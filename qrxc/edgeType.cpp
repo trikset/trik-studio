@@ -27,7 +27,8 @@
 
 using namespace utils;
 
-EdgeType::EdgeType(Diagram *diagram) : GraphicType(diagram)
+EdgeType::EdgeType(Diagram *diagram)
+	: GraphicType(diagram)
 {
 	mIsDividable = "false";
 }
@@ -36,7 +37,6 @@ EdgeType::~EdgeType()
 {
 	qDeleteAll(mRoles);
 }
-
 
 bool EdgeType::copyPorts(NodeType *parent)
 {
@@ -48,7 +48,7 @@ Type *EdgeType::clone() const
 {
 	EdgeType *result = new EdgeType(mDiagram);
 	GraphicType::copyFields(result);
-	for (RoleType * const role : mRoles) {
+	for (RoleType *const role : mRoles) {
 		result->mRoles.append(role->clone());
 	}
 	result->mBeginArrowType = mBeginArrowType;
@@ -64,7 +64,7 @@ Type *EdgeType::clone() const
 
 bool EdgeType::copyPictures(GraphicType *parent)
 {
-	EdgeType *pictureParent = dynamic_cast<EdgeType*>(parent);
+	EdgeType *pictureParent = dynamic_cast<EdgeType *>(parent);
 	if (pictureParent != nullptr) {
 		for (auto role : pictureParent->mRoles) {
 			mRoles.append(role->clone());
@@ -96,13 +96,13 @@ bool EdgeType::initRoles()
 
 	mBeginRoleName = beginRoleElement.attribute("role");
 	mEndRoleName = endRoleElement.attribute("role");
-	QList<Type*> allExistingTypes = mDiagram->types().values();
+	QList<Type *> allExistingTypes = mDiagram->types().values();
 
 	for (auto element : allExistingTypes) {
 		QString name = element->displayedName();
 
 		if (name == mBeginRoleName || name == mEndRoleName) {
-			RoleType *temp = dynamic_cast<RoleType *> (element->clone());
+			RoleType *temp = dynamic_cast<RoleType *>(element->clone());
 			mRoles.append(temp);
 		}
 	}
@@ -134,9 +134,9 @@ bool EdgeType::initRoleProperties()
 
 QString EdgeType::propertyName(Property *property, const QString &roleName)
 {
-	for (RoleType* const role : mRoles) {
+	for (RoleType *const role : mRoles) {
 		if (role->name() == roleName) {
-			for (Property* const currentProperty : role->getPropertiesOfRole()) {
+			for (Property *const currentProperty : role->getPropertiesOfRole()) {
 				if (currentProperty->name() == property->name()) {
 					return role->name() + "!" + property->name();
 				}
@@ -192,8 +192,7 @@ bool EdgeType::initGraphics()
 	QDomElement lineColorElement = mGraphics.firstChildElement("lineColor");
 	if (lineColorElement.isNull()) {
 		mLineColor = Qt::black;
-	}
-	else {
+	} else {
 		QString lineColor = lineColorElement.attribute("color");
 		if (lineColor.isEmpty()) {
 			qDebug() << "ERROR: no color of line";
@@ -275,28 +274,25 @@ void EdgeType::generateCode(OutFile &out)
 	const QString className = NameNormalizer::normalize(qualifiedName());
 
 	out() << "\tclass " << className << " : public qReal::EdgeElementType \n\t{\n"
-	<< "\tpublic:\n"
+	      << "\tpublic:\n"
 
-	<< "\t\texplicit " << className << "(qReal::Metamodel &metamodel)\n"
-			<< "\t\t\t: EdgeElementType(metamodel)\n"
-			<< "\t\t{\n";
+	      << "\t\texplicit " << className << "(qReal::Metamodel &metamodel)\n"
+	      << "\t\t\t: EdgeElementType(metamodel)\n"
+	      << "\t\t{\n";
 
 	generateCommonData(out);
 	generatePorts(out, mFromPorts, "From");
 	generatePorts(out, mToPorts, "To");
 	out() << "\t\t\tsetShapeType(qReal::LinkShape::" << mShapeType << ");\n"
-			<< "\t\t\tsetPenWidth(" << mLineWidth << ");\n"
-			<< "\t\t\tsetPenColor(QColor("
-					<< mLineColor.red() << ","
-					<< mLineColor.green() << ","
-					<< mLineColor.blue()
-			<< "));\n"
-			<< "\t\t\tsetPenStyle(" << (mLineType.isEmpty() ? "Qt::SolidLine" : mLineType) << ");\n"
-			<< "\t\t\tsetDividable(" << mIsDividable << ")\n;"
-			<< "\t\t\tinitProperties();\n"
-			<< "\t\t}\n\n"
+	      << "\t\t\tsetPenWidth(" << mLineWidth << ");\n"
+	      << "\t\t\tsetPenColor(QColor(" << mLineColor.red() << "," << mLineColor.green() << ","
+	      << mLineColor.blue() << "));\n"
+	      << "\t\t\tsetPenStyle(" << (mLineType.isEmpty() ? "Qt::SolidLine" : mLineType) << ");\n"
+	      << "\t\t\tsetDividable(" << mIsDividable << ")\n;"
+	      << "\t\t\tinitProperties();\n"
+	      << "\t\t}\n\n"
 
-	<< "\t\tvirtual ~" << className << "() {}\n\n";
+	      << "\t\tvirtual ~" << className << "() {}\n\n";
 
 	out() << "\t\tvoid drawStartArrow(QPainter * painter) const override\n\t\t{\n";
 	generateEdgeStyle(mBeginArrowType, out);
@@ -315,7 +311,7 @@ void EdgeType::generateLabels(OutFile &out) const
 	for (Label *label : mLabels) {
 		if (label->location() == "beginRole") {
 			label->setRoleName(mBeginRoleName);
-		} else if(label->location() == "endRole") {
+		} else if (label->location() == "endRole") {
 			label->setRoleName(mEndRoleName);
 		}
 
@@ -333,16 +329,16 @@ void EdgeType::generateEdgeStyle(const QString &styleString, OutFile &out)
 
 	QStringList bpmnEdges;
 	bpmnEdges << "signal" << "timer" << "message" << "error" << "escalation" << "cancel" << "compensation"
-			<< "conditional" << "multiple" << "parallel_multiple" << "message_noninterrupting"
-			<< "timer_noninterrupting" << "escalation_noninterrupting" << "conditional_noninterrupting"
-			<< "signal_noninterrupting" << "multiple_noninterrupting" << "parallel_multiple_noninterrupting";
+		  << "conditional" << "multiple" << "parallel_multiple" << "message_noninterrupting"
+		  << "timer_noninterrupting" << "escalation_noninterrupting" << "conditional_noninterrupting"
+		  << "signal_noninterrupting" << "multiple_noninterrupting" << "parallel_multiple_noninterrupting";
 
 	out() << "\t\t\tQBrush old = painter->brush();\n"
-	"\t\t\tQBrush brush;\n";
+		 "\t\t\tQBrush brush;\n";
 	out() << "\t\t\tbrush.setStyle(Qt::SolidPattern);\n";
 
 	if (style == "empty_arrow" || style == "empty_rhomb" || style == "complex_arrow" || style == "empty_circle"
-			|| bpmnEdges.contains(style)) {
+		|| bpmnEdges.contains(style)) {
 		out() << "\t\t\tbrush.setColor(Qt::white);\n";
 	}
 
@@ -353,38 +349,39 @@ void EdgeType::generateEdgeStyle(const QString &styleString, OutFile &out)
 
 	if (style == "empty_arrow" || style == "filled_arrow") {
 		out() << "\t\t\tstatic const QPointF points[] = {\n"
-		"\t\t\t\tQPointF(0,0),\n\t\t\t\tQPointF(-5,10),\n\t\t\t\tQPointF(5,10)\n\t\t\t};\n"
-		"\t\t\tpainter->drawPolygon(points, 3);\n";
+			 "\t\t\t\tQPointF(0,0),\n\t\t\t\tQPointF(-5,10),\n\t\t\t\tQPointF(5,10)\n\t\t\t};\n"
+			 "\t\t\tpainter->drawPolygon(points, 3);\n";
 	}
 
 	if (style == "empty_rhomb" || style == "filled_rhomb") {
 		out() << "\t\t\tstatic const QPointF points[] = {\n"
-		"\t\t\t\tQPointF(0,0),\n\t\t\t\tQPointF(-5,10),\n\t\t\t\tQPointF(0,20),\n\t\t\t\tQPointF(5,10)\n\t\t\t"
-		"};\n"
-		"\t\t\tpainter->drawPolygon(points, 4);\n";
+			 "\t\t\t\tQPointF(0,0),\n\t\t\t\tQPointF(-5,10),\n\t\t\t\tQPointF(0,20),\n\t\t\t\tQPointF(5,10)"
+		         "\n\t\t\t"
+			 "};\n"
+			 "\t\t\tpainter->drawPolygon(points, 4);\n";
 	}
 
 	if (style == "open_arrow") {
 		out() << "\t\t\tstatic const QPointF points[] = {\n"
-		"\t\t\t\tQPointF(-5,10),\n\t\t\t\tQPointF(0,0),\n\t\t\t\tQPointF(5,10)\n\t\t\t};\n"
-		"\t\t\tpainter->drawPolyline(points, 3);\n";
+			 "\t\t\t\tQPointF(-5,10),\n\t\t\t\tQPointF(0,0),\n\t\t\t\tQPointF(5,10)\n\t\t\t};\n"
+			 "\t\t\tpainter->drawPolyline(points, 3);\n";
 	}
 
 	if (style == "complex_arrow") {
 		out() << "\t\t\tstatic const QPointF points[] = {"
-		"\n\t\t\t\tQPointF(-15,30),\n\t\t\t\tQPointF(-10,10),"
-		"\n\t\t\t\tQPointF(0,0),\n\t\t\t\tQPointF(10,10),"
-		"\n\t\t\t\tQPointF(15,30),\n\t\t\t\tQPointF(0,23),\n\t\t\t\tQPointF(-15,30)\n\t\t\t};\n"
-		"\t\t\tpainter->drawPolyline(points, 7);\n";
+			 "\n\t\t\t\tQPointF(-15,30),\n\t\t\t\tQPointF(-10,10),"
+			 "\n\t\t\t\tQPointF(0,0),\n\t\t\t\tQPointF(10,10),"
+			 "\n\t\t\t\tQPointF(15,30),\n\t\t\t\tQPointF(0,23),\n\t\t\t\tQPointF(-15,30)\n\t\t\t};\n"
+			 "\t\t\tpainter->drawPolyline(points, 7);\n";
 	}
 
 	if (style == "crossed_line") {
 		out() << "\t\t\tQPen oldPen = painter->pen();\n"
-		"\t\t\tQPen newPen = oldPen;\n"
-		"\t\t\tnewPen.setWidth(2);\n"
-		"\t\t\tpainter->setPen(newPen);\n"
-		"\t\t\tpainter->drawLine(5, 5, -5, 15);\n"
-		"\t\t\tpainter->setPen(oldPen);\n";
+			 "\t\t\tQPen newPen = oldPen;\n"
+			 "\t\t\tnewPen.setWidth(2);\n"
+			 "\t\t\tpainter->setPen(newPen);\n"
+			 "\t\t\tpainter->drawLine(5, 5, -5, 15);\n"
+			 "\t\t\tpainter->setPen(oldPen);\n";
 	}
 
 	if (style == "empty_circle") {
@@ -396,103 +393,103 @@ void EdgeType::generateEdgeStyle(const QString &styleString, OutFile &out)
 		out() << "\t\t\tpainter->save();\n";
 		if (parts.last() == "noninterrupting") {
 			out() << "\t\t\tQPen dashPen = painter->pen();\n"
-					 "\t\t\tdashPen.setStyle(Qt::DashLine);\n"
-					 "\t\t\tpainter->setPen(dashPen);\n";
+				 "\t\t\tdashPen.setStyle(Qt::DashLine);\n"
+				 "\t\t\tpainter->setPen(dashPen);\n";
 			parts.removeLast();
 			style = parts.join('_');
 		}
 
 		out() << "\t\t\tpainter->drawEllipse(-20, 0, 40, 40);\n"
-				"\t\t\tpainter->drawEllipse(-15, 5, 30, 30);\n";
+			 "\t\t\tpainter->drawEllipse(-15, 5, 30, 30);\n";
 
 		out() << "\t\t\tQPen solidPen = painter->pen();\n"
-				 "\t\t\tsolidPen.setStyle(Qt::SolidLine);\n"
-				 "\t\t\tpainter->setPen(solidPen);\n";
+			 "\t\t\tsolidPen.setStyle(Qt::SolidLine);\n"
+			 "\t\t\tpainter->setPen(solidPen);\n";
 
 		if (style == "signal") {
 			out() << "\t\t\tstatic const QPointF points[] = {"
-					 "\n\t\t\t\tQPointF(0, 10),\n\t\t\t\tQPointF(-10, 27),"
-					 "\n\t\t\t\tQPointF(10, 27),\n\t\t\t\tQPointF(0, 10)\n\t\t\t};\n"
-					 "\t\t\tpainter->drawPolyline(points, 4);\n";
+				 "\n\t\t\t\tQPointF(0, 10),\n\t\t\t\tQPointF(-10, 27),"
+				 "\n\t\t\t\tQPointF(10, 27),\n\t\t\t\tQPointF(0, 10)\n\t\t\t};\n"
+				 "\t\t\tpainter->drawPolyline(points, 4);\n";
 		}
 
 		if (style == "timer") {
 			out() << "\t\t\tpainter->drawEllipse(-10, 10, 20, 20);\n"
-					 "\t\t\tpainter->drawLine(0, 20, 0, 15);\n"
-					 "\t\t\tpainter->drawLine(0, 20, 10, 20);\n";
+				 "\t\t\tpainter->drawLine(0, 20, 0, 15);\n"
+				 "\t\t\tpainter->drawLine(0, 20, 10, 20);\n";
 		}
 
 		if (style == "message") {
 			out() << "\t\t\tpainter->drawRect(-10, 15, 20, 11);\n"
-					 "\t\t\tpainter->drawLine(-9, 16, -1, 19);\n"
-					 "\t\t\tpainter->drawLine(9, 16, 1, 19);\n";
+				 "\t\t\tpainter->drawLine(-9, 16, -1, 19);\n"
+				 "\t\t\tpainter->drawLine(9, 16, 1, 19);\n";
 		}
 
 		if (style == "error") {
 			out() << "\t\t\tstatic const QPointF points[] = {"
-					 "\n\t\t\t\tQPointF(-10, 28),\n\t\t\t\tQPointF(-4, 10),"
-					 "\n\t\t\t\tQPointF(3, 20),\n\t\t\t\tQPointF(10, 12),"
-					 "\n\t\t\t\tQPointF(4, 30),\n\t\t\t\tQPointF(-3, 20),"
-					 "\n\t\t\t\tQPointF(-10, 28)\n\t\t\t};\n"
-					 "\t\t\tpainter->drawPolyline(points, 7);\n";
+				 "\n\t\t\t\tQPointF(-10, 28),\n\t\t\t\tQPointF(-4, 10),"
+				 "\n\t\t\t\tQPointF(3, 20),\n\t\t\t\tQPointF(10, 12),"
+				 "\n\t\t\t\tQPointF(4, 30),\n\t\t\t\tQPointF(-3, 20),"
+				 "\n\t\t\t\tQPointF(-10, 28)\n\t\t\t};\n"
+				 "\t\t\tpainter->drawPolyline(points, 7);\n";
 		}
 
 		if (style == "escalation") {
 			out() << "\t\t\tstatic const QPointF points[] = {"
-					 "\n\t\t\t\tQPointF(0, 22),\n\t\t\t\tQPointF(-6, 30),"
-					 "\n\t\t\t\tQPointF(0, 10),\n\t\t\t\tQPointF(6, 30),"
-					 "\n\t\t\t\tQPointF(0, 22)\n\t\t\t};\n"
-					 "\t\t\tpainter->drawPolyline(points, 5);\n";
+				 "\n\t\t\t\tQPointF(0, 22),\n\t\t\t\tQPointF(-6, 30),"
+				 "\n\t\t\t\tQPointF(0, 10),\n\t\t\t\tQPointF(6, 30),"
+				 "\n\t\t\t\tQPointF(0, 22)\n\t\t\t};\n"
+				 "\t\t\tpainter->drawPolyline(points, 5);\n";
 		}
 
 		if (style == "cancel") {
 			out() << "\t\t\tstatic const QPointF points[] = {"
-					 "\n\t\t\t\tQPointF(-12, 12),\n\t\t\t\tQPointF(-8, 8),"
-					 "\n\t\t\t\tQPointF(0, 17),\n\t\t\t\tQPointF(8, 8),"
-					 "\n\t\t\t\tQPointF(12, 12),\n\t\t\t\tQPointF(3, 20),"
-					 "\n\t\t\t\tQPointF(12, 28),\n\t\t\t\tQPointF(8, 32),"
-					 "\n\t\t\t\tQPointF(0, 23),\n\t\t\t\tQPointF(-8, 32),"
-					 "\n\t\t\t\tQPointF(-12, 28),\n\t\t\t\tQPointF(-3, 20),"
-					 "\n\t\t\t\tQPointF(-12, 12)\n\t\t\t};\n"
-					 "\t\t\tpainter->drawPolyline(points, 13);\n";
+				 "\n\t\t\t\tQPointF(-12, 12),\n\t\t\t\tQPointF(-8, 8),"
+				 "\n\t\t\t\tQPointF(0, 17),\n\t\t\t\tQPointF(8, 8),"
+				 "\n\t\t\t\tQPointF(12, 12),\n\t\t\t\tQPointF(3, 20),"
+				 "\n\t\t\t\tQPointF(12, 28),\n\t\t\t\tQPointF(8, 32),"
+				 "\n\t\t\t\tQPointF(0, 23),\n\t\t\t\tQPointF(-8, 32),"
+				 "\n\t\t\t\tQPointF(-12, 28),\n\t\t\t\tQPointF(-3, 20),"
+				 "\n\t\t\t\tQPointF(-12, 12)\n\t\t\t};\n"
+				 "\t\t\tpainter->drawPolyline(points, 13);\n";
 		}
 
 		if (style == "compensation") {
 			out() << "\t\t\tstatic const QPointF points1[] = {"
-					 "\n\t\t\t\tQPointF(-12, 20),\n\t\t\t\tQPointF(-2, 10),"
-					 "\n\t\t\t\tQPointF(-2, 30),\n\t\t\t\tQPointF(-12, 20)\n\t\t\t};\n"
-					 "\t\t\tpainter->drawPolyline(points1, 4);\n";
+				 "\n\t\t\t\tQPointF(-12, 20),\n\t\t\t\tQPointF(-2, 10),"
+				 "\n\t\t\t\tQPointF(-2, 30),\n\t\t\t\tQPointF(-12, 20)\n\t\t\t};\n"
+				 "\t\t\tpainter->drawPolyline(points1, 4);\n";
 			out() << "\t\t\tstatic const QPointF points2[] = {"
-					 "\n\t\t\t\tQPointF(-2, 20),\n\t\t\t\tQPointF(8, 10),"
-					 "\n\t\t\t\tQPointF(8, 30),\n\t\t\t\tQPointF(-2, 20)\n\t\t\t};\n"
-					 "\t\t\tpainter->drawPolyline(points2, 4);\n";
+				 "\n\t\t\t\tQPointF(-2, 20),\n\t\t\t\tQPointF(8, 10),"
+				 "\n\t\t\t\tQPointF(8, 30),\n\t\t\t\tQPointF(-2, 20)\n\t\t\t};\n"
+				 "\t\t\tpainter->drawPolyline(points2, 4);\n";
 		}
 
 		if (style == "conditional") {
 			out() << "\t\t\tpainter->drawRect(-8, 10, 16, 20);\n"
-					 "\t\t\tpainter->drawLine(-6, 14, 6, 14);\n"
-					 "\t\t\tpainter->drawLine(-6, 20, 6, 20);\n"
-					 "\t\t\tpainter->drawLine(-6, 26, 6, 26);\n";
+				 "\t\t\tpainter->drawLine(-6, 14, 6, 14);\n"
+				 "\t\t\tpainter->drawLine(-6, 20, 6, 20);\n"
+				 "\t\t\tpainter->drawLine(-6, 26, 6, 26);\n";
 		}
 
 		if (style == "multiple") {
 			out() << "\t\t\tstatic const QPointF points[] = {"
-					 "\n\t\t\t\tQPointF(0, 11),\n\t\t\t\tQPointF(10, 17),"
-					 "\n\t\t\t\tQPointF(7, 29),\n\t\t\t\tQPointF(-7, 29),"
-					 "\n\t\t\t\tQPointF(-10, 17),\n\t\t\t\tQPointF(0, 11)\n\t\t\t};\n"
-					 "\t\t\tpainter->drawPolyline(points, 6);\n";
+				 "\n\t\t\t\tQPointF(0, 11),\n\t\t\t\tQPointF(10, 17),"
+				 "\n\t\t\t\tQPointF(7, 29),\n\t\t\t\tQPointF(-7, 29),"
+				 "\n\t\t\t\tQPointF(-10, 17),\n\t\t\t\tQPointF(0, 11)\n\t\t\t};\n"
+				 "\t\t\tpainter->drawPolyline(points, 6);\n";
 		}
 
 		if (style == "parallel_multiple") {
 			out() << "\t\t\tstatic const QPointF points[] = {"
-					 "\n\t\t\t\tQPointF(-12, 17),\n\t\t\t\tQPointF(-3, 17),"
-					 "\n\t\t\t\tQPointF(-3, 8),\n\t\t\t\tQPointF(3, 8),"
-					 "\n\t\t\t\tQPointF(3, 17),\n\t\t\t\tQPointF(12, 17),"
-					 "\n\t\t\t\tQPointF(12, 23),\n\t\t\t\tQPointF(3, 23),"
-					 "\n\t\t\t\tQPointF(3, 32),\n\t\t\t\tQPointF(-3, 32),"
-					 "\n\t\t\t\tQPointF(-3, 23),\n\t\t\t\tQPointF(-12, 23),"
-					 "\n\t\t\t\tQPointF(-12, 17)\n\t\t\t};\n"
-					 "\t\t\tpainter->drawPolyline(points, 13);\n";
+				 "\n\t\t\t\tQPointF(-12, 17),\n\t\t\t\tQPointF(-3, 17),"
+				 "\n\t\t\t\tQPointF(-3, 8),\n\t\t\t\tQPointF(3, 8),"
+				 "\n\t\t\t\tQPointF(3, 17),\n\t\t\t\tQPointF(12, 17),"
+				 "\n\t\t\t\tQPointF(12, 23),\n\t\t\t\tQPointF(3, 23),"
+				 "\n\t\t\t\tQPointF(3, 32),\n\t\t\t\tQPointF(-3, 32),"
+				 "\n\t\t\t\tQPointF(-3, 23),\n\t\t\t\tQPointF(-12, 23),"
+				 "\n\t\t\t\tQPointF(-12, 17)\n\t\t\t};\n"
+				 "\t\t\tpainter->drawPolyline(points, 13);\n";
 		}
 
 		out() << "\t\t\tpainter->restore();\n";

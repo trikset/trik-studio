@@ -25,11 +25,9 @@ class QRGUI_MODELS_EXPORT ChangeParentCommand : public AbstractCommand
 {
 	Q_OBJECT
 public:
-	ChangeParentCommand(models::LogicalModelAssistApi &logicalApi
-			, models::GraphicalModelAssistApi &graphicalApi
-			, bool isLogical, const Id &id, const Id &oldParent
-			, const Id &newParent, QPointF oldPosition
-			, QPointF newPosition);
+	ChangeParentCommand(models::LogicalModelAssistApi &logicalApi, models::GraphicalModelAssistApi &graphicalApi,
+		bool isLogical, const Id &id, const Id &oldParent, const Id &newParent, QPointF oldPosition,
+		QPointF newPosition);
 
 protected:
 	bool execute();

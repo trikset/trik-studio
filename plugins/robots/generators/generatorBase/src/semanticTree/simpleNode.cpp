@@ -30,17 +30,17 @@ QString SimpleNode::toStringImpl(GeneratorCustomizer &customizer, int indent, co
 {
 	switch (mSyntheticBinding) {
 	case breakNode:
-		return utils::StringUtils::addIndent(customizer.factory()->breakGenerator(mId
-				, customizer)->generate(), indent, indentString);
+		return utils::StringUtils::addIndent(customizer.factory()->breakGenerator(mId, customizer)->generate(),
+			indent, indentString);
 	case continueNode:
-		return utils::StringUtils::addIndent(customizer.factory()->continueGenerator(mId
-				, customizer)->generate(), indent, indentString);
+		return utils::StringUtils::addIndent(
+			customizer.factory()->continueGenerator(mId, customizer)->generate(), indent, indentString);
 	case gotoNode:
-		return utils::StringUtils::addIndent(customizer.factory()->gotoSimpleGenerator(mId
-				, customizer)->generate(), indent, indentString);
+		return utils::StringUtils::addIndent(
+			customizer.factory()->gotoSimpleGenerator(mId, customizer)->generate(), indent, indentString);
 	default:
-		return utils::StringUtils::addIndent(customizer.factory()->simpleGenerator(mId
-				, customizer)->generate(), indent, indentString);
+		return utils::StringUtils::addIndent(customizer.factory()->simpleGenerator(mId, customizer)->generate(),
+			indent, indentString);
 	}
 }
 

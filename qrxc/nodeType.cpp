@@ -30,8 +30,8 @@
 using namespace utils;
 
 NodeType::NodeType(Diagram *diagram)
-		: GraphicType(diagram)
-		, mIsResizeable(true)
+	: GraphicType(diagram)
+	, mIsResizeable(true)
 {
 }
 
@@ -42,7 +42,7 @@ NodeType::~NodeType()
 	qDeleteAll(mCircularPorts);
 }
 
-Type* NodeType::clone() const
+Type *NodeType::clone() const
 {
 	NodeType *result = new NodeType(mDiagram);
 	GraphicType::copyFields(result);
@@ -67,22 +67,21 @@ Type* NodeType::clone() const
 
 bool NodeType::copyPictures(GraphicType *parent)
 {
-	const NodeType * const nodeParent = dynamic_cast<NodeType*>(parent);
+	const NodeType *const nodeParent = dynamic_cast<NodeType *>(parent);
 	if (nodeParent != nullptr) {
 		if (mSdfDomElement.isNull()) {
 			/// @todo Support this.
 			if (!nodeParent->mSdfDomElement.isNull()) {
 				qWarning() << name()
-						<< ": Inheriting pictures for an element without <picture> tag is not currently supported";
+					   << ": Inheriting pictures for an element without <picture> tag is not "
+				              "currently supported";
 			}
 		} else {
 			mWidth = qMax(mWidth, nodeParent->mWidth);
 			mHeight = qMax(mHeight, nodeParent->mHeight);
 
-			for (QDomNode sdfPrimitive = nodeParent->mSdfDomElement.firstChild();
-					!sdfPrimitive.isNull();
-					sdfPrimitive = sdfPrimitive.nextSibling())
-			{
+			for (QDomNode sdfPrimitive = nodeParent->mSdfDomElement.firstChild(); !sdfPrimitive.isNull();
+				sdfPrimitive = sdfPrimitive.nextSibling()) {
 				mSdfDomElement.appendChild(sdfPrimitive.cloneNode());
 			}
 
@@ -144,7 +143,8 @@ bool NodeType::initSdf()
 
 void NodeType::generateSdf() const
 {
-	mDiagram->editor()->xmlCompiler()->addResource("\t<file>generated/shapes/" + resourceName("Class") + "</file>\n");
+	mDiagram->editor()->xmlCompiler()->addResource(
+		"\t<file>generated/shapes/" + resourceName("Class") + "</file>\n");
 
 	OutFile out("generated/shapes/" + resourceName("Class"));
 	mSdfDomElement.save(out(), 1);
@@ -168,10 +168,8 @@ bool NodeType::initPorts()
 
 bool NodeType::initPointPorts(const QDomElement &portsElement)
 {
-	for (QDomElement portElement = portsElement.firstChildElement("pointPort")
-			; !portElement.isNull()
-			; portElement = portElement.nextSiblingElement("pointPort"))
-	{
+	for (QDomElement portElement = portsElement.firstChildElement("pointPort"); !portElement.isNull();
+		portElement = portElement.nextSiblingElement("pointPort")) {
 		Port *pointPort = new PointPort();
 		if (!pointPort->init(portElement, mWidth, mHeight)) {
 			delete pointPort;
@@ -186,10 +184,8 @@ bool NodeType::initPointPorts(const QDomElement &portsElement)
 
 bool NodeType::initLinePorts(const QDomElement &portsElement)
 {
-	for (QDomElement portElement = portsElement.firstChildElement("linePort")
-			; !portElement.isNull()
-			; portElement = portElement.nextSiblingElement("linePort"))
-	{
+	for (QDomElement portElement = portsElement.firstChildElement("linePort"); !portElement.isNull();
+		portElement = portElement.nextSiblingElement("linePort")) {
 		Port *linePort = new LinePort();
 		if (!linePort->init(portElement, mWidth, mHeight)) {
 			delete linePort;
@@ -204,10 +200,8 @@ bool NodeType::initLinePorts(const QDomElement &portsElement)
 
 bool NodeType::initCircularPorts(const QDomElement &portsElement)
 {
-	for (QDomElement portElement = portsElement.firstChildElement("circularPort");
-			!portElement.isNull();
-			portElement = portElement.nextSiblingElement("circularPort"))
-	{
+	for (QDomElement portElement = portsElement.firstChildElement("circularPort"); !portElement.isNull();
+		portElement = portElement.nextSiblingElement("circularPort")) {
 		Port *circularPort = new CircularPort();
 		if (!circularPort->init(portElement, mWidth, mHeight)) {
 			delete circularPort;
@@ -246,45 +240,45 @@ void NodeType::generateCode(OutFile &out)
 	const QString className = NameNormalizer::normalize(qualifiedName());
 
 	out() << "\tclass " << className << " : public qReal::NodeElementType\n\t{\n"
-			<< "\tpublic:\n";
+	      << "\tpublic:\n";
 
 	out() << "\t\texplicit " << className << "(qReal::Metamodel &metamodel)\n"
-			<< "\t\t\t: NodeElementType(metamodel)\n"
-			<< "\t\t{\n";
+	      << "\t\t\t: NodeElementType(metamodel)\n"
+	      << "\t\t{\n";
 
 	generateCommonData(out);
 
 	if (!mSdfDomElement.isNull()) {
-		out() << "\t\t\tloadSdf(utils::xmlUtils::loadDocument(\":/generated/shapes/"
-				+ className + "Class.sdf\").documentElement());\n";
+		out() << "\t\t\tloadSdf(utils::xmlUtils::loadDocument(\":/generated/shapes/" + className
+				 + "Class.sdf\").documentElement());\n";
 	}
 
 	out() << "\t\t\tsetSize(QSizeF(" + QString::number(mWidth) + ", " + QString::number(mHeight) + "));\n"
-			<< "\t\t\tinitProperties();\n";
+	      << "\t\t\tinitProperties();\n";
 
 	generateMouseGesture(out);
 
-	for (Port * const pointPort : mPointPorts) {
+	for (Port *const pointPort : mPointPorts) {
 		out() << "\t\t\taddPointPort(";
 		pointPort->generateCode(out);
 		out() << ");\n";
 	}
 
-	for (Port * const linePort : mLinePorts) {
+	for (Port *const linePort : mLinePorts) {
 		out() << "\t\t\taddLinePort(";
 		linePort->generateCode(out);
 		out() << ");\n";
 	}
 
-	for (Port * const circlePort : mCircularPorts) {
+	for (Port *const circlePort : mCircularPorts) {
 		out() << "\t\t\taddCircularPort(";
 		circlePort->generateCode(out);
 		out() << ");\n";
 	}
 
 	out() << "\t\t\tsetResizable(" << boolToString(mIsResizeable) << ");\n"
-			<< "\t\t\tsetContainer(" << boolToString(!mContains.empty()) << ");\n"
-			<< "\t\t\tsetSortingContainer(" << boolToString(mContainerProperties.isSortingContainer) << ");\n";
+	      << "\t\t\tsetContainer(" << boolToString(!mContains.empty()) << ");\n"
+	      << "\t\t\tsetSortingContainer(" << boolToString(mContainerProperties.isSortingContainer) << ");\n";
 
 	QStringList forestalling;
 	for (int size : mContainerProperties.sizeOfForestalling) {
@@ -292,15 +286,16 @@ void NodeType::generateCode(OutFile &out)
 	}
 
 	out() << "\t\t\tsetSizeOfForestalling({" << forestalling.join(", ") << "});\n"
-			<< "\t\t\tsetSizeOfChildrenForestalling("
-			<< QString::number(mContainerProperties.sizeOfChildrenForestalling) << ");\n"
-			<< "\t\t\tsetChildrenMovable(" << boolToString(mContainerProperties.hasMovableChildren) << ");\n"
-			<< "\t\t\tsetMinimizesToChildren(" << boolToString(mContainerProperties.minimizesToChildren) << ");\n"
-			<< "\t\t\tsetMaximizesChildren(" << boolToString(mContainerProperties.maximizesChildren) << ");\n"
-			<< "\t\t\tsetCreateChildrenFromMenu(" << boolToString(mCreateChildrenFromMenu) << ");\n"
-			/// @todo: borders are strange things available only in qrmc. Do we need it?
-			<< "\t\t\tsetBorder({});\n"
-			<< "\t\t}\n\n";
+	      << "\t\t\tsetSizeOfChildrenForestalling("
+	      << QString::number(mContainerProperties.sizeOfChildrenForestalling) << ");\n"
+	      << "\t\t\tsetChildrenMovable(" << boolToString(mContainerProperties.hasMovableChildren) << ");\n"
+	      << "\t\t\tsetMinimizesToChildren(" << boolToString(mContainerProperties.minimizesToChildren) << ");\n"
+	      << "\t\t\tsetMaximizesChildren(" << boolToString(mContainerProperties.maximizesChildren) << ");\n"
+	      << "\t\t\tsetCreateChildrenFromMenu(" << boolToString(mCreateChildrenFromMenu)
+	      << ");\n"
+	      /// @todo: borders are strange things available only in qrmc. Do we need it?
+	      << "\t\t\tsetBorder({});\n"
+	      << "\t\t}\n\n";
 
 	generatePropertyData(out);
 
@@ -313,17 +308,17 @@ QList<Port *> NodeType::ports() const
 	return mPointPorts + mLinePorts + mCircularPorts;
 }
 
-bool NodeType::copyPorts(NodeType* parent)
+bool NodeType::copyPorts(NodeType *parent)
 {
-	for (Port * const port : parent->mPointPorts) {
+	for (Port *const port : parent->mPointPorts) {
 		mPointPorts << port->clone();
 	}
 
-	for (Port * const port : parent->mLinePorts) {
+	for (Port *const port : parent->mLinePorts) {
 		mLinePorts << port->clone();
 	}
 
-	for (Port * const port : parent->mCircularPorts) {
+	for (Port *const port : parent->mCircularPorts) {
 		mCircularPorts << port->clone();
 	}
 

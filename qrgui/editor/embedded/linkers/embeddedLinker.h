@@ -43,20 +43,20 @@ public:
 
 	bool isDirected() const;
 	Id edgeType() const;
-	NodeElement* master() const;
+	NodeElement *master() const;
 
 	void setDirected(const bool directed);
-	void setMaster(NodeElement* const master);
-	void setEdgeType(const Id & edgeType);
+	void setMaster(NodeElement *const master);
+	void setEdgeType(const Id &edgeType);
 
 	void takePosition(int index, int maxIndex);
 
 	virtual QRectF boundingRect() const;
 	virtual void paint(QPainter *p, const QStyleOptionGraphicsItem *opt, QWidget *w);
 
-	virtual void mouseMoveEvent(QGraphicsSceneMouseEvent* event);
-	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event);
-	virtual void mousePressEvent(QGraphicsSceneMouseEvent* event);
+	virtual void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
+	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+	virtual void mousePressEvent(QGraphicsSceneMouseEvent *event);
 
 private:
 	EdgeElement *mEdge;

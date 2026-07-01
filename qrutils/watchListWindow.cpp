@@ -30,9 +30,8 @@ WatchListWindow::WatchListWindow(const utils::ExpressionsParser *parser, QWidget
 {
 }
 
-WatchListWindow::WatchListWindow(const utils::ExpressionsParser * const parser
-		, const qrtext::DebuggerInterface * const newParser
-		, QWidget *parent)
+WatchListWindow::WatchListWindow(const utils::ExpressionsParser *const parser,
+	const qrtext::DebuggerInterface *const newParser, QWidget *parent)
 	: QDockWidget(parent)
 	, mUi(new Ui::watchListWindow)
 	, mNewParser(newParser)
@@ -58,11 +57,11 @@ void WatchListWindow::updateVariables()
 	std::function<QVariant(const QString &)> value;
 
 	if (!mNewParser) {
-		identifiers = [this] () { return mParser->variables().keys(); };
-		value = [this] (const QString &name) { return mParser->variables().value(name)->value(); };
+		identifiers = [this]() { return mParser->variables().keys(); };
+		value = [this](const QString &name) { return mParser->variables().value(name)->value(); };
 	} else {
-		identifiers = [this] () { return mNewParser->identifiers(); };
-		value = [this] (const QString &name) { return mNewParser->value<QVariant>(name); };
+		identifiers = [this]() { return mNewParser->identifiers(); };
+		value = [this](const QString &name) { return mNewParser->value<QVariant>(name); };
 	}
 
 	auto sortedIdentifiers = identifiers();
@@ -147,7 +146,7 @@ bool WatchListWindow::supportsCopying() const
 
 void WatchListWindow::copy()
 {
-	QTableWidgetItem * const currentItem = mUi->watchListTableWidget->currentItem();
+	QTableWidgetItem *const currentItem = mUi->watchListTableWidget->currentItem();
 	if (currentItem && !currentItem->text().isEmpty()) {
 		QClipboard *clipboard = QApplication::clipboard();
 		clipboard->setText(currentItem->text());

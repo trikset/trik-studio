@@ -88,11 +88,10 @@ void XmlLoader::readGraphics(const QDomElement &graphic)
 				}
 				mDrift = QPoint(mStrX + distanceFigure, mStrY + distanceFigure);
 			} else
-				mDrift = QPoint(mScene->centerEmpty().x() - sizePictureX / 2
-						, mScene->centerEmpty().y() - sizePictureY / 2);
+				mDrift = QPoint(mScene->centerEmpty().x() - sizePictureX / 2,
+					mScene->centerEmpty().y() - sizePictureY / 2);
 			readPicture(type);
-		}
-		else if (type.tagName() == "labels")
+		} else if (type.tagName() == "labels")
 			readLabels(type);
 		else if (type.tagName() == "ports")
 			readPorts(type);
@@ -182,8 +181,8 @@ void XmlLoader::changeScaleColor(int i)
 	mListScalePoint.removeAt(i + 1);
 }
 
-void XmlLoader::checkScale(const QPair<QString, bool> &pointX1, const QPair<QString, bool> &pointX2
-		, const QPair<QString, bool> &pointY1, const QPair<QString, bool> &pointY2)
+void XmlLoader::checkScale(const QPair<QString, bool> &pointX1, const QPair<QString, bool> &pointX2,
+	const QPair<QString, bool> &pointY1, const QPair<QString, bool> &pointY2)
 {
 	if (pointX1.second) {
 		changeScaleColor(0);
@@ -220,10 +219,8 @@ QRectF XmlLoader::readRectOfXandY(const QDomElement &docItem)
 	return QRectF(x1, y1, x2 - x1, y2 - y1);
 }
 
-QPair<QPointF, QPointF> XmlLoader::calcLineOfXandY(const QPair<QString, bool> &pointX1
-												   , const QPair<QString, bool> &pointX2
-												   , const QPair<QString, bool> &pointY1
-												   , const QPair<QString, bool> &pointY2)
+QPair<QPointF, QPointF> XmlLoader::calcLineOfXandY(const QPair<QString, bool> &pointX1,
+	const QPair<QString, bool> &pointX2, const QPair<QString, bool> &pointY1, const QPair<QString, bool> &pointY2)
 {
 	qreal x1 = pointX1.first.toDouble() + mDrift.x();
 	qreal x2 = pointX2.first.toDouble() + mDrift.x();
@@ -311,7 +308,7 @@ QPointF XmlLoader::readXandY(const QDomElement &docItem)
 void XmlLoader::readLine(const QDomElement &line)
 {
 	QPair<QPointF, QPointF> rect = readLineOfXandY(line);
-	Line* item = new Line(rect.first.x(), rect.first.y(), rect.second.x(), rect.second.y(), nullptr);
+	Line *item = new Line(rect.first.x(), rect.first.y(), rect.second.x(), rect.second.y(), nullptr);
 	item->readPenBrush(line);
 	item->setListScalePoint(mListScalePoint);
 	item->setVisibilityCondition(readVisibility(line));
@@ -322,7 +319,7 @@ void XmlLoader::readLine(const QDomElement &line)
 void XmlLoader::readEllipse(const QDomElement &ellipse)
 {
 	QRectF rect = readRectOfXandY(ellipse);
-	QRealEllipse* item = new QRealEllipse(rect.left(), rect.top(), rect.right(), rect.bottom(), nullptr);
+	QRealEllipse *item = new QRealEllipse(rect.left(), rect.top(), rect.right(), rect.bottom(), nullptr);
 	item->readPenBrush(ellipse);
 	item->setListScalePoint(mListScalePoint);
 	item->setVisibilityCondition(readVisibility(ellipse));
@@ -335,7 +332,7 @@ void XmlLoader::readArch(const QDomElement &arch)
 	QRectF rect = readRectOfXandY(arch);
 	int spanAngle = arch.attribute("spanAngle", "0").toInt();
 	int startAngle = arch.attribute("startAngle", "0").toInt();
-	Arch* item = new Arch(rect, startAngle, spanAngle, nullptr);
+	Arch *item = new Arch(rect, startAngle, spanAngle, nullptr);
 	item->setVisibilityCondition(readVisibility(arch));
 	mScene->addItem(item);
 	mScene->setZValue(item);
@@ -344,7 +341,7 @@ void XmlLoader::readArch(const QDomElement &arch)
 void XmlLoader::readRectangle(const QDomElement &rectangle)
 {
 	QRectF rect = readRectOfXandY(rectangle);
-	QRealRectangle* item = new QRealRectangle(rect.left(), rect.top(), rect.right(), rect.bottom(), nullptr);
+	QRealRectangle *item = new QRealRectangle(rect.left(), rect.top(), rect.right(), rect.bottom(), nullptr);
 	item->readPenBrush(rectangle);
 	item->setListScalePoint(mListScalePoint);
 	item->setVisibilityCondition(readVisibility(rectangle));
@@ -358,7 +355,7 @@ void XmlLoader::readImage(const QDomElement &image)
 	QString fileName = image.attribute("name", "error");
 	const QString workingDirName = QFileInfo(QApplication::applicationFilePath()).absoluteDir().absolutePath();
 	const QString fullFileName = workingDirName + "/" + fileName;
-	Image* item = new Image(fullFileName, rect.left(), rect.top(), nullptr);
+	Image *item = new Image(fullFileName, rect.left(), rect.top(), nullptr);
 	item->setX2(rect.right());
 	item->setY2(rect.bottom());
 	item->setListScalePoint(mListScalePoint);
@@ -371,12 +368,12 @@ void XmlLoader::readStylus(const QDomElement &stylus)
 {
 	QDomNodeList stylusAttributes = stylus.childNodes();
 
-	Stylus* stylusItem = new Stylus(0, 0, nullptr);
+	Stylus *stylusItem = new Stylus(0, 0, nullptr);
 	for (int i = 0; i < stylusAttributes.length(); ++i) {
 		QDomElement type = stylusAttributes.at(i).toElement();
 		if (type.tagName() == "line") {
 			QRectF rect = readRectOfXandY(type);
-			Line* item = new Line(rect.left(), rect.top(), rect.right(), rect.bottom(), nullptr);
+			Line *item = new Line(rect.left(), rect.top(), rect.right(), rect.bottom(), nullptr);
 			item->readPenBrush(type);
 			item->setVisibilityCondition(readVisibility(type));
 			stylusItem->addLineInList(item);
@@ -394,8 +391,7 @@ void XmlLoader::readStylus(const QDomElement &stylus)
 
 bool XmlLoader::isNotLCMZ(QString str, int i)
 {
-	return (i != str.length()) && (str[i] != 'L') && (str[i] != 'C') && (str[i] != 'M')
-		&& (str[i] != 'Z');
+	return (i != str.length()) && (str[i] != 'L') && (str[i] != 'C') && (str[i] != 'M') && (str[i] != 'Z');
 }
 
 void XmlLoader::readPath(const QDomElement &element)
@@ -438,8 +434,7 @@ void XmlLoader::readPath(const QDomElement &element)
 
 				path.moveTo(endPoint);
 				i = j;
-			}
-			else if (dCont[i] == 'L') {
+			} else if (dCont[i] == 'L') {
 				j = i + 2;
 				while (isNotLCMZ(dCont, j)) {
 					while (dCont[j] != ' ') {
@@ -460,12 +455,11 @@ void XmlLoader::readPath(const QDomElement &element)
 					tempStr.clear();
 				}
 
-				 path.lineTo(endPoint);
-				 i = j;
-			}
-			else if (dCont[i] == 'C') {
+				path.lineTo(endPoint);
+				i = j;
+			} else if (dCont[i] == 'C') {
 				j = i + 2;
-				while(isNotLCMZ(dCont, j)) {
+				while (isNotLCMZ(dCont, j)) {
 					while (!(dCont[j] == ' ')) {
 						tempStr.append(dCont[j]);
 						++j;
@@ -563,7 +557,7 @@ void XmlLoader::readCurve(const QDomElement &curve)
 		}
 	}
 
-	Curve* item = new Curve(QPointF(x1, y1), QPointF(x2, y2), QPointF(x3, y3));
+	Curve *item = new Curve(QPointF(x1, y1), QPointF(x2, y2), QPointF(x3, y3));
 	item->readPenBrush(curve);
 	item->setVisibilityCondition(readVisibility(curve));
 	mScene->addItem(item);
@@ -576,7 +570,7 @@ void XmlLoader::readText(const QDomElement &text)
 	qreal x = point.left();
 	qreal y = point.top();
 	QString str = text.text();
-	TextPicture* item = new TextPicture(x, y, str);
+	TextPicture *item = new TextPicture(x, y, str);
 	item->readFont(text);
 	item->setListScalePoint(mListScalePoint);
 	item->setVisibilityCondition(readVisibility(text));
@@ -587,12 +581,13 @@ void XmlLoader::readText(const QDomElement &text)
 void XmlLoader::readLabel(const QDomElement &label)
 {
 	QPointF point = readXandY(label);
-	Text* item = nullptr;
+	Text *item = nullptr;
 	if (label.hasAttribute("text")) {
 		item = new Text(static_cast<int>(point.x()), static_cast<int>(point.y()), label.attribute("text", ""));
 		item->setIsDynamicText(false);
 	} else if (label.hasAttribute("textBinded")) {
-		item = new Text(static_cast<int>(point.x()), static_cast<int>(point.y()), label.attribute("textBinded", ""));
+		item = new Text(static_cast<int>(point.x()), static_cast<int>(point.y()),
+			label.attribute("textBinded", ""));
 		item->setIsDynamicText(true);
 	} else {
 		qDebug() << "Incorrect label tag";
@@ -622,7 +617,7 @@ void XmlLoader::readLinePort(const QDomElement &linePort)
 	}
 
 	QPair<QPointF, QPointF> rect = readLinePortOfXandY(start, end);
-	LinePort* item = new LinePort(rect.first.x(), rect.first.y(), rect.second.x(), rect.second.y(), nullptr);
+	LinePort *item = new LinePort(rect.first.x(), rect.first.y(), rect.second.x(), rect.second.y(), nullptr);
 	item->setListScalePoint(mListScalePoint);
 	item->setVisibilityCondition(readVisibility(linePort));
 	item->setType(linePort.attribute("type", "NonTyped"));
@@ -633,7 +628,7 @@ void XmlLoader::readLinePort(const QDomElement &linePort)
 void XmlLoader::readPointPort(const QDomElement &pointPort)
 {
 	QPointF point = readXandY(pointPort);
-	PointPort* item = new PointPort(point.x(), point.y(), nullptr);
+	PointPort *item = new PointPort(point.x(), point.y(), nullptr);
 	item->setListScalePoint(mListScalePoint);
 	item->setVisibilityCondition(readVisibility(pointPort));
 	item->setType(pointPort.attribute("type", "NonTyped"));

@@ -20,16 +20,13 @@ namespace ev3 {
 namespace simple {
 namespace lineLeader {
 
-
 /// Generator for 'Read Average to Variable' block
-class ReadAverageGenerator: public generatorBase::simple::BindingGenerator
+class ReadAverageGenerator : public generatorBase::simple::BindingGenerator
 {
 	Q_OBJECT
 public:
-	ReadAverageGenerator(const qrRepo::RepoApi &repo
-			, generatorBase::GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent = nullptr);
+	ReadAverageGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+		const qReal::Id &id, QObject *parent = nullptr);
 };
 
 }

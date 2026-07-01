@@ -19,7 +19,9 @@ using namespace twoDModel::model;
 using namespace kitBase::robotModel;
 
 AliasConfiguration::AliasConfiguration(twoDModel::robotModel::TwoDRobotModel &robotModel)
-	: mRobotModel(robotModel) {}
+	: mRobotModel(robotModel)
+{
+}
 
 void AliasConfiguration::deserialize(const QDomElement &element)
 {
@@ -30,10 +32,8 @@ void AliasConfiguration::deserialize(const QDomElement &element)
 	// but the information from their own blocks will take precedence and
 	// overwrite this information.
 	auto &&configurators = element.firstChildElement("configurators");
-	for (auto &&configurator = configurators.firstChildElement("configurator");
-		!configurator.isNull();
-		configurator = configurator.nextSiblingElement("configurator"))
-	{
+	for (auto &&configurator = configurators.firstChildElement("configurator"); !configurator.isNull();
+		configurator = configurator.nextSiblingElement("configurator")) {
 		auto &&portInfo = PortInfo::fromString(configurator.attribute("port"));
 		addAliases(portInfo, true);
 	}
@@ -50,13 +50,8 @@ QStringList AliasConfiguration::getAliases(const kitBase::robotModel::PortInfo &
 
 PortInfo AliasConfiguration::createFromPort(const PortInfo &port) const
 {
-	return PortInfo {
-		port.name(),
-		port.userFriendlyName(),
-		port.direction(),
-		getAliases(port),
-		port.reservedVariable(),
-		port.reservedVariableType()};
+	return PortInfo {port.name(), port.userFriendlyName(), port.direction(), getAliases(port),
+		port.reservedVariable(), port.reservedVariableType()};
 }
 
 void AliasConfiguration::addAliases(const kitBase::robotModel::PortInfo &portInfo, bool needSerialize)
@@ -64,11 +59,10 @@ void AliasConfiguration::addAliases(const kitBase::robotModel::PortInfo &portInf
 	QStringList result;
 	const auto &portName = portInfo.name();
 	const auto &aliases = portInfo.nameAliases();
-	for (auto &&alias: aliases) {
+	for (auto &&alias : aliases) {
 		bool found = {};
 		for (auto &&otherPort : mRobotModel.availablePorts()) {
-			if ((portName != otherPort.name())
-				&& (otherPort.name() == alias)) {
+			if ((portName != otherPort.name()) && (otherPort.name() == alias)) {
 				found = true;
 				break;
 			}
@@ -77,7 +71,7 @@ void AliasConfiguration::addAliases(const kitBase::robotModel::PortInfo &portInf
 			result.append(alias);
 		}
 	}
-	mAllowedAliases[portInfo] = AliasInfo{result, needSerialize};
+	mAllowedAliases[portInfo] = AliasInfo {result, needSerialize};
 }
 
 void AliasConfiguration::serialize(QDomElement &element) const

@@ -45,14 +45,15 @@ public:
 
 	/// Enumerates types of entities that can be dragged out of a palette. All those enities have type descriptors
 	/// subclassing this class.
-	enum class Type
-	{
+	enum class Type {
 		/// This type describes node element, toNode() can be safely called.
 		node = 0
 		/// This type describes edge element, toEdge() can be safely called.
-		, edge
+		,
+		edge
 		/// This type describes group of nodes and edges, toPattern() can be safely called.
-		, pattern
+		,
+		pattern
 	};
 
 	~ElementType() override;
@@ -171,8 +172,8 @@ public:
 	/// @param displayedName A string that will be shown to user as a name of this property, should be localized.
 	/// @param description A string that will be shown to user as a description of this property, should be localized.
 	/// @param isReference Must be true for properties whoose values point to some other element.
-	void addProperty(const QString &name, const QString &type, const QString &defaultValue
-			, const QString &displayedName, const QString &description, bool isReference);
+	void addProperty(const QString &name, const QString &type, const QString &defaultValue,
+		const QString &displayedName, const QString &description, bool isReference);
 
 	/// Returns true if this element type was removed by user in 'metamodeling-on-fly' mode.
 	bool isHidden() const;

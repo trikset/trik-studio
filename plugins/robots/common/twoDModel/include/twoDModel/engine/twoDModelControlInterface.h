@@ -39,7 +39,9 @@ class TWO_D_MODEL_EXPORT TwoDModelControlInterface : public QObject
 	Q_OBJECT
 
 public:
-	virtual ~TwoDModelControlInterface() {}
+	virtual ~TwoDModelControlInterface()
+	{
+	}
 
 	/// Returns a reference to the devices configurator.
 	/// Can be used by outside enviroment to connect it to other ones.
@@ -47,14 +49,13 @@ public:
 
 	/// Performs 2D model`s initialization with the given system components.
 	/// @todo: Separate twoD model engine from the enviroment (get rid of parameters)
-	virtual void init(const kitBase::EventsForKitPluginInterface &eventsForKitPlugin
-			, const qReal::SystemEvents &systemEvents
-			, qReal::LogicalModelAssistInterface &logicalModel
-			, qReal::ControllerInterface &controller
-			, qReal::gui::MainWindowInterpretersInterface &interpretersInterface
-			, qReal::gui::MainWindowDockInterface &dockInterface
-			, const qReal::ProjectManagementInterface &projectManager
-			, kitBase::InterpreterControlInterface &interpreterControl) = 0;
+	virtual void init(const kitBase::EventsForKitPluginInterface &eventsForKitPlugin,
+		const qReal::SystemEvents &systemEvents, qReal::LogicalModelAssistInterface &logicalModel,
+		qReal::ControllerInterface &controller,
+		qReal::gui::MainWindowInterpretersInterface &interpretersInterface,
+		qReal::gui::MainWindowDockInterface &dockInterface,
+		const qReal::ProjectManagementInterface &projectManager,
+		kitBase::InterpreterControlInterface &interpreterControl) = 0;
 
 public Q_SLOTS:
 	/// Starts interpretation process in 2D model.

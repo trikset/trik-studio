@@ -20,17 +20,19 @@
 class TrikAccelerometerAdapter : public trikControl::VectorSensorInterface
 {
 
-Q_OBJECT
+	Q_OBJECT
 
 public:
 	TrikAccelerometerAdapter(kitBase::robotModel::robotParts::AccelerometerSensor *acc);
 
-	virtual Status status() const override { return Status::ready; }
+	virtual Status status() const override
+	{
+		return Status::ready;
+	}
 
 public Q_SLOTS:
 	virtual QVector<int> read() const override;
 
 private:
 	kitBase::robotModel::robotParts::AccelerometerSensor *mAccelerometer;
-
 };

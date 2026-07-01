@@ -19,12 +19,8 @@
 using namespace generatorBase::simple;
 using namespace qReal;
 
-BindingGenerator::BindingGenerator(const qrRepo::RepoApi &repo
-		, GeneratorCustomizer &customizer
-		, const Id &id
-		, const QString &pathToTemplate
-		, QList<Binding *> const &bindings
-		, QObject *parent)
+BindingGenerator::BindingGenerator(const qrRepo::RepoApi &repo, GeneratorCustomizer &customizer, const Id &id,
+	const QString &pathToTemplate, QList<Binding *> const &bindings, QObject *parent)
 	: AbstractSimpleGenerator(repo, customizer, id, parent)
 	, mPathToTemplate(pathToTemplate)
 	, mBindings(bindings)
@@ -39,7 +35,7 @@ BindingGenerator::~BindingGenerator()
 QString BindingGenerator::generate()
 {
 	QString input = readTemplate(mPathToTemplate);
-	for (Binding * const binding : mBindings) {
+	for (Binding *const binding : mBindings) {
 		binding->apply(mRepo, mId, input);
 	}
 
@@ -53,7 +49,7 @@ void BindingGenerator::setPathToTemplate(const QString &pathToTemplate)
 	mPathToTemplate = pathToTemplate;
 }
 
-void BindingGenerator::addBinding(Binding * const binding)
+void BindingGenerator::addBinding(Binding *const binding)
 {
 	mBindings << binding;
 }

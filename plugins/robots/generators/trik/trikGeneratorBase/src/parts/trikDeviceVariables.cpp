@@ -18,13 +18,11 @@
 
 using namespace trik::parts;
 
-QString TrikDeviceVariables::variableTemplatePath(const kitBase::robotModel::DeviceInfo &device
-		, const kitBase::robotModel::PortInfo &port) const
+QString TrikDeviceVariables::variableTemplatePath(const kitBase::robotModel::DeviceInfo &device,
+	const kitBase::robotModel::PortInfo &port) const
 {
-	if (device.name() == "trikLineSensor"
-			|| device.name() == "trikObjectSensor"
-			|| device.name() == "trikColorSensor")
-	{
+	if (device.name() == "trikLineSensor" || device.name() == "trikObjectSensor"
+		|| device.name() == "trikColorSensor") {
 		QString templateName = port.name();
 		templateName.remove("Port");
 		return "videosensors/" + templateName + ".t";

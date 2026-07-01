@@ -32,7 +32,7 @@ public:
 
 	void save() override;
 	void restoreSettings() override;
-	void onRobotModelChanged(kitBase::robotModel::RobotModelInterface * const robotModel) override;
+	void onRobotModelChanged(kitBase::robotModel::RobotModelInterface *const robotModel) override;
 
 Q_SIGNALS:
 	void settingsChanged();
@@ -42,7 +42,7 @@ private Q_SLOTS:
 
 private:
 	QString selectedPortName() const;
-	void setColorOnGeneratorLabel(const QColor& color);
+	void setColorOnGeneratorLabel(const QColor &color);
 	void setTextOnGeneratorLabel();
 	Ui::NxtAdditionalPreferences *mUi;
 	const QString mBluetoothRobotName;

@@ -27,8 +27,7 @@ class TrikServoMotor : public kitBase::robotModel::robotParts::Motor
 	Q_CLASSINFO("friendlyName", tr("Servo Motor"))
 
 public:
-	TrikServoMotor(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port);
+	TrikServoMotor(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port);
 };
 
 }

@@ -57,7 +57,7 @@ NodeElement::NodeElement(const NodeElementType &type, const Id &id, const models
 	, mIsExpanded(false)
 	, mIsFolded(false)
 	, mLeftPressed(false)
-	, mPos(QPointF(0,0))
+	, mPos(QPointF(0, 0))
 	, mSelectionNeeded(false)
 	, mConnectionInProgress(false)
 	, mPlaceholder(nullptr)
@@ -72,14 +72,12 @@ NodeElement::NodeElement(const NodeElementType &type, const Id &id, const models
 	mRenderer.setElementRepo(this);
 
 	PortFactory portFactory;
-	mPortHandler = new PortHandler(this, mGraphicalAssistApi
-			, portFactory.createPorts(mType.pointPorts())
-			, portFactory.createPorts(mType.linePorts())
-			, portFactory.createPorts(mType.circularPorts()));
+	mPortHandler = new PortHandler(this, mGraphicalAssistApi, portFactory.createPorts(mType.pointPorts()),
+		portFactory.createPorts(mType.linePorts()), portFactory.createPorts(mType.circularPorts()));
 
 	const auto &labelInfos = mType.labels();
 	for (const auto &labelInfo : labelInfos) {
-		Label * const label = new Label(mGraphicalAssistApi, mLogicalAssistApi, mId, labelInfo);
+		Label *const label = new Label(mGraphicalAssistApi, mLogicalAssistApi, mId, labelInfo);
 		label->init(mContents);
 		label->setParentItem(this);
 		mLabels.append(label);
@@ -100,7 +98,8 @@ NodeElement::NodeElement(const NodeElementType &type, const Id &id, const models
 	mStartingLabelsCount = mLabels.count();
 
 	initExplosionConnections();
-	const Id explosionTarget = mLogicalAssistApi.logicalRepoApi().outgoingExplosion(mGraphicalAssistApi.logicalId(mId));
+	const Id explosionTarget =
+		mLogicalAssistApi.logicalRepoApi().outgoingExplosion(mGraphicalAssistApi.logicalId(mId));
 	if (!explosionTarget.isNull()) {
 		models.exploser().explosionTargetCouldChangeProperties(explosionTarget);
 	}
@@ -108,7 +107,7 @@ NodeElement::NodeElement(const NodeElementType &type, const Id &id, const models
 
 NodeElement::~NodeElement()
 {
-	for (EdgeElement * const edge : mEdgeList) {
+	for (EdgeElement *const edge : mEdgeList) {
 		edge->removeLink(this);
 	}
 
@@ -147,8 +146,8 @@ void NodeElement::connectSceneEvents()
 
 void NodeElement::initExplosionConnections()
 {
-	connect(&mModels.exploser(), &models::Exploser::explosionTargetCouldChangeProperties, this
-			, &NodeElement::updateDynamicProperties);
+	connect(&mModels.exploser(), &models::Exploser::explosionTargetCouldChangeProperties, this,
+		&NodeElement::updateDynamicProperties);
 }
 
 void NodeElement::updateDynamicProperties(const Id &target)
@@ -156,8 +155,8 @@ void NodeElement::updateDynamicProperties(const Id &target)
 	const Id outgoingExplosion = mLogicalAssistApi.logicalRepoApi().outgoingExplosion(logicalId());
 	if (outgoingExplosion.isNull()) {
 		// remove this line if there are language elements which can add explosion
-		disconnect(&mModels.exploser(), &models::Exploser::explosionTargetCouldChangeProperties, this
-				, &NodeElement::updateDynamicProperties);
+		disconnect(&mModels.exploser(), &models::Exploser::explosionTargetCouldChangeProperties, this,
+			&NodeElement::updateDynamicProperties);
 		return;
 	}
 
@@ -188,8 +187,8 @@ void NodeElement::updateDynamicProperties(const Id &target)
 
 	// Get labels
 	const QString dynamiclabels = mLogicalAssistApi.mutableLogicalRepoApi().stringProperty(target, "labels");
-	if (mPreviousDynamicLabels.isEmpty() ||
-			(!mPreviousDynamicLabels.isEmpty() && compareDynamicLabels(dynamiclabels, mPreviousDynamicLabels))) {
+	if (mPreviousDynamicLabels.isEmpty()
+		|| (!mPreviousDynamicLabels.isEmpty() && compareDynamicLabels(dynamiclabels, mPreviousDynamicLabels))) {
 		mPreviousDynamicLabels = dynamiclabels;
 
 		// ...delete old dynamic labels
@@ -199,19 +198,18 @@ void NodeElement::updateDynamicProperties(const Id &target)
 		}
 
 		// if we restore block from repo, we already have properties all properties Value
-		const QString mCurretDynamicProperties
-				= mLogicalAssistApi.mutableLogicalRepoApi().stringProperty(logicalId(), "dynamicProperties");
+		const QString mCurretDynamicProperties =
+			mLogicalAssistApi.mutableLogicalRepoApi().stringProperty(logicalId(), "dynamicProperties");
 		QMap<QString, QString> valueByPropertyName;
 		if (!mCurretDynamicProperties.isEmpty()) {
 			QDomDocument currentDynamicProperties;
 			currentDynamicProperties.setContent(mCurretDynamicProperties);
 
-			for (QDomElement element
-					= currentDynamicProperties.firstChildElement("properties").firstChildElement("property")
-					; !element.isNull()
-					; element = element.nextSiblingElement("property"))
-			{
-				valueByPropertyName[element.attribute("name")] = element.attribute("dynamicPropertyValue");
+			for (QDomElement element = currentDynamicProperties.firstChildElement("properties")
+			                .firstChildElement("property");
+				!element.isNull(); element = element.nextSiblingElement("property")) {
+				valueByPropertyName[element.attribute("name")] =
+					element.attribute("dynamicPropertyValue");
 			}
 		}
 
@@ -223,18 +221,15 @@ void NodeElement::updateDynamicProperties(const Id &target)
 		dynamicLabels.setContent(dynamiclabels);
 
 		int index = mLabels.count() + 1;
-		for (QDomElement element = dynamicLabels.firstChildElement("labels").firstChildElement("label")
-				; !element.isNull()
-				; element = element.nextSiblingElement("label"), ++index)
-		{
-			utils::ScalableCoordinate x = utils::ScalableItem::initCoordinate(element.attribute("x")
-					, mContents.width());
-			utils::ScalableCoordinate y = utils::ScalableItem::initCoordinate(element.attribute("y")
-					, mContents.height());
+		for (QDomElement element = dynamicLabels.firstChildElement("labels").firstChildElement("label");
+			!element.isNull(); element = element.nextSiblingElement("label"), ++index) {
+			utils::ScalableCoordinate x =
+				utils::ScalableItem::initCoordinate(element.attribute("x"), mContents.width());
+			utils::ScalableCoordinate y =
+				utils::ScalableItem::initCoordinate(element.attribute("y"), mContents.height());
 			const QString textBinded = element.attribute("textBinded");
-			const QString value = valueByPropertyName.contains(textBinded)
-					? valueByPropertyName[textBinded]
-					: element.attribute("value");
+			const QString value = valueByPropertyName.contains(textBinded) ? valueByPropertyName[textBinded]
+			                                                               : element.attribute("value");
 			const QString type = element.attribute("type");
 			const QString text = element.attribute("text");
 
@@ -248,8 +243,8 @@ void NodeElement::updateDynamicProperties(const Id &target)
 			properties.appendChild(property);
 
 			// Label initialization
-			QSharedPointer<LabelProperties> labelInfo(new LabelProperties(index, x.value(), y.value()
-																		  , textBinded, false, 0));
+			QSharedPointer<LabelProperties> labelInfo(
+				new LabelProperties(index, x.value(), y.value(), textBinded, false, 0));
 			labelInfo->setBackground(Qt::white);
 			labelInfo->setScalingX(false);
 			labelInfo->setScalingY(false);
@@ -264,9 +259,8 @@ void NodeElement::updateDynamicProperties(const Id &target)
 			mLabels.append(label);
 		}
 
-		mLogicalAssistApi.mutableLogicalRepoApi().setProperty(logicalId(), "dynamicProperties"
-				, dynamicProperties.toString(4));
-
+		mLogicalAssistApi.mutableLogicalRepoApi().setProperty(logicalId(), "dynamicProperties",
+			dynamicProperties.toString(4));
 	}
 }
 
@@ -288,8 +282,10 @@ void NodeElement::setPos(QPointF pos)
 		setPos(QPointF());
 		mContents.moveTo(QPointF());
 		storeGeometry();
-		QLOG_WARN() << "NaN passed to NodeElement::setPos(). That means that something went wrong. "\
-				"Learn to reproduce this message. The position has been set to (0,0). Attend element with id" << id();
+		QLOG_WARN()
+			<< "NaN passed to NodeElement::setPos(). That means that something went wrong. "
+			   "Learn to reproduce this message. The position has been set to (0,0). Attend element with id"
+			<< id();
 	} else {
 		mPos = pos;
 		QGraphicsItem::setPos(pos);
@@ -308,7 +304,7 @@ void NodeElement::adjustLinks()
 	}
 
 	for (QGraphicsItem *child : childItems()) {
-		NodeElement *element = dynamic_cast<NodeElement*>(child);
+		NodeElement *element = dynamic_cast<NodeElement *>(child);
 		if (element) {
 			element->adjustLinks();
 		}
@@ -324,9 +320,9 @@ void NodeElement::arrangeLinearPorts()
 void NodeElement::arrangeLinks()
 {
 	//Episode I: Home Jumps
-	for (EdgeElement* edge : mEdgeList) {
-		NodeElement* src = edge->src();
-		NodeElement* dst = edge->dst();
+	for (EdgeElement *edge : mEdgeList) {
+		NodeElement *src = edge->src();
+		NodeElement *dst = edge->dst();
 		edge->reconnectToNearestPorts(this == src, this == dst);
 	}
 
@@ -334,17 +330,17 @@ void NodeElement::arrangeLinks()
 	arrangeLinearPorts();
 
 	//Episode III: Remote Jumps
-	for (EdgeElement* edge : mEdgeList) {
-		NodeElement* src = edge->src();
-		NodeElement* dst = edge->dst();
-		NodeElement* other = edge->otherSide(this);
+	for (EdgeElement *edge : mEdgeList) {
+		NodeElement *src = edge->src();
+		NodeElement *dst = edge->dst();
+		NodeElement *other = edge->otherSide(this);
 		edge->reconnectToNearestPorts(other == src, other == dst);
 	}
 
 	//Episode IV: Remote Arrangigng
-	QSet<NodeElement*> arranged;
-	for (EdgeElement* edge : mEdgeList) {
-		NodeElement* other = edge->otherSide(this);
+	QSet<NodeElement *> arranged;
+	for (EdgeElement *edge : mEdgeList) {
+		NodeElement *other = edge->otherSide(this);
 		if (other && !arranged.contains(other)) {
 			other->arrangeLinearPorts();
 			arranged.insert(other);
@@ -382,7 +378,7 @@ void NodeElement::switchGrid(bool isChecked)
 	if (isChecked) {
 		alignToGrid();
 
-		for (EdgeElement * const edge : mEdgeList) {
+		for (EdgeElement *const edge : mEdgeList) {
 			edge->alignToGrid();
 		}
 	}
@@ -404,24 +400,18 @@ void NodeElement::mousePressEvent(QGraphicsSceneMouseEvent *event)
 	if (isSelected()) {
 		int dragArea = SettingsManager::instance()->value("DragArea").toInt();
 		if (QRectF(mContents.topLeft(), QSizeF(dragArea, dragArea)).contains(event->pos())
-				&& mType.isResizable())
-		{
+			&& mType.isResizable()) {
 			mDragState = TopLeft;
 		} else if (QRectF(mContents.topRight(), QSizeF(-dragArea, dragArea)).contains(event->pos())
-				&& mType.isResizable())
-		{
+			   && mType.isResizable()) {
 			mDragState = TopRight;
 		} else if (QRectF(mContents.bottomRight(), QSizeF(-dragArea, -dragArea)).contains(event->pos())
-				&& mType.isResizable())
-		{
+			   && mType.isResizable()) {
 			mDragState = BottomRight;
 		} else if (QRectF(mContents.bottomLeft(), QSizeF(dragArea, -dragArea)).contains(event->pos())
-				&& mType.isResizable())
-		{
+			   && mType.isResizable()) {
 			mDragState = BottomLeft;
-		} else if (QRectF(QPointF(-20, 0), QPointF(0, 20)).contains(event->pos())
-				&& mType.isContainer())
-		{
+		} else if (QRectF(QPointF(-20, 0), QPointF(0, 20)).contains(event->pos()) && mType.isContainer()) {
 			changeFoldState();
 		} else {
 			Element::mousePressEvent(event);
@@ -456,35 +446,35 @@ void NodeElement::recalculateHighlightedNode(QPointF mouseScenePos)
 	// Determing parent using corner position, not mouse coordinates
 	QPointF newParentInnerPoint = mouseScenePos;
 	switch (mDragState) {
-		case TopLeft:
-			newParentInnerPoint = scenePos();
-			break;
-		case Top:
-			newParentInnerPoint = scenePos() + QPointF(mContents.width() / 2, 0);
-			break;
-		case TopRight:
-			newParentInnerPoint = scenePos() + QPointF(mContents.width(), 0);
-			break;
-		case Left:
-			newParentInnerPoint = scenePos() + QPointF(0, mContents.height() / 2);
-			break;
-		case Right:
-			newParentInnerPoint = scenePos() + QPointF(mContents.width(), mContents.height() / 2);
-			break;
-		case BottomLeft:
-			newParentInnerPoint = scenePos() + QPointF(0, mContents.height());
-			break;
-		case Bottom:
-			newParentInnerPoint = scenePos() + QPointF(mContents.width() / 2, mContents.height());
-			break;
-		case BottomRight:
-			newParentInnerPoint = scenePos() + QPointF(mContents.width(), mContents.height());
-			break;
-		case None:
-			break;
+	case TopLeft:
+		newParentInnerPoint = scenePos();
+		break;
+	case Top:
+		newParentInnerPoint = scenePos() + QPointF(mContents.width() / 2, 0);
+		break;
+	case TopRight:
+		newParentInnerPoint = scenePos() + QPointF(mContents.width(), 0);
+		break;
+	case Left:
+		newParentInnerPoint = scenePos() + QPointF(0, mContents.height() / 2);
+		break;
+	case Right:
+		newParentInnerPoint = scenePos() + QPointF(mContents.width(), mContents.height() / 2);
+		break;
+	case BottomLeft:
+		newParentInnerPoint = scenePos() + QPointF(0, mContents.height());
+		break;
+	case Bottom:
+		newParentInnerPoint = scenePos() + QPointF(mContents.width() / 2, mContents.height());
+		break;
+	case BottomRight:
+		newParentInnerPoint = scenePos() + QPointF(mContents.width(), mContents.height());
+		break;
+	case None:
+		break;
 	}
 
-	EditorViewScene *evScene = dynamic_cast<EditorViewScene*>(scene());
+	EditorViewScene *evScene = dynamic_cast<EditorViewScene *>(scene());
 	NodeElement *newParent = evScene->findNewParent(newParentInnerPoint, this);
 
 	// it would be nice optimization to do nothing in case of
@@ -657,7 +647,7 @@ void NodeElement::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 			while (newParent) {
 				newParent->mContents = newParent->mContents.normalized();
 				newParent->storeGeometry();
-				newParent = dynamic_cast<NodeElement*>(newParent->parentItem());
+				newParent = dynamic_cast<NodeElement *>(newParent->parentItem());
 			}
 		} else {
 			AbstractCommand *parentCommand = changeParentCommand(evScene->rootItemId(), scenePos());
@@ -667,7 +657,7 @@ void NodeElement::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 		}
 	}
 
-	for (EdgeElement* edge : mEdgeList) {
+	for (EdgeElement *edge : mEdgeList) {
 		edge->layOut();
 		if (SettingsManager::value("ActivateGrid").toBool()) {
 			edge->alignToGrid();
@@ -675,8 +665,8 @@ void NodeElement::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 	}
 
 	if (shouldProcessResize && mResizeCommand) {
-		auto *insertCommand = new commands::InsertIntoEdgeCommand(
-				*evScene, mModels, id(), id(), Id::rootId(), event->scenePos(), boundingRect().bottomRight(), false);
+		auto *insertCommand = new commands::InsertIntoEdgeCommand(*evScene, mModels, id(), id(), Id::rootId(),
+			event->scenePos(), boundingRect().bottomRight(), false);
 		mResizeCommand->addPostAction(insertCommand);
 		endResize();
 	}
@@ -757,7 +747,7 @@ void NodeElement::initEmbeddedLinkers()
 
 		const EdgeElementType &edge = elementType.toEdge();
 		if (!edge.fromPortTypes().toSet().intersect(mType.portTypes().toSet()).isEmpty()) {
-			EmbeddedLinker* embeddedLinker = new EmbeddedLinker();
+			EmbeddedLinker *embeddedLinker = new EmbeddedLinker();
 			scene()->addItem(embeddedLinker);
 			embeddedLinker->setEdgeType(edge.typeId());
 			embeddedLinker->setDirected(true);
@@ -780,14 +770,14 @@ void NodeElement::setVisibleEmbeddedLinkers(const bool show)
 		setZValue(250);
 		int index = 0;
 		int maxIndex = mEmbeddedLinkers.size();
-		for (EmbeddedLinker* embeddedLinker : mEmbeddedLinkers) {
-			embeddedLinker->takePosition(index,maxIndex);
+		for (EmbeddedLinker *embeddedLinker : mEmbeddedLinkers) {
+			embeddedLinker->takePosition(index, maxIndex);
 			embeddedLinker->show();
 			index++;
 		}
 	} else {
 		setZValue(0);
-		for (EmbeddedLinker* embeddedLinker : mEmbeddedLinkers) {
+		for (EmbeddedLinker *embeddedLinker : mEmbeddedLinkers) {
 			embeddedLinker->hide();
 		}
 	}
@@ -796,7 +786,7 @@ void NodeElement::setVisibleEmbeddedLinkers(const bool show)
 QVariant NodeElement::itemChange(GraphicsItemChange change, const QVariant &value)
 {
 	bool isItemAddedOrDeleted = false;
-	NodeElement *item = dynamic_cast<NodeElement*>(value.value<QGraphicsItem*>());
+	NodeElement *item = dynamic_cast<NodeElement *>(value.value<QGraphicsItem *>());
 	switch (change) {
 	case ItemPositionHasChanged:
 		if (mDragState == None) {
@@ -986,8 +976,8 @@ void NodeElement::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 
 		if (mIsExpanded && mLogicalAssistApi.logicalRepoApi().outgoingExplosion(logicalId()) != Id()) {
 			QRectF rect = diagramRenderingRect();
-			painter->drawImage(rect, mRenderedDiagram.scaled(rect.size().toSize()
-					, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+			painter->drawImage(rect, mRenderedDiagram.scaled(rect.size().toSize(), Qt::KeepAspectRatio,
+							 Qt::SmoothTransformation));
 		}
 	}
 }
@@ -998,14 +988,14 @@ void NodeElement::drawPorts(QPainter *painter, bool mouseOver)
 	painter->setOpacity(0.7);
 
 	const QStringList mPortsVisibilityKeys = mPortsVisibility.keys(true);
-	const QStringList portTypes = mouseOver ? mGraphicalAssistApi.editorManagerInterface().portTypes(id().type())
-			: mPortsVisibilityKeys;
+	const QStringList portTypes =
+		mouseOver ? mGraphicalAssistApi.editorManagerInterface().portTypes(id().type()) : mPortsVisibilityKeys;
 	mPortHandler->drawPorts(painter, mContents, portTypes);
 
 	painter->restore();
 }
 
-QList<EdgeElement*> NodeElement::getEdges() const
+QList<EdgeElement *> NodeElement::getEdges() const
 {
 	return mEdgeList;
 }
@@ -1045,8 +1035,8 @@ void NodeElement::changeFoldState()
 {
 	mIsFolded = !mIsFolded;
 
-	for (QGraphicsItem* childItem : childItems()) {
-		NodeElement* curItem = dynamic_cast<NodeElement*>(childItem);
+	for (QGraphicsItem *childItem : childItems()) {
+		NodeElement *curItem = dynamic_cast<NodeElement *>(childItem);
 		if (curItem) {
 			curItem->setVisible(!mIsFolded);
 			curItem->setLinksVisible(!mIsFolded);
@@ -1057,14 +1047,13 @@ void NodeElement::changeFoldState()
 		mCurUnfoldedContents = mContents;
 		mFoldedContents.moveTo(pos());
 		setGeometry(mFoldedContents);
-	}
-	else {
+	} else {
 		mCurUnfoldedContents.moveTo(pos());
 		setGeometry(mCurUnfoldedContents);
 	}
 	mGraphicalAssistApi.mutableGraphicalRepoApi().setProperty(mId, "folded", mIsFolded ? "true" : "false");
 
-	NodeElement* parent = dynamic_cast<NodeElement*>(parentItem());
+	NodeElement *parent = dynamic_cast<NodeElement *>(parentItem());
 	if (parent) {
 		parent->resize();
 	}
@@ -1073,7 +1062,7 @@ void NodeElement::changeFoldState()
 
 void NodeElement::updateLabels()
 {
-	for (Label * const label : mLabels) {
+	for (Label *const label : mLabels) {
 		label->setParentContents(mContents);
 	}
 }
@@ -1095,10 +1084,8 @@ bool NodeElement::compareDynamicLabels(const QString &labelsPack1, const QString
 	QSet<QString> dynamicLabelsNames2;
 
 	auto traverse = [&](const QDomDocument &dynamicLabels, QSet<QString> &labelNamesSet) {
-		for (QDomElement element = dynamicLabels.firstChildElement("labels").firstChildElement("label")
-				; !element.isNull()
-				; element = element.nextSiblingElement("label"))
-		{
+		for (QDomElement element = dynamicLabels.firstChildElement("labels").firstChildElement("label");
+			!element.isNull(); element = element.nextSiblingElement("label")) {
 			const QString name = element.attribute("textBinded");
 			labelNamesSet.insert(name);
 		}
@@ -1115,8 +1102,8 @@ void NodeElement::setLinksVisible(bool isVisible)
 		curEdge->setVisible(isVisible);
 	}
 
-	for (QGraphicsItem* childItem : childItems()) {
-		NodeElement* curItem = dynamic_cast<NodeElement*>(childItem);
+	for (QGraphicsItem *childItem : childItems()) {
+		NodeElement *curItem = dynamic_cast<NodeElement *>(childItem);
 		if (curItem) {
 			curItem->setLinksVisible(isVisible);
 		}
@@ -1134,8 +1121,8 @@ void NodeElement::drawPlaceholder(QGraphicsRectItem *placeholder, QPointF pos)
 	// binary search? No because we need to know summary height of prev elements
 	NodeElement *nextItem = nullptr;
 
-	for (QGraphicsItem* childItem : childItems()) {
-		NodeElement *curItem = dynamic_cast<NodeElement*>(childItem);
+	for (QGraphicsItem *childItem : childItems()) {
+		NodeElement *curItem = dynamic_cast<NodeElement *>(childItem);
 		if (curItem) {
 			if (curItem->scenePos().y() > pos.y()) {
 				nextItem = curItem;
@@ -1147,22 +1134,22 @@ void NodeElement::drawPlaceholder(QGraphicsRectItem *placeholder, QPointF pos)
 	erasePlaceholder(false);
 	mPlaceholder = placeholder;
 	mPlaceholder->setParentItem(this);
-	if(nextItem) {
+	if (nextItem) {
 		mPlaceholder->stackBefore(nextItem);
 	}
 
 	resize();
 }
 
-Element* NodeElement::getPlaceholderNextElement() const
+Element *NodeElement::getPlaceholderNextElement() const
 {
-	if(mPlaceholder == nullptr) {
+	if (mPlaceholder == nullptr) {
 		return nullptr;
 	}
 	bool found = false;
 	// loking for child following the placeholder
 	for (QGraphicsItem *childItem : childItems()) {
-		Element *element = dynamic_cast<Element*>(childItem);
+		Element *element = dynamic_cast<Element *>(childItem);
 		if (found && element != nullptr) {
 			return element;
 		}
@@ -1186,12 +1173,12 @@ void NodeElement::erasePlaceholder(bool redraw)
 	delete mPlaceholder;
 	mPlaceholder = nullptr;
 
-	if(redraw) {
+	if (redraw) {
 		resize();
 	}
 }
 
-void NodeElement::updateByChild(NodeElement* item, bool isItemAddedOrDeleted)
+void NodeElement::updateByChild(NodeElement *item, bool isItemAddedOrDeleted)
 {
 	if (mIsFolded && isItemAddedOrDeleted && item) {
 		changeFoldState();
@@ -1206,7 +1193,7 @@ void NodeElement::updateByChild(NodeElement* item, bool isItemAddedOrDeleted)
 
 void NodeElement::updateByNewParent()
 {
-	NodeElement* parent = dynamic_cast<NodeElement*>(parentItem());
+	NodeElement *parent = dynamic_cast<NodeElement *>(parentItem());
 	if (!parent || parent->mType.hasMovableChildren()) {
 		setFlag(ItemIsMovable, true);
 	} else {
@@ -1258,7 +1245,6 @@ void NodeElement::updateChildrenOrder()
 	}
 
 	mGraphicalAssistApi.mutableGraphicalRepoApi().setProperty(mId, "childrenOrder", ids);
-
 }
 
 QList<qreal> NodeElement::borderValues() const
@@ -1327,7 +1313,7 @@ bool NodeElement::isFolded() const
 	return mIsFolded;
 }
 
-QGraphicsRectItem* NodeElement::placeholder() const
+QGraphicsRectItem *NodeElement::placeholder() const
 {
 	return mPlaceholder;
 }
@@ -1373,14 +1359,11 @@ AbstractCommand *NodeElement::changeParentCommand(const Id &newParent, QPointF p
 	// root, then translate into a new position and change parent to a new one.
 	// Also that element itself doesn`t change position in change parent command
 	// so using translation command
-	ChangeParentCommand *changeParentToSceneCommand =
-			new ChangeParentCommand(mLogicalAssistApi, mGraphicalAssistApi, false
-					, id(), oldParent, evScene->rootItemId(), oldPos, oldScenePos);
-	AbstractCommand *translateCommand = ResizeCommand::create(this, mContents
-			, position, mContents, oldScenePos);
-	ChangeParentCommand *result = new ChangeParentCommand(
-			mLogicalAssistApi, mGraphicalAssistApi, false
-			, id(), evScene->rootItemId(), newParent, position, position);
+	ChangeParentCommand *changeParentToSceneCommand = new ChangeParentCommand(mLogicalAssistApi,
+		mGraphicalAssistApi, false, id(), oldParent, evScene->rootItemId(), oldPos, oldScenePos);
+	AbstractCommand *translateCommand = ResizeCommand::create(this, mContents, position, mContents, oldScenePos);
+	ChangeParentCommand *result = new ChangeParentCommand(mLogicalAssistApi, mGraphicalAssistApi, false, id(),
+		evScene->rootItemId(), newParent, position, position);
 	result->addPreAction(changeParentToSceneCommand);
 	result->addPreAction(translateCommand);
 	return result;
@@ -1395,8 +1378,8 @@ IdList NodeElement::sortedChildren() const
 {
 	IdList result;
 	if (mGraphicalAssistApi.properties(mId).contains("childrenOrder")) {
-		for (const QString &id : mGraphicalAssistApi.graphicalRepoApi().property(mId, "childrenOrder")
-				.toStringList()) {
+		for (const QString &id :
+			mGraphicalAssistApi.graphicalRepoApi().property(mId, "childrenOrder").toStringList()) {
 			result << Id::loadFromString(id);
 		}
 	}
@@ -1446,14 +1429,13 @@ void NodeElement::initRenderedDiagram()
 
 QRectF NodeElement::diagramRenderingRect() const
 {
-	const NodeElement initial(
-			mLogicalAssistApi.editorManagerInterface().elementType(id()).toNode()
-			, id().sameTypeId()
-			, mModels
-			);
+	const NodeElement initial(mLogicalAssistApi.editorManagerInterface().elementType(id()).toNode(),
+		id().sameTypeId(), mModels);
 
-	const qreal xCoeff = (boundingRect().width() - 3 * squareSize) / (initial.boundingRect().width() - 3 * squareSize);
-	const qreal yCoeff = (boundingRect().height()- 3 * squareSize) / (initial.boundingRect().height()- 3 * squareSize);
+	const qreal xCoeff =
+		(boundingRect().width() - 3 * squareSize) / (initial.boundingRect().width() - 3 * squareSize);
+	const qreal yCoeff =
+		(boundingRect().height() - 3 * squareSize) / (initial.boundingRect().height() - 3 * squareSize);
 
 	// QReal:BP hardcode
 	// TODO: Remove this.

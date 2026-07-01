@@ -37,14 +37,11 @@ using namespace generatorBase;
 
 using namespace qReal;
 
-PioneerLuaMasterGenerator::PioneerLuaMasterGenerator(const qrRepo::RepoApi &repo
-		, qReal::ErrorReporterInterface &errorReporter
-		, const utils::ParserErrorReporter &parserErrorReporter
-		, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
-		, qrtext::LanguageToolboxInterface &textLanguage
-		, const qReal::Id &diagramId
-		, const QString &generatorName
-		, const qReal::EditorManagerInterface &metamodel)
+PioneerLuaMasterGenerator::PioneerLuaMasterGenerator(const qrRepo::RepoApi &repo,
+	qReal::ErrorReporterInterface &errorReporter, const utils::ParserErrorReporter &parserErrorReporter,
+	const kitBase::robotModel::RobotModelManagerInterface &robotModelManager,
+	qrtext::LanguageToolboxInterface &textLanguage, const qReal::Id &diagramId, const QString &generatorName,
+	const qReal::EditorManagerInterface &metamodel)
 	: MasterGeneratorBase(repo, errorReporter, robotModelManager, textLanguage, parserErrorReporter, diagramId)
 	, mGeneratorName(generatorName)
 	, mMetamodel(metamodel)
@@ -61,8 +58,7 @@ void PioneerLuaMasterGenerator::initialize()
 {
 	MasterGeneratorBase::initialize();
 	mControlFlowGenerator.reset(
-			new PioneerStateMachineGenerator(mRepo, mErrorReporter, *mCustomizer, *mValidator, mDiagram)
-			);
+		new PioneerStateMachineGenerator(mRepo, mErrorReporter, *mCustomizer, *mValidator, mDiagram));
 
 	auto factory = dynamic_cast<PioneerLuaGeneratorFactory *>(mCustomizer->factory());
 	if (!factory) {
@@ -70,21 +66,15 @@ void PioneerLuaMasterGenerator::initialize()
 	}
 
 	mRandomFunctionChecker.reset(
-			new RandomFunctionChecker(mRepo, mMetamodel, mTextLanguage, factory->randomGeneratorPart()));
+		new RandomFunctionChecker(mRepo, mMetamodel, mTextLanguage, factory->randomGeneratorPart()));
 
-	mControlFlowGenerator->registerNodeHook([this](const qReal::Id &id){ mRandomFunctionChecker->checkNode(id); });
+	mControlFlowGenerator->registerNodeHook([this](const qReal::Id &id) { mRandomFunctionChecker->checkNode(id); });
 }
 
 generatorBase::GeneratorCustomizer *PioneerLuaMasterGenerator::createCustomizer()
 {
-	return new PioneerLuaGeneratorCustomizer(
-			mRepo
-			, mErrorReporter
-			, mRobotModelManager
-			, *createLuaProcessor()
-			, mGeneratorName
-			, *mGotoLabelManager
-			, supportsSwitchUnstableToBreaks());
+	return new PioneerLuaGeneratorCustomizer(mRepo, mErrorReporter, mRobotModelManager, *createLuaProcessor(),
+		mGeneratorName, *mGotoLabelManager, supportsSwitchUnstableToBreaks());
 }
 
 QString PioneerLuaMasterGenerator::targetPath()
@@ -134,35 +124,35 @@ QString PioneerLuaMasterGenerator::generate(const QString &indentString)
 	const semantics::SemanticTree *mainControlFlow = mControlFlowGenerator->generate();
 	if (mainControlFlow) {
 		mainCode = mainControlFlow->toString(0, indentString);
-		const parts::Subprograms::GenerationResult subprogramsResult = mCustomizer->factory()
-				->subprograms()->generate(mControlFlowGenerator.data(), indentString);
+		const parts::Subprograms::GenerationResult subprogramsResult =
+			mCustomizer->factory()->subprograms()->generate(mControlFlowGenerator.data(), indentString);
 		if (subprogramsResult != parts::Subprograms::GenerationResult::success) {
 			mainCode = QString();
 		}
 	}
 
 	if (mainCode.isEmpty()) {
-		const QString errorMessage = tr("Generation failed. Possible causes are internal error in generator or too "
-				"complex program structure.");
+		const QString errorMessage =
+			tr("Generation failed. Possible causes are internal error in generator or too "
+			   "complex program structure.");
 		mErrorReporter.addError(errorMessage);
 		return QString();
 	}
 
 	QString resultCode = readTemplate("main.t");
-	replaceWithAutoIndent(resultCode, "@@SUBPROGRAMS_FORWARDING@@"
-			, mCustomizer->factory()->subprograms()->forwardDeclarations());
-	replaceWithAutoIndent(resultCode, "@@SUBPROGRAMS@@"
-			, mCustomizer->factory()->subprograms()->implementations());
-	replaceWithAutoIndent(resultCode, "@@THREADS_FORWARDING@@"
-			, mCustomizer->factory()->threads().generateDeclarations());
-	replaceWithAutoIndent(resultCode, "@@THREADS@@"
-			, mCustomizer->factory()->threads().generateImplementations(indentString));
+	replaceWithAutoIndent(resultCode, "@@SUBPROGRAMS_FORWARDING@@",
+		mCustomizer->factory()->subprograms()->forwardDeclarations());
+	replaceWithAutoIndent(resultCode, "@@SUBPROGRAMS@@", mCustomizer->factory()->subprograms()->implementations());
+	replaceWithAutoIndent(resultCode, "@@THREADS_FORWARDING@@",
+		mCustomizer->factory()->threads().generateDeclarations());
+	replaceWithAutoIndent(resultCode, "@@THREADS@@",
+		mCustomizer->factory()->threads().generateImplementations(indentString));
 	replaceWithAutoIndent(resultCode, "@@MAIN_CODE@@", mainCode);
 	replaceWithAutoIndent(resultCode, "@@INITHOOKS@@", mCustomizer->factory()->initCode());
-	replaceWithAutoIndent(resultCode, "@@TERMINATEHOOKS@@", utils::StringUtils::addIndent(
-			mCustomizer->factory()->terminateCode(), 1, indentString));
-	replaceWithAutoIndent(resultCode, "@@USERISRHOOKS@@", utils::StringUtils::addIndent(
-			mCustomizer->factory()->isrHooksCode(), 1, indentString));
+	replaceWithAutoIndent(resultCode, "@@TERMINATEHOOKS@@",
+		utils::StringUtils::addIndent(mCustomizer->factory()->terminateCode(), 1, indentString));
+	replaceWithAutoIndent(resultCode, "@@USERISRHOOKS@@",
+		utils::StringUtils::addIndent(mCustomizer->factory()->isrHooksCode(), 1, indentString));
 	const QString constantsString = mCustomizer->factory()->variables()->generateConstantsString();
 	const QString variablesString = mCustomizer->factory()->variables()->generateVariableString();
 

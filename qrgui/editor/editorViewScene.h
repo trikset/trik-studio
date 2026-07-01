@@ -51,28 +51,26 @@ class QRGUI_EDITOR_EXPORT EditorViewScene : public QGraphicsScene, public Editor
 	Q_OBJECT
 
 public:
-	EditorViewScene(const models::Models &models
-			, Controller &controller
-			/// @todo: move scene customizer properties to metamodel
-			, const SceneCustomizer &sceneCustomizer
-			, const Id &rootId
-			, QObject *parent = nullptr);
+	EditorViewScene(const models::Models &models,
+		Controller &controller
+		/// @todo: move scene customizer properties to metamodel
+		,
+		const SceneCustomizer &sceneCustomizer, const Id &rootId, QObject *parent = nullptr);
 	~EditorViewScene() override;
 
 	void clearScene();
 
-	virtual int launchEdgeMenu(EdgeElement *edge, NodeElement *node, QPointF scenePos
-			, bool canBeConnected, qReal::commands::CreateElementsCommand **elementCommand = nullptr);
+	virtual int launchEdgeMenu(EdgeElement *edge, NodeElement *node, QPointF scenePos, bool canBeConnected,
+		qReal::commands::CreateElementsCommand **elementCommand = nullptr);
 
 	//! @arg shiftToParent vector from (0,0) of container Node to new Element (aka localPos)
-	virtual Id createElement(const QString &idString
-			, QPointF scenePos
-			, qReal::commands::CreateElementsCommand **createCommandPointer = nullptr
-			, bool executeImmediately = true);
+	virtual Id createElement(const QString &idString, QPointF scenePos,
+		qReal::commands::CreateElementsCommand **createCommandPointer = nullptr,
+		bool executeImmediately = true);
 
-	virtual void createElement(const QMimeData *mimeData, QPointF scenePos
-			, qReal::commands::CreateElementsCommand **createCommandPointer = nullptr
-			, bool executeImmediately = true);
+	virtual void createElement(const QMimeData *mimeData, QPointF scenePos,
+		qReal::commands::CreateElementsCommand **createCommandPointer = nullptr,
+		bool executeImmediately = true);
 
 	// is virtual only to trick linker. is used from plugins and generators and we have no intention of
 	// including the scene (with dependencies) there
@@ -111,24 +109,23 @@ public:
 	static QGraphicsRectItem *getPlaceholder();
 	NodeElement *findNewParent(QPointF newParentInnerPoint, NodeElement *node);
 
-	void createSingleElement(const ElementInfo &element
-			, qReal::commands::CreateElementsCommand **createCommandPointer = nullptr
-			, bool executeImmediately = true);
+	void createSingleElement(const ElementInfo &element,
+		qReal::commands::CreateElementsCommand **createCommandPointer = nullptr,
+		bool executeImmediately = true);
 
 	EdgeElement *edgeForInsertion(QPointF scenePos);
 
-	void resolveOverlaps(NodeElement* node, QPointF scenePos, QPointF shift
-			, QMap<Id, QPointF> &shifting) const;
+	void resolveOverlaps(NodeElement *node, QPointF scenePos, QPointF shift, QMap<Id, QPointF> &shifting) const;
 
 	void returnElementsToOldPositions(QMap<Id, QPointF> const &shifting) const;
 
-	QList<NodeElement*> getCloseNodes(NodeElement* node) const;
+	QList<NodeElement *> getCloseNodes(NodeElement *node) const;
 
-	void reConnectLink(EdgeElement * edgeElem,  Element * src = nullptr, Element * dst = nullptr);
-	void arrangeNodeLinks(NodeElement* node) const;
+	void reConnectLink(EdgeElement *edgeElem, Element *src = nullptr, Element *dst = nullptr);
+	void arrangeNodeLinks(NodeElement *node) const;
 
-	NodeElement* getNodeById(const Id &itemId) const;
-	EdgeElement* getEdgeById(const Id &itemId) const;
+	NodeElement *getNodeById(const Id &itemId) const;
+	EdgeElement *getEdgeById(const Id &itemId) const;
 
 	/// update (for a beauty) all edges when tab is opening
 	void initNodes();
@@ -181,11 +178,11 @@ Q_SIGNALS:
 	void refreshPalette();
 
 	/// Emitted when user requested to change some element`s graphical representation.
-	void openShapeEditor(const qReal::Id &id
-		, const QString &propertyValue
+	void openShapeEditor(const qReal::Id &id,
+		const QString &propertyValue
 		/// @todo: whan passing it by reference the build on travis fails
-		, const qReal::EditorManagerInterface *editorManagerProxy
-		, bool useTypedPorts);
+		,
+		const qReal::EditorManagerInterface *editorManagerProxy, bool useTypedPorts);
 
 protected:
 	void dragEnterEvent(QGraphicsSceneDragDropEvent *event) override;
@@ -241,10 +238,8 @@ private:
 	QPointF offsetByDirection(int direction);
 	QPointF currentMousePos() const;
 
-	void createElement(const ElementInfo &elementInfo
-			, QPointF scenePos
-			, qReal::commands::CreateElementsCommand **createCommandPointer
-			, bool executeImmediately);
+	void createElement(const ElementInfo &elementInfo, QPointF scenePos,
+		qReal::commands::CreateElementsCommand **createCommandPointer, bool executeImmediately);
 
 	const models::Models &mModels;
 	const EditorManagerInterface &mEditorManager;

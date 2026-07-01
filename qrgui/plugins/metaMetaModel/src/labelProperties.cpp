@@ -51,8 +51,8 @@ LabelProperties::LabelProperties(int index, qreal x, qreal y, const QString &tex
 	, mSuffix()
 {
 }
-LabelProperties::LabelProperties(int index, qreal x, qreal y, const QString &binding, const QString &roleName
-		, const QString &nameOfRoleProperty, bool readOnly, qreal rotation)
+LabelProperties::LabelProperties(int index, qreal x, qreal y, const QString &binding, const QString &roleName,
+	const QString &nameOfRoleProperty, bool readOnly, qreal rotation)
 	: mIndex(index)
 	, mX(x)
 	, mY(y)

@@ -62,10 +62,10 @@ private:
 	bool makeJumpX(qreal deltaX, qreal pointX);
 	bool makeJumpY(qreal deltaY, qreal pointY);
 
-	void buildLineX(qreal deltaX, qreal pointX, qreal correctionX
-			, qreal &myX1, qreal &myX2, const QRectF &sceneRect);
-	void buildLineY(qreal deltaY, qreal pointY, qreal correctionY
-			, qreal &myY1, qreal &myY2, const QRectF &sceneRect);
+	void buildLineX(qreal deltaX, qreal pointX, qreal correctionX, qreal &myX1, qreal &myX2,
+		const QRectF &sceneRect);
+	void buildLineY(qreal deltaY, qreal pointY, qreal correctionY, qreal &myY1, qreal &myY2,
+		const QRectF &sceneRect);
 
 	/// move element vertically according to the grid; coef - index of cell in the grid
 	void makeGridMovingX(qreal myX, int coef, int indexGrid);

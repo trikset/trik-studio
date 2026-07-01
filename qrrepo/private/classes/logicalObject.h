@@ -37,7 +37,6 @@ public:
 protected:
 	// Override.
 	virtual Object *createClone() const;
-
 };
 
 }

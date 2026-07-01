@@ -24,10 +24,8 @@ class BreakGenerator : public BindingGenerator
 {
 	Q_OBJECT
 public:
-	BreakGenerator(const qrRepo::RepoApi &repo
-			, GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent = nullptr);
+	BreakGenerator(const qrRepo::RepoApi &repo, GeneratorCustomizer &customizer, const qReal::Id &id,
+		QObject *parent = nullptr);
 };
 
 }

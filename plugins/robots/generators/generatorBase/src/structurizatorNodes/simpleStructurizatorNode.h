@@ -30,6 +30,7 @@ public:
 	bool analyzeBreak();
 
 	qReal::Id id() const;
+
 private:
 	const qReal::Id mId;
 };

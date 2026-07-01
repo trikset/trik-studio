@@ -49,7 +49,7 @@ public:
 	virtual Qt::ItemFlags flags(const QModelIndex &index) const;
 	virtual Qt::DropActions supportedDropActions() const;
 	virtual QStringList mimeTypes() const;
-	virtual qReal::details::ModelsAssistInterface* modelAssistInterface() const = 0;
+	virtual qReal::details::ModelsAssistInterface *modelAssistInterface() const = 0;
 	bool dropMimeData(const QMimeData *data, Qt::DropAction action, int row, int column, const QModelIndex &parent);
 
 	/// Creates element described by the given parameters set.
@@ -87,18 +87,18 @@ protected:
 	AbstractModelItem *mRootItem {};
 
 	QString findPropertyName(const Id &id, const int role) const;
-	QModelIndex index(const AbstractModelItem * const item) const;
+	QModelIndex index(const AbstractModelItem *const item) const;
 
-	void cleanupTree(modelsImplementation::AbstractModelItem * item);
+	void cleanupTree(modelsImplementation::AbstractModelItem *item);
 
-	AbstractModelItem * parentAbstractItem(const QModelIndex &parent) const;
+	AbstractModelItem *parentAbstractItem(const QModelIndex &parent) const;
 	void removeModelItems(details::modelsImplementation::AbstractModelItem *const root);
 
 private:
 	virtual AbstractModelItem *createModelItem(const Id &id, AbstractModelItem *parentItem) const = 0;
 	virtual void init() = 0;
-	virtual void removeModelItemFromApi(details::modelsImplementation::AbstractModelItem *const root
-			, details::modelsImplementation::AbstractModelItem *child) = 0;
+	virtual void removeModelItemFromApi(details::modelsImplementation::AbstractModelItem *const root,
+		details::modelsImplementation::AbstractModelItem *child) = 0;
 };
 
 }

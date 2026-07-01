@@ -62,13 +62,13 @@ QString Label::generateInit(const MetaCompiler &compiler, bool isNode) const
 	const QString name = mText.isEmpty() ? mTextBinded : mText;
 
 	result.replace(labelXTag, mX.toString(false))
-			.replace(labelYTag, mY.toString(false))
-			.replace(xCoordIsScalable, mScalingX)
-			.replace(yCoordIsScalable, mScalingY)
-			.replace(labelReadonlyTag, mReadOnly)
-			.replace(labelIndexTag, QString::number(mIndex))
-			.replace(labelNameTag, "\"" + name + "\"")
-			.replace(labelRotationTag, QString::number(mRotation));
+		.replace(labelYTag, mY.toString(false))
+		.replace(xCoordIsScalable, mScalingX)
+		.replace(yCoordIsScalable, mScalingY)
+		.replace(labelReadonlyTag, mReadOnly)
+		.replace(labelIndexTag, QString::number(mIndex))
+		.replace(labelNameTag, "\"" + name + "\"")
+		.replace(labelRotationTag, QString::number(mRotation));
 
 	return result;
 }
@@ -83,8 +83,7 @@ QString Label::generateUpdate(const MetaCompiler &compiler) const
 	QString result = compiler.getTemplateUtils(updateDataTag);
 	const QString name = generateCodeForUpdateData();
 
-	return result.replace(updateRoleTag, name)
-			.replace(labelIndexTag, QString::number(mIndex));
+	return result.replace(updateRoleTag, name).replace(labelIndexTag, QString::number(mIndex));
 }
 
 QStringList Label::getListOfStr(const QString &strToParse) const
@@ -117,7 +116,7 @@ QString Label::generateCodeForUpdateData() const
 				field = "QString::fromUtf8(\"" + listElement + "\")";
 			}
 
-			resultStr += " + " +  field;
+			resultStr += " + " + field;
 			counter++;
 		}
 

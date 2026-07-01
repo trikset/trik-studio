@@ -23,9 +23,8 @@ class StructurizatorNodeWithBreaks : public IntermediateStructurizatorNode
 	Q_OBJECT
 
 public:
-	explicit StructurizatorNodeWithBreaks(IntermediateStructurizatorNode *condition
-			, const QList<IntermediateStructurizatorNode *> &exitBranches
-			, QObject *parent);
+	explicit StructurizatorNodeWithBreaks(IntermediateStructurizatorNode *condition,
+		const QList<IntermediateStructurizatorNode *> &exitBranches, QObject *parent);
 
 	IntermediateStructurizatorNode *condition() const;
 	QList<IntermediateStructurizatorNode *> exitBranches() const;
@@ -35,6 +34,7 @@ public:
 	bool analyzeBreak();
 	Type type() const;
 	qReal::Id firstId() const;
+
 private:
 	IntermediateStructurizatorNode *mCondition;
 	QList<IntermediateStructurizatorNode *> mExitBranches;

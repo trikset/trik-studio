@@ -22,7 +22,8 @@
 using namespace twoDModel::commands;
 
 ReshapeCommand::ReshapeCommand(graphicsUtils::AbstractScene &scene, const model::Model & /* model */
-							   , const QStringList &ids)
+	,
+	const QStringList &ids)
 	: mScene(scene)
 	, mIds(ids)
 {
@@ -62,7 +63,7 @@ void ReshapeCommand::takeSnapshot(QMap<QString, QDomElement> &target)
 void ReshapeCommand::setConfiguration(const QMap<QString, QDomElement> &configuration)
 {
 	for (const QString &id : mIds) {
-		if (graphicsUtils::AbstractItem * const item = mScene.findItem(id)) {
+		if (graphicsUtils::AbstractItem *const item = mScene.findItem(id)) {
 			item->deserialize(configuration[id]);
 		}
 	}

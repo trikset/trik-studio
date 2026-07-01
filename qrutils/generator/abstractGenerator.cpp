@@ -21,15 +21,12 @@
 using namespace qReal;
 using namespace utils;
 
-AbstractGenerator::AbstractGenerator(const QString &templateDirPath
-		, const QString &outputDirPath
-		, const qReal::LogicalModelAssistInterface &logicalModel
-		, qReal::ErrorReporterInterface &errorReporter
-		)
-		: mApi(logicalModel.logicalRepoApi())
-		, mErrorReporter(errorReporter)
-		, mOutputDirPath(outputDirPath)
-		, mTemplateDirPath(templateDirPath)
+AbstractGenerator::AbstractGenerator(const QString &templateDirPath, const QString &outputDirPath,
+	const qReal::LogicalModelAssistInterface &logicalModel, qReal::ErrorReporterInterface &errorReporter)
+	: mApi(logicalModel.logicalRepoApi())
+	, mErrorReporter(errorReporter)
+	, mOutputDirPath(outputDirPath)
+	, mTemplateDirPath(templateDirPath)
 {
 	loadUtilsTemplates();
 }
@@ -197,7 +194,7 @@ QString AbstractGenerator::generatePropertiesCode(const Id &element)
 		QString propertyTemplate = mTemplateUtils["@@Property@@"];
 		const QString name = mApi.name(property);
 		propertyTemplate.replace("@@Name@@", NameNormalizer::normalize(name))
-				.replace("@@Type@@", mApi.stringProperty(property, "Type"));
+			.replace("@@Type@@", mApi.stringProperty(property, "Type"));
 
 		properties += propertyTemplate;
 	}

@@ -22,13 +22,11 @@ using namespace ev3::simple::lineLeader;
 using namespace generatorBase::simple;
 using namespace qReal;
 
-WakeUpGenerator::WakeUpGenerator(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, const Id &id
-		, QObject *parent)
-	: BindingGenerator(repo, customizer, id, "sensors/lineLeader/wakeUp.t", QList<Binding *>()
-			<< Binding::createConverting("@@PORT@@", "Port"
-					, static_cast<Ev3GeneratorFactory *>(customizer.factory())->portNameConverter())
-			, parent)
+WakeUpGenerator::WakeUpGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+	const Id &id, QObject *parent)
+	: BindingGenerator(repo, customizer, id, "sensors/lineLeader/wakeUp.t",
+		  QList<Binding *>() << Binding::createConverting("@@PORT@@", "Port",
+			  static_cast<Ev3GeneratorFactory *>(customizer.factory())->portNameConverter()),
+		  parent)
 {
 }

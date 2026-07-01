@@ -33,7 +33,8 @@ protected:
 	QSharedPointer<qrtext::core::ast::Node> parseAndAnalyze(const QString &code);
 
 	template<typename T>
-	T interpret(const QString &code) {
+	T interpret(const QString &code)
+	{
 		auto const ast = parseAndAnalyze(code);
 		if (mErrors.isEmpty()) {
 			return mInterpreter->interpret(ast, *mAnalyzer).value<T>();

@@ -24,10 +24,8 @@ class GotoSimpleGenerator : public BindingGenerator
 {
 	Q_OBJECT
 public:
-	GotoSimpleGenerator(const qrRepo::RepoApi &repo
-			, GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent = nullptr);
+	GotoSimpleGenerator(const qrRepo::RepoApi &repo, GeneratorCustomizer &customizer, const qReal::Id &id,
+		QObject *parent = nullptr);
 };
 
 }

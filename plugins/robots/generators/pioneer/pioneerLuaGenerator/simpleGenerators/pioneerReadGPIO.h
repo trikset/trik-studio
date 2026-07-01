@@ -24,10 +24,8 @@ class PioneerReadGPIO : public generatorBase::simple::BindingGenerator
 {
 	Q_OBJECT
 public:
-	PioneerReadGPIO(const qrRepo::RepoApi &repo
-			, generatorBase::GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent);
+	PioneerReadGPIO(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+		const qReal::Id &id, QObject *parent);
 };
 
 }

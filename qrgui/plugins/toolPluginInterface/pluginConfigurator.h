@@ -28,23 +28,16 @@
 namespace qReal {
 class TextManagerInterface;
 
-
 /// A container class for convenient passing different system parts into plugins.
 class PluginConfigurator
 {
 public:
-	PluginConfigurator(
-		qrRepo::RepoControlInterface &repoControlInterface
-		, GraphicalModelAssistInterface &graphicalModelApi
-		, LogicalModelAssistInterface &logicalModelApi
-		, ControllerInterface &controller
-		, gui::MainWindowInterpretersInterface &mainWindowInterpretersInterface
-		, gui::MainWindowDockInterface &mainWindowDockInterface
-		, ProjectManagementInterface &projectManager
-		, gui::editor::SceneCustomizationInterface &sceneCustomizer
-		, SystemEvents &systemEvents
-		, TextManagerInterface &textManager
-	)
+	PluginConfigurator(qrRepo::RepoControlInterface &repoControlInterface,
+		GraphicalModelAssistInterface &graphicalModelApi, LogicalModelAssistInterface &logicalModelApi,
+		ControllerInterface &controller, gui::MainWindowInterpretersInterface &mainWindowInterpretersInterface,
+		gui::MainWindowDockInterface &mainWindowDockInterface, ProjectManagementInterface &projectManager,
+		gui::editor::SceneCustomizationInterface &sceneCustomizer, SystemEvents &systemEvents,
+		TextManagerInterface &textManager)
 		: mRepoControlInterface(repoControlInterface)
 		, mGraphicalModelApi(graphicalModelApi)
 		, mLogicalModelApi(logicalModelApi)
@@ -55,7 +48,8 @@ public:
 		, mSceneCustomizer(sceneCustomizer)
 		, mSystemEvents(systemEvents)
 		, mTextManager(textManager)
-	{}
+	{
+	}
 
 	qrRepo::RepoControlInterface &repoControlInterface() const
 	{

@@ -35,9 +35,8 @@ public:
 	/// @param parent Parent widget, who is responsible for deletion of this dialog.
 	/// @param interpreterEditorManager Editor manager.
 	/// @param elementsWithTheSameNameList IdList of elements with the same name.
-	RestoreElementDialog(QWidget *parent
-			, const EditorManagerInterface &interpreterEditorManager
-			, const IdList &elementsWithTheSameNameList);
+	RestoreElementDialog(QWidget *parent, const EditorManagerInterface &interpreterEditorManager,
+		const IdList &elementsWithTheSameNameList);
 
 	/// Destructor.
 	~RestoreElementDialog();

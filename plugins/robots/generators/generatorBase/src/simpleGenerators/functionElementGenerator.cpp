@@ -20,14 +20,13 @@
 using namespace generatorBase::simple;
 using namespace qReal;
 
-FunctionElementGenerator::FunctionElementGenerator(const qrRepo::RepoApi &repo
-		, GeneratorCustomizer &customizer
-		, const Id &id
-		, QObject *parent)
-	: BindingGenerator(repo, customizer, id, "function.t", QList<Binding *>()
-			<< Binding::createConverting("@@BODY@@", "Body", customizer.factory()->functionBlockConverter(id, "Body"))
-			, parent)
-	, mGenerateToInit(false)  // maybe it will be useful one day...
+FunctionElementGenerator::FunctionElementGenerator(const qrRepo::RepoApi &repo, GeneratorCustomizer &customizer,
+	const Id &id, QObject *parent)
+	: BindingGenerator(repo, customizer, id, "function.t",
+		  QList<Binding *>() << Binding::createConverting("@@BODY@@", "Body",
+			  customizer.factory()->functionBlockConverter(id, "Body")),
+		  parent)
+	, mGenerateToInit(false) // maybe it will be useful one day...
 {
 }
 

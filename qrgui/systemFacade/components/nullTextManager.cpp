@@ -16,8 +16,8 @@
 
 using namespace qReal;
 
-bool NullTextManager::openFile(const QString &filePath
-		, const QString &generatorName, const text::LanguageInfo &language)
+bool NullTextManager::openFile(const QString &filePath, const QString &generatorName,
+	const text::LanguageInfo &language)
 {
 	Q_UNUSED(filePath)
 	Q_UNUSED(generatorName)
@@ -104,8 +104,8 @@ bool NullTextManager::isModifiedEver(const QString &path) const
 	return false;
 }
 
-void NullTextManager::showInTextEditor(const QFileInfo &fileInfo
-		, const QString &genName, const text::LanguageInfo &language)
+void NullTextManager::showInTextEditor(const QFileInfo &fileInfo, const QString &genName,
+	const text::LanguageInfo &language)
 {
 	Q_UNUSED(fileInfo)
 	Q_UNUSED(genName)

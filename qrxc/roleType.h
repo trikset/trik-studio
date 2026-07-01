@@ -18,7 +18,7 @@
 #include "property.h"
 
 namespace utils {
-	class OutFile;
+class OutFile;
 }
 
 /// Class represents one of the ends of edge.
@@ -26,13 +26,13 @@ class RoleType : public NonGraphicType
 {
 public:
 	bool init(const QDomElement &element, const QString &context) override;
-	RoleType* clone() const override;
+	RoleType *clone() const override;
 
 	/// Returns the type of arrow.
 	QString typeOfArrow();
 
 	//// Returns list properties of role.
-	QList<Property*> getPropertiesOfRole();
+	QList<Property *> getPropertiesOfRole();
 
 	/// I have no idea what is it. Something based on standard UML 2.5.
 	bool isEnding();
@@ -42,7 +42,7 @@ public:
 
 private:
 	QString mArrowType;
-	QList<Property*> mProperties;
+	QList<Property *> mProperties;
 	QString mEnd;
 	QString mNavigable;
 };

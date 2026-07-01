@@ -19,9 +19,7 @@
 
 using namespace twoDModel::items;
 
-ColorFieldItem::ColorFieldItem(
-		graphicsUtils::AbstractCoordinateSystem *metricSystem,
-		QGraphicsItem* parent)
+ColorFieldItem::ColorFieldItem(graphicsUtils::AbstractCoordinateSystem *metricSystem, QGraphicsItem *parent)
 	: TwoDSceneItem(parent)
 {
 	setCoordinateSystem(metricSystem);
@@ -50,8 +48,10 @@ void ColorFieldItem::propagateSwitchToRegionMenu(QGraphicsSceneContextMenuEvent 
 
 	auto &&menu = std::make_unique<QMenu>();
 	auto &&removeAction = menu->addAction(QObject::tr("Remove"));
-	auto &&convertToRegionAction = menu->addAction(QObject::tr("Convert to region"));;
-	auto &&bindToRegionAction = menu->addAction(QObject::tr("Bind to region"));;
+	auto &&convertToRegionAction = menu->addAction(QObject::tr("Convert to region"));
+	;
+	auto &&bindToRegionAction = menu->addAction(QObject::tr("Bind to region"));
+	;
 	auto currentEditorMode = editorMode();
 
 	if (currentEditorMode != EditorMode::regionEditorMode || mBindedToRegion) {

@@ -17,12 +17,16 @@
 using namespace utils;
 
 ScalableCoordinate::ScalableCoordinate()
-	: mValue(0), mIsScalable(false)
-{}
+	: mValue(0)
+	, mIsScalable(false)
+{
+}
 
 ScalableCoordinate::ScalableCoordinate(qreal value, bool isScalable)
-	: mValue(value), mIsScalable(isScalable)
-{}
+	: mValue(value)
+	, mIsScalable(isScalable)
+{
+}
 
 qreal ScalableCoordinate::value() const
 {

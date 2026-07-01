@@ -18,7 +18,6 @@
 
 #include "ev3GeneratorBase/ev3GeneratorFactory.h"
 
-
 namespace ev3 {
 namespace simple {
 
@@ -27,10 +26,8 @@ class SendMailGenerator : public generatorBase::simple::BindingGenerator
 {
 	Q_OBJECT
 public:
-	SendMailGenerator(const qrRepo::RepoApi &repo
-			, generatorBase::GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent = nullptr);
+	SendMailGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+		const qReal::Id &id, QObject *parent = nullptr);
 };
 
 }

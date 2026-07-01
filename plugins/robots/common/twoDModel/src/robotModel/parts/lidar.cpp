@@ -19,8 +19,8 @@
 using namespace twoDModel::robotModel::parts;
 using namespace kitBase::robotModel;
 
-Lidar::Lidar(const DeviceInfo &info, const PortInfo &port
-		, engine::TwoDModelEngineInterface &engine, QPair<qreal, int> angleAndRange)
+Lidar::Lidar(const DeviceInfo &info, const PortInfo &port, engine::TwoDModelEngineInterface &engine,
+	QPair<qreal, int> angleAndRange)
 	: robotParts::LidarSensor(info, port)
 	, mEngine(engine)
 	, mAngle(angleAndRange.first)

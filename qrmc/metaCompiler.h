@@ -61,7 +61,7 @@ private:
 	/// Reference to a repository with metamodel being generated.
 	const qrRepo::LogicalRepoApi &mApi;
 
-	QMap<QString, Editor*> mEditors;
+	QMap<QString, Editor *> mEditors;
 
 	QString mPluginHeaderTemplate;
 	QString mPluginSourceTemplate;

@@ -20,8 +20,7 @@
 
 using namespace qReal;
 
-SuggestToCreateProjectDialog::SuggestToCreateProjectDialog(const EditorManagerInterface &editorManager
-		, QWidget *parent)
+SuggestToCreateProjectDialog::SuggestToCreateProjectDialog(const EditorManagerInterface &editorManager, QWidget *parent)
 	: QDialog(parent)
 {
 	SuggestToCreateDiagramWidget *suggestWidget = new SuggestToCreateDiagramWidget(editorManager, this);

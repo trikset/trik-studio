@@ -38,13 +38,12 @@ private slots:
 	void exterminate();
 
 private:
-	qrRepo::RepoControlInterface *mRepo;  // Doesn't have ownership
+	qrRepo::RepoControlInterface *mRepo; // Doesn't have ownership
 	QAction mAction;
 
 	/// To syncronize logical and graphical models with repository.
 	/// Doesn`t have ownership.
 	qReal::gui::MainWindowInterpretersInterface *mMainWindowInterpretersInterface;
-
 };
 
 }

@@ -36,4 +36,3 @@ public:
 	virtual QString expandExplosionActionText() const;
 	virtual QString collapseExplosionActionText() const;
 };
-

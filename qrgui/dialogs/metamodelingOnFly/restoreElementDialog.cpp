@@ -19,9 +19,8 @@
 
 using namespace qReal;
 
-RestoreElementDialog::RestoreElementDialog(QWidget *parent
-		, const EditorManagerInterface &interpreterEditorManager
-		, const IdList &elementsWithTheSameNameList)
+RestoreElementDialog::RestoreElementDialog(QWidget *parent, const EditorManagerInterface &interpreterEditorManager,
+	const IdList &elementsWithTheSameNameList)
 	: QDialog(parent)
 	, mUi(new Ui::RestoreElementDialog)
 	, mInterpreterEditorManager(interpreterEditorManager)
@@ -44,15 +43,15 @@ void RestoreElementDialog::fillSameNameElementsTreeView()
 	QStandardItemModel *standardModel = new QStandardItemModel();
 
 	QStandardItem *item = standardModel->invisibleRootItem();
-	for (const auto &element: mElementsWithTheSameNameList) {
+	for (const auto &element : mElementsWithTheSameNameList) {
 		QString state = tr("Existed");
 		if (mInterpreterEditorManager.isHidden(element)) {
 			state = tr("Deleted");
 		}
 
-		QList<QStandardItem *> elementRow = prepareRow(mInterpreterEditorManager.friendlyName(element)
-				+ " (" + state + ")", "", "");
-		for (QStandardItem *item: elementRow) {
+		QList<QStandardItem *> elementRow =
+			prepareRow(mInterpreterEditorManager.friendlyName(element) + " (" + state + ")", "", "");
+		for (QStandardItem *item : elementRow) {
 			item->setEditable(false);
 		}
 
@@ -60,9 +59,9 @@ void RestoreElementDialog::fillSameNameElementsTreeView()
 
 		QStringList propertiesInformationList = mInterpreterEditorManager.getPropertiesInformation(element);
 		for (int i = 0; i <= propertiesInformationList.count() - 3; i += 3) {
-			QList<QStandardItem *> preparedRow = prepareRow(propertiesInformationList[i]
-					, propertiesInformationList[i + 1], propertiesInformationList[i + 2]);
-			for (QStandardItem *item: preparedRow) {
+			QList<QStandardItem *> preparedRow = prepareRow(propertiesInformationList[i],
+				propertiesInformationList[i + 1], propertiesInformationList[i + 2]);
+			for (QStandardItem *item : preparedRow) {
 				item->setSelectable(false);
 				item->setEditable(false);
 			}
@@ -76,14 +75,14 @@ void RestoreElementDialog::fillSameNameElementsTreeView()
 	mUi->sameNameElementsTreeView->expandAll();
 }
 
-QList<QStandardItem *> RestoreElementDialog::prepareRow(const QString &first, const QString &second
-		, const QString &third)
+QList<QStandardItem *> RestoreElementDialog::prepareRow(const QString &first, const QString &second,
+	const QString &third)
 {
-	 QList<QStandardItem *> rowItems;
-	 rowItems << new QStandardItem(first);
-	 rowItems << new QStandardItem(second);
-	 rowItems << new QStandardItem(third);
-	 return rowItems;
+	QList<QStandardItem *> rowItems;
+	rowItems << new QStandardItem(first);
+	rowItems << new QStandardItem(second);
+	rowItems << new QStandardItem(third);
+	return rowItems;
 }
 
 void RestoreElementDialog::restoreButtonClicked()

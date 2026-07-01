@@ -35,7 +35,8 @@ BluetoothRobotCommunicationThread::BluetoothRobotCommunicationThread()
 	: mPort(nullptr)
 	, mKeepAliveTimer(new QTimer(this))
 {
-	QObject::connect(mKeepAliveTimer, &QTimer::timeout, this, &BluetoothRobotCommunicationThread::checkForConnection);
+	QObject::connect(mKeepAliveTimer, &QTimer::timeout, this,
+		&BluetoothRobotCommunicationThread::checkForConnection);
 	QObject::connect(this, &BluetoothRobotCommunicationThread::disconnected, mKeepAliveTimer, &QTimer::stop);
 }
 
@@ -79,17 +80,16 @@ bool BluetoothRobotCommunicationThread::connect()
 	mPort->setDataBits(QSerialPort::DataBits::Data8);
 	mPort->setStopBits(QSerialPort::StopBits::TwoStop);
 
-	if( !mPort->open(QIODevice::ReadWrite)) {
-		QLOG_ERROR() << "Failed to open actual port" << portName
-			    << "with error" << mPort->error()
-			    << "with error string" << mPort->errorString();
+	if (!mPort->open(QIODevice::ReadWrite)) {
+		QLOG_ERROR() << "Failed to open actual port" << portName << "with error" << mPort->error()
+			     << "with error string" << mPort->errorString();
 		Q_EMIT connected(false, tr("Cannot open port ") + portName);
 		return false;
 	}
 
 	// Sending "Get firmware version" system command to check connection.
 	QByteArray command(4, 0);
-	command[0] = 0x02;  //command length
+	command[0] = 0x02; //command length
 	command[1] = 0x00;
 	command[2] = 0x01;
 	command[3] = 0x88;

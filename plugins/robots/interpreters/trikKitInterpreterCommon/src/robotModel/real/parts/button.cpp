@@ -17,12 +17,13 @@
 using namespace trik::robotModel::real::parts;
 using namespace kitBase::robotModel;
 
-Button::Button(const DeviceInfo &info, const PortInfo &port, int code
-		, utils::robotCommunication::TcpRobotCommunicator &tcpRobotCommunicator)
-	: robotParts::Button(info, port, code), mRobotCommunicator(tcpRobotCommunicator)
+Button::Button(const DeviceInfo &info, const PortInfo &port, int code,
+	utils::robotCommunication::TcpRobotCommunicator &tcpRobotCommunicator)
+	: robotParts::Button(info, port, code)
+	, mRobotCommunicator(tcpRobotCommunicator)
 {
-	connect(&mRobotCommunicator, &utils::robotCommunication::TcpRobotCommunicator::newScalarSensorData
-			, this, &Button::onIncomingData);
+	connect(&mRobotCommunicator, &utils::robotCommunication::TcpRobotCommunicator::newScalarSensorData, this,
+		&Button::onIncomingData);
 }
 
 void Button::read()

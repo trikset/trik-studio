@@ -42,7 +42,7 @@ void PaletteTree::initUi()
 {
 	mLayout = new QVBoxLayout(this);
 	mLayout->setSpacing(0);
-	QHBoxLayout * const controlButtonsLayout = new QHBoxLayout;
+	QHBoxLayout *const controlButtonsLayout = new QHBoxLayout;
 	controlButtonsLayout->setSpacing(0);
 
 	mComboBox = new QComboBox;
@@ -50,7 +50,7 @@ void PaletteTree::initUi()
 	mLayout->addWidget(mComboBox);
 	mLayout->addLayout(controlButtonsLayout);
 
-	ui::SearchLineEdit * const searchField = new ui::SearchLineEdit(this);
+	ui::SearchLineEdit *const searchField = new ui::SearchLineEdit(this);
 	connect(searchField, &ui::SearchLineEdit::textChanged, this, &PaletteTree::onSearchTextChanged);
 	mLayout->addWidget(searchField);
 	mTemporarySpacer = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -116,8 +116,8 @@ void PaletteTree::initDone()
 		// In case of empty combobox we do not hide it for user`s ensuring in items absence
 		mComboBox->hide();
 	} else {
-		connect(mComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged)
-				, this, QOverload<int>::of(&PaletteTree::setActiveEditor));
+		connect(mComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+			QOverload<int>::of(&PaletteTree::setActiveEditor));
 		mComboBox->show();
 	}
 
@@ -132,7 +132,7 @@ void PaletteTree::setComboBox(const Id &id)
 	mComboBox->setCurrentIndex(mCategories.value(id, -1));
 }
 
-QComboBox* PaletteTree::comboBox() const
+QComboBox *PaletteTree::comboBox() const
 {
 	return mComboBox;
 }
@@ -323,7 +323,7 @@ void PaletteTree::setElementVisible(const Id &metatype, bool visible)
 
 void PaletteTree::setVisibleForAllElements(const Id &diagram, bool visible)
 {
-	for (PaletteTreeWidgets * const tree : mEditorsTrees) {
+	for (PaletteTreeWidgets *const tree : mEditorsTrees) {
 		if (tree->diagram() == diagram) {
 			tree->setVisibleForAllElements(visible);
 		}
@@ -339,7 +339,7 @@ void PaletteTree::setElementEnabled(const Id &metatype, bool enabled)
 
 void PaletteTree::setEnabledForAllElements(const Id &diagram, bool enabled)
 {
-	for (PaletteTreeWidgets * const tree : mEditorsTrees) {
+	for (PaletteTreeWidgets *const tree : mEditorsTrees) {
 		if (tree->diagram() == diagram) {
 			tree->setEnabledForAllElements(enabled);
 		}
@@ -348,14 +348,14 @@ void PaletteTree::setEnabledForAllElements(const Id &diagram, bool enabled)
 
 void PaletteTree::refreshUserPalettes()
 {
-	for (PaletteTreeWidgets * const tree : mEditorsTrees) {
+	for (PaletteTreeWidgets *const tree : mEditorsTrees) {
 		tree->refreshUserPalette();
 	}
 }
 
 void PaletteTree::customizeExplosionTitles(const QString &userGroupTitle, const QString &userGroupDescription)
 {
-	for (PaletteTreeWidgets * const tree : mEditorsTrees) {
+	for (PaletteTreeWidgets *const tree : mEditorsTrees) {
 		tree->customizeExplosionTitles(userGroupTitle, userGroupDescription);
 	}
 }

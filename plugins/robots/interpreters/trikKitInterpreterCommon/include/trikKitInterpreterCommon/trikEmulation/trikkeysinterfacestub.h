@@ -30,7 +30,6 @@ class Button;
 }
 }
 
-
 namespace trik {
 
 class TrikKeysInterfaceStub : public trikControl::KeysInterface
@@ -42,7 +41,10 @@ public:
 
 	void init();
 	void start();
-	virtual Status status() const override { return Status::ready; }
+	virtual Status status() const override
+	{
+		return Status::ready;
+	}
 
 public Q_SLOTS:
 	virtual void reset() override;

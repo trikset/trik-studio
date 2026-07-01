@@ -71,12 +71,12 @@ private:
 
 	QPen pen() const;
 
-	qReal::ui::ColorListEditor *mColorPicker {};  // Takes ownership
-	QCheckBox *mBrushPicker {};  // Takes ownership
-	PopupMetricWidget *mSpinBox {};  // Takes ownership
+	qReal::ui::ColorListEditor *mColorPicker {}; // Takes ownership
+	QCheckBox *mBrushPicker {}; // Takes ownership
+	PopupMetricWidget *mSpinBox {}; // Takes ownership
 	QColor mLastColor;
 	bool mLastFilled {};
-	qreal mLastThickness { -1 };
+	qreal mLastThickness {-1};
 };
 
 }

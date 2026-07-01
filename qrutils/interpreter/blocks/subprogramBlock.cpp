@@ -72,14 +72,10 @@ QList<SubprogramBlock::DynamicParameter> SubprogramBlock::dynamicParameters() co
 	QDomDocument dynamicProperties;
 	dynamicProperties.setContent(properties);
 	QList<DynamicParameter> result;
-	for (QDomElement element = dynamicProperties.firstChildElement("properties").firstChildElement("property")
-		; !element.isNull()
-		; element = element.nextSiblingElement("property"))
-	{
-		result << DynamicParameter {element.attribute("displayedName")
-				, element.attribute("type")
-				, element.attribute("dynamicPropertyValue")
-		};
+	for (QDomElement element = dynamicProperties.firstChildElement("properties").firstChildElement("property");
+		!element.isNull(); element = element.nextSiblingElement("property")) {
+		result << DynamicParameter {element.attribute("displayedName"), element.attribute("type"),
+			element.attribute("dynamicPropertyValue")};
 	}
 
 	return result;

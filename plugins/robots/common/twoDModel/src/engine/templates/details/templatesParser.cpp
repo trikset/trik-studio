@@ -19,7 +19,7 @@
 
 using namespace twoDModel::templates::details;
 
-XmlTemplate* TemplatesParser::findTemplate(const QString& name)
+XmlTemplate *TemplatesParser::findTemplate(const QString &name)
 {
 	auto &&it = mCurrentTemplates.find(name);
 	if (it == mCurrentTemplates.end()) {
@@ -33,17 +33,15 @@ bool TemplatesParser::parseTemplate(const QDomElement &templateElement)
 	auto &&templateName = templateElement.attribute("name", "");
 	if (templateName.isEmpty()) {
 		error(QObject::tr(
-			R"(The &lt;template&gt; tag was provided, but the required "name" attribute was missing.)"),
-			templateElement.lineNumber(),
-			ParserErrorCode::MissingTemplateNameAttribute,
-			{});
+			      R"(The &lt;template&gt; tag was provided, but the required "name" attribute was missing.)"),
+			templateElement.lineNumber(), ParserErrorCode::MissingTemplateNameAttribute, {});
 		return false;
 	}
 
-	const auto* foundTemplate = findTemplate(templateName);
+	const auto *foundTemplate = findTemplate(templateName);
 	if (foundTemplate) {
 		error(QObject::tr("Redefinition a template %1 that already exists").arg(templateName),
-			   templateElement.lineNumber(), ParserErrorCode::RedefinitionExistingTemplate, {});
+			templateElement.lineNumber(), ParserErrorCode::RedefinitionExistingTemplate, {});
 		return false;
 	}
 
@@ -51,7 +49,7 @@ bool TemplatesParser::parseTemplate(const QDomElement &templateElement)
 	xmlTemplate.processDeclaration(templateElement);
 
 	const auto &errors = xmlTemplate.declarationErrors();
-	for (auto &&declarationError: errors) {
+	for (auto &&declarationError : errors) {
 		error(declarationError.error, declarationError.line, declarationError.errorCode, templateName);
 	}
 	if (!errors.isEmpty()) {
@@ -74,12 +72,10 @@ QDomDocument TemplatesParser::parseTemplates(const QDomDocument &templatesDocume
 	auto firstChildElement = templatesXml.firstChildElement();
 	while (!firstChildElement.isNull()) {
 		if (firstChildElement.tagName().toLower() != "template") {
-			error(
-				QObject::tr("the &lt;templates&gt; tag can only contain"
-					    " the &lt;template&gt; tag as a child tag, actual %1")
-				.arg(firstChildElement.tagName())
-				, firstChildElement.lineNumber()
-				, ParserErrorCode::TemplatesTagContaintsOnlyTemplate, {});
+			error(QObject::tr("the &lt;templates&gt; tag can only contain"
+					  " the &lt;template&gt; tag as a child tag, actual %1")
+					.arg(firstChildElement.tagName()),
+				firstChildElement.lineNumber(), ParserErrorCode::TemplatesTagContaintsOnlyTemplate, {});
 		} else if (!parseTemplate(firstChildElement)) {
 			// already logged
 		} else {
@@ -114,8 +110,8 @@ QHash<QString, QDomDocument> TemplatesParser::parseAllTemplatesFromDirectory(con
 
 		const auto &&message = QString("Error parsing template from a file %1 with").arg(baseName);
 		if (!templates.setContent(templateCode, &errorMessage, &errorLine)) {
-			error(QString("%1 %2").arg(message, errorMessage),
-				   errorLine, ParserErrorCode::QtXmlParserError, {});
+			error(QString("%1 %2").arg(message, errorMessage), errorLine, ParserErrorCode::QtXmlParserError,
+				{});
 			continue;
 		}
 
@@ -123,8 +119,8 @@ QHash<QString, QDomDocument> TemplatesParser::parseAllTemplatesFromDirectory(con
 		QDomElement resultTemplates = currentResult.createElement("templates");
 
 		const auto &parseResult = parseTemplates(templates).firstChildElement("templatesContainer");
-		for (auto xmlTemplate = parseResult.firstChildElement("template"); !xmlTemplate.isNull()
-				; xmlTemplate = xmlTemplate.nextSiblingElement("template")) {
+		for (auto xmlTemplate = parseResult.firstChildElement("template"); !xmlTemplate.isNull();
+			xmlTemplate = xmlTemplate.nextSiblingElement("template")) {
 			resultTemplates.appendChild(xmlTemplate.cloneNode());
 		}
 		currentResult.appendChild(resultTemplates);
@@ -140,7 +136,7 @@ void TemplatesParser::clear()
 	mErrors.clear();
 }
 
-std::unordered_map<QString, XmlTemplate> & TemplatesParser::currentTemplates()
+std::unordered_map<QString, XmlTemplate> &TemplatesParser::currentTemplates()
 {
 	return mCurrentTemplates;
 }
@@ -150,7 +146,7 @@ QStringList TemplatesParser::errors() const
 	return mErrors;
 }
 
-void TemplatesParser::error(const QString& message, int line, ParserErrorCode code, const QString &currentTemplate)
+void TemplatesParser::error(const QString &message, int line, ParserErrorCode code, const QString &currentTemplate)
 {
 	Q_UNUSED(code)
 	QStringList messages = {message, QObject::tr("line %1").arg(line)};

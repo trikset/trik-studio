@@ -19,9 +19,7 @@
 using namespace twoDModel::robotModel::parts;
 using namespace kitBase::robotModel;
 
-Display::Display(const DeviceInfo &info
-		, const PortInfo &port
-		, engine::TwoDModelEngineInterface &engine)
+Display::Display(const DeviceInfo &info, const PortInfo &port, engine::TwoDModelEngineInterface &engine)
 	: robotParts::Display(info, port)
 	, mEngine(engine)
 {

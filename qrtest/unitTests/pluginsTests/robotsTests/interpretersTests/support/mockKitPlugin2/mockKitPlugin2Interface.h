@@ -39,7 +39,7 @@ public:
 	QList<kitBase::AdditionalPreferences *> settingsWidgets() override;
 
 	QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> blocksFactoryFor(
-			kitBase::robotModel::RobotModelInterface const *model) override;
+		kitBase::robotModel::RobotModelInterface const *model) override;
 
 	QList<qReal::ActionInfo> customActions() override;
 

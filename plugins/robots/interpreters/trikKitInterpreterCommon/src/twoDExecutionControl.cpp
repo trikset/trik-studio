@@ -23,14 +23,14 @@
 #include <trikControl/utilities.h>
 #include <QsLog.h>
 
-#define NOTIFY_DISABLED(methodName) do {\
-	QLOG_WARN() << "Script tried to use disabled method:" << #methodName;  \
-	(Q_EMIT textInStdOut(TwoDExecutionControl::tr("'%1' is disabled\n").arg(#methodName))); \
-	} while(0)
+#define NOTIFY_DISABLED(methodName) \
+	do { \
+		QLOG_WARN() << "Script tried to use disabled method:" << #methodName; \
+		(Q_EMIT textInStdOut(TwoDExecutionControl::tr("'%1' is disabled\n").arg(#methodName))); \
+	} while (0)
 
-TwoDExecutionControl::TwoDExecutionControl(
-		trik::TrikBrick &brick
-		, const QSharedPointer<trik::robotModel::twoD::TrikTwoDRobotModel> &model)
+TwoDExecutionControl::TwoDExecutionControl(trik::TrikBrick &brick,
+	const QSharedPointer<trik::robotModel::twoD::TrikTwoDRobotModel> &model)
 	: mBrick(brick)
 	, mTwoDRobotModel(model)
 {
@@ -52,7 +52,7 @@ int TwoDExecutionControl::random(int from, int to) const
 
 void TwoDExecutionControl::wait(const int &milliseconds)
 {
-	auto timeline = dynamic_cast<twoDModel::model::Timeline *> (&mTwoDRobotModel->timeline());
+	auto timeline = dynamic_cast<twoDModel::model::Timeline *>(&mTwoDRobotModel->timeline());
 
 	if (!timeline->isStarted()) {
 		return;
@@ -107,7 +107,6 @@ utils::AbstractTimer *TwoDExecutionControl::timer(int milliseconds)
 	result->start(milliseconds);
 	return result;
 }
-
 
 bool TwoDExecutionControl::isInEventDrivenMode() const
 {

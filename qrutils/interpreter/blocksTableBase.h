@@ -52,7 +52,7 @@ private:
 	/// Must be overridded to produce the logical instance of the block itself.
 	virtual BlockInterface *produceBlock(const qReal::Id &element) = 0;
 
-	QHash<qReal::Id, BlockInterface *> mBlocks;  // Has ownership
+	QHash<qReal::Id, BlockInterface *> mBlocks; // Has ownership
 };
 
 }

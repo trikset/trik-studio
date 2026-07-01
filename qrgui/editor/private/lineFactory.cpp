@@ -21,18 +21,17 @@
 using namespace qReal;
 using namespace qReal::gui::editor;
 
-LineFactory::LineFactory(EdgeElement *edge
-		, const LogicalModelAssistInterface &logicalModel
-		, const GraphicalModelAssistInterface &graphicalModel)
+LineFactory::LineFactory(EdgeElement *edge, const LogicalModelAssistInterface &logicalModel,
+	const GraphicalModelAssistInterface &graphicalModel)
 	: mEdge(edge)
 	, mLogicalModel(logicalModel)
 	, mGraphicalModel(graphicalModel)
 {
 }
 
-LineHandler * LineFactory::createHandler(LinkShape type) const
+LineHandler *LineFactory::createHandler(LinkShape type) const
 {
-	switch(type) {
+	switch (type) {
 	case LinkShape::broken:
 		return new BrokenLine(mEdge, mLogicalModel, mGraphicalModel);
 	case LinkShape::curve:
@@ -44,15 +43,15 @@ LineHandler * LineFactory::createHandler(LinkShape type) const
 
 QMenu *LineFactory::shapeTypeMenu() const
 {
-	QMenu * const menu = new QMenu();
+	QMenu *const menu = new QMenu();
 
-	QAction * const brokenLine = menu->addAction(tr("Broken"));
+	QAction *const brokenLine = menu->addAction(tr("Broken"));
 	connect(brokenLine, SIGNAL(triggered()), this, SLOT(setBrokenLine()));
 
-	QAction * const squareLine = menu->addAction(tr("Square"));
+	QAction *const squareLine = menu->addAction(tr("Square"));
 	connect(squareLine, SIGNAL(triggered()), this, SLOT(setSquareLine()));
 
-	QAction * const curveLine = menu->addAction(tr("Curve"));
+	QAction *const curveLine = menu->addAction(tr("Curve"));
 	connect(curveLine, SIGNAL(triggered()), this, SLOT(setCurveLine()));
 
 	return menu;

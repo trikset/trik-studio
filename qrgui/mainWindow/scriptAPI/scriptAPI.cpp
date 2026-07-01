@@ -96,26 +96,17 @@ void ScriptAPI::pickComboBoxItem(QComboBox *comboBox, const QString &name, int d
 	QTimer timer;
 	timer.setInterval(100);
 
-	connect(&timer, &QTimer::timeout
-			, [this, comboBox]() {
-				mVirtualCursor->moved(comboBox->view()->viewport());
-			});
+	connect(&timer, &QTimer::timeout, [this, comboBox]() { mVirtualCursor->moved(comboBox->view()->viewport()); });
 
 	timer.start();
 	mVirtualCursor->moveToRect(target, duration);
 	timer.stop();
 
-	QEvent *pressEvent = new QMouseEvent(QMouseEvent::MouseButtonPress
-			,  mVirtualCursor->pos()
-			, Qt::LeftButton
-			, Qt::LeftButton
-			, Qt::NoModifier);
+	QEvent *pressEvent = new QMouseEvent(QMouseEvent::MouseButtonPress, mVirtualCursor->pos(), Qt::LeftButton,
+		Qt::LeftButton, Qt::NoModifier);
 
-	QEvent *releaseEvent = new QMouseEvent(QMouseEvent::MouseButtonRelease
-			, mVirtualCursor->pos()
-			, Qt::LeftButton
-			, Qt::LeftButton
-			, Qt::NoModifier);
+	QEvent *releaseEvent = new QMouseEvent(QMouseEvent::MouseButtonRelease, mVirtualCursor->pos(), Qt::LeftButton,
+		Qt::LeftButton, Qt::NoModifier);
 
 	QApplication::postEvent(comboBox->view()->viewport(), pressEvent);
 	QApplication::postEvent(comboBox->view()->viewport(), releaseEvent);
@@ -124,7 +115,6 @@ void ScriptAPI::pickComboBoxItem(QComboBox *comboBox, const QString &name, int d
 	mVirtualCursor->move(newPos);
 	mVirtualCursor->show();
 }
-
 
 void ScriptAPI::wait(int duration)
 {
@@ -181,7 +171,7 @@ void ScriptAPI::scroll(QAbstractScrollArea *area, QWidget *widget, int duration)
 	mVirtualCursor->moveToPoint(xcoord, ycoord, duration / 2);
 
 	const int diff = area->verticalScrollBar()->height() - area->verticalScrollBar()->pageStep()
-			+ widget->pos().y() * area->verticalScrollBar()->maximum() / widget->parentWidget()->height();
+	                 + widget->pos().y() * area->verticalScrollBar()->maximum() / widget->parentWidget()->height();
 	ycoord = ycoord + diff * area->verticalScrollBar()->height() / area->verticalScrollBar()->maximum();
 
 	const QPoint target = mVirtualCursor->parentWidget()->mapFromGlobal(QPoint(xcoord, ycoord));

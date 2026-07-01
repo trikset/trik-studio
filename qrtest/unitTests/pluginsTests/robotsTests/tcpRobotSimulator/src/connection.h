@@ -25,30 +25,30 @@ class QTimer;
 namespace tcpRobotSimulator {
 
 /// Connection protocol variants.
-enum class Protocol
-{
+enum class Protocol {
 	/// Message is in form "<data length in bytes>:<data>".
 	messageLength
 
 	/// Message is in form "<data>\n".
-	, endOfLineSeparator
+	,
+	endOfLineSeparator
 };
 
 /// Heartbeat protocol option.
-enum class Heartbeat
-{
+enum class Heartbeat {
 	/// Wait for a packet every N milliseconds, if none is received, assume connection lost and close socket.
 	use
 
 	/// Do not use heartbeat, keep socket open until TCP protocol detects disconnect (which may take a while,
 	/// so we will not be able to detect hardware network failures).
-	, dontUse
+	,
+	dontUse
 };
 
 /// Somewhat modified Connection class from TRIK Runtime, simulates its behavior (actually can use different protocols
 /// and simulate heartbeat). processData() is implemented to simulate control connection (TrikCommunicator class
 /// in trikRuntime).
-class Connection: public QObject
+class Connection : public QObject
 {
 	Q_OBJECT
 
@@ -138,7 +138,7 @@ private:
 	QByteArray mBuffer;
 
 	/// Declared size of a current message.
-	int mExpectedBytes { 0 };
+	int mExpectedBytes {0};
 
 	/// Protocol selected for this connection.
 	Protocol mProtocol;

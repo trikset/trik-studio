@@ -50,26 +50,14 @@ void TrikV62QtsGeneratorTest::SetUp()
 	mInterpreterControlInterface.reset(new InterpreterControlInterfaceMock());
 
 	mFacade.reset(new QrguiFacade("unittests/smile.qrs"));
-	mPluginConfigurer.reset(new qReal::PluginConfigurator(
-			mFacade->repoControlInterface()
-			, mFacade->graphicalModelAssistInterface()
-			, mFacade->logicalModelAssistInterface()
-			, mFacade->controller()
-			, mFacade->mainWindowInterpretersInterface()
-			, mFacade->mainWindowDockInterface()
-			, mFacade->projectManagementInterface()
-			, mFacade->sceneCustomizer()
-			, mFacade->systemEvents()
-			, mFacade->textManager()
-			));
+	mPluginConfigurer.reset(new qReal::PluginConfigurator(mFacade->repoControlInterface(),
+		mFacade->graphicalModelAssistInterface(), mFacade->logicalModelAssistInterface(), mFacade->controller(),
+		mFacade->mainWindowInterpretersInterface(), mFacade->mainWindowDockInterface(),
+		mFacade->projectManagementInterface(), mFacade->sceneCustomizer(), mFacade->systemEvents(),
+		mFacade->textManager()));
 
-	mKitPluginConfigurer.reset(new kitBase::KitPluginConfigurator(
-			*mPluginConfigurer
-			, *mRobotModelManagerInterface
-			, *mLuaToolbox
-			, *mEventsForKitPluginInterface
-			, *mInterpreterControlInterface
-			));
+	mKitPluginConfigurer.reset(new kitBase::KitPluginConfigurator(*mPluginConfigurer, *mRobotModelManagerInterface,
+		*mLuaToolbox, *mEventsForKitPluginInterface, *mInterpreterControlInterface));
 
 	mTestRegistry.reset(new TestRegistry);
 	mTestRegistry->set("pathToGeneratorRoot", ".");
@@ -77,11 +65,8 @@ void TrikV62QtsGeneratorTest::SetUp()
 
 	mRobotModel.reset(new TestRobotModel());
 
-	ON_CALL(*robotModelManagerInterfaceMock, model()).WillByDefault(Invoke(
-			[this]() -> kitBase::robotModel::RobotModelInterface & {
-				return *mRobotModel;
-			}
-			));
+	ON_CALL(*robotModelManagerInterfaceMock, model())
+		.WillByDefault(Invoke([this]() -> kitBase::robotModel::RobotModelInterface & { return *mRobotModel; }));
 
 	EXPECT_CALL(*robotModelManagerInterfaceMock, model()).Times(AtLeast(1));
 }
@@ -118,8 +103,8 @@ TEST_F(TrikV62QtsGeneratorTest, incorrectCasingVersionTest)
 	EXPECT_TRUE(controlSimulator().isListening());
 	controlSimulator().setConfigVersion("model-2014");
 
-	const qReal::ErrorReporterInterface *errorReporter
-			= kitPluginConfigurer().qRealConfigurator().mainWindowInterpretersInterface().errorReporter();
+	const qReal::ErrorReporterInterface *errorReporter =
+		kitPluginConfigurer().qRealConfigurator().mainWindowInterpretersInterface().errorReporter();
 
 	const ErrorReporterMock *errorReporterMock = static_cast<const ErrorReporterMock *>(errorReporter);
 

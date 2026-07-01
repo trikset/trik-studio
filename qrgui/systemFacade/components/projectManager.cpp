@@ -36,11 +36,9 @@ ProjectManager::ProjectManager(models::Models &models)
 
 void ProjectManager::setSaveFilePath(const QString &filePath /* = "" */)
 {
-	mSaveFilePath = filePath.isEmpty()
-			? mAutosaver.tempFilePath()
-			: mAutosaver.isTempFile(filePath)
-					? filePath
-					: mAutosaver.originalFile(filePath);
+	mSaveFilePath = filePath.isEmpty()                ? mAutosaver.tempFilePath()
+	                : mAutosaver.isTempFile(filePath) ? filePath
+	                                                  : mAutosaver.originalFile(filePath);
 }
 
 QString ProjectManager::saveFilePath() const
@@ -146,14 +144,14 @@ bool ProjectManager::openProject(const QString &fileName)
 
 	try {
 		mModels.repoControlApi().open(fileName);
-	} catch (qrRepo::QrRepoException&) {
+	} catch (qrRepo::QrRepoException &) {
 		showMessage(tr("Error"), tr("Cannot open file, please try with another one."));
 		return false;
 	}
 
 	try {
 		mModels.reinit();
-	} catch (qReal::Exception & error) {
+	} catch (qReal::Exception &error) {
 		showMessage(tr("Error"), error.message());
 		QLOG_ERROR() << error.message();
 		return false;
@@ -216,8 +214,8 @@ bool ProjectManager::saveFileExists(const QString &fileName) const
 bool ProjectManager::pluginsEnough() const
 {
 	if (!missingPluginNames().isEmpty()) {
-		showMessage(tr("There are missing plugins")
-				, tr("These plugins are not present, but needed to load the save:\n") + missingPluginNames());
+		showMessage(tr("There are missing plugins"),
+			tr("These plugins are not present, but needed to load the save:\n") + missingPluginNames());
 		return false;
 	}
 
@@ -232,8 +230,8 @@ QString ProjectManager::missingPluginNames() const
 	return missingPlugins.join("\n");
 }
 
-void ProjectManager::checkNeededPluginsRecursive(const details::ModelsAssistInterface &api
-		, const Id &id, QStringList &result) const
+void ProjectManager::checkNeededPluginsRecursive(const details::ModelsAssistInterface &api, const Id &id,
+	QStringList &result) const
 {
 	const EditorManagerInterface &editorManager = mModels.logicalModelAssistApi().editorManagerInterface();
 	const IdList loadedEditors = editorManager.editors();
@@ -266,10 +264,13 @@ bool ProjectManager::checkForUnknownElements()
 {
 	const IdList allElements = mModels.logicalModelAssistApi().children(Id::rootId());
 	for (const Id &element : allElements) {
-		const bool isElementKnown = mModels.logicalModelAssistApi().editorManagerInterface().hasElement(element.type());
+		const bool isElementKnown =
+			mModels.logicalModelAssistApi().editorManagerInterface().hasElement(element.type());
 		if (!isElementKnown) {
-			const QString errorMessage = tr("This project contains unknown element %1 and thus can`t be opened. "\
-					"Probably it was created by old or incorrectly working version of QReal.").arg(element.toString());
+			const QString errorMessage =
+				tr("This project contains unknown element %1 and thus can`t be opened. "
+				   "Probably it was created by old or incorrectly working version of QReal.")
+					.arg(element.toString());
 			showMessage(tr("Can`t open project file"), errorMessage);
 			return false;
 		}

@@ -23,33 +23,33 @@
 
 using namespace qrmc;
 
-static const QString description = QObject::tr(
-		"QReal Metamodel Compiler. It takes .qrs file with QReal metamodel created by metaeditor"
-		" and generates Qt project with editor plugin for that metamodel. Project is ready to be built"
-		" with qmake, but it actively uses QReal sources and build system, so it can not be built alone."
-		" Example of command line:\n") +
-		"    qrmc metamodel.qrs ../../plugins/qrmcGeneratedEditor";
+static const QString description =
+	QObject::tr("QReal Metamodel Compiler. It takes .qrs file with QReal metamodel created by metaeditor"
+		    " and generates Qt project with editor plugin for that metamodel. Project is ready to be built"
+		    " with qmake, but it actively uses QReal sources and build system, so it can not be built alone."
+		    " Example of command line:\n")
+	+ "    qrmc metamodel.qrs ../../plugins/qrmcGeneratedEditor";
 
 void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QString &message)
 {
 	Q_UNUSED(context)
 	QByteArray localMsg = message.toLocal8Bit();
 	switch (type) {
-		case QtDebugMsg:
-			fprintf(stdout, "Debug: %s\n", localMsg.constData());
-			break;
-		case QtWarningMsg:
-			fprintf(stderr, "Warning: %s\n", localMsg.constData());
-			break;
-		case QtCriticalMsg:
-			fprintf(stderr, "Critical: %s\n", localMsg.constData());
-			break;
-		case QtFatalMsg:
-			fprintf(stderr, "Fatal: %s\n", localMsg.constData());
-			abort();
-		default:
-			fprintf(stderr, "Info: %s\n", localMsg.constData());
-			break;
+	case QtDebugMsg:
+		fprintf(stdout, "Debug: %s\n", localMsg.constData());
+		break;
+	case QtWarningMsg:
+		fprintf(stderr, "Warning: %s\n", localMsg.constData());
+		break;
+	case QtCriticalMsg:
+		fprintf(stderr, "Critical: %s\n", localMsg.constData());
+		break;
+	case QtFatalMsg:
+		fprintf(stderr, "Fatal: %s\n", localMsg.constData());
+		abort();
+	default:
+		fprintf(stderr, "Info: %s\n", localMsg.constData());
+		break;
 	}
 }
 
@@ -73,8 +73,8 @@ int main(int argc, char *argv[])
 	}
 
 	parser.addPositionalArgument("metamodel", QObject::tr("Metamodel file to be processed."));
-	parser.addPositionalArgument("target-directory"
-			, QObject::tr("Directory to which source code of the editor plugin shall be generated."));
+	parser.addPositionalArgument("target-directory",
+		QObject::tr("Directory to which source code of the editor plugin shall be generated."));
 
 	parser.process(app);
 

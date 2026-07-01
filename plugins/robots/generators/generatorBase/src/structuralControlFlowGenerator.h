@@ -37,14 +37,10 @@ class ROBOTS_GENERATOR_EXPORT StructuralControlFlowGenerator : public ControlFlo
 	Q_OBJECT
 
 public:
-	explicit StructuralControlFlowGenerator(const qrRepo::RepoApi &repo
-			, qReal::ErrorReporterInterface &errorReporter
-			, GeneratorCustomizer &customizer
-			, PrimaryControlFlowValidator &validator
-			, const qReal::Id &diagramId
-			, QObject *parent = 0
-			, bool isThisDiagramMain = true
-			, const qReal::Id &simpleId = qReal::Id());
+	explicit StructuralControlFlowGenerator(const qrRepo::RepoApi &repo,
+		qReal::ErrorReporterInterface &errorReporter, GeneratorCustomizer &customizer,
+		PrimaryControlFlowValidator &validator, const qReal::Id &diagramId, QObject *parent = 0,
+		bool isThisDiagramMain = true, const qReal::Id &simpleId = qReal::Id());
 
 	/// Implementation of clone operation for structural generator
 	ControlFlowGeneratorBase *cloneFor(const qReal::Id &diagramId, bool cloneForNewDiagram) override;
@@ -83,12 +79,11 @@ private:
 	/// Rule is applied only when generation was performed so there's a ForkNode or JoinNode variable.
 
 	/// When forkNode was obtained we register other threads to generate
-	void registerOtherThreads(const qReal::Id &id, const QList<LinkInfo> &threads
-			, const QHash<qReal::Id, QString> &threadIds, parts::Threads &threadsStorage) override;
+	void registerOtherThreads(const qReal::Id &id, const QList<LinkInfo> &threads,
+		const QHash<qReal::Id, QString> &threadIds, parts::Threads &threadsStorage) override;
 
 	/// When JoinNode was obtained we register other threads to generate
-	void registerTerminatingThreads(const qReal::Id &id, parts::Threads &threadsStorage
-			, bool fromMain) override;
+	void registerTerminatingThreads(const qReal::Id &id, parts::Threads &threadsStorage, bool fromMain) override;
 
 	void performStructurization();
 	void obtainSemanticTree(IntermediateStructurizatorNode *root);
@@ -108,13 +103,11 @@ private:
 
 	/// helper functions
 	semantics::SemanticNode *createConditionWithBreaks(StructurizatorNodeWithBreaks *nodeWithBreaks);
-	semantics::SemanticNode *createSemanticIfNode(const qReal::Id &conditionId
-			, IntermediateStructurizatorNode *thenNode
-			, IntermediateStructurizatorNode *elseNode);
+	semantics::SemanticNode *createSemanticIfNode(const qReal::Id &conditionId,
+		IntermediateStructurizatorNode *thenNode, IntermediateStructurizatorNode *elseNode);
 
-	semantics::SemanticNode *createSemanticSwitchNode(const qReal::Id &conditionId
-			, const QList<IntermediateStructurizatorNode *> &branches
-			, bool generateIfs);
+	semantics::SemanticNode *createSemanticSwitchNode(const qReal::Id &conditionId,
+		const QList<IntermediateStructurizatorNode *> &branches, bool generateIfs);
 
 	/// methods for building graph
 	void appendVertex(const qReal::Id &vertex);

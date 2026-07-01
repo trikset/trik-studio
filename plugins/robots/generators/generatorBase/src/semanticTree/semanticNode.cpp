@@ -37,7 +37,7 @@ void SemanticNode::bindTo(const Id &id)
 	mId = id;
 }
 
-void SemanticNode::setParentNode(SemanticNode * const parent)
+void SemanticNode::setParentNode(SemanticNode *const parent)
 {
 	mParentNode = parent;
 }
@@ -52,9 +52,9 @@ QString SemanticNode::toString(GeneratorCustomizer &customizer, int indent, cons
 	const QString code = toStringImpl(customizer, indent, indentString);
 	/// @todo: Probably some more generalized entity? Prepended and appended code generators in general?
 	auto prependedCodeGenerator = customizer.factory()->labelGenerator(mId, customizer);
-	const QString prependedCode = mLabeled
-			? utils::StringUtils::addIndent(prependedCodeGenerator->generate(), indent, indentString)
-			: QString();
+	const QString prependedCode =
+		mLabeled ? utils::StringUtils::addIndent(prependedCodeGenerator->generate(), indent, indentString)
+			 : QString();
 	return prependedCode + code;
 }
 
@@ -65,8 +65,8 @@ SemanticNode *SemanticNode::findNodeFor(const Id &id)
 	}
 
 	QLinkedList<SemanticNode *> const children = this->children();
-	for (SemanticNode * const child : children) {
-		SemanticNode * const searchResult = child->findNodeFor(id);
+	for (SemanticNode *const child : children) {
+		SemanticNode *const searchResult = child->findNodeFor(id);
 		if (searchResult) {
 			return searchResult;
 		}

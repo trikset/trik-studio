@@ -23,7 +23,7 @@
 using namespace qrRepo::details;
 using namespace qReal;
 
-void SingleXmlSerializer::exportToXml(const QString &targetFile, QHash<qReal::Id, Object*> const &objects)
+void SingleXmlSerializer::exportToXml(const QString &targetFile, QHash<qReal::Id, Object *> const &objects)
 {
 	Q_ASSERT_X(!targetFile.isEmpty(), "XmlSerializer::exportTo(...)", "target filename is empty");
 
@@ -44,12 +44,12 @@ void SingleXmlSerializer::exportToXml(const QString &targetFile, QHash<qReal::Id
 	doc.save(out(), 4);
 }
 
-void SingleXmlSerializer::exportDiagram(const Id &diagramId, QDomDocument &doc, QDomElement &root
-		, QHash<qReal::Id, Object*> const &objects)
+void SingleXmlSerializer::exportDiagram(const Id &diagramId, QDomDocument &doc, QDomElement &root,
+	QHash<qReal::Id, Object *> const &objects)
 {
 	QDomElement diagram = doc.createElement("diagram");
 
-	const GraphicalObject * const graphicalObject = dynamic_cast<const GraphicalObject *>(objects[diagramId]);
+	const GraphicalObject *const graphicalObject = dynamic_cast<const GraphicalObject *>(objects[diagramId]);
 	if (graphicalObject) {
 		diagram.setAttribute("logical_id", graphicalObject->logicalId().toString());
 	}
@@ -69,14 +69,14 @@ void SingleXmlSerializer::exportDiagram(const Id &diagramId, QDomDocument &doc, 
 	root.appendChild(diagram);
 }
 
-void SingleXmlSerializer::exportElement(const Id &id, QDomDocument &doc, QDomElement &root
-		, QHash<qReal::Id, Object*> const &objects)
+void SingleXmlSerializer::exportElement(const Id &id, QDomDocument &doc, QDomElement &root,
+	QHash<qReal::Id, Object *> const &objects)
 {
 	QDomElement element = doc.createElement("element");
 	element.setAttribute("name", objects[id]->properties()["name"].toString());
 	element.setAttribute("graphical_id", id.toString());
 
-	const GraphicalObject * const graphicalObject = dynamic_cast<const GraphicalObject *>(objects[id]);
+	const GraphicalObject *const graphicalObject = dynamic_cast<const GraphicalObject *>(objects[id]);
 	if (graphicalObject) {
 		element.setAttribute("logical_id", graphicalObject->logicalId().toString());
 	}
@@ -87,8 +87,8 @@ void SingleXmlSerializer::exportElement(const Id &id, QDomDocument &doc, QDomEle
 	root.appendChild(element);
 }
 
-void SingleXmlSerializer::exportChildren(const Id &id, QDomDocument &doc, QDomElement &root
-		, QHash<qReal::Id, Object*> const &objects)
+void SingleXmlSerializer::exportChildren(const Id &id, QDomDocument &doc, QDomElement &root,
+	QHash<qReal::Id, Object *> const &objects)
 {
 	Object *object = objects[id];
 	int size = object->children().size();
@@ -106,14 +106,14 @@ void SingleXmlSerializer::exportChildren(const Id &id, QDomDocument &doc, QDomEl
 	root.appendChild(children);
 }
 
-void SingleXmlSerializer::exportProperties(const Id&id, QDomDocument &doc, QDomElement &root
-		, QHash<Id, Object *> const &objects)
+void SingleXmlSerializer::exportProperties(const Id &id, QDomDocument &doc, QDomElement &root,
+	QHash<Id, Object *> const &objects)
 {
 	QDomElement props = doc.createElement("properties");
 
-	const GraphicalObject * const graphicalObject = dynamic_cast<const GraphicalObject *>(objects[id]);
-	const LogicalObject * const logicalObject
-			= dynamic_cast<const LogicalObject *>(objects[graphicalObject->logicalId()]);
+	const GraphicalObject *const graphicalObject = dynamic_cast<const GraphicalObject *>(objects[id]);
+	const LogicalObject *const logicalObject =
+		dynamic_cast<const LogicalObject *>(objects[graphicalObject->logicalId()]);
 
 	QMap<QString, QVariant> properties;
 
@@ -121,7 +121,6 @@ void SingleXmlSerializer::exportProperties(const Id&id, QDomDocument &doc, QDomE
 	while (i.hasNext()) {
 		i.next();
 		properties[i.key()] = i.value();
-
 	}
 
 	i = graphicalObject->propertiesIterator();
@@ -138,7 +137,7 @@ void SingleXmlSerializer::exportProperties(const Id&id, QDomDocument &doc, QDomE
 		if (typeName == "qReal::IdList" && (value.value<IdList>().size() != 0)) {
 			QDomElement list = ValuesSerializer::serializeIdList("list", value.value<IdList>(), doc);
 			prop.appendChild(list);
-		} else if (typeName == "qReal::Id"){
+		} else if (typeName == "qReal::Id") {
 			prop.setAttribute("value", value.value<Id>().toString());
 		} else if (value.toString().isEmpty()) {
 			continue;

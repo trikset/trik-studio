@@ -25,25 +25,23 @@ class ROBOTS_EV3_GENERATOR_BASE_EXPORT Ev3GeneratorFactory : public generatorBas
 {
 	Q_OBJECT
 public:
-	Ev3GeneratorFactory(const qrRepo::RepoApi &repo
-			, qReal::ErrorReporterInterface &errorReporter
-			, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
-			, generatorBase::lua::LuaProcessor &luaProcessor
-			, const QString &generatorName);
+	Ev3GeneratorFactory(const qrRepo::RepoApi &repo, qReal::ErrorReporterInterface &errorReporter,
+		const kitBase::robotModel::RobotModelManagerInterface &robotModelManager,
+		generatorBase::lua::LuaProcessor &luaProcessor, const QString &generatorName);
 
 	~Ev3GeneratorFactory() override;
 
 	/// Returns an entity processing everything about Mailboxes.
 	parts::Mailboxes &mailboxes();
 
-	generatorBase::simple::AbstractSimpleGenerator *ifGenerator(const qReal::Id &id
-			, generatorBase::GeneratorCustomizer &customizer, bool elseIsEmpty, bool needInverting) override;
+	generatorBase::simple::AbstractSimpleGenerator *ifGenerator(const qReal::Id &id,
+		generatorBase::GeneratorCustomizer &customizer, bool elseIsEmpty, bool needInverting) override;
 
-	generatorBase::simple::AbstractSimpleGenerator *forLoopGenerator(const qReal::Id &id
-			, generatorBase::GeneratorCustomizer &customizer) override;
+	generatorBase::simple::AbstractSimpleGenerator *forLoopGenerator(const qReal::Id &id,
+		generatorBase::GeneratorCustomizer &customizer) override;
 
-	generatorBase::simple::AbstractSimpleGenerator *simpleGenerator(const qReal::Id &id
-			, generatorBase::GeneratorCustomizer &customizer) override;
+	generatorBase::simple::AbstractSimpleGenerator *simpleGenerator(const qReal::Id &id,
+		generatorBase::GeneratorCustomizer &customizer) override;
 
 	/// Converts an output port with given id into generator-dependent port representation.
 	generatorBase::simple::Binding::ConverterInterface *outputPortNameConverter() const;
@@ -63,4 +61,3 @@ private:
 };
 
 }
-

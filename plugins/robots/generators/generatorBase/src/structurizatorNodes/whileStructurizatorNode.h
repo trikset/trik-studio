@@ -23,10 +23,8 @@ class WhileStructurizatorNode : public IntermediateStructurizatorNode
 	Q_OBJECT
 
 public:
-	explicit WhileStructurizatorNode(IntermediateStructurizatorNode *headNode
-			, IntermediateStructurizatorNode *bodyNode
-			, IntermediateStructurizatorNode *exitNode
-			, QObject *parent);
+	explicit WhileStructurizatorNode(IntermediateStructurizatorNode *headNode,
+		IntermediateStructurizatorNode *bodyNode, IntermediateStructurizatorNode *exitNode, QObject *parent);
 
 	IntermediateStructurizatorNode *headNode() const;
 	IntermediateStructurizatorNode *bodyNode() const;
@@ -35,6 +33,7 @@ public:
 	bool analyzeBreak();
 	Type type() const;
 	qReal::Id firstId() const;
+
 private:
 	IntermediateStructurizatorNode *mHeadNode;
 	IntermediateStructurizatorNode *mBodyNode;

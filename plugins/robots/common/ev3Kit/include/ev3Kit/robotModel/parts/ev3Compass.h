@@ -27,8 +27,7 @@ class Ev3Compass : public kitBase::robotModel::robotParts::ScalarSensor
 	Q_CLASSINFO("friendlyName", tr("Compass"))
 
 public:
-	Ev3Compass(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port);
+	Ev3Compass(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port);
 };
 
 }

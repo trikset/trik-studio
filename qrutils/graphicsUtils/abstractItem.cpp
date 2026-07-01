@@ -29,7 +29,7 @@ using namespace graphicsUtils;
 
 const qreal epsilon = 0.0000001;
 
-AbstractItem::AbstractItem(QGraphicsItem* parent)
+AbstractItem::AbstractItem(QGraphicsItem *parent)
 	: QGraphicsObject(parent)
 	, mId(QUuid::createUuid().toString())
 	, mCoordinateSystem(nullptr)
@@ -64,7 +64,7 @@ QPainterPath AbstractItem::realShape() const
 	return mapToScene(shape());
 }
 
-void AbstractItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
+void AbstractItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 	Q_UNUSED(widget)
 	painter->setPen(mPen);
@@ -79,7 +79,7 @@ void AbstractItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* opti
 	}
 }
 
-void AbstractItem::drawExtractionForItem(QPainter* painter)
+void AbstractItem::drawExtractionForItem(QPainter *painter)
 {
 	painter->drawPoint(QPointF(x1(), y1()));
 	painter->drawPoint(QPointF(x1(), y2()));
@@ -88,7 +88,7 @@ void AbstractItem::drawExtractionForItem(QPainter* painter)
 	drawFieldForResizeItem(painter);
 }
 
-void AbstractItem::drawFieldForResizeItem(QPainter* painter)
+void AbstractItem::drawFieldForResizeItem(QPainter *painter)
 {
 	setPenBrushDriftRect(painter);
 	painter->drawPath(resizeArea());
@@ -174,8 +174,14 @@ void AbstractItem::reshapeToIsotropic()
 	const auto newTargetX = (tx > bx) ? bx + size : bx - size;
 	const auto newTargetY = (ty > by) ? by + size : by - size;
 
-	if (useX1AsBase) setX2(newTargetX); else setX1(newTargetX);
-	if (useY1AsBase) setY2(newTargetY); else setY1(newTargetY);
+	if (useX1AsBase)
+		setX2(newTargetX);
+	else
+		setX1(newTargetX);
+	if (useY1AsBase)
+		setY2(newTargetY);
+	else
+		setY1(newTargetY);
 }
 
 void AbstractItem::reshapeRectWithShift()
@@ -190,17 +196,21 @@ void AbstractItem::changeDragState(qreal x, qreal y)
 	// NOLINTNEXTLINE(bugprone-branch-clone)
 	if (!mapToScene(resizeArea()).contains(QPointF(x, y))) {
 		mDragState = None;
-	} else if (QRectF(mapToScene(x1(), y1()), QSizeF(0, 0)).adjusted(-resizeDrift, -resizeDrift, resizeDrift
-			, resizeDrift).contains(QPointF(x, y))) {
+	} else if (QRectF(mapToScene(x1(), y1()), QSizeF(0, 0))
+			   .adjusted(-resizeDrift, -resizeDrift, resizeDrift, resizeDrift)
+			   .contains(QPointF(x, y))) {
 		mDragState = TopLeft;
-	} else if (QRectF(mapToScene(x2(), y2()), QSizeF(0, 0)).adjusted(-resizeDrift, -resizeDrift, resizeDrift
-			, resizeDrift).contains(QPointF(x, y))) {
+	} else if (QRectF(mapToScene(x2(), y2()), QSizeF(0, 0))
+			   .adjusted(-resizeDrift, -resizeDrift, resizeDrift, resizeDrift)
+			   .contains(QPointF(x, y))) {
 		mDragState = BottomRight;
-	} else if (QRectF(mapToScene(x2(), y1()), QSizeF(0, 0)).adjusted(-resizeDrift, -resizeDrift, resizeDrift
-			, resizeDrift).contains(QPointF(x, y))) {
+	} else if (QRectF(mapToScene(x2(), y1()), QSizeF(0, 0))
+			   .adjusted(-resizeDrift, -resizeDrift, resizeDrift, resizeDrift)
+			   .contains(QPointF(x, y))) {
 		mDragState = TopRight;
-	} else if (QRectF(mapToScene(x1(), y2()), QSizeF(0, 0)).adjusted(-resizeDrift, -resizeDrift, resizeDrift
-			, resizeDrift).contains(QPointF(x, y))) {
+	} else if (QRectF(mapToScene(x1(), y2()), QSizeF(0, 0))
+			   .adjusted(-resizeDrift, -resizeDrift, resizeDrift, resizeDrift)
+			   .contains(QPointF(x, y))) {
 		mDragState = BottomLeft;
 	} else {
 		mDragState = None;
@@ -268,8 +278,8 @@ void AbstractItem::resizeItem(QGraphicsSceneMouseEvent *event)
 	}
 }
 
-void AbstractItem::resizeItemCommon(QGraphicsSceneMouseEvent *event, QPointF &estimatedPosition,
-									bool showGrid, qreal gridSize)
+void AbstractItem::resizeItemCommon(QGraphicsSceneMouseEvent *event, QPointF &estimatedPosition, bool showGrid,
+	qreal gridSize)
 {
 	const auto gridAlligmentEnabled = showGrid && !(event->modifiers() & Qt::ControlModifier);
 
@@ -298,7 +308,6 @@ void AbstractItem::resizeItemCommon(QGraphicsSceneMouseEvent *event, QPointF &es
 	const auto topLeft = mapToScene(QPointF(itemBoundingRect.left(), itemBoundingRect.top()));
 	moveItemAlligned(topLeft, gridSize);
 }
-
 
 void AbstractItem::moveItemAlligned(QPointF syncPoint, qreal gridSize)
 {
@@ -390,8 +399,8 @@ void AbstractItem::setBrush(const QString &brushStyle, const QString &brushColor
 	setBrushColor(brushColor);
 }
 
-void AbstractItem::setPenBrush(const QString &penStyle, qreal width, const QString &penColor
-		, const QString &brushStyle, const QString &brushColor)
+void AbstractItem::setPenBrush(const QString &penStyle, qreal width, const QString &penColor, const QString &brushStyle,
+	const QString &brushColor)
 {
 	setPen(penStyle, width, penColor);
 	setBrush(brushStyle, brushColor);
@@ -467,7 +476,7 @@ void AbstractItem::restorePos()
 	setPos(mOldPos);
 }
 
-void AbstractItem::setXandY(QDomElement& dom, const QRectF &rect)
+void AbstractItem::setXandY(QDomElement &dom, const QRectF &rect)
 {
 	dom.setAttribute("y1", QString::number(rect.top()));
 	dom.setAttribute("x1", QString::number(rect.left()));
@@ -513,7 +522,7 @@ QDomElement AbstractItem::setPenBrushToElement(QDomElement &target, const QStrin
 		penStyle = "dash";
 		break;
 	case Qt::DashDotLine:
-		penStyle =  "dashdot";
+		penStyle = "dashdot";
 		break;
 	case Qt::DashDotDotLine:
 		penStyle = "dashdotdot";
@@ -577,15 +586,16 @@ void AbstractItem::readPenBrush(const QDomElement &docItem)
 
 QStringList AbstractItem::getPenStyleList()
 {
-	return { "Solid", "Dot", "Dash", "DashDot", "DashDotDot", "None" };
+	return {"Solid", "Dot", "Dash", "DashDot", "DashDotDot", "None"};
 }
 
 QStringList AbstractItem::getBrushStyleList()
 {
-	return { "None", "Solid" };
+	return {"None", "Solid"};
 }
 
-QIcon AbstractItem::loadThemedIcon(const QString& path, const QColor& color) {
+QIcon AbstractItem::loadThemedIcon(const QString &path, const QColor &color)
+{
 	QPixmap image(path);
 	QPainter pt(&image);
 	pt.setCompositionMode(QPainter::CompositionMode_SourceIn);
@@ -594,12 +604,13 @@ QIcon AbstractItem::loadThemedIcon(const QString& path, const QColor& color) {
 	return image;
 }
 
-QIcon AbstractItem::loadTextColorIcon(const QString& path) {
+QIcon AbstractItem::loadTextColorIcon(const QString &path)
+{
 	auto text_color = QApplication::palette().color(QPalette::Text);
 	return loadThemedIcon(path, text_color);
 }
 
-void AbstractItem::mouseMoveEvent(QGraphicsSceneMouseEvent * event)
+void AbstractItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
 	// When selecting a robot item on the scene than display widget may appear.
 	// After that scene would be shrinked and mouse move event would be generated (but actually
@@ -733,7 +744,7 @@ QPen AbstractItem::getStrokePen()
 	return mStrokePen;
 }
 
-void AbstractItem::copyTo(AbstractItem * const other) const
+void AbstractItem::copyTo(AbstractItem *const other) const
 {
 	other->mDragState = mDragState;
 	other->mPen = mPen;
@@ -745,15 +756,13 @@ void AbstractItem::copyTo(AbstractItem * const other) const
 	other->mEditable = mEditable;
 	other->setPos(pos());
 	other->savePos();
-	connect(this, &AbstractItem::positionChanged, other, [other](QPointF p) {other->setPos(p);} );
+	connect(this, &AbstractItem::positionChanged, other, [other](QPointF p) { other->setPos(p); });
 	connect(this, &AbstractItem::x1Changed, other, &AbstractItem::setX1);
 	connect(this, &AbstractItem::y1Changed, other, &AbstractItem::setY1);
 	connect(this, &AbstractItem::x2Changed, other, &AbstractItem::setX2);
 	connect(this, &AbstractItem::y2Changed, other, &AbstractItem::setY2);
-	connect(this, &AbstractItem::penChanged, other
-			, QOverload<const QPen &>::of(&AbstractItem::setPen));
-	connect(this, &AbstractItem::brushChanged, other
-			, QOverload<const QBrush &>::of(&AbstractItem::setBrush));
+	connect(this, &AbstractItem::penChanged, other, QOverload<const QPen &>::of(&AbstractItem::setPen));
+	connect(this, &AbstractItem::brushChanged, other, QOverload<const QBrush &>::of(&AbstractItem::setBrush));
 }
 
 qreal AbstractItem::alignedCoordinate(qreal coord, const qreal gridSize) const

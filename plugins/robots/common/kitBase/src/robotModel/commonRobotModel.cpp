@@ -33,13 +33,13 @@ CommonRobotModel::CommonRobotModel(const QString &kitId, const QString &robotId)
 	, mKitId(kitId)
 	, mRobotId(robotId)
 {
-	connect(&mConfiguration, &Configuration::allDevicesConfigured
-			, this, &CommonRobotModel::allDevicesConfigured, Qt::QueuedConnection);
+	connect(&mConfiguration, &Configuration::allDevicesConfigured, this, &CommonRobotModel::allDevicesConfigured,
+		Qt::QueuedConnection);
 
 	connect(this, &CommonRobotModel::connected, this, &CommonRobotModel::onConnected);
 	connect(this, &CommonRobotModel::disconnected, this, &CommonRobotModel::onDisconnected);
 
-	addAllowedConnection(PortInfo("RandomPort", input), { DeviceInfo::create<robotParts::Random>() });
+	addAllowedConnection(PortInfo("RandomPort", input), {DeviceInfo::create<robotParts::Random>()});
 }
 
 CommonRobotModel::~CommonRobotModel()
@@ -72,12 +72,12 @@ void CommonRobotModel::connectToRobot()
 
 void CommonRobotModel::stopRobot()
 {
-	for (robotParts::Device * const device : mConfiguration.devices()) {
-		auto* const motor = qobject_cast<robotParts::Motor *>(device);
+	for (robotParts::Device *const device : mConfiguration.devices()) {
+		auto *const motor = qobject_cast<robotParts::Motor *>(device);
 		if (motor) {
 			motor->off();
 		}
-		auto* const communicator = qobject_cast<robotParts::Communicator *>(device);
+		auto *const communicator = qobject_cast<robotParts::Communicator *>(device);
 		if (communicator) {
 			communicator->release();
 		}
@@ -92,8 +92,8 @@ void CommonRobotModel::disconnectFromRobot()
 
 void CommonRobotModel::updateSensorsValues() const
 {
-	for (robotParts::Device * const device : mConfiguration.devices()) {
-		robotParts::AbstractSensor * const sensor = dynamic_cast<robotParts::AbstractSensor *>(device);
+	for (robotParts::Device *const device : mConfiguration.devices()) {
+		robotParts::AbstractSensor *const sensor = dynamic_cast<robotParts::AbstractSensor *>(device);
 		if (sensor && !sensor->port().reservedVariable().isEmpty()) {
 
 			if (!sensor->ready() || sensor->isLocked()) {
@@ -209,12 +209,12 @@ void CommonRobotModel::configureDevice(const PortInfo &port, const DeviceInfo &d
 		return;
 	}
 
-	robotParts::Device * const device = createDevice(port, deviceInfo);
+	robotParts::Device *const device = createDevice(port, deviceInfo);
 	if (device) {
 		mConfiguration.configureDevice(device);
 	} else {
-		QLOG_WARN() << "Can not create device" << deviceInfo.toString()
-				<< "for port" << port.toString() << "on" << name();
+		QLOG_WARN() << "Can not create device" << deviceInfo.toString() << "for port" << port.toString() << "on"
+			    << name();
 	}
 	/// @todo Handle error
 }
@@ -269,7 +269,7 @@ void CommonRobotModel::removeAllowedConnections(const PortInfo &port)
 	}
 }
 
-robotParts::Device * CommonRobotModel::createDevice(const PortInfo &port, const DeviceInfo &deviceInfo)
+robotParts::Device *CommonRobotModel::createDevice(const PortInfo &port, const DeviceInfo &deviceInfo)
 {
 	if (deviceInfo.isA<robotParts::Random>()) {
 		return new robotParts::Random(deviceInfo, port);

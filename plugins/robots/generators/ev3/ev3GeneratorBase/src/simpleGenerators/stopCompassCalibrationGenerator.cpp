@@ -22,14 +22,12 @@ using namespace ev3::simple;
 using namespace generatorBase::simple;
 using namespace qReal;
 
-StopCompassCalibrationGenerator::StopCompassCalibrationGenerator(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, const Id &id
-		, QObject *parent)
-	: BindingGenerator(repo, customizer, id, "sensors/stopCompassCalibration.t", QList<Binding *>()
-			<< Binding::createConverting("@@PORT@@", "Port"
-					, static_cast<Ev3GeneratorFactory *>(customizer.factory())->portNameConverter())
-			, parent)
+StopCompassCalibrationGenerator::StopCompassCalibrationGenerator(const qrRepo::RepoApi &repo,
+	generatorBase::GeneratorCustomizer &customizer, const Id &id, QObject *parent)
+	: BindingGenerator(repo, customizer, id, "sensors/stopCompassCalibration.t",
+		  QList<Binding *>() << Binding::createConverting("@@PORT@@", "Port",
+			  static_cast<Ev3GeneratorFactory *>(customizer.factory())->portNameConverter()),
+		  parent)
 {
 	Binding::ConverterInterface *nameNormalizer = customizer.factory()->nameNormalizerConverter();
 	const QString variable = nameNormalizer->convert(mRepo.property(mId, "Variable").toString());

@@ -35,7 +35,8 @@ using namespace utils;
 struct ScopedConnection {
 	explicit ScopedConnection(QMetaObject::Connection c)
 		: mConnection(std::move(c))
-	{}
+	{
+	}
 
 	ScopedConnection(const ScopedConnection &c) = delete;
 	ScopedConnection(ScopedConnection &&c) noexcept
@@ -53,9 +54,8 @@ struct ScopedConnection {
 
 private:
 	QMetaObject::Connection mConnection;
-	bool mMoved { false };
+	bool mMoved {false};
 };
-
 
 ConstraintsParserTests::ConstraintsParserTests()
 	: mParser(mEvents, mVariables, mObjects, mTimeline, mStatus)
@@ -92,11 +92,10 @@ TEST_F(ConstraintsParserTests, noTimeLimitErrorTest)
 
 TEST_F(ConstraintsParserTests, tooManyTimeLimitErrorTest)
 {
-	const QString xml =
-			"<constraints>"
-			"	<timelimit value=\"1000\"/>"
-			"	<timelimit value=\"2000\"/>"
-			"</constraints>";
+	const QString xml = "<constraints>"
+			    "	<timelimit value=\"1000\"/>"
+			    "	<timelimit value=\"2000\"/>"
+			    "</constraints>";
 	ASSERT_FALSE(mParser.parse(xml));
 	qDebug() << mParser.errors();
 	ASSERT_EQ(mParser.errors().count(), 1);
@@ -104,10 +103,9 @@ TEST_F(ConstraintsParserTests, tooManyTimeLimitErrorTest)
 
 TEST_F(ConstraintsParserTests, timeLimitConstraintTest)
 {
-	const QString xml =
-			"<constraints>"
-			"	<timelimit value=\"1000\"/>"
-			"</constraints>";
+	const QString xml = "<constraints>"
+			    "	<timelimit value=\"1000\"/>"
+			    "</constraints>";
 	ASSERT_TRUE(mParser.parse(xml));
 	ASSERT_EQ(mEvents.count(), 1);
 	auto event = mEvents.values()[0];
@@ -128,23 +126,22 @@ TEST_F(ConstraintsParserTests, timeLimitConstraintTest)
 
 TEST_F(ConstraintsParserTests, timerWithoutDropTest)
 {
-	const QString xml =
-			"<constraints>"
-			"	<timelimit value=\"2000\"/>"
-			"	<event id=\"event\" settedUpInitially=\"true\" dropsOnFire=\"false\">"
-			"		<conditions glue=\"and\">"
-			"			<condition>"
-			"				<timer timeout=\"1000\" forceDropOnTimeout=\"false\"/>"
-			"			</condition>"
-			"			<condition>"
-			"				<timer timeout=\"1500\" forceDropOnTimeout=\"false\"/>"
-			"			</condition>"
-			"		</conditions>"
-			"		<trigger>"
-			"			<success/>"
-			"		</trigger>"
-			"	</event>"
-			"</constraints>";
+	const QString xml = "<constraints>"
+			    "	<timelimit value=\"2000\"/>"
+			    "	<event id=\"event\" settedUpInitially=\"true\" dropsOnFire=\"false\">"
+			    "		<conditions glue=\"and\">"
+			    "			<condition>"
+			    "				<timer timeout=\"1000\" forceDropOnTimeout=\"false\"/>"
+			    "			</condition>"
+			    "			<condition>"
+			    "				<timer timeout=\"1500\" forceDropOnTimeout=\"false\"/>"
+			    "			</condition>"
+			    "		</conditions>"
+			    "		<trigger>"
+			    "			<success/>"
+			    "		</trigger>"
+			    "	</event>"
+			    "</constraints>";
 	ASSERT_TRUE(mParser.parse(xml));
 	ASSERT_EQ(mEvents.count(), 2);
 	auto &event = mEvents["event"];
@@ -170,23 +167,22 @@ TEST_F(ConstraintsParserTests, timerWithoutDropTest)
 
 TEST_F(ConstraintsParserTests, timerWithDropTest)
 {
-	const QString xml =
-			"<constraints>"
-			"	<timelimit value=\"2000\"/>"
-			"	<event id=\"event\" settedUpInitially=\"true\" dropsOnFire=\"false\">"
-			"		<conditions glue=\"and\">"
-			"			<condition>"
-			"				<timer timeout=\"1000\" forceDropOnTimeout=\"false\"/>"
-			"			</condition>"
-			"			<condition>"
-			"				<timer timeout=\"1500\" forceDropOnTimeout=\"true\"/>"
-			"			</condition>"
-			"		</conditions>"
-			"		<trigger>"
-			"			<success/>"
-			"		</trigger>"
-			"	</event>"
-			"</constraints>";
+	const QString xml = "<constraints>"
+			    "	<timelimit value=\"2000\"/>"
+			    "	<event id=\"event\" settedUpInitially=\"true\" dropsOnFire=\"false\">"
+			    "		<conditions glue=\"and\">"
+			    "			<condition>"
+			    "				<timer timeout=\"1000\" forceDropOnTimeout=\"false\"/>"
+			    "			</condition>"
+			    "			<condition>"
+			    "				<timer timeout=\"1500\" forceDropOnTimeout=\"true\"/>"
+			    "			</condition>"
+			    "		</conditions>"
+			    "		<trigger>"
+			    "			<success/>"
+			    "		</trigger>"
+			    "	</event>"
+			    "</constraints>";
 	ASSERT_TRUE(mParser.parse(xml));
 	ASSERT_EQ(mEvents.count(), 2);
 	auto &event = mEvents["event"];
@@ -212,23 +208,22 @@ TEST_F(ConstraintsParserTests, timerWithDropTest)
 
 TEST_F(ConstraintsParserTests, noGlueErrorTest)
 {
-	const QString xml =
-			"<constraints>"
-			"	<timelimit value=\"2000\"/>"
-			"	<event id=\"event\">"
-			"		<conditions>"
-			"			<condition>"
-			"				<timer timeout=\"1000\"/>"
-			"			</condition>"
-			"			<condition>"
-			"				<timer timeout=\"1500\"/>"
-			"			</condition>"
-			"		</conditions>"
-			"		<trigger>"
-			"			<success/>"
-			"		</trigger>"
-			"	</event>"
-			"</constraints>";
+	const QString xml = "<constraints>"
+			    "	<timelimit value=\"2000\"/>"
+			    "	<event id=\"event\">"
+			    "		<conditions>"
+			    "			<condition>"
+			    "				<timer timeout=\"1000\"/>"
+			    "			</condition>"
+			    "			<condition>"
+			    "				<timer timeout=\"1500\"/>"
+			    "			</condition>"
+			    "		</conditions>"
+			    "		<trigger>"
+			    "			<success/>"
+			    "		</trigger>"
+			    "	</event>"
+			    "</constraints>";
 	ASSERT_FALSE(mParser.parse(xml));
 	qDebug() << mParser.errors();
 	ASSERT_EQ(mParser.errors().count(), 1);
@@ -238,21 +233,21 @@ TEST_F(ConstraintsParserTests, comparisonTest)
 {
 	auto testSign = [this](const QString &sign, const QString &type) {
 		mEvents.clear();
-		const QString xml = QString(
-				"<constraints>"
-				"	<timelimit value=\"2000\"/>"
-				"	<event id=\"event\" settedUpInitially=\"true\">"
-				"		<condition>"
-				"			<%1>"
-				"				<objectState object=\"testObject.%2Property\"/>"
-				"				<%2 value=\"100\"/>"
-				"			</%1>"
-				"		</condition>"
-				"		<trigger>"
-				"			<success/>"
-				"		</trigger>"
-				"	</event>"
-				"</constraints>").arg(sign, type);
+		const QString xml = QString("<constraints>"
+					    "	<timelimit value=\"2000\"/>"
+					    "	<event id=\"event\" settedUpInitially=\"true\">"
+					    "		<condition>"
+					    "			<%1>"
+					    "				<objectState object=\"testObject.%2Property\"/>"
+					    "				<%2 value=\"100\"/>"
+					    "			</%1>"
+					    "		</condition>"
+					    "		<trigger>"
+					    "			<success/>"
+					    "		</trigger>"
+					    "	</event>"
+					    "</constraints>")
+		                            .arg(sign, type);
 		ASSERT_TRUE(mParser.parse(xml));
 		ASSERT_EQ(mEvents.count(), 2);
 		auto &event = mEvents["event"];
@@ -294,16 +289,16 @@ TEST_F(ConstraintsParserTests, constraintTagAndTypeOfTagTest)
 {
 	auto testCase = [this](bool checkOnce, const QString &objectId, const QString &type) {
 		mEvents.clear();
-		const QString xml = QString(
-				"<constraints>"
-				"	<timelimit value=\"2000\"/>"
-				"	<constraint id=\"constraint\" checkOnce=\"%1\" failMessage=\"fail!\">"
-				"		<equals>"
-				"			<typeof objectId=\"%2\"/>"
-				"			<string value=\"%3\"/>"
-				"		</equals>"
-				"	</constraint>"
-				"</constraints>").arg(checkOnce ? "true" : "false", objectId, type);
+		const QString xml = QString("<constraints>"
+					    "	<timelimit value=\"2000\"/>"
+					    "	<constraint id=\"constraint\" checkOnce=\"%1\" failMessage=\"fail!\">"
+					    "		<equals>"
+					    "			<typeof objectId=\"%2\"/>"
+					    "			<string value=\"%3\"/>"
+					    "		</equals>"
+					    "	</constraint>"
+					    "</constraints>")
+		                            .arg(checkOnce ? "true" : "false", objectId, type);
 		ASSERT_TRUE(mParser.parse(xml));
 		ASSERT_EQ(mEvents.count(), 2);
 		auto &event = mEvents["constraint"];
@@ -324,16 +319,15 @@ TEST_F(ConstraintsParserTests, constraintTagAndTypeOfTagTest)
 
 TEST_F(ConstraintsParserTests, forgottenFailMessageErrorTest)
 {
-	const QString xml =
-			"<constraints>"
-			"	<timelimit value=\"2000\"/>"
-			"	<constraint id=\"constraint\" checkOnce=\"false\">"
-			"		<equals>"
-			"			<typeof objectId=\"nullObject\"/>"
-			"			<string value=\"undefined\"/>"
-			"		</equals>"
-			"	</constraint>"
-			"</constraints>";
+	const QString xml = "<constraints>"
+			    "	<timelimit value=\"2000\"/>"
+			    "	<constraint id=\"constraint\" checkOnce=\"false\">"
+			    "		<equals>"
+			    "			<typeof objectId=\"nullObject\"/>"
+			    "			<string value=\"undefined\"/>"
+			    "		</equals>"
+			    "	</constraint>"
+			    "</constraints>";
 	ASSERT_FALSE(mParser.parse(xml));
 	qDebug() << mParser.errors();
 	ASSERT_EQ(mParser.errors().count(), 1);
@@ -341,65 +335,64 @@ TEST_F(ConstraintsParserTests, forgottenFailMessageErrorTest)
 
 TEST_F(ConstraintsParserTests, arithmeticTest)
 {
-	const QString xml =
-			"<constraints>"
-			"	<timelimit value=\"2000\"/>"
-			"	<event id=\"event1\">"
-			"		<condition>"
-			"			<timer timeout=\"100\" forceDropOnTimeout=\"true\"/>"
-			"		</condition>"
-			"		<triggers>"
-			"			<setter name=\"x\">"
-			"				<int value=\"10\"/>"
-			"			</setter>"
-			"			<setter name=\"d\">"
-			"				<double value=\"10.2\"/>"
-			"			</setter>"
-			"			<setter name=\"s\">"
-			"				<string value=\"abc\"/>"
-			"			</setter>"
-			"			<setter name=\"b\">"
-			"				<bool value=\"true\"/>"
-			"			</setter>"
-			"		</triggers>"
-			"	</event>"
-			"	<event id=\"event2\">"
-			"		<condition>"
-			"			<timer timeout=\"200\" forceDropOnTimeout=\"true\"/>"
-			"		</condition>"
-			"		<trigger>"
-			"			<setter name=\"y\">"
-			"				<sum>"
-			"					<min>"
-			"						<abs>"
-			"							<int value=\"-2\"/>"
-			"						</abs>"
-			"						<int value=\"10\"/>"
-			"					</min>"
-			"					<variableValue name=\"x\"/>"
-			"				</sum>"
-			"			</setter>"
-			"		</trigger>"
-			"	</event>"
-			"	<event id=\"event3\">"
-			"		<condition>"
-			"			<timer timeout=\"300\" forceDropOnTimeout=\"true\"/>"
-			"		</condition>"
-			"		<trigger>"
-			"			<setter name=\"x\">"
-			"				<minus>"
-			"					<max>"
-			"						<int value=\"-4\"/>"
-			"						<difference>"
-			"							<variableValue name=\"x\"/>"
-			"							<variableValue name=\"y\"/>"
-			"						</difference>"
-			"					</max>"
-			"				</minus>"
-			"			</setter>"
-			"		</trigger>"
-			"	</event>"
-			"</constraints>";
+	const QString xml = "<constraints>"
+			    "	<timelimit value=\"2000\"/>"
+			    "	<event id=\"event1\">"
+			    "		<condition>"
+			    "			<timer timeout=\"100\" forceDropOnTimeout=\"true\"/>"
+			    "		</condition>"
+			    "		<triggers>"
+			    "			<setter name=\"x\">"
+			    "				<int value=\"10\"/>"
+			    "			</setter>"
+			    "			<setter name=\"d\">"
+			    "				<double value=\"10.2\"/>"
+			    "			</setter>"
+			    "			<setter name=\"s\">"
+			    "				<string value=\"abc\"/>"
+			    "			</setter>"
+			    "			<setter name=\"b\">"
+			    "				<bool value=\"true\"/>"
+			    "			</setter>"
+			    "		</triggers>"
+			    "	</event>"
+			    "	<event id=\"event2\">"
+			    "		<condition>"
+			    "			<timer timeout=\"200\" forceDropOnTimeout=\"true\"/>"
+			    "		</condition>"
+			    "		<trigger>"
+			    "			<setter name=\"y\">"
+			    "				<sum>"
+			    "					<min>"
+			    "						<abs>"
+			    "							<int value=\"-2\"/>"
+			    "						</abs>"
+			    "						<int value=\"10\"/>"
+			    "					</min>"
+			    "					<variableValue name=\"x\"/>"
+			    "				</sum>"
+			    "			</setter>"
+			    "		</trigger>"
+			    "	</event>"
+			    "	<event id=\"event3\">"
+			    "		<condition>"
+			    "			<timer timeout=\"300\" forceDropOnTimeout=\"true\"/>"
+			    "		</condition>"
+			    "		<trigger>"
+			    "			<setter name=\"x\">"
+			    "				<minus>"
+			    "					<max>"
+			    "						<int value=\"-4\"/>"
+			    "						<difference>"
+			    "							<variableValue name=\"x\"/>"
+			    "							<variableValue name=\"y\"/>"
+			    "						</difference>"
+			    "					</max>"
+			    "				</minus>"
+			    "			</setter>"
+			    "		</trigger>"
+			    "	</event>"
+			    "</constraints>";
 
 	ASSERT_TRUE(mParser.parse(xml));
 	ASSERT_EQ(mEvents.count(), 4);
@@ -461,52 +454,51 @@ TEST_F(ConstraintsParserTests, arithmeticTest)
 
 TEST_F(ConstraintsParserTests, extenendedSyntaxArithmeticTest)
 {
-	const QString xml =
-			"<constraints>"
-			"	<timelimit value=\"2000\"/>"
-			"	<event id=\"event1\">"
-			"		<condition>"
-			"			<timer timeout=\"100\" forceDropOnTimeout=\"true\"/>"
-			"		</condition>"
-			"		<triggers>"
-			"			<setter name=\"x\" _1=\"10\"/>"
-			"			<setter name=\"d\" _1=\"10.2\"/>"
-			"			<setter name=\"s\" _1=\"abc\"/>"
-			"			<setter name=\"b\" _1=\"true\"/>"
-			"		</triggers>"
-			"	</event>"
-			"	<event id=\"event2\">"
-			"		<condition>"
-			"			<timer timeout=\"200\" forceDropOnTimeout=\"true\"/>"
-			"		</condition>"
-			"		<trigger>"
-			"			<setter name=\"y\">"
-			"				<sum>"
-			"					<min>"
-			"						<abs _1=\"-2\"/>"
-			"						<int value=\"10\"/>"
-			"					</min>"
-			"					<variableValue name=\"x\"/>"
-			"				</sum>"
-			"			</setter>"
-			"		</trigger>"
-			"	</event>"
-			"	<event id=\"event3\">"
-			"		<condition>"
-			"			<timer timeout=\"300\" forceDropOnTimeout=\"true\"/>"
-			"		</condition>"
-			"		<trigger>"
-			"			<setter name=\"x\">"
-			"				<minus>"
-			"					<max>"
-			"						<int value=\"-4\"/>"
-			"						<difference _1=\"${x}\" _2=\"${y}\"/>"
-			"					</max>"
-			"				</minus>"
-			"			</setter>"
-			"		</trigger>"
-			"	</event>"
-			"</constraints>";
+	const QString xml = "<constraints>"
+			    "	<timelimit value=\"2000\"/>"
+			    "	<event id=\"event1\">"
+			    "		<condition>"
+			    "			<timer timeout=\"100\" forceDropOnTimeout=\"true\"/>"
+			    "		</condition>"
+			    "		<triggers>"
+			    "			<setter name=\"x\" _1=\"10\"/>"
+			    "			<setter name=\"d\" _1=\"10.2\"/>"
+			    "			<setter name=\"s\" _1=\"abc\"/>"
+			    "			<setter name=\"b\" _1=\"true\"/>"
+			    "		</triggers>"
+			    "	</event>"
+			    "	<event id=\"event2\">"
+			    "		<condition>"
+			    "			<timer timeout=\"200\" forceDropOnTimeout=\"true\"/>"
+			    "		</condition>"
+			    "		<trigger>"
+			    "			<setter name=\"y\">"
+			    "				<sum>"
+			    "					<min>"
+			    "						<abs _1=\"-2\"/>"
+			    "						<int value=\"10\"/>"
+			    "					</min>"
+			    "					<variableValue name=\"x\"/>"
+			    "				</sum>"
+			    "			</setter>"
+			    "		</trigger>"
+			    "	</event>"
+			    "	<event id=\"event3\">"
+			    "		<condition>"
+			    "			<timer timeout=\"300\" forceDropOnTimeout=\"true\"/>"
+			    "		</condition>"
+			    "		<trigger>"
+			    "			<setter name=\"x\">"
+			    "				<minus>"
+			    "					<max>"
+			    "						<int value=\"-4\"/>"
+			    "						<difference _1=\"${x}\" _2=\"${y}\"/>"
+			    "					</max>"
+			    "				</minus>"
+			    "			</setter>"
+			    "		</trigger>"
+			    "	</event>"
+			    "</constraints>";
 
 	ASSERT_TRUE(mParser.parse(xml));
 	ASSERT_EQ(mEvents.count(), 4);
@@ -524,9 +516,9 @@ TEST_F(ConstraintsParserTests, extenendedSyntaxArithmeticTest)
 	bool event1Fired = false;
 	bool event2Fired = false;
 	bool event3Fired = false;
-	ScopedConnection c1 { QObject::connect(&*event1, &Event::fired, [&event1Fired]() { event1Fired = true; })};
-	ScopedConnection c2 { QObject::connect(&*event2, &Event::fired, [&event2Fired]() { event2Fired = true; })};
-	ScopedConnection c3 { QObject::connect(&*event3, &Event::fired, [&event3Fired]() { event3Fired = true; })};
+	ScopedConnection c1 {QObject::connect(&*event1, &Event::fired, [&event1Fired]() { event1Fired = true; })};
+	ScopedConnection c2 {QObject::connect(&*event2, &Event::fired, [&event2Fired]() { event2Fired = true; })};
+	ScopedConnection c3 {QObject::connect(&*event3, &Event::fired, [&event3Fired]() { event3Fired = true; })};
 
 	mTimeline.setTimestamp(100);
 	event1->check();
@@ -566,26 +558,25 @@ TEST_F(ConstraintsParserTests, extenendedSyntaxArithmeticTest)
 	ASSERT_EQ(mVariables["y"].toInt(), 12);
 }
 
-
 TEST_F(ConstraintsParserTests, variableValueTest)
 {
 	auto testCase = [this](const QString &variable, const QString &value, const QString &type) {
 		mEvents.clear();
-		const QString xml = QString(
-				"<constraints>"
-				"	<timelimit value=\"2000\"/>"
-				"	<event id=\"event\" settedUpInitially=\"true\">"
-				"		<condition>"
-				"			<equals>"
-				"				<variableValue name=\"%1\"/>"
-				"				<%2 value=\"%3\"/>"
-				"			</equals>"
-				"		</condition>"
-				"		<trigger>"
-				"			<success/>"
-				"		</trigger>"
-				"	</event>"
-				"</constraints>").arg(variable, type, value);
+		const QString xml = QString("<constraints>"
+					    "	<timelimit value=\"2000\"/>"
+					    "	<event id=\"event\" settedUpInitially=\"true\">"
+					    "		<condition>"
+					    "			<equals>"
+					    "				<variableValue name=\"%1\"/>"
+					    "				<%2 value=\"%3\"/>"
+					    "			</equals>"
+					    "		</condition>"
+					    "		<trigger>"
+					    "			<success/>"
+					    "		</trigger>"
+					    "	</event>"
+					    "</constraints>")
+		                            .arg(variable, type, value);
 		ASSERT_TRUE(mParser.parse(xml));
 		ASSERT_EQ(mEvents.count(), 2);
 		auto &event = mEvents["event"];
@@ -618,21 +609,21 @@ TEST_F(ConstraintsParserTests, objectStateTest)
 {
 	auto testCase = [this](const QString &object, const QString &value, const QString &type) {
 		mEvents.clear();
-		const QString xml = QString(
-				"<constraints>"
-				"	<timelimit value=\"2000\"/>"
-				"	<event id=\"event\" settedUpInitially=\"true\">"
-				"		<condition>"
-				"			<equals>"
-				"				<objectState object=\"%1\"/>"
-				"				<%2 value=\"%3\"/>"
-				"			</equals>"
-				"		</condition>"
-				"		<trigger>"
-				"			<success/>"
-				"		</trigger>"
-				"	</event>"
-				"</constraints>").arg(object, type, value);
+		const QString xml = QString("<constraints>"
+					    "	<timelimit value=\"2000\"/>"
+					    "	<event id=\"event\" settedUpInitially=\"true\">"
+					    "		<condition>"
+					    "			<equals>"
+					    "				<objectState object=\"%1\"/>"
+					    "				<%2 value=\"%3\"/>"
+					    "			</equals>"
+					    "		</condition>"
+					    "		<trigger>"
+					    "			<success/>"
+					    "		</trigger>"
+					    "	</event>"
+					    "</constraints>")
+		                            .arg(object, type, value);
 		ASSERT_TRUE(mParser.parse(xml));
 		ASSERT_EQ(mEvents.count(), 2);
 		auto &event = mEvents["event"];
@@ -666,23 +657,23 @@ TEST_F(ConstraintsParserTests, setObjectStateTest)
 {
 	auto testCase = [this](const QString &object, const QString &property, const QString &valueXml) {
 		mEvents.clear();
-		const QString xml = QString(
-				"<constraints>"
-				"	<timelimit value=\"2000\"/>"
-				"	<event id=\"event\" settedUpInitially=\"true\">"
-				"		<condition>"
-				"			<greater>"
-				"				<int value=\"2\"/>"
-				"				<int value=\"1\"/>"
-				"			</greater>"
-				"		</condition>"
-				"		<trigger>"
-				"			<setState object=\"%1\" property=\"%2\">"
-				"				%3"
-				"			</setState>"
-				"		</trigger>"
-				"	</event>"
-				"</constraints>").arg(object, property, valueXml);
+		const QString xml = QString("<constraints>"
+					    "	<timelimit value=\"2000\"/>"
+					    "	<event id=\"event\" settedUpInitially=\"true\">"
+					    "		<condition>"
+					    "			<greater>"
+					    "				<int value=\"2\"/>"
+					    "				<int value=\"1\"/>"
+					    "			</greater>"
+					    "		</condition>"
+					    "		<trigger>"
+					    "			<setState object=\"%1\" property=\"%2\">"
+					    "				%3"
+					    "			</setState>"
+					    "		</trigger>"
+					    "	</event>"
+					    "</constraints>")
+		                            .arg(object, property, valueXml);
 		ASSERT_TRUE(mParser.parse(xml));
 		ASSERT_EQ(mEvents.count(), 2);
 		auto &event = mEvents["event"];
@@ -695,16 +686,15 @@ TEST_F(ConstraintsParserTests, setObjectStateTest)
 		ASSERT_TRUE(eventFired);
 	};
 
-	QScopedPointer<TestObjectB> objB (new TestObjectB);
+	QScopedPointer<TestObjectB> objB(new TestObjectB);
 	objB->otherObject()->setIntProperty(100500);
 	objB->otherObject()->setStringProperty("abc");
 	mObjects["object"] = objB.data();
 
-	const QString increment11Xml =
-			"<sum>"
-			"	<objectState object=\"object.otherObject.intProperty\"/>"
-			"	<int value=\"11\"/>"
-			"</sum>";
+	const QString increment11Xml = "<sum>"
+				       "	<objectState object=\"object.otherObject.intProperty\"/>"
+				       "	<int value=\"11\"/>"
+				       "</sum>";
 	testCase("object.otherObject", "intProperty", increment11Xml);
 	ASSERT_EQ(objB->otherObject()->intProperty(), 100511);
 	testCase("object.otherObject", "stringProperty", "<string value=\"abc123\"/>");
@@ -715,20 +705,20 @@ TEST_F(ConstraintsParserTests, extendedSyntaxSetObjectStateTest)
 {
 	auto testCase = [this](const QString &object, const QString &property, const QString &valueXml) {
 		mEvents.clear();
-		const QString xml = QString(
-				"<constraints>"
-				"	<timelimit value=\"2000\"/>"
-				"	<event id=\"event\" settedUpInitially=\"true\">"
-				"		<condition>"
-				"			<greater _1=\"2\" _2=\"1\"/>"
-				"		</condition>"
-				"		<trigger>"
-				"			<setState object=\"%1\" property=\"%2\">"
-				"				%3"
-				"			</setState>"
-				"		</trigger>"
-				"	</event>"
-				"</constraints>").arg(object, property, valueXml);
+		const QString xml = QString("<constraints>"
+					    "	<timelimit value=\"2000\"/>"
+					    "	<event id=\"event\" settedUpInitially=\"true\">"
+					    "		<condition>"
+					    "			<greater _1=\"2\" _2=\"1\"/>"
+					    "		</condition>"
+					    "		<trigger>"
+					    "			<setState object=\"%1\" property=\"%2\">"
+					    "				%3"
+					    "			</setState>"
+					    "		</trigger>"
+					    "	</event>"
+					    "</constraints>")
+		                            .arg(object, property, valueXml);
 		ASSERT_TRUE(mParser.parse(xml));
 		ASSERT_EQ(mEvents.count(), 2);
 		auto &event = mEvents["event"];
@@ -741,13 +731,12 @@ TEST_F(ConstraintsParserTests, extendedSyntaxSetObjectStateTest)
 		ASSERT_TRUE(eventFired);
 	};
 
-	QScopedPointer<TestObjectB> objB (new TestObjectB);
+	QScopedPointer<TestObjectB> objB(new TestObjectB);
 	objB->otherObject()->setIntProperty(100500);
 	objB->otherObject()->setStringProperty("abc");
 	mObjects["object"] = objB.data();
 
-	const QString increment11Xml =
-			R"(<sum _1="${object.otherObject.intProperty}" _2="11"/>)";
+	const QString increment11Xml = R"(<sum _1="${object.otherObject.intProperty}" _2="11"/>)";
 	testCase("object.otherObject", "intProperty", increment11Xml);
 	ASSERT_EQ(objB->otherObject()->intProperty(), 100511);
 	testCase("object.otherObject", "stringProperty", "<string value=\"abc123\"/>");
@@ -758,8 +747,8 @@ TEST_F(ConstraintsParserTests, objectsSetTest)
 {
 	auto testCase = [this](const QString &object, int size, int first, int last) {
 		mEvents.clear();
-		const QString xml = QString(
-				"<constraints>"
+		const QString xml =
+			QString("<constraints>"
 				"	<timelimit value=\"2000\"/>"
 				"	<event id=\"event\" settedUpInitially=\"true\">"
 				"		<conditions glue=\"and\">"
@@ -784,7 +773,8 @@ TEST_F(ConstraintsParserTests, objectsSetTest)
 				"			<success/>"
 				"		</trigger>"
 				"	</event>"
-				"</constraints>").arg(object, QString::number(size), QString::number(first), QString::number(last));
+				"</constraints>")
+				.arg(object, QString::number(size), QString::number(first), QString::number(last));
 		ASSERT_TRUE(mParser.parse(xml));
 		ASSERT_EQ(mEvents.count(), 2);
 		auto &event = mEvents["event"];
@@ -797,7 +787,7 @@ TEST_F(ConstraintsParserTests, objectsSetTest)
 		ASSERT_TRUE(eventFired);
 	};
 
-	auto * const set = new VariantSet;
+	auto *const set = new VariantSet;
 	set->add(10);
 	set->add(20);
 	set->add(30);
@@ -809,56 +799,56 @@ TEST_F(ConstraintsParserTests, objectsSetTest)
 	object.setIntListProperty({10, 9, 8, 7, 6, 5, 4, 3, 2, 1});
 	mObjects["object"] = &object;
 	const auto intListProperty = object.intListProperty();
-	testCase("object.intListProperty", intListProperty.size()
-			, intListProperty.first(), intListProperty.last());
+	testCase("object.intListProperty", intListProperty.size(), intListProperty.first(), intListProperty.last());
 }
 
 TEST_F(ConstraintsParserTests, boundingRectTest)
 {
 	auto testCase = [this](const QString &prefix, int x, int y, int width, int height) {
 		mEvents.clear();
-		const QString xml = QString(
-				"<constraints>"
-				"	<timelimit value=\"2000\"/>"
-				"	<event id=\"event\" settedUpInitially=\"true\">"
-				"		<condition>"
-				"			<using>"
-				"				<setter name=\"boundingRect\">"
-				"					<boundingRect>"
-				"						<%1=\"items\"/>"
-				"					</boundingRect>"
-				"				</setter>"
-				"				<return>"
-				"					<conditions glue=\"and\">"
-				"						<equals>"
-				"							<variableValue name=\"boundingRect.x\"/>"
-				"							<int value=\"%2\"/>"
-				"						</equals>"
-				"						<equals>"
-				"							<variableValue name=\"boundingRect.y\"/>"
-				"							<int value=\"%3\"/>"
-				"						</equals>"
-				"						<equals>"
-				"							<variableValue name=\"boundingRect.width\"/>"
-				"							<int value=\"%4\"/>"
-				"						</equals>"
-				"						<equals>"
-				"							<variableValue name=\"boundingRect.height\"/>"
-				"							<int value=\"%5\"/>"
-				"						</equals>"
-				"					</conditions>"
-				"				</return>"
-				"			</using>"
-				"		</condition>"
-				"		<trigger>"
-				"			<success/>"
-				"		</trigger>"
-				"	</event>"
-				"</constraints>").arg(prefix
-						, QString::number(x)
-						, QString::number(y)
-						, QString::number(width)
-						, QString::number(height));
+		const QString xml = QString("<constraints>"
+					    "	<timelimit value=\"2000\"/>"
+					    "	<event id=\"event\" settedUpInitially=\"true\">"
+					    "		<condition>"
+					    "			<using>"
+					    "				<setter name=\"boundingRect\">"
+					    "					<boundingRect>"
+					    "						<%1=\"items\"/>"
+					    "					</boundingRect>"
+					    "				</setter>"
+					    "				<return>"
+					    "					<conditions glue=\"and\">"
+					    "						<equals>"
+					    "							<variableValue "
+		                            "name=\"boundingRect.x\"/>"
+					    "							<int value=\"%2\"/>"
+					    "						</equals>"
+					    "						<equals>"
+					    "							<variableValue "
+		                            "name=\"boundingRect.y\"/>"
+					    "							<int value=\"%3\"/>"
+					    "						</equals>"
+					    "						<equals>"
+					    "							<variableValue "
+		                            "name=\"boundingRect.width\"/>"
+					    "							<int value=\"%4\"/>"
+					    "						</equals>"
+					    "						<equals>"
+					    "							<variableValue "
+		                            "name=\"boundingRect.height\"/>"
+					    "							<int value=\"%5\"/>"
+					    "						</equals>"
+					    "					</conditions>"
+					    "				</return>"
+					    "			</using>"
+					    "		</condition>"
+					    "		<trigger>"
+					    "			<success/>"
+					    "		</trigger>"
+					    "	</event>"
+					    "</constraints>")
+		                            .arg(prefix, QString::number(x), QString::number(y), QString::number(width),
+						    QString::number(height));
 		ASSERT_TRUE(mParser.parse(xml));
 		ASSERT_EQ(mEvents.count(), 2);
 		auto &event = mEvents["event"];
@@ -871,23 +861,23 @@ TEST_F(ConstraintsParserTests, boundingRectTest)
 		ASSERT_TRUE(eventFired);
 	};
 
-	const QList<CanvasObject *> shapes = {
-			new EllipseObject(QPoint(0, 0), 50, 50)
-			, new RectangleObject(QRect(0, 0, 200, 200))
-			, new LineObject(QPoint(-120, -130), QPoint(-80, -70))
-			, new PointObject(201, 201) };
+	const QList<CanvasObject *> shapes = {new EllipseObject(QPoint(0, 0), 50, 50),
+		new RectangleObject(QRect(0, 0, 200, 200)), new LineObject(QPoint(-120, -130), QPoint(-80, -70)),
+		new PointObject(201, 201)};
 	const QRect correctRect(QPoint(-120, -130), QPoint(201, 201));
 
 	ObjectsSet<CanvasObject *> set(shapes);
 	mObjects["items"] = &set;
-	testCase("objectState object", correctRect.left(), correctRect.top(), correctRect.width(), correctRect.height());
+	testCase("objectState object", correctRect.left(), correctRect.top(), correctRect.width(),
+		correctRect.height());
 
 	VariantSet emptySet;
 	mObjects["items"] = &emptySet;
 	testCase("objectState object", 0, 0, 0, 0);
 
 	mVariables["items"] = QVariant::fromValue<QList<CanvasObject *>>(shapes);
-	testCase("variableValue name", correctRect.left(), correctRect.top(), correctRect.width(), correctRect.height());
+	testCase("variableValue name", correctRect.left(), correctRect.top(), correctRect.width(),
+		correctRect.height());
 	qDeleteAll(shapes);
 }
 
@@ -895,24 +885,24 @@ TEST_F(ConstraintsParserTests, distanceTest)
 {
 	auto testCase = [this](const QString &value) {
 		mEvents.clear();
-		const QString xml = QString(
-				"<constraints>"
-				"	<timelimit value=\"2000\"/>"
-				"	<event id=\"event\" settedUpInitially=\"true\">"
-				"		<condition>"
-				"			<equals>"
-				"				<distance>"
-				"					<variableValue name=\"point1\"/>"
-				"					<variableValue name=\"point2\"/>"
-				"				</distance>"
-				"				<double value=\"%1\"/>"
-				"			</equals>"
-				"		</condition>"
-				"		<trigger>"
-				"			<success/>"
-				"		</trigger>"
-				"	</event>"
-				"</constraints>").arg(value);
+		const QString xml = QString("<constraints>"
+					    "	<timelimit value=\"2000\"/>"
+					    "	<event id=\"event\" settedUpInitially=\"true\">"
+					    "		<condition>"
+					    "			<equals>"
+					    "				<distance>"
+					    "					<variableValue name=\"point1\"/>"
+					    "					<variableValue name=\"point2\"/>"
+					    "				</distance>"
+					    "				<double value=\"%1\"/>"
+					    "			</equals>"
+					    "		</condition>"
+					    "		<trigger>"
+					    "			<success/>"
+					    "		</trigger>"
+					    "	</event>"
+					    "</constraints>")
+		                            .arg(value);
 		ASSERT_TRUE(mParser.parse(xml));
 		ASSERT_EQ(mEvents.count(), 2);
 		auto &event = mEvents["event"];
@@ -940,43 +930,42 @@ TEST_F(ConstraintsParserTests, distanceTest)
 
 TEST_F(ConstraintsParserTests, usingTest)
 {
-	const QString xml =
-			"<constraints>"
-			"	<timelimit value=\"2000\"/>"
-			"	<event id=\"event1\">"
-			"		<condition>"
-			"			<using>"
-			"				<setter name=\"x\">"
-			"					<int value=\"100500\"/>"
-			"				</setter>"
-			"				<setter name=\"y\">"
-			"					<int value=\"1\"/>"
-			"				</setter>"
-			"				<return>"
-			"					<greater>"
-			"						<variableValue name=\"y\"/>"
-			"						<int value=\"0\"/>"
-			"					</greater>"
-			"				</return>"
-			"			</using>"
-			"		</condition>"
-			"		<trigger>"
-			"			<setUp id=\"event2\"/>"
-			"		</trigger>"
-			"	</event>"
-			"	<event id=\"event2\">"
-			"		<conditions glue=\"and\">"
-			"			<timer timeout=\"500\"/>"
-			"			<equals>"
-			"				<variableValue name=\"x\"/>"
-			"				<int value=\"100500\"/>"
-			"			</equals>"
-			"		</conditions>"
-			"		<trigger>"
-			"			<success/>"
-			"		</trigger>"
-			"	</event>"
-			"</constraints>";
+	const QString xml = "<constraints>"
+			    "	<timelimit value=\"2000\"/>"
+			    "	<event id=\"event1\">"
+			    "		<condition>"
+			    "			<using>"
+			    "				<setter name=\"x\">"
+			    "					<int value=\"100500\"/>"
+			    "				</setter>"
+			    "				<setter name=\"y\">"
+			    "					<int value=\"1\"/>"
+			    "				</setter>"
+			    "				<return>"
+			    "					<greater>"
+			    "						<variableValue name=\"y\"/>"
+			    "						<int value=\"0\"/>"
+			    "					</greater>"
+			    "				</return>"
+			    "			</using>"
+			    "		</condition>"
+			    "		<trigger>"
+			    "			<setUp id=\"event2\"/>"
+			    "		</trigger>"
+			    "	</event>"
+			    "	<event id=\"event2\">"
+			    "		<conditions glue=\"and\">"
+			    "			<timer timeout=\"500\"/>"
+			    "			<equals>"
+			    "				<variableValue name=\"x\"/>"
+			    "				<int value=\"100500\"/>"
+			    "			</equals>"
+			    "		</conditions>"
+			    "		<trigger>"
+			    "			<success/>"
+			    "		</trigger>"
+			    "	</event>"
+			    "</constraints>";
 	ASSERT_TRUE(mParser.parse(xml));
 	ASSERT_EQ(mEvents.count(), 3);
 
@@ -989,8 +978,8 @@ TEST_F(ConstraintsParserTests, usingTest)
 
 	bool event1Fired = false;
 	bool event2Fired = false;
-	ScopedConnection c1 { QObject::connect(&*event1, &Event::fired, [&event1Fired]() { event1Fired = true; })};
-	ScopedConnection c2 { QObject::connect(&*event2, &Event::fired, [&event2Fired]() { event2Fired = true; })};
+	ScopedConnection c1 {QObject::connect(&*event1, &Event::fired, [&event1Fired]() { event1Fired = true; })};
+	ScopedConnection c2 {QObject::connect(&*event2, &Event::fired, [&event2Fired]() { event2Fired = true; })};
 
 	mTimeline.setTimestamp(100);
 	event1->check();
@@ -1012,33 +1001,32 @@ TEST_F(ConstraintsParserTests, usingTest)
 
 TEST_F(ConstraintsParserTests, extendedSyntaxUsingTest)
 {
-	const QString xml =
-			"<constraints>"
-			"	<timelimit value=\"2000\"/>"
-			"	<event id=\"event1\">"
-			"		<condition>"
-			"			<using>"
-			"				<setter name=\"x\" _1=\"100500\"/>"
-			"				<setter name=\"y\" _1=\"1\"/>"
-			"				<return>"
-			"					<greater _1=\"${y}\" _2=\"0\"/>"
-			"				</return>"
-			"			</using>"
-			"		</condition>"
-			"		<trigger>"
-			"			<setUp id=\"event2\"/>"
-			"		</trigger>"
-			"	</event>"
-			"	<event id=\"event2\">"
-			"		<conditions glue=\"and\">"
-			"			<timer timeout=\"500\"/>"
-			"			<equals _1=\"${x}\" _2=\"100500\"/>"
-			"		</conditions>"
-			"		<trigger>"
-			"			<success/>"
-			"		</trigger>"
-			"	</event>"
-			"</constraints>";
+	const QString xml = "<constraints>"
+			    "	<timelimit value=\"2000\"/>"
+			    "	<event id=\"event1\">"
+			    "		<condition>"
+			    "			<using>"
+			    "				<setter name=\"x\" _1=\"100500\"/>"
+			    "				<setter name=\"y\" _1=\"1\"/>"
+			    "				<return>"
+			    "					<greater _1=\"${y}\" _2=\"0\"/>"
+			    "				</return>"
+			    "			</using>"
+			    "		</condition>"
+			    "		<trigger>"
+			    "			<setUp id=\"event2\"/>"
+			    "		</trigger>"
+			    "	</event>"
+			    "	<event id=\"event2\">"
+			    "		<conditions glue=\"and\">"
+			    "			<timer timeout=\"500\"/>"
+			    "			<equals _1=\"${x}\" _2=\"100500\"/>"
+			    "		</conditions>"
+			    "		<trigger>"
+			    "			<success/>"
+			    "		</trigger>"
+			    "	</event>"
+			    "</constraints>";
 	ASSERT_TRUE(mParser.parse(xml));
 	ASSERT_EQ(mEvents.count(), 3);
 
@@ -1074,29 +1062,28 @@ TEST_F(ConstraintsParserTests, extendedSyntaxUsingTest)
 
 TEST_F(ConstraintsParserTests, forgottenReturnInUsingTest)
 {
-	const QString xml =
-			"<constraints>"
-			"	<timelimit value=\"2000\"/>"
-			"	<event>"
-			"		<condition>"
-			"			<using>"
-			"				<setter name=\"x\">"
-			"					<int value=\"100500\"/>"
-			"				</setter>"
-			"				<setter name=\"y\">"
-			"					<int value=\"1\"/>"
-			"				</setter>"
-			"				<greater>"
-			"					<variableValue name=\"y\"/>"
-			"					<int value=\"0\"/>"
-			"				</greater>"
-			"			</using>"
-			"		</condition>"
-			"		<trigger>"
-			"			<success/>"
-			"		</trigger>"
-			"	</event>"
-			"</constraints>";
+	const QString xml = "<constraints>"
+			    "	<timelimit value=\"2000\"/>"
+			    "	<event>"
+			    "		<condition>"
+			    "			<using>"
+			    "				<setter name=\"x\">"
+			    "					<int value=\"100500\"/>"
+			    "				</setter>"
+			    "				<setter name=\"y\">"
+			    "					<int value=\"1\"/>"
+			    "				</setter>"
+			    "				<greater>"
+			    "					<variableValue name=\"y\"/>"
+			    "					<int value=\"0\"/>"
+			    "				</greater>"
+			    "			</using>"
+			    "		</condition>"
+			    "		<trigger>"
+			    "			<success/>"
+			    "		</trigger>"
+			    "	</event>"
+			    "</constraints>";
 	ASSERT_FALSE(mParser.parse(xml));
 	qDebug() << mParser.errors();
 	// 2 errors: triggers has no 'greater' variant + no 'return' tag error
@@ -1105,25 +1092,24 @@ TEST_F(ConstraintsParserTests, forgottenReturnInUsingTest)
 
 TEST_F(ConstraintsParserTests, initializationTagTest)
 {
-	const QString xml =
-			"<constraints>"
-			"	<timelimit value=\"2000\"/>"
-			"	<init>"
-			"		<setter name=\"x\"><int value=\"123\"/></setter>"
-			"	</init>"
-			"	<event id=\"event\" settedUpInitially=\"true\">"
-			"		<conditions glue=\"and\">"
-			"			<timer timeout=\"1000\"/>"
-			"			<equals>"
-			"				<variableValue name=\"x\"/>"
-			"				<int value=\"123\"/>"
-			"			</equals>"
-			"		</conditions>"
-			"		<trigger>"
-			"			<success/>"
-			"		</trigger>"
-			"	</event>"
-			"</constraints>";
+	const QString xml = "<constraints>"
+			    "	<timelimit value=\"2000\"/>"
+			    "	<init>"
+			    "		<setter name=\"x\"><int value=\"123\"/></setter>"
+			    "	</init>"
+			    "	<event id=\"event\" settedUpInitially=\"true\">"
+			    "		<conditions glue=\"and\">"
+			    "			<timer timeout=\"1000\"/>"
+			    "			<equals>"
+			    "				<variableValue name=\"x\"/>"
+			    "				<int value=\"123\"/>"
+			    "			</equals>"
+			    "		</conditions>"
+			    "		<trigger>"
+			    "			<success/>"
+			    "		</trigger>"
+			    "	</event>"
+			    "</constraints>";
 	ASSERT_TRUE(mParser.parse(xml));
 	ASSERT_EQ(mEvents.count(), 3);
 
@@ -1135,7 +1121,7 @@ TEST_F(ConstraintsParserTests, initializationTagTest)
 
 	auto &event = mEvents["event"];
 	bool eventFired = false;
-	ScopedConnection c { QObject::connect(&*event, &Event::fired, [&eventFired]() { eventFired = true; })};
+	ScopedConnection c {QObject::connect(&*event, &Event::fired, [&eventFired]() { eventFired = true; })};
 
 	mTimeline.setTimestamp(1000);
 	event->check();
@@ -1149,65 +1135,64 @@ TEST_F(ConstraintsParserTests, initializationTagTest)
 TEST_F(ConstraintsParserTests, communicationTest)
 {
 	// This program will iteratively add 2 to 'counter', then subtract 1, then again add 2 and so on...
-	const QString xml =
-			"<constraints>"
-			"	<timelimit value=\"2000\"/>"
-			"	<event id=\"Set Initial Value\" settedUpInitially=\"true\">"
-			"		<condition>"
-			"			<timer timeout=\"0\"/>"
-			"		</condition>"
-			"		<triggers>"
-			"			<trigger>"
-			"				<setter name=\"counter\"><int value=\"0\"/></setter>"
-			"			</trigger>"
-			"			<trigger>"
-			"				<setUp id=\"Increment 2\" value=\"0\"/>"
-			"			</trigger>"
-			"		</triggers>"
-			"	</event>"
-			"	<event id=\"Check Done\" settedUpInitially=\"true\">"
-			"		<condition>"
-			"			<not>"
-			"				<less>"
-			"					<variableValue name=\"counter\"/>"
-			"					<int value=\"10\"/>"
-			"				</less>"
-			"			</not>"
-			"		</condition>"
-			"		<trigger>"
-			"			<success/>"
-			"		</trigger>"
-			"	</event>"
-			"	<event id=\"Increment 2\" settedUpInitially=\"true\" dropsOnFire=\"false\">"
-			"		<condition>"
-			"			<timer timeout=\"1\"/>"
-			"		</condition>"
-			"		<triggers>"
-			"			<setter name=\"counter\">"
-			"				<sum>"
-			"					<variableValue name=\"counter\"/>"
-			"					<int value=\"2\"/>"
-			"				</sum>"
-			"			</setter>"
-			"			<setUp id=\"Decrement 1\" />"
-			"			<drop id=\"Increment 2\" />"
-			"		</triggers>"
-			"	</event>"
-			"	<event id=\"Decrement 1\" settedUpInitially=\"true\">"
-			"		<condition>"
-			"			<timer timeout=\"1\"/>"
-			"		</condition>"
-			"		<triggers>"
-			"			<setter name=\"counter\">"
-			"				<sum>"
-			"					<variableValue name=\"counter\"/>"
-			"					<int value=\"-1\"/>"
-			"				</sum>"
-			"			</setter>"
-			"			<setUp id=\"Increment 2\" />"
-			"		</triggers>"
-			"	</event>"
-			"</constraints>";
+	const QString xml = "<constraints>"
+			    "	<timelimit value=\"2000\"/>"
+			    "	<event id=\"Set Initial Value\" settedUpInitially=\"true\">"
+			    "		<condition>"
+			    "			<timer timeout=\"0\"/>"
+			    "		</condition>"
+			    "		<triggers>"
+			    "			<trigger>"
+			    "				<setter name=\"counter\"><int value=\"0\"/></setter>"
+			    "			</trigger>"
+			    "			<trigger>"
+			    "				<setUp id=\"Increment 2\" value=\"0\"/>"
+			    "			</trigger>"
+			    "		</triggers>"
+			    "	</event>"
+			    "	<event id=\"Check Done\" settedUpInitially=\"true\">"
+			    "		<condition>"
+			    "			<not>"
+			    "				<less>"
+			    "					<variableValue name=\"counter\"/>"
+			    "					<int value=\"10\"/>"
+			    "				</less>"
+			    "			</not>"
+			    "		</condition>"
+			    "		<trigger>"
+			    "			<success/>"
+			    "		</trigger>"
+			    "	</event>"
+			    "	<event id=\"Increment 2\" settedUpInitially=\"true\" dropsOnFire=\"false\">"
+			    "		<condition>"
+			    "			<timer timeout=\"1\"/>"
+			    "		</condition>"
+			    "		<triggers>"
+			    "			<setter name=\"counter\">"
+			    "				<sum>"
+			    "					<variableValue name=\"counter\"/>"
+			    "					<int value=\"2\"/>"
+			    "				</sum>"
+			    "			</setter>"
+			    "			<setUp id=\"Decrement 1\" />"
+			    "			<drop id=\"Increment 2\" />"
+			    "		</triggers>"
+			    "	</event>"
+			    "	<event id=\"Decrement 1\" settedUpInitially=\"true\">"
+			    "		<condition>"
+			    "			<timer timeout=\"1\"/>"
+			    "		</condition>"
+			    "		<triggers>"
+			    "			<setter name=\"counter\">"
+			    "				<sum>"
+			    "					<variableValue name=\"counter\"/>"
+			    "					<int value=\"-1\"/>"
+			    "				</sum>"
+			    "			</setter>"
+			    "			<setUp id=\"Increment 2\" />"
+			    "		</triggers>"
+			    "	</event>"
+			    "</constraints>";
 	ASSERT_TRUE(mParser.parse(xml));
 	ASSERT_EQ(mEvents.count(), 5);
 

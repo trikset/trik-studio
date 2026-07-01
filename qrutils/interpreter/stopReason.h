@@ -18,14 +18,15 @@ namespace qReal {
 namespace interpretation {
 
 /// A set of reasons why program execution stopped.
-enum class StopReason
-{
+enum class StopReason {
 	/// Program finished correctly
 	finished = 0
 	/// Program finished incorrectly, error occured
-	, error
+	,
+	error
 	/// User stopped program execution (explicitly or implicitly)
-	, userStop
+	,
+	userStop
 };
 
 }

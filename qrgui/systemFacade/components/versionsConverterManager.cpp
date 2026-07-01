@@ -36,8 +36,8 @@ bool VersionsConverterManager::validateCurrentProject()
 	const QMap<Id, Version> savedVersions = mModels.logicalModelAssistApi().editorVersions();
 
 	for (const QString &editor : editorsToCheck) {
-		const Version currentVersion = mModels.logicalModelAssistApi()
-				.editorManagerInterface().version(Id(editor));
+		const Version currentVersion =
+			mModels.logicalModelAssistApi().editorManagerInterface().version(Id(editor));
 		const Version savedVersion = savedVersions[Id(editor)];
 
 		if (currentVersion == savedVersion) {
@@ -52,7 +52,7 @@ bool VersionsConverterManager::validateCurrentProject()
 		QList<ProjectConverter> l;
 		auto const &cs = mConverters.equal_range(editor);
 
-		for(auto i = cs.first; i != cs.second && i!=mConverters.end(); ++i) {
+		for (auto i = cs.first; i != cs.second && i != mConverters.end(); ++i) {
 			l.push_back(i->second);
 		}
 
@@ -64,15 +64,13 @@ bool VersionsConverterManager::validateCurrentProject()
 	return true;
 }
 
-bool VersionsConverterManager::convertProject(const Version &enviromentVersion
-		, const Version &saveVersion
-		, QList<ProjectConverter> const &converters)
+bool VersionsConverterManager::convertProject(const Version &enviromentVersion, const Version &saveVersion,
+	QList<ProjectConverter> const &converters)
 {
 	// Stage I: Sorting converters by versions
 	QList<ProjectConverter> sortedConverters = converters;
-	std::sort(sortedConverters.begin(), sortedConverters.end()
-		, [=](const ProjectConverter &converter1, const ProjectConverter &converter2)
-	{
+	std::sort(sortedConverters.begin(), sortedConverters.end(),
+		[=](const ProjectConverter &converter1, const ProjectConverter &converter2) {
 		return converter1.fromVersion() < converter2.fromVersion();
 	});
 
@@ -89,9 +87,8 @@ bool VersionsConverterManager::convertProject(const Version &enviromentVersion
 	// Stage III: Sequentially applying converters
 	for (ProjectConverter &converter : sortedConverters) {
 		if (converter.fromVersion() >= saveVersion && converter.toVersion() <= enviromentVersion) {
-			const ProjectConverter::ConvertionResult result = converter.convert(
-					mModels.graphicalModelAssistApi()
-					, mModels.logicalModelAssistApi());
+			const ProjectConverter::ConvertionResult result =
+				converter.convert(mModels.graphicalModelAssistApi(), mModels.logicalModelAssistApi());
 			switch (result) {
 			case ProjectConverter::Success:
 				converterApplied = true;
@@ -111,10 +108,11 @@ bool VersionsConverterManager::convertProject(const Version &enviromentVersion
 	// Stage IV: Notifying user
 	if (converterApplied) {
 		mConverted = true;
-		mErrorMessage = QObject::tr("Project was automaticly converted from version %1 to version %2."\
-				" Please check its contents.").arg(saveVersion.toString(), enviromentVersion.toString());
-		mModels.mutableLogicalRepoApi().setMetaInformation(
-				converters.first().editor() + "Version", enviromentVersion.toString());
+		mErrorMessage = QObject::tr("Project was automaticly converted from version %1 to version %2."
+					    " Please check its contents.")
+		                        .arg(saveVersion.toString(), enviromentVersion.toString());
+		mModels.mutableLogicalRepoApi().setMetaInformation(converters.first().editor() + "Version",
+			enviromentVersion.toString());
 	}
 
 	return true;
@@ -122,8 +120,9 @@ bool VersionsConverterManager::convertProject(const Version &enviromentVersion
 
 void VersionsConverterManager::displayCannotConvertError()
 {
-	const QString errorMessage = QObject::tr("The attempt to automaticly convert this project "\
-			"to the current enviroment version failed and thus save file can`t be opened. ");
+	const QString errorMessage =
+		QObject::tr("The attempt to automaticly convert this project "
+			    "to the current enviroment version failed and thus save file can`t be opened. ");
 
 	showError(errorMessage);
 }
@@ -132,8 +131,9 @@ void VersionsConverterManager::displayTooOldSaveError(const Version &saveVersion
 {
 	const bool showVersionDetails = saveVersion.isValid();
 	const QString reason = showVersionDetails
-			? QObject::tr("This project was created by version %1 of the editor.").arg(saveVersion.toString())
-			: QObject::tr("This project was created by too old version of the editor.");
+	                               ? QObject::tr("This project was created by version %1 of the editor.")
+	                                         .arg(saveVersion.toString())
+	                               : QObject::tr("This project was created by too old version of the editor.");
 
 	const QString errorMessage = reason + QObject::tr(" It is now considered outdated and cannot be opened.");
 
@@ -142,9 +142,10 @@ void VersionsConverterManager::displayTooOldSaveError(const Version &saveVersion
 
 void VersionsConverterManager::displayTooOldEnviromentError(const Version &saveVersion)
 {
-	const QString errorMessage = QObject::tr("The save you are trying to open is made by version %1 of editor, "\
-			"whitch is newer than currently installed enviroment. "\
-			"Update your version before opening this save.").arg(saveVersion.toString());
+	const QString errorMessage = QObject::tr("The save you are trying to open is made by version %1 of editor, "
+						 "whitch is newer than currently installed enviroment. "
+						 "Update your version before opening this save.")
+	                                     .arg(saveVersion.toString());
 
 	showError(errorMessage);
 }

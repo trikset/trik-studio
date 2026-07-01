@@ -24,10 +24,8 @@ class WaitForInfraredSensorGenerator : public BindingGenerator
 {
 	Q_OBJECT
 public:
-	WaitForInfraredSensorGenerator(const qrRepo::RepoApi &repo
-			, GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent = nullptr);
+	WaitForInfraredSensorGenerator(const qrRepo::RepoApi &repo, GeneratorCustomizer &customizer,
+		const qReal::Id &id, QObject *parent = nullptr);
 };
 
 }

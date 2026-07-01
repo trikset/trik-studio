@@ -19,10 +19,8 @@
 using namespace pioneer::lua;
 using namespace generatorBase::simple;
 
-EndOfHandlerGenerator::EndOfHandlerGenerator(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, const qReal::Id &id
-		, QObject *parent)
+EndOfHandlerGenerator::EndOfHandlerGenerator(const qrRepo::RepoApi &repo,
+	generatorBase::GeneratorCustomizer &customizer, const qReal::Id &id, QObject *parent)
 	: BindingGenerator(repo, customizer, id, "endOfHandler.t", {}, parent)
 {
 }

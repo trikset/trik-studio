@@ -67,7 +67,7 @@ void PreferencesDialog::init()
 void PreferencesDialog::applyChanges()
 {
 	bool shouldRestart = false;
-	for (PreferencesPage * const page : mCustomPages.values()) {
+	for (PreferencesPage *const page : mCustomPages.values()) {
 		page->save();
 		Q_EMIT page->saved();
 		shouldRestart |= page->mShouldRestartSystemToApply;
@@ -77,7 +77,8 @@ void PreferencesDialog::applyChanges()
 	SettingsManager::instance()->saveData();
 
 	if (shouldRestart) {
-		QMessageBox::information(this, tr("Information"), tr("You should restart the program to apply changes"));
+		QMessageBox::information(this, tr("Information"),
+			tr("You should restart the program to apply changes"));
 	}
 
 	Q_EMIT settingsApplied();
@@ -85,7 +86,7 @@ void PreferencesDialog::applyChanges()
 
 void PreferencesDialog::restoreSettings()
 {
-	for (PreferencesPage * const page : mCustomPages.values()) {
+	for (PreferencesPage *const page : mCustomPages.values()) {
 		page->restoreSettings();
 		Q_EMIT page->restored();
 	}
@@ -95,13 +96,13 @@ void PreferencesDialog::changeEvent(QEvent *e)
 {
 	QDialog::changeEvent(e);
 	switch (e->type()) {
-		case QEvent::LanguageChange:
-			mUi->retranslateUi(this);
-			for (PreferencesPage *page : mCustomPages.values())
-				page->changeEvent(e);
-			break;
-		default:
-			break;
+	case QEvent::LanguageChange:
+		mUi->retranslateUi(this);
+		for (PreferencesPage *page : mCustomPages.values())
+			page->changeEvent(e);
+		break;
+	default:
+		break;
 	}
 }
 
@@ -129,7 +130,7 @@ void PreferencesDialog::chooseTab(const QModelIndex &index)
 	mUi->pageContentWidget->setCurrentIndex(index.row() + 1);
 }
 
-void PreferencesDialog::registerPage(const QString &pageName, PreferencesPage * const page)
+void PreferencesDialog::registerPage(const QString &pageName, PreferencesPage *const page)
 {
 	mUi->pageContentWidget->addWidget(page);
 	mCustomPages.insert(pageName, page);
@@ -153,8 +154,8 @@ QList<PreferencesPage *> PreferencesDialog::pages() const
 
 void PreferencesDialog::exportSettings()
 {
-	QString fileNameForExport = QRealFileDialog::getSaveFileName("SaveEnginePreferences", this
-			, tr("Save File"), "/mySettings", tr("*.ini"));
+	QString fileNameForExport = QRealFileDialog::getSaveFileName("SaveEnginePreferences", this, tr("Save File"),
+		"/mySettings", tr("*.ini"));
 	if (!fileNameForExport.endsWith(".ini")) {
 		fileNameForExport += ".ini";
 	}
@@ -164,7 +165,7 @@ void PreferencesDialog::exportSettings()
 
 void PreferencesDialog::importSettings()
 {
-	QString fileNameForImport = QRealFileDialog::getOpenFileName("OpenEnginePreferences", this
-			, tr("Open File"), "/mySettings", tr("*.ini"));
+	QString fileNameForImport = QRealFileDialog::getOpenFileName("OpenEnginePreferences", this, tr("Open File"),
+		"/mySettings", tr("*.ini"));
 	SettingsManager::instance()->loadSettings(fileNameForImport);
 }

@@ -39,7 +39,7 @@ QList<kitBase::robotModel::RobotModelInterface *> PioneerKitInterpreterPlugin::r
 }
 
 QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> PioneerKitInterpreterPlugin::blocksFactoryFor(
-		const kitBase::robotModel::RobotModelInterface *model)
+	const kitBase::robotModel::RobotModelInterface *model)
 {
 	Q_UNUSED(model)
 	return mBlocksFactory;
@@ -47,7 +47,7 @@ QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> PioneerKitInterprete
 
 QList<kitBase::AdditionalPreferences *> PioneerKitInterpreterPlugin::settingsWidgets()
 {
-	return { nullptr };
+	return {nullptr};
 }
 
 QList<qReal::ActionInfo> PioneerKitInterpreterPlugin::customActions()
@@ -60,8 +60,7 @@ QList<qReal::HotKeyActionInfo> PioneerKitInterpreterPlugin::hotKeyActions()
 	return {};
 }
 
-QIcon PioneerKitInterpreterPlugin::iconForFastSelector(
-		const kitBase::robotModel::RobotModelInterface &robotModel) const
+QIcon PioneerKitInterpreterPlugin::iconForFastSelector(const kitBase::robotModel::RobotModelInterface &robotModel) const
 {
 	Q_UNUSED(robotModel)
 	return QIcon();

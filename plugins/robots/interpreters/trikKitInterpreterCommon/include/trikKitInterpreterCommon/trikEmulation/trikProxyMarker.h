@@ -27,7 +27,10 @@ class TrikProxyMarker : public trikControl::MarkerInterface
 public:
 	TrikProxyMarker(twoDModel::robotModel::parts::Marker *marker);
 
-	Status status() const override {return Status::ready;}
+	Status status() const override
+	{
+		return Status::ready;
+	}
 
 	Q_INVOKABLE virtual void down(const QString &color) override;
 	Q_INVOKABLE virtual void up() override;

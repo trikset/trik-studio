@@ -35,7 +35,7 @@ public:
 
 	/// Stop waiting upon receiving a given signal from a given sender. This method can be called as many times as
 	/// needed, and has "or" semantics, so the waiting will stop once any signal is received.
-	template <typename Func>
+	template<typename Func>
 	void stopAt(const typename QtPrivate::FunctionPointer<Func>::Object *object, Func signal)
 	{
 		QObject::connect(object, signal, &mLoop, &QEventLoop::quit);
@@ -53,7 +53,7 @@ private:
 	QEventLoop mLoop;
 
 	/// Timeout value in milliseconds.
-	int mTimeout { -1 };
+	int mTimeout {-1};
 };
 
 }

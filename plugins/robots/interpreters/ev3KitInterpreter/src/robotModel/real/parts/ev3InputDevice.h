@@ -29,8 +29,8 @@ class Ev3InputDevice : public QObject
 	Q_OBJECT
 
 public:
-	Ev3InputDevice(utils::robotCommunication::RobotCommunicator &robotCommunicator
-			, const kitBase::robotModel::PortInfo &port);
+	Ev3InputDevice(utils::robotCommunication::RobotCommunicator &robotCommunicator,
+		const kitBase::robotModel::PortInfo &port);
 
 	void send(const QByteArray &command, const unsigned responseSize, QByteArray reading);
 

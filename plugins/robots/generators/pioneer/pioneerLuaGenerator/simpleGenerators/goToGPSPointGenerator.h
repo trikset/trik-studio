@@ -24,10 +24,8 @@ class GoToGPSPointGenerator : public generatorBase::simple::BindingGenerator
 {
 	Q_OBJECT
 public:
-	GoToGPSPointGenerator(const qrRepo::RepoApi &repo
-			, generatorBase::GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent);
+	GoToGPSPointGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+		const qReal::Id &id, QObject *parent);
 };
 
 }

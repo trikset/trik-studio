@@ -29,7 +29,7 @@ public:
 	StyledButton(const QString &text, const QString &icon = QString(), QWidget *parent = nullptr);
 
 	/// Widget passed to this method will be highlighted on mouse hover over this button
-	void bindHighlightedOnHover(QWidget * const widget);
+	void bindHighlightedOnHover(QWidget *const widget);
 
 protected:
 	virtual void enterEvent(QEvent *event) override;

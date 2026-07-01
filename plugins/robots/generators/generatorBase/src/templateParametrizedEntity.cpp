@@ -38,7 +38,7 @@ TemplateParametrizedEntity::~TemplateParametrizedEntity()
 
 QString TemplateParametrizedEntity::readTemplate(const QString &pathFromRoot) const
 {
-	for (const QString &path: mPathsToRoot) {
+	for (const QString &path : mPathsToRoot) {
 		const QString fullPath = path + '/' + pathFromRoot;
 		if (QFile::exists(fullPath)) {
 			QString errorMessage;
@@ -60,7 +60,7 @@ QString TemplateParametrizedEntity::readTemplate(const QString &pathFromRoot) co
 
 QString TemplateParametrizedEntity::readTemplateIfExists(const QString &pathFromRoot, const QString &fallback) const
 {
-	for (const QString &path: mPathsToRoot) {
+	for (const QString &path : mPathsToRoot) {
 		const QString fullPath = path + '/' + pathFromRoot;
 		if (QFile::exists(fullPath)) {
 			QString errorMessage;

@@ -37,8 +37,8 @@ class TWO_D_MODEL_EXPORT SensorsConfiguration : public QObject, public kitBase::
 
 public:
 	SensorsConfiguration(twoDModel::model::MetricCoordinateSystem *metricSystem,
-			     QSharedPointer<twoDModel::model::AliasConfiguration> aliasConfiguration,
-			     const QString &robotModelName, QSizeF robotSize, QObject *parent = nullptr);
+		QSharedPointer<twoDModel::model::AliasConfiguration> aliasConfiguration, const QString &robotModelName,
+		QSizeF robotSize, QObject *parent = nullptr);
 
 	void setPosition(const kitBase::robotModel::PortInfo &port, QPointF position);
 	QPointF position(const kitBase::robotModel::PortInfo &port) const;
@@ -68,8 +68,7 @@ Q_SIGNALS:
 	void rotationChanged(const kitBase::robotModel::PortInfo &port);
 
 private:
-	struct SensorInfo
-	{
+	struct SensorInfo {
 		SensorInfo();
 		SensorInfo(QPointF position, qreal direction);
 
@@ -78,10 +77,8 @@ private:
 		bool isNull;
 	};
 
-	void onDeviceConfigurationChanged(const QString &robotId
-			, const kitBase::robotModel::PortInfo &port
-			, const kitBase::robotModel::DeviceInfo &device
-			, Reason reason) override;
+	void onDeviceConfigurationChanged(const QString &robotId, const kitBase::robotModel::PortInfo &port,
+		const kitBase::robotModel::DeviceInfo &device, Reason reason) override;
 
 	QPointF defaultPosition(const kitBase::robotModel::DeviceInfo &device) const;
 	QSharedPointer<twoDModel::model::AliasConfiguration> mAliasConfiguration;

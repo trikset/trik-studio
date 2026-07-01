@@ -17,9 +17,8 @@
 using namespace generatorBase::parts;
 using namespace qReal;
 
-Engines::Engines(const QStringList &pathsToTemplates
-		, const simple::Binding::ConverterInterface *outputPortConverter
-		, const simple::Binding::MultiConverterInterface *outputPortsConverter)
+Engines::Engines(const QStringList &pathsToTemplates, const simple::Binding::ConverterInterface *outputPortConverter,
+	const simple::Binding::MultiConverterInterface *outputPortsConverter)
 	: InitTerminateCodeGenerator(pathsToTemplates)
 	, mOutputPortConverter(outputPortConverter)
 	, mOutputPortsConverter(outputPortsConverter)

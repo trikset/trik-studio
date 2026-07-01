@@ -18,17 +18,16 @@
 
 using namespace ev3::rbf;
 
-Ev3RbfGeneratorFactory::Ev3RbfGeneratorFactory(const qrRepo::RepoApi &repo
-		, qReal::ErrorReporterInterface &errorReporter
-		, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
-		, generatorBase::lua::LuaProcessor &luaProcessor
-		, const QString &generatorName)
+Ev3RbfGeneratorFactory::Ev3RbfGeneratorFactory(const qrRepo::RepoApi &repo,
+	qReal::ErrorReporterInterface &errorReporter,
+	const kitBase::robotModel::RobotModelManagerInterface &robotModelManager,
+	generatorBase::lua::LuaProcessor &luaProcessor, const QString &generatorName)
 	: Ev3GeneratorFactory(repo, errorReporter, robotModelManager, luaProcessor, generatorName)
 {
 }
 
-generatorBase::simple::AbstractSimpleGenerator *Ev3RbfGeneratorFactory::labelGenerator(const qReal::Id &id
-		, generatorBase::GeneratorCustomizer &customizer)
+generatorBase::simple::AbstractSimpleGenerator *Ev3RbfGeneratorFactory::labelGenerator(const qReal::Id &id,
+	generatorBase::GeneratorCustomizer &customizer)
 {
 	return new simple::PrependedCodeGenerator(mRepo, customizer, id, this);
 }

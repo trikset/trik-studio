@@ -25,17 +25,15 @@ namespace converters {
 class SwitchConditionsMerger : public TemplateParametrizedConverter
 {
 public:
-	SwitchConditionsMerger(const QStringList &pathsToTemplates
-			, const ConverterInterface * const systemVariablesConverter
-			, const QStringList &values
-			, bool generateIf);
+	SwitchConditionsMerger(const QStringList &pathsToTemplates,
+		const ConverterInterface *const systemVariablesConverter, const QStringList &values, bool generateIf);
 
 	~SwitchConditionsMerger() override;
 
 	QString convert(const QString &expression) const override;
 
 private:
-	const ConverterInterface *mSystemVariablesConverter;  // Takes ownership
+	const ConverterInterface *mSystemVariablesConverter; // Takes ownership
 	const QStringList mValues;
 	bool mGenerateIf;
 };

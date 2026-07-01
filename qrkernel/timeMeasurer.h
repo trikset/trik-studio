@@ -47,4 +47,6 @@ private:
 }
 
 /// Macro to conveniently log time it takes to exit current block.
-#define LOG_TIME const qReal::TimeMeasurer measurer(Q_FUNC_INFO); measurer.doNothing();
+#define LOG_TIME \
+	const qReal::TimeMeasurer measurer(Q_FUNC_INFO); \
+	measurer.doNothing();

@@ -69,56 +69,145 @@ class IndexingExpression;
 class LuaAstVisitorInterface : public core::AstVisitorInterface
 {
 public:
-	~LuaAstVisitorInterface() override {}
+	~LuaAstVisitorInterface() override
+	{
+	}
 
 	// Second argument is a parent everywhere.
 
-	virtual void visit(const QSharedPointer<ast::Number> &             , const QSharedPointer<core::ast::Node> &) {}
-	virtual void visit(const QSharedPointer<ast::UnaryMinus> &         , const QSharedPointer<core::ast::Node> &) {}
-	virtual void visit(const QSharedPointer<ast::Not> &                , const QSharedPointer<core::ast::Node> &) {}
-	virtual void visit(const QSharedPointer<ast::BitwiseNegation> &    , const QSharedPointer<core::ast::Node> &) {}
-	virtual void visit(const QSharedPointer<ast::Length> &             , const QSharedPointer<core::ast::Node> &) {}
-	virtual void visit(const QSharedPointer<ast::LogicalAnd> &         , const QSharedPointer<core::ast::Node> &) {}
-	virtual void visit(const QSharedPointer<ast::LogicalOr> &          , const QSharedPointer<core::ast::Node> &) {}
-	virtual void visit(const QSharedPointer<ast::Addition> &           , const QSharedPointer<core::ast::Node> &) {}
-	virtual void visit(const QSharedPointer<ast::Subtraction> &        , const QSharedPointer<core::ast::Node> &) {}
-	virtual void visit(const QSharedPointer<ast::Multiplication> &     , const QSharedPointer<core::ast::Node> &) {}
-	virtual void visit(const QSharedPointer<ast::Division> &           , const QSharedPointer<core::ast::Node> &) {}
-	virtual void visit(const QSharedPointer<ast::IntegerDivision> &    , const QSharedPointer<core::ast::Node> &) {}
-	virtual void visit(const QSharedPointer<ast::Modulo> &             , const QSharedPointer<core::ast::Node> &) {}
-	virtual void visit(const QSharedPointer<ast::Exponentiation> &     , const QSharedPointer<core::ast::Node> &) {}
-	virtual void visit(const QSharedPointer<ast::BitwiseAnd> &         , const QSharedPointer<core::ast::Node> &) {}
-	virtual void visit(const QSharedPointer<ast::BitwiseOr> &          , const QSharedPointer<core::ast::Node> &) {}
-	virtual void visit(const QSharedPointer<ast::BitwiseXor> &         , const QSharedPointer<core::ast::Node> &) {}
-	virtual void visit(const QSharedPointer<ast::BitwiseLeftShift> &   , const QSharedPointer<core::ast::Node> &) {}
-	virtual void visit(const QSharedPointer<ast::BitwiseRightShift> &  , const QSharedPointer<core::ast::Node> &) {}
-	virtual void visit(const QSharedPointer<ast::Concatenation> &      , const QSharedPointer<core::ast::Node> &) {}
-	virtual void visit(const QSharedPointer<ast::Equality> &           , const QSharedPointer<core::ast::Node> &) {}
-	virtual void visit(const QSharedPointer<ast::LessThan> &           , const QSharedPointer<core::ast::Node> &) {}
-	virtual void visit(const QSharedPointer<ast::LessOrEqual> &        , const QSharedPointer<core::ast::Node> &) {}
-	virtual void visit(const QSharedPointer<ast::Inequality> &         , const QSharedPointer<core::ast::Node> &) {}
-	virtual void visit(const QSharedPointer<ast::GreaterThan> &        , const QSharedPointer<core::ast::Node> &) {}
-	virtual void visit(const QSharedPointer<ast::GreaterOrEqual> &     , const QSharedPointer<core::ast::Node> &) {}
-	virtual void visit(const QSharedPointer<ast::IntegerNumber> &      , const QSharedPointer<core::ast::Node> &) {}
-	virtual void visit(const QSharedPointer<ast::FloatNumber> &        , const QSharedPointer<core::ast::Node> &) {}
-	virtual void visit(const QSharedPointer<ast::FieldInitialization> &, const QSharedPointer<core::ast::Node> &) {}
-	virtual void visit(const QSharedPointer<ast::TableConstructor> &   , const QSharedPointer<core::ast::Node> &) {}
-	virtual void visit(const QSharedPointer<ast::String> &             , const QSharedPointer<core::ast::Node> &) {}
-	virtual void visit(const QSharedPointer<ast::True> &               , const QSharedPointer<core::ast::Node> &) {}
-	virtual void visit(const QSharedPointer<ast::False> &              , const QSharedPointer<core::ast::Node> &) {}
-	virtual void visit(const QSharedPointer<ast::Nil> &                , const QSharedPointer<core::ast::Node> &) {}
-	virtual void visit(const QSharedPointer<ast::Identifier> &         , const QSharedPointer<core::ast::Node> &) {}
-	virtual void visit(const QSharedPointer<ast::FunctionCall> &       , const QSharedPointer<core::ast::Node> &) {}
-	virtual void visit(const QSharedPointer<ast::MethodCall> &         , const QSharedPointer<core::ast::Node> &) {}
-	virtual void visit(const QSharedPointer<ast::Assignment> &         , const QSharedPointer<core::ast::Node> &) {}
-	virtual void visit(const QSharedPointer<ast::Block> &              , const QSharedPointer<core::ast::Node> &) {}
-	virtual void visit(const QSharedPointer<ast::IndexingExpression> & , const QSharedPointer<core::ast::Node> &) {}
+	virtual void visit(const QSharedPointer<ast::Number> &, const QSharedPointer<core::ast::Node> &)
+	{
+	}
+	virtual void visit(const QSharedPointer<ast::UnaryMinus> &, const QSharedPointer<core::ast::Node> &)
+	{
+	}
+	virtual void visit(const QSharedPointer<ast::Not> &, const QSharedPointer<core::ast::Node> &)
+	{
+	}
+	virtual void visit(const QSharedPointer<ast::BitwiseNegation> &, const QSharedPointer<core::ast::Node> &)
+	{
+	}
+	virtual void visit(const QSharedPointer<ast::Length> &, const QSharedPointer<core::ast::Node> &)
+	{
+	}
+	virtual void visit(const QSharedPointer<ast::LogicalAnd> &, const QSharedPointer<core::ast::Node> &)
+	{
+	}
+	virtual void visit(const QSharedPointer<ast::LogicalOr> &, const QSharedPointer<core::ast::Node> &)
+	{
+	}
+	virtual void visit(const QSharedPointer<ast::Addition> &, const QSharedPointer<core::ast::Node> &)
+	{
+	}
+	virtual void visit(const QSharedPointer<ast::Subtraction> &, const QSharedPointer<core::ast::Node> &)
+	{
+	}
+	virtual void visit(const QSharedPointer<ast::Multiplication> &, const QSharedPointer<core::ast::Node> &)
+	{
+	}
+	virtual void visit(const QSharedPointer<ast::Division> &, const QSharedPointer<core::ast::Node> &)
+	{
+	}
+	virtual void visit(const QSharedPointer<ast::IntegerDivision> &, const QSharedPointer<core::ast::Node> &)
+	{
+	}
+	virtual void visit(const QSharedPointer<ast::Modulo> &, const QSharedPointer<core::ast::Node> &)
+	{
+	}
+	virtual void visit(const QSharedPointer<ast::Exponentiation> &, const QSharedPointer<core::ast::Node> &)
+	{
+	}
+	virtual void visit(const QSharedPointer<ast::BitwiseAnd> &, const QSharedPointer<core::ast::Node> &)
+	{
+	}
+	virtual void visit(const QSharedPointer<ast::BitwiseOr> &, const QSharedPointer<core::ast::Node> &)
+	{
+	}
+	virtual void visit(const QSharedPointer<ast::BitwiseXor> &, const QSharedPointer<core::ast::Node> &)
+	{
+	}
+	virtual void visit(const QSharedPointer<ast::BitwiseLeftShift> &, const QSharedPointer<core::ast::Node> &)
+	{
+	}
+	virtual void visit(const QSharedPointer<ast::BitwiseRightShift> &, const QSharedPointer<core::ast::Node> &)
+	{
+	}
+	virtual void visit(const QSharedPointer<ast::Concatenation> &, const QSharedPointer<core::ast::Node> &)
+	{
+	}
+	virtual void visit(const QSharedPointer<ast::Equality> &, const QSharedPointer<core::ast::Node> &)
+	{
+	}
+	virtual void visit(const QSharedPointer<ast::LessThan> &, const QSharedPointer<core::ast::Node> &)
+	{
+	}
+	virtual void visit(const QSharedPointer<ast::LessOrEqual> &, const QSharedPointer<core::ast::Node> &)
+	{
+	}
+	virtual void visit(const QSharedPointer<ast::Inequality> &, const QSharedPointer<core::ast::Node> &)
+	{
+	}
+	virtual void visit(const QSharedPointer<ast::GreaterThan> &, const QSharedPointer<core::ast::Node> &)
+	{
+	}
+	virtual void visit(const QSharedPointer<ast::GreaterOrEqual> &, const QSharedPointer<core::ast::Node> &)
+	{
+	}
+	virtual void visit(const QSharedPointer<ast::IntegerNumber> &, const QSharedPointer<core::ast::Node> &)
+	{
+	}
+	virtual void visit(const QSharedPointer<ast::FloatNumber> &, const QSharedPointer<core::ast::Node> &)
+	{
+	}
+	virtual void visit(const QSharedPointer<ast::FieldInitialization> &, const QSharedPointer<core::ast::Node> &)
+	{
+	}
+	virtual void visit(const QSharedPointer<ast::TableConstructor> &, const QSharedPointer<core::ast::Node> &)
+	{
+	}
+	virtual void visit(const QSharedPointer<ast::String> &, const QSharedPointer<core::ast::Node> &)
+	{
+	}
+	virtual void visit(const QSharedPointer<ast::True> &, const QSharedPointer<core::ast::Node> &)
+	{
+	}
+	virtual void visit(const QSharedPointer<ast::False> &, const QSharedPointer<core::ast::Node> &)
+	{
+	}
+	virtual void visit(const QSharedPointer<ast::Nil> &, const QSharedPointer<core::ast::Node> &)
+	{
+	}
+	virtual void visit(const QSharedPointer<ast::Identifier> &, const QSharedPointer<core::ast::Node> &)
+	{
+	}
+	virtual void visit(const QSharedPointer<ast::FunctionCall> &, const QSharedPointer<core::ast::Node> &)
+	{
+	}
+	virtual void visit(const QSharedPointer<ast::MethodCall> &, const QSharedPointer<core::ast::Node> &)
+	{
+	}
+	virtual void visit(const QSharedPointer<ast::Assignment> &, const QSharedPointer<core::ast::Node> &)
+	{
+	}
+	virtual void visit(const QSharedPointer<ast::Block> &, const QSharedPointer<core::ast::Node> &)
+	{
+	}
+	virtual void visit(const QSharedPointer<ast::IndexingExpression> &, const QSharedPointer<core::ast::Node> &)
+	{
+	}
 
-	void visit(const QSharedPointer<core::ast::Node> &          , const QSharedPointer<core::ast::Node> &) override {}
-	void visit(const QSharedPointer<core::ast::Expression> &    , const QSharedPointer<core::ast::Node> &) override {}
-	void visit(const QSharedPointer<core::ast::BinaryOperator> &, const QSharedPointer<core::ast::Node> &) override {}
-	void visit(const QSharedPointer<core::ast::UnaryOperator> & , const QSharedPointer<core::ast::Node> &) override {}
-
+	void visit(const QSharedPointer<core::ast::Node> &, const QSharedPointer<core::ast::Node> &) override
+	{
+	}
+	void visit(const QSharedPointer<core::ast::Expression> &, const QSharedPointer<core::ast::Node> &) override
+	{
+	}
+	void visit(const QSharedPointer<core::ast::BinaryOperator> &, const QSharedPointer<core::ast::Node> &) override
+	{
+	}
+	void visit(const QSharedPointer<core::ast::UnaryOperator> &, const QSharedPointer<core::ast::Node> &) override
+	{
+	}
 };
 
 }

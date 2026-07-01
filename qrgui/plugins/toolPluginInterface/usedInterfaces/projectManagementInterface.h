@@ -19,7 +19,6 @@
 #include "qrgui/systemFacade/components/autosaver.h"
 #include "qrgui/plugins/toolPluginInterface/toolPluginInterfaceDeclSpec.h"
 
-
 #include <QDebug>
 
 namespace qReal {
@@ -30,7 +29,9 @@ class QRGUI_TOOL_PLUGIN_INTERFACE_EXPORT ProjectManagementInterface : public QOb
 	Q_OBJECT
 
 public:
-	virtual ~ProjectManagementInterface() {}
+	virtual ~ProjectManagementInterface()
+	{
+	}
 
 public Q_SLOTS:
 	/// Tries to open an existing file, prompts you to save changes, if any. Checks for the presence of a file and the

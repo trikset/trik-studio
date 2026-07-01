@@ -21,7 +21,8 @@
 using namespace qReal::gui;
 
 RenameDialog::RenameDialog(const QString &initialText, QWidget *parent)
-	: QDialog(parent), mInitialName(initialText)
+	: QDialog(parent)
+	, mInitialName(initialText)
 {
 	setWindowTitle(QCoreApplication::translate("qReal::gui::RenameDialog", "Enter new name"));
 	this->setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);

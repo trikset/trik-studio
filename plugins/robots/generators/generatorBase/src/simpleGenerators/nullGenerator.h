@@ -24,10 +24,8 @@ class NullGenerator : public AbstractSimpleGenerator
 {
 	Q_OBJECT
 public:
-	NullGenerator(const qrRepo::RepoApi &repo
-			, GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent = nullptr);
+	NullGenerator(const qrRepo::RepoApi &repo, GeneratorCustomizer &customizer, const qReal::Id &id,
+		QObject *parent = nullptr);
 
 	virtual QString generate();
 };

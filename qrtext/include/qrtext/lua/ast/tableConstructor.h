@@ -44,10 +44,11 @@ public:
 	}
 
 private:
-	void accept(core::AstVisitorInterface &visitor, const QSharedPointer<Node> &pointer
-			, const QSharedPointer<Node> &parent) override
+	void accept(core::AstVisitorInterface &visitor, const QSharedPointer<Node> &pointer,
+		const QSharedPointer<Node> &parent) override
 	{
-		static_cast<LuaAstVisitorInterface *>(&visitor)->visit(qSharedPointerCast<TableConstructor>(pointer), parent);
+		static_cast<LuaAstVisitorInterface *>(&visitor)->visit(qSharedPointerCast<TableConstructor>(pointer),
+			parent);
 	}
 
 	QList<QSharedPointer<FieldInitialization>> mInitializers;

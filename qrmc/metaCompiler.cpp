@@ -118,13 +118,13 @@ bool MetaCompiler::loadTemplateUtils()
 	return true;
 }
 
-Editor* MetaCompiler::loadMetaModel(const Id &metamodelId)
+Editor *MetaCompiler::loadMetaModel(const Id &metamodelId)
 {
 	qDebug() << "Loading metamodel started: " << mApi.name(metamodelId);
 	const QString metamodelName = mApi.name(metamodelId);
 
 	if (mEditors.contains(metamodelName)) {
-		Editor * const editor = mEditors[metamodelName];
+		Editor *const editor = mEditors[metamodelName];
 		if (editor->isLoaded()) {
 			qDebug() << "Metamodel already loaded";
 			return editor;
@@ -133,7 +133,7 @@ Editor* MetaCompiler::loadMetaModel(const Id &metamodelId)
 			return nullptr;
 		}
 	} else {
-		Editor * const editor = new Editor(*this, mApi, metamodelId, mTargetDirectory);
+		Editor *const editor = new Editor(*this, mApi, metamodelId, mTargetDirectory);
 		if (!editor->load()) {
 			qDebug() << "ERROR: Failed to load file";
 			delete editor;
@@ -147,8 +147,8 @@ Editor* MetaCompiler::loadMetaModel(const Id &metamodelId)
 
 Diagram *MetaCompiler::getDiagram(const QString &diagramName) const
 {
-	for (const Editor * const editor : mEditors) {
-		Diagram * const diagram = editor->findDiagram(diagramName);
+	for (const Editor *const editor : mEditors) {
+		Diagram *const diagram = editor->findDiagram(diagramName);
 		if (diagram) {
 			return diagram;
 		}
@@ -163,15 +163,14 @@ void MetaCompiler::generateCode(const QString &targetMetamodel)
 	qDebug() << "===";
 
 	QString pluginNames;
-	for (Editor * const editor : mEditors) {
+	for (Editor *const editor : mEditors) {
 		if (!targetMetamodel.isEmpty() && mApi.name(editor->id()) != targetMetamodel) {
 			continue;
 		}
 
 		pluginNames += nodeIndent + editor->name() + "\\" + endline;
-		editor->generate(mPluginHeaderTemplate, mPluginSourceTemplate,
-					mNodeTemplate, mEdgeTemplate, mElementsHeaderTemplate,
-					mResourceTemplate, mProjectTemplate, mTemplateUtils);
+		editor->generate(mPluginHeaderTemplate, mPluginSourceTemplate, mNodeTemplate, mEdgeTemplate,
+			mElementsHeaderTemplate, mResourceTemplate, mProjectTemplate, mTemplateUtils);
 	}
 
 	QDir dir;

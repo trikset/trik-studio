@@ -24,11 +24,8 @@ class ForkCallGenerator : public AbstractSimpleGenerator
 {
 	Q_OBJECT
 public:
-	ForkCallGenerator(const qrRepo::RepoApi &repo
-		, GeneratorCustomizer &customizer
-		, const qReal::Id &id
-		, const QMap<qReal::Id, QString> &threads
-		, QObject *parent = nullptr);
+	ForkCallGenerator(const qrRepo::RepoApi &repo, GeneratorCustomizer &customizer, const qReal::Id &id,
+		const QMap<qReal::Id, QString> &threads, QObject *parent = nullptr);
 
 	QString generate() override;
 

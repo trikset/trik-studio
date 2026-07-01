@@ -20,8 +20,7 @@
 
 #include "twoDModel/engine/twoDModelDisplayWidget.h"
 
-namespace Ui
-{
+namespace Ui {
 class NxtDisplayWidget;
 }
 

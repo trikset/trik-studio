@@ -24,10 +24,8 @@ class VariableInitGenerator : public BindingGenerator
 {
 	Q_OBJECT
 public:
-	VariableInitGenerator(const qrRepo::RepoApi &repo
-			, GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent = nullptr);
+	VariableInitGenerator(const qrRepo::RepoApi &repo, GeneratorCustomizer &customizer, const qReal::Id &id,
+		QObject *parent = nullptr);
 };
 
 }

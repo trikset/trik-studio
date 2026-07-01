@@ -45,8 +45,8 @@ void HintAPI::arrowToWidget(QWidget *target, qreal angle, int lifeTime, QWidget 
 
 	const qreal angleInRads = angle * pi / 180;
 
-	const QPoint sourcePoint(xcoord + sourcePointDeviation * qCos(angleInRads)
-			, ycoord + sourcePointDeviation * qSin(angleInRads));
+	const QPoint sourcePoint(xcoord + sourcePointDeviation * qCos(angleInRads),
+		ycoord + sourcePointDeviation * qSin(angleInRads));
 	const QPoint destPoint(xcoord, ycoord);
 
 	// The arrow will show and dispose itself.

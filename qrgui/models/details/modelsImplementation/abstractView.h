@@ -28,23 +28,23 @@ class AbstractView : public QAbstractItemView
 	Q_OBJECT
 
 public:
-	explicit AbstractView(AbstractModel * const model);
+	explicit AbstractView(AbstractModel *const model);
 	virtual ~AbstractView();
 
 public Q_SLOTS:
-	void rowsAboutToBeMoved(const QModelIndex &sourceParent, int sourceStart, int sourceEnd
-			, const QModelIndex &destinationParent, int destinationRow);
-	void rowsMoved(const QModelIndex &sourceParent, int sourceStart, int sourceEnd
-			, const QModelIndex &destinationParent, int destinationRow);
+	void rowsAboutToBeMoved(const QModelIndex &sourceParent, int sourceStart, int sourceEnd,
+		const QModelIndex &destinationParent, int destinationRow);
+	void rowsMoved(const QModelIndex &sourceParent, int sourceStart, int sourceEnd,
+		const QModelIndex &destinationParent, int destinationRow);
 
 protected Q_SLOTS:
-	virtual void dataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight
-			, QVector<int> const &roles = QVector<int>());
+	virtual void dataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight,
+		QVector<int> const &roles = QVector<int>());
 	virtual void rowsAboutToBeRemoved(const QModelIndex &parent, int start, int end);
 	virtual void rowsInserted(const QModelIndex &parent, int start, int end);
 
 protected:
-	AbstractModel * const mModel;
+	AbstractModel *const mModel;
 
 	// Unneeded stuff from QAbstractItemView. It would be helpful if Qt Model/View framework
 	// were moved to QtCore and got separated from GUI concerns, since Model/View pattern
@@ -57,8 +57,8 @@ protected:
 	int horizontalOffset() const;
 	int verticalOffset() const;
 	bool isIndexHidden(const QModelIndex &index) const;
-	void setSelection(const QRect& rect, QItemSelectionModel::SelectionFlags command);
-	QRegion visualRegionForSelection(const QItemSelection &selection ) const;
+	void setSelection(const QRect &rect, QItemSelectionModel::SelectionFlags command);
+	QRegion visualRegionForSelection(const QItemSelection &selection) const;
 };
 
 }

@@ -18,7 +18,7 @@
 
 using namespace graphicsUtils;
 
-void AnimatedHighlighter::highlight(QGraphicsItem * const item)
+void AnimatedHighlighter::highlight(QGraphicsItem *const item)
 {
 	if (!item) {
 		return;
@@ -29,9 +29,9 @@ void AnimatedHighlighter::highlight(QGraphicsItem * const item)
 	animation->setStartValue(1.0);
 	animation->setEndValue(0.0);
 	const qreal oldOpacity = item->opacity();
-	QObject::connect(animation, &QVariantAnimation::valueChanged
-			, [item](const QVariant &value) { item->setOpacity(value.toReal()); });
-	QObject::connect(animation, &QVariantAnimation::finished
-			, [item, oldOpacity]() { item->setOpacity(oldOpacity); });
+	QObject::connect(animation, &QVariantAnimation::valueChanged,
+		[item](const QVariant &value) { item->setOpacity(value.toReal()); });
+	QObject::connect(animation, &QVariantAnimation::finished,
+		[item, oldOpacity]() { item->setOpacity(oldOpacity); });
 	animation->start(QAbstractAnimation::DeleteWhenStopped);
 }

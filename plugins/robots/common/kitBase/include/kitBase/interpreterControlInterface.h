@@ -27,14 +27,15 @@ class ROBOTS_KIT_BASE_EXPORT InterpreterControlInterface : public QObject
 	Q_OBJECT
 
 public:
-	InterpreterControlInterface() {
-		connect(this
-				, &InterpreterControlInterface::stopAllInterpretation
-				, this
-				, &InterpreterControlInterface::stopRobot);
+	InterpreterControlInterface()
+	{
+		connect(this, &InterpreterControlInterface::stopAllInterpretation, this,
+			&InterpreterControlInterface::stopRobot);
 	}
 
-	virtual ~InterpreterControlInterface() {}
+	virtual ~InterpreterControlInterface()
+	{
+	}
 
 Q_SIGNALS:
 	/// Emitted when connection to robot is established, devices are configured and interpretation is started.
@@ -47,7 +48,8 @@ Q_SIGNALS:
 	void errored();
 
 	/// @todo: temporary hack while js interpreter is separated from regular interpreter logic
-	void stopAllInterpretation(qReal::interpretation::StopReason reason = qReal::interpretation::StopReason::userStop);
+	void stopAllInterpretation(
+		qReal::interpretation::StopReason reason = qReal::interpretation::StopReason::userStop);
 
 	/// same
 	void startScriptInterpretation();

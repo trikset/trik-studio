@@ -27,7 +27,7 @@ class PointPort : public Port
 {
 public:
 	bool init(const QDomElement &element, int width, int height) override;
-	virtual Port* clone() const override;
+	virtual Port *clone() const override;
 
 	virtual QString generateSdf(const MetaCompiler &compiler) const override;
 	virtual QString generateInit(const MetaCompiler &compiler) const override;

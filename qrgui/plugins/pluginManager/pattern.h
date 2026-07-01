@@ -50,8 +50,8 @@ class QRGUI_PLUGINS_MANAGER_EXPORT Pattern
 {
 public:
 	Pattern();
-	Pattern(const QString &editor, const QString &diagram, const QString &name
-			, const QString &inNode, const QString &outNode, const QString &rootNode);
+	Pattern(const QString &editor, const QString &diagram, const QString &name, const QString &inNode,
+		const QString &outNode, const QString &rootNode);
 
 	void setName(const QString &name);
 	QString name() const;
@@ -94,10 +94,8 @@ private:
 
 inline bool operator==(const GroupNode &node1, const GroupNode &node2)
 {
-	return node1.type == node2.type
-			&& node1.id == node2.id
-			&& node1.parent == node2.parent
-			&& node1.position == node2.position;
+	return node1.type == node2.type && node1.id == node2.id && node1.parent == node2.parent
+	       && node1.position == node2.position;
 }
 
 }

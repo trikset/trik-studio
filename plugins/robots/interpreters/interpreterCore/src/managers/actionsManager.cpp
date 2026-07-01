@@ -34,14 +34,10 @@ ActionsManager::ActionsManager(KitPluginManager &kitPluginManager, RobotModelMan
 	, mConnectToRobotAction(new QAction(QIcon(":/icons/robots_connect.svg"), QObject::tr("Connect to robot"), this))
 	, mRobotSettingsAction(QIcon(":/icons/robots_settings.png"), QObject::tr("Robot settings"), this)
 	, mExportExerciseAction(QIcon(), QObject::tr("Save as task..."), this)
-	, mDebugModeAction(new QAction(
-		graphicsUtils::AbstractItem::loadTextColorIcon(":/icons/main_tabbar_debug.svg"),  
-		QObject::tr("Debug"), 
-		this))
-	, mEditModeAction(new QAction(
-		graphicsUtils::AbstractItem::loadTextColorIcon(":/icons/main_tabbar_edit.svg"), 
-		QObject::tr("Edit"), 
-		this))
+	, mDebugModeAction(new QAction(graphicsUtils::AbstractItem::loadTextColorIcon(":/icons/main_tabbar_debug.svg"),
+		  QObject::tr("Debug"), this))
+	, mEditModeAction(new QAction(graphicsUtils::AbstractItem::loadTextColorIcon(":/icons/main_tabbar_edit.svg"),
+		  QObject::tr("Edit"), this))
 	, mHomeAction(new QAction(QIcon(":/icons/home.svg"), tr("To main page"), this))
 	, mSeparator1(this)
 	, mSeparator2(this)
@@ -54,13 +50,8 @@ ActionsManager::ActionsManager(KitPluginManager &kitPluginManager, RobotModelMan
 	mSeparator1.setSeparator(true);
 	mSeparator2.setSeparator(true);
 
-	mActions
-			<< mConnectToRobotAction
-			<< mRunAction
-			<< mStopRobotAction
-			<< &mRobotSettingsAction
-			<< &mExportExerciseAction
-			;
+	mActions << mConnectToRobotAction << mRunAction << mStopRobotAction << &mRobotSettingsAction
+		 << &mExportExerciseAction;
 
 	mEditModeAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_1));
 	mEditModeAction->setCheckable(true);
@@ -85,19 +76,17 @@ QList<qReal::ActionInfo> ActionsManager::actions()
 
 	result << mPluginActionInfos;
 
-	result
-			<< qReal::ActionInfo(mHomeAction, QString(), "view")
-			<< qReal::ActionInfo(mConnectToRobotAction, "interpreters", "tools")
-			<< qReal::ActionInfo(mRunAction, "interpreters", "tools")
-			<< qReal::ActionInfo(mStopRobotAction, "interpreters", "tools")
-			<< qReal::ActionInfo(&mSeparator1, "interpreters", "tools");
+	result << qReal::ActionInfo(mHomeAction, QString(), "view")
+	       << qReal::ActionInfo(mConnectToRobotAction, "interpreters", "tools")
+	       << qReal::ActionInfo(mRunAction, "interpreters", "tools")
+	       << qReal::ActionInfo(mStopRobotAction, "interpreters", "tools")
+	       << qReal::ActionInfo(&mSeparator1, "interpreters", "tools");
 
 	result << mRobotModelActions.values();
 
 	result << qReal::ActionInfo(&mSeparator2, "interpreters", "tools")
-			<< qReal::ActionInfo(&mRobotSettingsAction, "interpreters", "tools")
-			<< qReal::ActionInfo(&mExportExerciseAction, "", "tools")
-			;
+	       << qReal::ActionInfo(&mRobotSettingsAction, "interpreters", "tools")
+	       << qReal::ActionInfo(&mExportExerciseAction, "", "tools");
 
 	return result;
 }
@@ -109,12 +98,10 @@ QList<qReal::HotKeyActionInfo> ActionsManager::hotKeyActionInfos()
 	result += mPluginHotKeyActionInfos;
 	result += mAdditionalHotKeyInfos;
 
-	result
-			<< qReal::HotKeyActionInfo("Editor.EditMode", QObject::tr("Switch to edit mode"), mEditModeAction)
-			<< qReal::HotKeyActionInfo("Editor.DebugMode", QObject::tr("Switch to debug mode"), mDebugModeAction)
-			<< qReal::HotKeyActionInfo("Interpreter.Run", QObject::tr("Run interpreter"), mRunAction)
-			<< qReal::HotKeyActionInfo("Interpreter.Stop", QObject::tr("Stop interpreter"), mStopRobotAction)
-			;
+	result << qReal::HotKeyActionInfo("Editor.EditMode", QObject::tr("Switch to edit mode"), mEditModeAction)
+	       << qReal::HotKeyActionInfo("Editor.DebugMode", QObject::tr("Switch to debug mode"), mDebugModeAction)
+	       << qReal::HotKeyActionInfo("Interpreter.Run", QObject::tr("Run interpreter"), mRunAction)
+	       << qReal::HotKeyActionInfo("Interpreter.Stop", QObject::tr("Stop interpreter"), mStopRobotAction);
 
 	return result;
 }
@@ -212,7 +199,7 @@ void ActionsManager::onRobotModelActionChecked(QObject *robotModelObject)
 QString ActionsManager::kitIdOf(kitBase::robotModel::RobotModelInterface &model) const
 {
 	for (const QString &kitId : mKitPluginManager.kitIds()) {
-		for (kitBase::KitPluginInterface * const kit : mKitPluginManager.kitsById(kitId)) {
+		for (kitBase::KitPluginInterface *const kit : mKitPluginManager.kitsById(kitId)) {
 			if (kit->robotModels().contains(&model)) {
 				return kitId;
 			}
@@ -238,7 +225,7 @@ void ActionsManager::updateEnabledActions()
 	const qReal::Id &rootElementId = mMainWindowInterpretersInterface->activeDiagram();
 	const bool enabled = rootElementId.type() == robotDiagramType || rootElementId.type() == subprogramDiagramType;
 
-	for (QAction * const action : mActions) {
+	for (QAction *const action : mActions) {
 		if (action != &mRobotSettingsAction) {
 			action->setEnabled(enabled);
 		}
@@ -247,18 +234,18 @@ void ActionsManager::updateEnabledActions()
 
 void ActionsManager::initKitPluginActions()
 {
-	QSignalMapper * const robotModelMapper = new QSignalMapper(this);
-	connect(robotModelMapper, SIGNAL(mapped(QObject*)), this, SLOT(onRobotModelActionChecked(QObject*)));
+	QSignalMapper *const robotModelMapper = new QSignalMapper(this);
+	connect(robotModelMapper, SIGNAL(mapped(QObject *)), this, SLOT(onRobotModelActionChecked(QObject *)));
 
 	for (const QString &kitId : mKitPluginManager.kitIds()) {
 		const QList<kitBase::KitPluginInterface *> kits = mKitPluginManager.kitsById(kitId);
-		QActionGroup * const group = new QActionGroup(this);
+		QActionGroup *const group = new QActionGroup(this);
 		QList<kitBase::robotModel::RobotModelInterface *> robotModels;
 		QMap<kitBase::robotModel::RobotModelInterface *, QIcon> fastSelectorIcons;
-		for (kitBase::KitPluginInterface * const kitPlugin : kits) {
+		for (kitBase::KitPluginInterface *const kitPlugin : kits) {
 			mPluginActionInfos << kitPlugin->customActions();
 			mPluginHotKeyActionInfos << kitPlugin->hotKeyActions();
-			for (kitBase::robotModel::RobotModelInterface * const robotModel : kitPlugin->robotModels()) {
+			for (kitBase::robotModel::RobotModelInterface *const robotModel : kitPlugin->robotModels()) {
 				const QIcon &icon = kitPlugin->iconForFastSelector(*robotModel);
 				if (icon.isNull()) {
 					continue;
@@ -272,9 +259,9 @@ void ActionsManager::initKitPluginActions()
 		QList<QAction *> twoDModelActions;
 		QList<QAction *> realRobotActions;
 		kitBase::robotModel::RobotModelUtils::sortRobotModels(robotModels);
-		for (kitBase::robotModel::RobotModelInterface * const robotModel : robotModels) {
+		for (kitBase::robotModel::RobotModelInterface *const robotModel : robotModels) {
 			const QString &text = robotModel->friendlyName();
-			QAction * const fastSelectionAction = new QAction(fastSelectorIcons[robotModel], text, group);
+			QAction *const fastSelectionAction = new QAction(fastSelectorIcons[robotModel], text, group);
 			robotModelMapper->setMapping(fastSelectionAction, robotModel);
 			connect(fastSelectionAction, SIGNAL(triggered()), robotModelMapper, SLOT(map()));
 			fastSelectionAction->setObjectName("switchTo" + kitId + robotModel->name());
@@ -288,44 +275,46 @@ void ActionsManager::initKitPluginActions()
 		}
 
 		if (!kits.isEmpty()) {
-			QAction * const realRobotSwitcher = produceMenuAction(kitId, tr("Real robot"), realRobotActions);
-			QAction * const twoDModelSwitcher = produceMenuAction(kitId, tr("2D model"), twoDModelActions);
+			QAction *const realRobotSwitcher = produceMenuAction(kitId, tr("Real robot"), realRobotActions);
+			QAction *const twoDModelSwitcher = produceMenuAction(kitId, tr("2D model"), twoDModelActions);
 
 			if (realRobotSwitcher) {
-				mRobotModelActions.insertMulti(kitId, qReal::ActionInfo(realRobotSwitcher, "interpreters", "tools"));
+				mRobotModelActions.insertMulti(kitId,
+					qReal::ActionInfo(realRobotSwitcher, "interpreters", "tools"));
 			}
 
 			if (twoDModelSwitcher) {
-				mRobotModelActions.insertMulti(kitId, qReal::ActionInfo(twoDModelSwitcher, "interpreters", "tools"));
+				mRobotModelActions.insertMulti(kitId,
+					qReal::ActionInfo(twoDModelSwitcher, "interpreters", "tools"));
 			}
 		}
 	}
 }
 
-QAction *ActionsManager::produceMenuAction(const QString &kitId, const QString &name
-		, const QList<QAction *> &subActions)
+QAction *ActionsManager::produceMenuAction(const QString &kitId, const QString &name,
+	const QList<QAction *> &subActions)
 {
 	if (subActions.isEmpty()) {
 		return nullptr;
 	}
 
 	if (subActions.count() == 1) {
-		QAction * const result = subActions.first();
-		connect(&mRobotModelManager, &RobotModelManager::robotModelChanged
-				, this, [kitId, result](kitBase::robotModel::RobotModelInterface &model) {
+		QAction *const result = subActions.first();
+		connect(&mRobotModelManager, &RobotModelManager::robotModelChanged, this,
+			[kitId, result](kitBase::robotModel::RobotModelInterface &model) {
 			result->setChecked("switchTo" + kitId + model.name() == result->objectName());
 		});
 
 		return result;
 	}
 
-	QAction * const menuAction = new QAction(subActions.first()->icon(), name, this);
+	QAction *const menuAction = new QAction(subActions.first()->icon(), name, this);
 	menuAction->setCheckable(true);
 	menuAction->setMenu(new QMenu(&mDummyWidget));
 	menuAction->menu()->addActions(subActions);
 
 	auto checkAction = [menuAction, kitId](const QString &name) {
-		for (QAction * const action : menuAction->menu()->actions()) {
+		for (QAction *const action : menuAction->menu()->actions()) {
 			if (action->objectName() == name) {
 				action->setChecked(true);
 				qReal::SettingsManager::setValue("lastFastSelectorActionFor" + kitId, name);
@@ -339,14 +328,14 @@ QAction *ActionsManager::produceMenuAction(const QString &kitId, const QString &
 		return static_cast<QAction *>(nullptr);
 	};
 
-	connect(&mRobotModelManager, &RobotModelManager::robotModelChanged
-			, this, [kitId, checkAction](kitBase::robotModel::RobotModelInterface &model) {
+	connect(&mRobotModelManager, &RobotModelManager::robotModelChanged, this,
+		[kitId, checkAction](kitBase::robotModel::RobotModelInterface &model) {
 		checkAction("switchTo" + kitId + model.name());
 	});
 
 	connect(menuAction, &QAction::triggered, this, [kitId, checkAction, menuAction]() {
 		const QString key = qReal::SettingsManager::value("lastFastSelectorActionFor" + kitId).toString();
-		if (QAction * const action = checkAction(key)) {
+		if (QAction *const action = checkAction(key)) {
 			action->trigger();
 		} else if (!menuAction->menu()->actions().isEmpty()) {
 			menuAction->menu()->actions().first()->trigger();

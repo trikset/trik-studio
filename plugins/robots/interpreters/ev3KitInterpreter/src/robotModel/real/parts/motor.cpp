@@ -32,8 +32,8 @@ Motor::Motor(const DeviceInfo &info, const PortInfo &port, RobotCommunicator &ro
 
 void Motor::on(int speed)
 {
-	QByteArray command = Ev3DirectCommand::formCommand(19, 0, 0, 0
-			, enums::commandType::CommandTypeEnum::DIRECT_COMMAND_REPLY);
+	QByteArray command =
+		Ev3DirectCommand::formCommand(19, 0, 0, 0, enums::commandType::CommandTypeEnum::DIRECT_COMMAND_REPLY);
 	int index = 7;
 	Ev3DirectCommand::addOpcode(enums::opcode::OpcodeEnum::OUTPUT_POWER, command, index);
 	Ev3DirectCommand::addByteParameter(enums::daisyChainLayer::DaisyChainLayerEnum::EV3, command, index);
@@ -53,8 +53,8 @@ void Motor::stop()
 
 void Motor::off()
 {
-	QByteArray command = Ev3DirectCommand::formCommand(14, 0, 0, 0
-			, enums::commandType::CommandTypeEnum::DIRECT_COMMAND_REPLY);
+	QByteArray command =
+		Ev3DirectCommand::formCommand(14, 0, 0, 0, enums::commandType::CommandTypeEnum::DIRECT_COMMAND_REPLY);
 	int index = 7;
 	Ev3DirectCommand::addOpcode(enums::opcode::OpcodeEnum::OUTPUT_STOP, command, index);
 	Ev3DirectCommand::addByteParameter(enums::daisyChainLayer::DaisyChainLayerEnum::EV3, command, index);
@@ -77,4 +77,3 @@ char Motor::parsePort(QChar portName)
 	}
 	return 0x00;
 }
-

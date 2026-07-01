@@ -25,14 +25,15 @@ class OutFile;
 namespace twoDModel {
 
 /// Represents the type of the message showed to user.
-enum class Level
-{
+enum class Level {
 	/// Informational message, does not contain information about errors or smth.
 	information = 0
 	/// Error message if something went wrong.
-	, error
+	,
+	error
 	/// Log message
-	, log
+	,
+	log
 };
 
 /// Collects information about the interpretation process and writes it into the given file as JSON report.
@@ -84,8 +85,8 @@ public Q_SLOTS:
 	/// @param devicePort The name of the port the device is plugged into, obtained by PortInfo::name().
 	/// @param property The name of the modified Q_PROPERTY.
 	/// @param value The new value of the property.
-	void newDeviceState(const QString &robotId, int timestamp, const QString &deviceType
-			, const QString &devicePort, const QString &property, const QVariant &value);
+	void newDeviceState(const QString &robotId, int timestamp, const QString &deviceType, const QString &devicePort,
+		const QString &property, const QVariant &value);
 
 	/// Writes an information about all messages shown to user during the interpretation process into the specified
 	/// in constructor file in XML format.
@@ -99,7 +100,7 @@ private:
 	QList<QPair<Level, QString>> mMessages;
 	const QScopedPointer<utils::OutFile> mMessagesFile;
 	const QScopedPointer<utils::OutFile> mTrajectoryFile;
-	bool mFirstMessage { true };
+	bool mFirstMessage {true};
 };
 
 }

@@ -28,18 +28,12 @@ class QRGUI_MODELS_EXPORT NodeInfo
 public:
 	NodeInfo();
 
-	NodeInfo(const Id &graphicalId
-			, const Id &logicalId
-			, LogicalModelAssistInterface &logicalModel
-			, GraphicalModelAssistInterface &graphicalModel);
+	NodeInfo(const Id &graphicalId, const Id &logicalId, LogicalModelAssistInterface &logicalModel,
+		GraphicalModelAssistInterface &graphicalModel);
 
-	NodeInfo(const Id &id
-			, const Id &logicalId
-			, const Id &logicalParent
-			, const Id &graphicalParent
-			, const QMap<QString, QVariant> &logicalProperties
-			, const QMap<QString, QVariant> &graphicalProperties
-			, const Id &explosionTarget);
+	NodeInfo(const Id &id, const Id &logicalId, const Id &logicalParent, const Id &graphicalParent,
+		const QMap<QString, QVariant> &logicalProperties, const QMap<QString, QVariant> &graphicalProperties,
+		const Id &explosionTarget);
 
 	QDataStream &serialize(QDataStream &out) const;
 
@@ -104,6 +98,6 @@ private:
 
 }
 
-QRGUI_MODELS_EXPORT QDataStream &operator<< (QDataStream &out, const qReal::NodeInfo &data);
-QRGUI_MODELS_EXPORT QDataStream &operator>> (QDataStream &in, qReal::NodeInfo &data);
-QRGUI_MODELS_EXPORT bool operator== (const qReal::NodeInfo &first, const qReal::NodeInfo &second);
+QRGUI_MODELS_EXPORT QDataStream &operator<<(QDataStream &out, const qReal::NodeInfo &data);
+QRGUI_MODELS_EXPORT QDataStream &operator>>(QDataStream &in, qReal::NodeInfo &data);
+QRGUI_MODELS_EXPORT bool operator==(const qReal::NodeInfo &first, const qReal::NodeInfo &second);

@@ -24,7 +24,9 @@ namespace qrRepo {
 class GraphicalRepoApi : public CommonRepoApi
 {
 public:
-	virtual ~GraphicalRepoApi() {}
+	virtual ~GraphicalRepoApi()
+	{
+	}
 
 	virtual qReal::Id copy(const qReal::Id &src) = 0;
 
@@ -49,8 +51,8 @@ public:
 	virtual qReal::Id logicalId(const qReal::Id &id) const = 0;
 
 	virtual qReal::IdList temporaryRemovedLinksAt(const qReal::Id &id, const QString &direction) const = 0;
-	virtual void setTemporaryRemovedLinks(const qReal::Id &id, const qReal::IdList &value
-			, const QString &direction) = 0;
+	virtual void setTemporaryRemovedLinks(const qReal::Id &id, const qReal::IdList &value,
+		const QString &direction) = 0;
 
 	virtual void removeTemporaryRemovedLinks(const qReal::Id &id) = 0;
 
@@ -62,14 +64,11 @@ public:
 
 	virtual QList<int> graphicalParts(const qReal::Id &id) const = 0;
 
-	virtual QVariant graphicalPartProperty(const qReal::Id &id, int partIndex, const QString &propertyName) const = 0;
+	virtual QVariant graphicalPartProperty(const qReal::Id &id, int partIndex,
+		const QString &propertyName) const = 0;
 
-	virtual void setGraphicalPartProperty(
-			const qReal::Id &id
-			, int partIndex
-			, const QString &propertyName
-			, const QVariant &value
-			) = 0;
+	virtual void setGraphicalPartProperty(const qReal::Id &id, int partIndex, const QString &propertyName,
+		const QVariant &value) = 0;
 };
 
 }

@@ -46,14 +46,20 @@ public:
 	explicit SdfRenderer(const QString &path);
 	~SdfRenderer();
 
-	bool load (const QString &filename);
+	bool load(const QString &filename);
 	bool load(const QDomDocument &document);
 	bool load(const QDomElement &picture);
 	void render(QPainter *painter, const QRectF &bounds, bool isIcon = false);
 	void noScale();
 
-	int pictureWidth() { return first_size_x; }
-	int pictureHeight() { return first_size_y; }
+	int pictureWidth()
+	{
+		return first_size_x;
+	}
+	int pictureHeight()
+	{
+		return first_size_y;
+	}
 
 	void setElementRepo(ElementRepoInterface *elementRepo);
 
@@ -69,8 +75,8 @@ private:
 	int first_size_y {-1};
 	int current_size_x {-1};
 	int current_size_y {-1};
-	int mStartX { 0 };
-	int mStartY { 0 };
+	int mStartX {0};
+	int mStartY {0};
 	int i {-1};
 	int j {-1};
 	int sep {-1};
@@ -87,7 +93,7 @@ private:
 	/** @brief is false if we don't need to scale according to absolute
 	 * coords, is useful for rendering icons. default is true
 	**/
-	bool mNeedScale { true };
+	bool mNeedScale {true};
 	qreal mZoom = 1.0;
 	ElementRepoInterface *mElementRepo {};
 
@@ -103,7 +109,7 @@ private:
 	void rectangle(QDomElement &element);
 	void polygon(QDomElement &element);
 	QPoint *getpoints(QDomElement &element, int n);
-	void point (QDomElement &element);
+	void point(QDomElement &element);
 	void defaultstyle();
 	void path_draw(QDomElement &element);
 	void stylus_draw(QDomElement &element);

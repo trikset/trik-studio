@@ -34,7 +34,7 @@ public:
 	explicit SdfRenderer(const QDomNode &bla);
 	~SdfRenderer();
 
-	bool load (const QString &filename);
+	bool load(const QString &filename);
 	QString render();
 	void noScale();
 
@@ -43,15 +43,15 @@ private:
 	QTextStream toGen;
 
 	QRectF bounds;
-	int first_size_x { -1 };
-	int first_size_y { -1 };
-	int current_size_x { -1 };
-	int current_size_y { -1 };
-	int mStartX { -1 };
-	int mStartY { -1 };
-	int i { -1 };
-	int j { -1 };
-	int sep { -1 };
+	int first_size_x {-1};
+	int first_size_y {-1};
+	int current_size_x {-1};
+	int current_size_y {-1};
+	int mStartX {-1};
+	int mStartY {-1};
+	int i {-1};
+	int j {-1};
+	int sep {-1};
 	QPainter *painter {};
 	QPen pen;
 	QBrush brush;
@@ -73,7 +73,7 @@ private:
 	void rectangle(QDomElement &element);
 	void polygon(QDomElement &element);
 	QPoint *getpoints(QDomElement &element, int n);
-	void point (QDomElement &element);
+	void point(QDomElement &element);
 	void defaultstyle();
 	void path_draw(QDomElement &element);
 
@@ -81,11 +81,12 @@ private:
 	bool while_condition(QString str, int i);
 };
 
-class SdfIconEngineV2: public QIconEngine
+class SdfIconEngineV2 : public QIconEngine
 {
 public:
 	SdfIconEngineV2(const QString &file);
 	virtual void paint(QPainter *painter, const QRect &rect, QIcon::Mode mode, QIcon::State state);
+
 private:
 	SdfRenderer mRenderer;
 };

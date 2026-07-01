@@ -96,4 +96,3 @@ void ModelTimer::onTimeout()
 		start();
 	}
 }
-

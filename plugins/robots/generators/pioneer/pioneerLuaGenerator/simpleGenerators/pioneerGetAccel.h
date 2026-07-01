@@ -24,10 +24,8 @@ class PioneerGetAccel : public generatorBase::simple::BindingGenerator
 {
 	Q_OBJECT
 public:
-	PioneerGetAccel(const qrRepo::RepoApi &repo
-			, generatorBase::GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent);
+	PioneerGetAccel(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+		const qReal::Id &id, QObject *parent);
 };
 
 }

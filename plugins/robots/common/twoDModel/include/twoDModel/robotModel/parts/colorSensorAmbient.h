@@ -33,9 +33,8 @@ class TWO_D_MODEL_EXPORT ColorSensorAmbient : public kitBase::robotModel::robotP
 	Q_CLASSINFO("friendlyName", tr("EV3 color sensor (ambient)"))
 
 public:
-	ColorSensorAmbient(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port
-			, engine::TwoDModelEngineInterface &engine);
+	ColorSensorAmbient(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+		engine::TwoDModelEngineInterface &engine);
 
 	void read();
 

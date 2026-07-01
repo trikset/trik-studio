@@ -27,11 +27,8 @@ namespace converters {
 class IntPropertyConverter : public CodeConverterBase, public TemplateParametrizedEntity
 {
 public:
-	IntPropertyConverter(const QStringList &pathsToTemplates
-			, lua::LuaProcessor &luaTranslator
-			, const qReal::Id &id
-			, const QString &propertyName
-			, simple::Binding::ConverterInterface *reservedVariablesConverter);
+	IntPropertyConverter(const QStringList &pathsToTemplates, lua::LuaProcessor &luaTranslator, const qReal::Id &id,
+		const QString &propertyName, simple::Binding::ConverterInterface *reservedVariablesConverter);
 
 	QString convert(const QString &luaCode) const override;
 };

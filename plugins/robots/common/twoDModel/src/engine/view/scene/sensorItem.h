@@ -37,13 +37,12 @@ class SensorItem : public graphicsUtils::RotateItem, public items::SolidItem
 	Q_OBJECT
 
 public:
-	SensorItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-	           model::SensorsConfiguration &configuration
-			, const kitBase::robotModel::PortInfo &port, const QString &pathToImage, QRect imageSize);
+	SensorItem(graphicsUtils::AbstractCoordinateSystem *metricSystem, model::SensorsConfiguration &configuration,
+		const kitBase::robotModel::PortInfo &port, const QString &pathToImage, QRect imageSize);
 
 	/// Draws selection rect around sensorBoundingBox
-	void drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr) override;
-	void drawExtractionForItem(QPainter* painter) override;
+	void drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
+	void drawExtractionForItem(QPainter *painter) override;
 
 	QRectF boundingRect() const override;
 
@@ -96,7 +95,7 @@ protected:
 	// Use utilitary class that can handle PNG & SVG properly.
 	// QImage renders SVG ugly, thus robot moves smothier now
 	const twoDModel::model::Image mImage;
-	PortItem *mPortItem;  // Has ownership.
+	PortItem *mPortItem; // Has ownership.
 };
 
 }

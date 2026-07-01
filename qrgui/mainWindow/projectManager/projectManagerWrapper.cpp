@@ -89,9 +89,9 @@ bool ProjectManagerWrapper::askQuestion(const QString &title, const QString &que
 bool ProjectManagerWrapper::open(const QString &fileName)
 {
 	const QString dequotedFileName = (fileName.startsWith("'") && fileName.endsWith("'"))
-			|| (fileName.startsWith("\"") && fileName.endsWith("\""))
-					? fileName.mid(1, fileName.length() - 2)
-					: fileName;
+	                                                 || (fileName.startsWith("\"") && fileName.endsWith("\""))
+	                                         ? fileName.mid(1, fileName.length() - 2)
+	                                         : fileName;
 
 	const QFileInfo fileInfo(dequotedFileName);
 
@@ -180,8 +180,8 @@ void ProjectManagerWrapper::refreshApplicationStateAfterSave()
 void ProjectManagerWrapper::refreshApplicationStateAfterOpen()
 {
 	mMainWindow->closeStartTab();
-	mMainWindow->propertyModel().setSourceModels(mMainWindow->models().logicalModel()
-			, mMainWindow->models().graphicalModel());
+	mMainWindow->propertyModel().setSourceModels(mMainWindow->models().logicalModel(),
+		mMainWindow->models().graphicalModel());
 	mMainWindow->graphicalModelExplorer()->setModel(mMainWindow->models().graphicalModel());
 	mMainWindow->logicalModelExplorer()->setModel(mMainWindow->models().logicalModel());
 
@@ -235,8 +235,8 @@ void ProjectManagerWrapper::suggestToCreateDiagram(bool isClosable)
 		mMainWindow->createDiagram(mMainWindow->editorManager().diagramNodeNameString(editor, theOnlyDiagram));
 	} else {
 		SuggestToCreateDiagramDialog suggestDialog(mMainWindow->editorManager(), mMainWindow, isClosable);
-		connect(&suggestDialog, &SuggestToCreateDiagramDialog::diagramSelected
-				, mMainWindow, &MainWindow::createDiagram);
+		connect(&suggestDialog, &SuggestToCreateDiagramDialog::diagramSelected, mMainWindow,
+			&MainWindow::createDiagram);
 		suggestDialog.exec();
 	}
 }
@@ -269,7 +269,7 @@ bool ProjectManagerWrapper::save()
 bool ProjectManagerWrapper::saveOrSuggestToSaveAs()
 {
 	if (mSaveFilePath == mAutosaver.tempFilePath()
-			|| mSaveFilePath == mMainWindow->editorManager().saveMetamodelFilePath()) {
+		|| mSaveFilePath == mMainWindow->editorManager().saveMetamodelFilePath()) {
 		return suggestToSaveAs();
 	}
 
@@ -290,7 +290,8 @@ void ProjectManagerWrapper::setStackUnsaved(bool isUnsaved)
 	refreshWindowTitleAccordingToSaveFile();
 }
 
-bool ProjectManagerWrapper::saveText() {
+bool ProjectManagerWrapper::saveText()
+{
 	return mTextManager->saveText(false);
 }
 
@@ -315,9 +316,8 @@ bool ProjectManagerWrapper::suggestToSaveAs()
 QString ProjectManagerWrapper::openFile(const QString &dialogWindowTitle, bool openExamples) const
 {
 	const QString pathToExamples = mMainWindow->toolManager().customizer()->examplesDirectory();
-	const QString defaultDirectory = pathToExamples.isEmpty()
-			? QFileInfo(mSaveFilePath).absoluteDir().absolutePath()
-			: pathToExamples;
+	const QString defaultDirectory =
+		pathToExamples.isEmpty() ? QFileInfo(mSaveFilePath).absoluteDir().absolutePath() : pathToExamples;
 	QString filter = tr("QReal Save File (*.qrs)") + ";;";
 	const QString extensions = textFileFilters();
 
@@ -325,11 +325,11 @@ QString ProjectManagerWrapper::openFile(const QString &dialogWindowTitle, bool o
 
 	QString fileName;
 	if (openExamples) {
-		fileName = QRealFileDialog::getOpenFileName("OpenQRSProject", mMainWindow, dialogWindowTitle
-			, defaultDirectory, filter, nullptr, false);
+		fileName = QRealFileDialog::getOpenFileName("OpenQRSProject", mMainWindow, dialogWindowTitle,
+			defaultDirectory, filter, nullptr, false);
 	} else {
-		fileName = QRealFileDialog::getOpenFileName("OpenQRSProject", mMainWindow, dialogWindowTitle
-			, defaultDirectory, filter);
+		fileName = QRealFileDialog::getOpenFileName("OpenQRSProject", mMainWindow, dialogWindowTitle,
+			defaultDirectory, filter);
 	}
 
 	if (!fileName.isEmpty() && !QFile::exists(fileName)) {
@@ -354,10 +354,10 @@ QString ProjectManagerWrapper::saveFileName(const QString &dialogWindowTitle) co
 {
 	const QString oldFileName = QFileInfo(saveFilePath()).fileName();
 	const QString defaultSaveFilePath = mAutosaver.isTempFile(mSaveFilePath)
-			? PlatformInfo::invariantSettingsPath("pathToDefaultSaves")
-			: QFileInfo(mSaveFilePath).absoluteDir().absolutePath();
-	QString fileName = QRealFileDialog::getSaveFileName("SaveQRSProject", mMainWindow, dialogWindowTitle
-			, defaultSaveFilePath, tr("QReal Save File(*.qrs)"), oldFileName);
+	                                            ? PlatformInfo::invariantSettingsPath("pathToDefaultSaves")
+	                                            : QFileInfo(mSaveFilePath).absoluteDir().absolutePath();
+	QString fileName = QRealFileDialog::getSaveFileName("SaveQRSProject", mMainWindow, dialogWindowTitle,
+		defaultSaveFilePath, tr("QReal Save File(*.qrs)"), oldFileName);
 
 	if (!fileName.isEmpty() && !fileName.endsWith(".qrs", Qt::CaseInsensitive)) {
 		fileName += ".qrs";

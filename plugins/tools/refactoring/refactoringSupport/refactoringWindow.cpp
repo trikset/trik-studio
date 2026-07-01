@@ -19,15 +19,16 @@
 using namespace qReal;
 
 RefactoringWindow::RefactoringWindow(QWidget *parent)
-		: QDialog(parent)
-		, mUi(new Ui::refactoringForm)
+	: QDialog(parent)
+	, mUi(new Ui::refactoringForm)
 {
 	mUi->setupUi(this);
 	mUi->applyButton->setEnabled(false);
 	mUi->discardButton->setEnabled(false);
 	mUi->findNextButton->setEnabled(false);
 
-	connect(mUi->refactoringList, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(openPicture(QListWidgetItem*)));
+	connect(mUi->refactoringList, SIGNAL(itemClicked(QListWidgetItem *)), this,
+		SLOT(openPicture(QListWidgetItem *)));
 	connect(mUi->findButton, SIGNAL(clicked()), this, SLOT(findButtonActivate()));
 	connect(mUi->findNextButton, SIGNAL(clicked()), this, SLOT(findNextButtonActivate()));
 	connect(mUi->discardButton, SIGNAL(clicked()), this, SLOT(discardButtonActivate()));
@@ -70,7 +71,7 @@ void RefactoringWindow::updateRefactorings(const QString &dirPath)
 
 void RefactoringWindow::findButtonActivate()
 {
-	QList<QListWidgetItem*> selectedItems = mUi->refactoringList->selectedItems();
+	QList<QListWidgetItem *> selectedItems = mUi->refactoringList->selectedItems();
 	if (selectedItems.size() != 1) {
 		return;
 	}
@@ -81,7 +82,6 @@ void RefactoringWindow::findNextButtonActivate()
 {
 	emit findNextButtonClicked();
 }
-
 
 void RefactoringWindow::activateRestButtons()
 {
@@ -97,7 +97,6 @@ void RefactoringWindow::discard()
 	mUi->discardButton->setEnabled(false);
 	mUi->findNextButton->setEnabled(false);
 	mUi->findButton->setEnabled(true);
-
 }
 
 void RefactoringWindow::discardButtonActivate()

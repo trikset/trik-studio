@@ -23,10 +23,8 @@ class RandomInitGenerator : public BindingGenerator
 {
 	Q_OBJECT
 public:
-	RandomInitGenerator(const qrRepo::RepoApi &repo
-			, GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent = nullptr);
+	RandomInitGenerator(const qrRepo::RepoApi &repo, GeneratorCustomizer &customizer, const qReal::Id &id,
+		QObject *parent = nullptr);
 };
 
 }

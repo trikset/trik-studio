@@ -18,8 +18,9 @@
 
 using namespace qReal::gui::editor;
 
-BorderChecker::BorderChecker(const NodeElement* const node)
-	: mNode(node), mBorderValues(node->borderValues())
+BorderChecker::BorderChecker(const NodeElement *const node)
+	: mNode(node)
+	, mBorderValues(node->borderValues())
 	, mXHor(mBorderValues[0])
 	, mYHor(mBorderValues[1])
 	, mXVert(mBorderValues[2])
@@ -33,8 +34,7 @@ bool BorderChecker::checkLowerBorder(QPointF point) const
 	const qreal checkingPointY = point.y();
 	const QRectF rc = mNode->boundingRect();
 	return (checkingPointX >= rc.x() + mXHor) && (checkingPointX <= rc.x() + rc.width() - mXHor)
-			&& (checkingPointY >= rc.y() + rc.height() - mYHor)
-			&& (checkingPointY <= rc.y() + rc.height() + mYHor);
+	       && (checkingPointY >= rc.y() + rc.height() - mYHor) && (checkingPointY <= rc.y() + rc.height() + mYHor);
 }
 
 bool BorderChecker::checkUpperBorder(QPointF point) const
@@ -43,8 +43,7 @@ bool BorderChecker::checkUpperBorder(QPointF point) const
 	const qreal checkingPointY = point.y();
 	const QRectF rc = mNode->boundingRect();
 	return (checkingPointX >= rc.x() + mXHor) && (checkingPointX <= rc.x() + rc.width() - mXHor)
-			&& (checkingPointY >= rc.y() - mYHor)
-			&& (checkingPointY <= rc.y() + mYHor);
+	       && (checkingPointY >= rc.y() - mYHor) && (checkingPointY <= rc.y() + mYHor);
 }
 
 bool BorderChecker::checkLeftBorder(QPointF point) const
@@ -53,8 +52,7 @@ bool BorderChecker::checkLeftBorder(QPointF point) const
 	const qreal checkingPointY = point.y();
 	const QRectF rc = mNode->boundingRect();
 	return (checkingPointX >= rc.x() - mXVert) && (checkingPointX <= rc.x() + mXVert)
-			&& (checkingPointY >= rc.y() + mYVert)
-			&& (checkingPointY <= rc.y() + rc.height() - mYVert);
+	       && (checkingPointY >= rc.y() + mYVert) && (checkingPointY <= rc.y() + rc.height() - mYVert);
 }
 
 bool BorderChecker::checkRightBorder(QPointF point) const
@@ -63,8 +61,7 @@ bool BorderChecker::checkRightBorder(QPointF point) const
 	const qreal checkingPointY = point.y();
 	const QRectF rc = mNode->boundingRect();
 	return (checkingPointX >= rc.x() + rc.width() - mXVert) && (checkingPointX <= rc.x() + rc.width() + mXVert)
-			&& (checkingPointY >= rc.y() + mYVert)
-			&& (checkingPointY <= rc.y() + rc.height() - mYVert);
+	       && (checkingPointY >= rc.y() + mYVert) && (checkingPointY <= rc.y() + rc.height() - mYVert);
 }
 
 bool BorderChecker::checkNoBorderX(QPointF point, qreal y) const

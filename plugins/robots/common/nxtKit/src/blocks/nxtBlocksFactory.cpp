@@ -61,9 +61,8 @@ qReal::interpretation::Block *NxtBlocksFactory::produceBlock(const qReal::Id &el
 	} else if (elementMetatypeIs(element, "NxtWaitForTouchSensor")) {
 		return new WaitForTouchSensorBlock(mRobotModelManager->model());
 	} else if (elementMetatypeIs(element, "NxtWaitForSonarDistance")) {
-		return new WaitForSonarDistanceBlock(mRobotModelManager->model()
-				, kitBase::robotModel::DeviceInfo::create<
-						kitBase::robotModel::robotParts::RangeSensor>());
+		return new WaitForSonarDistanceBlock(mRobotModelManager->model(),
+			kitBase::robotModel::DeviceInfo::create<kitBase::robotModel::robotParts::RangeSensor>());
 	} else if (elementMetatypeIs(element, "NxtWaitForColor")) {
 		return new WaitForColorBlock(mRobotModelManager->model());
 	} else if (elementMetatypeIs(element, "NxtWaitForEncoder")) {
@@ -92,28 +91,16 @@ qReal::interpretation::Block *NxtBlocksFactory::produceBlock(const qReal::Id &el
 
 qReal::IdList NxtBlocksFactory::providedBlocks() const
 {
-	return {
-		id("NxtBeep")
-		, id("NxtPlayTone")
-		, id("NxtEnginesForward")
-		, id("NxtEnginesBackward")
-		, id("NxtEnginesStop")
-		, id("NxtClearEncoder")
+	return {id("NxtBeep"), id("NxtPlayTone"), id("NxtEnginesForward"), id("NxtEnginesBackward"),
+		id("NxtEnginesStop"), id("NxtClearEncoder")
 
-		, id("NxtWaitForTouchSensor")
-		, id("NxtWaitForSonarDistance")
-		, id("NxtWaitForColor")
-		, id("NxtWaitForColorIntensity")
-		, id("NxtWaitForEncoder")
-		, id("NxtWaitForLight")
-		, id("NxtWaitForSound")
-		, id("NxtWaitForButton")
+					      ,
+		id("NxtWaitForTouchSensor"), id("NxtWaitForSonarDistance"), id("NxtWaitForColor"),
+		id("NxtWaitForColorIntensity"), id("NxtWaitForEncoder"), id("NxtWaitForLight"), id("NxtWaitForSound"),
+		id("NxtWaitForButton")
 
-		, id("NxtDrawPixel")
-		, id("NxtDrawLine")
-		, id("NxtDrawCircle")
-		, id("NxtDrawRect")
-	};
+			,
+		id("NxtDrawPixel"), id("NxtDrawLine"), id("NxtDrawCircle"), id("NxtDrawRect")};
 }
 
 qReal::IdList NxtBlocksFactory::blocksToDisable() const
@@ -121,9 +108,7 @@ qReal::IdList NxtBlocksFactory::blocksToDisable() const
 	qReal::IdList result;
 
 	if (mRobotModelManager->model().name().contains("TwoD")) {
-		result
-				<< id("NxtWaitForSound")
-				;
+		result << id("NxtWaitForSound");
 	}
 
 	result << id("Join") << id("SendMessageThreads") << id("ReceiveMessageThreads") << id("KillThread");
@@ -133,9 +118,5 @@ qReal::IdList NxtBlocksFactory::blocksToDisable() const
 
 qReal::IdList NxtBlocksFactory::blocksToHide() const
 {
-	return { id("Join")
-		, id("SendMessageThreads")
-		, id("ReceiveMessageThreads")
-		, id("KillThread")
-	};
+	return {id("Join"), id("SendMessageThreads"), id("ReceiveMessageThreads"), id("KillThread")};
 }

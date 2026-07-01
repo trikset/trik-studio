@@ -41,8 +41,8 @@ public:
 	/// @param name - name of a function.
 	/// @param semantic - actual C++ function that implements it. Must take list of actual parameters and return
 	///        calculated value as QVariant.
-	void addIntrinsicFunction(const QString &name
-			, std::function<QVariant(const QList<QVariant> &)> const &semantic);
+	void addIntrinsicFunction(const QString &name,
+		std::function<QVariant(const QList<QVariant> &)> const &semantic);
 
 	/// Interprets given AST using type information provided by given semantic analyzer, returns the result of
 	/// calculation or QVariant() if there is no result (error or AST is not supposed to return anything).
@@ -68,39 +68,33 @@ public:
 	void clear();
 
 private:
-	QVariant interpretUnaryOperator(const QSharedPointer<core::ast::Node> &root
-			, const core::SemanticAnalyzer &semanticAnalyzer);
+	QVariant interpretUnaryOperator(const QSharedPointer<core::ast::Node> &root,
+		const core::SemanticAnalyzer &semanticAnalyzer);
 
-	QVariant interpretBinaryOperator(const QSharedPointer<core::ast::Node> &root
-			, const core::SemanticAnalyzer &semanticAnalyzer);
+	QVariant interpretBinaryOperator(const QSharedPointer<core::ast::Node> &root,
+		const core::SemanticAnalyzer &semanticAnalyzer);
 
-	QVariant operateOnIndexingExpression(const QSharedPointer<core::ast::Node> &indexingExpression
-			, const core::SemanticAnalyzer &semanticAnalyzer
-			, const std::function<QVariant(const QString &
-					, const QVariantList &
-					, const QVector<int> &
-					, const core::Connection &)> &action);
+	QVariant operateOnIndexingExpression(const QSharedPointer<core::ast::Node> &indexingExpression,
+		const core::SemanticAnalyzer &semanticAnalyzer,
+		const std::function<QVariant(const QString &, const QVariantList &, const QVector<int> &,
+			const core::Connection &)> &action);
 
-	QVariant constructTable(const QSharedPointer<core::ast::Node> &tableConstructor
-			, const core::SemanticAnalyzer &semanticAnalyzer);
+	QVariant constructTable(const QSharedPointer<core::ast::Node> &tableConstructor,
+		const core::SemanticAnalyzer &semanticAnalyzer);
 
-	void assignToTableElement(const QSharedPointer<core::ast::Node> &variable, const QVariant &interpretedValue
-			, const core::SemanticAnalyzer &semanticAnalyzer);
+	void assignToTableElement(const QSharedPointer<core::ast::Node> &variable, const QVariant &interpretedValue,
+		const core::SemanticAnalyzer &semanticAnalyzer);
 
-	QVariantList doAssignToTableElement(const QVariantList &table
-			, const QVariant &value
-			, const QVector<int> &index
-			, const core::Connection &connection);
+	QVariantList doAssignToTableElement(const QVariantList &table, const QVariant &value, const QVector<int> &index,
+		const core::Connection &connection);
 
-	QVariant slice(const QSharedPointer<core::ast::Node> &indexingExpression
-			, const core::SemanticAnalyzer &semanticAnalyzer);
+	QVariant slice(const QSharedPointer<core::ast::Node> &indexingExpression,
+		const core::SemanticAnalyzer &semanticAnalyzer);
 
-	QVariant operateOnIndexingExpressionRecursive(const QSharedPointer<core::ast::Node> &indexingExpression
-			, const QVector<int> &currentIndex, const core::SemanticAnalyzer &semanticAnalyzer
-			, const std::function<QVariant(const QString &
-					, const QVariantList &
-					, const QVector<int> &
-					, const core::Connection &)> &action);
+	QVariant operateOnIndexingExpressionRecursive(const QSharedPointer<core::ast::Node> &indexingExpression,
+		const QVector<int> &currentIndex, const core::SemanticAnalyzer &semanticAnalyzer,
+		const std::function<QVariant(const QString &, const QVariantList &, const QVector<int> &,
+			const core::Connection &)> &action);
 
 	QHash<QString, QVariant> mIdentifierValues;
 	QHash<QString, std::function<QVariant(const QList<QVariant> &)>> mIntrinsicFunctions;

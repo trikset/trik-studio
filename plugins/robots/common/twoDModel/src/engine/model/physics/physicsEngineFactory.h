@@ -35,9 +35,8 @@ class PhysicsEngineFactory : public QObject
 public:
 	PhysicsEngineFactory() = default;
 
-	using CreateEngineCallback = std::function<PhysicsEngineBase *(
-	        const twoDModel::model::WorldModel &,
-	        const QList<twoDModel::model::RobotModel *> &)>;
+	using CreateEngineCallback = std::function<PhysicsEngineBase *(const twoDModel::model::WorldModel &,
+		const QList<twoDModel::model::RobotModel *> &)>;
 
 	virtual CreateEngineCallback create(bool isRealistic) const;
 };

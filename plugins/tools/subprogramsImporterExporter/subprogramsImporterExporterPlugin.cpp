@@ -26,11 +26,10 @@
 
 #include "subprogramsCollectionDialog.h"
 
-
 const QString PROGRAM_DIRECTORY = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
 const QString SUBPROGRAMS_COLLECTION_DIRECTORY = "subprogramsCollection";
-const QMap<QString, QString> KIT_ID_TO_FRIENDLY_NAME = {
-		{"trikV62Kit", "TRIK"}, {"ev3Kit", "Lego EV3"}, {"nxtKit", "Lego NXT"}};
+const QMap<QString, QString> KIT_ID_TO_FRIENDLY_NAME = {{"trikV62Kit", "TRIK"}, {"ev3Kit", "Lego EV3"},
+	{"nxtKit", "Lego NXT"}};
 
 using namespace subprogramsImporterExporter;
 
@@ -50,13 +49,14 @@ SubprogramsImporterExporterPlugin::SubprogramsImporterExporterPlugin()
 	, mProjectManager(nullptr)
 {
 	connect(&mExportAction, &QAction::triggered, this, &SubprogramsImporterExporterPlugin::exportToFile);
-	connect(&mImportToProjectAction, &QAction::triggered, this, &SubprogramsImporterExporterPlugin::importToProject);
-	connect(&mSaveToCollection, &QAction::triggered, this
-			, &SubprogramsImporterExporterPlugin::saveToCollectionTriggered);
-	connect(&mImportFromCollection, &QAction::triggered, this
-			, &SubprogramsImporterExporterPlugin::importFromCollectionTriggered);
-	connect(&mClearCollection, &QAction::triggered, this
-			, &SubprogramsImporterExporterPlugin::clearCollectionTriggered);
+	connect(&mImportToProjectAction, &QAction::triggered, this,
+		&SubprogramsImporterExporterPlugin::importToProject);
+	connect(&mSaveToCollection, &QAction::triggered, this,
+		&SubprogramsImporterExporterPlugin::saveToCollectionTriggered);
+	connect(&mImportFromCollection, &QAction::triggered, this,
+		&SubprogramsImporterExporterPlugin::importFromCollectionTriggered);
+	connect(&mClearCollection, &QAction::triggered, this,
+		&SubprogramsImporterExporterPlugin::clearCollectionTriggered);
 }
 
 SubprogramsImporterExporterPlugin::~SubprogramsImporterExporterPlugin()
@@ -74,9 +74,8 @@ QList<qReal::ActionInfo> SubprogramsImporterExporterPlugin::actions()
 	mMenu.addAction(&mImportFromCollection);
 	mMenu.addSeparator();
 	mMenu.addAction(&mClearCollection);
-	return { qReal::ActionInfo(&mFirstSeparatorAction, "", "tools")
-			, qReal::ActionInfo(&mMenu, "tools")
-			, qReal::ActionInfo(&mSecondSeparatorAction, "", "tools") };
+	return {qReal::ActionInfo(&mFirstSeparatorAction, "", "tools"), qReal::ActionInfo(&mMenu, "tools"),
+		qReal::ActionInfo(&mSecondSeparatorAction, "", "tools")};
 }
 
 void SubprogramsImporterExporterPlugin::init(qReal::PluginConfigurator const &configurator)
@@ -95,10 +94,9 @@ void SubprogramsImporterExporterPlugin::exportToFile() const
 	}
 
 	const QString fileLocation = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
-	QString fileName = utils::QRealFileDialog::getSaveFileName("ExportSubprograms"
-			, mMainWindowInterpretersInterface->currentTab()
-			, tr("Select subprograms file (name for new one)")
-			, fileLocation, tr("QReal Save File(*.qrs)"));
+	QString fileName = utils::QRealFileDialog::getSaveFileName("ExportSubprograms",
+		mMainWindowInterpretersInterface->currentTab(), tr("Select subprograms file (name for new one)"),
+		fileLocation, tr("QReal Save File(*.qrs)"));
 
 	if (fileName.isEmpty()) {
 		return;
@@ -120,7 +118,7 @@ void SubprogramsImporterExporterPlugin::exportToFile() const
 	uniqueNames.remove("");
 	if (uniqueNames.isEmpty()) {
 		mMainWindowInterpretersInterface->errorReporter()->addInformation(tr("There are no subprograms"
-				" in your project."));
+										     " in your project."));
 		return;
 	}
 
@@ -138,10 +136,9 @@ void SubprogramsImporterExporterPlugin::importToProject() const
 	}
 
 	const QString fileLocation = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
-	QString fileName = utils::QRealFileDialog::getOpenFileName("ExportSubprograms"
-			, mMainWindowInterpretersInterface->currentTab()
-			, tr("Select subprograms file")
-			, fileLocation, tr("QReal Save File(*.qrs)"));
+	QString fileName = utils::QRealFileDialog::getOpenFileName("ExportSubprograms",
+		mMainWindowInterpretersInterface->currentTab(), tr("Select subprograms file"), fileLocation,
+		tr("QReal Save File(*.qrs)"));
 
 	if (fileName.isEmpty()) {
 		return;
@@ -198,7 +195,7 @@ void SubprogramsImporterExporterPlugin::saveToCollectionTriggered() const
 	uniqueNames.remove("");
 	if (uniqueNames.isEmpty()) {
 		mMainWindowInterpretersInterface->errorReporter()->addInformation(tr("There are not subprograms"
-				" in your project"));
+										     " in your project"));
 		QDir().cd(currentPath);
 		return;
 	}
@@ -219,7 +216,7 @@ void SubprogramsImporterExporterPlugin::saveToCollectionTriggered() const
 		QHash<QString, qReal::IdList> toSave;
 		for (const auto &key : map.keys()) {
 			if (map[key]) {
-				qReal::IdList innerSPs = { nameToId[key] };
+				qReal::IdList innerSPs = {nameToId[key]};
 				innerSubprograms(nameToId[key], innerSPs);
 				toSave.insert(collectionDirectory.path() + QDir::separator() + key + ".qrs", innerSPs);
 			}
@@ -235,16 +232,18 @@ void SubprogramsImporterExporterPlugin::importFromCollectionTriggered() const
 		return;
 	}
 
-	QStringList currentlySavedSPs= currentlySavedSubprograms();
+	QStringList currentlySavedSPs = currentlySavedSubprograms();
 	if (currentlySavedSPs.isEmpty()) {
 		QString kitId = mLogicalModel->logicalRepoApi().metaInformation("lastKitId").toString();
-		mMainWindowInterpretersInterface->errorReporter()->addInformation(tr("There are no subprograms"
-				" in your collection for %1 robot.").arg(KIT_ID_TO_FRIENDLY_NAME.value(kitId, QString())));
+		mMainWindowInterpretersInterface->errorReporter()->addInformation(
+			tr("There are no subprograms"
+			   " in your collection for %1 robot.")
+				.arg(KIT_ID_TO_FRIENDLY_NAME.value(kitId, QString())));
 		return;
 	}
 
 	QMap<QString, bool> map;
-	for (auto const &str :  currentlySavedSPs){
+	for (auto const &str : currentlySavedSPs) {
 		map[str] = false;
 	}
 
@@ -256,9 +255,9 @@ void SubprogramsImporterExporterPlugin::importFromCollectionTriggered() const
 			oldMeta[metaKey] = mLogicalModel->logicalRepoApi().metaInformation(metaKey);
 		}
 		const auto &openedDiagrams = mMainWindowInterpretersInterface->openedDiagrams();
-		const QString directoryPath = PROGRAM_DIRECTORY + QDir::separator() + SUBPROGRAMS_COLLECTION_DIRECTORY
-				+ QDir::separator() + mLogicalModel->logicalRepoApi().metaInformation("lastKitId").toString()
-				+ QDir::separator();
+		const QString directoryPath =
+			PROGRAM_DIRECTORY + QDir::separator() + SUBPROGRAMS_COLLECTION_DIRECTORY + QDir::separator()
+			+ mLogicalModel->logicalRepoApi().metaInformation("lastKitId").toString() + QDir::separator();
 		for (auto const &key : map.keys()) {
 			if (map[key]) {
 				mRepo->importFromDisk(directoryPath + key + ".qrs");
@@ -284,12 +283,10 @@ void SubprogramsImporterExporterPlugin::clearCollectionTriggered() const
 {
 	QDir dir = PROGRAM_DIRECTORY + QDir::separator() + SUBPROGRAMS_COLLECTION_DIRECTORY;
 	if (dir.exists()
-			&& QMessageBox::No != QMessageBox::warning(nullptr
-													   , tr("Clear the collection")
-													   , tr("Remove all subprograms for all kits from the collection?")
-													   , QMessageBox::Yes | QMessageBox::No
-													   , QMessageBox::No)
-			) {
+		&& QMessageBox::No
+			   != QMessageBox::warning(nullptr, tr("Clear the collection"),
+				   tr("Remove all subprograms for all kits from the collection?"),
+				   QMessageBox::Yes | QMessageBox::No, QMessageBox::No)) {
 		dir.removeRecursively();
 	}
 }
@@ -319,8 +316,9 @@ bool SubprogramsImporterExporterPlugin::checkSubprogramsForUniqueNames() const
 	if (idToName.size() == idToName.values().toSet().size()) {
 		return true;
 	} else {
-		mMainWindowInterpretersInterface->errorReporter()->addInformation(tr("There are different subprograms"
-				" with the same name in your project. Please make them unique."));
+		mMainWindowInterpretersInterface->errorReporter()->addInformation(
+			tr("There are different subprograms"
+			   " with the same name in your project. Please make them unique."));
 		return false;
 	}
 }
@@ -347,14 +345,17 @@ QStringList SubprogramsImporterExporterPlugin::currentlySavedSubprograms() const
 	const QString kit = mLogicalModel->logicalRepoApi().metaInformation("lastKitId").toString();
 	const QString path = tmpPath + QDir::separator() + kit;
 
-	QStringList list = QDir(path).entryList({ "*.qrs" });
-	std::transform(list.begin(), list.end(), list.begin(), [](QString &str){ str.chop(4); return str; });
+	QStringList list = QDir(path).entryList({"*.qrs"});
+	std::transform(list.begin(), list.end(), list.begin(), [](QString &str) {
+		str.chop(4);
+		return str;
+	});
 
 	return list;
 }
 
-QMap<QString, bool> SubprogramsImporterExporterPlugin::markLeftExistedInRight(const QStringList &left
-		, const QStringList &right) const
+QMap<QString, bool> SubprogramsImporterExporterPlugin::markLeftExistedInRight(const QStringList &left,
+	const QStringList &right) const
 {
 	QMap<QString, bool> answer;
 	for (auto const &s : left) {

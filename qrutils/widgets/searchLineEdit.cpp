@@ -34,7 +34,7 @@ SearchLineEdit::SearchLineEdit(QWidget *parent, bool borderEnabled)
 	, mRegularExpression(new QAction(tr("Regular expression"), this))
 	, mCurrentOption(SearchOptions::CaseInsensitive)
 {
-	QHBoxLayout * const layout = new QHBoxLayout(this);
+	QHBoxLayout *const layout = new QHBoxLayout(this);
 	layout->setContentsMargins(2, 2, 2, 2);
 	layout->setSpacing(2);
 
@@ -106,7 +106,7 @@ void SearchLineEdit::clearText()
 
 QToolButton *SearchLineEdit::initButton(const QIcon &icon, const QString &toolTip)
 {
-	QToolButton * const result = new QToolButton(this);
+	QToolButton *const result = new QToolButton(this);
 	result->setIcon(icon);
 	result->setToolTip(toolTip);
 	result->setStyleSheet("QToolButton { border: 0; } QToolButton:menu-indicator { image: none; }");
@@ -126,7 +126,6 @@ void SearchLineEdit::makeContextMenu()
 		notifyTextChanged();
 	});
 
-
 	connect(mCaseInsensitive, &QAction::triggered, this, [=]() {
 		mCurrentOption = SearchOptions::CaseInsensitive;
 		notifyTextChanged();
@@ -137,17 +136,17 @@ void SearchLineEdit::makeContextMenu()
 		notifyTextChanged();
 	});
 
-	QActionGroup * const group = new QActionGroup(this);
+	QActionGroup *const group = new QActionGroup(this);
 	group->setExclusive(true);
 	group->addAction(mCaseInsensitive);
 	group->addAction(mCaseSensitive);
 	group->addAction(mRegularExpression);
 
-	for (QAction * const action : group->actions()) {
+	for (QAction *const action : group->actions()) {
 		action->setCheckable(true);
 	}
 
-	QMenu * const menu = new QMenu(this);
+	QMenu *const menu = new QMenu(this);
 	menu->addActions(group->actions());
 	mOptionsButton->setMenu(menu);
 }
@@ -162,16 +161,16 @@ QRegExp SearchLineEdit::regexpFromText(const QString &text, SearchOptions option
 	QRegExp result(text);
 
 	switch (option) {
-		case SearchOptions::RegularExpression:
-			break;
-		case SearchOptions::CaseInsensitive:
-			result.setPatternSyntax(QRegExp::FixedString);
-			result.setCaseSensitivity(Qt::CaseInsensitive);
-			break;
-		case SearchOptions::CaseSensitive:
-			result.setPatternSyntax(QRegExp::FixedString);
-			result.setCaseSensitivity(Qt::CaseSensitive);
-			break;
+	case SearchOptions::RegularExpression:
+		break;
+	case SearchOptions::CaseInsensitive:
+		result.setPatternSyntax(QRegExp::FixedString);
+		result.setCaseSensitivity(Qt::CaseInsensitive);
+		break;
+	case SearchOptions::CaseSensitive:
+		result.setPatternSyntax(QRegExp::FixedString);
+		result.setCaseSensitivity(Qt::CaseSensitive);
+		break;
 	}
 	return result;
 }

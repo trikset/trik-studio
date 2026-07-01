@@ -29,10 +29,9 @@ class RefactoringFinder : public BaseGraphTransformationUnit
 	Q_OBJECT
 
 public:
-	RefactoringFinder(LogicalModelAssistInterface &logicalModelApi
-			, GraphicalModelAssistInterface &graphicalModelApi
-			, gui::MainWindowInterpretersInterface &interpretersInterface
-			, qrRepo::RepoApi *refactoringRepoApi);
+	RefactoringFinder(LogicalModelAssistInterface &logicalModelApi,
+		GraphicalModelAssistInterface &graphicalModelApi,
+		gui::MainWindowInterpretersInterface &interpretersInterface, qrRepo::RepoApi *refactoringRepoApi);
 
 	void highlightMatch();
 	bool findMatch();

@@ -17,7 +17,8 @@
 using namespace qrtext::core;
 
 Range::Range(const Connection &start, const Connection &end)
-	: mStart(start), mEnd(end)
+	: mStart(start)
+	, mEnd(end)
 {
 }
 
@@ -34,4 +35,3 @@ const Connection &Range::end() const
 {
 	return mEnd;
 }
-

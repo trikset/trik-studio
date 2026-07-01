@@ -40,7 +40,7 @@ Object::Object(const QDomElement &element)
 
 	mParent = ValuesSerializer::deserializeId(element.attribute("parent", ""));
 
-	for (const Id &child: ValuesSerializer::deserializeIdList(element, "children")) {
+	for (const Id &child : ValuesSerializer::deserializeIdList(element, "children")) {
 		mChildren.append(child);
 	}
 
@@ -66,15 +66,15 @@ void Object::replaceProperties(const QString &value, const QString &newValue)
 	}
 }
 
-Object *Object::clone(QHash<Id, Object*> &objHash) const
+Object *Object::clone(QHash<Id, Object *> &objHash) const
 {
-	Object * const result = createClone();
+	Object *const result = createClone();
 	objHash.insert(result->id(), result);
 
 	result->mParent = mParent;
 
 	for (const Id &childId : mChildren) {
-		Object * const child = objHash[childId]->clone(objHash);
+		Object *const child = objHash[childId]->clone(objHash);
 		child->setParent(mId);
 		result->addChild(child->id());
 	}
@@ -129,7 +129,8 @@ void Object::stackBefore(const qReal::Id &element, const qReal::Id &sibling)
 	}
 
 	if (!mChildren.contains(sibling)) {
-		throw Exception("Object " + mId.toString() + ": stacking before nonexistent child " + sibling.toString());
+		throw Exception(
+			"Object " + mId.toString() + ": stacking before nonexistent child " + sibling.toString());
 	}
 
 	mChildren.removeOne(element);
@@ -149,7 +150,7 @@ void Object::setProperty(const QString &name, const QVariant &value)
 		Q_ASSERT(!"Empty QVariant set as a property");
 	}
 
-	mProperties.insert(name,value);
+	mProperties.insert(name, value);
 }
 
 void Object::setProperties(QMap<QString, QVariant> const &properties)
@@ -179,12 +180,14 @@ void Object::setBackReference(const qReal::Id &reference)
 void Object::removeBackReference(const qReal::Id &reference)
 {
 	if (!mProperties.contains("backReferences")) {
-		throw Exception("Object " + mId.toString() + ": removing nonexsistent reference " + reference.toString());
+		throw Exception(
+			"Object " + mId.toString() + ": removing nonexsistent reference " + reference.toString());
 	}
 
 	IdList references = mProperties["backReferences"].value<IdList>();
 	if (!references.contains(reference)) {
-		throw Exception("Object " + mId.toString() + ": removing nonexsistent reference " + reference.toString());
+		throw Exception(
+			"Object " + mId.toString() + ": removing nonexsistent reference " + reference.toString());
 	}
 
 	references.removeOne(reference);

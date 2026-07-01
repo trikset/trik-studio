@@ -20,8 +20,8 @@ using namespace qReal;
 using namespace qReal::models::details;
 using namespace qReal::models::details::modelsImplementation;
 
-GraphicalPartModel::GraphicalPartModel(qrRepo::GraphicalRepoApi &repoApi
-		, const modelsImplementation::ModelIndexesInterface &graphicalModel)
+GraphicalPartModel::GraphicalPartModel(qrRepo::GraphicalRepoApi &repoApi,
+	const modelsImplementation::ModelIndexesInterface &graphicalModel)
 	: mRepoApi(repoApi)
 	, mGraphicalModel(graphicalModel)
 {
@@ -45,7 +45,7 @@ void GraphicalPartModel::reinit()
 
 QVariant GraphicalPartModel::data(const QModelIndex &index, int role) const
 {
-	const GraphicalPartModelItem * const item = static_cast<const GraphicalPartModelItem *>(index.internalPointer());
+	const GraphicalPartModelItem *const item = static_cast<const GraphicalPartModelItem *>(index.internalPointer());
 	switch (role) {
 	case positionRole:
 		return mRepoApi.graphicalPartProperty(item->id(), item->index(), "position");
@@ -62,7 +62,7 @@ bool GraphicalPartModel::setData(const QModelIndex &index, const QVariant &value
 		return false;
 	}
 
-	const GraphicalPartModelItem * const item = static_cast<const GraphicalPartModelItem *>(index.internalPointer());
+	const GraphicalPartModelItem *const item = static_cast<const GraphicalPartModelItem *>(index.internalPointer());
 	switch (role) {
 	case positionRole:
 		mRepoApi.setGraphicalPartProperty(item->id(), item->index(), "position", value);
@@ -122,7 +122,7 @@ QModelIndex GraphicalPartModel::parent(const QModelIndex &index) const
 		return QModelIndex();
 	}
 
-	const GraphicalPartModelItem * const item = static_cast<const GraphicalPartModelItem *>(index.internalPointer());
+	const GraphicalPartModelItem *const item = static_cast<const GraphicalPartModelItem *>(index.internalPointer());
 	const int row = mIdPositions[item->id()];
 	return createIndex(row, 0, static_cast<void *>(nullptr));
 }
@@ -170,7 +170,7 @@ QModelIndex GraphicalPartModel::findIndex(const Id &element, int index) const
 	const int parentRow = mIdPositions.value(element);
 	const QModelIndex parent = createIndex(parentRow, 0, static_cast<void *>(nullptr));
 	int partRow = 0;
-	for (const modelsImplementation::GraphicalPartModelItem * const item : mItems[parentRow]) {
+	for (const modelsImplementation::GraphicalPartModelItem *const item : mItems[parentRow]) {
 		if (item->index() == index) {
 			break;
 		}

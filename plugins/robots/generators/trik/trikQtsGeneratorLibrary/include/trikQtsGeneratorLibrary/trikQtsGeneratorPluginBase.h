@@ -49,9 +49,9 @@ class TrikQtsGeneratorPluginBase : public TrikGeneratorPluginBase
 	Q_OBJECT
 
 public:
-	TrikQtsGeneratorPluginBase(trik::robotModel::TrikRobotModelBase * const robotModel
-			, const QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> &blocksFactory
-			, const QStringList &pathsToTemplates);
+	TrikQtsGeneratorPluginBase(trik::robotModel::TrikRobotModelBase *const robotModel,
+		const QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> &blocksFactory,
+		const QStringList &pathsToTemplates);
 
 	~TrikQtsGeneratorPluginBase() override;
 
@@ -89,16 +89,16 @@ private:
 	void disableButtons();
 
 	/// Action that launches code generator
-	QAction *mGenerateCodeAction;  // Doesn't have ownership; may be disposed by GUI.
+	QAction *mGenerateCodeAction; // Doesn't have ownership; may be disposed by GUI.
 
 	/// Action that generates and uploads program on a robot
-	QAction *mUploadProgramAction;  // Doesn't have ownership; may be disposed by GUI.
+	QAction *mUploadProgramAction; // Doesn't have ownership; may be disposed by GUI.
 
 	/// Action that generates and uploads program on a robot
-	QAction *mRunProgramAction;  // Doesn't have ownership; may be disposed by GUI.
+	QAction *mRunProgramAction; // Doesn't have ownership; may be disposed by GUI.
 
 	/// Action that stops script execution and turns off motors.
-	QAction *mStopRobotAction;  // Doesn't have ownership; may be disposed by GUI.
+	QAction *mStopRobotAction; // Doesn't have ownership; may be disposed by GUI.
 
 	/// Communicator object used to send commands to robot.
 	QScopedPointer<utils::robotCommunication::TcpRobotCommunicator> mCommunicator;

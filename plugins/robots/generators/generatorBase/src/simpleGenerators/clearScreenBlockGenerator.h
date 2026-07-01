@@ -24,10 +24,8 @@ class ClearScreenBlockGenerator : public BindingGenerator
 {
 	Q_OBJECT
 public:
-	ClearScreenBlockGenerator(const qrRepo::RepoApi &repo
-			, GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent = nullptr);
+	ClearScreenBlockGenerator(const qrRepo::RepoApi &repo, GeneratorCustomizer &customizer, const qReal::Id &id,
+		QObject *parent = nullptr);
 };
 
 }

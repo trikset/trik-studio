@@ -26,7 +26,7 @@ namespace parts {
 
 /// Implementation of TRIK Android gamepad pad as button for interpretation mode on real robot.
 class ROBOTS_TRIK_KIT_INTERPRETER_COMMON_EXPORT GamepadPadPressSensor
-		: public robotModel::parts::TrikGamepadPadPressSensor
+	: public robotModel::parts::TrikGamepadPadPressSensor
 {
 	Q_OBJECT
 
@@ -36,9 +36,8 @@ public:
 	/// @param port - port on which this device is configured.
 	/// @param tcpRobotCommunicator - communicator object that is used to send/receive data to/from telemetry
 	///        service on a robot.
-	GamepadPadPressSensor(const kitBase::robotModel::DeviceInfo &info
-		, const kitBase::robotModel::PortInfo &port
-		, utils::robotCommunication::TcpRobotCommunicator &tcpRobotCommunicator);
+	GamepadPadPressSensor(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+		utils::robotCommunication::TcpRobotCommunicator &tcpRobotCommunicator);
 
 	void read() override;
 

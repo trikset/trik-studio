@@ -34,7 +34,6 @@ TrikV62KitInterpreterPlugin::TrikV62KitInterpreterPlugin()
 	const auto blocksFactory = QSharedPointer<blocks::TrikV62BlocksFactory>(new blocks::TrikV62BlocksFactory());
 
 	initKitInterpreterPluginBase(realRobotModel, twoDRobotModel, blocksFactory);
-
 }
 
 QString TrikV62KitInterpreterPlugin::kitId() const

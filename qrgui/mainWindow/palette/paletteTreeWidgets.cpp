@@ -26,8 +26,8 @@
 using namespace qReal;
 using namespace gui;
 
-PaletteTreeWidgets::PaletteTreeWidgets(PaletteTree &parent, MainWindow *mainWindow
-		, EditorManagerInterface &editorManagerProxy)
+PaletteTreeWidgets::PaletteTreeWidgets(PaletteTree &parent, MainWindow *mainWindow,
+	EditorManagerInterface &editorManagerProxy)
 	: QSplitter(Qt::Vertical)
 	, mEditorManager(&editorManagerProxy)
 	, mParentPalette(&parent)
@@ -38,9 +38,8 @@ PaletteTreeWidgets::PaletteTreeWidgets(PaletteTree &parent, MainWindow *mainWind
 	initWidgets();
 }
 
-PaletteTreeWidgets::PaletteTreeWidgets(PaletteTree &parent, MainWindow *mainWindow
-		, EditorManagerInterface &editorManagerProxy
-		, const Id &editor, const Id &diagram)
+PaletteTreeWidgets::PaletteTreeWidgets(PaletteTree &parent, MainWindow *mainWindow,
+	EditorManagerInterface &editorManagerProxy, const Id &editor, const Id &diagram)
 	: QSplitter(Qt::Vertical)
 	, mParentPalette(&parent)
 	, mMainWindow(mainWindow)
@@ -66,7 +65,7 @@ void PaletteTreeWidgets::initWidgets()
 	initWidget(mUserTree);
 }
 
-void PaletteTreeWidgets::initWidget(PaletteTreeWidget * const tree)
+void PaletteTreeWidgets::initWidget(PaletteTreeWidget *const tree)
 {
 	tree->setHeaderHidden(true);
 	tree->setSelectionMode(QAbstractItemView::NoSelection);
@@ -111,14 +110,15 @@ void PaletteTreeWidgets::initEditorTree()
 void PaletteTreeWidgets::initUserTree()
 {
 	refreshUserPalette();
-	connect(&mMainWindow->models().exploser(), &models::Exploser::explosionsSetCouldChange
-			, this, [&](){refreshUserPaletteHandler(true);});
+	connect(&mMainWindow->models().exploser(), &models::Exploser::explosionsSetCouldChange, this,
+		[&]() { refreshUserPaletteHandler(true); });
 }
 
 void PaletteTreeWidgets::addTopItemType(const PaletteElement &data, QTreeWidget *tree)
 {
 	QTreeWidgetItem *item = new QTreeWidgetItem;
-	DraggableElement *element = new DraggableElement(*mMainWindow, data, mParentPalette->iconsView(), *mEditorManager);
+	DraggableElement *element =
+		new DraggableElement(*mMainWindow, data, mParentPalette->iconsView(), *mEditorManager);
 
 	mPaletteElements.insert(data.id(), element);
 
@@ -132,8 +132,7 @@ void PaletteTreeWidgets::resizeIcons()
 		const int iconSize = 48;
 		const int widgetSize = this->size().width() - (iconSize << 1);
 		const int itemsCount = maxItemsCountInARow();
-		const int newSize = (widgetSize < itemsCount * iconSize)
-				? (widgetSize / itemsCount) : iconSize;
+		const int newSize = (widgetSize < itemsCount * iconSize) ? (widgetSize / itemsCount) : iconSize;
 		for (int i = 0; i < mEditorTree->topLevelItemCount(); i++) {
 			for (int j = 0; j < mEditorTree->topLevelItem(i)->childCount(); j++) {
 				QWidget *field = mEditorTree->itemWidget(mEditorTree->topLevelItem(i)->child(j), 0);
@@ -142,7 +141,7 @@ void PaletteTreeWidgets::resizeIcons()
 				}
 
 				for (QObject *child : field->children()) {
-					DraggableElement *element = dynamic_cast<DraggableElement*>(child);
+					DraggableElement *element = dynamic_cast<DraggableElement *>(child);
 					if (element) {
 						element->setIconSize(newSize);
 					}
@@ -210,7 +209,7 @@ void PaletteTreeWidgets::setElementVisible(const Id &metatype, bool visible)
 
 void PaletteTreeWidgets::setVisibleForAllElements(bool visible)
 {
-	for (QWidget * const element : mPaletteElements.values()) {
+	for (QWidget *const element : mPaletteElements.values()) {
 		element->setVisible(visible);
 	}
 
@@ -228,7 +227,7 @@ void PaletteTreeWidgets::setElementEnabled(const Id &metatype, bool enabled)
 
 void PaletteTreeWidgets::setEnabledForAllElements(bool enabled)
 {
-	for (QWidget * const element : mPaletteElements.values()) {
+	for (QWidget *const element : mPaletteElements.values()) {
 		element->setEnabled(enabled);
 	}
 
@@ -247,15 +246,13 @@ void PaletteTreeWidgets::refreshUserPaletteHandler(bool force)
 		refreshUserPalette(force);
 		return;
 	}
-	connect(mUserTree, &PaletteTreeWidget::signalReadyToRefresh, this, [=]() {
-		refreshUserPalette(force);
-	});
+	connect(mUserTree, &PaletteTreeWidget::signalReadyToRefresh, this, [=]() { refreshUserPalette(force); });
 }
 
 void PaletteTreeWidgets::refreshUserPalette(bool force)
 {
 	QList<QPair<QString, QList<gui::PaletteElement>>> groups;
-	QMap<QString, QString> descriptions = { { mUserGroupTitle, mUserGroupDescription } };
+	QMap<QString, QString> descriptions = {{mUserGroupTitle, mUserGroupDescription}};
 	QList<gui::PaletteElement> groupElements;
 
 	const QMultiMap<Id, Id> types = mMainWindow->models().exploser().explosions(mDiagram);
@@ -268,15 +265,13 @@ void PaletteTreeWidgets::refreshUserPalette(bool force)
 			} else {
 				QDomDocument doc;
 				doc.setContent(shape);
-				SdfIconEngineV2 * const engine = new SdfIconEngineV2(doc);
+				SdfIconEngineV2 *const engine = new SdfIconEngineV2(doc);
 				icon = QIcon(engine);
 			}
 
-			groupElements << gui::PaletteElement(source
-					, mMainWindow->models().logicalRepoApi().name(target)
-					, QString(), icon
-					, mEditorManager->iconSize(source)
-					, target);
+			groupElements << gui::PaletteElement(source,
+				mMainWindow->models().logicalRepoApi().name(target), QString(), icon,
+				mEditorManager->iconSize(source), target);
 		}
 	}
 

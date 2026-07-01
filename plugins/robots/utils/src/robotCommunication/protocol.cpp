@@ -44,7 +44,7 @@ Protocol::~Protocol()
 void Protocol::setAction(QState *state, const std::function<void(TcpRobotCommunicatorInterface &)> &action)
 {
 	state->disconnect();
-	connect(state, &QState::entered, this, [this, action](){ action(mCommunicator); });
+	connect(state, &QState::entered, this, [this, action]() { action(mCommunicator); });
 }
 
 void Protocol::run()
@@ -75,7 +75,7 @@ void Protocol::onError()
 	mTimeoutTimer->stop();
 }
 
-void Protocol::registerStateIfNeeded(QState * const state)
+void Protocol::registerStateIfNeeded(QState *const state)
 {
 	if (!mKnownStates.contains(state)) {
 		mStateMachine->addState(state);

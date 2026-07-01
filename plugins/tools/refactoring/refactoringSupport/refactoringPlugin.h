@@ -110,23 +110,20 @@ private:
 	/// @param metamodel metamodel for integranion with refactoring language
 	/// @param graphics xml-element, refactoring elements will be its children
 	/// @param pathToRefactoringMetamodel absolute path to Refactoring Metmaodel
-	void addRefactoringLanguageElements(const QString &diagramName, QDomDocument metamodel
-			, QDomElement &graphics, QString const &pathToRefactoringMetamodel);
-
+	void addRefactoringLanguageElements(const QString &diagramName, QDomDocument metamodel, QDomElement &graphics,
+		QString const &pathToRefactoringMetamodel);
 
 	QDomElement createPaletteElement(QString const &elementType, QDomDocument metamodel, const QString &name);
-	QDomElement metamodelPaletteGroup(QDomDocument metamodel
-			, const QDomNodeList &nodeList, const QDomNodeList &edgeList);
+	QDomElement metamodelPaletteGroup(QDomDocument metamodel, const QDomNodeList &nodeList,
+		const QDomNodeList &edgeList);
 
-	void addPalette(QDomDocument metamodel, QDomElement diagram
-			, const QDomElement &metamodelPaletteGroup);
-	void addPaletteGroup(QDomDocument metamodel, QDomElement palette
-			, QString const &groupName, QStringList const &elementNameList);
-	void addElementsToMetamodelGroup(QDomDocument metamodel, const QDomNodeList &list
-			, QDomElement &metamodelGroup);
+	void addPalette(QDomDocument metamodel, QDomElement diagram, const QDomElement &metamodelPaletteGroup);
+	void addPaletteGroup(QDomDocument metamodel, QDomElement palette, QString const &groupName,
+		QStringList const &elementNameList);
+	void addElementsToMetamodelGroup(QDomDocument metamodel, const QDomNodeList &list, QDomElement &metamodelGroup);
 	const QString nameForPaletteGroup(const QString &name);
 	void arrangeElements(QString const &algorithm);
-	QList<QPair<Id, QPair<Id, bool> > > findOutsideSelectionLinks();
+	QList<QPair<Id, QPair<Id, bool>>> findOutsideSelectionLinks();
 	void removeUnnecessaryLinksFromSelected();
 	void makeSubprogramHARDCODE();
 
@@ -162,8 +159,8 @@ private:
 
 	qrRepo::RepoApi *mRefactoringRepoApi;
 	RefactoringWindow *mRefactoringWindow;
-	QList<QHash<Id, Id> > mMatches;
-	QHash <Id, Id> mCurrentMatch;
+	QList<QHash<Id, Id>> mMatches;
+	QHash<Id, Id> mCurrentMatch;
 	IdList mSelectedElementsOnActiveDiagram;
 };
 }

@@ -42,7 +42,7 @@ private:
 
 	robotModel::DeviceInfo device() const override;
 
-	robotModel::robotParts::Button *mButton {};  // Does not have ownership.
+	robotModel::robotParts::Button *mButton {}; // Does not have ownership.
 };
 
 }

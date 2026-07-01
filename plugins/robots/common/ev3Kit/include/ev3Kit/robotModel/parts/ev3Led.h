@@ -21,28 +21,36 @@ namespace robotModel {
 namespace parts {
 
 /// A enumeration of all modes available for EV3 LED.
-enum class Ev3LedColor
-{
+enum class Ev3LedColor {
 	/// LED is turned off, black color
 	off = 0
 	/// LED is turned on, red color
-	, red
+	,
+	red
 	/// LED is turned on, green color
-	, green
+	,
+	green
 	/// LED is turned on, orange color
-	, orange
+	,
+	orange
 	/// LED is flashes with red color
-	, redFlash
+	,
+	redFlash
 	/// LED is flashes with green color
-	, greenFlash
+	,
+	greenFlash
 	/// LED is flashes with orange color
-	, orangeFlash
+	,
+	orangeFlash
 	/// LED is pulses with red color
-	, redPulse
+	,
+	redPulse
 	/// LED is pulses with green color
-	, greenPulse
+	,
+	greenPulse
 	/// LED is pulses with orange color
-	, orangePulse
+	,
+	orangePulse
 };
 
 /// A base for all implementations of LED on the front panel of EV3 brick.
@@ -54,8 +62,7 @@ class Ev3Led : public kitBase::robotModel::robotParts::Device
 	Q_CLASSINFO("direction", "output")
 
 public:
-	Ev3Led(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port);
+	Ev3Led(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port);
 
 	virtual void setColor(Ev3LedColor color) = 0;
 };

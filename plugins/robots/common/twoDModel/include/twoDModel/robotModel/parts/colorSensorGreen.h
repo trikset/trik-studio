@@ -36,9 +36,8 @@ class TWO_D_MODEL_EXPORT ColorSensorGreen : public kitBase::robotModel::robotPar
 	Q_CLASSINFO("friendlyName", tr("Color sensor (green)"))
 
 public:
-	ColorSensorGreen(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port
-			, engine::TwoDModelEngineInterface &engine);
+	ColorSensorGreen(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+		engine::TwoDModelEngineInterface &engine);
 
 	void read();
 

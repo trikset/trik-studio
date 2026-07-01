@@ -25,12 +25,12 @@ class SizeUnit;
 
 /// The metric system, which is an implementation of the qrutils
 /// AbstractCoordinateSystem interface for using the metric system in 2D model items
-class MetricCoordinateSystem: public graphicsUtils::AbstractCoordinateSystem
+class MetricCoordinateSystem : public graphicsUtils::AbstractCoordinateSystem
 {
 	Q_OBJECT
 public:
 	explicit MetricCoordinateSystem(const QSharedPointer<twoDModel::model::SizeUnit> &metricSystem,
-					QObject* parent = nullptr);
+		QObject *parent = nullptr);
 
 	~MetricCoordinateSystem() override;
 
@@ -45,6 +45,7 @@ public:
 
 	/// Converting pixels to QPointF
 	QPointF toUnit(const QPointF &size) const override;
+
 private:
 	QSharedPointer<twoDModel::model::SizeUnit> mMetricSystem;
 };

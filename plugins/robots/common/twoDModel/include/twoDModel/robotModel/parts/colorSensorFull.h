@@ -37,9 +37,8 @@ class TWO_D_MODEL_EXPORT ColorSensorFull : public kitBase::robotModel::robotPart
 	Q_CLASSINFO("friendlyName", tr("Color sensor (full)"))
 
 public:
-	ColorSensorFull(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port
-			, engine::TwoDModelEngineInterface &engine);
+	ColorSensorFull(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+		engine::TwoDModelEngineInterface &engine);
 
 	void read();
 

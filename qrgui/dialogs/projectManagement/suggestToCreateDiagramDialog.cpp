@@ -20,8 +20,8 @@
 
 using namespace qReal;
 
-SuggestToCreateDiagramDialog::SuggestToCreateDiagramDialog(const EditorManagerInterface &editorManager
-		, QWidget *parent, bool isClosable)
+SuggestToCreateDiagramDialog::SuggestToCreateDiagramDialog(const EditorManagerInterface &editorManager, QWidget *parent,
+	bool isClosable)
 	: ManagedClosableDialog(parent, isClosable)
 {
 	SuggestToCreateDiagramWidget *suggestWidget = new SuggestToCreateDiagramWidget(editorManager, this);

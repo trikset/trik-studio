@@ -15,7 +15,6 @@
 #pragma once
 #include <QtCore/QThread>
 
-
 /// This class performs win8 drag manager hack for workaround of
 /// https://github.com/qreal/qreal/issues/1014
 class HackTouchDragThread : public QThread
@@ -31,5 +30,3 @@ public:
 protected:
 	virtual void run();
 };
-
-

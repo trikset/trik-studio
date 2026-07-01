@@ -26,8 +26,8 @@ using namespace kitBase::robotModel::robotParts;
 const int border = 0;
 const int defaultTraceWidth = 6;
 
-RobotItem::RobotItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-		const QString &robotImageFileName, model::RobotModel &robotModel)
+RobotItem::RobotItem(graphicsUtils::AbstractCoordinateSystem *metricSystem, const QString &robotImageFileName,
+	model::RobotModel &robotModel)
 	: mImage(robotImageFileName, true)
 	, mRobotModel(robotModel)
 {
@@ -40,20 +40,21 @@ RobotItem::RobotItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 	connect(&mRobotModel, &model::RobotModel::rotationChanged, this, &RobotItem::setRotation);
 	connect(&mRobotModel, &model::RobotModel::playingSoundChanged, this, &RobotItem::setNeededBeep);
 
-	connect(&mRobotModel.configuration(), &model::SensorsConfiguration::deviceRemoved, this, &RobotItem::removeSensor);
-	connect(&mRobotModel.configuration(), &model::SensorsConfiguration::positionChanged
-			, this, &RobotItem::updateSensorPosition);
-	connect(&mRobotModel.configuration(), &model::SensorsConfiguration::rotationChanged
-			, this, &RobotItem::updateSensorRotation);
+	connect(&mRobotModel.configuration(), &model::SensorsConfiguration::deviceRemoved, this,
+		&RobotItem::removeSensor);
+	connect(&mRobotModel.configuration(), &model::SensorsConfiguration::positionChanged, this,
+		&RobotItem::updateSensorPosition);
+	connect(&mRobotModel.configuration(), &model::SensorsConfiguration::rotationChanged, this,
+		&RobotItem::updateSensorRotation);
 
-	connect(&mRobotModel.info(), &twoDModel::robotModel::TwoDRobotModel::settingsChanged
-			, this, &RobotItem::updateImage);
+	connect(&mRobotModel.info(), &twoDModel::robotModel::TwoDRobotModel::settingsChanged, this,
+		&RobotItem::updateImage);
 
 	setAcceptHoverEvents(true);
 	setAcceptDrops(true);
 	setZValue(ZValue::Robot);
 
-	connect(&mRobotModel, &model::RobotModel::deserialized, this, [this](QPointF newPos, qreal newAngle){
+	connect(&mRobotModel, &model::RobotModel::deserialized, this, [this](QPointF newPos, qreal newAngle) {
 		Q_UNUSED(newPos)
 		Q_UNUSED(newAngle)
 		prepareGeometryChange();
@@ -67,18 +68,19 @@ RobotItem::RobotItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 	mBeepItem.setParentItem(this);
 	updateGraphicParams();
 
-	QHash<kitBase::robotModel::PortInfo, kitBase::robotModel::DeviceInfo> sensors = robotModel.info().specialDevices();
+	QHash<kitBase::robotModel::PortInfo, kitBase::robotModel::DeviceInfo> sensors =
+		robotModel.info().specialDevices();
 	for (auto it = sensors.begin(); it != sensors.end(); it++) {
 		auto port = it.key();
 		auto device = it.value();
 
-		SensorItem *sensorItem = new SensorItem(coordinateSystem(), robotModel.configuration(), port
-				, robotModel.info().sensorImagePath(device), robotModel.info().sensorImageRect(device));
+		SensorItem *sensorItem = new SensorItem(coordinateSystem(), robotModel.configuration(), port,
+			robotModel.info().sensorImagePath(device), robotModel.info().sensorImageRect(device));
 		addSensor(port, sensorItem);
 
 		const QPair<QPoint, qreal> configuration(robotModel.info().specialDeviceConfiguration(port));
-		QPoint position(configuration.first.x() * boundingRect().width() / 2
-				, configuration.first.y() * boundingRect().height() / 2);
+		QPoint position(configuration.first.x() * boundingRect().width() / 2,
+			configuration.first.y() * boundingRect().height() / 2);
 		sensorItem->setPos(position + boundingRect().center());
 		sensorItem->setRotation(configuration.second);
 	}
@@ -97,7 +99,7 @@ void RobotItem::updateGraphicParams()
 	RotateItem::init();
 }
 
-void RobotItem::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
+void RobotItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 	Q_UNUSED(option)
 	Q_UNUSED(widget)
@@ -106,7 +108,7 @@ void RobotItem::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* opti
 	mImage.draw(*painter, RectangleImpl::calcRect(x1(), y1(), x2(), y2()).toRect());
 }
 
-void RobotItem::drawExtractionForItem(QPainter* painter)
+void RobotItem::drawExtractionForItem(QPainter *painter)
 {
 	painter->setPen(QPen(Qt::blue));
 	painter->drawRect(QRectF(QPointF(x1(), y1()), QPointF(x2(), y2())));
@@ -122,7 +124,7 @@ QRectF RobotItem::calcNecessaryBoundingRect() const
 	return boundingRect().adjusted(border, border, -border, -border);
 }
 
-void RobotItem::mousePressEvent(QGraphicsSceneMouseEvent * event)
+void RobotItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
 	Q_EMIT mousePressed();
 	AbstractItem::mousePressEvent(event);
@@ -133,12 +135,12 @@ void RobotItem::mousePressEvent(QGraphicsSceneMouseEvent * event)
 	}
 }
 
-void RobotItem::mouseMoveEvent(QGraphicsSceneMouseEvent * event)
+void RobotItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
 	AbstractItem::mouseMoveEvent(event);
 }
 
-void RobotItem::mouseReleaseEvent(QGraphicsSceneMouseEvent * event)
+void RobotItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
 	AbstractItem::mouseReleaseEvent(event);
 	if (editable()) {
@@ -163,8 +165,7 @@ QDomElement RobotItem::serialize(QDomElement &parent) const
 	auto *coordSystem = coordinateSystem();
 	result.setTagName("robot");
 	result.setAttribute("position",
-	                    QString::number(coordSystem->toUnit(x()))
-	                    + ":" + QString::number(coordSystem->toUnit(y())));
+		QString::number(coordSystem->toUnit(x())) + ":" + QString::number(coordSystem->toUnit(y())));
 	result.setAttribute("direction", QString::number(rotation()));
 	return result;
 }
@@ -230,7 +231,6 @@ void RobotItem::removeSensor(const kitBase::robotModel::PortInfo &port)
 	delete sensor;
 	// Only pointer itself, not the pointee can be used after deletion
 	Q_EMIT sensorRemoved(sensor);
-
 }
 
 void RobotItem::updateSensorPosition(const kitBase::robotModel::PortInfo &port)
@@ -299,8 +299,7 @@ twoDModel::items::SolidItem::BodyType RobotItem::bodyType() const
 	return BodyType::DYNAMIC;
 }
 
-void RobotItem::BeepItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
-		, QWidget *widget)
+void RobotItem::BeepItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 	Q_UNUSED(option)
 	Q_UNUSED(widget)
