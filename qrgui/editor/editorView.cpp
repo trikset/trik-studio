@@ -63,7 +63,7 @@ EditorView::EditorView(const models::Models &models
 
 	setAlignment(Qt::AlignCenter);
 
-	connect(&mTouchManager, SIGNAL(gestureStarted()), &mScene, SLOT(deleteGesture()));
+	connect(&mTouchManager, &gui::editor::view::details::TouchSupportManager::gestureStarted, &mScene, &gui::editor::EditorViewScene::deleteGesture);
 	SettingsListener::listen("IndexGrid", &mScene, &EditorViewScene::redraw);
 	SettingsListener::listen("GridWidth", &mScene, &EditorViewScene::redraw);
 	SettingsListener::listen("CurrentFont", this, &EditorView::setSceneFont);
@@ -124,7 +124,7 @@ void EditorView::startAnimation(char const *slot)
 	anim->setUpdateInterval(zoomAnimationInterval);
 
 	connect(anim, SIGNAL(valueChanged(qreal)), this, slot);
-	connect(anim, SIGNAL(finished()), this, SLOT(animFinished()));
+	connect(anim, &QTimeLine::finished, this, &EditorView::animFinished);
 	anim->start();
 }
 

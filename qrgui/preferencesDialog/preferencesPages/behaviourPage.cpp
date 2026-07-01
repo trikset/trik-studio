@@ -32,8 +32,8 @@ PreferencesBehaviourPage::PreferencesBehaviourPage(QWidget *parent)
 
 	initLanguages();
 
-	connect(mUi->autoSaveCheckBox, SIGNAL(clicked(bool)), this, SLOT(showAutoSaveBox(bool)));
-	connect(mUi->gesturesCheckBox, SIGNAL(toggled(bool)), SLOT(updateGesturesSettings(bool)));
+	connect(mUi->autoSaveCheckBox, &QAbstractButton::clicked, this, &PreferencesBehaviourPage::showAutoSaveBox);
+	connect(mUi->gesturesCheckBox, &QAbstractButton::toggled, this, &PreferencesBehaviourPage::updateGesturesSettings);
 	restoreSettings();
 }
 

@@ -31,7 +31,7 @@ DotRunner::DotRunner(
 		, mAlgorithm("")
 		, mAbsolutePathToDotFiles(absolutePathToDotFiles)
 {
-	QObject::connect(&mProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(readFromProcess()));
+	QObject::connect(&mProcess, &QProcess::readyReadStandardOutput, this, &DotRunner::readFromProcess);
 }
 
 void DotRunner::readFromProcess()

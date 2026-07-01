@@ -88,14 +88,14 @@ NodeElement::NodeElement(const NodeElementType &type, const Id &id, const models
 	mFoldedContents = mContents;
 
 	mSwitchGridAction.setCheckable(true);
-	connect(&mSwitchGridAction, SIGNAL(toggled(bool)), this, SLOT(switchGrid(bool)));
+	connect(&mSwitchGridAction, &QAction::toggled, this, &NodeElement::switchGrid);
 
 	mGrid = new SceneGridHandler(this);
 	switchGrid(SettingsManager::value("ActivateGrid").toBool());
 
 	initPortsVisibility();
 
-	connect(&mRenderTimer, SIGNAL(timeout()), this, SLOT(initRenderedDiagram()));
+	connect(&mRenderTimer, &QTimer::timeout, this, &NodeElement::initRenderedDiagram);
 
 	mStartingLabelsCount = mLabels.count();
 

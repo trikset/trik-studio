@@ -38,8 +38,8 @@ Arrow::Arrow(QPoint sourcePoint, QPoint destPoint, int lifeTime, QWidget *parent
 	setWindowFlags(Qt::WindowStaysOnTopHint);
 	activateWindow();
 
-	QTimer::singleShot(mDuration, this, SLOT(disappear()));
-	QTimer::singleShot(lifeTime, this, SLOT(deleteLater()));
+	QTimer::singleShot(mDuration, this, &Arrow::disappear);
+	QTimer::singleShot(lifeTime, this, &QObject::deleteLater);
 }
 
 void Arrow::paintEvent(QPaintEvent *)
