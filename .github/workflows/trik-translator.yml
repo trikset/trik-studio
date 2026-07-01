@@ -11,19 +11,19 @@ jobs:
   update:
     runs-on: ubuntu-latest
     env:
-      TRIK_TRANSLATOR_PATH: ../trik-translator
+      TRIK_TRANSLATOR_PATH: trik-translator
     steps:
       - name: Checkout current repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Checkout external repository
+      - name: Checkout trik-translator
         uses: actions/checkout@v4
         with:
           repository: vkutuev/trik-translator
-          ref: v1.0.0
-          path: trik-translator
+          ref: main
+          path: ${{ env.TRIK_TRANSLATOR_PATH }}
           fetch-depth: 1
 
       - name: Create .env
@@ -41,6 +41,12 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Install Qt qmake + modules
+        run: |
+          sudo apt update
+          sudo apt install -y qtscript5-dev qttools5-dev-tools qtmultimedia5-dev libqt5serialport5-dev libqt5svg5-dev \
+          qtbase5-private-dev libqscintilla2-qt5-dev libquazip5-dev
+
       - name: Install uv
         run: pip install uv
 
@@ -51,8 +57,8 @@ jobs:
       - name: Run machine
         working-directory: ${{ env.TRIK_TRANSLATOR_PATH }}
         run: |   
-          for lang in fr ru; do
-            uv run main.py "$GITHUB_WORKSPACE" "$lang"
+          for lang in fr ru vi es; do
+            uv run main.py "$GITHUB_WORKSPACE" "$lang" --max_tokens 10000
           done
 
       - name: Remove secrets
@@ -75,8 +81,8 @@ jobs:
         uses: peter-evans/create-pull-request@v7
         with:
           branch: lupdatebot/lupdate-${{ github.run_id }}
-          title: "Automated update"
-          commit-message: "Automated update"
+          title: "TRIK Translator: automatic update"
+          commit-message: "TRIK Translator: automatic update"
           body: |
-            Generated from external release.
+            TRIK Translator: automatic update.
           delete-branch: true
