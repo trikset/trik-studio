@@ -26,7 +26,7 @@ class FoldCommand : public NodeElementCommand
 	Q_OBJECT
 public:
 	FoldCommand(const NodeElement *element);
-	virtual ~FoldCommand() {}
+	virtual ~FoldCommand() = default;
 
 protected:
 	bool execute();

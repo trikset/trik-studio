@@ -52,9 +52,7 @@ GraphicType::GraphicType(
 {
 }
 
-GraphicType::~GraphicType()
-{
-}
+GraphicType::~GraphicType() = default;
 
 bool GraphicType::init(const QString &context)
 {

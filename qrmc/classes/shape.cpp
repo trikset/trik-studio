@@ -34,9 +34,7 @@ Shape::Shape(const QString &shape, const QString &targetDirectory)
 	init(shape);
 }
 
-Shape::~Shape()
-{
-}
+Shape::~Shape() = default;
 
 void Shape::setNode(GraphicType *node)
 {

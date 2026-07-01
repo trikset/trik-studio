@@ -19,9 +19,7 @@
 using namespace qReal;
 using namespace models::details::modelsImplementation;
 
-AbstractModelItem::~AbstractModelItem()
-{
-}
+AbstractModelItem::~AbstractModelItem() = default;
 
 AbstractModelItem::AbstractModelItem(const Id &id, AbstractModelItem *parent)
 	: mParent(parent), mId(id)

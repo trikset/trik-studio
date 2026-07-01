@@ -22,6 +22,4 @@ TrikShell::TrikShell(const DeviceInfo &info, const PortInfo &port)
 {
 }
 
-TrikShell::~TrikShell()
-{
-}
+TrikShell::~TrikShell() = default;

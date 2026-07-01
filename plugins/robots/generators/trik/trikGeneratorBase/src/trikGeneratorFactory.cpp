@@ -73,9 +73,7 @@ TrikGeneratorFactory::TrikGeneratorFactory(const qrRepo::RepoApi &repo
 	mDeviceVariables.reset(new trik::parts::TrikDeviceVariables());
 }
 
-TrikGeneratorFactory::~TrikGeneratorFactory()
-{
-}
+TrikGeneratorFactory::~TrikGeneratorFactory() = default;
 
 void TrikGeneratorFactory::initDeviceVariables()
 {

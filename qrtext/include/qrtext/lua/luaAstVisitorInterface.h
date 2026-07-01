@@ -69,7 +69,7 @@ class IndexingExpression;
 class LuaAstVisitorInterface : public core::AstVisitorInterface
 {
 public:
-	~LuaAstVisitorInterface() override {}
+	~LuaAstVisitorInterface() override = default;
 
 	// Second argument is a parent everywhere.
 

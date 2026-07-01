@@ -21,9 +21,7 @@ Range::Range(const Connection &start, const Connection &end)
 {
 }
 
-Range::Range()
-{
-}
+Range::Range() = default;
 
 const Connection &Range::start() const
 {

@@ -21,9 +21,7 @@ static const QString strBase64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrst
 
 using namespace qReal::gestures;
 
-KeyManager::KeyManager()
-{
-}
+KeyManager::KeyManager() = default;
 
 QString KeyManager::getKey(QList<QPoint> const &path)
 {

@@ -54,9 +54,7 @@ TrikQtsGeneratorPluginBase::TrikQtsGeneratorPluginBase(
 {
 }
 
-TrikQtsGeneratorPluginBase::~TrikQtsGeneratorPluginBase()
-{
-}
+TrikQtsGeneratorPluginBase::~TrikQtsGeneratorPluginBase() = default;
 
 void TrikQtsGeneratorPluginBase::init(const kitBase::KitPluginConfigurator &configurer)
 {

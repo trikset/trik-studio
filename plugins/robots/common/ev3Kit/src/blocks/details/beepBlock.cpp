@@ -23,9 +23,7 @@ BeepBlock::BeepBlock(kitBase::robotModel::RobotModelInterface &robotModel)
 {
 }
 
-BeepBlock::~BeepBlock()
-{
-}
+BeepBlock::~BeepBlock() = default;
 
 int BeepBlock::duration()
 {

@@ -20,9 +20,7 @@
 
 using namespace qReal::interpretation::blocks;
 
-SubprogramBlock::SubprogramBlock()
-{
-}
+SubprogramBlock::SubprogramBlock() = default;
 
 void SubprogramBlock::run()
 {

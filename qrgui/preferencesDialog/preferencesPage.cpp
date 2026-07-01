@@ -22,9 +22,7 @@ PreferencesPage::PreferencesPage(QWidget *parent)
 {
 }
 
-PreferencesPage::~PreferencesPage()
-{
-}
+PreferencesPage::~PreferencesPage() = default;
 
 void PreferencesPage::setRestartFlag()
 {

@@ -24,9 +24,7 @@ ElementCommand::ElementCommand(const EditorViewScene *scene, const Id &id)
 	reinitElement();
 }
 
-ElementCommand::~ElementCommand()
-{
-}
+ElementCommand::~ElementCommand() = default;
 
 const EditorViewScene *ElementCommand::scene() const
 {

@@ -37,9 +37,7 @@ Protocol::Protocol(TcpRobotCommunicatorInterface &communicator, int timeout)
 	mStateMachine->addState(mErrored);
 }
 
-Protocol::~Protocol()
-{
-}
+Protocol::~Protocol() = default;
 
 void Protocol::setAction(QState *state, const std::function<void(TcpRobotCommunicatorInterface &)> &action)
 {

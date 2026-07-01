@@ -32,9 +32,7 @@ TcpRobotCommunicatorWorker::TcpRobotCommunicatorWorker(const QString &robotIpReg
 	qRegisterMetaType<MessageKind>("MessageKind");
 }
 
-TcpRobotCommunicatorWorker::~TcpRobotCommunicatorWorker()
-{
-}
+TcpRobotCommunicatorWorker::~TcpRobotCommunicatorWorker() = default;
 
 void TcpRobotCommunicatorWorker::init()
 {

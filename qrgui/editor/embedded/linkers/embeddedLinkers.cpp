@@ -14,5 +14,4 @@
 
 #include "embeddedLinkers.h"
 
-EmbeddedLinkers::EmbeddedLinkers() {
-}
+EmbeddedLinkers::EmbeddedLinkers() = default;

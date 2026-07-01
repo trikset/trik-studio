@@ -57,7 +57,7 @@ public:
 		this->correctPath = path;
 		this->key = key;
 	}
-	KeyObjectItem(){}
+	KeyObjectItem() = default;
 	QString object;
 	QList<QPoint> correctPath;
 	QString key;

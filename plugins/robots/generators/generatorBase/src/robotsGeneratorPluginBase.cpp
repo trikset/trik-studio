@@ -31,13 +31,9 @@ using namespace utils;
 /// that file was created and filled at the same time.
 const int maxTimestampsDifference = 3000;
 
-RobotsGeneratorPluginBase::RobotsGeneratorPluginBase()
-{
-}
+RobotsGeneratorPluginBase::RobotsGeneratorPluginBase() = default;
 
-RobotsGeneratorPluginBase::~RobotsGeneratorPluginBase()
-{
-}
+RobotsGeneratorPluginBase::~RobotsGeneratorPluginBase() = default;
 
 QString RobotsGeneratorPluginBase::defaultFilePath(const QString &projectName) const
 {

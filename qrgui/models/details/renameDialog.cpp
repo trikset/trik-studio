@@ -39,9 +39,7 @@ RenameDialog::RenameDialog(const QString &initialText, QWidget *parent)
 	setLayout(layout);
 }
 
-RenameDialog::~RenameDialog()
-{
-}
+RenameDialog::~RenameDialog() = default;
 
 QString RenameDialog::name() const
 {

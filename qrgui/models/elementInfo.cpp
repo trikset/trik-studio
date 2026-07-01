@@ -20,9 +20,7 @@
 
 using namespace qReal;
 
-ElementInfo::ElementInfo()
-{
-}
+ElementInfo::ElementInfo() = default;
 
 ElementInfo::ElementInfo(bool isEdge)
 	: mIsEdge(isEdge)

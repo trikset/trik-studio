@@ -35,9 +35,7 @@ StopRobotProtocol::StopRobotProtocol(TcpRobotCommunicator &communicator)
 	connect(mProtocol.data(), &Protocol::timeout, this, &StopRobotProtocol::timeout);
 }
 
-StopRobotProtocol::~StopRobotProtocol()
-{
-}
+StopRobotProtocol::~StopRobotProtocol() = default;
 
 void StopRobotProtocol::run(const QString &shutdownCommand)
 {

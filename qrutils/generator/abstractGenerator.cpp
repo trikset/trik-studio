@@ -34,9 +34,7 @@ AbstractGenerator::AbstractGenerator(const QString &templateDirPath
 	loadUtilsTemplates();
 }
 
-AbstractGenerator::~AbstractGenerator()
-{
-}
+AbstractGenerator::~AbstractGenerator() = default;
 
 QDir AbstractGenerator::getDir(const QString &path)
 {

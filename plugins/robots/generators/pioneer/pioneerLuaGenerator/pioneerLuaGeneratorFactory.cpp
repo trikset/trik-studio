@@ -61,9 +61,7 @@ PioneerLuaGeneratorFactory::PioneerLuaGeneratorFactory(const qrRepo::RepoApi &re
 {
 }
 
-PioneerLuaGeneratorFactory::~PioneerLuaGeneratorFactory()
-{
-}
+PioneerLuaGeneratorFactory::~PioneerLuaGeneratorFactory() = default;
 
 generatorBase::simple::AbstractSimpleGenerator *PioneerLuaGeneratorFactory::simpleGenerator(const qReal::Id &id
 		, generatorBase::GeneratorCustomizer &customizer)

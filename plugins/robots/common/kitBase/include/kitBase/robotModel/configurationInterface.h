@@ -31,7 +31,7 @@ class ROBOTS_KIT_BASE_EXPORT ConfigurationInterface : public QObject
 	Q_OBJECT
 
 public:
-	~ConfigurationInterface() override {}
+	~ConfigurationInterface() override = default;
 
 	/// Adds device to pending configuration. Actual configuring of a device on a robot is done in applyConfiguration().
 	/// @param device - device to be added to configuration. Transfers ownership.

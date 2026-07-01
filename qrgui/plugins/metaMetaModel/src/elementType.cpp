@@ -32,9 +32,7 @@ ElementType::ElementType(Metamodel &metamodel)
 {
 }
 
-ElementType::~ElementType()
-{
-}
+ElementType::~ElementType() = default;
 
 Metamodel &ElementType::metamodel() const
 {
