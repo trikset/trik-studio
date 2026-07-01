@@ -27,8 +27,8 @@ EllipseObject::EllipseObject(QObject *parent)
 {
 }
 
-EllipseObject::EllipseObject(QPoint center, int semiDiameterX, int semiDiameterY
-		, const QColor &color, int thickness, bool filled, QObject *parent)
+EllipseObject::EllipseObject(QPoint center, int semiDiameterX, int semiDiameterY, const QColor &color, int thickness,
+	bool filled, QObject *parent)
 	: CanvasObject(color, thickness, parent)
 	, mCenter(center)
 	, mSemiDiameterX(semiDiameterX)
@@ -69,7 +69,8 @@ void EllipseObject::setSemiDiameterY(int b)
 
 QRect EllipseObject::boundingRect() const
 {
-	return QRect(center() - QPoint(semiDiameterX(), semiDiameterY()), QSize(2 * semiDiameterX(), 2 * semiDiameterY()));
+	return QRect(center() - QPoint(semiDiameterX(), semiDiameterY()),
+		QSize(2 * semiDiameterX(), 2 * semiDiameterY()));
 }
 
 bool EllipseObject::filled() const

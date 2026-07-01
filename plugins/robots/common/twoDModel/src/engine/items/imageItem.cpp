@@ -24,8 +24,8 @@ using namespace twoDModel::items;
 using namespace qReal;
 using namespace graphicsUtils;
 
-ImageItem::ImageItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-		     const QSharedPointer<model::Image> &image, const QRectF &geometry)
+ImageItem::ImageItem(graphicsUtils::AbstractCoordinateSystem *metricSystem, const QSharedPointer<model::Image> &image,
+	const QRectF &geometry)
 	: mImage(image)
 {
 	setCoordinateSystem(metricSystem);
@@ -37,9 +37,7 @@ ImageItem::ImageItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 	setY2(geometry.bottom());
 	setBackgroundRole(false);
 	unsetCursor();
-	connect(this, &AbstractItem::mouseInteractionStarted, this, [this](){
-			mEstimatedPos = pos();
-		});
+	connect(this, &AbstractItem::mouseInteractionStarted, this, [this]() { mEstimatedPos = pos(); });
 }
 
 AbstractItem *ImageItem::clone() const
@@ -49,7 +47,7 @@ AbstractItem *ImageItem::clone() const
 	return cloned;
 }
 
-void ImageItem::drawExtractionForItem(QPainter* painter)
+void ImageItem::drawExtractionForItem(QPainter *painter)
 {
 	if (isSelected() || !isBackground()) {
 		AbstractItem::drawExtractionForItem(painter);
@@ -77,7 +75,7 @@ QPainterPath ImageItem::resizeArea() const
 
 QAction *ImageItem::imageTool()
 {
-	auto * const result = new QAction(loadTextColorIcon(":/icons/2d_image.svg"), tr("Image (I)"), nullptr);
+	auto *const result = new QAction(loadTextColorIcon(":/icons/2d_image.svg"), tr("Image (I)"), nullptr);
 	result->setShortcuts({QKeySequence(Qt::Key_I), QKeySequence(Qt::Key_Minus)});
 	result->setCheckable(false);
 	return result;
@@ -117,15 +115,15 @@ QDomElement ImageItem::serialize(QDomElement &parent) const
 	QDomElement imageNode = AbstractItem::serialize(parent);
 	imageNode.setTagName("image");
 
-//	mImage.serialize(imageNode);
+	//	mImage.serialize(imageNode);
 	const auto &system = coordinateSystem();
-	imageNode.setAttribute("rect", QString("%1:%2:%3:%4").arg(
-			QString::number(system->toUnit(x1()))
-			, QString::number(system->toUnit(y1()))
-			, QString::number(system->toUnit(x2() - x1()))
-			, QString::number(system->toUnit(y2() - y1()))));
-	imageNode.setAttribute("position", QString::number(system->toUnit(x()))
-					+ ":" + QString::number(system->toUnit(y())));
+	imageNode.setAttribute("rect",
+		QString("%1:%2:%3:%4")
+			.arg(QString::number(system->toUnit(x1())), QString::number(system->toUnit(y1())),
+				QString::number(system->toUnit(x2() - x1())),
+				QString::number(system->toUnit(y2() - y1()))));
+	imageNode.setAttribute("position",
+		QString::number(system->toUnit(x())) + ":" + QString::number(system->toUnit(y())));
 	imageNode.setAttribute("imageId", mImage->imageId());
 	imageNode.setAttribute("isBackground", mBackgroundRole ? "true" : "false");
 	return imageNode;
@@ -135,7 +133,7 @@ void ImageItem::deserialize(const QDomElement &element)
 {
 	AbstractItem::deserialize(element);
 	QRectF rect;
-	const auto& system = coordinateSystem();
+	const auto &system = coordinateSystem();
 	if (element.hasAttribute("backgroundRect")) {
 		rect = deserializeRect(element.attribute("backgroundRect"));
 		setPos(0, 0);

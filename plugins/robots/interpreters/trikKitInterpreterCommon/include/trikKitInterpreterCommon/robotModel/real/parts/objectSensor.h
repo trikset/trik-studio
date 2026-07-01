@@ -30,9 +30,8 @@ class ROBOTS_TRIK_KIT_INTERPRETER_COMMON_EXPORT ObjectSensor : public robotModel
 	Q_OBJECT
 
 public:
-	ObjectSensor(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port
-			, utils::robotCommunication::TcpRobotCommunicator &robotCommunicator);
+	ObjectSensor(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+		utils::robotCommunication::TcpRobotCommunicator &robotCommunicator);
 
 	void init() override;
 	void detect() override;

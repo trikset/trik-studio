@@ -81,8 +81,8 @@ protected:
 
 	bool pluginsEnough() const;
 	QString missingPluginNames() const;
-	void checkNeededPluginsRecursive(const details::ModelsAssistInterface &api, const Id &id
-			, QStringList &result) const;
+	void checkNeededPluginsRecursive(const details::ModelsAssistInterface &api, const Id &id,
+		QStringList &result) const;
 
 	virtual bool checkVersions();
 	bool checkForUnknownElements();

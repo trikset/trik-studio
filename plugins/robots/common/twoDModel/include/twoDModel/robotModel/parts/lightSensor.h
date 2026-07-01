@@ -35,9 +35,8 @@ class TWO_D_MODEL_EXPORT LightSensor : public kitBase::robotModel::robotParts::L
 	Q_OBJECT
 
 public:
-	LightSensor(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port
-			, engine::TwoDModelEngineInterface &engine);
+	LightSensor(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+		engine::TwoDModelEngineInterface &engine);
 
 	void read() override;
 

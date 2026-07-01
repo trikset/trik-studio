@@ -35,12 +35,11 @@ public:
 
 	qReal::interpretation::BlockInterface *block(const qReal::Id &element) override;
 
-	void configure(const qReal::GraphicalModelAssistInterface &graphicalModelApi
-			, const qReal::LogicalModelAssistInterface &logicalModelApi
-			, kitBase::robotModel::RobotModelManagerInterface &robotModelManager
-			, qReal::ErrorReporterInterface &errorReporter
-			, qrtext::LanguageToolboxInterface &textLanguageToolbox
-			) final;
+	void configure(const qReal::GraphicalModelAssistInterface &graphicalModelApi,
+		const qReal::LogicalModelAssistInterface &logicalModelApi,
+		kitBase::robotModel::RobotModelManagerInterface &robotModelManager,
+		qReal::ErrorReporterInterface &errorReporter,
+		qrtext::LanguageToolboxInterface &textLanguageToolbox) final;
 
 	/// May be overriden to disable some blocks from palette when binded to this factory
 	/// robot model is active. Default implementation disables nothing.
@@ -59,11 +58,11 @@ protected:
 	virtual qReal::interpretation::Block *produceBlock(const qReal::Id &element) = 0;
 
 	/// @todo: there is no such thing as protected fields. One can not trust its descendants.
-	kitBase::robotModel::RobotModelManagerInterface *mRobotModelManager;  // Does not have ownership.
-	const qReal::GraphicalModelAssistInterface *mGraphicalModelApi;  // Does not have ownership.
-	const qReal::LogicalModelAssistInterface *mLogicalModelApi;  // Does not have ownership.
-	qReal::ErrorReporterInterface *mErrorReporter;  // Does not have ownership.
-	qrtext::LanguageToolboxInterface *mParser;  // Does not have ownership.
+	kitBase::robotModel::RobotModelManagerInterface *mRobotModelManager; // Does not have ownership.
+	const qReal::GraphicalModelAssistInterface *mGraphicalModelApi; // Does not have ownership.
+	const qReal::LogicalModelAssistInterface *mLogicalModelApi; // Does not have ownership.
+	qReal::ErrorReporterInterface *mErrorReporter; // Does not have ownership.
+	qrtext::LanguageToolboxInterface *mParser; // Does not have ownership.
 };
 
 }

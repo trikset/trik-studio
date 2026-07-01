@@ -44,7 +44,7 @@ void ToolPluginManager::init(const PluginConfigurator &configurator)
 	QLOG_INFO() << "Initializing tool plugins...";
 	mSystemEvents = &configurator.systemEvents();
 
-	for (ToolPluginInterface * const toolPlugin : mPlugins) {
+	for (ToolPluginInterface *const toolPlugin : mPlugins) {
 		toolPlugin->init(configurator);
 	}
 }
@@ -59,7 +59,7 @@ void ToolPluginManager::release()
 QList<ActionInfo> ToolPluginManager::actions() const
 {
 	QList<ActionInfo> result;
-	for (ToolPluginInterface * const toolPlugin : mPlugins) {
+	for (ToolPluginInterface *const toolPlugin : mPlugins) {
 		result += toolPlugin->actions();
 	}
 
@@ -69,7 +69,7 @@ QList<ActionInfo> ToolPluginManager::actions() const
 QList<HotKeyActionInfo> ToolPluginManager::hotKeyActions() const
 {
 	QList<HotKeyActionInfo> result;
-	for (ToolPluginInterface * const toolPlugin : mPlugins) {
+	for (ToolPluginInterface *const toolPlugin : mPlugins) {
 		result += toolPlugin->hotKeyActions();
 	}
 
@@ -78,7 +78,7 @@ QList<HotKeyActionInfo> ToolPluginManager::hotKeyActions() const
 
 void ToolPluginManager::loadDefaultSettings()
 {
-	for (ToolPluginInterface * const toolPlugin : mPlugins) {
+	for (ToolPluginInterface *const toolPlugin : mPlugins) {
 		for (const QString &defaultSettingsFile : toolPlugin->defaultSettingsFiles()) {
 			SettingsManager::loadDefaultSettings(defaultSettingsFile);
 		}
@@ -88,7 +88,7 @@ void ToolPluginManager::loadDefaultSettings()
 QList<QPair<QString, gui::PreferencesPage *>> ToolPluginManager::preferencesPages() const
 {
 	QList<QPair<QString, gui::PreferencesPage *>> result;
-	for (ToolPluginInterface * const toolPlugin : mPlugins) {
+	for (ToolPluginInterface *const toolPlugin : mPlugins) {
 		if (toolPlugin->preferencesPage().second) {
 			result << toolPlugin->preferencesPage();
 		}
@@ -111,7 +111,7 @@ std::multimap<QString, ProjectConverter> ToolPluginManager::projectConverters() 
 
 const Customizer *ToolPluginManager::customizer() const
 {
-	for (ToolPluginInterface * const toolPlugin : mPlugins) {
+	for (ToolPluginInterface *const toolPlugin : mPlugins) {
 		if (toolPlugin->customizationInterface()) {
 			return toolPlugin->customizationInterface();
 		}

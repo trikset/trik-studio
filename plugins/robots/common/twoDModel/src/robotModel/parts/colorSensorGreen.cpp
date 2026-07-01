@@ -20,9 +20,8 @@
 using namespace twoDModel::robotModel::parts;
 using namespace kitBase::robotModel;
 
-ColorSensorGreen::ColorSensorGreen(const kitBase::robotModel::DeviceInfo &info
-		, const kitBase::robotModel::PortInfo &port
-		, engine::TwoDModelEngineInterface &engine)
+ColorSensorGreen::ColorSensorGreen(const kitBase::robotModel::DeviceInfo &info,
+	const kitBase::robotModel::PortInfo &port, engine::TwoDModelEngineInterface &engine)
 	: kitBase::robotModel::robotParts::ColorSensorGreen(info, port)
 	, mEngine(engine)
 {

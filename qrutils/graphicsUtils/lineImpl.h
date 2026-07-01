@@ -30,13 +30,14 @@ public:
 	QLineF line(qreal x1, qreal y1, qreal x2, qreal y2) const;
 	QPainterPath shape(const int width, qreal x1, qreal y1, qreal x2, qreal y2) const;
 	QRectF boundingRect(qreal x1, qreal y1, qreal x2, qreal y2, qreal penWidth, const int drift) const;
-	QRectF realBoundingRectWithoutScene(qreal x1, qreal y1, qreal x2, qreal y2, qreal penWidth, const int drift) const;
-	void drawItem(QPainter* painter, qreal x1, qreal y1, qreal x2, qreal y2);
-	void drawPointExtractionForItem(QPainter* painter, qreal x1, qreal y1, qreal x2, qreal y2);
-	void drawExtractionForItem(QPainter* painter, qreal x1, qreal y1, qreal x2, qreal y2, const int drift);
-	void drawFieldForResizeItem(QPainter* painter, const int resizeDrift, qreal x1, qreal y1, qreal x2, qreal y2);
-	QPair<qreal, qreal> reshapeRectWithShiftForLine(qreal x1, qreal y1, qreal x2, qreal y2, qreal differenceX
-			, qreal differenceY, qreal size);
+	QRectF realBoundingRectWithoutScene(qreal x1, qreal y1, qreal x2, qreal y2, qreal penWidth,
+		const int drift) const;
+	void drawItem(QPainter *painter, qreal x1, qreal y1, qreal x2, qreal y2);
+	void drawPointExtractionForItem(QPainter *painter, qreal x1, qreal y1, qreal x2, qreal y2);
+	void drawExtractionForItem(QPainter *painter, qreal x1, qreal y1, qreal x2, qreal y2, const int drift);
+	void drawFieldForResizeItem(QPainter *painter, const int resizeDrift, qreal x1, qreal y1, qreal x2, qreal y2);
+	QPair<qreal, qreal> reshapeRectWithShiftForLine(qreal x1, qreal y1, qreal x2, qreal y2, qreal differenceX,
+		qreal differenceY, qreal size);
 	QPainterPath fieldForResizeItem(const int resizeDrift, qreal x1, qreal y1, qreal x2, qreal y2) const;
 
 	/// Serializes line`s begin and end into the given XML element.

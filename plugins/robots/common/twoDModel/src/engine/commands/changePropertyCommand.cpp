@@ -18,10 +18,8 @@
 
 using namespace twoDModel::commands;
 
-ChangePropertyCommand::ChangePropertyCommand(const graphicsUtils::AbstractScene &scene
-		, const QStringList &ids
-		, const QString &property
-		, const QVariant &value)
+ChangePropertyCommand::ChangePropertyCommand(const graphicsUtils::AbstractScene &scene, const QStringList &ids,
+	const QString &property, const QVariant &value)
 	: mScene(scene)
 	, mIds(ids)
 	, mPropertyName(property)

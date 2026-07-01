@@ -66,9 +66,8 @@ void Node::connect(QList<Range> const &ranges)
 	std::sort(mRanges.begin(), mRanges.end(), [](Range const &a, Range const &b) { return a.start() < b.start(); });
 }
 
-void Node::acceptRecursively(AstVisitorInterface &visitor
-		, const QSharedPointer<Node> &pointer
-		, const QSharedPointer<Node> &parent)
+void Node::acceptRecursively(AstVisitorInterface &visitor, const QSharedPointer<Node> &pointer,
+	const QSharedPointer<Node> &parent)
 {
 	for (const auto &node : children()) {
 		if (node.data()) {

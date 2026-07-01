@@ -28,16 +28,18 @@ public:
 	/// Constructor for initialization in form of "key = value", like "x = 1" or "[30] = 23".
 	/// @param key - table key.
 	/// @param value - value to assign to a given key.
-	FieldInitialization(QSharedPointer<Expression> const &key
-			, QSharedPointer<Expression> const &value)
-		: mKey(key), mValue(value), mImplicitKey(false)
+	FieldInitialization(QSharedPointer<Expression> const &key, QSharedPointer<Expression> const &value)
+		: mKey(key)
+		, mValue(value)
+		, mImplicitKey(false)
 	{
 	}
 
 	/// Constructor for initialization in form of "value", like "1" or "f(x)".
 	/// @param value - value to assign to "current" key (see http://www.lua.org/work/doc/manual.html#3.4.9).
 	FieldInitialization(QSharedPointer<Expression> const &value)
-		: mValue(value), mImplicitKey(true)
+		: mValue(value)
+		, mImplicitKey(true)
 	{
 	}
 
@@ -65,11 +67,11 @@ public:
 	}
 
 private:
-	void accept(core::AstVisitorInterface &visitor, const QSharedPointer<Node> &pointer
-			, const QSharedPointer<Node> &parent) override
+	void accept(core::AstVisitorInterface &visitor, const QSharedPointer<Node> &pointer,
+		const QSharedPointer<Node> &parent) override
 	{
-		static_cast<LuaAstVisitorInterface *>(&visitor)->visit(
-				qSharedPointerCast<FieldInitialization>(pointer), parent);
+		static_cast<LuaAstVisitorInterface *>(&visitor)->visit(qSharedPointerCast<FieldInitialization>(pointer),
+			parent);
 	}
 
 	QSharedPointer<Expression> mKey;

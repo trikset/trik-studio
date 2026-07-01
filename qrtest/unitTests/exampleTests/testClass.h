@@ -17,6 +17,10 @@
 class TestClass
 {
 public:
-	virtual ~TestClass() {}
-	virtual void testMethod() {}
+	virtual ~TestClass()
+	{
+	}
+	virtual void testMethod()
+	{
+	}
 };

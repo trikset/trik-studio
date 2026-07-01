@@ -19,13 +19,9 @@
 using namespace trik::simple;
 using namespace generatorBase::simple;
 
-RemoveFileGenerator::RemoveFileGenerator(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, const qReal::Id &id
-		, QObject *parent)
-	: BindingGenerator(repo, customizer, id, "files/removeFile.t"
-			, { Binding::createDirect("@@FILE@@", "File") }
-			, parent)
+RemoveFileGenerator::RemoveFileGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+	const qReal::Id &id, QObject *parent)
+	: BindingGenerator(repo, customizer, id, "files/removeFile.t", {Binding::createDirect("@@FILE@@", "File")},
+		  parent)
 {
-
 }

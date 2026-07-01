@@ -29,9 +29,8 @@ class ColorSensorPassive : public kitBase::robotModel::robotParts::ColorSensorPa
 	Q_OBJECT
 
 public:
-	ColorSensorPassive(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port
-			, utils::robotCommunication::RobotCommunicator &robotCommunicator);
+	ColorSensorPassive(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+		utils::robotCommunication::RobotCommunicator &robotCommunicator);
 
 	void read() override;
 

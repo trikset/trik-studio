@@ -30,9 +30,9 @@ public:
 	/// Delimiter that will be inserted instead of '.' in each "elemName.propertyName" occurencce
 	static QString const delimeter;
 
-	TextCodeGenerator(LogicalModelAssistInterface &logicalModelApi
-			, GraphicalModelAssistInterface &graphicalModelApi
-			, gui::MainWindowInterpretersInterface &interpretersInterface);
+	TextCodeGenerator(LogicalModelAssistInterface &logicalModelApi,
+		GraphicalModelAssistInterface &graphicalModelApi,
+		gui::MainWindowInterpretersInterface &interpretersInterface);
 
 	/// Matched rule id
 	void setRule(Id const &rule);
@@ -94,8 +94,8 @@ protected:
 	IdList mRuleElements;
 	QHash<Id, Id> mMatch;
 
-	QHash<QString, QSet<QString>* > mPropertiesUsage;
-	QHash<QString, QSet<QString>* > mMethodsInvocation;
+	QHash<QString, QSet<QString> *> mPropertiesUsage;
+	QHash<QString, QSet<QString> *> mMethodsInvocation;
 };
 
 }

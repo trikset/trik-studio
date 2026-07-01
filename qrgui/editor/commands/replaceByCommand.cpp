@@ -21,8 +21,8 @@ using namespace qReal;
 using namespace qReal::commands;
 using namespace qReal::gui::editor::commands;
 
-ReplaceByCommand::ReplaceByCommand(const models::Models &models, gui::editor::EditorViewScene &scene
-		, NodeElement *elementToRemove, const ElementInfo &elementToCreate)
+ReplaceByCommand::ReplaceByCommand(const models::Models &models, gui::editor::EditorViewScene &scene,
+	NodeElement *elementToRemove, const ElementInfo &elementToCreate)
 	: mCreateCommand(models, {elementToCreate})
 	, mRemoveCommand(models)
 	, mScene(scene)
@@ -35,7 +35,8 @@ void ReplaceByCommand::reconnect(ElementInfo &oldInfo, ElementInfo &newInfo)
 {
 	auto *removed = mScene.getNodeById(oldInfo.id());
 	auto *created = mScene.getNodeById(newInfo.id());
-	if (!removed || !created) return;
+	if (!removed || !created)
+		return;
 	for (auto edge : removed->edgeList()) {
 		const auto &srcElem = removed == edge->src() ? created : edge->src();
 		const auto &dstElem = removed == edge->dst() ? created : edge->dst();

@@ -17,7 +17,8 @@
 using namespace qReal;
 using namespace text;
 
-TextHighlighter::TextHighlighter(QTextDocument *document): QSyntaxHighlighter(document)
+TextHighlighter::TextHighlighter(QTextDocument *document)
+	: QSyntaxHighlighter(document)
 {
 	HighlightingRule rule;
 
@@ -25,8 +26,8 @@ TextHighlighter::TextHighlighter(QTextDocument *document): QSyntaxHighlighter(do
 	mKeywordFormat.setFontWeight(QFont::Bold);
 	QStringList keywordPatterns;
 	keywordPatterns << "\\bconst\\b" << "\\bdouble\\b" << "\\bint\\b" << "\\bvoid\\b"
-					<< "\\bwhile\\b" << "\\bif\\b" << "\\belse\\b"
-					<< "\\breturn\\b" << "\\bcontinue\\b" << "\\bbreak\\b"  ;
+			<< "\\bwhile\\b" << "\\bif\\b" << "\\belse\\b"
+			<< "\\breturn\\b" << "\\bcontinue\\b" << "\\bbreak\\b";
 	for (const QString &pattern : keywordPatterns) {
 		rule.pattern = QRegExp(pattern);
 		rule.format = mKeywordFormat;
@@ -95,5 +96,4 @@ void TextHighlighter::highlightBlock(const QString &text)
 		setFormat(startIndex, commentLength, mMultiLineCommentFormat);
 		startIndex = mCommentStartExpression.indexIn(text, startIndex + commentLength);
 	}
-
 }

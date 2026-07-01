@@ -27,7 +27,9 @@ using namespace models::details;
 using namespace modelsImplementation;
 
 LogicalModel::LogicalModel(qrRepo::LogicalRepoApi *repoApi, const EditorManagerInterface &editorManagerInterface)
-		: AbstractModel(editorManagerInterface), mGraphicalModelView(this), mApi(*repoApi)
+	: AbstractModel(editorManagerInterface)
+	, mGraphicalModelView(this)
+	, mApi(*repoApi)
 {
 	mRootItem = new LogicalModelItem(Id::rootId(), nullptr);
 	init();
@@ -65,14 +67,15 @@ void LogicalModel::init()
 				auto incomingExplosions = mApi.property(out, "incomingExplosions").value<IdList>();
 				if (!incomingExplosions.contains(item->id())) {
 					incomingExplosions.append(item->id());
-					mApi.setProperty(out, "incomingExplosions", QVariant::fromValue(incomingExplosions));
+					mApi.setProperty(out, "incomingExplosions",
+						QVariant::fromValue(incomingExplosions));
 				}
 			}
 		}
 	}
 }
 
-void LogicalModel::loadSubtreeFromClient(LogicalModelItem * const parent)
+void LogicalModel::loadSubtreeFromClient(LogicalModelItem *const parent)
 {
 	for (const auto &childId : mApi.children(parent->id())) {
 		if (mApi.isLogicalElement(childId)) {
@@ -125,7 +128,7 @@ void LogicalModel::addInsufficientProperties(const Id &id, const QString &name)
 	}
 }
 
-void LogicalModel::connectToGraphicalModel(GraphicalModel * const graphicalModel)
+void LogicalModel::connectToGraphicalModel(GraphicalModel *const graphicalModel)
 {
 	mGraphicalModelView.setModel(graphicalModel);
 }
@@ -146,18 +149,18 @@ void LogicalModel::updateElements(const Id &logicalId, const QString &name)
 	Q_EMIT dataChanged(index, index);
 }
 
-QMimeData* LogicalModel::mimeData(const QModelIndexList &indexes) const
+QMimeData *LogicalModel::mimeData(const QModelIndexList &indexes) const
 {
 	QByteArray data;
 	QDataStream stream(&data, QIODevice::WriteOnly);
 	for (const QModelIndex &index : indexes) {
 		if (index.isValid()) {
-			AbstractModelItem *item = static_cast<AbstractModelItem*>(index.internalPointer());
+			AbstractModelItem *item = static_cast<AbstractModelItem *>(index.internalPointer());
 			const Id id = item->id();
 			const bool isEdge = mLogicalAssistApi->editorManagerInterface().isNodeOrEdge(id.type()) == -1;
 
-			stream << ElementInfo(id, id, mApi.property(id, "name").toString(), mApi.outgoingExplosion(item->id())
-					, isEdge);
+			stream << ElementInfo(id, id, mApi.property(id, "name").toString(),
+				mApi.outgoingExplosion(item->id()), isEdge);
 		} else {
 			stream << ElementInfo();
 		}
@@ -174,9 +177,10 @@ void LogicalModel::addElementToModel(ElementInfo &elementInfo)
 		return;
 	}
 
-	Q_ASSERT_X(mModelItems.contains(elementInfo.logicalParent()), Q_FUNC_INFO, "Adding element to non-existing parent");
-	AbstractModelItem * const parentItem = mModelItems[elementInfo.logicalParent()];
-	AbstractModelItem * const newItem = createElementWithoutCommit(elementInfo, parentItem);
+	Q_ASSERT_X(mModelItems.contains(elementInfo.logicalParent()), Q_FUNC_INFO,
+		"Adding element to non-existing parent");
+	AbstractModelItem *const parentItem = mModelItems[elementInfo.logicalParent()];
+	AbstractModelItem *const newItem = createElementWithoutCommit(elementInfo, parentItem);
 	if (!newItem) {
 		return;
 	}
@@ -222,14 +226,14 @@ void LogicalModel::addElementsToModel(QList<ElementInfo> &elementsInfo)
 void LogicalModel::addTree(const Id &parent, const QMultiMap<Id, ElementInfo> &childrenOfParents, QSet<Id> &visited)
 {
 	Q_ASSERT_X(mModelItems.contains(parent), Q_FUNC_INFO, "Adding element to non-existing parent");
-	AbstractModelItem * const parentItem = mModelItems[parent];
+	AbstractModelItem *const parentItem = mModelItems[parent];
 
 	visited.insert(parent);
 	QList<ElementInfo> children = childrenOfParents.values(parent);
 	const int newRow = parentItem->children().size();
 	beginInsertRows(index(parentItem), newRow, newRow + children.size() - 1);
 	for (ElementInfo &child : children) {
-		AbstractModelItem * const newGraphicalModelItem = createElementWithoutCommit(child, parentItem);
+		AbstractModelItem *const newGraphicalModelItem = createElementWithoutCommit(child, parentItem);
 		initializeElement(child, parentItem, newGraphicalModelItem);
 	}
 
@@ -241,8 +245,8 @@ void LogicalModel::addTree(const Id &parent, const QMultiMap<Id, ElementInfo> &c
 	}
 }
 
-AbstractModelItem *LogicalModel::createElementWithoutCommit(const ElementInfo &elementInfo
-		, AbstractModelItem *parentItem)
+AbstractModelItem *LogicalModel::createElementWithoutCommit(const ElementInfo &elementInfo,
+	AbstractModelItem *parentItem)
 {
 	AbstractModelItem *result = nullptr;
 
@@ -259,14 +263,13 @@ AbstractModelItem *LogicalModel::createElementWithoutCommit(const ElementInfo &e
 	return result;
 }
 
-void LogicalModel::initializeElement(const ElementInfo &elementInfo
-		, modelsImplementation::AbstractModelItem *parentItem
-		, modelsImplementation::AbstractModelItem *item)
+void LogicalModel::initializeElement(const ElementInfo &elementInfo,
+	modelsImplementation::AbstractModelItem *parentItem, modelsImplementation::AbstractModelItem *item)
 {
 	parentItem->addChild(item);
 	mApi.addChild(parentItem->id(), elementInfo.id());
-	mApi.setMetaInformation(elementInfo.id().editor() + "Version"
-			, mEditorManagerInterface.version(Id(elementInfo.id().editor())).toString());
+	mApi.setMetaInformation(elementInfo.id().editor() + "Version",
+		mEditorManagerInterface.version(Id(elementInfo.id().editor())).toString());
 
 	addInsufficientProperties(elementInfo.id(), elementInfo.name());
 	for (const QString &property : elementInfo.logicalProperties()) {
@@ -279,28 +282,27 @@ void LogicalModel::initializeElement(const ElementInfo &elementInfo
 QVariant LogicalModel::data(const QModelIndex &index, int role) const
 {
 	if (index.isValid()) {
-		AbstractModelItem *item = static_cast<AbstractModelItem*>(index.internalPointer());
+		AbstractModelItem *item = static_cast<AbstractModelItem *>(index.internalPointer());
 		Q_ASSERT(item);
 		switch (role) {
-			case Qt::DisplayRole:
-			case Qt::EditRole:
-				return mApi.name(item->id());
-			case Qt::DecorationRole:
-				return QVariant();
-				// return mEditorManager.icon(item->id());
-			case roles::idRole:
-				return item->id().toVariant();
-			case roles::fromRole:
-				return mApi.from(item->id()).toVariant();
-			case roles::toRole:
-				return mApi.to(item->id()).toVariant();
+		case Qt::DisplayRole:
+		case Qt::EditRole:
+			return mApi.name(item->id());
+		case Qt::DecorationRole:
+			return QVariant();
+			// return mEditorManager.icon(item->id());
+		case roles::idRole:
+			return item->id().toVariant();
+		case roles::fromRole:
+			return mApi.from(item->id()).toVariant();
+		case roles::toRole:
+			return mApi.to(item->id()).toVariant();
 		}
 
 		if (role >= roles::customPropertiesBeginRole) {
 			const QString selectedProperty = findPropertyName(item->id(), role);
-			return selectedProperty.isEmpty()
-					? dynamicPropertyData(item->id(), role)
-					: mApi.property(item->id(), selectedProperty);
+			return selectedProperty.isEmpty() ? dynamicPropertyData(item->id(), role)
+			                                  : mApi.property(item->id(), selectedProperty);
 		}
 
 		Q_ASSERT(role < Qt::UserRole);
@@ -319,10 +321,9 @@ QVariant LogicalModel::dynamicPropertyData(const Id &id, int role) const
 		QDomDocument dynamProperties;
 		dynamProperties.setContent(dynamicProperties);
 		int index = 0;
-		for (QDomElement element = dynamProperties.firstChildElement("properties").firstChildElement("property")
-				; !element.isNull()
-				; element = element.nextSiblingElement("property"))
-		{
+		for (QDomElement element =
+				dynamProperties.firstChildElement("properties").firstChildElement("property");
+			!element.isNull(); element = element.nextSiblingElement("property")) {
 			if (index != role - propertiesCount - roles::customPropertiesBeginRole) {
 				++index;
 				continue;
@@ -358,26 +359,28 @@ bool LogicalModel::setData(const QModelIndex &index, const QVariant &value, int 
 					break;
 				}
 
-				int propertiesCount = mLogicalAssistApi->editorManagerInterface().
-						propertyNames(item->id().type()).count();
-				const QString dynamicProperties = mApi.property(item->id(), "dynamicProperties").toString();
+				int propertiesCount = mLogicalAssistApi->editorManagerInterface()
+				                              .propertyNames(item->id().type())
+				                              .count();
+				const QString dynamicProperties =
+					mApi.property(item->id(), "dynamicProperties").toString();
 
 				if (!dynamicProperties.isEmpty()) {
 					QDomDocument dynamProperties;
 					dynamProperties.setContent(dynamicProperties);
 					int index = 0;
-					for (QDomElement element
-							= dynamProperties.firstChildElement("properties").firstChildElement("property");
-							!element.isNull();
-							element = element.nextSiblingElement("property"))
-					{
-						if (index != role - propertiesCount - roles::customPropertiesBeginRole) {
+					for (QDomElement element = dynamProperties.firstChildElement("properties")
+					                .firstChildElement("property");
+						!element.isNull(); element = element.nextSiblingElement("property")) {
+						if (index
+							!= role - propertiesCount - roles::customPropertiesBeginRole) {
 							index++;
 							continue;
 						}
 
 						element.setAttribute("dynamicPropertyValue", value.toString());
-						mApi.setProperty(item->id(), "dynamicProperties", dynamProperties.toString(4));
+						mApi.setProperty(item->id(), "dynamicProperties",
+							dynamProperties.toString(4));
 						break;
 					}
 				}
@@ -392,7 +395,7 @@ bool LogicalModel::setData(const QModelIndex &index, const QVariant &value, int 
 	return false;
 }
 
-void LogicalModel::changeParent(const QModelIndex &element, const QModelIndex &parent,  QPointF position)
+void LogicalModel::changeParent(const QModelIndex &element, const QModelIndex &parent, QPointF position)
 {
 	Q_UNUSED(position)
 	if (!parent.isValid() || element.parent() == parent) {
@@ -402,7 +405,7 @@ void LogicalModel::changeParent(const QModelIndex &element, const QModelIndex &p
 	int destinationRow = parentAbstractItem(parent)->children().size();
 
 	if (beginMoveRows(element.parent(), element.row(), element.row(), parent, destinationRow)) {
-		AbstractModelItem *elementItem = static_cast<AbstractModelItem*>(element.internalPointer());
+		AbstractModelItem *elementItem = static_cast<AbstractModelItem *>(element.internalPointer());
 		elementItem->parent()->removeChild(elementItem);
 		AbstractModelItem *parentItem = parentAbstractItem(parent);
 
@@ -431,9 +434,9 @@ void LogicalModel::stackBefore(const QModelIndex &element, const QModelIndex &si
 
 	beginMoveRows(element.parent(), element.row(), element.row(), element.parent(), sibling.row());
 
-	AbstractModelItem *parent = static_cast<AbstractModelItem *>(element.parent().internalPointer())
-			, *item = static_cast<AbstractModelItem *>(element.internalPointer())
-			, *siblingItem = static_cast<AbstractModelItem *>(sibling.internalPointer());
+	AbstractModelItem *parent = static_cast<AbstractModelItem *>(element.parent().internalPointer()),
+			  *item = static_cast<AbstractModelItem *>(element.internalPointer()),
+			  *siblingItem = static_cast<AbstractModelItem *>(sibling.internalPointer());
 
 	parent->stackBefore(item, siblingItem);
 	mApi.stackBefore(parent->id(), item->id(), siblingItem->id());
@@ -479,16 +482,16 @@ bool LogicalModel::removeRows(int row, int count, const QModelIndex &parent)
 	}
 }
 
-void LogicalModel::removeModelItemFromApi(details::modelsImplementation::AbstractModelItem *const root
-		, details::modelsImplementation::AbstractModelItem *child)
+void LogicalModel::removeModelItemFromApi(details::modelsImplementation::AbstractModelItem *const root,
+	details::modelsImplementation::AbstractModelItem *child)
 {
-	if (mModelItems.count(child->id())==0) {
-		mApi.removeChild(root->id(),child->id());
+	if (mModelItems.count(child->id()) == 0) {
+		mApi.removeChild(root->id(), child->id());
 	}
 	mApi.removeElement(child->id());
 }
 
-qReal::details::ModelsAssistInterface* LogicalModel::modelAssistInterface() const
+qReal::details::ModelsAssistInterface *LogicalModel::modelAssistInterface() const
 {
 	return mLogicalAssistApi;
 }

@@ -19,16 +19,20 @@
 
 using namespace twoDModel::templates::details;
 
-XmlTemplate::XmlTemplate(QString id) noexcept:
-	mId(std::move(id)) {}
+XmlTemplate::XmlTemplate(QString id) noexcept
+	: mId(std::move(id))
+{
+}
 
 void XmlTemplate::processContent(const QDomElement &contentDecl)
 {
 	auto &&content = contentDecl.firstChild();
-	if(!content.isCDATASection()) {
-		addDeclarationError(QObject::tr(
-			R"(Currently, this method of setting &lt;content&gt; tag for the template %1 is not supported.)")
-			   .arg(mId), contentDecl.lineNumber(), TemplateParseErrorCode::ContentFormatNotSuppoted);
+	if (!content.isCDATASection()) {
+		addDeclarationError(
+			QObject::tr(
+				R"(Currently, this method of setting &lt;content&gt; tag for the template %1 is not supported.)")
+				.arg(mId),
+			contentDecl.lineNumber(), TemplateParseErrorCode::ContentFormatNotSuppoted);
 		return;
 	}
 
@@ -44,11 +48,10 @@ void XmlTemplate::processContent(const QDomElement &contentDecl)
 
 		if (paramIt == mParameters.end()) {
 			const auto startPos = match.capturedStart(0);
-			addDeclarationError(QObject::tr(
-				"When defining the template %1,"
-				" the syntax %2 was used to substitute an"
-				" offset %3 for an undeclared parameter %4.")
-				.arg(mId, fullMatch, QString::number(startPos), paramName),
+			addDeclarationError(QObject::tr("When defining the template %1,"
+							" the syntax %2 was used to substitute an"
+							" offset %3 for an undeclared parameter %4.")
+						    .arg(mId, fullMatch, QString::number(startPos), paramName),
 				contentDecl.lineNumber(), TemplateParseErrorCode::UseSpecialSyntaxForUndeclaredParam);
 		}
 		offset = match.capturedEnd();
@@ -61,21 +64,19 @@ void XmlTemplate::processParams(const QDomElement &params)
 	while (!firstParamDecl.isNull()) {
 		if (firstParamDecl.tagName() != "param") {
 			addDeclarationError(QObject::tr("the &lt;params&gt; tag can only contain the &lt;param&gt;"
-					" tag as a child tag for template %1, actual tag is &lt;%2&gt;")
-					.arg(mId, firstParamDecl.tagName()), firstParamDecl.lineNumber(),
-					TemplateParseErrorCode::ParamsTagContainOnlyParam);
+							" tag as a child tag for template %1, actual tag is &lt;%2&gt;")
+						    .arg(mId, firstParamDecl.tagName()),
+				firstParamDecl.lineNumber(), TemplateParseErrorCode::ParamsTagContainOnlyParam);
 			return;
 		}
 
 		auto &&paramName = firstParamDecl.attribute("name");
 
 		if (paramName.isEmpty()) {
-			addDeclarationError(QObject::tr(
-				"The &lt;param&gt; tag of template %1 was provided,"
-				" but the required \"name\" attribute was missing.")
-				.arg(mId),
-				firstParamDecl.lineNumber(),
-				 TemplateParseErrorCode::MissingParamNameAttribute);
+			addDeclarationError(QObject::tr("The &lt;param&gt; tag of template %1 was provided,"
+							" but the required \"name\" attribute was missing.")
+						    .arg(mId),
+				firstParamDecl.lineNumber(), TemplateParseErrorCode::MissingParamNameAttribute);
 			return;
 		}
 
@@ -100,7 +101,6 @@ void XmlTemplate::clear()
 	mDeclarationErrors.clear();
 	mSubstitutionErrors.clear();
 }
-
 
 XmlTemplate::SubstitutionErrors XmlTemplate::substitutionErrors() const
 {
@@ -127,10 +127,10 @@ void XmlTemplate::processDeclaration(const QDomElement &templateDeclaration)
 
 	auto &&contentDecl = templateDeclaration.firstChildElement("content");
 	if (contentDecl.isNull()) {
-		addDeclarationError(QObject::tr(
-			"The &lt;template&gt; of template %1 tag was provided,"
-			" but the required child tag &lt;content&gt; was missing")
-			.arg(mId), templateDeclaration.lineNumber(), TemplateParseErrorCode::MissingContentTag);
+		addDeclarationError(QObject::tr("The &lt;template&gt; of template %1 tag was provided,"
+						" but the required child tag &lt;content&gt; was missing")
+					    .arg(mId),
+			templateDeclaration.lineNumber(), TemplateParseErrorCode::MissingContentTag);
 		return;
 	}
 	processContent(contentDecl);
@@ -140,16 +140,15 @@ bool XmlTemplate::validateParam(const QDomNode &with, const QString &param)
 {
 	auto it = mParameters.find(param);
 	if (it == mParameters.end()) {
-		addSubstitutionError(QObject::tr(
-			"The using an undeclared parameter %1 for template %2").arg(param, mId),
+		addSubstitutionError(
+			QObject::tr("The using an undeclared parameter %1 for template %2").arg(param, mId),
 			with.lineNumber(), TemplateSubstitutionErrorCode::UseUndeclaredParam);
 		return false;
 	}
 	return true;
 }
 
-void XmlTemplate::parseParams(const QDomElement &paramTag,
-			      QHash<QString, QString> &paramsForReplace, bool fromTemplate)
+void XmlTemplate::parseParams(const QDomElement &paramTag, QHash<QString, QString> &paramsForReplace, bool fromTemplate)
 {
 	auto &&attributes = paramTag.attributes();
 	for (int i = 0; i < attributes.length(); i++) {
@@ -158,7 +157,7 @@ void XmlTemplate::parseParams(const QDomElement &paramTag,
 		if (fromTemplate && currentParamName == "template") {
 			continue;
 		}
-		if (validateParam(paramTag, currentParamName)){
+		if (validateParam(paramTag, currentParamName)) {
 			paramsForReplace.insert(currentParamName, attr.value());
 		}
 	}
@@ -167,8 +166,7 @@ void XmlTemplate::parseParams(const QDomElement &paramTag,
 void XmlTemplate::parseWith(const QDomElement &with, QHash<QString, QString> &paramsForReplace)
 {
 	if (with.tagName().toLower() != "with") {
-		addSubstitutionError(QObject::tr(
-			"The &lt;use&gt; tag can only contain a child tag &lt;with&gt;"),
+		addSubstitutionError(QObject::tr("The &lt;use&gt; tag can only contain a child tag &lt;with&gt;"),
 			with.lineNumber(), TemplateSubstitutionErrorCode::UseTagContainsOnlyWithTag);
 		return;
 	}
@@ -189,10 +187,8 @@ QString XmlTemplate::substitute(const QDomElement &templateUsage)
 	clear();
 	QHash<QString, QString> paramsForReplace;
 	parseParams(templateUsage, paramsForReplace, true);
-	for (QDomElement element = templateUsage.firstChildElement()
-		; !element.isNull()
-		; element = element.nextSiblingElement())
-	{
+	for (QDomElement element = templateUsage.firstChildElement(); !element.isNull();
+		element = element.nextSiblingElement()) {
 		parseWith(element, paramsForReplace);
 	}
 
@@ -206,11 +202,11 @@ QString XmlTemplate::substitute(const QDomElement &templateUsage)
 		auto declaredParam = mParameters.find(*it).value();
 		if (value == paramsForReplace.end()) {
 			if (!declaredParam.mHasDefaultValue) {
-				addSubstitutionError(
-				QObject::tr("The parameter %1 of template %2 has no default"
-					    " value and was not explicitly specified by the user")
-					    .arg(*it, mId), templateUsage.lineNumber(),
-					    TemplateSubstitutionErrorCode::MissingReqiuredParam);
+				addSubstitutionError(QObject::tr("The parameter %1 of template %2 has no default"
+								 " value and was not explicitly specified by the user")
+							     .arg(*it, mId),
+					templateUsage.lineNumber(),
+					TemplateSubstitutionErrorCode::MissingReqiuredParam);
 				continue;
 			}
 			substitute(*it, declaredParam.mDefaultValue, result);
@@ -221,18 +217,18 @@ QString XmlTemplate::substitute(const QDomElement &templateUsage)
 	return result;
 }
 
-void XmlTemplate::substitute(const QString& name, const QString& value, QString &result)
+void XmlTemplate::substitute(const QString &name, const QString &value, QString &result)
 {
 	result.replace("#{" + name + "}", value);
 }
 
-void XmlTemplate::addDeclarationError(const QString& message, int lineNumber, TemplateParseErrorCode code)
+void XmlTemplate::addDeclarationError(const QString &message, int lineNumber, TemplateParseErrorCode code)
 {
 	Q_UNUSED(code)
 	mDeclarationErrors.push_back({lineNumber, message, code});
 }
 
-void XmlTemplate::addSubstitutionError(const QString& message, int lineNumber, TemplateSubstitutionErrorCode code)
+void XmlTemplate::addSubstitutionError(const QString &message, int lineNumber, TemplateSubstitutionErrorCode code)
 {
 	Q_UNUSED(code)
 	mSubstitutionErrors.push_back({lineNumber, message, code});

@@ -109,15 +109,14 @@ void Number::neg()
 {
 
 	switch (mType) {
-		case Number::intType:
-			mValue = -mValue.toInt();
-			break;
-		case Number::doubleType:
-			mValue = -mValue.toDouble();
-			break;
+	case Number::intType:
+		mValue = -mValue.toInt();
+		break;
+	case Number::doubleType:
+		mValue = -mValue.toDouble();
+		break;
 	}
 }
-
 
 bool Number::operator<(const Number &arg)
 {
@@ -140,20 +139,20 @@ bool Number::operator==(const Number &arg)
 
 bool Number::operator>(const Number &arg)
 {
-	return !((*this)<arg || (*this)==arg);
+	return !((*this) < arg || (*this) == arg);
 }
 
 bool Number::operator<=(const Number &arg)
 {
-	return (*this)<arg || (*this)==arg;
+	return (*this) < arg || (*this) == arg;
 }
 
 bool Number::operator>=(const Number &arg)
 {
-	return !((*this)<arg);
+	return !((*this) < arg);
 }
 
 bool Number::operator!=(const Number &arg)
 {
-	return !((*this)==arg);
+	return !((*this) == arg);
 }

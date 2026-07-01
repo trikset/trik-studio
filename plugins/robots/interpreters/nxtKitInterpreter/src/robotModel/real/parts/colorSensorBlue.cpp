@@ -16,9 +16,8 @@
 
 using namespace nxt::robotModel::real::parts;
 
-ColorSensorBlue::ColorSensorBlue(const kitBase::robotModel::DeviceInfo &info
-		, const kitBase::robotModel::PortInfo &port
-		, utils::robotCommunication::RobotCommunicator &robotCommunicator)
+ColorSensorBlue::ColorSensorBlue(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+	utils::robotCommunication::RobotCommunicator &robotCommunicator)
 	: kitBase::robotModel::robotParts::ColorSensorBlue(info, port)
 	, mImpl(port, robotCommunicator, enums::lowLevelSensorType::COLORBLUE)
 {

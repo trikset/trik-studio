@@ -46,17 +46,17 @@ public:
 		/// Generated successfully
 		success = 0
 		/// Generated with error, but another generator may be tried
-		, error
+		,
+		error
 		/// Diagram contains syntax errors, nothing can be done.
-		, fatalError
+		,
+		fatalError
 	};
 
-	Subprograms(const qrRepo::RepoApi &repo
-			, qReal::ErrorReporterInterface &errorReporter
-			, const QStringList &pathsToTemplates
-			, qrtext::LanguageToolboxInterface &luaToolbox
-			, const simple::Binding::ConverterInterface *nameNormalizer
-			, const simple::Binding::ConverterInterface *typeConverter);
+	Subprograms(const qrRepo::RepoApi &repo, qReal::ErrorReporterInterface &errorReporter,
+		const QStringList &pathsToTemplates, qrtext::LanguageToolboxInterface &luaToolbox,
+		const simple::Binding::ConverterInterface *nameNormalizer,
+		const simple::Binding::ConverterInterface *typeConverter);
 
 	~Subprograms() override;
 
@@ -78,8 +78,7 @@ public:
 private:
 	bool checkIdentifier(const QString &identifier, const QString &rawName);
 
-	void obtainCode(QMap<qReal::Id, QString> const &declarations
-			, QMap<qReal::Id, QString> const &implementations);
+	void obtainCode(QMap<qReal::Id, QString> const &declarations, QMap<qReal::Id, QString> const &implementations);
 
 	QString generateManualDeclarations() const;
 
@@ -93,8 +92,8 @@ private:
 	const qrRepo::RepoApi &mRepo;
 	qReal::ErrorReporterInterface &mErrorReporter;
 	qrtext::LanguageToolboxInterface &mLuaToolbox;
-	const simple::Binding::ConverterInterface *mNameNormalizer;  // Takes ownership
-	const simple::Binding::ConverterInterface *mTypeConverter;  // Takes ownership
+	const simple::Binding::ConverterInterface *mNameNormalizer; // Takes ownership
+	const simple::Binding::ConverterInterface *mTypeConverter; // Takes ownership
 
 	/// Stores all found by generator diagrams with subprograms implementation.
 	/// Bool value means if key diagram was already processed and generated into

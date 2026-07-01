@@ -35,12 +35,12 @@ StartWidget::StartWidget(MainWindow *mainWindow, ProjectManager *projectManager,
 	: QWidget(parent)
 	, mMainWindow(mainWindow)
 	, mProjectManager(projectManager)
-	, mProjectListSize(SettingsManager::value("recentProjectsLimit", 5).toInt())  // TODO: Why 5?
+	, mProjectListSize(SettingsManager::value("recentProjectsLimit", 5).toInt()) // TODO: Why 5?
 {
 	setStyleSheet(BrandManager::styles()->startTabSubstrateBackgroundStyle());
-	QWidget * const mainWidget = createMainWidget();
+	QWidget *const mainWidget = createMainWidget();
 
-	QHBoxLayout * const mainLayout = new QHBoxLayout;
+	QHBoxLayout *const mainLayout = new QHBoxLayout;
 	mainLayout->addStretch(1);
 	mainLayout->addWidget(mainWidget, 10);
 	mainLayout->addStretch(1);
@@ -49,16 +49,16 @@ StartWidget::StartWidget(MainWindow *mainWindow, ProjectManager *projectManager,
 
 QWidget *StartWidget::createMainWidget()
 {
-	QWidget * const result = new QWidget(this);
+	QWidget *const result = new QWidget(this);
 	result->setStyleSheet(BrandManager::styles()->startTabBackgroundStyle());
 
-	QWidget * const header = createHeader();
+	QWidget *const header = createHeader();
 	mRecentProjectsWidget = createRecentProjectsWidget();
-	QWidget * const projectsManagement = createProjectsManagementWidget();
+	QWidget *const projectsManagement = createProjectsManagementWidget();
 
-	QVBoxLayout * mainLayout = new QVBoxLayout;
+	QVBoxLayout *mainLayout = new QVBoxLayout;
 	mainLayout->setSpacing(20);
-	QHBoxLayout * contentsLayout = new QHBoxLayout;
+	QHBoxLayout *contentsLayout = new QHBoxLayout;
 
 	mainLayout->addWidget(header);
 	mainLayout->addLayout(contentsLayout);
@@ -79,25 +79,25 @@ QWidget *StartWidget::createMainWidget()
 
 QWidget *StartWidget::createHeader()
 {
-	QLabel * const appName = new QLabel(BrandManager::applicationName());
+	QLabel *const appName = new QLabel(BrandManager::applicationName());
 	appName->setStyleSheet(BrandManager::styles()->startTabLabelLevel1Style());
 
-	QLabel * const appLogo = new QLabel;
+	QLabel *const appLogo = new QLabel;
 	appLogo->setFixedSize(300, 150);
 	appLogo->setScaledContents(false);
-	appLogo->setPixmap(QPixmap::fromImage(BrandManager::applicationLogo()).scaled(appLogo->size()
-			, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+	appLogo->setPixmap(QPixmap::fromImage(BrandManager::applicationLogo())
+			.scaled(appLogo->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
 
-	QVBoxLayout * const logoLayout = new QVBoxLayout;
+	QVBoxLayout *const logoLayout = new QVBoxLayout;
 	logoLayout->addWidget(appName);
 	logoLayout->addStretch();
 
-	QHBoxLayout * const headerLayout = new QHBoxLayout;
+	QHBoxLayout *const headerLayout = new QHBoxLayout;
 	headerLayout->addLayout(logoLayout);
 	headerLayout->addStretch();
 	headerLayout->addWidget(appLogo);
 
-	QWidget * const header = new QWidget;
+	QWidget *const header = new QWidget;
 	header->setObjectName("header");
 	header->setStyleSheet(BrandManager::styles()->startTabHeaderBackgroundStyle());
 	header->setLayout(headerLayout);
@@ -109,7 +109,7 @@ QWidget *StartWidget::createRecentProjectsWidget()
 {
 	const QString recentProjects = SettingsManager::value("recentProjects").toString();
 
-	QWidget * const result = new QWidget;
+	QWidget *const result = new QWidget;
 	result->setStyleSheet(BrandManager::styles()->startTabRecentProjectsBackgroundStyle());
 	result->setLayout(createRecentProjectsList(recentProjects));
 	return result;
@@ -121,8 +121,7 @@ QWidget *StartWidget::createProjectsManagementWidget()
 	mProjectsManagementLayout->setSpacing(20);
 	mProjectsManagementLayout->setMargin(0);
 
-	mOpenProjectButton = new StyledButton(tr("Open project")
-			, ":/mainWindow/images/startTab/open.svg");
+	mOpenProjectButton = new StyledButton(tr("Open project"), ":/mainWindow/images/startTab/open.svg");
 	mOpenProjectButton->setObjectName("withIcon");
 
 	connect(mOpenProjectButton, &QPushButton::clicked, this, &StartWidget::openExistingProject);
@@ -130,7 +129,8 @@ QWidget *StartWidget::createProjectsManagementWidget()
 	const Id theOnlyDiagram = mMainWindow->editorManager().theOnlyDiagram();
 	if (!theOnlyDiagram.isNull()) {
 		const Id editor = mMainWindow->editorManager().editors()[0];
-		const QString diagramIdString = mMainWindow->editorManager().diagramNodeNameString(editor, theOnlyDiagram);
+		const QString diagramIdString =
+			mMainWindow->editorManager().diagramNodeNameString(editor, theOnlyDiagram);
 
 		mNewProjectButton = new StyledButton(tr("New project"), ":/mainWindow/images/startTab/new.svg");
 		mNewProjectButton->setObjectName("withIcon");
@@ -141,7 +141,7 @@ QWidget *StartWidget::createProjectsManagementWidget()
 		connect(newProjectMapper, SIGNAL(mapped(QString)), this, SLOT(createProjectWithDiagram(QString)));
 	} else {
 		if (!mMainWindow->editorManager().editors().isEmpty()) {
-			QWidget * const pluginsWidget = createPluginsList();
+			QWidget *const pluginsWidget = createPluginsList();
 			mProjectsManagementLayout->addWidget(pluginsWidget, 1);
 		} else {
 			mOpenProjectButton->hide();
@@ -150,10 +150,10 @@ QWidget *StartWidget::createProjectsManagementWidget()
 
 	mProjectsManagementLayout->addWidget(mOpenProjectButton);
 	if (mNewProjectButton) {
-			mProjectsManagementLayout->addWidget(mNewProjectButton);
+		mProjectsManagementLayout->addWidget(mNewProjectButton);
 	}
 
-	QWidget * const result = new QWidget();
+	QWidget *const result = new QWidget();
 	result->setLayout(mProjectsManagementLayout);
 	return result;
 }
@@ -175,15 +175,15 @@ void StartWidget::createProjectWithDiagram(const QString &idString)
 
 QLayout *StartWidget::createRecentProjectsList(const QString &recentProjects)
 {
-	QVBoxLayout * const mainLayout = new QVBoxLayout;
-	QVBoxLayout * const recentProjectsLayout = new QVBoxLayout;
+	QVBoxLayout *const mainLayout = new QVBoxLayout;
+	QVBoxLayout *const recentProjectsLayout = new QVBoxLayout;
 	recentProjectsLayout->setContentsMargins(0, 0, 0, 0);
 
-	QLabel * const recentProjectsLabel = new QLabel(tr("Recent projects"));
+	QLabel *const recentProjectsLabel = new QLabel(tr("Recent projects"));
 	recentProjectsLabel->setWordWrap(true);
 	recentProjectsLabel->setStyleSheet(BrandManager::styles()->startTabLabelLevel2Style());
 
-	QWidget * const spacer = new QWidget;
+	QWidget *const spacer = new QWidget;
 	spacer->setFixedHeight(10);
 
 	mainLayout->addWidget(recentProjectsLabel);
@@ -192,13 +192,13 @@ QLayout *StartWidget::createRecentProjectsList(const QString &recentProjects)
 
 	mainLayout->addStretch(0);
 
-	QSignalMapper * const projectNameMapper = new QSignalMapper(this);
+	QSignalMapper *const projectNameMapper = new QSignalMapper(this);
 	connect(projectNameMapper, SIGNAL(mapped(QString)), this, SLOT(openRecentProject(QString)));
 
 	int i = 0;
 	for (const QString &project : recentProjects.split(";", QString::SkipEmptyParts)) {
 		const QString name = project.split("/").last().split("\\").last();
-		QPushButton * const projectItem = new StyledButton(name);
+		QPushButton *const projectItem = new StyledButton(name);
 		projectItem->setToolTip(project);
 		recentProjectsLayout->addWidget(projectItem);
 
@@ -216,15 +216,15 @@ QLayout *StartWidget::createRecentProjectsList(const QString &recentProjects)
 
 QWidget *StartWidget::createPluginsList()
 {
-	QWidget * const circleWidget = new CircleWidget(QSize(70, 70), ":/mainWindow/images/startTab/new.svg");
+	QWidget *const circleWidget = new CircleWidget(QSize(70, 70), ":/mainWindow/images/startTab/new.svg");
 	circleWidget->setStyleSheet(BrandManager::styles()->startTabButtonStyle());
 
-	QVBoxLayout * const innerLayout = new QVBoxLayout;
+	QVBoxLayout *const innerLayout = new QVBoxLayout;
 	innerLayout->addStretch();
 	for (const Id &editor : mMainWindow->editorManager().editors()) {
 		const Id editorTmpId = Id::loadFromString("qrm:/" + editor.editor());
 		for (const Id &diagram : mMainWindow->editorManager().diagrams(editorTmpId)) {
-			QWidget * const pluginWidget = createPluginButton(editor, diagram, circleWidget);
+			QWidget *const pluginWidget = createPluginButton(editor, diagram, circleWidget);
 			innerLayout->addWidget(pluginWidget);
 		}
 	}
@@ -244,20 +244,20 @@ QWidget *StartWidget::createPluginsList()
 	scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	scrollArea->setWidget(innerWidget);
 
-	QHBoxLayout * const mainLayout = new QHBoxLayout;
+	QHBoxLayout *const mainLayout = new QHBoxLayout;
 	mainLayout->addWidget(circleWidget, Qt::AlignCenter);
 	mainLayout->addWidget(scrollArea);
 	mainLayout->setStretch(0, 0);
 	mainLayout->setStretch(1, 10);
 	mainLayout->setMargin(0);
 
-	QWidget * const result = new QWidget;
+	QWidget *const result = new QWidget;
 	result->setLayout(mainLayout);
 
 	return result;
 }
 
-QWidget *StartWidget::createPluginButton(const Id &editor, const Id &diagram, QWidget * const bindedImage)
+QWidget *StartWidget::createPluginButton(const Id &editor, const Id &diagram, QWidget *const bindedImage)
 {
 	const EditorManagerInterface &editorManagerInterface = mMainWindow->editorManager();
 
@@ -268,7 +268,7 @@ QWidget *StartWidget::createPluginButton(const Id &editor, const Id &diagram, QW
 		return nullptr;
 	}
 
-	StyledButton * const result = new StyledButton(tr("Create ") + diagramName);
+	StyledButton *const result = new StyledButton(tr("Create ") + diagramName);
 	result->bindHighlightedOnHover(bindedImage);
 	result->setFocusPolicy(Qt::StrongFocus);
 	result->setStyleSheet(BrandManager::styles()->startTabButtonStyle());
@@ -295,8 +295,8 @@ void StartWidget::openInterpretedDiagram()
 	editorManager.unloadAllPlugins();
 
 	QrsMetamodelLoader loader;
-	connect(&loader, &QrsMetamodelLoader::errorOccured
-			, static_cast<gui::ErrorReporter *>(mMainWindow->errorReporter()), &gui::ErrorReporter::addError);
+	connect(&loader, &QrsMetamodelLoader::errorOccured,
+		static_cast<gui::ErrorReporter *>(mMainWindow->errorReporter()), &gui::ErrorReporter::addError);
 
 	for (auto &&metamodel : loader.load(fileName)) {
 		editorManager.loadMetamodel(metamodel);
@@ -308,13 +308,14 @@ void StartWidget::openInterpretedDiagram()
 	QStringList interpreterDiagramsList;
 	for (const Id &editor : editorManager.editors()) {
 		for (const Id &diagram : editorManager.diagrams(editor)) {
-			const QString diagramNodeName = editorManager.diagramNodeName(editor.editor(), diagram.diagram());
+			const QString diagramNodeName =
+				editorManager.diagramNodeName(editor.editor(), diagram.diagram());
 			if (diagramNodeName.isEmpty()) {
 				continue;
 			}
 
-			interpreterDiagramsList.append("qrm:/" + editor.editor() + "/"
-					+ diagram.diagram() + "/" + diagramNodeName);
+			interpreterDiagramsList.append(
+				"qrm:/" + editor.editor() + "/" + diagram.diagram() + "/" + diagramNodeName);
 		}
 	}
 
@@ -333,8 +334,8 @@ void StartWidget::createInterpretedDiagram()
 	bool ok = false;
 	QString name;
 	do {
-		name = QInputDialog::getText(this, tr("Enter the diagram name:"), tr("diagram name:")
-				, QLineEdit::Normal, "", &ok);
+		name = QInputDialog::getText(this, tr("Enter the diagram name:"), tr("diagram name:"),
+			QLineEdit::Normal, "", &ok);
 	} while (ok && name.isEmpty());
 
 	EditorManagerInterface &editorManager = mMainWindow->editorManager();
@@ -374,7 +375,7 @@ void StartWidget::setVisibleForInterpreterButton(const bool visible)
 	}
 
 	if (needLayoutHorizontally) {
-		for (QPushButton * const button : toCentralize) {
+		for (QPushButton *const button : toCentralize) {
 			centralizeButton(button);
 		}
 
@@ -382,16 +383,16 @@ void StartWidget::setVisibleForInterpreterButton(const bool visible)
 	}
 }
 
-void StartWidget::centralizeButton(QPushButton * const styledButton)
+void StartWidget::centralizeButton(QPushButton *const styledButton)
 {
 	if (!styledButton) {
 		return;
 	}
 
-	QBoxLayout * const layout = static_cast<QBoxLayout *>(styledButton->layout());
+	QBoxLayout *const layout = static_cast<QBoxLayout *>(styledButton->layout());
 	layout->setDirection(QBoxLayout::TopToBottom);
-	QWidget * const icon = layout->itemAt(0)->widget();
-	QLabel * const label = static_cast<QLabel *>(layout->itemAt(1)->widget());
+	QWidget *const icon = layout->itemAt(0)->widget();
+	QLabel *const label = static_cast<QLabel *>(layout->itemAt(1)->widget());
 	label->setAlignment(Qt::AlignHCenter);
 	layout->setAlignment(icon, Qt::AlignHCenter | Qt::AlignBottom);
 	layout->setAlignment(label, Qt::AlignHCenter | Qt::AlignTop);

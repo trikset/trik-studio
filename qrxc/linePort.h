@@ -21,7 +21,7 @@
 #include "port.h"
 
 namespace utils {
-	class OutFile;
+class OutFile;
 }
 
 class LinePort : public Port
@@ -29,7 +29,7 @@ class LinePort : public Port
 public:
 	virtual bool init(const QDomElement &element, int width, int height);
 	virtual void generateCode(utils::OutFile &out);
-	virtual Port* clone() const;
+	virtual Port *clone() const;
 
 private:
 	utils::ScalableCoordinate mStartX;

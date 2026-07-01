@@ -34,9 +34,8 @@ class Display : public kitBase::robotModel::robotParts::Display
 	Q_OBJECT
 
 public:
-	Display(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port
-			, engine::TwoDModelEngineInterface &engine);
+	Display(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+		engine::TwoDModelEngineInterface &engine);
 
 private:
 	engine::TwoDModelEngineInterface &mEngine;

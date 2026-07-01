@@ -34,9 +34,8 @@ public:
 	/// @param parser - blocks parser, used to show values of variables on graphs.
 	/// @param robotManager - object that controls currently selected robot model.
 	/// @param parent - parent of this widget in Qt widget hierarchy.
-	GraphicsWatcherManager(const qrtext::DebuggerInterface &parser
-			, RobotModelManager &robotManager
-			, QObject *parent = nullptr);
+	GraphicsWatcherManager(const qrtext::DebuggerInterface &parser, RobotModelManager &robotManager,
+		QObject *parent = nullptr);
 
 	/// Returns the graphics watcher widget itself for placing it into dock. Takes ownership over result.
 	QWidget *widget();
@@ -49,10 +48,8 @@ public Q_SLOTS:
 	void forceStop();
 
 private:
-	void onDeviceConfigurationChanged(const QString &robotId
-			, const kitBase::robotModel::PortInfo &port
-			, const kitBase::robotModel::DeviceInfo &sensor
-			, Reason reason) override;
+	void onDeviceConfigurationChanged(const QString &robotId, const kitBase::robotModel::PortInfo &port,
+		const kitBase::robotModel::DeviceInfo &sensor, Reason reason) override;
 
 	void updateSensorsList(const QString &currentRobotModel);
 

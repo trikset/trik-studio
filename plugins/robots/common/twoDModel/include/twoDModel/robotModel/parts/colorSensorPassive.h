@@ -37,9 +37,8 @@ class TWO_D_MODEL_EXPORT ColorSensorPassive : public kitBase::robotModel::robotP
 	Q_CLASSINFO("friendlyName", tr("Color sensor (passive)"))
 
 public:
-	ColorSensorPassive(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port
-			, engine::TwoDModelEngineInterface &engine);
+	ColorSensorPassive(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+		engine::TwoDModelEngineInterface &engine);
 
 	void read();
 

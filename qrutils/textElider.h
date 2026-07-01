@@ -22,7 +22,7 @@ namespace utils {
 
 /// Provides text auto-trimming on a given widget.
 /// The given widget must have setText(QString) slot, i.e. QLabel is ok
-class QRUTILS_EXPORT TextElider: public QObject
+class QRUTILS_EXPORT TextElider : public QObject
 {
 	Q_OBJECT
 
@@ -37,7 +37,7 @@ public Q_SLOTS:
 	void setText(const QString &text);
 
 private:
-	QWidget *mWidget;  // Doesn`t take ownership
+	QWidget *mWidget; // Doesn`t take ownership
 	Qt::TextElideMode mMode;
 };
 

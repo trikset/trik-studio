@@ -38,12 +38,12 @@ NxtKitInterpreterPlugin::NxtKitInterpreterPlugin()
 	mTwoDRobotModel.setEngine(modelEngine->engine());
 	mTwoDModel.reset(modelEngine);
 
-	connect(mAdditionalPreferences, &NxtAdditionalPreferences::settingsChanged
-			, &mUsbRealRobotModel, &robotModel::real::RealRobotModel::rereadSettings);
-	connect(mAdditionalPreferences, &NxtAdditionalPreferences::settingsChanged
-			, &mBluetoothRealRobotModel, &robotModel::real::RealRobotModel::rereadSettings);
-	connect(mAdditionalPreferences, &NxtAdditionalPreferences::settingsChanged
-			, &mTwoDRobotModel, &robotModel::twoD::TwoDRobotModel::rereadSettings);
+	connect(mAdditionalPreferences, &NxtAdditionalPreferences::settingsChanged, &mUsbRealRobotModel,
+		&robotModel::real::RealRobotModel::rereadSettings);
+	connect(mAdditionalPreferences, &NxtAdditionalPreferences::settingsChanged, &mBluetoothRealRobotModel,
+		&robotModel::real::RealRobotModel::rereadSettings);
+	connect(mAdditionalPreferences, &NxtAdditionalPreferences::settingsChanged, &mTwoDRobotModel,
+		&robotModel::twoD::TwoDRobotModel::rereadSettings);
 }
 
 NxtKitInterpreterPlugin::~NxtKitInterpreterPlugin()
@@ -53,39 +53,28 @@ NxtKitInterpreterPlugin::~NxtKitInterpreterPlugin()
 
 void NxtKitInterpreterPlugin::init(const kitBase::KitPluginConfigurator &configurator)
 {
-	connect(&configurator.eventsForKitPlugin(), &kitBase::EventsForKitPluginInterface::robotModelChanged
-			, this, [this](const QString &modelName)
-	{
-		mCurrentlySelectedModelName = modelName;
-	});
+	connect(&configurator.eventsForKitPlugin(), &kitBase::EventsForKitPluginInterface::robotModelChanged, this,
+		[this](const QString &modelName) { mCurrentlySelectedModelName = modelName; });
 
-	qReal::gui::MainWindowInterpretersInterface &interpretersInterface
-			= configurator.qRealConfigurator().mainWindowInterpretersInterface();
-	connect(&mUsbRealRobotModel, &robotModel::real::RealRobotModel::errorOccured
-			, [&interpretersInterface](const QString &message) {
-				interpretersInterface.errorReporter()->addError(message);
-	});
-	connect(&mUsbRealRobotModel, &robotModel::real::RealRobotModel::messageArrived
-			, this, [&interpretersInterface](const QString &message) {
-				interpretersInterface.errorReporter()->addInformation(message);
-	});
-	connect(&mBluetoothRealRobotModel, &robotModel::real::RealRobotModel::errorOccured
-			, this, [&interpretersInterface](const QString &message) {
-				interpretersInterface.errorReporter()->addError(message);
-	});
-	connect(&mBluetoothRealRobotModel, &robotModel::real::RealRobotModel::messageArrived
-			, this, [&interpretersInterface](const QString &message) {
-				interpretersInterface.errorReporter()->addInformation(message);
-	});
+	qReal::gui::MainWindowInterpretersInterface &interpretersInterface =
+		configurator.qRealConfigurator().mainWindowInterpretersInterface();
+	connect(&mUsbRealRobotModel, &robotModel::real::RealRobotModel::errorOccured,
+		[&interpretersInterface](
+			const QString &message) { interpretersInterface.errorReporter()->addError(message); });
+	connect(&mUsbRealRobotModel, &robotModel::real::RealRobotModel::messageArrived, this,
+		[&interpretersInterface](
+			const QString &message) { interpretersInterface.errorReporter()->addInformation(message); });
+	connect(&mBluetoothRealRobotModel, &robotModel::real::RealRobotModel::errorOccured, this,
+		[&interpretersInterface](
+			const QString &message) { interpretersInterface.errorReporter()->addError(message); });
+	connect(&mBluetoothRealRobotModel, &robotModel::real::RealRobotModel::messageArrived, this,
+		[&interpretersInterface](
+			const QString &message) { interpretersInterface.errorReporter()->addInformation(message); });
 
-	mTwoDModel->init(configurator.eventsForKitPlugin()
-			, configurator.qRealConfigurator().systemEvents()
-			, configurator.qRealConfigurator().logicalModelApi()
-			, configurator.qRealConfigurator().controller()
-			, interpretersInterface
-			, configurator.qRealConfigurator().mainWindowDockInterface()
-			, configurator.qRealConfigurator().projectManager()
-			, configurator.interpreterControl());
+	mTwoDModel->init(configurator.eventsForKitPlugin(), configurator.qRealConfigurator().systemEvents(),
+		configurator.qRealConfigurator().logicalModelApi(), configurator.qRealConfigurator().controller(),
+		interpretersInterface, configurator.qRealConfigurator().mainWindowDockInterface(),
+		configurator.qRealConfigurator().projectManager(), configurator.interpreterControl());
 }
 
 void NxtKitInterpreterPlugin::release()
@@ -113,7 +102,7 @@ QList<kitBase::robotModel::RobotModelInterface *> NxtKitInterpreterPlugin::robot
 }
 
 QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> NxtKitInterpreterPlugin::blocksFactoryFor(
-		const kitBase::robotModel::RobotModelInterface *model)
+	const kitBase::robotModel::RobotModelInterface *model)
 {
 	Q_UNUSED(model)
 	return mBlocksFactory;
@@ -132,9 +121,7 @@ QList<kitBase::AdditionalPreferences *> NxtKitInterpreterPlugin::settingsWidgets
 
 QWidget *NxtKitInterpreterPlugin::quickPreferencesFor(const kitBase::robotModel::RobotModelInterface &model)
 {
-	return model.name().toLower().contains("bluetooth")
-			? produceBluetoothPortConfigurer()
-			: nullptr;
+	return model.name().toLower().contains("bluetooth") ? produceBluetoothPortConfigurer() : nullptr;
 }
 
 QList<qReal::ActionInfo> NxtKitInterpreterPlugin::customActions()
@@ -152,14 +139,11 @@ QString NxtKitInterpreterPlugin::defaultSettingsFile() const
 	return ":/nxtDefaultSettings.ini";
 }
 
-QIcon NxtKitInterpreterPlugin::iconForFastSelector(
-		const kitBase::robotModel::RobotModelInterface &robotModel) const
+QIcon NxtKitInterpreterPlugin::iconForFastSelector(const kitBase::robotModel::RobotModelInterface &robotModel) const
 {
-	return &robotModel == &mUsbRealRobotModel
-			? QIcon(":/icons/switch-real-nxt-usb.svg")
-			: &robotModel == &mBluetoothRealRobotModel
-					? QIcon(":/icons/switch-real-nxt-bluetooth.svg")
-					: QIcon(":/icons/switch-2d.svg");
+	return &robotModel == &mUsbRealRobotModel         ? QIcon(":/icons/switch-real-nxt-usb.svg")
+	       : &robotModel == &mBluetoothRealRobotModel ? QIcon(":/icons/switch-real-nxt-bluetooth.svg")
+	                                                  : QIcon(":/icons/switch-2d.svg");
 }
 
 kitBase::DevicesConfigurationProvider *NxtKitInterpreterPlugin::devicesConfigurationProvider()
@@ -169,6 +153,6 @@ kitBase::DevicesConfigurationProvider *NxtKitInterpreterPlugin::devicesConfigura
 
 QWidget *NxtKitInterpreterPlugin::produceBluetoothPortConfigurer()
 {
-	QWidget * const result = new ui::ComPortPicker("NxtBluetoothPortName", this);
+	QWidget *const result = new ui::ComPortPicker("NxtBluetoothPortName", this);
 	return result;
 }

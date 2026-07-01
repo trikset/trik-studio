@@ -29,16 +29,16 @@ class QRUTILS_EXPORT BaseGraphTransformationUnit : public QObject
 	Q_OBJECT
 
 public:
-	BaseGraphTransformationUnit(LogicalModelAssistInterface &logicalModelApi
-			, GraphicalModelAssistInterface &graphicalModelApi
-			, gui::MainWindowInterpretersInterface &interpretersInterface);
+	BaseGraphTransformationUnit(LogicalModelAssistInterface &logicalModelApi,
+		GraphicalModelAssistInterface &graphicalModelApi,
+		gui::MainWindowInterpretersInterface &interpretersInterface);
 	~BaseGraphTransformationUnit();
 
 	/// True if match was found
 	virtual bool findMatch() = 0;
 
 	/// Get all matches of selected rule
-	QList<QHash<Id, Id> > matches();
+	QList<QHash<Id, Id>> matches();
 
 protected:
 
@@ -57,8 +57,7 @@ protected:
 
 	/// Checks if node in model has all links to the current matched subgraph
 	/// as node in rule has
-	bool checkExistingLinks(const Id &nodeInModel, const Id &nodeInRule
-			, QHash<Id, Id> *linksToAddInMatch);
+	bool checkExistingLinks(const Id &nodeInModel, const Id &nodeInRule, QHash<Id, Id> *linksToAddInMatch);
 
 	/// Performs a rollback in match algo, removes last added node to the current
 	/// matched subgraph.
@@ -74,8 +73,7 @@ protected:
 	/// Returns link id in model which has one of its ends given node in model
 	/// and correspond to link in rule and its ends and
 	/// returns root id if it can not be found
-	Id properLink(const Id &nodeInModel, const Id &linkInRule
-			, const Id &linkEndInR) const;
+	Id properLink(const Id &nodeInModel, const Id &linkInRule, const Id &linkEndInR) const;
 
 	/// Get all links from given node in model which can correspond
 	/// given link in rule
@@ -100,8 +98,7 @@ protected:
 	QVariant property(const Id &id, const QString &propertyName) const;
 	virtual QMapIterator<QString, QVariant> propertiesIterator(const Id &id) const;
 	bool hasProperty(const Id &id, const QString &propertyName) const;
-	void setProperty(const Id &id, const QString &propertyName
-			, const QVariant &value) const;
+	void setProperty(const Id &id, const QString &propertyName, const QVariant &value) const;
 	QHash<QString, QVariant> properties(const Id &id) const;
 
 	/// Functions for test elements for equality
@@ -143,7 +140,7 @@ protected:
 	QHash<Id, Id> mMatch;
 
 	/// List contains all matches of rule
-	QList<QHash<Id, Id> > mMatches;
+	QList<QHash<Id, Id>> mMatches;
 
 	/// Nodes of rule subgraph which matched model subgraph at current step
 	IdList mCurrentMatchedGraphInRule;
@@ -155,7 +152,7 @@ protected:
 	IdList mNodesHavingOutsideLinks;
 
 	/// Current position in mNodesHavingOutsideLinks for quicker access
-	int mPos { -1 };
+	int mPos {-1};
 
 	/// Set of properties that will not be checked in compare elements
 	QSet<QString> mDefaultProperties;

@@ -24,10 +24,8 @@ class WaitGamepadButtonGenerator : public generatorBase::simple::BindingGenerato
 {
 	Q_OBJECT
 public:
-	WaitGamepadButtonGenerator(const qrRepo::RepoApi &repo
-			, generatorBase::GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent);
+	WaitGamepadButtonGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+		const qReal::Id &id, QObject *parent);
 };
 
 }

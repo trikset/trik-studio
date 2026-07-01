@@ -21,17 +21,14 @@ using namespace trik::simple;
 using namespace trik::converters;
 using namespace generatorBase::simple;
 
-SetBackgroundGenerator::SetBackgroundGenerator(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, const qReal::Id &id
-		, QObject *parent)
-	: BindingGenerator(repo, customizer, id
-			, "drawing/setBackground.t"
-			, { Binding::createConverting("@@COLOR@@", "Color"
-					, new BackgroundColorConverter(customizer.factory()->pathsToTemplates()))
-			}, parent)
+SetBackgroundGenerator::SetBackgroundGenerator(const qrRepo::RepoApi &repo,
+	generatorBase::GeneratorCustomizer &customizer, const qReal::Id &id, QObject *parent)
+	: BindingGenerator(repo, customizer, id, "drawing/setBackground.t",
+		  {Binding::createConverting("@@COLOR@@", "Color",
+			  new BackgroundColorConverter(customizer.factory()->pathsToTemplates()))},
+		  parent)
 {
 	// Calling virtual readTemplate() before base class constructor will cause segfault.
-	addBinding(Binding::createStatic("@@REDRAW@@", repo.property(id, "Redraw").toBool()
-			? readTemplate("drawing/redraw.t") : QString()));
+	addBinding(Binding::createStatic("@@REDRAW@@",
+		repo.property(id, "Redraw").toBool() ? readTemplate("drawing/redraw.t") : QString()));
 }

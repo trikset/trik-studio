@@ -75,10 +75,9 @@ bool BluetoothRobotCommunicationThread::connect()
 	mPort->setDataBits(QSerialPort::DataBits::Data8);
 	mPort->setStopBits(QSerialPort::StopBits::TwoStop);
 
-	if( !mPort->open(QIODevice::ReadWrite)) {
-		QLOG_ERROR() << "Failed to open actual port" << portName
-			    << "with error" << mPort->error()
-			    << "with error string" << mPort->errorString();
+	if (!mPort->open(QIODevice::ReadWrite)) {
+		QLOG_ERROR() << "Failed to open actual port" << portName << "with error" << mPort->error()
+			     << "with error string" << mPort->errorString();
 		Q_EMIT connected(false, tr("Cannot open port ") + portName);
 		return false;
 	}
@@ -90,7 +89,8 @@ bool BluetoothRobotCommunicationThread::connect()
 
 	mKeepAliveTimer->moveToThread(this->thread());
 	mKeepAliveTimer->disconnect();
-	QObject::connect(mKeepAliveTimer, &QTimer::timeout, this, &BluetoothRobotCommunicationThread::checkForConnection);
+	QObject::connect(mKeepAliveTimer, &QTimer::timeout, this,
+		&BluetoothRobotCommunicationThread::checkForConnection);
 	QObject::connect(this, &BluetoothRobotCommunicationThread::disconnected, mKeepAliveTimer, &QTimer::stop);
 	mKeepAliveTimer->start(500);
 
@@ -150,8 +150,8 @@ void BluetoothRobotCommunicationThread::checkForConnection()
 
 void BluetoothRobotCommunicationThread::keepAlive()
 {
-	QByteArray command = Ev3DirectCommand::formCommand(10, 0, 0, 0
-			, enums::commandType::CommandTypeEnum::DIRECT_COMMAND_REPLY);
+	QByteArray command =
+		Ev3DirectCommand::formCommand(10, 0, 0, 0, enums::commandType::CommandTypeEnum::DIRECT_COMMAND_REPLY);
 	int index = 7;
 	Ev3DirectCommand::addOpcode(enums::opcode::OpcodeEnum::KEEP_ALIVE, command, index);
 	Ev3DirectCommand::addByteParameter(10, command, index); // 10 - Number of minutes before entering sleep mode.

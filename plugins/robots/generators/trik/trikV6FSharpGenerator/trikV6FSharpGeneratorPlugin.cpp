@@ -22,14 +22,11 @@ using namespace trik::fSharp;
 using namespace kitBase::robotModel;
 
 TrikV6FSharpGeneratorPlugin::TrikV6FSharpGeneratorPlugin()
-	: TrikFSharpGeneratorPluginBase(new robotModel::TrikV6GeneratorRobotModel(
-					"trikKit"
-					, "trikKitRobot"
-					, "TrikV6FSharpGeneratorRobotModel"
-					, tr("Generation (F#)")
-					, 6 /* After Python generator */)
-			, QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface>(new blocks::TrikV6BlocksFactory())
-			, {":/trikFSharp/templates"})
+	: TrikFSharpGeneratorPluginBase(new robotModel::TrikV6GeneratorRobotModel("trikKit", "trikKitRobot",
+						"TrikV6FSharpGeneratorRobotModel", tr("Generation (F#)"),
+						6 /* After Python generator */),
+		  QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface>(new blocks::TrikV6BlocksFactory()),
+		  {":/trikFSharp/templates"})
 	, mModel(static_cast<robotModel::TrikV6GeneratorRobotModel *>(robotModels().first()))
 {
 }

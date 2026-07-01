@@ -22,7 +22,9 @@ const int step = 3;
 
 using namespace graphicsUtils;
 
-Line::Line(qreal x1, qreal y1, qreal x2, qreal y2, Item* parent):Item(parent), mLineImpl()
+Line::Line(qreal x1, qreal y1, qreal x2, qreal y2, Item *parent)
+	: Item(parent)
+	, mLineImpl()
 {
 	mNeedScalingRect = false;
 	setPen(QPen(Qt::green));
@@ -40,18 +42,18 @@ QRectF Line::boundingRect() const
 
 QRectF Line::realBoundingRect() const
 {
-	return mapToScene(mLineImpl.realBoundingRectWithoutScene(x1(), y1(), x2(), y2()
-			, pen().width(), drift)).boundingRect();
+	return mapToScene(mLineImpl.realBoundingRectWithoutScene(x1(), y1(), x2(), y2(), pen().width(), drift))
+	        .boundingRect();
 }
 
-void Line::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
+void Line::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 	Q_UNUSED(option);
 	Q_UNUSED(widget);
 	mLineImpl.drawItem(painter, x1(), y1(), x2(), y2());
 }
 
-void Line::drawExtractionForItem(QPainter* painter)
+void Line::drawExtractionForItem(QPainter *painter)
 {
 	mLineImpl.drawPointExtractionForItem(painter, x1(), y1(), x2(), y2());
 	setPenBrushDriftRect(painter);
@@ -63,7 +65,7 @@ void Line::drawExtractionForItem(QPainter* painter)
 	drawScalingRects(painter);
 }
 
-void Line::drawScalingRects(QPainter* painter)
+void Line::drawScalingRects(QPainter *painter)
 {
 	QBrush brush(Qt::SolidPattern);
 	if (x2() > x1()) {
@@ -90,11 +92,13 @@ void Line::drawScalingRects(QPainter* painter)
 
 			brush.setColor(mListScalePoint.at(6).second);
 			painter->setBrush(brush);
-			painter->drawRect(x1()  - scalingRect - step, y1() - scalingRect + step, scalingRect, scalingRect);
+			painter->drawRect(x1() - scalingRect - step, y1() - scalingRect + step, scalingRect,
+				scalingRect);
 
 			brush.setColor(mListScalePoint.at(1).second);
 			painter->setBrush(brush);
-			painter->drawRect(x2() - scalingRect + step, y2() - scalingRect - step, scalingRect, scalingRect);
+			painter->drawRect(x2() - scalingRect + step, y2() - scalingRect - step, scalingRect,
+				scalingRect);
 
 			brush.setColor(mListScalePoint.at(5).second);
 			painter->setBrush(brush);
@@ -108,11 +112,13 @@ void Line::drawScalingRects(QPainter* painter)
 
 			brush.setColor(mListScalePoint.at(1).second);
 			painter->setBrush(brush);
-			painter->drawRect(x1() - scalingRect + step, y1() - scalingRect - step, scalingRect, scalingRect);
+			painter->drawRect(x1() - scalingRect + step, y1() - scalingRect - step, scalingRect,
+				scalingRect);
 
 			brush.setColor(mListScalePoint.at(6).second);
 			painter->setBrush(brush);
-			painter->drawRect(x2() - scalingRect - step, y2() - scalingRect + step, scalingRect, scalingRect);
+			painter->drawRect(x2() - scalingRect - step, y2() - scalingRect + step, scalingRect,
+				scalingRect);
 
 			brush.setColor(mListScalePoint.at(2).second);
 			painter->setBrush(brush);
@@ -149,15 +155,14 @@ QPainterPath Line::shape() const
 
 void Line::changeScalingPointState(qreal x, qreal y)
 {
-	qreal x1= (boundingRect().adjusted(drift, drift, -drift, -drift)).left();
+	qreal x1 = (boundingRect().adjusted(drift, drift, -drift, -drift)).left();
 	qreal x2 = (boundingRect().adjusted(drift, drift, -drift, -drift)).right();
 	qreal y1 = (boundingRect().adjusted(drift, drift, -drift, -drift)).top();
 	qreal y2 = (boundingRect().adjusted(drift, drift, -drift, -drift)).bottom();
 	int correction = step;
 	calcForChangeScalingState(QPointF(x, y), QPointF(x1, y1), QPointF(x2, y2), correction);
-	if (mScalingState == topRightX || mScalingState == topRightY
-			|| mScalingState == bottomLeftX || mScalingState == bottomLeftY)
-	{
+	if (mScalingState == topRightX || mScalingState == topRightY || mScalingState == bottomLeftX
+		|| mScalingState == bottomLeftY) {
 		setDragState(None);
 	}
 }
@@ -177,8 +182,8 @@ void Line::reshapeRectWithShift()
 	qreal size = qMax(differenceX, differenceY);
 	const int delta = size / 2;
 	if (differenceXY > delta) {
-		QPair<qreal, qreal> res = mLineImpl.reshapeRectWithShiftForLine(x1(), y1(), x2(), y2()
-				, differenceX, differenceY, size);
+		QPair<qreal, qreal> res =
+			mLineImpl.reshapeRectWithShiftForLine(x1(), y1(), x2(), y2(), differenceX, differenceY, size);
 		setX2(res.first);
 		setY2(res.second);
 	} else {
@@ -186,7 +191,7 @@ void Line::reshapeRectWithShift()
 	}
 }
 
-QPair<QPair<QString, QString>, QPair<QString, QString> > Line::setXandYBefore(QRect rect)
+QPair<QPair<QString, QString>, QPair<QString, QString>> Line::setXandYBefore(QRect rect)
 {
 	QString x1;
 	QString y1;
@@ -221,7 +226,7 @@ QPair<QPair<QString, QString>, QPair<QString, QString> > Line::setXandYBefore(QR
 	return {{x1, y1}, {x2, y2}};
 }
 
-void Line::setDomXandY(QDomElement& dom, const QPair<QPair<QString, QString>, QPair<QString, QString> > &pair)
+void Line::setDomXandY(QDomElement &dom, const QPair<QPair<QString, QString>, QPair<QString, QString>> &pair)
 {
 	dom.setAttribute("y1", pair.first.second);
 	dom.setAttribute("x1", pair.first.first);

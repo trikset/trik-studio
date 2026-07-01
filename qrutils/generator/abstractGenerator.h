@@ -39,11 +39,8 @@ public:
 	  @param logicalModel Logical model reference.
 	  @param errorReporter Object to return errors to.
 	  */
-	AbstractGenerator(const QString &templateDirPath
-			, const QString &outputDirPath
-			, const qReal::LogicalModelAssistInterface &logicalModel
-			, qReal::ErrorReporterInterface &errorReporter
-			);
+	AbstractGenerator(const QString &templateDirPath, const QString &outputDirPath,
+		const qReal::LogicalModelAssistInterface &logicalModel, qReal::ErrorReporterInterface &errorReporter);
 
 	virtual ~AbstractGenerator();
 

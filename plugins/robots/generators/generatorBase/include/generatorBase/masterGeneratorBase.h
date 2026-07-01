@@ -52,12 +52,10 @@ class ROBOTS_GENERATOR_EXPORT MasterGeneratorBase : public QObject, public Templ
 	Q_OBJECT
 	Q_DISABLE_COPY(MasterGeneratorBase)
 public:
-	MasterGeneratorBase(const qrRepo::RepoApi &repo
-			, qReal::ErrorReporterInterface &errorReporter
-			, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
-			, qrtext::LanguageToolboxInterface &textLanguage
-			, const utils::ParserErrorReporter &parserErrorReporter
-			, const qReal::Id &diagramId);
+	MasterGeneratorBase(const qrRepo::RepoApi &repo, qReal::ErrorReporterInterface &errorReporter,
+		const kitBase::robotModel::RobotModelManagerInterface &robotModelManager,
+		qrtext::LanguageToolboxInterface &textLanguage, const utils::ParserErrorReporter &parserErrorReporter,
+		const qReal::Id &diagramId);
 
 	~MasterGeneratorBase();
 

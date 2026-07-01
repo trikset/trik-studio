@@ -24,10 +24,10 @@ class QRealEllipse : public Item
 {
 	Q_OBJECT
 public:
-	QRealEllipse(qreal x1, qreal y1, qreal x2, qreal y2, Item* parent = nullptr);
+	QRealEllipse(qreal x1, qreal y1, qreal x2, qreal y2, Item *parent = nullptr);
 	virtual QRectF boundingRect() const;
-	virtual void drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr);
+	virtual void drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr);
 
-	virtual QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document
-			, const QPoint &topLeftPicture);
+	virtual QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document,
+		const QPoint &topLeftPicture);
 };

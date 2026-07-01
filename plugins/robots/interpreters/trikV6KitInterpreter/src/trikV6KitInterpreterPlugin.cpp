@@ -44,5 +44,5 @@ QString TrikV6KitInterpreterPlugin::friendlyKitName() const
 
 int TrikV6KitInterpreterPlugin::priority() const
 {
-	return 10;  // Old case is more likely will be met for now.
+	return 10; // Old case is more likely will be met for now.
 }

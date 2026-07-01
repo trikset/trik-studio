@@ -24,13 +24,13 @@ class Path : public Item
 public:
 	Path(const QPainterPath &path);
 	virtual QRectF boundingRect() const;
-	virtual void drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr) ;
-	virtual QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document
-			, const QPoint &topLeftPicture);
+	virtual void drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr);
+	virtual QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document,
+		const QPoint &topLeftPicture);
 
-	virtual void drawExtractionForItem(QPainter* painter);
-	virtual void drawFieldForResizeItem(QPainter* painter);
-	virtual void drawScalingRects(QPainter* painter);
+	virtual void drawExtractionForItem(QPainter *painter);
+	virtual void drawFieldForResizeItem(QPainter *painter);
+	virtual void drawScalingRects(QPainter *painter);
 
 private:
 	QPainterPath mPath;

@@ -32,7 +32,9 @@ class ErrorReporter;
 class MainWindowInterpretersInterface : public ProgressReporterInterface
 {
 public:
-	virtual ~MainWindowInterpretersInterface() {}
+	virtual ~MainWindowInterpretersInterface()
+	{
+	}
 	virtual void selectItem(const Id &graphicalId) = 0;
 	virtual void selectItemOrDiagram(const Id &graphicalId) = 0;
 	virtual void highlight(const Id &graphicalId, bool exclusive = true, const QColor &color = Qt::red) = 0;
@@ -95,7 +97,7 @@ public:
 	virtual void deleteElementFromDiagram(const Id &id) = 0;
 
 	virtual QWidget *currentTab() = 0;
-	virtual QList<QWidget*> allTabs() const = 0;
+	virtual QList<QWidget *> allTabs() const = 0;
 	virtual void openTab(QWidget *tab, const QString &title) = 0;
 	virtual void closeTab(QWidget *tab) = 0;
 	/// Sets text on the header of the tab containing the given widget or does nothing if such tab was not found.

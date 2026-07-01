@@ -47,12 +47,9 @@ static const QColor backgrondColor = QPalette().color(QPalette::Background);
 static const QColor editModeColor = QPalette().color(QPalette::Background);
 static const QColor debugModeColor = qRgb(152, 251, 152);
 
-UiManager::UiManager(QAction &debugModeAction
-		, QAction &editModeAction
-		, qReal::gui::MainWindowDockInterface &mainWindow
-		, qReal::SystemEvents &systemEvents
-		, kitBase::EventsForKitPluginInterface &kitPluginEvents
-		, kitBase::robotModel::RobotModelManagerInterface &robotModelManager)
+UiManager::UiManager(QAction &debugModeAction, QAction &editModeAction, qReal::gui::MainWindowDockInterface &mainWindow,
+	qReal::SystemEvents &systemEvents, kitBase::EventsForKitPluginInterface &kitPluginEvents,
+	kitBase::robotModel::RobotModelManagerInterface &robotModelManager)
 	: mDebugModeAction(debugModeAction)
 	, mEditModeAction(editModeAction)
 	, mMainWindow(mainWindow)
@@ -64,14 +61,14 @@ UiManager::UiManager(QAction &debugModeAction
 
 	connect(&systemEvents, &qReal::SystemEvents::activeTabChanged, this, &UiManager::onActiveTabChanged);
 	connect(&systemEvents, &qReal::SystemEvents::ensureDiagramVisible, this, &UiManager::ensureDiagramVisible);
-	connect(&kitPluginEvents, &kitBase::EventsForKitPluginInterface::interpretationStarted
-			, this, &UiManager::switchToDebuggerMode);
-	connect(&kitPluginEvents, &kitBase::EventsForKitPluginInterface::interpretationStarted
-			, mRobotConsole, &qReal::ui::ConsoleDock::clear);
-	connect(&kitPluginEvents, &kitBase::EventsForKitPluginInterface::robotModelChanged
-			, this, [=]() { QTimer::singleShot(0, this, &UiManager::reloadDocksSavingToolbarsAndErrors); });
-	connect(&robotModelManager, &kitBase::robotModel::RobotModelManagerInterface::robotModelChanged
-			, this, &UiManager::onRobotModelChanged);
+	connect(&kitPluginEvents, &kitBase::EventsForKitPluginInterface::interpretationStarted, this,
+		&UiManager::switchToDebuggerMode);
+	connect(&kitPluginEvents, &kitBase::EventsForKitPluginInterface::interpretationStarted, mRobotConsole,
+		&qReal::ui::ConsoleDock::clear);
+	connect(&kitPluginEvents, &kitBase::EventsForKitPluginInterface::robotModelChanged, this,
+		[=]() { QTimer::singleShot(0, this, &UiManager::reloadDocksSavingToolbarsAndErrors); });
+	connect(&robotModelManager, &kitBase::robotModel::RobotModelManagerInterface::robotModelChanged, this,
+		&UiManager::onRobotModelChanged);
 	connect(&debugModeAction, &QAction::triggered, this, &UiManager::switchToDebuggerMode);
 	connect(&editModeAction, &QAction::triggered, this, &UiManager::switchToEditorMode);
 
@@ -109,7 +106,7 @@ UiManager::~UiManager()
 
 void UiManager::placeDevicesConfig(QWidget *devicesWidget)
 {
-	QDockWidget * const devicesDock = produceDockWidget(QObject::tr("Configure devices"), devicesWidget);
+	QDockWidget *const devicesDock = produceDockWidget(QObject::tr("Configure devices"), devicesWidget);
 	devicesDock->setObjectName("devicesConfigurationDock");
 	utils::SmartDock::hideCloseButton(devicesDock);
 	mMainWindow.addDockWidget(Qt::LeftDockWidgetArea, devicesDock);
@@ -123,7 +120,7 @@ void UiManager::placeWatchPlugins(QDockWidget *watchWindow, QWidget *graphicsWat
 	watchWindow->setFloating(false);
 
 	mDockWidgets.insert(watchWindow);
-	QDockWidget * const graphWatchDock = produceDockWidget(QObject::tr("Sensors state"), graphicsWatch);
+	QDockWidget *const graphWatchDock = produceDockWidget(QObject::tr("Sensors state"), graphicsWatch);
 	graphWatchDock->setObjectName("graphicsWatcherDock");
 	mMainWindow.addDockWidget(Qt::LeftDockWidgetArea, graphWatchDock);
 
@@ -131,13 +128,13 @@ void UiManager::placeWatchPlugins(QDockWidget *watchWindow, QWidget *graphicsWat
 	reloadDocks();
 }
 
-void UiManager::addWidgetToToolbar(kitBase::robotModel::RobotModelInterface &robotModel, QWidget * const widget)
+void UiManager::addWidgetToToolbar(kitBase::robotModel::RobotModelInterface &robotModel, QWidget *const widget)
 {
 	if (!widget) {
 		return;
 	}
 
-	QAction * const action = mCustomWidgetsBar->addWidget(widget);
+	QAction *const action = mCustomWidgetsBar->addWidget(widget);
 	mToolBarWidgets[action] = &robotModel;
 }
 
@@ -160,17 +157,17 @@ void UiManager::onActiveTabChanged(const qReal::TabInfo &tab)
 
 void UiManager::onRobotModelChanged(kitBase::robotModel::RobotModelInterface &model)
 {
-	for (QAction * const action : mToolBarWidgets.keys()) {
+	for (QAction *const action : mToolBarWidgets.keys()) {
 		const kitBase::robotModel::RobotModelInterface *bindedModel = mToolBarWidgets[action];
 		action->setVisible(!bindedModel || bindedModel == &model);
 	}
 
 	auto subscribeShell = [this, &model]() {
-		if (kitBase::robotModel::robotParts::Shell * const shell = kitBase::robotModel::RobotModelUtils::findDevice
-				<kitBase::robotModel::robotParts::Shell>(model, "ShellPort"))
-		{
-			connect(shell, &kitBase::robotModel::robotParts::Shell::textPrinted
-					, mRobotConsole, &qReal::ui::ConsoleDock::print, Qt::UniqueConnection);
+		if (kitBase::robotModel::robotParts::Shell *const shell =
+				kitBase::robotModel::RobotModelUtils::findDevice<
+					kitBase::robotModel::robotParts::Shell>(model, "ShellPort")) {
+			connect(shell, &kitBase::robotModel::robotParts::Shell::textPrinted, mRobotConsole,
+				&qReal::ui::ConsoleDock::print, Qt::UniqueConnection);
 		}
 	};
 
@@ -215,9 +212,9 @@ void UiManager::toggleModeButtons()
 		mTabBar->setVisible(mCurrentTab != qReal::TabInfo::TabType::other);
 	}
 
-	const QColor color = mCurrentTab == qReal::TabInfo::TabType::other
-			? backgrondColor
-			: mCurrentMode == Mode::Editing ? editModeColor : debugModeColor;
+	const QColor color = mCurrentTab == qReal::TabInfo::TabType::other ? backgrondColor
+	                     : mCurrentMode == Mode::Editing               ? editModeColor
+	                                                                   : debugModeColor;
 	QPalette palette;
 	palette.setColor(QPalette::Background, color);
 	palette.setColor(QPalette::Base, color);
@@ -228,7 +225,7 @@ void UiManager::toggleModeButtons()
 
 QDockWidget *UiManager::produceDockWidget(const QString &title, QWidget *content)
 {
-	QDockWidget * const dock = new QDockWidget(title);
+	QDockWidget *const dock = new QDockWidget(title);
 	mDockWidgets.insert(dock);
 	dock->setWidget(content);
 	updateDocksSettings();
@@ -297,7 +294,7 @@ void UiManager::reloadDocksSavingToolbarsAndErrors() const
 	const bool errorReporterWasVisible = mMainWindow.errorReporterDock()->isVisible();
 	const bool robotConsoleWasVisible = mRobotConsole->isVisible();
 	QMap<QToolBar *, bool> toolBarsVisiblity;
-	for (QToolBar * const toolBar : mMainWindow.toolBars()) {
+	for (QToolBar *const toolBar : mMainWindow.toolBars()) {
 		toolBarsVisiblity[toolBar] = toolBar->isVisible();
 	}
 
@@ -307,7 +304,7 @@ void UiManager::reloadDocksSavingToolbarsAndErrors() const
 	// And finally restoring old configuration.
 	mMainWindow.errorReporterDock()->setVisible(errorReporterWasVisible);
 	mRobotConsole->setVisible(robotConsoleWasVisible);
-	for (QToolBar * const toolBar : toolBarsVisiblity.keys()) {
+	for (QToolBar *const toolBar : toolBarsVisiblity.keys()) {
 		toolBar->setVisible(toolBarsVisiblity[toolBar]);
 	}
 }
@@ -329,7 +326,7 @@ void UiManager::ensureDiagramVisible()
 
 	// 2D model is placed into smart dock that may hide central widget if docked into TopDockWidgetArea.
 	// If we met such case then switching to editor mode.
-	for (utils::SmartDock * const twoDModel : mMainWindow.windowWidget()->findChildren<utils::SmartDock *>()) {
+	for (utils::SmartDock *const twoDModel : mMainWindow.windowWidget()->findChildren<utils::SmartDock *>()) {
 		if (twoDModel->isCentral()) {
 			switchToEditorMode();
 			return;
@@ -367,7 +364,7 @@ void UiManager::updateDocksSettings() const
 		}
 	}
 
-	for (utils::SmartDock * const twoDModel : mMainWindow.windowWidget()->findChildren<utils::SmartDock *>()) {
+	for (utils::SmartDock *const twoDModel : mMainWindow.windowWidget()->findChildren<utils::SmartDock *>()) {
 		if (dockableWidgets) {
 			twoDModel->setFeatures(flag);
 		} else {
@@ -394,7 +391,8 @@ void UiManager::initTab()
 	mTabBar = new QToolBar(tr("Modes"), mMainWindow.windowWidget());
 	mTabBar->setObjectName("largeTabsBar");
 	mTabBar->setIconSize(QSize(32, 32));
-	mTabBar->setToolButtonStyle(resolution.width() < upperMediumResolutionBorder
+	mTabBar->setToolButtonStyle(
+		resolution.width() < upperMediumResolutionBorder
 			? Qt::ToolButtonIconOnly // On small resolutions in some locales text may be too wide.
 			: Qt::ToolButtonTextUnderIcon);
 	mMainWindow.addToolBar(Qt::LeftToolBarArea, mTabBar);
@@ -407,7 +405,7 @@ void UiManager::hack2dModelDock() const
 	// 2D model is placed into smart dock: it may be embedded into instance of QDialog
 	// that is not influeced by mMainWindow::restoreState. So we must first switch to a docked form
 	// and then restore docks state.
-	if (utils::SmartDock * const twoDModel = mMainWindow.windowWidget()->findChild<utils::SmartDock *>()) {
+	if (utils::SmartDock *const twoDModel = mMainWindow.windowWidget()->findChild<utils::SmartDock *>()) {
 		twoDModel->switchToDocked();
 	}
 }
@@ -416,18 +414,19 @@ void UiManager::enableDocksSnapshotter() const
 {
 	// This method provides tools only for development.
 	// It must not be called in master branch code.
-	QWidget * const mainWindow = dynamic_cast<QWidget *>(&mMainWindow);
-	QDialog * const dialog = new QDialog(mainWindow);
-	QVBoxLayout * const layout = new QVBoxLayout;
+	QWidget *const mainWindow = dynamic_cast<QWidget *>(&mMainWindow);
+	QDialog *const dialog = new QDialog(mainWindow);
+	QVBoxLayout *const layout = new QVBoxLayout;
 	dialog->setLayout(layout);
-	QPushButton * const button = new QPushButton("Snapshot docks", mainWindow);
-	QLineEdit * const lineEdit = new QLineEdit(mainWindow);
+	QPushButton *const button = new QPushButton("Snapshot docks", mainWindow);
+	QLineEdit *const lineEdit = new QLineEdit(mainWindow);
 	connect(button, &QPushButton::clicked, this, [=]() {
 		const QString tempSettingsFileName = "tempFileForStoringWindowState";
 		QSettings tempSettings(tempSettingsFileName, QSettings::IniFormat);
 		tempSettings.setValue(currentSettingsKey(), mMainWindow.saveState(currentMode()));
 		tempSettings.sync();
-		lineEdit->setText(utils::InFile::readAll(tempSettingsFileName).split("\n", QString::SkipEmptyParts).last());
+		lineEdit->setText(
+			utils::InFile::readAll(tempSettingsFileName).split("\n", QString::SkipEmptyParts).last());
 		QFile::remove(tempSettingsFileName);
 	});
 	layout->addWidget(button);

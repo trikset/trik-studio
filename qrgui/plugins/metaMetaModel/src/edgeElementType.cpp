@@ -139,10 +139,11 @@ void EdgeElementType::updateSdf()
 		break;
 	}
 
-	const QString sdf = "<picture sizex=\"100\" sizey=\"60\" >\n"\
-			"\t<line fill=\"" + mPenColor.name() + "\" stroke-style=\"" + sdfType + "\" stroke=\"" + mPenColor.name() +
-			"\" y1=\"0\" x1=\"0\" y2=\"60\" stroke-width=\"2\" x2=\"100\" fill-style=\"solid\" />\n"
-			 "</picture>";
+	const QString sdf = "<picture sizex=\"100\" sizey=\"60\" >\n"
+	                    "\t<line fill=\""
+	                    + mPenColor.name() + "\" stroke-style=\"" + sdfType + "\" stroke=\"" + mPenColor.name()
+	                    + "\" y1=\"0\" x1=\"0\" y2=\"60\" stroke-width=\"2\" x2=\"100\" fill-style=\"solid\" />\n"
+	                      "</picture>";
 
 	QDomDocument sdfDocument;
 	sdfDocument.setContent(sdf);

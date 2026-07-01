@@ -18,22 +18,13 @@
 
 using namespace pioneer::lua;
 
-PioneerLuaGeneratorCustomizer::PioneerLuaGeneratorCustomizer(const qrRepo::RepoApi &repo
-		, qReal::ErrorReporterInterface &errorReporter
-		, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
-		, generatorBase::lua::LuaProcessor &luaProcessor
-		, const QString &generatorName
-		, GotoLabelManager &gotoLabelManager
-		, bool supportsSwitchUnstableToBreaks)
-	: mFactory(
-			new PioneerLuaGeneratorFactory(
-					repo
-					, errorReporter
-					, robotModelManager
-					, luaProcessor
-					, generatorName
-					, gotoLabelManager
-			))
+PioneerLuaGeneratorCustomizer::PioneerLuaGeneratorCustomizer(const qrRepo::RepoApi &repo,
+	qReal::ErrorReporterInterface &errorReporter,
+	const kitBase::robotModel::RobotModelManagerInterface &robotModelManager,
+	generatorBase::lua::LuaProcessor &luaProcessor, const QString &generatorName,
+	GotoLabelManager &gotoLabelManager, bool supportsSwitchUnstableToBreaks)
+	: mFactory(new PioneerLuaGeneratorFactory(repo, errorReporter, robotModelManager, luaProcessor, generatorName,
+		  gotoLabelManager))
 	, mSupportsSwitchUnstableToBreaks(supportsSwitchUnstableToBreaks)
 {
 }

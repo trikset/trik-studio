@@ -25,16 +25,16 @@ using namespace qReal;
 using namespace qReal::gui::editor;
 
 PropertyEditorView::PropertyEditorView(QWidget *parent)
-		: QWidget(parent)
-		, mChangingPropertyValue(false)
-		, mModel(nullptr)
-		, mPropertyEditor(new QtTreePropertyBrowser(this))
-		, mLogicalModelAssistApi(nullptr)
-		, mVariantManager(nullptr)
-		, mVariantFactory(nullptr)
-		, mButtonManager(nullptr)
-		, mButtonFactory(nullptr)
-		, mController(nullptr)
+	: QWidget(parent)
+	, mChangingPropertyValue(false)
+	, mModel(nullptr)
+	, mPropertyEditor(new QtTreePropertyBrowser(this))
+	, mLogicalModelAssistApi(nullptr)
+	, mVariantManager(nullptr)
+	, mVariantFactory(nullptr)
+	, mButtonManager(nullptr)
+	, mButtonFactory(nullptr)
+	, mController(nullptr)
 {
 	bool ok;
 	auto size = qReal::SettingsManager::value("CustomDockTextSize").toInt(&ok);
@@ -46,8 +46,8 @@ PropertyEditorView::PropertyEditorView(QWidget *parent)
 
 PropertyEditorView::~PropertyEditorView() = default;
 
-void PropertyEditorView::init(qReal::models::LogicalModelAssistApi &logicalModelAssistApi
-		, qReal::Controller &controller)
+void PropertyEditorView::init(qReal::models::LogicalModelAssistApi &logicalModelAssistApi,
+	qReal::Controller &controller)
 {
 	mLogicalModelAssistApi = &logicalModelAssistApi; // unused
 	mController = &controller;
@@ -59,7 +59,8 @@ void PropertyEditorView::init(qReal::models::LogicalModelAssistApi &logicalModel
 void PropertyEditorView::setModel(PropertyEditorModel *model)
 {
 	mModel = model;
-	connect(mModel, SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SLOT(dataChanged(QModelIndex,QModelIndex)));
+	connect(mModel, SIGNAL(dataChanged(QModelIndex, QModelIndex)), this,
+		SLOT(dataChanged(QModelIndex, QModelIndex)));
 	connect(mModel, SIGNAL(modelReset()), this, SLOT(reset()));
 }
 
@@ -78,8 +79,8 @@ void PropertyEditorView::update(const QModelIndex &)
 	QWidget::update();
 }
 
-void PropertyEditorView::setPropertyToRoot(const QModelIndex &index, const QList<QPair<QString, QString>> &values
-		, QtVariantProperty *vItem)
+void PropertyEditorView::setPropertyToRoot(const QModelIndex &index, const QList<QPair<QString, QString>> &values,
+	QtVariantProperty *vItem)
 {
 	const QString value = mModel->getValueFromIndex(index);
 	const QVariant val(value);
@@ -102,8 +103,7 @@ void PropertyEditorView::setPropertyToRoot(const QModelIndex &index, const QList
 	}
 }
 
-int PropertyEditorView::getType(const QString &typeName
-					, bool &isButton, const QList<QPair<QString, QString>> &values)
+int PropertyEditorView::getType(const QString &typeName, bool &isButton, const QList<QPair<QString, QString>> &values)
 {
 	int type = QVariant::String;
 	if (typeName == "int") {
@@ -120,7 +120,6 @@ int PropertyEditorView::getType(const QString &typeName
 
 	return type;
 }
-
 
 void PropertyEditorView::setDescription(QtVariantProperty *vItem, int cellIndex)
 {
@@ -178,12 +177,12 @@ void PropertyEditorView::setRootIndex(const QModelIndex &index)
 					this->setDescription(vItem, i);
 				}
 
-				QList<QtProperty*> list;
+				QList<QtProperty *> list;
 				for (int j = 0; j < count; ++j) {
 					valueIndex = mModel->index(i, j + 1);
 					name = mModel->data(valueIndex).toString();
 					QtProperty *item1 = nullptr;
-					typeName =  mModel->typeName(valueIndex).toLower();
+					typeName = mModel->typeName(valueIndex).toLower();
 					values = mModel->enumValues(valueIndex);
 					isButton = false;
 
@@ -210,27 +209,25 @@ void PropertyEditorView::setRootIndex(const QModelIndex &index)
 		}
 	}
 
-	connect(mButtonManager.get(), &PushButtonPropertyManager::buttonClicked
-			, this, &PropertyEditorView::buttonClicked, Qt::UniqueConnection);
+	connect(mButtonManager.get(), &PushButtonPropertyManager::buttonClicked, this,
+		&PropertyEditorView::buttonClicked, Qt::UniqueConnection);
 	// For some reason c++11-style connections do not work here!
 	// TODO: fix with new SIGNAL/SLOT signature
-	connect(mVariantManager.get(), SIGNAL(valueChanged(QtProperty*, QVariant))
-				, this, SLOT(editorValueChanged(QtProperty *, QVariant)), Qt::UniqueConnection);
+	connect(mVariantManager.get(), SIGNAL(valueChanged(QtProperty *, QVariant)), this,
+		SLOT(editorValueChanged(QtProperty *, QVariant)), Qt::UniqueConnection);
 	mPropertyEditor->setPropertiesWithoutValueMarked(true);
 	mPropertyEditor->setRootIsDecorated(false);
 }
 
-void PropertyEditorView::setPropertyFromDataChanged(const QModelIndex &valueIndex, QtVariantProperty *prop
-		, const int descriptionIndex)
+void PropertyEditorView::setPropertyFromDataChanged(const QModelIndex &valueIndex, QtVariantProperty *prop,
+	const int descriptionIndex)
 {
 	const QString val = mModel->getValueFromIndex(valueIndex);
 	QVariant value(val);
 	if (prop) {
 		if (prop->propertyType() == QtVariantPropertyManager::enumTypeId()
-				&& !mModel->enumEditable(valueIndex))
-		{
+			&& !mModel->enumEditable(valueIndex)) {
 			value = enumPropertyIndexOf(valueIndex, value.toString());
-
 		}
 
 		setPropertyValue(prop, value);
@@ -255,17 +252,17 @@ void PropertyEditorView::dataChanged(const QModelIndex &, const QModelIndex &)
 			break;
 		}
 
-		QList<QtProperty*> childs = property->subProperties();
+		QList<QtProperty *> childs = property->subProperties();
 		if (childs.isEmpty()) {
-			if (dynamic_cast<QtVariantProperty*>(property)) {
-				QtVariantProperty *prop = dynamic_cast<QtVariantProperty*>(property);
+			if (dynamic_cast<QtVariantProperty *>(property)) {
+				QtVariantProperty *prop = dynamic_cast<QtVariantProperty *>(property);
 				const QModelIndex &valueIndex = mModel->index(row, 0);
 				setPropertyFromDataChanged(valueIndex, prop, i);
 			}
 		}
 
 		for (int j = 0; j < childs.count(); ++j) {
-			QtVariantProperty *child = dynamic_cast<QtVariantProperty*>(childs.at(j));
+			QtVariantProperty *child = dynamic_cast<QtVariantProperty *>(childs.at(j));
 			const QModelIndex &valueIndex = mModel->index(row, j + 1);
 			setPropertyFromDataChanged(valueIndex, child, i);
 		}
@@ -298,18 +295,14 @@ void PropertyEditorView::buttonClicked(QtProperty *property)
 		if (typeName == "code") {
 			Q_EMIT textEditorRequested(actualIndex, role, propertyValue);
 		} else if (typeName == "directorypath") {
-			const QString startPath = propertyValue.isEmpty()
-					? QDir::homePath()
-					: propertyValue;
-			const QString location = utils::QRealFileDialog::getExistingDirectory("OpenDirectoryForPropertyEditor"
-					, this, tr("Specify directory:"), startPath);
+			const QString startPath = propertyValue.isEmpty() ? QDir::homePath() : propertyValue;
+			const QString location = utils::QRealFileDialog::getExistingDirectory(
+				"OpenDirectoryForPropertyEditor", this, tr("Specify directory:"), startPath);
 			mModel->setData(index, location);
 		} else if (typeName == "filepath") {
-			const QString startPath = propertyValue.isEmpty()
-					? QDir::homePath()
-					: propertyValue;
-			const QString location = utils::QRealFileDialog::getOpenFileName("OpenFileForPropertyEditor"
-					, this, tr("Select file:"), startPath);
+			const QString startPath = propertyValue.isEmpty() ? QDir::homePath() : propertyValue;
+			const QString location = utils::QRealFileDialog::getOpenFileName("OpenFileForPropertyEditor",
+				this, tr("Select file:"), startPath);
 			mModel->setData(index, location);
 		} else {
 			Q_EMIT referenceListRequested(actualIndex, typeName, propertyValue, role);
@@ -323,21 +316,21 @@ void PropertyEditorView::editorValueChanged(QtProperty *prop, QVariant value)
 		return;
 	}
 
-	const QtVariantProperty *property = dynamic_cast<QtVariantProperty*>(prop);
+	const QtVariantProperty *property = dynamic_cast<QtVariantProperty *>(prop);
 	int propertyType = property->propertyType();
 
-	const QList<QtProperty*> list = mPropertyEditor->properties();
+	const QList<QtProperty *> list = mPropertyEditor->properties();
 	int row = 0;
 
 	QString firstPart = "";
 	int i = 0;
 
 	while (i < list.length()) {
-		const QtProperty* tempProperty = list.at(i);
-		const QList<QtProperty*> childs = tempProperty->subProperties();
+		const QtProperty *tempProperty = list.at(i);
+		const QList<QtProperty *> childs = tempProperty->subProperties();
 		if (!childs.isEmpty()) {
 			++row;
-			for (const QtProperty* property : childs) {
+			for (const QtProperty *property : childs) {
 				if (property == prop) {
 					firstPart = tempProperty->propertyName();
 					break;
@@ -399,7 +392,7 @@ void PropertyEditorView::editorValueChanged(QtProperty *prop, QVariant value)
 	// TODO: edit included Qt Property Browser framework or inherit new browser
 	// from it and create propertyCommited() and propertyCancelled() signal
 	qReal::commands::ChangePropertyCommand *changeCommand =
-			new qReal::commands::ChangePropertyCommand(mLogicalModelAssistApi, firstPart + propertyName, id, value);
+		new qReal::commands::ChangePropertyCommand(mLogicalModelAssistApi, firstPart + propertyName, id, value);
 	mController->execute(changeCommand);
 }
 
@@ -429,7 +422,8 @@ int PropertyEditorView::enumPropertyIndexOf(const QModelIndex &index, const QStr
 	return -1;
 }
 
-void PropertyEditorView::resizeEvent(QResizeEvent *event ) {
+void PropertyEditorView::resizeEvent(QResizeEvent *event)
+{
 	mPropertyEditor->resize(event->size());
 }
 

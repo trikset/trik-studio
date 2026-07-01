@@ -21,10 +21,8 @@
 using namespace generatorBase::converters;
 using namespace qReal;
 
-DynamicPropertiesConverter::DynamicPropertiesConverter(lua::LuaProcessor &luaTranslator
-		, const qReal::Id &id
-		, const QStringList &pathsToTemplates
-		, ConverterInterface *reservedVariablesConverter)
+DynamicPropertiesConverter::DynamicPropertiesConverter(lua::LuaProcessor &luaTranslator, const qReal::Id &id,
+	const QStringList &pathsToTemplates, ConverterInterface *reservedVariablesConverter)
 	: TemplateParametrizedEntity(pathsToTemplates)
 	, mLuaTranslator(luaTranslator)
 	, mId(id)
@@ -44,13 +42,11 @@ QString DynamicPropertiesConverter::convert(const QString &properties) const
 		dynamicProperties.setContent(properties);
 
 		QStringList argumentsList;
-		for (QDomElement element
-				= dynamicProperties.firstChildElement("properties").firstChildElement("property")
-				; !element.isNull()
-				; element = element.nextSiblingElement("property"))
-		{
-			argumentsList << mLuaTranslator.translate(element.attribute("dynamicPropertyValue")
-					, mId, element.attribute("name"), mReservedVariablesConverter);
+		for (QDomElement element =
+				dynamicProperties.firstChildElement("properties").firstChildElement("property");
+			!element.isNull(); element = element.nextSiblingElement("property")) {
+			argumentsList << mLuaTranslator.translate(element.attribute("dynamicPropertyValue"), mId,
+				element.attribute("name"), mReservedVariablesConverter);
 		}
 
 		QString result = argumentsList.join(readTemplate("luaPrinting/argumentsSeparator.t"));

@@ -40,7 +40,7 @@ Q_SIGNALS:
 	void gestureFinished();
 
 protected:
-	virtual bool eventFilter(QObject* object, QEvent* event);
+	virtual bool eventFilter(QObject *object, QEvent *event);
 
 private Q_SLOTS:
 	void grabTapAndHold();

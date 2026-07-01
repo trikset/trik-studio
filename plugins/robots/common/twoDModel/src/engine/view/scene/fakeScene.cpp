@@ -25,20 +25,17 @@ using namespace model;
 
 FakeScene::FakeScene(const WorldModel &world)
 {
-	connect(&world, &WorldModel::wallAdded, this, [=](const QSharedPointer<items::WallItem> &wall) {
-		addClone(wall, wall->clone());
-	});
-	connect(&world, &WorldModel::colorItemAdded
-			, this, [=](const QSharedPointer<items::ColorFieldItem> &item) {
-		addClone(item, item->clone());
-	});
+	connect(&world, &WorldModel::wallAdded, this,
+		[=](const QSharedPointer<items::WallItem> &wall) { addClone(wall, wall->clone()); });
+	connect(&world, &WorldModel::colorItemAdded, this,
+		[=](const QSharedPointer<items::ColorFieldItem> &item) { addClone(item, item->clone()); });
 	connect(&world, &WorldModel::imageItemAdded, this, [=](const QSharedPointer<items::ImageItem> &item) {
 		if (!item->isBackground()) {
 			addClone(item, item->clone());
 		}
 	});
-	connect(&world, &WorldModel::traceItemAddedOrChanged
-			, this, [this](const QSharedPointer<QGraphicsPathItem> &item, bool justChanged) {
+	connect(&world, &WorldModel::traceItemAddedOrChanged, this,
+		[this](const QSharedPointer<QGraphicsPathItem> &item, bool justChanged) {
 		// if traceItem was changed need delete old clone before adding new clone
 		if (justChanged) {
 			deleteItem(item);
@@ -48,7 +45,7 @@ FakeScene::FakeScene(const WorldModel &world)
 	connect(&world, &WorldModel::itemRemoved, this, &FakeScene::deleteItem);
 }
 
-void FakeScene::addClone(const QWeakPointer<QGraphicsItem> &original, QGraphicsItem * const cloned)
+void FakeScene::addClone(const QWeakPointer<QGraphicsItem> &original, QGraphicsItem *const cloned)
 {
 	mClonedItems[original] = cloned;
 	addItem(cloned);
@@ -62,7 +59,10 @@ void FakeScene::addClone(const QWeakPointer<QGraphicsItem> &original, QGraphicsI
 	// then some very unobvious thing is wrong). One way to fix that is simply to move item when we
 	// change its corners.
 	if (auto &&orit = qSharedPointerDynamicCast<graphicsUtils::AbstractItem>(original.lock())) {
-		const auto hack = [=]() { cloned->moveBy(1, 1); cloned->moveBy(-1, -1); };
+		const auto hack = [=]() {
+			cloned->moveBy(1, 1);
+			cloned->moveBy(-1, -1);
+		};
 		connect(&*orit, &graphicsUtils::AbstractItem::x1Changed, this, hack);
 		connect(&*orit, &graphicsUtils::AbstractItem::y1Changed, this, hack);
 		connect(&*orit, &graphicsUtils::AbstractItem::x2Changed, this, hack);

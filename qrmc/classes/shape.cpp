@@ -72,10 +72,8 @@ void Shape::init(const QString &shape)
 void Shape::initLabels(const QDomElement &graphics)
 {
 	int count = 1;
-	for (QDomElement element = graphics.firstChildElement("labels").firstChildElement("label");
-		!element.isNull();
-		element = element.nextSiblingElement("label"))
-	{
+	for (QDomElement element = graphics.firstChildElement("labels").firstChildElement("label"); !element.isNull();
+		element = element.nextSiblingElement("label")) {
 		Label *label = new Label();
 		if (!label->init(element, count, true, mWidth, mHeight)) {
 			delete label;
@@ -100,10 +98,8 @@ void Shape::initPorts(const QDomElement &graphics)
 
 void Shape::initPointPorts(const QDomElement &portsElement)
 {
-	for (QDomElement portElement = portsElement.firstChildElement("pointPort");
-		!portElement.isNull();
-		portElement = portElement.nextSiblingElement("pointPort"))
-	{
+	for (QDomElement portElement = portsElement.firstChildElement("pointPort"); !portElement.isNull();
+		portElement = portElement.nextSiblingElement("pointPort")) {
 		Port *pointPort = new PointPort();
 		if (!pointPort->init(portElement, mWidth, mHeight)) {
 			delete pointPort;
@@ -117,13 +113,10 @@ void Shape::initPointPorts(const QDomElement &portsElement)
 
 void Shape::initLinePorts(const QDomElement &portsElement)
 {
-	for (QDomElement portElement = portsElement.firstChildElement("linePort");
-		!portElement.isNull();
-		portElement = portElement.nextSiblingElement("linePort"))
-	{
+	for (QDomElement portElement = portsElement.firstChildElement("linePort"); !portElement.isNull();
+		portElement = portElement.nextSiblingElement("linePort")) {
 		Port *linePort = new LinePort();
-		if (!linePort->init(portElement, mWidth, mHeight))
-		{
+		if (!linePort->init(portElement, mWidth, mHeight)) {
 			delete linePort;
 			return;
 		}
@@ -175,17 +168,15 @@ void Shape::generate(QString &classTemplate) const
 		unused += nodeIndent + "Q_UNUSED(titles);" + endline + nodeIndent + "Q_UNUSED(factory)" + endline;
 	}
 
-	const QString shapeRendererLine = hasPicture()
-			? compiler.getTemplateUtils(nodeLoadShapeRendererTag)
-			: "";
+	const QString shapeRendererLine = hasPicture() ? compiler.getTemplateUtils(nodeLoadShapeRendererTag) : "";
 
 	const QString portRendererLine = (hasLinePorts() || hasPointPorts())
-			? compiler.getTemplateUtils(nodeLoadPortsRendererTag)
-			: nodeIndent +  "mRenderer->setElementRepo(elementRepo);";
+	                                         ? compiler.getTemplateUtils(nodeLoadPortsRendererTag)
+	                                         : nodeIndent + "mRenderer->setElementRepo(elementRepo);";
 
 	const QString nodeContentsLine = compiler.getTemplateUtils(nodeContentsTag)
-			.replace(nodeWidthTag, QString::number(mWidth))
-			.replace(nodeHeightTag, QString::number(mHeight));
+	                                         .replace(nodeWidthTag, QString::number(mWidth))
+	                                         .replace(nodeHeightTag, QString::number(mHeight));
 
 	QString portsInitLine;
 	for (Port *port : mPorts) {
@@ -197,7 +188,7 @@ void Shape::generate(QString &classTemplate) const
 	QString labelsUpdateLine;
 	QString labelsDefinitionLine;
 
-	for (const Label * const label : mLabels) {
+	for (const Label *const label : mLabels) {
 		labelsInitLine += label->generateInit(compiler, true) + endline;
 		labelsUpdateLine += label->generateUpdate(compiler) + endline;
 		labelsDefinitionLine += label->generateDefinition(compiler) + endline;
@@ -207,16 +198,16 @@ void Shape::generate(QString &classTemplate) const
 	}
 
 	classTemplate.replace(nodeUnusedTag, unused)
-			.replace(nodeLoadShapeRendererTag, shapeRendererLine)
-			.replace(nodeLoadPortsRendererTag, portRendererLine)
-			.replace(nodeContentsTag, nodeContentsLine)
-			.replace(nodeInitPortsTag, portsInitLine)
-			.replace(nodeInitTag, labelsInitLine)
-			.replace(updateDataTag, labelsUpdateLine)
-			.replace(labelDefinitionTag, labelsDefinitionLine);
+		.replace(nodeLoadShapeRendererTag, shapeRendererLine)
+		.replace(nodeLoadPortsRendererTag, portRendererLine)
+		.replace(nodeContentsTag, nodeContentsLine)
+		.replace(nodeInitPortsTag, portsInitLine)
+		.replace(nodeInitTag, labelsInitLine)
+		.replace(updateDataTag, labelsUpdateLine)
+		.replace(labelDefinitionTag, labelsDefinitionLine);
 }
 
-QList<Port*> Shape::getPorts() const
+QList<Port *> Shape::getPorts() const
 {
 	return mPorts;
 }
@@ -249,8 +240,8 @@ bool Shape::hasLabels() const
 
 bool Shape::hasPointPorts() const
 {
-	for (Port *port : mPorts){
-		if (dynamic_cast<PointPort*>(port)) {
+	for (Port *port : mPorts) {
+		if (dynamic_cast<PointPort *>(port)) {
 			return true;
 		}
 	}
@@ -259,8 +250,8 @@ bool Shape::hasPointPorts() const
 
 bool Shape::hasLinePorts() const
 {
-	for (Port *port : mPorts){
-		if (dynamic_cast<LinePort*>(port)) {
+	for (Port *port : mPorts) {
+		if (dynamic_cast<LinePort *>(port)) {
 			return true;
 		}
 	}

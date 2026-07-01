@@ -39,7 +39,7 @@ QList<kitBase::robotModel::RobotModelInterface *> NullKitInterpreterPlugin::robo
 }
 
 QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> NullKitInterpreterPlugin::blocksFactoryFor(
-		const kitBase::robotModel::RobotModelInterface *model)
+	const kitBase::robotModel::RobotModelInterface *model)
 {
 	Q_UNUSED(model)
 	return nullptr;
@@ -60,8 +60,7 @@ QList<qReal::HotKeyActionInfo> NullKitInterpreterPlugin::hotKeyActions()
 	return {};
 }
 
-QIcon NullKitInterpreterPlugin::iconForFastSelector(
-		const kitBase::robotModel::RobotModelInterface &robotModel) const
+QIcon NullKitInterpreterPlugin::iconForFastSelector(const kitBase::robotModel::RobotModelInterface &robotModel) const
 {
 	Q_UNUSED(robotModel)
 	return QIcon();

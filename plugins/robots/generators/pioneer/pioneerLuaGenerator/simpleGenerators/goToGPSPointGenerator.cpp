@@ -19,25 +19,15 @@
 using namespace pioneer::lua;
 using namespace generatorBase::simple;
 
-GoToGPSPointGenerator::GoToGPSPointGenerator(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, const qReal::Id &id
-		, QObject *parent)
-	: BindingGenerator(repo, customizer, id, "quadcopterCommands/goToPoint.t"
-		, {
-			Binding::createConverting(
-					"@@LATITUDE@@"
-					, "Latitude"
-					, customizer.factory()->intPropertyConverter(id, "X"))
-			, Binding::createConverting(
-					"@@LONGITUDE@@"
-					, "Longitude"
-					, customizer.factory()->intPropertyConverter(id, "Y"))
-			, Binding::createConverting(
-					"@@ALTITUDE@@"
-					, "Altitude"
-					, customizer.factory()->intPropertyConverter(id, "Z"))
-			}
-		, parent)
+GoToGPSPointGenerator::GoToGPSPointGenerator(const qrRepo::RepoApi &repo,
+	generatorBase::GeneratorCustomizer &customizer, const qReal::Id &id, QObject *parent)
+	: BindingGenerator(repo, customizer, id, "quadcopterCommands/goToPoint.t",
+		  {Binding::createConverting("@@LATITUDE@@", "Latitude",
+			   customizer.factory()->intPropertyConverter(id, "X")),
+			  Binding::createConverting("@@LONGITUDE@@", "Longitude",
+				  customizer.factory()->intPropertyConverter(id, "Y")),
+			  Binding::createConverting("@@ALTITUDE@@", "Altitude",
+				  customizer.factory()->intPropertyConverter(id, "Z"))},
+		  parent)
 {
 }

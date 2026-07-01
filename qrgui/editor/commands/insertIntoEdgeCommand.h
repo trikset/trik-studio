@@ -29,15 +29,9 @@ class InsertIntoEdgeCommand : public qReal::commands::AbstractCommand
 {
 	Q_OBJECT
 public:
-	InsertIntoEdgeCommand(EditorViewScene &scene
-			, const models::Models &models
-			, const Id &firstElem
-			, const Id &lastElem
-			, const Id &parent
-			, QPointF scenePos
-			, QPointF shift
-			, bool isFromLogicalModel
-			, qReal::commands::CreateElementsCommand *createCommand = nullptr);
+	InsertIntoEdgeCommand(EditorViewScene &scene, const models::Models &models, const Id &firstElem,
+		const Id &lastElem, const Id &parent, QPointF scenePos, QPointF shift, bool isFromLogicalModel,
+		qReal::commands::CreateElementsCommand *createCommand = nullptr);
 
 	~InsertIntoEdgeCommand();
 
@@ -46,9 +40,10 @@ protected:
 	virtual bool restoreState();
 
 private:
-	void initCommand(qReal::commands::CreateElementsCommand *&command, const Id &type
-			, const QMap<QString, QVariant> &additionalProperties);
-	void makeLink(qReal::commands::CreateElementsCommand *command, NodeElement *src, NodeElement *dst, QPolygonF line);
+	void initCommand(qReal::commands::CreateElementsCommand *&command, const Id &type,
+		const QMap<QString, QVariant> &additionalProperties);
+	void makeLink(qReal::commands::CreateElementsCommand *command, NodeElement *src, NodeElement *dst,
+		QPolygonF line);
 
 	EditorViewScene &mScene;
 	const models::Models &mModels;

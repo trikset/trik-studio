@@ -23,12 +23,10 @@ namespace nxt {
 class NxtGeneratorCustomizer : public generatorBase::GeneratorCustomizer
 {
 public:
-	NxtGeneratorCustomizer(const qrRepo::RepoApi &repo
-			, qReal::ErrorReporterInterface &errorReporter
-			, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
-			, generatorBase::lua::LuaProcessor &luaProcessor
-			, const QString &generatorName
-			, bool supportsSwitchUnstableToBreaks);
+	NxtGeneratorCustomizer(const qrRepo::RepoApi &repo, qReal::ErrorReporterInterface &errorReporter,
+		const kitBase::robotModel::RobotModelManagerInterface &robotModelManager,
+		generatorBase::lua::LuaProcessor &luaProcessor, const QString &generatorName,
+		bool supportsSwitchUnstableToBreaks);
 
 	generatorBase::GeneratorFactoryBase *factory() override;
 

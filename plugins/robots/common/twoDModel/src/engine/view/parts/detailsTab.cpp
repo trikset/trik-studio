@@ -49,9 +49,9 @@ DetailsTab::~DetailsTab()
 
 void DetailsTab::initItem(QTreeWidgetItem *item, const QString &text, bool expanded)
 {
-	QWidget * const widget = new QWidget(this);
-	QVBoxLayout * const layout = new QVBoxLayout(widget);
-	QLabel * const label = new QLabel(text, widget);
+	QWidget *const widget = new QWidget(this);
+	QVBoxLayout *const layout = new QVBoxLayout(widget);
+	QLabel *const label = new QLabel(text, widget);
 	layout->addStretch();
 	layout->addWidget(label);
 	layout->addStretch();
@@ -95,7 +95,7 @@ void DetailsTab::setParamsSettings(QWidget *widget)
 void DetailsTab::setMetricSettings(QWidget *widget)
 {
 	mMetric = widget;
-	setItemWidget(mMetricItem, 0 , widget);
+	setItemWidget(mMetricItem, 0, widget);
 }
 
 void DetailsTab::setDevicesSectionsVisible(bool visible)

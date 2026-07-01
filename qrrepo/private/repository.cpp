@@ -22,8 +22,8 @@ using namespace qrRepo;
 using namespace qrRepo::details;
 
 Repository::Repository(const QString &workingFile)
-		: mWorkingFile(workingFile)
-		, mSerializer(workingFile)
+	: mWorkingFile(workingFile)
+	, mSerializer(workingFile)
 {
 	loadFromDisk();
 }
@@ -54,17 +54,17 @@ IdList Repository::findElementsByName(const QString &name, bool sensitivity, boo
 	const QRegExp regExp(name, caseSensitivity);
 	IdList result;
 
-	if (regExpression){
-		for (Object * const element : mObjects.values()) {
+	if (regExpression) {
+		for (Object *const element : mObjects.values()) {
 			if (element->property("name").toString().contains(regExp)
-					&& !isLogicalId(mObjects.key(element))) {
+				&& !isLogicalId(mObjects.key(element))) {
 				result.append(mObjects.key(element));
 			}
 		}
 	} else {
-		for (Object * const element : mObjects.values()) {
+		for (Object *const element : mObjects.values()) {
 			if (element->property("name").toString().contains(name, caseSensitivity)
-					&& !isLogicalId(mObjects.key(element))) {
+				&& !isLogicalId(mObjects.key(element))) {
 				result.append(mObjects.key(element));
 			}
 		}
@@ -73,14 +73,13 @@ IdList Repository::findElementsByName(const QString &name, bool sensitivity, boo
 	return result;
 }
 
-qReal::IdList Repository::elementsByProperty(const QString &property, bool sensitivity
-		, bool regExpression) const
+qReal::IdList Repository::elementsByProperty(const QString &property, bool sensitivity, bool regExpression) const
 {
 	IdList result;
 
 	for (Object *element : mObjects.values()) {
 		if ((element->hasProperty(property, sensitivity, regExpression))
-				&& (!isLogicalId(mObjects.key(element)))) {
+			&& (!isLogicalId(mObjects.key(element)))) {
 			result.append(mObjects.key(element));
 		}
 	}
@@ -88,15 +87,15 @@ qReal::IdList Repository::elementsByProperty(const QString &property, bool sensi
 	return result;
 }
 
-qReal::IdList Repository::elementsByPropertyContent(const QString &propertyValue, bool sensitivity
-		, bool regExpression) const
+qReal::IdList Repository::elementsByPropertyContent(const QString &propertyValue, bool sensitivity,
+	bool regExpression) const
 {
 	const Qt::CaseSensitivity caseSensitivity = sensitivity ? Qt::CaseSensitive : Qt::CaseInsensitive;
 
 	const QRegExp regExp(propertyValue, caseSensitivity);
 	IdList result;
 
-	for (Object * const element : mObjects.values()) {
+	for (Object *const element : mObjects.values()) {
 		QMapIterator<QString, QVariant> iterator = element->propertiesIterator();
 		if (regExpression) {
 			while (iterator.hasNext()) {
@@ -145,7 +144,7 @@ Id Repository::parent(const Id &id) const
 
 Id Repository::cloneObject(const qReal::Id &id)
 {
-	const Object * const result = mObjects[id]->clone(mObjects);
+	const Object *const result = mObjects[id]->clone(mObjects);
 	return result->id();
 }
 
@@ -157,11 +156,12 @@ void Repository::setParent(const Id &id, const Id &parent)
 			if (!mObjects[parent]->children().contains(id))
 				mObjects[parent]->addChild(id);
 		} else {
-			throw Exception("Repository: Adding nonexistent parent " + parent.toString()
-					+ " to  object " + id.toString());
+			throw Exception("Repository: Adding nonexistent parent " + parent.toString() + " to  object "
+					+ id.toString());
 		}
 	} else {
-		throw Exception("Repository: Adding parent " + parent.toString() + " to nonexistent object " + id.toString());
+		throw Exception(
+			"Repository: Adding parent " + parent.toString() + " to nonexistent object " + id.toString());
 	}
 }
 
@@ -179,30 +179,32 @@ void Repository::addChild(const Id &id, const Id &child, const Id &logicalId)
 		if (mObjects.contains(child)) { // should we move element?
 			mObjects[child]->setParent(id);
 		} else {
-			Object * const object = logicalId.isNull()
-					? static_cast<Object *>(new LogicalObject(child))
-					: static_cast<Object *>(new GraphicalObject(child, id, logicalId))
-					;
+			Object *const object =
+				logicalId.isNull() ? static_cast<Object *>(new LogicalObject(child))
+						   : static_cast<Object *>(new GraphicalObject(child, id, logicalId));
 
 			object->setParent(id);
 
 			mObjects.insert(child, object);
 		}
 	} else {
-		throw Exception("Repository: Adding child " + child.toString() + " to nonexistent object " + id.toString());
+		throw Exception(
+			"Repository: Adding child " + child.toString() + " to nonexistent object " + id.toString());
 	}
 }
 
-void Repository::stackBefore(const qReal::Id &id, const qReal::Id &child, const qReal::Id &sibling) {
-	if(!mObjects.contains(id)) {
-		throw Exception("Repository: Moving child " + child.toString() + " of nonexistent object " + id.toString());
+void Repository::stackBefore(const qReal::Id &id, const qReal::Id &child, const qReal::Id &sibling)
+{
+	if (!mObjects.contains(id)) {
+		throw Exception(
+			"Repository: Moving child " + child.toString() + " of nonexistent object " + id.toString());
 	}
 
-	if(!mObjects.contains(child)) {
+	if (!mObjects.contains(child)) {
 		throw Exception("Repository: Moving nonexistent child " + child.toString());
 	}
 
-	if(!mObjects.contains(sibling)) {
+	if (!mObjects.contains(sibling)) {
 		throw Exception("Repository: Stacking before nonexistent child " + sibling.toString());
 	}
 
@@ -217,8 +219,8 @@ void Repository::removeParent(const Id &id)
 			mObjects[id]->setParent(Id());
 			mObjects[parent]->removeChild(id);
 		} else {
-			throw Exception("Repository: Removing nonexistent parent " + parent.toString()
-					+ " from object " + id.toString());
+			throw Exception("Repository: Removing nonexistent parent " + parent.toString() + " from object "
+					+ id.toString());
 		}
 	} else {
 		throw Exception("Repository: Removing parent from nonexistent object " + id.toString());
@@ -231,21 +233,22 @@ void Repository::removeChild(const Id &id, const Id &child)
 		if (mObjects.contains(child)) {
 			mObjects[id]->removeChild(child);
 		} else {
-			throw Exception("Repository: removing nonexistent child " + child.toString()
-					+ " from object " + id.toString());
+			throw Exception("Repository: removing nonexistent child " + child.toString() + " from object "
+					+ id.toString());
 		}
 	} else {
-		throw Exception("Repository: removing child " + child.toString() + " from nonexistent object " + id.toString());
+		throw Exception(
+			"Repository: removing child " + child.toString() + " from nonexistent object " + id.toString());
 	}
 }
 
-void Repository::setProperty(const Id &id, const QString &name, const QVariant &value ) const
+void Repository::setProperty(const Id &id, const QString &name, const QVariant &value) const
 {
 	if (mObjects.contains(id)) {
 		// see Object::property() for details
-//		Q_ASSERT(mObjects[id]->hasProperty(name)
-//				 ? mObjects[id]->property(name).userType() == value.userType()
-//				 : true);
+		//		Q_ASSERT(mObjects[id]->hasProperty(name)
+		//				 ? mObjects[id]->property(name).userType() == value.userType()
+		//				 : true);
 		mObjects[id]->setProperty(name, value);
 	} else {
 		throw Exception("Repository: Setting property " + name + " of nonexistent object " + id.toString());
@@ -290,8 +293,8 @@ bool Repository::hasProperty(const Id &id, const QString &name, bool sensitivity
 	if (mObjects.contains(id)) {
 		return mObjects[id]->hasProperty(name, sensitivity, regExpression);
 	} else {
-		throw Exception("Repository: Checking the existence of a property '" + name
-				+ "' of nonexistent object " + id.toString());
+		throw Exception("Repository: Checking the existence of a property '" + name + "' of nonexistent object "
+				+ id.toString());
 	}
 }
 
@@ -302,7 +305,7 @@ void Repository::setBackReference(const Id &id, const Id &reference) const
 			mObjects[id]->setBackReference(reference);
 		} else {
 			throw Exception("Repository: setting nonexistent back reference " + reference.toString()
-							+ " to object " + id.toString());
+					+ " to object " + id.toString());
 		}
 	} else {
 		throw Exception("Repository: setting back reference of nonexistent object " + id.toString());
@@ -316,7 +319,7 @@ void Repository::removeBackReference(const Id &id, const Id &reference) const
 			mObjects[id]->removeBackReference(reference);
 		} else {
 			throw Exception("Repository: removing nonexistent back reference " + reference.toString()
-							+ " of object " + id.toString());
+					+ " of object " + id.toString());
 		}
 	} else {
 		throw Exception("Repository: removing back reference of nonexistent object " + id.toString());
@@ -400,9 +403,9 @@ IdList Repository::idsOfAllChildrenOf(const Id &id) const
 	return result;
 }
 
-QList<Object*> Repository::allChildrenOf(const Id &id) const
+QList<Object *> Repository::allChildrenOf(const Id &id) const
 {
-	QList<Object*> result;
+	QList<Object *> result;
 	result.append(mObjects[id]);
 	for (const Id &childId : mObjects[id]->children()) {
 		result.append(allChildrenOf(childId));
@@ -411,16 +414,15 @@ QList<Object*> Repository::allChildrenOf(const Id &id) const
 	return result;
 }
 
-QList<Object*> Repository::allChildrenOfWithLogicalId(const Id &id) const
+QList<Object *> Repository::allChildrenOfWithLogicalId(const Id &id) const
 {
-	QList<Object*> result;
+	QList<Object *> result;
 	result.append(mObjects[id]);
 
 	// along with each ID we also add its logical ID.
 
-	for(const auto &childId: mObjects[id]->children())
-		result << allChildrenOf(childId)
-				<< allChildrenOf(logicalId(childId));
+	for (const auto &childId : mObjects[id]->children())
+		result << allChildrenOf(childId) << allChildrenOf(logicalId(childId));
 	return result;
 }
 
@@ -436,7 +438,7 @@ bool Repository::saveAll() const
 
 bool Repository::save(const IdList &list) const
 {
-	QList<Object*> toSave;
+	QList<Object *> toSave;
 	for (const Id &id : list) {
 		toSave.append(allChildrenOf(id));
 	}
@@ -446,11 +448,10 @@ bool Repository::save(const IdList &list) const
 
 bool Repository::saveWithLogicalId(const qReal::IdList &list) const
 {
-	QList<Object*> toSave;
+	QList<Object *> toSave;
 	for (const Id &id : list) {
 		toSave << allChildrenOfWithLogicalId(id);
 	}
-
 
 	return mSerializer.saveToDisk(toSave, mMetaInfo);
 }
@@ -480,7 +481,7 @@ bool Repository::saveDiagramsById(QHash<QString, IdList> const &diagramIds)
 
 void Repository::remove(const IdList &list) const
 {
-	for(const auto &id: list) {
+	for (const auto &id : list) {
 		qDebug() << id.toString();
 		mSerializer.removeFromDisk(id);
 	}
@@ -558,7 +559,7 @@ bool Repository::isLogicalId(const qReal::Id &elem) const
 
 qReal::Id Repository::logicalId(const qReal::Id &elem) const
 {
-	const GraphicalObject * const graphicalObject = dynamic_cast<GraphicalObject *>(mObjects[elem]);
+	const GraphicalObject *const graphicalObject = dynamic_cast<GraphicalObject *>(mObjects[elem]);
 	if (!graphicalObject) {
 		throw Exception("Trying to get logical id from non-graphical object");
 	}
@@ -573,7 +574,7 @@ QMapIterator<QString, QVariant> Repository::propertiesIterator(const qReal::Id &
 
 void Repository::createGraphicalPart(const qReal::Id &id, int partIndex)
 {
-	GraphicalObject * const graphicalObject = dynamic_cast<GraphicalObject *>(mObjects[id]);
+	GraphicalObject *const graphicalObject = dynamic_cast<GraphicalObject *>(mObjects[id]);
 	if (!graphicalObject) {
 		throw Exception("Trying to create graphical part for non-graphical object");
 	}
@@ -583,7 +584,7 @@ void Repository::createGraphicalPart(const qReal::Id &id, int partIndex)
 
 QList<int> Repository::graphicalParts(const qReal::Id &id) const
 {
-	GraphicalObject * const graphicalObject = dynamic_cast<GraphicalObject *>(mObjects[id]);
+	GraphicalObject *const graphicalObject = dynamic_cast<GraphicalObject *>(mObjects[id]);
 	if (!graphicalObject) {
 		return QList<int>();
 	}
@@ -593,7 +594,7 @@ QList<int> Repository::graphicalParts(const qReal::Id &id) const
 
 QVariant Repository::graphicalPartProperty(const qReal::Id &id, int partIndex, const QString &propertyName) const
 {
-	GraphicalObject * const graphicalObject = dynamic_cast<GraphicalObject *>(mObjects[id]);
+	GraphicalObject *const graphicalObject = dynamic_cast<GraphicalObject *>(mObjects[id]);
 	if (!graphicalObject) {
 		throw Exception("Trying to obtain graphical part property for non-graphical item");
 	}
@@ -601,14 +602,10 @@ QVariant Repository::graphicalPartProperty(const qReal::Id &id, int partIndex, c
 	return graphicalObject->graphicalPartProperty(partIndex, propertyName);
 }
 
-void Repository::setGraphicalPartProperty(
-		const qReal::Id &id
-		, int partIndex
-		, const QString &propertyName
-		, const QVariant &value
-		)
+void Repository::setGraphicalPartProperty(const qReal::Id &id, int partIndex, const QString &propertyName,
+	const QVariant &value)
 {
-	GraphicalObject * const graphicalObject = dynamic_cast<GraphicalObject *>(mObjects[id]);
+	GraphicalObject *const graphicalObject = dynamic_cast<GraphicalObject *>(mObjects[id]);
 	if (!graphicalObject) {
 		throw Exception("Trying to obtain graphical part property for non-graphical item");
 	}

@@ -53,8 +53,7 @@ class TWO_D_MODEL_EXPORT WorldModel : public QObject
 	Q_OBJECT
 
 public:
-	WorldModel(Settings *settings,
-		   twoDModel::model::MetricCoordinateSystem *metricSystem);
+	WorldModel(Settings *settings, twoDModel::model::MetricCoordinateSystem *metricSystem);
 	~WorldModel() override;
 
 	void init(qReal::ErrorReporterInterface &errorReporter);
@@ -65,15 +64,14 @@ public:
 	Q_INVOKABLE int rangeReading(QPointF position, qreal direction, int maxDistance, qreal maxAngle) const;
 
 	/// Measures the distance between robot and solid object for each angle in maxAngle and maxDistance scanning region
-	Q_INVOKABLE QVector<int> lidarReading(QPointF position, qreal direction
-			, int maxDistance, qreal maxAngle) const;
+	Q_INVOKABLE QVector<int> lidarReading(QPointF position, qreal direction, int maxDistance, qreal maxAngle) const;
 
 	/// Returns area which is seen by sonar sensor.
 	QPainterPath rangeSensorScanningRegion(QPointF position, qreal direction,
-			QPair<qreal,int> angleAndRange) const;
+		QPair<qreal, int> angleAndRange) const;
 
 	/// Returns area which is seen by sonar sensor with zero rotation.
-	QPainterPath rangeSensorScanningRegion(QPointF position, QPair<qreal,int> angleAndRange) const;
+	QPainterPath rangeSensorScanningRegion(QPointF position, QPair<qreal, int> angleAndRange) const;
 
 	/// Checks if the given path intersects some wall.
 	bool checkCollision(const QPainterPath &path) const;
@@ -154,7 +152,7 @@ public:
 	void removeImageItem(QSharedPointer<items::ImageItem> imageItem);
 
 	/// Sets using robot model
-	void setRobotModel(RobotModel * robotModel);
+	void setRobotModel(RobotModel *robotModel);
 
 	/// Removes all walls, colored items, regions and robot traces from the world model.
 	void clear();
@@ -217,7 +215,7 @@ public:
 	void createComment(const QDomElement &element);
 
 	/// Creates image item described by \a element in the world model.
-	QSharedPointer<items::ImageItem> createImageItem(const QDomElement &element, bool background=false);
+	QSharedPointer<items::ImageItem> createImageItem(const QDomElement &element, bool background = false);
 
 	/// Creates region item described by \a element in the world model.
 	void createRegion(const QDomElement &element);
@@ -273,11 +271,11 @@ Q_SIGNALS:
 
 private:
 	/// Returns true if ray intersects some wall.
-	bool checkRangeDistance(const int distance, QPointF position
-			, const qreal direction, const qreal scanningAngle, const QPainterPath &wallPath) const;
+	bool checkRangeDistance(const int distance, QPointF position, const qreal direction, const qreal scanningAngle,
+		const QPainterPath &wallPath) const;
 	QPainterPath buildSolidItemsPath() const;
 
-	void serializeBackground(QDomElement &background, QRect rect, const Image * const img) const;
+	void serializeBackground(QDomElement &background, QRect rect, const Image *const img) const;
 	QRectF deserializeRect(const QString &string) const;
 
 	QMap<QString, QSharedPointer<items::WallItem>> mWalls;
@@ -289,7 +287,7 @@ private:
 	QMap<QString, QSharedPointer<items::RegionItem>> mRegions;
 	QMap<QString, QSharedPointer<model::Image>> mImages;
 	QMap<QString, QSharedPointer<items::CommentItem>> mComments;
-	RobotModel * mRobotModel {}; // Doesn't take ownership
+	RobotModel *mRobotModel {}; // Doesn't take ownership
 
 	// Doesn't take ownership, ownership is twoDModel::model::Model.
 	// The lifetime of this object is greater than WorldModel (see Model.h)
@@ -298,7 +296,7 @@ private:
 	QList<QSharedPointer<QGraphicsPathItem>> mRobotTrace;
 	QRect mBackgroundRect;
 	QScopedPointer<QDomDocument> mXmlFactory;
-	qReal::ErrorReporterInterface *mErrorReporter;  // Doesn`t take ownership.
+	qReal::ErrorReporterInterface *mErrorReporter; // Doesn`t take ownership.
 	// Doesn't take ownership, ownership is twoDModel::model::Model.
 	// The lifetime of this object is greater than WorldModel (see Model.h)
 	QPointer<MetricCoordinateSystem> mMetricCoordinateSystem;

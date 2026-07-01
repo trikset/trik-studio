@@ -19,9 +19,7 @@
 using namespace twoDModel::robotModel::parts;
 using namespace kitBase::robotModel;
 
-LightSensor::LightSensor(const DeviceInfo &info
-		, const PortInfo &port
-		, engine::TwoDModelEngineInterface &engine)
+LightSensor::LightSensor(const DeviceInfo &info, const PortInfo &port, engine::TwoDModelEngineInterface &engine)
 	: robotParts::LightSensor(info, port)
 	, mEngine(engine)
 {

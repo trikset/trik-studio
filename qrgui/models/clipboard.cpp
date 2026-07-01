@@ -47,8 +47,7 @@ QList<NodeInfo> Clipboard::nodesData(const IdList &elements)
 	QList<NodeInfo> nodes;
 	for (const Id &item : elements) {
 		if (mModels.graphicalModelAssistApi().editorManagerInterface().isNodeOrEdge(item) > 0
-				&& !elements.contains(mModels.graphicalModelAssistApi().parent(item)))
-		{
+			&& !elements.contains(mModels.graphicalModelAssistApi().parent(item))) {
 			nodes << nodeInfo(item);
 		}
 	}
@@ -73,14 +72,14 @@ void Clipboard::addChildren(const Id &node, QList<NodeInfo> &nodes)
 
 NodeInfo Clipboard::nodeInfo(const Id &node) const
 {
-	return NodeInfo(node, mModels.graphicalModelAssistApi().logicalId(node)
-					, mModels.logicalModelAssistApi(), mModels.graphicalModelAssistApi());
+	return NodeInfo(node, mModels.graphicalModelAssistApi().logicalId(node), mModels.logicalModelAssistApi(),
+		mModels.graphicalModelAssistApi());
 }
 
 EdgeInfo Clipboard::edgeInfo(const Id &edge) const
 {
-	return EdgeInfo(edge, mModels.graphicalModelAssistApi().logicalId(edge)
-					, mModels.logicalModelAssistApi(), mModels.graphicalModelAssistApi());
+	return EdgeInfo(edge, mModels.graphicalModelAssistApi().logicalId(edge), mModels.logicalModelAssistApi(),
+		mModels.graphicalModelAssistApi());
 }
 
 bool Clipboard::contains(const QList<NodeInfo> &nodes, const Id &id)
@@ -97,7 +96,7 @@ bool Clipboard::contains(const QList<NodeInfo> &nodes, const Id &id)
 QList<EdgeInfo> Clipboard::edgesData(const IdList &elements)
 {
 	QList<EdgeInfo> edgesData;
-	for (const Id &item: elements) {
+	for (const Id &item : elements) {
 		if (mModels.graphicalModelAssistApi().editorManagerInterface().isNodeOrEdge(item) < 0) {
 			edgesData << edgeInfo(item);
 		}
@@ -129,11 +128,8 @@ bool Clipboard::isEmpty() const
 
 void Clipboard::paste(const Id &parent, QPointF position, bool isGraphicalCopy)
 {
-	qReal::commands::PasteCommand *pasteCommand = new qReal::commands::PasteCommand(
-			mModels
-			, isGraphicalCopy
-			, position
-			, parent);
+	qReal::commands::PasteCommand *pasteCommand =
+		new qReal::commands::PasteCommand(mModels, isGraphicalCopy, position, parent);
 	if (!pasteCommand->isEmpty()) {
 		mController.execute(pasteCommand);
 	}

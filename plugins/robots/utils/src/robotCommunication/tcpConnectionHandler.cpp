@@ -28,14 +28,13 @@ TcpConnectionHandler::TcpConnectionHandler(int port)
 	: mKeepAliveTimer(new QTimer(this))
 	, mPort(port)
 {
-	QObject::connect(&mSocket, &QTcpSocket::readyRead, this
-		, &TcpConnectionHandler::onIncomingData, Qt::DirectConnection);
+	QObject::connect(&mSocket, &QTcpSocket::readyRead, this, &TcpConnectionHandler::onIncomingData,
+		Qt::DirectConnection);
 
-	QObject::connect(&mSocket, &QTcpSocket::disconnected
-					 , mKeepAliveTimer, &QTimer::stop, Qt::DirectConnection);
+	QObject::connect(&mSocket, &QTcpSocket::disconnected, mKeepAliveTimer, &QTimer::stop, Qt::DirectConnection);
 
-	QObject::connect(mKeepAliveTimer, &QTimer::timeout, this
-		, &TcpConnectionHandler::keepalive, Qt::DirectConnection);
+	QObject::connect(mKeepAliveTimer, &QTimer::timeout, this, &TcpConnectionHandler::keepalive,
+		Qt::DirectConnection);
 
 	mKeepAliveTimer->setInterval(keepaliveTime);
 	mKeepAliveTimer->setSingleShot(false);
@@ -68,7 +67,7 @@ bool TcpConnectionHandler::connect(const QHostAddress &serverAddress)
 		const QNetworkProxyQuery proxyQuery(serverAddress.toString(), mPort);
 		const auto &tcpProxies = QNetworkProxyFactory::systemProxyForQuery(proxyQuery);
 		if (!tcpProxies.isEmpty()
-				&& (tcpProxies.size() != 1  || tcpProxies.first().type() != QNetworkProxy::NoProxy)) {
+			&& (tcpProxies.size() != 1 || tcpProxies.first().type() != QNetworkProxy::NoProxy)) {
 			QLOG_INFO() << "Proxies:" << tcpProxies;
 			QLOG_INFO() << "Attempting to reconnect with an application default proxy";
 			mSocket.setProxy(QNetworkProxy::DefaultProxy);
@@ -144,7 +143,8 @@ void TcpConnectionHandler::onIncomingData()
 				bool ok = false;
 				mExpectedBytes = length.toInt(&ok);
 				if (!ok) {
-					QLOG_ERROR() << "Malformed message, can not determine message length from this:" << length;
+					QLOG_ERROR() << "Malformed message, can not determine message length from this:"
+						     << length;
 					mExpectedBytes = 0;
 				}
 			}

@@ -36,11 +36,9 @@
 
 using namespace deployment;
 
-BlocksTable::BlocksTable(qReal::GraphicalModelAssistInterface const &graphicalModelApi
-		, qReal::LogicalModelAssistInterface const &logicalModelApi
-		, qReal::ErrorReporterInterface &errorReporter
-		, qrtext::LanguageToolboxInterface &textLanguageToolbox
-		, ShellWidget *shellWidget)
+BlocksTable::BlocksTable(qReal::GraphicalModelAssistInterface const &graphicalModelApi,
+	qReal::LogicalModelAssistInterface const &logicalModelApi, qReal::ErrorReporterInterface &errorReporter,
+	qrtext::LanguageToolboxInterface &textLanguageToolbox, ShellWidget *shellWidget)
 	: mGraphicalModelApi(graphicalModelApi)
 	, mLogicalModelApi(logicalModelApi)
 	, mErrorReporter(errorReporter)
@@ -90,7 +88,7 @@ qReal::interpretation::Block *BlocksTable::produceRawBlock(qReal::Id const &elem
 
 qReal::interpretation::BlockInterface *BlocksTable::produceBlock(qReal::Id const &element)
 {
-	qReal::interpretation::Block * const block = produceRawBlock(element);
+	qReal::interpretation::Block *const block = produceRawBlock(element);
 	block->init(element, mGraphicalModelApi, mLogicalModelApi, &mErrorReporter, mTextLanguageToolbox);
 	return block;
 }

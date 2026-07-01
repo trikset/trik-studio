@@ -32,7 +32,7 @@ void ImagesCache::drawImage(const QString &fileName, QPainter &painter, QRect re
 	QTransform scale;
 	scale.scale(zoom, zoom);
 	auto scaledRect = scale.mapRect(rect);
-	auto savePrerenderedSvg = [this, &fileName, &scaledRect] (QSvgRenderer &renderer) {
+	auto savePrerenderedSvg = [this, &fileName, &scaledRect](QSvgRenderer &renderer) {
 		QPixmap pixmap(scaledRect.size());
 		pixmap.fill(Qt::transparent);
 		QPainter pixmapPainter(&pixmap);

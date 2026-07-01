@@ -96,7 +96,8 @@ void Image::serialize(QDomElement &target) const
 				const QDomText svgText = target.ownerDocument().createTextNode(file.readAll());
 				target.appendChild(svgText);
 			} else {
-				QLOG_ERROR() << "Could not open" << mPath << "for reading when embedding svg into save file";
+				QLOG_ERROR()
+					<< "Could not open" << mPath << "for reading when embedding svg into save file";
 			}
 		} else {
 			const QDomText svgText = target.ownerDocument().createTextNode(mSvgBytes);

@@ -28,9 +28,9 @@ class QtScriptGenerator : public TextCodeGenerator
 	Q_OBJECT
 
 public:
-	QtScriptGenerator(LogicalModelAssistInterface &logicalModelApi
-			, GraphicalModelAssistInterface &graphicalModelApi
-			, gui::MainWindowInterpretersInterface &interpretersInterface);
+	QtScriptGenerator(LogicalModelAssistInterface &logicalModelApi,
+		GraphicalModelAssistInterface &graphicalModelApi,
+		gui::MainWindowInterpretersInterface &interpretersInterface);
 
 protected:
 	/// Add to code correct initialization of new variables and create proper output for model update

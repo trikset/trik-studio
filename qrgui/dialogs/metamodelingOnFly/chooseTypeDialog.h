@@ -37,7 +37,8 @@ public:
 	/// Constructor.
 	/// @param diagram Id of a diagram to which we will add new node or edge.
 	/// @param editorManagerProxy Editor manager.
-	ChooseTypeDialog(const Id &diagram, const EditorManagerInterface &editorManagerProxy, QWidget *parent = nullptr);
+	ChooseTypeDialog(const Id &diagram, const EditorManagerInterface &editorManagerProxy,
+		QWidget *parent = nullptr);
 
 	/// Destructor.
 	~ChooseTypeDialog();
@@ -51,7 +52,6 @@ public:
 Q_SIGNALS:
 	/// Emitted when editing is complete and everything must be reloaded.
 	void jobDone();
-
 
 private:
 	Ui::ChooseTypeDialog *mUi;

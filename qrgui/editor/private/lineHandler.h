@@ -31,9 +31,8 @@ class LineHandler : public QObject
 	Q_OBJECT
 
 public:
-	LineHandler(EdgeElement *edge
-		, const LogicalModelAssistInterface &logicalModel
-		, const GraphicalModelAssistInterface &graphicalModel);
+	LineHandler(EdgeElement *edge, const LogicalModelAssistInterface &logicalModel,
+		const GraphicalModelAssistInterface &graphicalModel);
 
 	/// Start reshape links, determine whether user tries to move point, segment or port of the link
 	int startMovingEdge(QPointF pos);

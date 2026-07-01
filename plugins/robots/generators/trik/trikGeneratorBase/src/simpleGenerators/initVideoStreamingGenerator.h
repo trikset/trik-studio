@@ -24,10 +24,8 @@ class InitVideoStreamingGenerator : public generatorBase::simple::BindingGenerat
 {
 	Q_OBJECT
 public:
-	InitVideoStreamingGenerator(const qrRepo::RepoApi &repo
-			, generatorBase::GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent);
+	InitVideoStreamingGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+		const qReal::Id &id, QObject *parent);
 };
 
 }

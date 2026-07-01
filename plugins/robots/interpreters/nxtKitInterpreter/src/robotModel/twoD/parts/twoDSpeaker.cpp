@@ -16,9 +16,8 @@
 
 using namespace nxt::robotModel::twoD::parts;
 
-TwoDSpeaker::TwoDSpeaker(const kitBase::robotModel::DeviceInfo &info
-		, const kitBase::robotModel::PortInfo &port
-		, twoDModel::engine::TwoDModelEngineInterface &engine)
+TwoDSpeaker::TwoDSpeaker(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+	twoDModel::engine::TwoDModelEngineInterface &engine)
 	: robotModel::parts::NxtSpeaker(info, port)
 	, mEngine(engine)
 {

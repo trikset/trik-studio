@@ -19,10 +19,8 @@ using namespace qReal;
 
 /// @todo: Unify code with interpreter
 
-PrimaryControlFlowValidator::PrimaryControlFlowValidator(const qrRepo::RepoApi &repo
-		, ErrorReporterInterface &errorReporter
-		, GeneratorCustomizer &customizer
-		, QObject *parent)
+PrimaryControlFlowValidator::PrimaryControlFlowValidator(const qrRepo::RepoApi &repo,
+	ErrorReporterInterface &errorReporter, GeneratorCustomizer &customizer, QObject *parent)
 	: QObject(parent)
 	, RobotsDiagramVisitor(repo, customizer)
 	, mRepo(repo)
@@ -76,8 +74,7 @@ QPair<LinkInfo, LinkInfo> PrimaryControlFlowValidator::loopBranchesFor(const qRe
 	return mLoopBranches[id];
 }
 
-void PrimaryControlFlowValidator::visitRegular(const Id &id
-		, const QList<LinkInfo> &links)
+void PrimaryControlFlowValidator::visitRegular(const Id &id, const QList<LinkInfo> &links)
 {
 	if (links.size() != 1) {
 		error(QObject::tr("This element must have exactly ONE outgoing link"), id);
@@ -86,16 +83,14 @@ void PrimaryControlFlowValidator::visitRegular(const Id &id
 	}
 }
 
-void PrimaryControlFlowValidator::visitFinal(const Id &id
-		, const QList<LinkInfo> &links)
+void PrimaryControlFlowValidator::visitFinal(const Id &id, const QList<LinkInfo> &links)
 {
 	if (!links.isEmpty()) {
 		error(QObject::tr("Final node must not have outgoing links"), id);
 	}
 }
 
-void PrimaryControlFlowValidator::visitConditional(const Id &id
-		, const QList<LinkInfo> &links)
+void PrimaryControlFlowValidator::visitConditional(const Id &id, const QList<LinkInfo> &links)
 {
 	if (links.size() != 2) {
 		error(QObject::tr("If block must have exactly TWO outgoing links"), id);
@@ -131,7 +126,9 @@ void PrimaryControlFlowValidator::visitConditional(const Id &id
 
 		default:
 			if (nonMarkedLink) {
-				error(QObject::tr("There must be at least one link with \"true\" or \"false\" marker on it"), id);
+				error(QObject::tr("There must be at least one link with \"true\" or \"false\" marker "
+				                  "on it"),
+					id);
 				return;
 			} else {
 				nonMarkedLink = &link;
@@ -156,8 +153,7 @@ void PrimaryControlFlowValidator::visitConditional(const Id &id
 	mIfBranches[id] = branches;
 }
 
-void PrimaryControlFlowValidator::visitLoop(const Id &id
-		, const QList<LinkInfo> &links)
+void PrimaryControlFlowValidator::visitLoop(const Id &id, const QList<LinkInfo> &links)
 {
 	if (links.size() != 2) {
 		error(QObject::tr("Loop block must have exactly TWO outgoing links"), id);
@@ -203,8 +199,7 @@ void PrimaryControlFlowValidator::visitPreconditionalLoop(const Id &id, const QL
 	visitLoop(id, links);
 }
 
-void PrimaryControlFlowValidator::visitSwitch(const Id &id
-		, const QList<LinkInfo> &links)
+void PrimaryControlFlowValidator::visitSwitch(const Id &id, const QList<LinkInfo> &links)
 {
 	QSet<QString> branches;
 	bool defaultBranchFound = false;
@@ -220,7 +215,9 @@ void PrimaryControlFlowValidator::visitSwitch(const Id &id
 		const QString condition = mRepo.property(link.linkId, "Guard").toString();
 		if (condition.isEmpty()) {
 			if (defaultBranchFound) {
-				error(QObject::tr("There must be exactly one link without marker on it (default branch)"), id);
+				error(QObject::tr(
+					      "There must be exactly one link without marker on it (default branch)"),
+					id);
 				return;
 			} else {
 				defaultBranchFound = true;

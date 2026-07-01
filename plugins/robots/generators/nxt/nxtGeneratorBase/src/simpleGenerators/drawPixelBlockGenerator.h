@@ -24,10 +24,8 @@ class DrawPixelBlockGenerator : public DrawBlockGenerator
 {
 	Q_OBJECT
 public:
-	DrawPixelBlockGenerator(const qrRepo::RepoApi &repo
-			, generatorBase::GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent = nullptr);
+	DrawPixelBlockGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+		const qReal::Id &id, QObject *parent = nullptr);
 
 protected:
 	virtual void drawBmp(QPainter *painter);

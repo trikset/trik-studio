@@ -37,12 +37,13 @@ public:
 	ResizeCommand(const EditorView *view, const Id &id);
 
 	/// Creating new instance of command in usial style
-	ResizeCommand(const EditorViewScene *scene, const Id &id
-			, const QRectF &oldGeometry, const QRectF &newGeometry);
-	virtual ~ResizeCommand() {}
+	ResizeCommand(const EditorViewScene *scene, const Id &id, const QRectF &oldGeometry, const QRectF &newGeometry);
+	virtual ~ResizeCommand()
+	{
+	}
 
-	static ResizeCommand *create(const NodeElement * const element, const QRectF &newContents
-			, QPointF newPos, const QRectF &oldContents, QPointF oldPos);
+	static ResizeCommand *create(const NodeElement *const element, const QRectF &newContents, QPointF newPos,
+		const QRectF &oldContents, QPointF oldPos);
 
 	virtual void startTracking();
 	virtual void stopTracking();
@@ -56,7 +57,7 @@ protected:
 	bool restoreState();
 
 private:
-	void resize(NodeElement * const element, const QRectF &geometry);
+	void resize(NodeElement *const element, const QRectF &geometry);
 
 	/// Performs geometries snapshot for all selected items hierarchies
 	void makeCommonSnapshot(QMap<Id, QRectF> &target);

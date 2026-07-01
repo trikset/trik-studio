@@ -31,16 +31,11 @@ class NxtInputDevice : public QObject
 
 public:
 	/// Represents a state of the communication with device.
-	enum State {
-		idle
-		, pending
-	};
+	enum State { idle, pending };
 
-	NxtInputDevice(
-			utils::robotCommunication::RobotCommunicator &robotCommunicator
-			, const kitBase::robotModel::PortInfo &port
-			, enums::lowLevelSensorType::SensorTypeEnum lowLevelSensorType
-			, enums::sensorMode::SensorModeEnum sensorMode);
+	NxtInputDevice(utils::robotCommunication::RobotCommunicator &robotCommunicator,
+		const kitBase::robotModel::PortInfo &port, enums::lowLevelSensorType::SensorTypeEnum lowLevelSensorType,
+		enums::sensorMode::SensorModeEnum sensorMode);
 
 	/// Sends configuration buffer into the real device. When configuration is done configured() singal is emitted.
 	void configure();

@@ -27,8 +27,7 @@ class Ev3NXTColorSensorV2Raw : public kitBase::robotModel::robotParts::VectorSen
 	Q_CLASSINFO("friendlyName", tr("NXT color sensor V2 (raw)"))
 
 public:
-	Ev3NXTColorSensorV2Raw(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port);
+	Ev3NXTColorSensorV2Raw(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port);
 };
 
 }

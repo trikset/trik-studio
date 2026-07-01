@@ -38,8 +38,9 @@ GraphicalObject::GraphicalObject(const QDomElement &element)
 
 	const QDomElement graphicalParts = element.firstChildElement("graphicalParts");
 	if (!graphicalParts.isNull()) {
-		for (QDomElement part = graphicalParts.firstChildElement(); !part.isNull(); part = part.nextSiblingElement()) {
-			GraphicalPart * const deserializedPart = new GraphicalPart(part);
+		for (QDomElement part = graphicalParts.firstChildElement(); !part.isNull();
+			part = part.nextSiblingElement()) {
+			GraphicalPart *const deserializedPart = new GraphicalPart(part);
 
 			const QString indexString = part.attribute("index");
 			if (indexString.isEmpty()) {
@@ -65,9 +66,7 @@ QDomElement GraphicalObject::serialize(QDomDocument &document) const
 	result.appendChild(graphicalParts);
 
 	for (QHash<int, GraphicalPart *>::const_iterator i = mGraphicalParts.constBegin();
-			i != mGraphicalParts.constEnd();
-			++i)
-	{
+		i != mGraphicalParts.constEnd(); ++i) {
 		const QDomElement graphicalPart = i.value()->serialize(i.key(), document);
 		graphicalParts.appendChild(graphicalPart);
 	}
@@ -81,7 +80,7 @@ void GraphicalObject::createGraphicalPart(int index)
 		throw Exception("Part with that index already exists");
 	}
 
-	GraphicalPart * const part = new GraphicalPart();
+	GraphicalPart *const part = new GraphicalPart();
 	mGraphicalParts.insert(index, part);
 }
 
@@ -110,13 +109,11 @@ void GraphicalObject::setGraphicalPartProperty(int index, const QString &name, c
 
 Object *GraphicalObject::createClone() const
 {
-	GraphicalObject * const clone = new GraphicalObject(mId.sameTypeId(), mParent, mLogicalId);
+	GraphicalObject *const clone = new GraphicalObject(mId.sameTypeId(), mParent, mLogicalId);
 
 	for (QHash<int, GraphicalPart *>::const_iterator i = mGraphicalParts.constBegin();
-			i != mGraphicalParts.constEnd();
-			++i)
-	{
-		GraphicalPart * const partClone = i.value()->clone();
+		i != mGraphicalParts.constEnd(); ++i) {
+		GraphicalPart *const partClone = i.value()->clone();
 		clone->mGraphicalParts.insert(i.key(), partClone);
 	}
 

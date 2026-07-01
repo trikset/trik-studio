@@ -26,33 +26,35 @@ LineImpl::LineImpl()
 
 QRectF LineImpl::boundingRect(qreal x1, qreal y1, qreal x2, qreal y2, qreal penWidth, const int drift) const
 {
-	return (QRectF(qMin(x1, x2) - penWidth, qMin(y1, y2) - penWidth, qAbs(x2 - x1) + penWidth, qAbs(y2 - y1) + penWidth)
+	return (QRectF(qMin(x1, x2) - penWidth, qMin(y1, y2) - penWidth, qAbs(x2 - x1) + penWidth,
+		qAbs(y2 - y1) + penWidth)
 			.adjusted(-drift, -drift, drift, drift));
 }
 
-QRectF LineImpl::realBoundingRectWithoutScene(qreal x1, qreal y1, qreal x2, qreal y2, qreal penWidth
-		, const int drift) const
+QRectF LineImpl::realBoundingRectWithoutScene(qreal x1, qreal y1, qreal x2, qreal y2, qreal penWidth,
+	const int drift) const
 {
-	return boundingRect(x1, y1, x2, y2, penWidth, drift).adjusted(drift + penWidth, drift + penWidth, -drift, -drift);
+	return boundingRect(x1, y1, x2, y2, penWidth, drift)
+	        .adjusted(drift + penWidth, drift + penWidth, -drift, -drift);
 }
 
-void LineImpl::drawItem(QPainter* painter, qreal x1, qreal y1, qreal x2, qreal y2)
+void LineImpl::drawItem(QPainter *painter, qreal x1, qreal y1, qreal x2, qreal y2)
 {
 	painter->drawLine(x1, y1, x2, y2);
 }
 
-void LineImpl::drawPointExtractionForItem(QPainter* painter, qreal x1, qreal y1, qreal x2, qreal y2)
+void LineImpl::drawPointExtractionForItem(QPainter *painter, qreal x1, qreal y1, qreal x2, qreal y2)
 {
 	painter->drawPoint(x1, y1);
 	painter->drawPoint(x2, y2);
 }
 
-void LineImpl::drawExtractionForItem(QPainter* painter, qreal x1, qreal y1, qreal x2, qreal y2, const int drift)
+void LineImpl::drawExtractionForItem(QPainter *painter, qreal x1, qreal y1, qreal x2, qreal y2, const int drift)
 {
 	painter->drawPath(shape(drift, x1, y1, x2, y2));
 }
 
-void LineImpl::drawFieldForResizeItem(QPainter* painter, const int resizeDrift, qreal x1, qreal y1, qreal x2, qreal y2)
+void LineImpl::drawFieldForResizeItem(QPainter *painter, const int resizeDrift, qreal x1, qreal y1, qreal x2, qreal y2)
 {
 	painter->drawPath(fieldForResizeItem(resizeDrift, x1, y1, x2, y2));
 }
@@ -92,16 +94,16 @@ QPainterPath LineImpl::shape(const int width, qreal x1, qreal y1, qreal x2, qrea
 	return path;
 }
 
-QPair<qreal, qreal> LineImpl::reshapeRectWithShiftForLine(qreal x1, qreal y1, qreal x2, qreal y2, qreal differenceX
-		, qreal differenceY, qreal size)
+QPair<qreal, qreal> LineImpl::reshapeRectWithShiftForLine(qreal x1, qreal y1, qreal x2, qreal y2, qreal differenceX,
+	qreal differenceY, qreal size)
 {
 	if (differenceX > differenceY) {
-		if(x2 > x1)
+		if (x2 > x1)
 			return QPair<qreal, qreal>(x1 + size, y1);
 		else
 			return QPair<qreal, qreal>(x1 - size, y1);
 	} else {
-		if(y2 > y1)
+		if (y2 > y1)
 			return QPair<qreal, qreal>(x1, y1 + size);
 		else
 			return QPair<qreal, qreal>(x1, y1 - size);

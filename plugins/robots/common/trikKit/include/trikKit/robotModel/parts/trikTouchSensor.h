@@ -16,7 +16,6 @@
 
 #include <kitBase/robotModel/robotParts/touchSensor.h>
 
-
 namespace trik {
 namespace robotModel {
 namespace parts {

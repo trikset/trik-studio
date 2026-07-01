@@ -24,10 +24,8 @@ class DrawCircleBlockGenerator : public DrawBlockGenerator
 {
 	Q_OBJECT
 public:
-	DrawCircleBlockGenerator(const qrRepo::RepoApi &repo
-			, generatorBase::GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent = nullptr);
+	DrawCircleBlockGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+		const qReal::Id &id, QObject *parent = nullptr);
 
 protected:
 	virtual void drawBmp(QPainter *painter);

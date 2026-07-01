@@ -19,19 +19,13 @@
 using namespace pioneer::lua;
 using namespace generatorBase::simple;
 
-PioneerGetLPSYaw::PioneerGetLPSYaw(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, const qReal::Id &id
-		, QObject *parent)
-	: BindingGenerator(repo, customizer, id, "quadcopterCommands/getLPSYaw.t"
-		, {
-			Binding::createConverting(
-					"@@YAW@@"
-					, "Yaw"
-					, customizer.factory()->stringPropertyConverter(id, "Yaw"))
-			}
-		, parent)
+PioneerGetLPSYaw::PioneerGetLPSYaw(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+	const qReal::Id &id, QObject *parent)
+	: BindingGenerator(repo, customizer, id, "quadcopterCommands/getLPSYaw.t",
+		  {Binding::createConverting("@@YAW@@", "Yaw",
+			  customizer.factory()->stringPropertyConverter(id, "Yaw"))},
+		  parent)
 {
 	customizer.factory()->functionBlockConverter(id, "")->convert(
-			QString("%1 = 0;").arg(repo.stringProperty(id, "Yaw")));
+		QString("%1 = 0;").arg(repo.stringProperty(id, "Yaw")));
 }

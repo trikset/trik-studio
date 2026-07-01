@@ -24,8 +24,7 @@ DummySensorsConfigurer::DummySensorsConfigurer(QString const &name)
 {
 }
 
-void DummySensorsConfigurer::configureBroadly(QString const &robotModel
-		, PortInfo const &port, DeviceInfo const &device)
+void DummySensorsConfigurer::configureBroadly(QString const &robotModel, PortInfo const &port, DeviceInfo const &device)
 {
 	deviceConfigurationChanged(robotModel, port, device, Reason::userAction);
 }
@@ -35,8 +34,8 @@ DeviceInfo DummySensorsConfigurer::device(QString const &robotModel, PortInfo co
 	return currentConfiguration(robotModel, port);
 }
 
-void DummySensorsConfigurer::onDeviceConfigurationChanged(QString const &robotModel
-		, PortInfo const &port, DeviceInfo const &sensor, Reason reason)
+void DummySensorsConfigurer::onDeviceConfigurationChanged(QString const &robotModel, PortInfo const &port,
+	DeviceInfo const &sensor, Reason reason)
 {
 	Q_UNUSED(robotModel)
 	Q_UNUSED(port)

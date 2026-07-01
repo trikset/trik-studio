@@ -59,15 +59,13 @@ public:
 	/// @param parser - parser that is used to analyze and evaluate textual expressions inside properties of blocks.
 	/// @param connectToRobotAction - reference to action that connects to robot, interpreter manages its state
 	///        depending on success or failure of its own connection attempts.
-	QtsInterpreter(const qReal::GraphicalModelAssistInterface &graphicalModelApi
-			, qReal::LogicalModelAssistInterface &logicalModelApi
-			, qReal::gui::MainWindowInterpretersInterface &interpretersInterface
-			, const qReal::ProjectManagementInterface &projectManager
-			, BlocksFactoryManagerInterface &blocksFactoryManager
-			, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
-			, qrtext::LanguageToolboxInterface &languageToolbox
-			, QAction &connectToRobotAction
-			);
+	QtsInterpreter(const qReal::GraphicalModelAssistInterface &graphicalModelApi,
+		qReal::LogicalModelAssistInterface &logicalModelApi,
+		qReal::gui::MainWindowInterpretersInterface &interpretersInterface,
+		const qReal::ProjectManagementInterface &projectManager,
+		BlocksFactoryManagerInterface &blocksFactoryManager,
+		const kitBase::robotModel::RobotModelManagerInterface &robotModelManager,
+		qrtext::LanguageToolboxInterface &languageToolbox, QAction &connectToRobotAction);
 
 	~QtsInterpreter() override;
 
@@ -82,11 +80,7 @@ private slots:
 	void devicesConfiguredSlot();
 
 private:
-	enum InterpreterState {
-		interpreting
-		, waitingForDevicesConfiguredToLaunch
-		, idle
-	};
+	enum InterpreterState { interpreting, waitingForDevicesConfiguredToLaunch, idle };
 
 	void reportError(const QString &message);
 
@@ -101,7 +95,7 @@ private:
 	InterpreterState mState;
 	quint64 mInterpretationStartedTimestamp;
 	const kitBase::robotModel::RobotModelManagerInterface &mRobotModelManager;
-	details::BlocksTable *mBlocksTable;  // Has ownership
+	details::BlocksTable *mBlocksTable; // Has ownership
 
 	/// Action responsible for the connection to the robot
 	QAction &mActionConnectToRobot;

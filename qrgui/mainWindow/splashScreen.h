@@ -34,7 +34,7 @@ public:
 	void setProgress(int progress);
 
 private:
-	QProgressBar *mProgressBar;  // Takes ownership
+	QProgressBar *mProgressBar; // Takes ownership
 };
 
 }

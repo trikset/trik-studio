@@ -41,13 +41,9 @@ class PioneerStateMachineGenerator : public generatorBase::GotoControlFlowGenera
 	Q_OBJECT
 
 public:
-	PioneerStateMachineGenerator(const qrRepo::RepoApi &repo
-			, qReal::ErrorReporterInterface &errorReporter
-			, generatorBase::GeneratorCustomizer &customizer
-			, generatorBase::PrimaryControlFlowValidator &validator
-			, const qReal::Id &diagramId
-			, QObject *parent = nullptr
-			, bool isThisDiagramMain = true);
+	PioneerStateMachineGenerator(const qrRepo::RepoApi &repo, qReal::ErrorReporterInterface &errorReporter,
+		generatorBase::GeneratorCustomizer &customizer, generatorBase::PrimaryControlFlowValidator &validator,
+		const qReal::Id &diagramId, QObject *parent = nullptr, bool isThisDiagramMain = true);
 
 	/// Registers a function that will be called when generator visits a node with given id.
 	/// Allows to collect additional information during generation.
@@ -67,13 +63,11 @@ private:
 	/// Copies a linear fragment starting from semantic node with id @p from and pastes it into semantic tree as a
 	/// sibling of @p after node.
 	/// @returns node that ends copied synchronous fragment (goto node) or nullptr if there was error.
-	generatorBase::semantics::NonZoneNode * copySynchronousFragment(
-			generatorBase::semantics::NonZoneNode *after
-			, const qReal::Id &from
-			, bool withLabel);
+	generatorBase::semantics::NonZoneNode *copySynchronousFragment(generatorBase::semantics::NonZoneNode *after,
+		const qReal::Id &from, bool withLabel);
 
 	/// Returns true if this node is asynchronous.
-	bool isAsynchronous(const generatorBase::semantics::SemanticNode * const node) const;
+	bool isAsynchronous(const generatorBase::semantics::SemanticNode *const node) const;
 
 	/// Creates synthetic node that denotes end of asynchronous handler.
 	generatorBase::semantics::SimpleNode *produceEndOfHandlerNode();
@@ -85,13 +79,14 @@ private:
 	void reportAndExplainConditions();
 
 	/// Return true if this is an If node.
-	static bool isIf(const generatorBase::semantics::SemanticNode * const node);
+	static bool isIf(const generatorBase::semantics::SemanticNode *const node);
 
 	/// Returns true if this is an end-of-handler node.
-	static bool isEndOfHandler(const generatorBase::semantics::SemanticNode * const node);
+	static bool isEndOfHandler(const generatorBase::semantics::SemanticNode *const node);
 
 	/// Returns nearest right end-of-handler sibling of a given node or nullptr if no such node exists.
-	generatorBase::semantics::NonZoneNode *findEndOfHandler(generatorBase::semantics::SemanticNode * const from) const;
+	generatorBase::semantics::NonZoneNode *findEndOfHandler(
+		generatorBase::semantics::SemanticNode *const from) const;
 
 	/// Processes deferred goto generation requests (if any). Deferred goto generation is caused by trying to generate
 	/// goto for asynchronous node that has not been visited yet, so we had no idea where to transfer control.
@@ -130,11 +125,9 @@ private:
 	/// Queue to keep track conditional nodes.
 	/// The boolean value indicates the fact that the asynchronous node in the branch leads to fi block.
 	/// Zone nodes refer to branch nodes
-	QQueue<std::tuple<
-			generatorBase::semantics::SemanticNode *
-			, bool
-			, generatorBase::semantics::ZoneNode *
-			, generatorBase::semantics::ZoneNode *>> mConditionZonesQueue;
+	QQueue<std::tuple<generatorBase::semantics::SemanticNode *, bool, generatorBase::semantics::ZoneNode *,
+		generatorBase::semantics::ZoneNode *>>
+		mConditionZonesQueue;
 
 	/// The storage show if the branch contains async node
 	QHash<generatorBase::semantics::ZoneNode *, bool> mBranchAsyncMarkers;

@@ -101,32 +101,11 @@ qReal::interpretation::Block *CoreBlocksFactory::produceBlock(const qReal::Id &e
 
 qReal::IdList CoreBlocksFactory::providedBlocks() const
 {
-	return {
-		id("ControlFlow")
-		, id("InitialNode")
-		, id("FinalNode")
-		, id("Timer")
-		, id("CommentBlock")
-		, id("IfBlock")
-		, id("FiBlock")
-		, id("SwitchBlock")
-		, id("Loop")
-		, id("PreconditionalLoop")
-		, id("Fork")
-		, id("Join")
-		, id("SendMessageThreads")
-		, id("ReceiveMessageThreads")
-		, id("KillThread")
-		, id("Subprogram")
-		, id("Function")
-		, id("VariableInit")
-		, id("Input")
-		, id("Randomizer")
-		, id("ClearScreen")
-		, id("PrintText")
-		, id("MarkerDown")
-		, id("MarkerUp")
-	};
+	return {id("ControlFlow"), id("InitialNode"), id("FinalNode"), id("Timer"), id("CommentBlock"), id("IfBlock"),
+		id("FiBlock"), id("SwitchBlock"), id("Loop"), id("PreconditionalLoop"), id("Fork"), id("Join"),
+		id("SendMessageThreads"), id("ReceiveMessageThreads"), id("KillThread"), id("Subprogram"),
+		id("Function"), id("VariableInit"), id("Input"), id("Randomizer"), id("ClearScreen"), id("PrintText"),
+		id("MarkerDown"), id("MarkerUp")};
 }
 
 qReal::IdList CoreBlocksFactory::blocksToDisable() const
@@ -136,9 +115,7 @@ qReal::IdList CoreBlocksFactory::blocksToDisable() const
 	if (!robotModelName.contains("TwoD")) {
 		result << id("Input");
 		if (!robotModelName.contains("TrikV62")) {
-			result
-					<< id("MarkerDown")
-					<< id("MarkerUp");
+			result << id("MarkerDown") << id("MarkerUp");
 		}
 	}
 

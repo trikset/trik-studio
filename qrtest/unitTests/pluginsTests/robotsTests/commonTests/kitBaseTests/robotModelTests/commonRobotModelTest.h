@@ -50,10 +50,8 @@ public:
 		MOCK_CONST_METHOD0(convertibleBases, QList<kitBase::robotModel::DeviceInfo>());
 
 	private:
-		kitBase::robotModel::robotParts::Device * createDevice(
-				kitBase::robotModel::PortInfo const &port
-				, kitBase::robotModel::DeviceInfo const &deviceInfo
-				) override;
+		kitBase::robotModel::robotParts::Device *createDevice(kitBase::robotModel::PortInfo const &port,
+			kitBase::robotModel::DeviceInfo const &deviceInfo) override;
 
 		QTimer mConnectionTimer;
 		bool mImmediateConnection;

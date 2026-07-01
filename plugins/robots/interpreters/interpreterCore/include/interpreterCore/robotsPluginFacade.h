@@ -56,7 +56,7 @@ public:
 	void init(const qReal::PluginConfigurator &configurer);
 
 	/// Returns a pointer to settings page for robots plugin.
-	qReal::gui::PreferencesPage *robotsSettingsPage() const;  // Transfers ownership.
+	qReal::gui::PreferencesPage *robotsSettingsPage() const; // Transfers ownership.
 
 	/// Returns the customization class object for configuring QReal's main GUI module
 	Customizer &customizer();
@@ -87,7 +87,7 @@ public:
 
 public Q_SLOTS:
 	void saveCode(const QString &code, const QString &languageExtension);
-//	void openSavedCode();
+	//	void openSavedCode();
 
 private:
 	void connectInterpreterToActions();
@@ -99,9 +99,8 @@ private:
 
 	void initKitPlugins(const qReal::PluginConfigurator &configurer);
 
-	void initFactoriesFor(const QString &kitId
-			, const kitBase::robotModel::RobotModelInterface *model
-			, const qReal::PluginConfigurator &configurer);
+	void initFactoriesFor(const QString &kitId, const kitBase::robotModel::RobotModelInterface *model,
+		const qReal::PluginConfigurator &configurer);
 
 	void connectEventsForKitPlugin();
 
@@ -120,7 +119,7 @@ private:
 	interpreterCore::interpreter::ProxyInterpreter mProxyInterpreter;
 
 	/// Page with plugin settings. Created here, but then ownership is passed to a caller of preferencesPage().
-	ui::RobotsSettingsPage *mRobotSettingsPage {};  // Does not have ownership
+	ui::RobotsSettingsPage *mRobotSettingsPage {}; // Does not have ownership
 
 	KitPluginManager mKitPluginManager;
 	RobotModelManager mRobotModelManager;
@@ -130,11 +129,11 @@ private:
 	QScopedPointer<UiManager> mUiManager;
 
 	QScopedPointer<kitBase::DevicesConfigurationWidget> mDockDevicesConfigurer;
-	utils::WatchListWindow *mWatchListWindow {};  // Does not have ownership
+	utils::WatchListWindow *mWatchListWindow {}; // Does not have ownership
 	QScopedPointer<GraphicsWatcherManager> mGraphicsWatcherManager;
 	BlocksFactoryManager mBlocksFactoryManager;
 	kitBase::EventsForKitPluginInterface mEventsForKitPlugin;
-	PaletteUpdateManager *mPaletteUpdateManager {};  // Has ownership via Qt paren-child system
+	PaletteUpdateManager *mPaletteUpdateManager {}; // Has ownership via Qt paren-child system
 
 	qReal::LogicalModelAssistInterface *mLogicalModelApi {};
 	qReal::TextManagerInterface *mTextManager {};

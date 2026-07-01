@@ -31,9 +31,8 @@ class ROBOTS_TRIK_KIT_INTERPRETER_COMMON_EXPORT ColorSensor : public robotModel:
 	Q_OBJECT
 
 public:
-	ColorSensor(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port
-			, twoDModel::engine::TwoDModelEngineInterface &engine);
+	ColorSensor(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+		twoDModel::engine::TwoDModelEngineInterface &engine);
 
 	void init() override;
 	void read() override;

@@ -21,7 +21,7 @@ class Association
 public:
 	bool init(const QDomElement &element);
 	// Default copy constructor ok.
-	Association* clone() const;
+	Association *clone() const;
 
 private:
 	QString mBeginName;

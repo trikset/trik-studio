@@ -18,15 +18,13 @@
 using namespace generatorBase::simple;
 using namespace qReal;
 
-BeepGenerator::BeepGenerator(const qrRepo::RepoApi &repo
-		, GeneratorCustomizer &customizer
-		, const Id &id
-		, QObject *parent)
-	: BindingGenerator(repo, customizer, id, "beep.t"
-			, {Binding::createConverting("@@VOLUME@@", "Volume"
-					, customizer.factory()->intPropertyConverter(id, "Volume"))
-				, Binding::createConverting("@@WAIT_FOR_COMPLETION@@", "WaitForCompletion"
-						, customizer.factory()->boolPropertyConverter(id, "WaitForCompletion", false))}
-			, parent)
+BeepGenerator::BeepGenerator(const qrRepo::RepoApi &repo, GeneratorCustomizer &customizer, const Id &id,
+	QObject *parent)
+	: BindingGenerator(repo, customizer, id, "beep.t",
+		  {Binding::createConverting("@@VOLUME@@", "Volume",
+			   customizer.factory()->intPropertyConverter(id, "Volume")),
+			  Binding::createConverting("@@WAIT_FOR_COMPLETION@@", "WaitForCompletion",
+				  customizer.factory()->boolPropertyConverter(id, "WaitForCompletion", false))},
+		  parent)
 {
 }

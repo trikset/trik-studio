@@ -32,9 +32,8 @@ public:
 	Id rootId() const;
 
 protected:
-	QList<ElementInfo> parse(models::LogicalModelAssistApi &logicalApi
-			, models::GraphicalModelAssistApi &graphicalApi
-			, const ElementInfo &pattern);
+	QList<ElementInfo> parse(models::LogicalModelAssistApi &logicalApi,
+		models::GraphicalModelAssistApi &graphicalApi, const ElementInfo &pattern);
 
 	Pattern mPattern;
 	QMap<QString, Id> mCreatedNodes;

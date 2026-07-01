@@ -26,7 +26,8 @@ class QRREPO_EXPORT SourceFolderNotFoundException : public QrRepoException
 public:
 	explicit SourceFolderNotFoundException(const QString &folderName)
 		: QrRepoException("Uncompressed save folder not found: " + folderName)
-	{}
+	{
+	}
 };
 
 }

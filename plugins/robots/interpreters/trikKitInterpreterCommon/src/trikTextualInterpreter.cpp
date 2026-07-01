@@ -29,15 +29,13 @@
 #include <trikNetwork/mailboxFactory.h>
 #include <qrkernel/settingsManager.h>
 
-
-Q_DECLARE_METATYPE(utils::AbstractTimer*)
+Q_DECLARE_METATYPE(utils::AbstractTimer *)
 
 const QString jsOverrides = "Date.now = script.time;";
 
 trik::TrikTextualInterpreter::TrikTextualInterpreter(
-	const QSharedPointer<trik::robotModel::twoD::TrikTwoDRobotModel> &model
-		, trikNetwork::MailboxInterface *mailbox
-		, bool enablePython)
+	const QSharedPointer<trik::robotModel::twoD::TrikTwoDRobotModel> &model, trikNetwork::MailboxInterface *mailbox,
+	bool enablePython)
 	: mBrick(model)
 	, mMailbox(mailbox)
 	, mScriptRunner(mBrick, mMailbox, new TwoDExecutionControl(mBrick, model))
@@ -46,19 +44,19 @@ trik::TrikTextualInterpreter::TrikTextualInterpreter(
 	connect(&mBrick, &TrikBrick::warning, this, &TrikTextualInterpreter::reportWarning);
 
 	// clazy:excludeall=function-args-by-value
-	auto atimerToScriptValue = [](QScriptEngine *engine, utils::AbstractTimer * const &in) {
-	// clazy:enable
-	return engine->newQObject(in);
+	auto atimerToScriptValue = [](QScriptEngine *engine, utils::AbstractTimer *const &in) {
+		// clazy:enable
+		return engine->newQObject(in);
 	};
-	auto atimerFromScriptValue = [](const QScriptValue &object, utils::AbstractTimer* &out){
-	out = qobject_cast<utils::AbstractTimer*>(object.toQObject());
+	auto atimerFromScriptValue = [](const QScriptValue &object, utils::AbstractTimer *&out) {
+		out = qobject_cast<utils::AbstractTimer *>(object.toQObject());
 	};
-	mScriptRunner.addCustomEngineInitStep([&atimerToScriptValue, &atimerFromScriptValue](QScriptEngine *engine){
-	qScriptRegisterMetaType<utils::AbstractTimer*>(engine, atimerToScriptValue, atimerFromScriptValue);
+	mScriptRunner.addCustomEngineInitStep([&atimerToScriptValue, &atimerFromScriptValue](QScriptEngine *engine) {
+		qScriptRegisterMetaType<utils::AbstractTimer *>(engine, atimerToScriptValue, atimerFromScriptValue);
 	});
 	connect(&mScriptRunner, &trikScriptRunner::TrikScriptRunner::textInStdOut, &mBrick, &TrikBrick::log);
-	connect(&mScriptRunner, &trikScriptRunner::TrikScriptRunner::completed
-		, this, &TrikTextualInterpreter::scriptFinished);
+	connect(&mScriptRunner, &trikScriptRunner::TrikScriptRunner::completed, this,
+		&TrikTextualInterpreter::scriptFinished);
 
 	using qReal::text::Languages;
 	using trikScriptRunner::ScriptType;
@@ -93,8 +91,8 @@ void trik::TrikTextualInterpreter::interpretScript(const QString &script, const 
 	}
 }
 
-void trik::TrikTextualInterpreter::interpretScriptExercise(const QString &script
-	, const QString &inputs, const QString &languageExtension)
+void trik::TrikTextualInterpreter::interpretScriptExercise(const QString &script, const QString &inputs,
+	const QString &languageExtension)
 {
 	mRunning = true;
 	mBrick.processSensors(true);
@@ -151,42 +149,42 @@ void trik::TrikTextualInterpreter::reportLog(const QString &msg)
 QString trik::TrikTextualInterpreter::initInputs(const QString &inputs) const
 {
 	auto jsValToStr = [this](const QJsonValue &val) -> QString {
-	switch (val.type()) {
-	case QJsonValue::Bool:
-		return val.toBool() ? "true" : "false";
-	case QJsonValue::Double:
-		return QString::number(val.Double);//maybe increase precision
-	case QJsonValue::String:
-		return QString("\"%1\"").arg(val.toString());
-	case QJsonValue::Array:
-		return QString(QJsonDocument(val.toArray()).toJson(QJsonDocument::Compact));
-	case QJsonValue::Object:
-		return QString(QJsonDocument(val.toObject()).toJson(QJsonDocument::Compact));
-	default:
-		mErrorReporter->addError(QObject::tr("Bogus input values"));
-		return "";
-	}
+		switch (val.type()) {
+		case QJsonValue::Bool:
+			return val.toBool() ? "true" : "false";
+		case QJsonValue::Double:
+			return QString::number(val.Double); //maybe increase precision
+		case QJsonValue::String:
+			return QString("\"%1\"").arg(val.toString());
+		case QJsonValue::Array:
+			return QString(QJsonDocument(val.toArray()).toJson(QJsonDocument::Compact));
+		case QJsonValue::Object:
+			return QString(QJsonDocument(val.toObject()).toJson(QJsonDocument::Compact));
+		default:
+			mErrorReporter->addError(QObject::tr("Bogus input values"));
+			return "";
+		}
 	};
 
 	QString result;
 	if (!inputs.isEmpty()) {
-	QString val;
-	QFile file;
-	file.setFileName(inputs);
-	if (file.open(QIODevice::ReadOnly)) {
-		val = file.readAll();
-		file.close();
-		QJsonDocument document = QJsonDocument::fromJson(val.toUtf8());
-		QJsonObject object = document.object();
-		for (const QString &name : object.keys()) {
-		QJsonValue value = object[name];
-		QString valueStr = jsValToStr(value);
-		QString line("var " + name + " = " + valueStr + ";\n");
-		result.append(line);
+		QString val;
+		QFile file;
+		file.setFileName(inputs);
+		if (file.open(QIODevice::ReadOnly)) {
+			val = file.readAll();
+			file.close();
+			QJsonDocument document = QJsonDocument::fromJson(val.toUtf8());
+			QJsonObject object = document.object();
+			for (const QString &name : object.keys()) {
+				QJsonValue value = object[name];
+				QString valueStr = jsValToStr(value);
+				QString line("var " + name + " = " + valueStr + ";\n");
+				result.append(line);
+			}
+		} else {
+			mErrorReporter->addError(QObject::tr("Error: File %1 couldn't be opened!").arg(inputs));
 		}
-	} else {
-		mErrorReporter->addError(QObject::tr("Error: File %1 couldn't be opened!").arg(inputs));
-	}
 	}
 	return result;
 }
@@ -218,12 +216,12 @@ void trik::TrikTextualInterpreter::scriptFinished(const QString &error, int scri
 {
 	Q_UNUSED(scriptId);
 	if (!error.isEmpty()) {
-	reportError(error);
+		reportError(error);
 	}
 
 	if (mRunning) { /// @todo: figure out better place for this check - it should avoid double aborts
-	mRunning = false;
-	mBrick.processSensors(false);
-	Q_EMIT completed();
+		mRunning = false;
+		mBrick.processSensors(false);
+		Q_EMIT completed();
 	}
 }

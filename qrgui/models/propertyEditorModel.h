@@ -30,8 +30,8 @@ class QRGUI_MODELS_EXPORT PropertyEditorModel : public QAbstractItemModel
 	Q_OBJECT
 
 public:
-	explicit PropertyEditorModel(const qReal::EditorManagerInterface &editorManagerInterface
-			, QObject *parent = nullptr);
+	explicit PropertyEditorModel(const qReal::EditorManagerInterface &editorManagerInterface,
+		QObject *parent = nullptr);
 
 	QModelIndex parent(const QModelIndex &index) const;
 
@@ -50,8 +50,8 @@ public:
 
 	bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole);
 
-	void setSourceModels(QAbstractItemModel * const logicalSourceModel
-				, QAbstractItemModel * const graphicalSourceModel);
+	void setSourceModels(QAbstractItemModel *const logicalSourceModel,
+		QAbstractItemModel *const graphicalSourceModel);
 
 	void setModelIndexes(const QModelIndex &logicalModelIndex, const QModelIndex &graphicalModelIndex);
 	void clearModelIndexes();
@@ -75,36 +75,31 @@ public:
 	int roleByIndex(int row) const;
 	bool isReference(const QModelIndex &index, const QString &propertyName);
 
-	const QModelIndex& logicalModelIndex() const;
-	const QModelIndex& graphicalModelIndex() const;
+	const QModelIndex &logicalModelIndex() const;
+	const QModelIndex &graphicalModelIndex() const;
 
-	QAbstractItemModel* logicalTargetModel() const;
-	QAbstractItemModel* graphicalTargetModel() const;
+	QAbstractItemModel *logicalTargetModel() const;
+	QAbstractItemModel *graphicalTargetModel() const;
 
 	bool isCurrentIndex(const QModelIndex &index) const;
 
 	qReal::Id idByIndex(const QModelIndex &index) const;
 
 	enum AttributeClassEnum {
-		namePseudoattribute
-		, logicalAttribute
-		, graphicalAttribute
-		, graphicalIdPseudoattribute
-		, logicalIdPseudoattribute
-		, metatypePseudoattribute
+		namePseudoattribute,
+		logicalAttribute,
+		graphicalAttribute,
+		graphicalIdPseudoattribute,
+		logicalIdPseudoattribute,
+		metatypePseudoattribute
 	};
 
-	class Field {
+	class Field
+	{
 
 	public:
-		Field(
-				const QString &fieldName
-				, AttributeClassEnum attributeClass
-				, int role
-				, Field *parent
-				, QPersistentModelIndex targetLogicalObject
-				, QPersistentModelIndex targetGraphicalObject
-				)
+		Field(const QString &fieldName, AttributeClassEnum attributeClass, int role, Field *parent,
+			QPersistentModelIndex targetLogicalObject, QPersistentModelIndex targetGraphicalObject)
 			: mFieldName(fieldName)
 			, mAttributeClass(attributeClass)
 			, mRole(role)
@@ -134,7 +129,7 @@ public:
 			mChildItems.append(item);
 		}
 
-		Field* child(int row) const
+		Field *child(int row) const
 		{
 			return mChildItems.value(row);
 		}
@@ -149,9 +144,9 @@ public:
 			return mParentItem;
 		}
 
-		QList<Field*> children(Field* parent) const
+		QList<Field *> children(Field *parent) const
 		{
-			QList<Field*> result;
+			QList<Field *> result;
 			for (int i = 0; i < mChildItems.count(); ++i) {
 				if ((mChildItems.at(i)->parentItem() == parent)) {
 					result.append(mChildItems.at(i));
@@ -161,7 +156,7 @@ public:
 			return result;
 		}
 
-		int numberOfChildren(Field* parent) const
+		int numberOfChildren(Field *parent) const
 		{
 			int result = 0;
 			for (int i = 0; i < mChildItems.count(); ++i) {
@@ -176,7 +171,7 @@ public:
 		int row() const
 		{
 			if (mParentItem) {
-				return mParentItem->mChildItems.indexOf(const_cast<Field*>(this));
+				return mParentItem->mChildItems.indexOf(const_cast<Field *>(this));
 			}
 
 			return 0;
@@ -233,10 +228,10 @@ public:
 		const int mRole;
 
 		/// Has ownership over contained items.
-		QList<Field*> mChildItems;
+		QList<Field *> mChildItems;
 
 		/// Does not have ownership.
-		Field * const mParentItem;
+		Field *const mParentItem;
 
 		const QPersistentModelIndex mTargetLogicalObject;
 		const QPersistentModelIndex mTargetGraphicalObject;

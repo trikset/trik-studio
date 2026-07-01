@@ -28,10 +28,10 @@
 using namespace qReal;
 
 const int maxShortcutParts = 3; // Actually, 3 = number of commas in string (= 4 shortcut parts)
-								// e.g. "Ctrl+X, Alt+V, Shift+G, Ctrl+Y"
+// e.g. "Ctrl+X, Alt+V, Shift+G, Ctrl+Y"
 const int maxShortcuts = 3; // Max number of shortcuts which we can set to one command
 
-PreferencesHotKeyManagerPage:: PreferencesHotKeyManagerPage(QWidget *parent)
+PreferencesHotKeyManagerPage::PreferencesHotKeyManagerPage(QWidget *parent)
 	: PreferencesPage(parent)
 	, mUi(new Ui::hotKeyManagerPage)
 	, mCurrentId("")
@@ -48,10 +48,10 @@ PreferencesHotKeyManagerPage:: PreferencesHotKeyManagerPage(QWidget *parent)
 	mUi->importPushButton->hide();
 	mUi->exportPushButton->hide();
 
-	connect(mUi->hotKeysTable, SIGNAL(cellClicked(int,int)), this, SLOT(activateShortcutLineEdit(int,int)));
-	connect(mUi->hotKeysTable, SIGNAL(cellDoubleClicked(int,int)), this, SLOT(doubleClicked(int,int)));
-	connect(mUi->shortcutLineEdit, SIGNAL(newModifiers(Qt::KeyboardModifiers))
-			, this, SLOT(newModifiers(Qt::KeyboardModifiers)));
+	connect(mUi->hotKeysTable, SIGNAL(cellClicked(int, int)), this, SLOT(activateShortcutLineEdit(int, int)));
+	connect(mUi->hotKeysTable, SIGNAL(cellDoubleClicked(int, int)), this, SLOT(doubleClicked(int, int)));
+	connect(mUi->shortcutLineEdit, SIGNAL(newModifiers(Qt::KeyboardModifiers)), this,
+		SLOT(newModifiers(Qt::KeyboardModifiers)));
 	connect(mUi->shortcutLineEdit, SIGNAL(newKey(int)), this, SLOT(newKey(int)));
 	connect(mUi->resetShortcutPushButton, SIGNAL(clicked()), this, SLOT(resetShortcuts()));
 	connect(mUi->resetAllPushButton, SIGNAL(clicked()), this, SLOT(resetAllShortcuts()));
@@ -95,8 +95,10 @@ void PreferencesHotKeyManagerPage::resetShortcuts()
 
 void PreferencesHotKeyManagerPage::resetAllShortcuts()
 {
-	if (utils::QRealMessageBox::question(this, tr("Question"), tr("This will clear all "\
-			"current shortcuts. Are you sure?")) == QMessageBox::Yes) {
+	if (utils::QRealMessageBox::question(this, tr("Question"),
+		    tr("This will clear all "
+		       "current shortcuts. Are you sure?"))
+		== QMessageBox::Yes) {
 		mCurrentItem = nullptr;
 		mCurrentId = "";
 
@@ -201,10 +203,8 @@ void PreferencesHotKeyManagerPage::newKey(const int key)
 			const int parts = mCurrentItem->text().count(',');
 
 			if (parts != maxShortcutParts) {
-				const QString shortcut = QString("%1, %2").arg(
-									mCurrentItem->text()
-									, QKeySequence(mCurrentModifiers + key).toString()
-								);
+				const QString shortcut = QString("%1, %2").arg(mCurrentItem->text(),
+					QKeySequence(mCurrentModifiers + key).toString());
 
 				if (mCurrentItem->foreground().color() == Qt::black) {
 					HotKeyManager::deleteShortcut(mCurrentId, mCurrentItem->text());
@@ -215,7 +215,7 @@ void PreferencesHotKeyManagerPage::newKey(const int key)
 					mCurrentItem->setText(shortcut);
 					mUi->shortcutLineEdit->setText(mCurrentItem->text());
 				} else {
-					HotKeyManager::setShortcut(mCurrentId,  mCurrentItem->text());
+					HotKeyManager::setShortcut(mCurrentId, mCurrentItem->text());
 
 					if (parts < maxShortcutParts - 1) {
 						setTextColor(Qt::red);

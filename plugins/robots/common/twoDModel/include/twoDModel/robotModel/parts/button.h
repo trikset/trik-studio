@@ -35,10 +35,8 @@ class Button : public kitBase::robotModel::robotParts::Button
 	Q_OBJECT
 
 public:
-	Button(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port
-			, int code
-			, engine::TwoDModelEngineInterface &engine);
+	Button(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port, int code,
+		engine::TwoDModelEngineInterface &engine);
 
 	void read() override;
 

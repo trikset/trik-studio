@@ -48,14 +48,12 @@ const Id notExistingId("1", "1", "1", "1");
 const Id newId1("editor1", "diagram1", "element1", "id1");
 const Id newId2("editor2", "diagram2", "element2", "id2");
 
-
 void RepositoryTest::removeDirectory(QString const &dirName)
 {
 	QDir const dir(dirName);
 
-	for (QFileInfo info : dir.entryInfoList(QDir::Hidden
-			| QDir::NoDotAndDotDot | QDir::Dirs | QDir::Files, QDir::DirsFirst))
-	{
+	for (QFileInfo info :
+		dir.entryInfoList(QDir::Hidden | QDir::NoDotAndDotDot | QDir::Dirs | QDir::Files, QDir::DirsFirst)) {
 		if (info.isDir()) {
 			removeDirectory(info.absoluteFilePath());
 		} else {
@@ -66,7 +64,8 @@ void RepositoryTest::removeDirectory(QString const &dirName)
 	dir.rmdir(dir.absolutePath());
 }
 
-void RepositoryTest::SetUp() {
+void RepositoryTest::SetUp()
+{
 	LogicalObject theRoot(Id::rootId());
 	theRoot.setProperty("name", Id::rootId().toString());
 
@@ -142,14 +141,16 @@ void RepositoryTest::SetUp() {
 	serializer.saveToDisk(newList, QHash<QString, QVariant>());
 }
 
-void RepositoryTest::TearDown() {
+void RepositoryTest::TearDown()
+{
 	delete mRepository;
 
 	QFile::remove("saveFile.qrs");
 	QFile::remove("newSaveFile.qrs");
 }
 
-TEST_F(RepositoryTest, replacePropertiesTest) {
+TEST_F(RepositoryTest, replacePropertiesTest)
+{
 	IdList toReplace;
 	toReplace << root << child1 << child2 << child3 << child1_child << child2_child << child3_child;
 	mRepository->replaceProperties(toReplace, "value", "replacedValue");
@@ -159,7 +160,8 @@ TEST_F(RepositoryTest, replacePropertiesTest) {
 	EXPECT_EQ(mRepository->property(child2, "property3").toString(), "val3");
 }
 
-TEST_F(RepositoryTest, findElementsByNameTest) {
+TEST_F(RepositoryTest, findElementsByNameTest)
+{
 	IdList list = mRepository->findElementsByName("child3", false, false);
 	EXPECT_EQ(list.size(), 0);
 
@@ -189,7 +191,8 @@ TEST_F(RepositoryTest, findElementsByNameTest) {
 	EXPECT_TRUE(list.contains(child1_child));
 }
 
-TEST_F(RepositoryTest, elementsByPropertyTest) {
+TEST_F(RepositoryTest, elementsByPropertyTest)
+{
 	IdList list = mRepository->elementsByProperty("property1", false, false);
 	EXPECT_EQ(list.size(), 1);
 	EXPECT_TRUE(list.contains(root));
@@ -210,7 +213,8 @@ TEST_F(RepositoryTest, elementsByPropertyTest) {
 	EXPECT_TRUE(list.contains(child1_child));
 }
 
-TEST_F(RepositoryTest, elementsByPropertyContentTest) {
+TEST_F(RepositoryTest, elementsByPropertyContentTest)
+{
 	IdList list = mRepository->elementsByPropertyContent("value", false, false);
 	EXPECT_EQ(list.size(), 2);
 	EXPECT_TRUE(list.contains(root));
@@ -232,7 +236,8 @@ TEST_F(RepositoryTest, elementsByPropertyContentTest) {
 	EXPECT_TRUE(list.contains(root));
 }
 
-TEST_F(RepositoryTest, parentOperationsTest) {
+TEST_F(RepositoryTest, parentOperationsTest)
+{
 	EXPECT_EQ(mRepository->parent(child1), root);
 	EXPECT_EQ(mRepository->parent(child2), root);
 	EXPECT_EQ(mRepository->parent(child3), root);
@@ -257,7 +262,8 @@ TEST_F(RepositoryTest, parentOperationsTest) {
 	EXPECT_THROW(mRepository->removeParent(parent), Exception);
 }
 
-TEST_F(RepositoryTest, childOperationsTest) {
+TEST_F(RepositoryTest, childOperationsTest)
+{
 	ASSERT_EQ(mRepository->children(parent).size(), 1);
 	EXPECT_TRUE(mRepository->children(parent).contains(root));
 
@@ -297,7 +303,8 @@ TEST_F(RepositoryTest, childOperationsTest) {
 	EXPECT_THROW(mRepository->removeChild(root, child3_child), Exception);
 }
 
-TEST_F(RepositoryTest, elementsAndExistTest) {
+TEST_F(RepositoryTest, elementsAndExistTest)
+{
 	IdList elems = mRepository->elements();
 	ASSERT_EQ(elems.size(), 9);
 	EXPECT_TRUE(elems.contains(Id::rootId()));
@@ -322,7 +329,8 @@ TEST_F(RepositoryTest, elementsAndExistTest) {
 	EXPECT_FALSE(mRepository->exist(notExistingId));
 }
 
-TEST_F(RepositoryTest, logicalIdTest) {
+TEST_F(RepositoryTest, logicalIdTest)
+{
 	EXPECT_FALSE(mRepository->isLogicalId(root));
 	EXPECT_FALSE(mRepository->isLogicalId(child1));
 	EXPECT_FALSE(mRepository->isLogicalId(child1_child));
@@ -333,10 +341,11 @@ TEST_F(RepositoryTest, logicalIdTest) {
 	EXPECT_TRUE(mRepository->isLogicalId(child3));
 	EXPECT_TRUE(mRepository->isLogicalId(child3_child));
 
-	EXPECT_EQ(mRepository->logicalId(root),rootLogicalId);
+	EXPECT_EQ(mRepository->logicalId(root), rootLogicalId);
 }
 
-TEST_F(RepositoryTest, removeIdTest) {
+TEST_F(RepositoryTest, removeIdTest)
+{
 	mRepository->remove(root);
 	EXPECT_FALSE(mRepository->exist(root));
 
@@ -344,7 +353,8 @@ TEST_F(RepositoryTest, removeIdTest) {
 }
 
 // Same as removeFromDisk test fro Serializer
-TEST_F(RepositoryTest, removeIdListTest) {
+TEST_F(RepositoryTest, removeIdListTest)
+{
 	mRepository->serializer().decompressFile("saveFile.qrs");
 	IdList toRemove;
 	toRemove << child3 << child1_child << child2_child << child3_child;
@@ -353,7 +363,8 @@ TEST_F(RepositoryTest, removeIdListTest) {
 	EXPECT_TRUE(true);
 }
 
-TEST_F(RepositoryTest, stackBeforeTest) {
+TEST_F(RepositoryTest, stackBeforeTest)
+{
 	EXPECT_THROW(mRepository->stackBefore(notExistingId, child1, child2), Exception);
 	EXPECT_THROW(mRepository->stackBefore(root, notExistingId, child2), Exception);
 	EXPECT_THROW(mRepository->stackBefore(root, child1, notExistingId), Exception);
@@ -368,20 +379,23 @@ TEST_F(RepositoryTest, stackBeforeTest) {
 	ASSERT_EQ(mRepository->children(root).indexOf(child1) + 1, mRepository->children(root).indexOf(child2_child));
 }
 
-TEST_F(RepositoryTest, cloneObjectTest) {
+TEST_F(RepositoryTest, cloneObjectTest)
+{
 	const Id clonedId = mRepository->cloneObject(root);
 	EXPECT_EQ(clonedId.type(), root.type());
 	EXPECT_TRUE(clonedId != root);
 }
 
-TEST_F(RepositoryTest, exterminateTest) {
+TEST_F(RepositoryTest, exterminateTest)
+{
 	mRepository->exterminate();
 
 	EXPECT_EQ(mRepository->elements().size(), 1);
 	EXPECT_TRUE(mRepository->elements().contains(Id::rootId()));
 }
 
-TEST_F(RepositoryTest, openTest) {
+TEST_F(RepositoryTest, openTest)
+{
 	mRepository->open("newSaveFile.qrs");
 	EXPECT_EQ(mRepository->elements().size(), 3);
 	EXPECT_TRUE(mRepository->elements().contains(Id::rootId()));
@@ -395,7 +409,8 @@ TEST_F(RepositoryTest, openTest) {
 	EXPECT_EQ(mRepository->property(newId2, "property2").toString(), "value2");
 }
 
-TEST_F(RepositoryTest,importFromDiskTest) {
+TEST_F(RepositoryTest, importFromDiskTest)
+{
 	mRepository->importFromDisk("newSaveFile.qrs");
 
 	IdList elems = mRepository->elements();
@@ -419,14 +434,16 @@ TEST_F(RepositoryTest,importFromDiskTest) {
 	EXPECT_EQ(mRepository->property(newId2, "property2").toString(), "value2");
 }
 
-TEST_F(RepositoryTest, workingFileTest) {
+TEST_F(RepositoryTest, workingFileTest)
+{
 	EXPECT_EQ(mRepository->workingFile(), "saveFile.qrs");
 
 	mRepository->setWorkingFile("newSaveFile");
 	EXPECT_EQ(mRepository->workingFile(), "newSaveFile");
 }
 
-TEST_F(RepositoryTest, singlePropertyOperationsTest) {
+TEST_F(RepositoryTest, singlePropertyOperationsTest)
+{
 	ASSERT_TRUE(mRepository->hasProperty(root, "property1"));
 	ASSERT_TRUE(mRepository->hasProperty(child3_child, "property2"));
 	ASSERT_TRUE(mRepository->hasProperty(child2, "property3"));
@@ -460,7 +477,8 @@ TEST_F(RepositoryTest, singlePropertyOperationsTest) {
 }
 
 // All used methods do not check existance of object with specified id
-TEST_F(RepositoryTest, multiplePropertiesOperationsTest) {
+TEST_F(RepositoryTest, multiplePropertiesOperationsTest)
+{
 	mRepository->setProperty(root, "test", "test");
 
 	QMap<QString, QVariant> properties = mRepository->properties(root);
@@ -495,7 +513,8 @@ TEST_F(RepositoryTest, multiplePropertiesOperationsTest) {
 }
 
 // Method does not check existance of object with specified id
-TEST_F(RepositoryTest, copyPropertiesTest) {
+TEST_F(RepositoryTest, copyPropertiesTest)
+{
 	//EXPECT_THROW(mRepository->copyProperties(notExistingId, root), Exception);
 	//EXPECT_THROW(mRepository->copyProperties(root, notExistingId), Exception);
 	mRepository->copyProperties(root, child2);
@@ -507,7 +526,8 @@ TEST_F(RepositoryTest, copyPropertiesTest) {
 	EXPECT_EQ(mRepository->property(root, "property3").toString(), "val3");
 }
 
-TEST_F(RepositoryTest, backReferenceTest) {
+TEST_F(RepositoryTest, backReferenceTest)
+{
 	const Id backReference1("editor", "diagram", "element", "backReference1");
 	const Id backReference2("editor1", "diagram2", "element3", "child1");
 	const Id backReference3("editor1", "diagram2", "element3", "child2");
@@ -529,7 +549,8 @@ TEST_F(RepositoryTest, backReferenceTest) {
 	EXPECT_TRUE(references.contains(backReference3));
 }
 
-TEST_F(RepositoryTest, temporaryRemovedLinksTest) {
+TEST_F(RepositoryTest, temporaryRemovedLinksTest)
+{
 	const Id linkTo1("editor", "diagram", "element", "linkTo1");
 	const Id linkTo2("editor", "diagram", "element", "linkTo2");
 	const Id linkFrom1("editor", "diagram", "element", "linkFrom1");
@@ -579,7 +600,8 @@ TEST_F(RepositoryTest, temporaryRemovedLinksTest) {
 	ASSERT_FALSE(mRepository->hasProperty(root, QString()));
 }
 
-TEST_F(RepositoryTest, saveAllTest) {
+TEST_F(RepositoryTest, saveAllTest)
+{
 	mRepository->serializer().clearWorkingDir();
 	mRepository->remove(root);
 	mRepository->saveAll();
@@ -595,7 +617,8 @@ TEST_F(RepositoryTest, saveAllTest) {
 	EXPECT_TRUE(mRepository->exist(child3_child));
 }
 
-TEST_F(RepositoryTest, saveTest) {
+TEST_F(RepositoryTest, saveTest)
+{
 	mRepository->serializer().clearWorkingDir();
 	IdList toSave;
 	toSave << child1 << child2 << child3;
@@ -611,7 +634,8 @@ TEST_F(RepositoryTest, saveTest) {
 	EXPECT_TRUE(mRepository->exist(child3_child));
 }
 
-TEST_F(RepositoryTest, saveWithLogicalIdTest) {
+TEST_F(RepositoryTest, saveWithLogicalIdTest)
+{
 	mRepository->serializer().clearWorkingDir();
 	IdList toSave;
 	toSave << child1 << child3_child;
@@ -625,7 +649,8 @@ TEST_F(RepositoryTest, saveWithLogicalIdTest) {
 	EXPECT_TRUE(mRepository->exist(child3_child));
 }
 
-TEST_F(RepositoryTest, saveDiagramsByIdTest) {
+TEST_F(RepositoryTest, saveDiagramsByIdTest)
+{
 	mRepository->serializer().clearWorkingDir();
 	IdList toSave;
 	toSave << child1;

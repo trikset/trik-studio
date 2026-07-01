@@ -21,7 +21,6 @@ namespace models {
 namespace details {
 namespace modelsImplementation {
 
-
 class LogicalModelItem : public AbstractModelItem
 {
 public:

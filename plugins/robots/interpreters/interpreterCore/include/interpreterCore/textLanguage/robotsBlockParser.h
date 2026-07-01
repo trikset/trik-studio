@@ -33,8 +33,8 @@ public:
 	/// Constructor
 	/// @param robotModelManager - provides information about robot model.
 	/// @param timeComputer - method to get time elapsed since start of interpretation, used in predefined variable.
-	RobotsBlockParser(const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
-			, const utils::ComputableNumber::IntComputer &timeComputer);
+	RobotsBlockParser(const kitBase::robotModel::RobotModelManagerInterface &robotModelManager,
+		const utils::ComputableNumber::IntComputer &timeComputer);
 
 	/// Returns a list of predefined variables that should be hidden from user (sensor and port variables, basically).
 	const QStringList &hiddenVariables() const;
@@ -42,10 +42,8 @@ public:
 	void clear() override;
 
 protected:
-	virtual void onDeviceConfigurationChanged(const QString &robotId
-			, const kitBase::robotModel::PortInfo &port
-			, const kitBase::robotModel::DeviceInfo &device
-			, Reason reason) override;
+	virtual void onDeviceConfigurationChanged(const QString &robotId, const kitBase::robotModel::PortInfo &port,
+		const kitBase::robotModel::DeviceInfo &device, Reason reason) override;
 
 private Q_SLOTS:
 	void setReservedVariables();

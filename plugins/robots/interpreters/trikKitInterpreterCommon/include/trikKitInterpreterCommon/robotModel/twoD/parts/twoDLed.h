@@ -32,9 +32,8 @@ class ROBOTS_TRIK_KIT_INTERPRETER_COMMON_EXPORT TwoDLed : public robotModel::par
 	Q_PROPERTY(QColor color READ color WRITE setColor NOTIFY colorChanged)
 
 public:
-	TwoDLed(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port
-			, twoDModel::engine::TwoDModelEngineInterface &engine);
+	TwoDLed(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+		twoDModel::engine::TwoDModelEngineInterface &engine);
 
 	/// Returns the current color of led emulator in 2D model.
 	QColor color() const;

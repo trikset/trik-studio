@@ -25,10 +25,8 @@ class ROBOTS_GENERATOR_EXPORT WaitForButtonGenerator : public generatorBase::sim
 {
 	Q_OBJECT
 public:
-	WaitForButtonGenerator(const qrRepo::RepoApi &repo
-			, generatorBase::GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent);
+	WaitForButtonGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+		const qReal::Id &id, QObject *parent);
 };
 
 }

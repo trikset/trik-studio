@@ -24,16 +24,16 @@
 
 namespace qReal {
 
-class QRGUI_SYSTEM_FACADE_EXPORT NullMainWindow : public QObject
-		, public gui::MainWindowInterpretersInterface
-		, public gui::MainWindowDockInterface
+class QRGUI_SYSTEM_FACADE_EXPORT NullMainWindow : public QObject,
+						  public gui::MainWindowInterpretersInterface,
+						  public gui::MainWindowDockInterface
 {
 	Q_OBJECT
 
 public:
-	NullMainWindow(ErrorReporterInterface &errorReporter, SystemEvents &events
-			, const ProjectManagementInterface *projectManager = nullptr
-			, const GraphicalModelAssistInterface *graphicalModel = nullptr);
+	NullMainWindow(ErrorReporterInterface &errorReporter, SystemEvents &events,
+		const ProjectManagementInterface *projectManager = nullptr,
+		const GraphicalModelAssistInterface *graphicalModel = nullptr);
 	~NullMainWindow();
 
 	void selectItem(const Id &graphicalId) override;
@@ -73,7 +73,7 @@ public:
 	void reportOperation(const QFuture<void> &operation, const QString &description = QString()) override;
 
 	QWidget *currentTab() override;
-	QList<QWidget*> allTabs() const override;
+	QList<QWidget *> allTabs() const override;
 	void openTab(QWidget *tab, const QString &title) override;
 	void closeTab(QWidget *tab) override;
 	void setTabText(QWidget *tab, const QString &text) override;
@@ -104,7 +104,7 @@ public:
 
 	void tabifyDockWidget(QDockWidget *first, QDockWidget *second) override;
 	void addDockWidget(Qt::DockWidgetArea area, QDockWidget *dockWidget) override;
-	void addToolBar(Qt::ToolBarArea area, QToolBar * const toolbar) override;
+	void addToolBar(Qt::ToolBarArea area, QToolBar *const toolbar) override;
 
 	QByteArray saveState(int version = 0) const override;
 	bool restoreState(const QByteArray &state, int version = 0) override;
@@ -124,14 +124,14 @@ private:
 	SystemEvents &mEvents;
 	const GraphicalModelAssistInterface *mGraphicalModel;
 	Id mActiveId;
-	QWidget *mWindowWidget;  // Takes ownership
-	QDockWidget *mLogicalModelDock;  // Takes ownership
-	QDockWidget *mGraphicalModelDock;  // Takes ownership
-	QDockWidget *mPropertyEditorDock;  // Takes ownership
-	QDockWidget *mErrorReporterDock;  // Takes ownership
-	QDockWidget *mPaletteDock;  // Takes ownership
-	QDockWidget *mMinimapDock;  // Takes ownership
-	QStatusBar *mStatusBar;  // Takes ownership
+	QWidget *mWindowWidget; // Takes ownership
+	QDockWidget *mLogicalModelDock; // Takes ownership
+	QDockWidget *mGraphicalModelDock; // Takes ownership
+	QDockWidget *mPropertyEditorDock; // Takes ownership
+	QDockWidget *mErrorReporterDock; // Takes ownership
+	QDockWidget *mPaletteDock; // Takes ownership
+	QDockWidget *mMinimapDock; // Takes ownership
+	QStatusBar *mStatusBar; // Takes ownership
 	bool mClosed = false;
 };
 

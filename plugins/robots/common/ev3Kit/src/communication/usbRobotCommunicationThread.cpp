@@ -79,24 +79,22 @@ bool UsbRobotCommunicationThread::connect()
 		// it is not necessary but logs are extremely useful
 		QLOG_INFO() << "hidapi devices:";
 		hid_device_info *devs = hid_enumerate(0x0, 0x0);
-		for(hid_device_info *cur_dev = devs; cur_dev; cur_dev = cur_dev->next) {
-			QLOG_INFO() << qSetFieldWidth(4) << right << qSetPadChar('0')  << hex << uppercasebase
-						<< cur_dev->vendor_id
-						<< qSetFieldWidth(4) << right << qSetPadChar('0')  << hex << uppercasebase
-						<< cur_dev->product_id
-						<< reset << cur_dev->path
-						<< QString::fromWCharArray(cur_dev->serial_number)
-						<< QString::fromWCharArray(cur_dev->manufacturer_string)
-						<< QString::fromWCharArray(cur_dev->product_string);
+		for (hid_device_info *cur_dev = devs; cur_dev; cur_dev = cur_dev->next) {
+			QLOG_INFO() << qSetFieldWidth(4) << right << qSetPadChar('0') << hex << uppercasebase
+				    << cur_dev->vendor_id << qSetFieldWidth(4) << right << qSetPadChar('0') << hex
+				    << uppercasebase << cur_dev->product_id << reset << cur_dev->path
+				    << QString::fromWCharArray(cur_dev->serial_number)
+				    << QString::fromWCharArray(cur_dev->manufacturer_string)
+				    << QString::fromWCharArray(cur_dev->product_string);
 		}
 		hid_free_enumeration(devs);
 	}
 
 	mHandle = hid_open(EV3_VID, EV3_PID, nullptr);
 	if (!mHandle) {
-		QLOG_ERROR() << "hid_open failed for "
-				<< QString::number(EV3_VID, 16) << QString::number(EV3_PID, 16);
-		Q_EMIT connected(false, tr("Cannot find EV3 device. Check robot connected and turned on and try again."));
+		QLOG_ERROR() << "hid_open failed for " << QString::number(EV3_VID, 16) << QString::number(EV3_PID, 16);
+		Q_EMIT connected(false,
+			tr("Cannot find EV3 device. Check robot connected and turned on and try again."));
 		return false;
 	}
 
@@ -169,11 +167,11 @@ bool UsbRobotCommunicationThread::send1(const QByteArray &buf) const
 
 	auto buffer = buf;
 	buffer.prepend('\0');
-	auto n = hid_write(mHandle, reinterpret_cast<const uint8_t*>(buffer.data()), buffer.size());
+	auto n = hid_write(mHandle, reinterpret_cast<const uint8_t *>(buffer.data()), buffer.size());
 	auto ok = n >= buffer.size();
 	if (!ok) {
-		QLOG_ERROR() << "EV3USB" << "Failed hid_write with" << n
-					 << "bytes written of" << buffer.size() << ", errno =" << hidapi_lasterror();
+		QLOG_ERROR() << "EV3USB" << "Failed hid_write with" << n << "bytes written of" << buffer.size()
+			     << ", errno =" << hidapi_lasterror();
 	}
 
 	return ok;
@@ -183,17 +181,19 @@ QByteArray UsbRobotCommunicationThread::receive(int size) const
 {
 	// It's strange, but regardless of kind of response, it must have size = 1024 (EV3_PACKET_SIZE)
 	// If we set another size(For example, response[10]), program will throw error.
-	uchar response[EV3_PACKET_SIZE] {0, };
-	size_t bufSize = sizeof(response)/sizeof (response[0]);
-//	response[0] = 0;
-//	response[1] = EV3_EP_IN;
-//	auto n = hid_write(mHandle, response, bufSize);
-//	if (n != bufSize) {
-//		QLOG_ERROR() << "EV3USB" << "Failed hid_write with errno =" << errno;
-//	}
+	uchar response[EV3_PACKET_SIZE] {
+		0,
+	};
+	size_t bufSize = sizeof(response) / sizeof(response[0]);
+	//	response[0] = 0;
+	//	response[1] = EV3_EP_IN;
+	//	auto n = hid_write(mHandle, response, bufSize);
+	//	if (n != bufSize) {
+	//		QLOG_ERROR() << "EV3USB" << "Failed hid_write with errno =" << errno;
+	//	}
 
 	auto n = hid_read(mHandle, response, bufSize);
-	if ( n <= 0) {
+	if (n <= 0) {
 		QLOG_ERROR() << "EV3USB" << "Failed hid_read with" << n << ", errno = " << errno;
 	}
 	auto resultSize = qMin(EV3_PACKET_SIZE, size);

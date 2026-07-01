@@ -25,9 +25,6 @@ HelpWithChangelogBlock::HelpWithChangelogBlock(ShellWidget *shellWidget)
 
 QStringList HelpWithChangelogBlock::arguments()
 {
-	return {
-		QCoreApplication::applicationDirPath() + "/deployment-scripts/version_increment/generate_changelog.sh"
-		, stringProperty(id(), "Path")
-		, stringProperty(id(), "Tag")
-	};
+	return {QCoreApplication::applicationDirPath() + "/deployment-scripts/version_increment/generate_changelog.sh",
+		stringProperty(id(), "Path"), stringProperty(id(), "Tag")};
 }

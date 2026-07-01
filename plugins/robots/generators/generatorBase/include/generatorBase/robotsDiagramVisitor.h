@@ -34,13 +34,13 @@ public:
 protected:
 	// TODO: move this enum to global robots definitions and use it
 	/// A property that used for marking links in model
-	enum LinkGuard
-	{
-		emptyGuard = 0
-		, bodyGuard  // :)
-		, trueGuard
-		, falseGuard
-		, threadIdGuard
+	enum LinkGuard {
+		emptyGuard = 0,
+		bodyGuard // :)
+		,
+		trueGuard,
+		falseGuard,
+		threadIdGuard
 	};
 
 	/// Starts repo graph dfs-traversal
@@ -65,8 +65,8 @@ protected:
 	/// This method is called when traverser gets into a block with loop semantics
 	virtual void visitLoop(const qReal::Id &id, QList<utils::DeepFirstSearcher::LinkInfo> const &links) = 0;
 
-	virtual void visitPreconditionalLoop(const qReal::Id &id
-			, QList<utils::DeepFirstSearcher::LinkInfo> const &links) = 0;
+	virtual void visitPreconditionalLoop(const qReal::Id &id,
+		QList<utils::DeepFirstSearcher::LinkInfo> const &links) = 0;
 
 	/// This method is called when traverser gets into a block with switch semantics
 	virtual void visitSwitch(const qReal::Id &id, QList<utils::DeepFirstSearcher::LinkInfo> const &links) = 0;

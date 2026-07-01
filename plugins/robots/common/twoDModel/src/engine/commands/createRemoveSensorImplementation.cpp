@@ -19,12 +19,9 @@
 using namespace twoDModel;
 using namespace commands;
 
-CreateRemoveSensorImplementation::CreateRemoveSensorImplementation(model::SensorsConfiguration &configurator
-		, const QString &robotId
-		, const kitBase::robotModel::PortInfo &port
-		, const kitBase::robotModel::DeviceInfo &device
-		, QPointF position
-		, const qreal direction)
+CreateRemoveSensorImplementation::CreateRemoveSensorImplementation(model::SensorsConfiguration &configurator,
+	const QString &robotId, const kitBase::robotModel::PortInfo &port,
+	const kitBase::robotModel::DeviceInfo &device, QPointF position, const qreal direction)
 	: mConfigurator(configurator)
 	, mRobotId(robotId)
 	, mPort(port)

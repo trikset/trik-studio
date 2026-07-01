@@ -23,10 +23,8 @@
 
 using namespace qReal;
 
-EditPropertiesDialog::EditPropertiesDialog(const EditorManagerInterface &interpreterEditorManager
-		, qrRepo::LogicalRepoApi &api
-		, const Id &id
-		, QWidget *parent)
+EditPropertiesDialog::EditPropertiesDialog(const EditorManagerInterface &interpreterEditorManager,
+	qrRepo::LogicalRepoApi &api, const Id &id, QWidget *parent)
 	: QDialog(parent)
 	, mUi(new Ui::EditPropertiesDialog)
 	, mInterpreterEditorManager(interpreterEditorManager)
@@ -60,13 +58,8 @@ void EditPropertiesDialog::messageBoxCancel()
 
 void EditPropertiesDialog::updateProperties()
 {
-	mInterpreterEditorManager.updateProperties(
-			mId
-			, mPropertyName
-			, mUi->attributeTypeEdit->text()
-			, mUi->defaultValueEdit->text()
-			, mUi->displayedNameEdit->text()
-			);
+	mInterpreterEditorManager.updateProperties(mId, mPropertyName, mUi->attributeTypeEdit->text(),
+		mUi->defaultValueEdit->text(), mUi->displayedNameEdit->text());
 
 	if (mPropertyItem != nullptr) {
 		mPropertyItem->setText(mInterpreterEditorManager.propertyDisplayedName(mId, mPropertyName));
@@ -78,8 +71,8 @@ void EditPropertiesDialog::updateProperties()
 void EditPropertiesDialog::acceptPropertyModifications()
 {
 	if (mPropertyName.isEmpty()) {
-		const IdList sameNameProperties = mInterpreterEditorManager.propertiesWithTheSameName(mId, ""
-				, mUi->displayedNameEdit->text());
+		const IdList sameNameProperties =
+			mInterpreterEditorManager.propertiesWithTheSameName(mId, "", mUi->displayedNameEdit->text());
 		if (sameNameProperties.isEmpty()) {
 			mPropertyName = mUi->displayedNameEdit->text();
 		} else {
@@ -88,7 +81,7 @@ void EditPropertiesDialog::acceptPropertyModifications()
 
 		mInterpreterEditorManager.addProperty(mId, mPropertyName);
 		// set property default value for elements on diagram
-		for (const auto &elementOnDiagram: mElementsOnDiagram) {
+		for (const auto &elementOnDiagram : mElementsOnDiagram) {
 			mApi.setProperty(elementOnDiagram, mPropertyName, mUi->defaultValueEdit->text());
 		}
 
@@ -96,20 +89,18 @@ void EditPropertiesDialog::acceptPropertyModifications()
 	}
 
 	if (mMode == editExisting
-			&& mInterpreterEditorManager.typeName(mId, mPropertyName) != mUi->attributeTypeEdit->text()
-			)
-	{
+		&& mInterpreterEditorManager.typeName(mId, mPropertyName) != mUi->attributeTypeEdit->text()) {
 		// TODO: Remove connects.
-		QMessageBox messageBox(tr("Warning:")
-				, tr("You changed the type of property. In case of incorrect conversion it may"
-						" result in resetting of the existing property value.")
-				, QMessageBox::Warning, QMessageBox::Ok, QMessageBox::Cancel, QMessageBox::NoButton);
+		QMessageBox messageBox(tr("Warning:"),
+			tr("You changed the type of property. In case of incorrect conversion it may"
+			   " result in resetting of the existing property value."),
+			QMessageBox::Warning, QMessageBox::Ok, QMessageBox::Cancel, QMessageBox::NoButton);
 		messageBox.button(QMessageBox::Ok)->setText(tr("Proceed anyway"));
 		messageBox.button(QMessageBox::Cancel)->setText(tr("Cancel the type conversion"));
-		connect(messageBox.button(QMessageBox::Cancel), &QAbstractButton::clicked
-				, this, &EditPropertiesDialog::messageBoxCancel);
-		connect(messageBox.button(QMessageBox::Ok), &QAbstractButton::clicked
-				, this, &EditPropertiesDialog::updateProperties);
+		connect(messageBox.button(QMessageBox::Cancel), &QAbstractButton::clicked, this,
+			&EditPropertiesDialog::messageBoxCancel);
+		connect(messageBox.button(QMessageBox::Ok), &QAbstractButton::clicked, this,
+			&EditPropertiesDialog::updateProperties);
 		messageBox.exec();
 	} else {
 		updateProperties();
@@ -119,35 +110,31 @@ void EditPropertiesDialog::acceptPropertyModifications()
 void EditPropertiesDialog::okButtonClicked()
 {
 	if (mUi->attributeTypeEdit->text().isEmpty() || mUi->displayedNameEdit->text().isEmpty()) {
-		QMessageBox::critical(this, tr("Error"), tr("All required properties should be filled")
-				, QMessageBox::tr("Close"));
+		QMessageBox::critical(this, tr("Error"), tr("All required properties should be filled"),
+			QMessageBox::tr("Close"));
 	} else {
-		const IdList propertiesWithTheSameNameList = mInterpreterEditorManager.propertiesWithTheSameName(mId
-				, mPropertyName, mUi->displayedNameEdit->text());
+		const IdList propertiesWithTheSameNameList = mInterpreterEditorManager.propertiesWithTheSameName(mId,
+			mPropertyName, mUi->displayedNameEdit->text());
 		if (!propertiesWithTheSameNameList.isEmpty()) {
 			hide();
 			mRestorePropertiesDialog = new RestorePropertiesDialog(this, mInterpreterEditorManager);
-			mRestorePropertiesDialog->fillSameNamePropertiesTW(propertiesWithTheSameNameList
-					, mUi->displayedNameEdit->text());
+			mRestorePropertiesDialog->fillSameNamePropertiesTW(propertiesWithTheSameNameList,
+				mUi->displayedNameEdit->text());
 			mRestorePropertiesDialog->setWindowTitle(tr("Restore properties"));
 			mRestorePropertiesDialog->setModal(true);
 			mRestorePropertiesDialog->show();
-			connect(mRestorePropertiesDialog, &qReal::RestorePropertiesDialog::createNewChosen
-					, this, &EditPropertiesDialog::acceptPropertyModifications);
-			connect(mRestorePropertiesDialog, &qReal::RestorePropertiesDialog::finished
-					, this, &EditPropertiesDialog::done);
+			connect(mRestorePropertiesDialog, &qReal::RestorePropertiesDialog::createNewChosen, this,
+				&EditPropertiesDialog::acceptPropertyModifications);
+			connect(mRestorePropertiesDialog, &qReal::RestorePropertiesDialog::finished, this,
+				&EditPropertiesDialog::done);
 		} else {
 			acceptPropertyModifications();
 		}
 	}
 }
 
-void EditPropertiesDialog::changeProperty(
-		QListWidgetItem *propertyItem
-		, const QString &propertyName
-		, const QString &propertyDisplayedName
-		, qReal::IdList *elementsOnDiagram
-		)
+void EditPropertiesDialog::changeProperty(QListWidgetItem *propertyItem, const QString &propertyName,
+	const QString &propertyDisplayedName, qReal::IdList *elementsOnDiagram)
 {
 	//mPropertyName = mInterpreterEditorManager.propertyNameByDisplayedName(mId, propertyDisplayedName);
 	mPropertyName = propertyName;

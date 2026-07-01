@@ -39,8 +39,8 @@ protected:
 	QString toStringImpl(GeneratorCustomizer &customizer, int indent, const QString &indentString) const override;
 
 private:
-	ZoneNode *mThenZone;  // Takes ownership
-	ZoneNode *mElseZone;  // Takes ownership
+	ZoneNode *mThenZone; // Takes ownership
+	ZoneNode *mElseZone; // Takes ownership
 	bool mIsSimple;
 };
 

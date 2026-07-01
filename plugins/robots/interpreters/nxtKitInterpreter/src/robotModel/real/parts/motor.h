@@ -29,9 +29,8 @@ class Motor : public nxt::robotModel::parts::NxtMotor
 	Q_OBJECT
 
 public:
-	Motor(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port
-			, utils::robotCommunication::RobotCommunicator &robotCommunicator);
+	Motor(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+		utils::robotCommunication::RobotCommunicator &robotCommunicator);
 
 	void on(int speed, bool breakMode = true) override;
 	void on(int speed, uint64_t degrees, bool breakMode = true) override;
@@ -40,12 +39,8 @@ public:
 	void resetMotorPosition(bool relative);
 
 private:
-	void setOutputState(int speed
-			, int mode
-			, enums::regulationMode::RegulationModeEnum regulation
-			, int turnRatio
-			, enums::runState::RunStateEnum runState
-			, uint64_t tachoLimit);
+	void setOutputState(int speed, int mode, enums::regulationMode::RegulationModeEnum regulation, int turnRatio,
+		enums::runState::RunStateEnum runState, uint64_t tachoLimit);
 
 	utils::robotCommunication::RobotCommunicator &mRobotCommunicator;
 };

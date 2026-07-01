@@ -28,19 +28,19 @@ ShortcutEdit::ShortcutEdit(QWidget *parent)
 bool ShortcutEdit::event(QEvent *event)
 {
 	if (event->type() == QEvent::KeyPress || event->type() == QEvent::KeyRelease) {
-		QKeyEvent *keyevent = static_cast<QKeyEvent *> (event);
+		QKeyEvent *keyevent = static_cast<QKeyEvent *>(event);
 
 		switch (keyevent->key()) {
-			case Qt::Key_Shift:
-			case Qt::Key_Control:
-			case Qt::Key_Alt:
-			case Qt::Key_AltGr:
-				Q_EMIT newModifiers(keyevent->modifiers());
-				break;
-			default:
-				if (event->type() == QEvent::KeyPress) {
-					Q_EMIT newKey(keyevent->key());
-				}
+		case Qt::Key_Shift:
+		case Qt::Key_Control:
+		case Qt::Key_Alt:
+		case Qt::Key_AltGr:
+			Q_EMIT newModifiers(keyevent->modifiers());
+			break;
+		default:
+			if (event->type() == QEvent::KeyPress) {
+				Q_EMIT newKey(keyevent->key());
+			}
 		}
 		return true;
 	}

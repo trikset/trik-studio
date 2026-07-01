@@ -27,9 +27,8 @@ class SoundSensor : public kitBase::robotModel::robotParts::SoundSensor
 	Q_OBJECT
 
 public:
-	SoundSensor(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port
-			, utils::robotCommunication::RobotCommunicator &robotCommunicator);
+	SoundSensor(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+		utils::robotCommunication::RobotCommunicator &robotCommunicator);
 
 	void read() override;
 	void doConfiguration() override;

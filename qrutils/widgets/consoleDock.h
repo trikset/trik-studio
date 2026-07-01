@@ -44,7 +44,7 @@ public Q_SLOTS:
 	void clear();
 
 private:
-	QPlainTextEdit *mOutput;  // Takes ownership
+	QPlainTextEdit *mOutput; // Takes ownership
 	QTimer mTimer;
 	QQueue<QString> mMsgQueue;
 };

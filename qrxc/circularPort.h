@@ -21,7 +21,7 @@
 #include "port.h"
 
 namespace utils {
-	class OutFile;
+class OutFile;
 }
 
 /// Represents circular port.
@@ -30,7 +30,7 @@ class CircularPort : public Port
 public:
 	bool init(const QDomElement &element, int width, int height) override;
 	void generateCode(utils::OutFile &out) override;
-	Port* clone() const override;
+	Port *clone() const override;
 
 private:
 	/// X coordinate of a center of port.

@@ -16,12 +16,11 @@
 
 using namespace ev3;
 
-Ev3GeneratorCustomizer::Ev3GeneratorCustomizer(const qrRepo::RepoApi &repo
-		, qReal::ErrorReporterInterface &errorReporter
-		, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
-		, generatorBase::lua::LuaProcessor &luaProcessor
-		, const QString &generatorName
-		, bool supportsSwitchUnstableToBreaks)
+Ev3GeneratorCustomizer::Ev3GeneratorCustomizer(const qrRepo::RepoApi &repo,
+	qReal::ErrorReporterInterface &errorReporter,
+	const kitBase::robotModel::RobotModelManagerInterface &robotModelManager,
+	generatorBase::lua::LuaProcessor &luaProcessor, const QString &generatorName,
+	bool supportsSwitchUnstableToBreaks)
 	: mFactory(repo, errorReporter, robotModelManager, luaProcessor, generatorName)
 	, mSupportsSwitchUnstableToBreaks(supportsSwitchUnstableToBreaks)
 {

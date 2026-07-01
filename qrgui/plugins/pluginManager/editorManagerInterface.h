@@ -106,10 +106,10 @@ public:
 	virtual Id theOnlyDiagram() const = 0;
 	virtual QString diagramNodeNameString(const Id &editor, const Id &diagram) const = 0;
 
-//	virtual QList<StringPossibleEdge> possibleEdges(const QString &editor, const QString &element) const = 0;
+	//	virtual QList<StringPossibleEdge> possibleEdges(const QString &editor, const QString &element) const = 0;
 	virtual int isNodeOrEdge(const Id &id) const = 0;
-	virtual bool isParentOf(const QString &editor, const QString &parentDiagram, const QString &parentElement
-			, const QString &childDiagram, const QString &childElement) const = 0;
+	virtual bool isParentOf(const QString &editor, const QString &parentDiagram, const QString &parentElement,
+		const QString &childDiagram, const QString &childElement) const = 0;
 	virtual QString diagramName(const QString &editor, const QString &diagram) const = 0;
 	virtual QString diagramNodeName(const QString &editor, const QString &diagram) const = 0;
 
@@ -119,8 +119,8 @@ public:
 	virtual bool isParentProperty(const Id &id, const QString &propertyName) const = 0;
 	virtual void deleteProperty(const QString &propDisplayedName) const = 0;
 	virtual void addProperty(const Id &id, const QString &propDisplayedName) const = 0;
-	virtual void updateProperties(const Id &id, const QString &property, const QString &propertyType
-			, const QString &propertyDefaultValue, const QString &propertyDisplayedName) const = 0;
+	virtual void updateProperties(const Id &id, const QString &property, const QString &propertyType,
+		const QString &propertyDefaultValue, const QString &propertyDisplayedName) const = 0;
 	virtual QString propertyNameByDisplayedName(const Id &id, const QString &displayedPropertyName) const = 0;
 	virtual IdList children(const Id &parent) const = 0;
 	virtual QString shape(const Id &id) const = 0;
@@ -128,16 +128,16 @@ public:
 	virtual void resetIsHidden(const Id &id) const = 0;
 	virtual bool isHidden(const Id &id) const = 0;
 	virtual void deleteElement(const Id &id) const = 0;
-	virtual void addNodeElement(const Id &diagram, const QString &name, const QString &displayedName
-			, bool isRootDiagramNode) const = 0;
-	virtual void addEdgeElement(const Id &diagram, const QString &name, const QString &displayedName
-			, const QString &labelText, const QString &labelType, const QString &lineType
-			, const QString &beginType, const QString &endType) const = 0;
+	virtual void addNodeElement(const Id &diagram, const QString &name, const QString &displayedName,
+		bool isRootDiagramNode) const = 0;
+	virtual void addEdgeElement(const Id &diagram, const QString &name, const QString &displayedName,
+		const QString &labelText, const QString &labelType, const QString &lineType, const QString &beginType,
+		const QString &endType) const = 0;
 	virtual void createEditorAndDiagram(const QString &name) = 0;
 	virtual void saveMetamodel(const QString &newMetamodelFileName) = 0;
 	virtual QString saveMetamodelFilePath() const = 0;
 	virtual QStringList paletteGroups(const Id &editor, const Id &diagram) const = 0;
-	virtual QStringList paletteGroupList(const Id &editor,const Id &diagram, const QString &group) const = 0;
+	virtual QStringList paletteGroupList(const Id &editor, const Id &diagram, const QString &group) const = 0;
 	virtual QString paletteGroupDescription(const Id &editor, const Id &diagram, const QString &group) const = 0;
 	virtual bool shallPaletteBeSorted(const Id &editor, const Id &diagram) const = 0;
 	virtual QStringList referenceProperties(const Id &id) const = 0;
@@ -145,8 +145,8 @@ public:
 	virtual QSize iconSize(const Id &id) const = 0;
 
 	virtual IdList elementsWithTheSameName(const Id &diagram, const QString &name, const QString &type) const = 0;
-	virtual IdList propertiesWithTheSameName(const Id &id, const QString &propCurrentName
-			, const QString &propNewName) const = 0;
+	virtual IdList propertiesWithTheSameName(const Id &id, const QString &propCurrentName,
+		const QString &propNewName) const = 0;
 
 	virtual QStringList getPropertiesInformation(const Id &id) const = 0;
 	virtual QStringList getSameNamePropertyParams(const Id &propertyId, const QString &propertyName) const = 0;
@@ -156,6 +156,5 @@ public:
 	/// Includes or excludes element from metamodel.
 	virtual void setElementEnabled(const Id &type, bool enabled) = 0;
 };
-
 
 }

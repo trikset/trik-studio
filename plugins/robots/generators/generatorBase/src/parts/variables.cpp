@@ -28,9 +28,8 @@ using namespace generatorBase;
 using namespace parts;
 using namespace qReal;
 
-Variables::Variables(const QStringList &pathsToTemplates
-		, const kitBase::robotModel::RobotModelInterface &robotModel
-		, qrtext::LanguageToolboxInterface &luaToolbox)
+Variables::Variables(const QStringList &pathsToTemplates, const kitBase::robotModel::RobotModelInterface &robotModel,
+	qrtext::LanguageToolboxInterface &luaToolbox)
 	: TemplateParametrizedEntity(pathsToTemplates)
 	, mRobotModel(robotModel)
 	, mLuaToolbox(luaToolbox)
@@ -39,15 +38,17 @@ Variables::Variables(const QStringList &pathsToTemplates
 
 QString Variables::generateConstantsString() const
 {
-	const QMap<QString, QSharedPointer<qrtext::core::types::TypeExpression>> variables = mLuaToolbox.variableTypes();
+	const QMap<QString, QSharedPointer<qrtext::core::types::TypeExpression>> variables =
+		mLuaToolbox.variableTypes();
 	QString result;
 	for (const QString &constantName : mLuaToolbox.specialConstants()) {
 		const QString value = mLuaToolbox.variableTypes()[constantName]->is<qrtext::lua::types::Float>()
-				? readTemplateIfExists("floatFormat.t", "@@VALUE@@")
-						.replace("@@VALUE@@", mLuaToolbox.value<QString>(constantName))
-				: mLuaToolbox.value<QString>(constantName);
-		result += QString(constantDeclaration(variables[constantName])).replace("@@NAME@@", constantName)
-				.replace("@@VALUE@@", value);
+		                              ? readTemplateIfExists("floatFormat.t", "@@VALUE@@")
+		                                        .replace("@@VALUE@@", mLuaToolbox.value<QString>(constantName))
+		                              : mLuaToolbox.value<QString>(constantName);
+		result += QString(constantDeclaration(variables[constantName]))
+		                  .replace("@@NAME@@", constantName)
+		                  .replace("@@VALUE@@", value);
 	}
 
 	return result;
@@ -55,7 +56,8 @@ QString Variables::generateConstantsString() const
 
 QStringList Variables::generateVariablesList() const
 {
-	const QMap<QString, QSharedPointer<qrtext::core::types::TypeExpression>> variables = mLuaToolbox.variableTypes();
+	const QMap<QString, QSharedPointer<qrtext::core::types::TypeExpression>> variables =
+		mLuaToolbox.variableTypes();
 	const QStringList reservedNames = mLuaToolbox.specialIdentifiers();
 
 	QStringList result;
@@ -113,8 +115,8 @@ QString Variables::constantDeclaration(const QSharedPointer<qrtext::core::types:
 QString Variables::variableDeclaration(const QSharedPointer<qrtext::core::types::TypeExpression> &type) const
 {
 	const QString universalTemplate = readTemplate("variables/variableDeclaration.t");
-	QString concreteTemplate = readTemplateIfExists(QString("variables/%1VariableDeclaration.t")
-			.arg(typeName(type)), universalTemplate);
+	QString concreteTemplate = readTemplateIfExists(
+		QString("variables/%1VariableDeclaration.t").arg(typeName(type)), universalTemplate);
 	return concreteTemplate.replace("@@TYPE@@", typeExpression(type));
 }
 

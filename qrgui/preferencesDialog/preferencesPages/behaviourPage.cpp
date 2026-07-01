@@ -114,10 +114,10 @@ void PreferencesBehaviourPage::updateGesturesSettings(bool gesturesEnabled)
 
 void PreferencesBehaviourPage::initLanguages()
 {
-	mUi->languageComboBox->addItem(tr("<System Language>"),"");
+	mUi->languageComboBox->addItem(tr("<System Language>"), "");
 	mUi->languageComboBox->addItem("English", "en");
 	QDir translationsDir(PlatformInfo::invariantSettingsPath("pathToTranslations"));
-	for (const QString &locale: translationsDir.entryList(QDir::Dirs)) {
+	for (const QString &locale : translationsDir.entryList(QDir::Dirs)) {
 		const QString language = QLocale(locale).nativeLanguageName();
 		if (!language.isEmpty()) {
 			const QString capitalizedLanguage = language[0].toUpper() + language.mid(1);

@@ -31,7 +31,9 @@ class QRGUI_CONTROLLER_EXPORT ControllerInterface : public QObject
 	Q_OBJECT
 
 public:
-	virtual ~ControllerInterface() {}
+	virtual ~ControllerInterface()
+	{
+	}
 
 	/// Returns true if last action can be undone for current stack or global stack.
 	virtual bool canUndo() const = 0;

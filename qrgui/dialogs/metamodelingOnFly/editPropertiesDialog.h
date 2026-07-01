@@ -39,10 +39,8 @@ public:
 	/// @param interpreterEditorManager Editor manager.
 	/// @param id Id of an element for which we edit properties.
 	/// @param parent Parent widget, who is responsible for deletion of this dialog.
-	EditPropertiesDialog(const EditorManagerInterface &interpreterEditorManager
-			, qrRepo::LogicalRepoApi &api
-			, const Id &id
-			, QWidget *parent = nullptr);
+	EditPropertiesDialog(const EditorManagerInterface &interpreterEditorManager, qrRepo::LogicalRepoApi &api,
+		const Id &id, QWidget *parent = nullptr);
 
 	/// Destructor.
 	~EditPropertiesDialog();
@@ -52,8 +50,8 @@ public:
 	/// @param propertyName Name of a property which we edit.
 	/// @param propertyDisplayedName Displayed name of this property.
 	/// @param elementsOnDiagram logical elements on the diagram.
-	void changeProperty(QListWidgetItem *propertyItem, const QString &propertyName
-				, const QString &propertyDisplayedName, qReal::IdList *elementsOnDiagram);
+	void changeProperty(QListWidgetItem *propertyItem, const QString &propertyName,
+		const QString &propertyDisplayedName, qReal::IdList *elementsOnDiagram);
 private Q_SLOTS:
 	void okButtonClicked();
 	void messageBoxCancel();
@@ -61,11 +59,7 @@ private Q_SLOTS:
 	void acceptPropertyModifications();
 
 private:
-	enum Mode
-	{
-		addNew
-		, editExisting
-	};
+	enum Mode { addNew, editExisting };
 
 	void initDefaultValues();
 

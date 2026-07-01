@@ -38,7 +38,7 @@ TextManager::TextManager(SystemEvents &systemEvents, gui::MainWindowInterpreters
 
 bool TextManager::openFile(const QString &filePath, const QString &generatorName, const text::LanguageInfo &language)
 {
-	QFile file(filePath);	
+	QFile file(filePath);
 
 	if (!file.isOpen() && file.open(QIODevice::ReadOnly | QIODevice::Text)) {
 		QTextStream inStream(&file);
@@ -46,8 +46,8 @@ bool TextManager::openFile(const QString &filePath, const QString &generatorName
 		const auto &area = new QScintillaTextEdit();
 		area->setCurrentLanguage(language);
 		area->setText(inStream.readAll());
-		connect(&*area, &QScintillaTextEdit::textWasModified, this
-				, [this](QScintillaTextEdit *t) { setModified(t, true); });
+		connect(&*area, &QScintillaTextEdit::textWasModified, this,
+			[this](QScintillaTextEdit *t) { setModified(t, true); });
 		mText.insert(filePath, area);
 		mPath.insert(area, filePath);
 		mPathType.insert(filePath, true);
@@ -81,17 +81,13 @@ bool TextManager::unbindCode(const QString &filePath)
 bool TextManager::suggestToSaveCode(text::QScintillaTextEdit *code)
 {
 	if (mModified[mPath.value(code)].second) {
-		switch (utils::QRealMessageBox::question(
-				mMainWindow.currentTab()
-				, tr("Confirmation")
-				, tr("Save before closing?")
-				, QMessageBox::StandardButtons(QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel)))
-		{
+		switch (utils::QRealMessageBox::question(mMainWindow.currentTab(), tr("Confirmation"),
+			tr("Save before closing?"),
+			QMessageBox::StandardButtons(QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel))) {
 		case QMessageBox::Yes:
 			saveText(false);
 			return true;
-		case QMessageBox::No:
-		{
+		case QMessageBox::No: {
 			// very bad way but now I have only this idea
 			// need to reset code to last saved state
 			setModified(code, false);
@@ -215,8 +211,8 @@ void TextManager::onTabClosed(const QFileInfo &file)
 	closeFile(file.absoluteFilePath());
 }
 
-void TextManager::showInTextEditor(const QFileInfo &fileInfo
-		, const QString &genName, const text::LanguageInfo &language)
+void TextManager::showInTextEditor(const QFileInfo &fileInfo, const QString &genName,
+	const text::LanguageInfo &language)
 {
 	/// @todo: Uncomment it
 	// Q_ASSERT(!fileInfo.baseName().isEmpty());
@@ -258,15 +254,15 @@ void TextManager::showInTextEditor(const QFileInfo &fileInfo, const text::Langua
 	area->show();
 
 	// Need to bind diagram and code file only if code is just generated
-//	bindCode(mMainWindow.activeDiagram(), filePath);
-//	emit mSystemEvents.newCodeAppeared(mMainWindow.activeDiagram(), QFileInfo(filePath));
+	//	bindCode(mMainWindow.activeDiagram(), filePath);
+	//	emit mSystemEvents.newCodeAppeared(mMainWindow.activeDiagram(), QFileInfo(filePath));
 
 	mMainWindow.openTab(area, fileInfo.fileName());
 }
 
 bool TextManager::saveText(bool saveAs)
 {
-	QScintillaTextEdit * const area = dynamic_cast<QScintillaTextEdit *>(mMainWindow.currentTab());
+	QScintillaTextEdit *const area = dynamic_cast<QScintillaTextEdit *>(mMainWindow.currentTab());
 	if (!area) {
 		return false;
 	}
@@ -274,18 +270,14 @@ bool TextManager::saveText(bool saveAs)
 	QFileInfo fileInfo = path(area);
 
 	if (saveAs || fileInfo.fileName().isEmpty()) {
-		QString editorExtension = QString("%1 (*.%2)").arg(
-				area->currentLanguage().extensionDescription
-				, area->currentLanguage().extension);
+		QString editorExtension =
+			QString("%1 (*.%2)")
+				.arg(area->currentLanguage().extensionDescription, area->currentLanguage().extension);
 		const QString extensionDescriptions = editorExtension + ";;" + tr("All files (*)");
 		QString *currentExtensionDescription = &editorExtension;
-		fileInfo = QFileInfo(utils::QRealFileDialog::getSaveFileName("SaveTextFromTextManager"
-				, mMainWindow.windowWidget()
-				, tr("Save generated code")
-				, QString()
-				, extensionDescriptions
-				, QString()
-				, currentExtensionDescription));
+		fileInfo = QFileInfo(utils::QRealFileDialog::getSaveFileName("SaveTextFromTextManager",
+			mMainWindow.windowWidget(), tr("Save generated code"), QString(), extensionDescriptions,
+			QString(), currentExtensionDescription));
 	}
 
 	if (!fileInfo.fileName().isEmpty()) {

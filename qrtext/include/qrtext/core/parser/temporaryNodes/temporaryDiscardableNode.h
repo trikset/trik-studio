@@ -23,8 +23,7 @@ namespace core {
 /// parts of parse tree, like brackets, or optional parts of grammar that were not in input stream (in such case it is
 /// not connected).
 class TemporaryDiscardableNode : public ast::Node
-{
-};
+{};
 
 }
 }

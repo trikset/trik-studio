@@ -19,8 +19,8 @@
 using namespace trik::robotModel::real::parts;
 using namespace kitBase::robotModel;
 
-PowerMotor::PowerMotor(const DeviceInfo &info, const PortInfo &port
-		, utils::robotCommunication::TcpRobotCommunicator &tcpRobotCommunicator)
+PowerMotor::PowerMotor(const DeviceInfo &info, const PortInfo &port,
+	utils::robotCommunication::TcpRobotCommunicator &tcpRobotCommunicator)
 	: robotModel::parts::TrikPowerMotor(info, port)
 	, mRobotCommunicator(tcpRobotCommunicator)
 {
@@ -32,8 +32,9 @@ void PowerMotor::on(int speed)
 		Motor::on(speed);
 		const QString pathToCommand = ":/trikQts/templates/engines/forward.t";
 		const QString directCommand = utils::InFile::readAll(pathToCommand)
-				.replace("@@PORT@@", "\"" + port().name() + "\"")
-				.replace("@@POWER@@", QString::number(speed)) + "script.run();";
+		                                      .replace("@@PORT@@", "\"" + port().name() + "\"")
+		                                      .replace("@@POWER@@", QString::number(speed))
+		                              + "script.run();";
 
 		mRobotCommunicator.runDirectCommand(directCommand);
 	}

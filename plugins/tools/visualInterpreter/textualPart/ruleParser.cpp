@@ -17,12 +17,11 @@
 using namespace qReal;
 using namespace utils;
 
-RuleParser::RuleParser(LogicalModelAssistInterface &logicalModelApi
-		, GraphicalModelAssistInterface &graphicalModelApi
-		, ErrorReporterInterface* errorReporter)
-		: ExpressionsParser(errorReporter)
-		, mLogicalModelApi(logicalModelApi)
-		, mGraphicalModelApi(graphicalModelApi)
+RuleParser::RuleParser(LogicalModelAssistInterface &logicalModelApi, GraphicalModelAssistInterface &graphicalModelApi,
+	ErrorReporterInterface *errorReporter)
+	: ExpressionsParser(errorReporter)
+	, mLogicalModelApi(logicalModelApi)
+	, mGraphicalModelApi(graphicalModelApi)
 {
 }
 
@@ -96,8 +95,7 @@ void RuleParser::parseRunFunction(QString const &stream, int &pos, QHash<Id, Id>
 }
 
 // TODO: refactor this!
-void RuleParser::parsePropertyChange(QString const &stream, int &pos,
-		QHash<Id, Id> const &mMatch)
+void RuleParser::parsePropertyChange(QString const &stream, int &pos, QHash<Id, Id> const &mMatch)
 {
 	QString const name = parseElemName(stream, pos);
 	if (hasErrors()) {
@@ -143,8 +141,7 @@ void RuleParser::parsePropertyChange(QString const &stream, int &pos,
 
 		int position = 0;
 
-		bool value = parseCondition(property(condId, condProperty).toString(),
-				position, condId);
+		bool value = parseCondition(property(condId, condProperty).toString(), position, condId);
 
 		Id const id = elementByName(name, mMatch);
 		if (id == Id::rootId()) {
@@ -164,8 +161,7 @@ void RuleParser::parsePropertyChange(QString const &stream, int &pos,
 		pos += value.length();
 
 		if (stream.at(pos).toLatin1() != '"') {
-			error(unexpectedSymbol, QString::number(pos)
-					, "\"", QString(stream.at(pos).toLatin1()));
+			error(unexpectedSymbol, QString::number(pos), "\"", QString(stream.at(pos).toLatin1()));
 			return;
 		}
 
@@ -242,8 +238,7 @@ void RuleParser::parsePropertyChange(QString const &stream, int &pos,
 
 	if ((stream.indexOf("=", pos) > pos && stream.indexOf("=", pos) < stream.indexOf(";", pos))
 		|| (stream.indexOf("<", pos) > pos && stream.indexOf("<", pos) < stream.indexOf(";", pos))
-		|| (stream.indexOf(">", pos) > pos && stream.indexOf(">", pos) < stream.indexOf(";", pos)))
-	{
+		|| (stream.indexOf(">", pos) > pos && stream.indexOf(">", pos) < stream.indexOf(";", pos))) {
 		bool result = parseConditionHelper(stream, pos);
 		if (hasErrors()) {
 			return;
@@ -282,7 +277,6 @@ void RuleParser::parsePropertyChange(QString const &stream, int &pos,
 
 		setProperty(id, prop, result->toStringList().join(','));
 	}
-
 }
 
 bool RuleParser::checkForLogicalConst(QString const &stream, int &pos)
@@ -297,9 +291,7 @@ void RuleParser::parseRuleCommand(QString const &stream, int &pos, QHash<Id, Id>
 		return;
 	}
 
-	if (stream.indexOf(".", pos) > 0 &&
-			stream.indexOf(".", pos) < stream.indexOf("=", pos))
-	{
+	if (stream.indexOf(".", pos) > 0 && stream.indexOf(".", pos) < stream.indexOf("=", pos)) {
 		parsePropertyChange(stream, pos, mMatch);
 	} else {
 		parseCommand(stream, pos);
@@ -413,19 +405,14 @@ void RuleParser::parseVarPart(QString const &stream, int &pos)
 	if (stream.mid(pos, 4).compare("var ") == 0) {
 		pos += 4;
 		skip(stream, pos);
-		if (!isEndOfStream(stream, pos) &&
-				stream.mid(pos, 4).compare("int ") != 0 &&
-				stream.mid(pos, 7).compare("double ") != 0)
-		{
-			error(unexpectedSymbol, QString::number(pos + 1),
-					tr("int\' or \'double"), stream.at(pos));
+		if (!isEndOfStream(stream, pos) && stream.mid(pos, 4).compare("int ") != 0
+			&& stream.mid(pos, 7).compare("double ") != 0) {
+			error(unexpectedSymbol, QString::number(pos + 1), tr("int\' or \'double"), stream.at(pos));
 			return;
 		}
 
-		while (pos < stream.length() &&
-				(stream.mid(pos, 4).compare("int ") == 0 ||
-				stream.mid(pos, 7).compare("double ") == 0) )
-		{
+		while (pos < stream.length()
+			&& (stream.mid(pos, 4).compare("int ") == 0 || stream.mid(pos, 7).compare("double ") == 0)) {
 			Number::Type curType;
 			if (stream.mid(pos, 4).compare("int ") == 0) {
 				curType = Number::intType;
@@ -447,42 +434,37 @@ void RuleParser::parseVarPart(QString const &stream, int &pos)
 					return;
 				}
 				switch (stream.at(pos).toLatin1()) {
-				case '=':
-					{
-						pos++;
-						skip(stream, pos);
-						Number *temp = parseExpression(stream, pos);
-						temp->setType(curType);
-						mVariables[variable] = temp;
-						break;
+				case '=': {
+					pos++;
+					skip(stream, pos);
+					Number *temp = parseExpression(stream, pos);
+					temp->setType(curType);
+					mVariables[variable] = temp;
+					break;
+				}
+				case ',': {
+					pos++;
+					mVariables[variable] = new Number();
+					skip(stream, pos);
+					if (pos == stream.length()) {
+						error(unexpectedEndOfStream, QString::number(pos + 1));
+						return;
 					}
-				case ',':
-					{
-						pos++;
-						mVariables[variable] = new Number();
-						skip(stream, pos);
-						if (pos == stream.length()) {
-							error(unexpectedEndOfStream, QString::number(pos + 1));
-							return;
-						}
-						if (stream.at(pos).toLatin1() == ';') {
-							error(unexpectedSymbol, QString::number(pos + 1),
-									tr("\'letter"),
-									QString(stream.at(pos).toLatin1())
-							);
-							return;
-						}
-						break;
+					if (stream.at(pos).toLatin1() == ';') {
+						error(unexpectedSymbol, QString::number(pos + 1), tr("\'letter"),
+							QString(stream.at(pos).toLatin1()));
+						return;
 					}
-				default:
-					{
-						if (!checkForColon(stream, pos)) {
-							return;
-						}
+					break;
+				}
+				default: {
+					if (!checkForColon(stream, pos)) {
+						return;
+					}
 
-						mVariables[variable] = new Number();
-						break;
-					}
+					mVariables[variable] = new Number();
+					break;
+				}
 				}
 				skip(stream, pos);
 			}

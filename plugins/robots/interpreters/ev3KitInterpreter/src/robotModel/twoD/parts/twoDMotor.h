@@ -27,9 +27,8 @@ class TwoDMotor : public robotModel::parts::Ev3Motor
 {
 	Q_OBJECT
 public:
-	TwoDMotor(kitBase::robotModel::DeviceInfo const &info
-			, kitBase::robotModel::PortInfo const &port
-			, twoDModel::engine::TwoDModelEngineInterface &engine);
+	TwoDMotor(kitBase::robotModel::DeviceInfo const &info, kitBase::robotModel::PortInfo const &port,
+		twoDModel::engine::TwoDModelEngineInterface &engine);
 
 	void on(int speed) override;
 	void stop() override;

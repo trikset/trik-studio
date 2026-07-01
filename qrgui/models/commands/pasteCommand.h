@@ -31,10 +31,8 @@ public:
 	/// @param isGraphicalCopy If true only graphical part will be pasted, logical part will not be created.
 	/// @param mousePosition Mouse cursor position in scene coordinates in moment of paste action triggering.
 	/// @param rootGraphicalId Graphical id of root element of the scene elements were pasted into.
-	PasteCommand(const models::Models &models
-			, bool isGraphicalCopy
-			, QPointF mousePosition
-			, const Id &rootGraphicalId);
+	PasteCommand(const models::Models &models, bool isGraphicalCopy, QPointF mousePosition,
+		const Id &rootGraphicalId);
 
 	/// Returns true if clipboard did not contain any information about nodes or edges.
 	bool isEmpty() const;
@@ -42,8 +40,8 @@ public:
 private:
 	void pullDataFromClipboard(QList<NodeInfo> &nodesData, QList<EdgeInfo> &edgesData) const;
 
-	QHash<Id, Id> prepareNodes(models::GraphicalModelAssistApi &graphicalApi
-			, QList<NodeInfo> &nodesData, QPointF offset);
+	QHash<Id, Id> prepareNodes(models::GraphicalModelAssistApi &graphicalApi, QList<NodeInfo> &nodesData,
+		QPointF offset);
 	QPointF newPos(const NodeInfo &nodeData, const QHash<Id, Id> &copiedIds, QPointF offset) const;
 	QPointF newGraphicalPos(const NodeInfo &nodeData, const QHash<Id, Id> &copiedIds, QPointF offset) const;
 	qReal::Id newGraphicalParent(const ElementInfo &data, const QHash<Id, Id> &copiedIds) const;

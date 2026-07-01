@@ -98,8 +98,8 @@ qreal PointsQueueProcessor::pointToAbsoluteValue(const qreal yValue) const
 	return pointToAbsoluteValue(yValue, mMinCurrent, mMaxCurrent, mGraphHeight);
 }
 
-qreal PointsQueueProcessor::pointToAbsoluteValue(const qreal yValue, const qreal minValue
-		, const qreal maxValue, const qreal graphHeight) const
+qreal PointsQueueProcessor::pointToAbsoluteValue(const qreal yValue, const qreal minValue, const qreal maxValue,
+	const qreal graphHeight) const
 {
 	return (((maxValue - minValue) * (-yValue - 10)) / graphHeight) + minValue;
 }

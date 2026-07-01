@@ -66,29 +66,19 @@
 
 using namespace ev3::rbf::lua;
 
-const QMap<Ev3RbfType, QString> registerNames = {  // clazy:exclude=non-pod-global-static
-	{ Ev3RbfType::data8, "_bool_temp_result_" }
-	, { Ev3RbfType::data16, "_small_int_temp_result_" }
-	, { Ev3RbfType::data32, "_int_temp_result_" }
-	, { Ev3RbfType::dataF, "_float_temp_result_" }
-	, { Ev3RbfType::dataS, "_string_temp_result_" }
-	, { Ev3RbfType::array8, "_array8_temp_result_" }
-	, { Ev3RbfType::array16, "_array16_temp_result_" }
-	, { Ev3RbfType::array32, "_array32_temp_result_" }
-	, { Ev3RbfType::arrayF, "_arrayF_temp_result_" }
-};
+const QMap<Ev3RbfType, QString> registerNames = { // clazy:exclude=non-pod-global-static
+	{Ev3RbfType::data8, "_bool_temp_result_"}, {Ev3RbfType::data16, "_small_int_temp_result_"},
+	{Ev3RbfType::data32, "_int_temp_result_"}, {Ev3RbfType::dataF, "_float_temp_result_"},
+	{Ev3RbfType::dataS, "_string_temp_result_"}, {Ev3RbfType::array8, "_array8_temp_result_"},
+	{Ev3RbfType::array16, "_array16_temp_result_"}, {Ev3RbfType::array32, "_array32_temp_result_"},
+	{Ev3RbfType::arrayF, "_arrayF_temp_result_"}};
 
-const QMap<Ev3RbfType, QString> typeNames = {  // clazy:exclude=non-pod-global-static
-	{ Ev3RbfType::data8, "8" }
-	, { Ev3RbfType::data16, "16" }
-	, { Ev3RbfType::data32, "32" }
-	, { Ev3RbfType::dataF, "F" }
-	, { Ev3RbfType::dataS, "S" }
-};
+const QMap<Ev3RbfType, QString> typeNames = { // clazy:exclude=non-pod-global-static
+	{Ev3RbfType::data8, "8"}, {Ev3RbfType::data16, "16"}, {Ev3RbfType::data32, "32"}, {Ev3RbfType::dataF, "F"},
+	{Ev3RbfType::dataS, "S"}};
 
-Ev3LuaPrinter::Ev3LuaPrinter(const QStringList &pathsToTemplates
-		, const qrtext::LanguageToolboxInterface &textLanguage
-		, generatorBase::parts::Variables &variables)
+Ev3LuaPrinter::Ev3LuaPrinter(const QStringList &pathsToTemplates, const qrtext::LanguageToolboxInterface &textLanguage,
+	generatorBase::parts::Variables &variables)
 	: generatorBase::TemplateParametrizedEntity(addSuffix(pathsToTemplates))
 	, mTextLanguage(textLanguage)
 	, mVariables(variables)
@@ -165,10 +155,8 @@ Ev3RbfType Ev3LuaPrinter::typeOf(const QSharedPointer<qrtext::lua::ast::Node> &n
 
 bool Ev3LuaPrinter::isArray(Ev3RbfType type) const
 {
-	return type == Ev3RbfType::array8
-			|| type == Ev3RbfType::array16
-			|| type == Ev3RbfType::array32
-			|| type == Ev3RbfType::arrayF;
+	return type == Ev3RbfType::array8 || type == Ev3RbfType::array16 || type == Ev3RbfType::array32
+	       || type == Ev3RbfType::arrayF;
 }
 
 Ev3RbfType Ev3LuaPrinter::elementType(Ev3RbfType arrayType) const
@@ -207,8 +195,8 @@ QString Ev3LuaPrinter::newRegister(Ev3RbfType type)
 	}
 
 	const QString declarationTemplate = (type == Ev3RbfType::dataS)
-			? "DATA%1 %2 255"
-			: (isArray(type) ? QString("HANDLE %2").arg(result): "DATA%1 %2");
+	                                            ? "DATA%1 %2 255"
+	                                            : (isArray(type) ? QString("HANDLE %2").arg(result) : "DATA%1 %2");
 	mVariables.appendManualDeclaration(declarationTemplate.arg(typeNames[type], result));
 	return result;
 }
@@ -220,8 +208,8 @@ QString Ev3LuaPrinter::print(const QSharedPointer<qrtext::lua::ast::Node> &node,
 	return printWithoutPop(node) ? popResult(node) : QString();
 }
 
-QString Ev3LuaPrinter::castTo(const QSharedPointer<qrtext::core::types::TypeExpression> &type
-		, const QSharedPointer<qrtext::lua::ast::Node> &node, const qReal::Id &id)
+QString Ev3LuaPrinter::castTo(const QSharedPointer<qrtext::core::types::TypeExpression> &type,
+	const QSharedPointer<qrtext::lua::ast::Node> &node, const qReal::Id &id)
 {
 	mId = id;
 	mAdditionalCode.clear();
@@ -255,16 +243,17 @@ QString Ev3LuaPrinter::arraysEvaluation()
 {
 	QStringList code;
 	const QString tableConstuctorTemplate = readTemplate("tableConstructor.t");
-	QMap<QString, QSharedPointer<qrtext::core::types::TypeExpression> > variables
-			= mTextLanguage.variableTypes();
+	QMap<QString, QSharedPointer<qrtext::core::types::TypeExpression>> variables = mTextLanguage.variableTypes();
 	for (auto it = variables.cbegin(); it != variables.cend(); it++) {
 		const auto &arrayVariable = it.key();
 		if (variables[arrayVariable].data()->is<qrtext::lua::types::Table>()
-				&& !mTextLanguage.specialIdentifiers().contains(arrayVariable)) {
-			Ev3RbfType ev3Type = toEv3Type(
-					dynamic_cast<qrtext::lua::types::Table *>(variables[arrayVariable].data())->elementType());
+			&& !mTextLanguage.specialIdentifiers().contains(arrayVariable)) {
+			Ev3RbfType ev3Type =
+				toEv3Type(dynamic_cast<qrtext::lua::types::Table *>(variables[arrayVariable].data())
+						->elementType());
 			QString constuctorTemplate = tableConstuctorTemplate;
-			code << constuctorTemplate.replace("@@TYPE@@", typeNames[ev3Type]).replace("@@RESULT@@", arrayVariable);
+			code << constuctorTemplate.replace("@@TYPE@@", typeNames[ev3Type])
+					.replace("@@RESULT@@", arrayVariable);
 		}
 	}
 
@@ -272,8 +261,7 @@ QString Ev3LuaPrinter::arraysEvaluation()
 		const auto &arrayType = it.key();
 		for (int i = 1; i <= mArrayDeclarationCount[arrayType]; ++i) {
 			QString constuctorTemplate = tableConstuctorTemplate;
-			code << constuctorTemplate
-					.replace("@@TYPE@@", typeNames[elementType(arrayType)])
+			code << constuctorTemplate.replace("@@TYPE@@", typeNames[elementType(arrayType)])
 					.replace("@@RESULT@@", registerNames[arrayType] + QString::number(i));
 		}
 	}
@@ -281,8 +269,8 @@ QString Ev3LuaPrinter::arraysEvaluation()
 	return code.join("\n");
 }
 
-void Ev3LuaPrinter::pushResult(const QSharedPointer<qrtext::lua::ast::Node> &node
-		, const QString &generatedCode, const QString &additionalCode)
+void Ev3LuaPrinter::pushResult(const QSharedPointer<qrtext::lua::ast::Node> &node, const QString &generatedCode,
+	const QString &additionalCode)
 {
 	mGeneratedCode[node.data()] = generatedCode;
 	pushChildrensAdditionalCode(node);
@@ -321,8 +309,8 @@ bool Ev3LuaPrinter::printWithoutPop(const QSharedPointer<qrtext::lua::ast::Node>
 
 	node->acceptRecursively(*this, node, qrtext::wrap(nullptr));
 	if (mGeneratedCode.count() != 1 || mGeneratedCode.firstKey() != node.data()) {
-		QLOG_WARN() << "Lua printer got into the inconsistent state during printing."
-				<< mGeneratedCode.count() << "pieces of code:";
+		QLOG_WARN() << "Lua printer got into the inconsistent state during printing." << mGeneratedCode.count()
+			    << "pieces of code:";
 		for (auto it = mGeneratedCode.cbegin(); it != mGeneratedCode.cbegin(); it++) {
 			QLOG_INFO() << it.value();
 		}
@@ -334,10 +322,9 @@ bool Ev3LuaPrinter::printWithoutPop(const QSharedPointer<qrtext::lua::ast::Node>
 	return true;
 }
 
-void Ev3LuaPrinter::processTemplate(const QSharedPointer<qrtext::lua::ast::Node> &node
-		, const QString &templateFileName
-		, QMap<QString, QSharedPointer<qrtext::lua::ast::Node>> const &bindings
-		, const QMap<QString, QString> &staticBindings)
+void Ev3LuaPrinter::processTemplate(const QSharedPointer<qrtext::lua::ast::Node> &node, const QString &templateFileName,
+	QMap<QString, QSharedPointer<qrtext::lua::ast::Node>> const &bindings,
+	const QMap<QString, QString> &staticBindings)
 {
 	QString computation = readTemplate(templateFileName);
 	const bool typedComputation = computation.contains("@@RESULT@@");
@@ -360,171 +347,172 @@ void Ev3LuaPrinter::processTemplate(const QSharedPointer<qrtext::lua::ast::Node>
 	pushResult(node, result, computation);
 }
 
-void Ev3LuaPrinter::processUnary(const QSharedPointer<qrtext::core::ast::UnaryOperator> &node
-		, const QString &templateFileName)
+void Ev3LuaPrinter::processUnary(const QSharedPointer<qrtext::core::ast::UnaryOperator> &node,
+	const QString &templateFileName)
 {
 	const Ev3RbfType type = typeOf(node);
 	QString templateCode = readTemplate(templateFileName);
 	const bool hasAdditionalCode = templateCode.contains("@@RESULT@@");
 	const QString result = hasAdditionalCode ? newRegister(type) : QString();
-	const QString code = templateCode
-			.replace("@@TYPE@@", typeNames[type])
-			.replace("@@OPERAND@@", popResult(node->operand()))
-			.replace("@@RESULT@@", result);
+	const QString code = templateCode.replace("@@TYPE@@", typeNames[type])
+	                             .replace("@@OPERAND@@", popResult(node->operand()))
+	                             .replace("@@RESULT@@", result);
 	pushResult(node, hasAdditionalCode ? result : code, hasAdditionalCode ? code : QString());
 }
 
-void Ev3LuaPrinter::processBinary(const QSharedPointer<qrtext::core::ast::BinaryOperator> &node
-		, Ev3RbfType operandsType, Ev3RbfType resultType, const QString &templateFileName)
+void Ev3LuaPrinter::processBinary(const QSharedPointer<qrtext::core::ast::BinaryOperator> &node,
+	Ev3RbfType operandsType, Ev3RbfType resultType, const QString &templateFileName)
 {
 	const QString result = newRegister(resultType);
-	pushResult(node, result, readTemplate(templateFileName)
+	pushResult(node, result,
+		readTemplate(templateFileName)
 			.replace("@@TYPE@@", typeNames[operandsType])
 			.replace("@@RESULT@@", result)
 			.replace("@@LEFT@@", castTo(operandsType, node->leftOperand()))
 			.replace("@@RIGHT@@", castTo(operandsType, node->rightOperand())));
 }
 
-void Ev3LuaPrinter::processBinary(const QSharedPointer<qrtext::core::ast::BinaryOperator> &node
-		, Ev3RbfType resultType, const QString &templateFileName)
+void Ev3LuaPrinter::processBinary(const QSharedPointer<qrtext::core::ast::BinaryOperator> &node, Ev3RbfType resultType,
+	const QString &templateFileName)
 {
 	const Ev3RbfType operandsType = moreCommon(typeOf(node->leftOperand()), typeOf(node->rightOperand()));
 	processBinary(node, operandsType, resultType, templateFileName);
 }
 
-void Ev3LuaPrinter::processBinary(const QSharedPointer<qrtext::core::ast::BinaryOperator> &node
-		, const QString &templateFileName)
+void Ev3LuaPrinter::processBinary(const QSharedPointer<qrtext::core::ast::BinaryOperator> &node,
+	const QString &templateFileName)
 {
 	const Ev3RbfType type = moreCommon(typeOf(node->leftOperand()), typeOf(node->rightOperand()));
 	processBinary(node, type, type, templateFileName);
 }
 
-void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::Number> &node
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::Number> &node,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	pushResult(node, node->stringRepresentation(), QString());
 }
 
-void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::UnaryMinus> &node
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::UnaryMinus> &node,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	processUnary(node, "unaryMinus.t");
 }
 
-void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::Not> &node
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::Not> &node,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	processUnary(node, "not.t");
 }
 
-void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::BitwiseNegation> &node
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::BitwiseNegation> &node,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	processUnary(node, "bitwiseNegation.t");
 }
 
-void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::Length> &node
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::Length> &node,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	processUnary(node, "length.t");
 }
 
-void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::LogicalAnd> &node
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::LogicalAnd> &node,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	processBinary(node, Ev3RbfType::data8, Ev3RbfType::data8, "logicalAnd.t");
 }
 
-void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::LogicalOr> &node
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::LogicalOr> &node,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	processBinary(node, Ev3RbfType::data8, Ev3RbfType::data8, "logicalOr.t");
 }
 
-void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::Addition> &node
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::Addition> &node,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	processBinary(node, "addition.t");
 }
 
-void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::Subtraction> &node
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::Subtraction> &node,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	processBinary(node, "subtraction.t");
 }
 
-void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::Multiplication> &node
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::Multiplication> &node,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	processBinary(node, "multiplication.t");
 }
 
-void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::Division> &node
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::Division> &node,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	processBinary(node, Ev3RbfType::dataF, Ev3RbfType::dataF, "division.t");
 }
 
-void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::IntegerDivision> &node
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::IntegerDivision> &node,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	processBinary(node, Ev3RbfType::data32, Ev3RbfType::data32, "integerDivision.t");
 }
 
-void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::Modulo> &node
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::Modulo> &node,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	processBinary(node, Ev3RbfType::data32, Ev3RbfType::data32, "modulo.t");
 }
 
-void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::Exponentiation> &node
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::Exponentiation> &node,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	processBinary(node, Ev3RbfType::dataF, Ev3RbfType::dataF, "exponentiation.t");
 }
 
-void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::BitwiseAnd> &node
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::BitwiseAnd> &node,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	processBinary(node, Ev3RbfType::data32, Ev3RbfType::data32, "bitwiseAnd.t");
 }
 
-void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::BitwiseOr> &node
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::BitwiseOr> &node,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	processBinary(node, Ev3RbfType::data32, Ev3RbfType::data32, "bitwiseOr.t");
 }
 
-void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::BitwiseXor> &node
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::BitwiseXor> &node,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	processBinary(node, Ev3RbfType::data32, Ev3RbfType::data32, "bitwiseXor.t");
 }
 
-void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::BitwiseLeftShift> &node
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::BitwiseLeftShift> &node,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	processBinary(node, Ev3RbfType::data32, Ev3RbfType::data32, "bitwiseLeftShift.t");
 }
 
-void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::BitwiseRightShift> &node
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::BitwiseRightShift> &node,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	processBinary(node, Ev3RbfType::data32, Ev3RbfType::data32, "bitwiseRightShift.t");
 }
 
-void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::Concatenation> &node
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::Concatenation> &node,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	const QString result = newRegister(node);
-	pushResult(node, result, readTemplate("concatenation.t")
+	pushResult(node, result,
+		readTemplate("concatenation.t")
 			.replace("@@RESULT@@", result)
 			.replace("@@LEFT@@", toString(node->leftOperand()))
 			.replace("@@RIGHT@@", toString(node->rightOperand())));
 }
 
-void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::Equality> &node
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::Equality> &node,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	const Ev3RbfType operandsType = moreCommon(typeOf(node->leftOperand()), typeOf(node->rightOperand()));
 	if (operandsType == Ev3RbfType::dataS) {
@@ -534,20 +522,20 @@ void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::Equality> &node
 	}
 }
 
-void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::LessThan> &node
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::LessThan> &node,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	processBinary(node, Ev3RbfType::data8, "lessThan.t");
 }
 
-void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::LessOrEqual> &node
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::LessOrEqual> &node,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	processBinary(node, Ev3RbfType::data8, "lessOrEqual.t");
 }
 
-void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::Inequality> &node
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::Inequality> &node,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	const Ev3RbfType operandsType = moreCommon(typeOf(node->leftOperand()), typeOf(node->rightOperand()));
 	if (operandsType == Ev3RbfType::dataS) {
@@ -557,32 +545,32 @@ void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::Inequality> &no
 	}
 }
 
-void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::GreaterThan> &node
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::GreaterThan> &node,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	processBinary(node, Ev3RbfType::data8, "greaterThan.t");
 }
 
-void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::GreaterOrEqual> &node
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::GreaterOrEqual> &node,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	processBinary(node, Ev3RbfType::data8, "greaterOrEqual.t");
 }
 
-void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::IntegerNumber> &node
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::IntegerNumber> &node,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	pushResult(node, node->stringRepresentation(), QString());
 }
 
-void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::FloatNumber> &node
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::FloatNumber> &node,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	pushResult(node, node->stringRepresentation() + "F", QString());
 }
 
-void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::FieldInitialization> &node
-		, const QSharedPointer<qrtext::core::ast::Node> &parent)
+void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::FieldInitialization> &node,
+	const QSharedPointer<qrtext::core::ast::Node> &parent)
 {
 	QString value;
 	const auto &tableType = mTextLanguage.type(parent);
@@ -595,15 +583,17 @@ void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::FieldInitializa
 		value = popResult(node->value());
 	}
 
-	const QString initializer = readTemplate("writeIndexer.t")
-			.replace("@@INDEX@@", node->key() ? popResult(node->key()) : QString::number(++mTableInitializersCount))
+	const QString initializer =
+		readTemplate("writeIndexer.t")
+			.replace("@@INDEX@@",
+				node->key() ? popResult(node->key()) : QString::number(++mTableInitializersCount))
 			.replace("@@VALUE@@", value)
 			.replace("@@EV3_TYPE@@", indexerType);
 	pushResult(node, initializer, QString());
 }
 
-void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::TableConstructor> &node
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::TableConstructor> &node,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	mTableInitializersCount = -1;
 	QStringList initializers = popResults(qrtext::as<qrtext::lua::ast::Node>(node->initializers()));
@@ -617,32 +607,32 @@ void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::TableConstructo
 	pushResult(node, result, initializers.join("\n"));
 }
 
-void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::String> &node
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::String> &node,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	pushResult(node, readTemplate("string.t").replace("@@VALUE@@", node->string()), QString());
 }
 
-void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::True> &node
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::True> &node,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	pushResult(node, readTemplate("true.t"), QString());
 }
 
-void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::False> &node
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::False> &node,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	pushResult(node, readTemplate("false.t"), QString());
 }
 
-void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::Nil> &node
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::Nil> &node,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	pushResult(node, readTemplate("nil.t"), QString());
 }
 
-void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::Identifier> &node
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::Identifier> &node,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	QString additionalCode;
 	QString result = mReservedVariablesConverter->convert(node->name());
@@ -655,8 +645,8 @@ void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::Identifier> &no
 	pushResult(node, result, additionalCode);
 }
 
-void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::FunctionCall> &node
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::FunctionCall> &node,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	const QString expression = popResult(node->function());
 
@@ -689,7 +679,8 @@ void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::FunctionCall> &
 				for (auto &&argument : arguments) {
 					const auto &oldValue = argument;
 					const auto &argChanged = newRegister(Ev3RbfType::dataF);
-					additionalResults << QString("MULF(%1, %2, %3)").arg(oldValue, "57.29577951308232F", argChanged);
+					additionalResults << QString("MULF(%1, %2, %3)")
+								     .arg(oldValue, "57.29577951308232F", argChanged);
 					argument = argChanged;
 				}
 			}
@@ -702,7 +693,8 @@ void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::FunctionCall> &
 	QString result = shouldCastToIntAfter ? newRegister(Ev3RbfType::data32) : functionResult;
 
 	if (reservedFunctionCall.isEmpty()) {
-		pushResult(node, result, readTemplate("functionCall.t")
+		pushResult(node, result,
+			readTemplate("functionCall.t")
 				.replace("@@FUNCTION@@", expression)
 				.replace("@@ARGUMENTS@@", arguments.join(readTemplate("argumentsSeparator.t")))
 				.replace("@@RESULT@@", functionResult));
@@ -715,20 +707,22 @@ void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::FunctionCall> &
 	}
 }
 
-void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::MethodCall> &node
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::MethodCall> &node,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	const QString object = popResult(node->object());
 	const QString method = popResult(node->methodName());
 	const QStringList arguments = popResults(qrtext::as<qrtext::lua::ast::Node>(node->arguments()));
-	pushResult(node, readTemplate("methodCall.t")
+	pushResult(node,
+		readTemplate("methodCall.t")
 			.replace("@@OBJECT@@", object)
 			.replace("@@METHOD@@", method)
-			.replace("@@ARGUMENTS@@", arguments.join(readTemplate("argumentsSeparator.t"))), QString());
+			.replace("@@ARGUMENTS@@", arguments.join(readTemplate("argumentsSeparator.t"))),
+		QString());
 }
 
-void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::Assignment> &node
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::Assignment> &node,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	if (dynamic_cast<qrtext::lua::ast::IndexingExpression *>(node->variable().data())) {
 		// We are dealing with write-indexer here. Template for result is already ready,
@@ -753,22 +747,20 @@ void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::Assignment> &no
 	const Ev3RbfType type = typeOf(node->variable());
 	const bool isString = type == Ev3RbfType::dataS;
 	const bool isArray = this->isArray(type);
-	processTemplate(node, isString ? "assignmentStrings.t" : (isArray ? "assignmentArrays.t" : "assignment.t")
-			, { {"@@VARIABLE@@", node->variable()}, {"@@VALUE@@", node->value()} }
-			, { {"@@TYPE1@@", typeNames[typeOf(node->variable())]}
-			,   {"@@TYPE2@@", typeNames[typeOf(node->value())]} }
-	);
+	processTemplate(node, isString ? "assignmentStrings.t" : (isArray ? "assignmentArrays.t" : "assignment.t"),
+		{{"@@VARIABLE@@", node->variable()}, {"@@VALUE@@", node->value()}},
+		{{"@@TYPE1@@", typeNames[typeOf(node->variable())]}, {"@@TYPE2@@", typeNames[typeOf(node->value())]}});
 }
 
-void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::Block> &node
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::Block> &node,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	const QStringList expressions = popResults(node->children());
 	pushResult(node, expressions.join(readTemplate("statementsSeparator.t")), QString());
 }
 
-void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::IndexingExpression> &node
-		, const QSharedPointer<qrtext::core::ast::Node> &parent)
+void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::IndexingExpression> &node,
+	const QSharedPointer<qrtext::core::ast::Node> &parent)
 {
 	bool isWriteIndexer = false;
 	auto assignment = dynamic_cast<qrtext::lua::ast::Assignment *>(parent.data());
@@ -777,7 +769,7 @@ void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::IndexingExpress
 	}
 
 	const QString indexerTemplate = isWriteIndexer ? "writeIndexer.t" : "readIndexer.t";
-	processTemplate(node, indexerTemplate, { {"@@TABLE@@", node->table()}, {"@@INDEX@@", node->indexer()} });
+	processTemplate(node, indexerTemplate, {{"@@TABLE@@", node->table()}, {"@@INDEX@@", node->indexer()}});
 }
 
 QString Ev3LuaPrinter::toString(const QSharedPointer<qrtext::lua::ast::Node> &node)
@@ -831,8 +823,8 @@ QString Ev3LuaPrinter::castTo(Ev3RbfType targetType, const QSharedPointer<qrtext
 
 	auto result = newRegister(targetType);
 	pushChildrensAdditionalCode(node);
-	mAdditionalCode[node.data()] << QString("MOVE%1_%2(%3, %4)")
-			.arg(typeNames[actualType], typeNames[targetType], value, result);
+	mAdditionalCode[node.data()]
+		<< QString("MOVE%1_%2(%3, %4)").arg(typeNames[actualType], typeNames[targetType], value, result);
 	return result;
 }
 

@@ -26,8 +26,7 @@ class TrikSpeaker : public kitBase::robotModel::robotParts::Speaker
 	Q_OBJECT
 
 public:
-	TrikSpeaker(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port);
+	TrikSpeaker(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port);
 
 	virtual void play(const QString &filePath) = 0;
 

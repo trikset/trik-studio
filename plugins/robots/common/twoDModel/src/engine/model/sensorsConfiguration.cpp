@@ -26,9 +26,9 @@ using namespace twoDModel::model;
 using namespace kitBase::robotModel;
 
 SensorsConfiguration::SensorsConfiguration(twoDModel::model::MetricCoordinateSystem *metricSystem,
-			QSharedPointer<twoDModel::model::AliasConfiguration> aliasConfiguration,
-			// NOLINTNEXTLINE(modernize-pass-by-value)
-			const QString &robotModelName, QSizeF robotSize, QObject *parent)
+	QSharedPointer<twoDModel::model::AliasConfiguration> aliasConfiguration,
+	// NOLINTNEXTLINE(modernize-pass-by-value)
+	const QString &robotModelName, QSizeF robotSize, QObject *parent)
 	: QObject(parent)
 	, mAliasConfiguration(std::move(aliasConfiguration))
 	, mRobotSize(robotSize)
@@ -37,12 +37,13 @@ SensorsConfiguration::SensorsConfiguration(twoDModel::model::MetricCoordinateSys
 {
 }
 
-void SensorsConfiguration::clear() {
+void SensorsConfiguration::clear()
+{
 	clearConfiguration(Reason::loading);
 }
 
-void SensorsConfiguration::onDeviceConfigurationChanged(const QString &robotId
-		, const PortInfo &port, const DeviceInfo &device, Reason reason)
+void SensorsConfiguration::onDeviceConfigurationChanged(const QString &robotId, const PortInfo &port,
+	const DeviceInfo &device, Reason reason)
 {
 	if (robotId != mRobotId) {
 		// Ignoring external events
@@ -68,9 +69,9 @@ void SensorsConfiguration::onDeviceConfigurationChanged(const QString &robotId
 QPointF SensorsConfiguration::defaultPosition(const DeviceInfo &device) const
 {
 	/// @todo: Move it somewhere?
-	return  !device.simulated() || device.isA<kitBase::robotModel::robotParts::LidarSensor>()
-			? QPointF(mRobotSize.width() / 2, mRobotSize.height() / 2)
-			: QPointF(mRobotSize.width() * 3 / 2, mRobotSize.height() / 2);
+	return !device.simulated() || device.isA<kitBase::robotModel::robotParts::LidarSensor>()
+	               ? QPointF(mRobotSize.width() / 2, mRobotSize.height() / 2)
+	               : QPointF(mRobotSize.width() * 3 / 2, mRobotSize.height() / 2);
 }
 
 QPointF SensorsConfiguration::position(const PortInfo &port) const
@@ -124,10 +125,9 @@ void SensorsConfiguration::serialize(QDomElement &robot) const
 		sensorElem.setAttribute("type", device.toString());
 
 		if (mMetricSystem) {
-			sensorElem.setAttribute("position"
-		                , QString::number(
-					mMetricSystem->toUnit(sensor.position.x()))
-					+ ":" + QString::number(mMetricSystem->toUnit(sensor.position.y())));
+			sensorElem.setAttribute("position",
+				QString::number(mMetricSystem->toUnit(sensor.position.x())) + ":"
+					+ QString::number(mMetricSystem->toUnit(sensor.position.y())));
 		}
 		sensorElem.setAttribute("direction", QString::number(sensor.direction));
 	}
@@ -154,7 +154,7 @@ void SensorsConfiguration::deserialize(const QDomElement &element)
 		const QStringList splittedStr = positionStr.split(":");
 		const auto x = static_cast<qreal>(splittedStr[0].toDouble());
 		const auto y = static_cast<qreal>(splittedStr[1].toDouble());
-		auto position = QPointF{x, y};
+		auto position = QPointF {x, y};
 		if (mMetricSystem) {
 			position = mMetricSystem->toPx({x, y});
 		}

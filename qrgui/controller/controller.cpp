@@ -33,7 +33,7 @@ Controller::~Controller()
 	disconnect(this, SLOT(resetModifiedState()));
 	disconnect(this, SLOT(resetCanRedoState()));
 	disconnect(this, SLOT(resetCanUndoState()));
-	for (UndoStack * const stack : mModuleStacks) {
+	for (UndoStack *const stack : mModuleStacks) {
 		if (stack) {
 			// 'delete stack;' causes segfaults when app is beeing closed:
 			// for some reason slots are still connected
@@ -121,15 +121,15 @@ void Controller::moduleClosed(const QString &moduleId)
 
 bool Controller::isUnsaved(const QString &moduleId) const
 {
-	return !moduleId.isEmpty() && mModuleStacks.keys().contains(moduleId)
-		&& mModuleStacks[moduleId] && !mModuleStacks[moduleId]->isClean();
+	return !moduleId.isEmpty() && mModuleStacks.keys().contains(moduleId) && mModuleStacks[moduleId]
+	       && !mModuleStacks[moduleId]->isClean();
 }
 
 void Controller::resetModifiedState()
 {
 	bool wasModified = false;
 	QList<UndoStack *> const undoStacks = stacks();
-	for (UndoStack * const stack : undoStacks) {
+	for (UndoStack *const stack : undoStacks) {
 		if (stack && !stack->isClean()) {
 			wasModified = true;
 			break;
@@ -175,7 +175,7 @@ QList<UndoStack *> Controller::stacks() const
 void Controller::projectSaved()
 {
 	mGlobalStack->setClean();
-	for (UndoStack * const stack : mModuleStacks) {
+	for (UndoStack *const stack : mModuleStacks) {
 		stack->setClean();
 	}
 }
@@ -206,10 +206,10 @@ UndoStack *Controller::selectActiveStack(bool forUndo)
 	const int shift = forUndo ? -1 : 0;
 	const int moduleIndex = mActiveStack ? mActiveStack->index() + shift : -1;
 	const int globalIndex = mGlobalStack->index() + shift;
-	const AbstractCommand *moduleCommand = moduleIndex < 0 ? nullptr
-			: dynamic_cast<const AbstractCommand *>(mActiveStack->command(moduleIndex));
-	const AbstractCommand *globalCommand = globalIndex < 0 ? nullptr
-			: dynamic_cast<const AbstractCommand *>(mGlobalStack->command(globalIndex));
+	const AbstractCommand *moduleCommand =
+		moduleIndex < 0 ? nullptr : dynamic_cast<const AbstractCommand *>(mActiveStack->command(moduleIndex));
+	const AbstractCommand *globalCommand =
+		globalIndex < 0 ? nullptr : dynamic_cast<const AbstractCommand *>(mGlobalStack->command(globalIndex));
 	if (!moduleCommand && !globalCommand) {
 		return nullptr;
 	}

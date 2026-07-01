@@ -32,9 +32,9 @@ class EditorGenerator
 public:
 	explicit EditorGenerator(qrRepo::LogicalRepoApi const &api, qReal::ErrorReporterInterface &errorReporter);
 
-	QHash<qReal::Id, QPair<QString, QString> > getMetamodelList();
-	QPair<QString, QString> generateEditor(const qReal::Id &metamodelId, const QString &pathToFile
-			, const QString &pathToQRealSource);
+	QHash<qReal::Id, QPair<QString, QString>> getMetamodelList();
+	QPair<QString, QString> generateEditor(const qReal::Id &metamodelId, const QString &pathToFile,
+		const QString &pathToQRealSource);
 
 private:
 	void serializeObjects(QDomElement &parent, const qReal::Id &idParent);
@@ -54,8 +54,8 @@ private:
 	void setGeneralization(QDomElement &parent, const qReal::Id &id);
 	void setRoles(QDomElement &parent, const qReal::Id &id);
 	void setPossibleEdges(QDomElement &parent, const qReal::Id &id);
-	void setStatusElement(QDomElement &parent, const qReal::Id &id, const QString &tagName
-			, const QString &propertyName);
+	void setStatusElement(QDomElement &parent, const qReal::Id &id, const QString &tagName,
+		const QString &propertyName);
 
 	void setCreateChildrenFromMenu(QDomElement &parent, const qReal::Id &id);
 	void createDiagrams(QDomElement &parent, const qReal::Id &id);
@@ -64,8 +64,8 @@ private:
 	void setExplosion(QDomElement &parent, const qReal::Id &id);
 	void setExplosionProperties(QDomElement &target, const qReal::Id &linkId);
 	void setDividability(QDomElement &parent, const qReal::Id &id);
-	void newSetConnections(QDomElement &parent, const qReal::Id &id
-			, const QString &commonTagName, const QString &internalTagName, const QString &typeName);
+	void newSetConnections(QDomElement &parent, const qReal::Id &id, const QString &commonTagName,
+		const QString &internalTagName, const QString &typeName);
 	void ensureCorrectness(const qReal::Id &id, QDomElement element, const QString &tagName, const QString &value);
 	bool findPort(const QString &name) const;
 	void setBoolValuesForContainer(const QString &propertyName, QDomElement &properties, const qReal::Id &id);

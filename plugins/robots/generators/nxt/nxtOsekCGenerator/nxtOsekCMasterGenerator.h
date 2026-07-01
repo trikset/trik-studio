@@ -23,13 +23,11 @@ class NxtOsekCMasterGenerator : public NxtMasterGeneratorBase
 {
 	Q_OBJECT
 public:
-	NxtOsekCMasterGenerator(const qrRepo::RepoApi &repo
-			, qReal::ErrorReporterInterface &errorReporter
-			, const utils::ParserErrorReporter &parserErrorReporter
-			, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
-			, qrtext::LanguageToolboxInterface &textLanguage
-			, const qReal::Id &diagramId
-			, const QString &generatorName);
+	NxtOsekCMasterGenerator(const qrRepo::RepoApi &repo, qReal::ErrorReporterInterface &errorReporter,
+		const utils::ParserErrorReporter &parserErrorReporter,
+		const kitBase::robotModel::RobotModelManagerInterface &robotModelManager,
+		qrtext::LanguageToolboxInterface &textLanguage, const qReal::Id &diagramId,
+		const QString &generatorName);
 
 	void generateOilAndMakeFiles();
 

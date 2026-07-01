@@ -46,7 +46,7 @@ public:
 
 	/// The root of all evil. Method that gets information about label contents and configuration from repository.
 	/// @param text Contains current value of the property and its configuration.
-	virtual void setTextFromRepo(const QString& text) = 0;
+	virtual void setTextFromRepo(const QString &text) = 0;
 
 	/// Allows to set graphics item flags for current label.
 	virtual void setFlags(QGraphicsItem::GraphicsItemFlags flags) = 0;

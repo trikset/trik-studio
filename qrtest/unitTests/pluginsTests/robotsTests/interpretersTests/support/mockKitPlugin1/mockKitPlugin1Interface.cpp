@@ -31,13 +31,13 @@ QList<kitBase::robotModel::RobotModelInterface *> MockKitPlugin1Interface::robot
 	return QList<kitBase::robotModel::RobotModelInterface *>();
 }
 
-QList<kitBase::AdditionalPreferences *>  MockKitPlugin1Interface::settingsWidgets()
+QList<kitBase::AdditionalPreferences *> MockKitPlugin1Interface::settingsWidgets()
 {
 	return {nullptr};
 }
 
 QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> MockKitPlugin1Interface::blocksFactoryFor(
-		kitBase::robotModel::RobotModelInterface const *model)
+	kitBase::robotModel::RobotModelInterface const *model)
 {
 	Q_UNUSED(model)
 	return nullptr;
@@ -53,8 +53,7 @@ QList<qReal::HotKeyActionInfo> MockKitPlugin1Interface::hotKeyActions()
 	return {};
 }
 
-QIcon MockKitPlugin1Interface::iconForFastSelector(
-		kitBase::robotModel::RobotModelInterface const &robotModel) const
+QIcon MockKitPlugin1Interface::iconForFastSelector(kitBase::robotModel::RobotModelInterface const &robotModel) const
 {
 	Q_UNUSED(robotModel)
 	return QIcon();

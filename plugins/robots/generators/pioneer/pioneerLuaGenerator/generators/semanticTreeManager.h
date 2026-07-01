@@ -43,44 +43,43 @@ public:
 	/// Constructor. Accepts semantic tree which this class shall wrap. It also takes a reference to a error reporter
 	/// where all tree-related errors will be reported and reference to a boolean variable which will be set to true
 	/// in case of errors.
-	explicit SemanticTreeManager(
-			generatorBase::semantics::SemanticTree &semanticTree
-			, qReal::ErrorReporterInterface &errorReporter
-			, bool &errorsOccured);
+	explicit SemanticTreeManager(generatorBase::semantics::SemanticTree &semanticTree,
+		qReal::ErrorReporterInterface &errorReporter, bool &errorsOccured);
 
 	/// Returns true if this node is label, i.e. synthetic node that marks other node in a tree.
-	static bool isGotoNode(const generatorBase::semantics::SemanticNode * const node);
+	static bool isGotoNode(const generatorBase::semantics::SemanticNode *const node);
 
 	/// Returns first non-synthetic right sibling of a given node. Returns nullptr if there is no such sibling.
 	static generatorBase::semantics::SemanticNode *nonSyntheticRightSibling(
-			generatorBase::semantics::SemanticNode * const node);
+		generatorBase::semantics::SemanticNode *const node);
 
 	/// Returns first sibling of a given node. Returns nullptr if there is no such sibling.
 	static generatorBase::semantics::SemanticNode *anyRightSibling(
-			generatorBase::semantics::SemanticNode * const node);
+		generatorBase::semantics::SemanticNode *const node);
 
 	/// Returns parent of a given node.
-	static generatorBase::semantics::NonZoneNode *parent(generatorBase::semantics::SemanticNode * const node);
+	static generatorBase::semantics::NonZoneNode *parent(generatorBase::semantics::SemanticNode *const node);
 
 	/// Returns ancestor of a given node that is on a top level (not inside If branch or some other zone).
-	static generatorBase::semantics::NonZoneNode *topLevelParent(generatorBase::semantics::SemanticNode * const node);
+	static generatorBase::semantics::NonZoneNode *topLevelParent(
+		generatorBase::semantics::SemanticNode *const node);
 
 	/// Adds nextNode as a right sibling of thisNode.
-	static void addAfter(generatorBase::semantics::SemanticNode * const thisNode
-			, generatorBase::semantics::SemanticNode * const nextNode);
+	static void addAfter(generatorBase::semantics::SemanticNode *const thisNode,
+		generatorBase::semantics::SemanticNode *const nextNode);
 
 	/// Returns true if given node is a direct child of a root node.
-	static bool isTopLevelNode(const generatorBase::semantics::NonZoneNode * const node);
+	static bool isTopLevelNode(const generatorBase::semantics::NonZoneNode *const node);
 
 	/// Searches for a first sibling for which given predicate is true.
-	static generatorBase::semantics::SemanticNode *findSibling(generatorBase::semantics::SemanticNode *node
-			, const std::function<bool(generatorBase::semantics::SemanticNode *)> &predicate);
+	static generatorBase::semantics::SemanticNode *findSibling(generatorBase::semantics::SemanticNode *node,
+		const std::function<bool(generatorBase::semantics::SemanticNode *)> &predicate);
 
 	/// Copies right siblings of the @p node until predicate for a sibling becomes true, or until end.
 	/// @returns a list of copied nodes.
-	std::vector<generatorBase::semantics::SemanticNode *>
-	copyRightSiblingsUntil(generatorBase::semantics::SemanticNode *node
-			, const std::function<bool(generatorBase::semantics::SemanticNode *)> &predicate);
+	std::vector<generatorBase::semantics::SemanticNode *> copyRightSiblingsUntil(
+		generatorBase::semantics::SemanticNode *node,
+		const std::function<bool(generatorBase::semantics::SemanticNode *)> &predicate);
 
 	/// Creates a new node for a given Id, registers it as clone if node with such Id is already in semantic tree.
 	generatorBase::semantics::NonZoneNode *produceNode(const qReal::Id &id);
@@ -89,7 +88,7 @@ public:
 	generatorBase::semantics::NonZoneNode *produceLabeledNode(const qReal::Id &block);
 
 	/// Produces a node from given block and adds it to a given zone.
-	void addToZone(generatorBase::semantics::ZoneNode * const zone, const qReal::Id &id);
+	void addToZone(generatorBase::semantics::ZoneNode *const zone, const qReal::Id &id);
 
 	/// Returns a list of nodes in a semantic tree corresponding to a given Id.
 	QList<generatorBase::semantics::NonZoneNode *> nodes(const qReal::Id &id) const;
@@ -108,21 +107,21 @@ private:
 	generatorBase::semantics::NonZoneNode *copy(generatorBase::semantics::NonZoneNode *node);
 
 	/// Returns true if this node is synthetic (has no corresponding block on a diagram).
-	static bool isSynthetic(const generatorBase::semantics::SemanticNode * const node);
+	static bool isSynthetic(const generatorBase::semantics::SemanticNode *const node);
 
 	/// Copies children from zone node @p from to zone node @p to.
-	void copyIfBranch(generatorBase::semantics::ZoneNode * const from, generatorBase::semantics::ZoneNode * const to);
+	void copyIfBranch(generatorBase::semantics::ZoneNode *const from, generatorBase::semantics::ZoneNode *const to);
 
 	/// Registers one node as a clone of the other node.
-	void registerClone(generatorBase::semantics::SemanticNode * const original
-			, generatorBase::semantics::SemanticNode * const clone);
+	void registerClone(generatorBase::semantics::SemanticNode *const original,
+		generatorBase::semantics::SemanticNode *const clone);
 
 	/// Logs an error and flags that there were errors.
 	void reportError(const QString &message);
 
 	/// Reeturns true if a given node is a prototype of given clone info (maybe indirect).
 	bool isParent(generatorBase::semantics::NonZoneNode *node,
-						 pioneer::lua::SemanticTreeManager::CloneInfo cloneInfo) const;
+		pioneer::lua::SemanticTreeManager::CloneInfo cloneInfo) const;
 
 	/// Semantic tree on which we shall work.
 	generatorBase::semantics::SemanticTree &mSemanticTree;

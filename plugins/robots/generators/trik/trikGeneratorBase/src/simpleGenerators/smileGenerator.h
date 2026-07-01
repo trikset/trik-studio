@@ -24,10 +24,8 @@ class SmileGenerator : public generatorBase::simple::BindingGenerator
 {
 	Q_OBJECT
 public:
-	SmileGenerator(const qrRepo::RepoApi &repo
-			, generatorBase::GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent);
+	SmileGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer, const qReal::Id &id,
+		QObject *parent);
 };
 
 }

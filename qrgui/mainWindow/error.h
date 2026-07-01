@@ -25,24 +25,19 @@ namespace gui {
 class Error
 {
 public:
-	enum Severity {
-		information
-		, warning
-		, error
-		, critical
-	};
+	enum Severity { information, warning, error, critical };
 
-	Error(const QString &message, qReal::gui::Error::Severity severity, qReal::Id  const &position);
+	Error(const QString &message, qReal::gui::Error::Severity severity, qReal::Id const &position);
 	Severity severity() const;
 	QString message() const;
 	QString timestamp() const;
-	qReal::Id  position() const;
+	qReal::Id position() const;
 
 private:
 	QString mMessage;
 	QTime mTimestamp;
 	Severity mSeverity;
-	qReal::Id  mPosition;
+	qReal::Id mPosition;
 };
 
 }

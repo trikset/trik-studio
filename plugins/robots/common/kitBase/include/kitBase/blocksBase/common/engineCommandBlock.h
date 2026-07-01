@@ -52,7 +52,7 @@ protected:
 		const QList<robotModel::PortInfo> ports = parsePorts(reportErrors);
 
 		for (const robotModel::PortInfo &port : ports) {
-			MotorType * const motor = robotModel::RobotModelUtils::findDevice<MotorType>(mRobotModel, port);
+			MotorType *const motor = robotModel::RobotModelUtils::findDevice<MotorType>(mRobotModel, port);
 			if (motor) {
 				result << motor;
 			}

@@ -19,9 +19,8 @@ const unsigned gyroscopeSensorResponseSize = 9;
 using namespace ev3::robotModel::real::parts;
 using namespace kitBase::robotModel;
 
-Gyroscope::Gyroscope(const kitBase::robotModel::DeviceInfo &info
-		, const kitBase::robotModel::PortInfo &port
-		, utils::robotCommunication::RobotCommunicator &robotCommunicator)
+Gyroscope::Gyroscope(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+	utils::robotCommunication::RobotCommunicator &robotCommunicator)
 	: kitBase::robotModel::robotParts::GyroscopeSensor(info, port)
 	, mImplementation(robotCommunicator, port)
 	, mRobotCommunicator(robotCommunicator)

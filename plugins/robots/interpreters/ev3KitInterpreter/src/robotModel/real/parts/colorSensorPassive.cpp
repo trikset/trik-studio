@@ -20,9 +20,8 @@ using namespace ev3::robotModel::real::parts;
 using namespace ev3::communication;
 using namespace kitBase::robotModel;
 
-ColorSensorPassive::ColorSensorPassive(const kitBase::robotModel::DeviceInfo &info
-		, const kitBase::robotModel::PortInfo &port
-		, utils::robotCommunication::RobotCommunicator &robotCommunicator)
+ColorSensorPassive::ColorSensorPassive(const kitBase::robotModel::DeviceInfo &info,
+	const kitBase::robotModel::PortInfo &port, utils::robotCommunication::RobotCommunicator &robotCommunicator)
 	: kitBase::robotModel::robotParts::ColorSensorPassive(info, port)
 	, mImplementation(robotCommunicator, port)
 	, mRobotCommunicator(robotCommunicator)

@@ -32,16 +32,16 @@ public:
 	virtual void setIsDynamicText(bool isDynamic);
 	virtual QRectF boundingRect() const;
 	virtual QRectF realBoundingRect() const;
-	virtual void drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr);
-	virtual void drawExtractionForItem(QPainter* painter);
-	virtual void drawFieldForResizeItem(QPainter* painter);
-	virtual void drawScalingRects(QPainter* painter);
+	virtual void drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr);
+	virtual void drawExtractionForItem(QPainter *painter);
+	virtual void drawFieldForResizeItem(QPainter *painter);
+	virtual void drawScalingRects(QPainter *painter);
 	virtual void changeScalingPointState(qreal x, qreal y);
-	QGraphicsTextItem const& getText();
+	QGraphicsTextItem const &getText();
 	virtual void setItemZValue(int zValue);
 
-	virtual QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document
-			, const QPoint &topLeftPicture);
+	virtual QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document,
+		const QPoint &topLeftPicture);
 
 protected:
 	int mX1 {};
@@ -50,5 +50,5 @@ protected:
 	QGraphicsTextItem mText;
 	bool mIsDynamicText;
 	QRectF mRect;
-	void drawForDynamicText(QPainter* painter);
+	void drawForDynamicText(QPainter *painter);
 };

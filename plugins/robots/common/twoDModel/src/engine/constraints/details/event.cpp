@@ -16,11 +16,8 @@
 
 using namespace twoDModel::constraints::details;
 
-Event::Event(const QString &id
-		, const Condition &condition
-		, const Trigger &trigger
-		, bool dropsOnFire
-		, bool isSettedInitially)
+Event::Event(const QString &id, const Condition &condition, const Trigger &trigger, bool dropsOnFire,
+	bool isSettedInitially)
 	: mId(id)
 	, mIsAlive(isSettedInitially)
 	, mCondition(condition)

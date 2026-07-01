@@ -43,8 +43,8 @@ UXInfoPlugin::UXInfoPlugin()
 	mUsabilityTestingToolbar->addAction(mStartTest);
 	mUsabilityTestingToolbar->addAction(mFinishTest);
 
-	connect(qReal::SettingsManager::instance(), &qReal::SettingsManager::settingsChanged
-			, UXInfo::instance(), &UXInfo::reportSettingsChanges);
+	connect(qReal::SettingsManager::instance(), &qReal::SettingsManager::settingsChanged, UXInfo::instance(),
+		&UXInfo::reportSettingsChanges);
 }
 
 void UXInfoPlugin::init(qReal::PluginConfigurator const &configurator)
@@ -60,27 +60,27 @@ void UXInfoPlugin::init(qReal::PluginConfigurator const &configurator)
 		UXInfo::reportTotalTime(totalTime);
 	});
 
-	connect(&configurator.systemEvents(), &qReal::SystemEvents::graphicalElementAdded
-			, [](qReal::Id const &id) { UXInfo::reportCreation(id.editor(), id.element()); });
+	connect(&configurator.systemEvents(), &qReal::SystemEvents::graphicalElementAdded,
+		[](qReal::Id const &id) { UXInfo::reportCreation(id.editor(), id.element()); });
 
-	connect(&configurator.systemEvents(), &qReal::SystemEvents::informationAdded
-			, [](QString const &message, qReal::Id const &position) {
+	connect(&configurator.systemEvents(), &qReal::SystemEvents::informationAdded,
+		[](QString const &message, qReal::Id const &position) {
 		UXInfo::reportErrors("information", position.editor(), position.element(), message);
 	});
-	connect(&configurator.systemEvents(), &qReal::SystemEvents::warningAdded
-			, [](QString const &message, qReal::Id const &position) {
+	connect(&configurator.systemEvents(), &qReal::SystemEvents::warningAdded,
+		[](QString const &message, qReal::Id const &position) {
 		UXInfo::reportErrors("warning", position.editor(), position.element(), message);
 	});
-	connect(&configurator.systemEvents(), &qReal::SystemEvents::errorAdded
-			, [](QString const &message, qReal::Id const &position) {
+	connect(&configurator.systemEvents(), &qReal::SystemEvents::errorAdded,
+		[](QString const &message, qReal::Id const &position) {
 		UXInfo::reportErrors("error", position.editor(), position.element(), message);
 	});
-	connect(&configurator.systemEvents(), &qReal::SystemEvents::criticalAdded
-			, [](QString const &message, qReal::Id const &position) {
+	connect(&configurator.systemEvents(), &qReal::SystemEvents::criticalAdded,
+		[](QString const &message, qReal::Id const &position) {
 		UXInfo::reportErrors("critical", position.editor(), position.element(), message);
 	});
 
-	QWidget * const windowWidget = configurator.mainWindowInterpretersInterface().windowWidget();
+	QWidget *const windowWidget = configurator.mainWindowInterpretersInterface().windowWidget();
 	static_cast<QMainWindow *>(windowWidget)->addToolBar(Qt::TopToolBarArea, mUsabilityTestingToolbar);
 	mUsabilityTestingToolbar->setVisible(qReal::SettingsManager::value("usabilityTestingMode").toBool());
 
@@ -95,28 +95,30 @@ void UXInfoPlugin::init(qReal::PluginConfigurator const &configurator)
 
 QStringList UXInfoPlugin::defaultSettingsFiles()
 {
-	return { ":/uxInfoDefaultSettings.ini" };
+	return {":/uxInfoDefaultSettings.ini"};
 }
 
 void UXInfoPlugin::initSettingsUi(qReal::gui::PreferencesPage &behaviourPage)
 {
-	QGridLayout * const automaticsLayout = behaviourPage.findChild<QGridLayout *>("automaticsFrameLayout");
+	QGridLayout *const automaticsLayout = behaviourPage.findChild<QGridLayout *>("automaticsFrameLayout");
 	if (!automaticsLayout) {
 		QLOG_ERROR() << "Could not find 'automaticsFrameLayout' on preferences behaviour page";
 		return;
 	}
 
-	QCheckBox * const ergonomicBox = new QCheckBox(tr("Collect ergonomic values"), automaticsLayout->widget());
-	QCheckBox * const usabilityModeBox = new QCheckBox(tr("Usability testing mode"), automaticsLayout->widget());
+	QCheckBox *const ergonomicBox = new QCheckBox(tr("Collect ergonomic values"), automaticsLayout->widget());
+	QCheckBox *const usabilityModeBox = new QCheckBox(tr("Usability testing mode"), automaticsLayout->widget());
 	automaticsLayout->addWidget(ergonomicBox, automaticsLayout->rowCount(), 0, 1, automaticsLayout->columnCount());
-	automaticsLayout->addWidget(usabilityModeBox, automaticsLayout->rowCount(), 0, 1, automaticsLayout->columnCount());
+	automaticsLayout->addWidget(usabilityModeBox, automaticsLayout->rowCount(), 0, 1,
+		automaticsLayout->columnCount());
 
 	connect(ergonomicBox, &QAbstractButton::clicked, [](bool status) { UXInfo::setStatus(status); });
 
 	connect(&behaviourPage, &qReal::gui::PreferencesPage::saved, [=]() {
 		bool const usabilityTestingMode = usabilityModeBox->isChecked();
 		qReal::SettingsManager::setValue("usabilityTestingMode", usabilityTestingMode);
-		qReal::SettingsManager::setValue("collectErgonomicValues", ergonomicBox->isChecked() || usabilityTestingMode);
+		qReal::SettingsManager::setValue("collectErgonomicValues",
+			ergonomicBox->isChecked() || usabilityTestingMode);
 		if (mUsabilityTestingMode != usabilityTestingMode) {
 			if (usabilityTestingMode) {
 				ergonomicBox->setChecked(true);
@@ -136,12 +138,12 @@ void UXInfoPlugin::initSettingsUi(qReal::gui::PreferencesPage &behaviourPage)
 
 void UXInfoPlugin::processEvent(QObject *obj, QEvent *e)
 {
-	QMouseEvent *mouseEvent = dynamic_cast<QMouseEvent*>(e);
-	QWidget *widget = dynamic_cast<QWidget*>(obj);
+	QMouseEvent *mouseEvent = dynamic_cast<QMouseEvent *>(e);
+	QWidget *widget = dynamic_cast<QWidget *>(obj);
 	QPoint pos;
 	if (mouseEvent && widget && mouseEvent->type() == QMouseEvent::MouseButtonPress) {
 		pos = widget->pos();
-		for (; widget; widget = dynamic_cast<QWidget*>(widget->parent())) {
+		for (; widget; widget = dynamic_cast<QWidget *>(widget->parent())) {
 			pos += widget->pos();
 		}
 

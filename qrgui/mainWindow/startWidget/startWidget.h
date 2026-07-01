@@ -54,22 +54,22 @@ private:
 
 	QLayout *createRecentProjectsList(const QString &recentProjects);
 	QWidget *createPluginsList();
-	QWidget *createPluginButton(const Id &editor, const Id &diagram, QWidget * const bindedImage);
+	QWidget *createPluginButton(const Id &editor, const Id &diagram, QWidget *const bindedImage);
 
-	void centralizeButton(QPushButton * const styledButton);
+	void centralizeButton(QPushButton *const styledButton);
 
 	virtual void paintEvent(QPaintEvent *event) override;
 
-	MainWindow *mMainWindow;  // Doesn't have ownership.
-	ProjectManager *mProjectManager;  // Doesn't have ownership.
-	int mProjectListSize { -1 };
+	MainWindow *mMainWindow; // Doesn't have ownership.
+	ProjectManager *mProjectManager; // Doesn't have ownership.
+	int mProjectListSize {-1};
 
-	QBoxLayout *mProjectsManagementLayout {};  // Has ownership.
-	QWidget *mRecentProjectsWidget {};  // Has ownership.
-	QPushButton *mNewProjectButton {};  // Has ownership.
-	QPushButton *mOpenProjectButton {};  // Has ownership.
-	QPushButton *mOpenInterpreterButton {};  // Has ownership.
-	QPushButton *mCreateInterpreterButton {};  // Has ownership.
+	QBoxLayout *mProjectsManagementLayout {}; // Has ownership.
+	QWidget *mRecentProjectsWidget {}; // Has ownership.
+	QPushButton *mNewProjectButton {}; // Has ownership.
+	QPushButton *mOpenProjectButton {}; // Has ownership.
+	QPushButton *mOpenInterpreterButton {}; // Has ownership.
+	QPushButton *mCreateInterpreterButton {}; // Has ownership.
 };
 
 }

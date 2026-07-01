@@ -73,9 +73,7 @@ QString LuaStringEscapeUtils::unescape(const QString &string)
 	auto transformedString = string;
 	for (int i = 0; i < transformedString.length() - 1; ++i) {
 		if (transformedString[i] == '\\') {
-			const auto replace = [&](QChar c) {
-				transformedString.replace(i, 2, c);
-			};
+			const auto replace = [&](QChar c) { transformedString.replace(i, 2, c); };
 
 			switch (transformedString[i + 1].toLatin1()) {
 			case '\\':

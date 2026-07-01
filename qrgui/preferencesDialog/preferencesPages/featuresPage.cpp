@@ -20,8 +20,8 @@
 using namespace qReal;
 
 PreferencesFeaturesPage::PreferencesFeaturesPage(QWidget *parent)
-		: PreferencesPage(parent)
-		, mUi(new Ui::PreferencesFeaturesPage)
+	: PreferencesPage(parent)
+	, mUi(new Ui::PreferencesFeaturesPage)
 {
 	mUi->setupUi(this);
 	setObjectName("preferencesFeaturesPage");

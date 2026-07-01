@@ -24,10 +24,8 @@ class PioneerPrintGenerator : public generatorBase::simple::BindingGenerator
 {
 	Q_OBJECT
 public:
-	PioneerPrintGenerator(const qrRepo::RepoApi &repo
-			, generatorBase::GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent);
+	PioneerPrintGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+		const qReal::Id &id, QObject *parent);
 };
 
 }

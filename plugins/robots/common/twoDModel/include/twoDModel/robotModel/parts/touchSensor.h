@@ -34,9 +34,8 @@ class TWO_D_MODEL_EXPORT TouchSensor : public kitBase::robotModel::robotParts::T
 	Q_OBJECT
 
 public:
-	TouchSensor(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port
-			, engine::TwoDModelEngineInterface &engine);
+	TouchSensor(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+		engine::TwoDModelEngineInterface &engine);
 
 	void read() override;
 

@@ -24,10 +24,8 @@ class MarkerDownGenerator : public generatorBase::simple::BindingGenerator
 {
 	Q_OBJECT
 public:
-	MarkerDownGenerator(const qrRepo::RepoApi &repo
-			, generatorBase::GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent);
+	MarkerDownGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+		const qReal::Id &id, QObject *parent);
 };
 
 }

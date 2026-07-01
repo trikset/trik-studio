@@ -26,12 +26,10 @@ using namespace interpretation;
 
 const int maxThreadsCount = 100;
 
-Interpreter::Interpreter(const GraphicalModelAssistInterface &graphicalModelApi
-		, LogicalModelAssistInterface &logicalModelApi
-		, qReal::gui::MainWindowInterpretersInterface &interpretersInterface
-		, BlocksTableInterface &blocksTable
-		, qrtext::LanguageToolboxInterface &languageToolbox
-		, const Id &initialNodeType)
+Interpreter::Interpreter(const GraphicalModelAssistInterface &graphicalModelApi,
+	LogicalModelAssistInterface &logicalModelApi,
+	qReal::gui::MainWindowInterpretersInterface &interpretersInterface, BlocksTableInterface &blocksTable,
+	qrtext::LanguageToolboxInterface &languageToolbox, const Id &initialNodeType)
 	: mGraphicalModelApi(graphicalModelApi)
 	, mLogicalModelApi(logicalModelApi)
 	, mInterpretersInterface(interpretersInterface)
@@ -63,8 +61,8 @@ void Interpreter::startInterpretation()
 
 	const Id currentDiagramId = mInterpretersInterface.activeDiagram();
 
-	qReal::interpretation::Thread * const initialThread = new qReal::interpretation::Thread(&mGraphicalModelApi
-			, mInterpretersInterface, mInitialNodeType, currentDiagramId, mBlocksTable, "main");
+	qReal::interpretation::Thread *const initialThread = new qReal::interpretation::Thread(&mGraphicalModelApi,
+		mInterpretersInterface, mInitialNodeType, currentDiagramId, mBlocksTable, "main");
 
 	Q_EMIT started();
 	addThread(initialThread, "main");
@@ -81,7 +79,7 @@ void Interpreter::stopInterpretation()
 
 void Interpreter::threadStopped()
 {
-	Thread * const thread = static_cast<Thread *>(sender());
+	Thread *const thread = static_cast<Thread *>(sender());
 
 	mThreads.remove(thread->id());
 	delete thread;
@@ -98,12 +96,12 @@ void Interpreter::newThread(const Id &startBlockId, const QString &threadId)
 		stopInterpretation();
 	}
 
-	Thread * const thread = new Thread(&mGraphicalModelApi, mInterpretersInterface
-			, mInitialNodeType, mBlocksTable, startBlockId, threadId);
+	Thread *const thread = new Thread(&mGraphicalModelApi, mInterpretersInterface, mInitialNodeType, mBlocksTable,
+		startBlockId, threadId);
 	addThread(thread, threadId);
 }
 
-void Interpreter::addThread(Thread * const thread, const QString &threadId)
+void Interpreter::addThread(Thread *const thread, const QString &threadId)
 {
 	if (mThreads.count() >= maxThreadsCount) {
 		reportError(tr("Threads limit exceeded. Maximum threads count is %1").arg(maxThreadsCount));

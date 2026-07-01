@@ -24,14 +24,14 @@ namespace enums {
 namespace semantics {
 
 enum Semantics {
-	regularBlock = 0
-	, finalBlock
-	, conditionalBlock
-	, loopBlock
-	, preconditionalLoopBlock
-	, switchBlock
-	, forkBlock
-	, joinBlock
+	regularBlock = 0,
+	finalBlock,
+	conditionalBlock,
+	loopBlock,
+	preconditionalLoopBlock,
+	switchBlock,
+	forkBlock,
+	joinBlock
 };
 
 }

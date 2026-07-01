@@ -27,9 +27,8 @@ class SquareLine : public LineHandler
 {
 	Q_OBJECT
 public:
-	SquareLine(EdgeElement *edge
-		, const LogicalModelAssistInterface &logicalModel
-		, const GraphicalModelAssistInterface &graphicalModel);
+	SquareLine(EdgeElement *edge, const LogicalModelAssistInterface &logicalModel,
+		const GraphicalModelAssistInterface &graphicalModel);
 
 	/// Adjust link's ends, keep end segments strait
 	virtual void adjust();
@@ -41,12 +40,7 @@ public:
 	virtual QList<ContextMenuAction *> extraActions(QPointF pos);
 
 protected:
-	enum LineType {
-		vertical
-		, horizontal
-		, verticalTurn
-		, horizontalTurn
-	};
+	enum LineType { vertical, horizontal, verticalTurn, horizontalTurn };
 
 	/// If link reshaping is started on a segment, move that segment to position pos (in link's local coordinates)
 	/// If user is trying to move port, do it. Otherwise do nothing

@@ -30,16 +30,16 @@ class QRGUI_MODELS_EXPORT ChangePropertyCommand : public AbstractCommand
 	Q_OBJECT
 public:
 	/// Use this overload to modify properties via models api with automatic assigning current value as old one.
-	ChangePropertyCommand(models::LogicalModelAssistApi * const model
-			, const QString &property, const Id &id, const QVariant &newValue);
+	ChangePropertyCommand(models::LogicalModelAssistApi *const model, const QString &property, const Id &id,
+		const QVariant &newValue);
 
 	/// Use this overload to modify properties via models api with manual old value specification.
-	ChangePropertyCommand(qrRepo::LogicalRepoApi * const model
-			, const QString &property, const Id &id, const QVariant &oldValue, const QVariant &newValue);
+	ChangePropertyCommand(qrRepo::LogicalRepoApi *const model, const QString &property, const Id &id,
+		const QVariant &oldValue, const QVariant &newValue);
 
 	/// Use this overload to modify properties via models api with manual old value specification.
-	ChangePropertyCommand(models::LogicalModelAssistApi * const model
-			, const QString &property, const Id &id, const QVariant &oldValue, const QVariant &newValue);
+	ChangePropertyCommand(models::LogicalModelAssistApi *const model, const QString &property, const Id &id,
+		const QVariant &oldValue, const QVariant &newValue);
 
 protected:
 	virtual bool execute();

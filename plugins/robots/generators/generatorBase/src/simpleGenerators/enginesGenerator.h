@@ -24,11 +24,8 @@ class EnginesGenerator : public BindingGenerator
 {
 	Q_OBJECT
 public:
-	EnginesGenerator(const qrRepo::RepoApi &repo
-			, GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, const QString &engineType
-			, QObject *parent);
+	EnginesGenerator(const qrRepo::RepoApi &repo, GeneratorCustomizer &customizer, const qReal::Id &id,
+		const QString &engineType, QObject *parent);
 };
 
 }

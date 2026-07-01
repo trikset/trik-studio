@@ -88,7 +88,7 @@ private:
 	void animate(QPoint from, QPoint to, int duration);
 
 	ScriptAPI &mScriptAPI;
-	QPropertyAnimation *mCursorMoveAnimation;  // Takes ownership
+	QPropertyAnimation *mCursorMoveAnimation; // Takes ownership
 
 	QPixmap mCursorPixmap;
 	QPixmap mDragPixmap;

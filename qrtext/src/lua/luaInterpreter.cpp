@@ -67,8 +67,8 @@ LuaInterpreter::LuaInterpreter(QList<core::Error> &errors)
 {
 }
 
-QVariant LuaInterpreter::interpret(const QSharedPointer<core::ast::Node> &root
-		, const core::SemanticAnalyzer &semanticAnalyzer)
+QVariant LuaInterpreter::interpret(const QSharedPointer<core::ast::Node> &root,
+	const core::SemanticAnalyzer &semanticAnalyzer)
 {
 	Q_UNUSED(semanticAnalyzer);
 
@@ -104,8 +104,8 @@ QVariant LuaInterpreter::interpret(const QSharedPointer<core::ast::Node> &root
 			const auto name = as<ast::Identifier>(variable)->name();
 
 			if (mReadOnlyVariables.contains(name)) {
-				mErrors.append(core::Error(root->start(), QObject::tr("Variable %1 is read-only")
-						, core::ErrorType::runtimeError, core::Severity::error));
+				mErrors.append(core::Error(root->start(), QObject::tr("Variable %1 is read-only"),
+					core::ErrorType::runtimeError, core::Severity::error));
 
 				return QVariant();
 			}
@@ -116,8 +116,9 @@ QVariant LuaInterpreter::interpret(const QSharedPointer<core::ast::Node> &root
 			assignToTableElement(variable, interpretedValue, semanticAnalyzer);
 			return QVariant();
 		} else {
-			mErrors.append(core::Error(root->start(), QObject::tr("This construction is not supported by interpreter")
-					, core::ErrorType::runtimeError, core::Severity::error));
+			mErrors.append(core::Error(root->start(),
+				QObject::tr("This construction is not supported by interpreter"),
+				core::ErrorType::runtimeError, core::Severity::error));
 		}
 
 		return QVariant();
@@ -127,8 +128,8 @@ QVariant LuaInterpreter::interpret(const QSharedPointer<core::ast::Node> &root
 		auto value = mIdentifierValues.value(as<ast::Identifier>(root)->name());
 		if (!value.isValid()) {
 			mErrors.append(core::Error(root->start(),
-					QObject::tr("Seems like accessing an uninitialized variable %1").arg(name)
-					, core::ErrorType::runtimeError, core::Severity::error));
+				QObject::tr("Seems like accessing an uninitialized variable %1").arg(name),
+				core::ErrorType::runtimeError, core::Severity::error));
 		}
 		return value;
 	} else if (root->is<ast::FunctionCall>()) {
@@ -155,15 +156,16 @@ QVariant LuaInterpreter::interpret(const QSharedPointer<core::ast::Node> &root
 	} else if (root->is<ast::Nil>()) {
 		return QVariant();
 	} else {
-		mErrors.append(core::Error(root->start(), QObject::tr("This construction is not supported by interpreter")
-				, core::ErrorType::runtimeError, core::Severity::error));
+		mErrors.append(
+			core::Error(root->start(), QObject::tr("This construction is not supported by interpreter"),
+				core::ErrorType::runtimeError, core::Severity::error));
 
 		return QVariant();
 	}
 }
 
-void LuaInterpreter::addIntrinsicFunction(const QString &name
-		, std::function<QVariant(const QList<QVariant> &)> const &semantic)
+void LuaInterpreter::addIntrinsicFunction(const QString &name,
+	std::function<QVariant(const QList<QVariant> &)> const &semantic)
 {
 	mIntrinsicFunctions.insert(name, semantic);
 }
@@ -186,11 +188,8 @@ QVariant LuaInterpreter::value(const QString &identifier) const
 void LuaInterpreter::setVariableValue(const QString &name, const QVariant &value)
 {
 	QString valueString = value.toString();
-	if (!valueString.isEmpty()
-			&& (valueString[0] == '\'' || valueString[0] == '\"')
-			&& (valueString[valueString.size() - 1] == '\'' || valueString[valueString.size() - 1] == '\"')
-			)
-	{
+	if (!valueString.isEmpty() && (valueString[0] == '\'' || valueString[0] == '\"')
+		&& (valueString[valueString.size() - 1] == '\'' || valueString[valueString.size() - 1] == '\"')) {
 		// It is a string variable, chop off quotes.
 		valueString.remove(0, 1);
 		valueString.chop(1);
@@ -211,8 +210,8 @@ void LuaInterpreter::clear()
 	mReadOnlyVariables.clear();
 }
 
-QVariant LuaInterpreter::interpretUnaryOperator(const QSharedPointer<core::ast::Node> &root
-		, const core::SemanticAnalyzer &semanticAnalyzer)
+QVariant LuaInterpreter::interpretUnaryOperator(const QSharedPointer<core::ast::Node> &root,
+	const core::SemanticAnalyzer &semanticAnalyzer)
 {
 	auto operand = as<ast::UnaryOperator>(root)->operand();
 	if (root->is<ast::UnaryMinus>()) {
@@ -238,30 +237,29 @@ QVariant LuaInterpreter::interpretUnaryOperator(const QSharedPointer<core::ast::
 	return QVariant();
 }
 
-QVariant LuaInterpreter::interpretBinaryOperator(const QSharedPointer<core::ast::Node> &root
-		, const core::SemanticAnalyzer &semanticAnalyzer)
+QVariant LuaInterpreter::interpretBinaryOperator(const QSharedPointer<core::ast::Node> &root,
+	const core::SemanticAnalyzer &semanticAnalyzer)
 {
 	auto leftOperand = as<ast::BinaryOperator>(root)->leftOperand();
 	auto rightOperand = as<ast::BinaryOperator>(root)->rightOperand();
 
 	if (root->is<ast::Addition>()) {
 		return interpret(leftOperand, semanticAnalyzer).toDouble()
-				+ interpret(rightOperand, semanticAnalyzer).toDouble();
+		       + interpret(rightOperand, semanticAnalyzer).toDouble();
 	} else if (root->is<ast::Subtraction>()) {
 		return interpret(leftOperand, semanticAnalyzer).toDouble()
-				- interpret(rightOperand, semanticAnalyzer).toDouble();
+		       - interpret(rightOperand, semanticAnalyzer).toDouble();
 	} else if (root->is<ast::Multiplication>()) {
 		QVariant leftOperandValue = interpret(leftOperand, semanticAnalyzer);
-		return leftOperandValue.toDouble()
-				* interpret(rightOperand, semanticAnalyzer).toDouble();
+		return leftOperandValue.toDouble() * interpret(rightOperand, semanticAnalyzer).toDouble();
 	} else if (root->is<ast::Division>()) {
 		const auto leftOperandValue = interpret(leftOperand, semanticAnalyzer).toDouble();
 		const auto rightOperandValue = interpret(rightOperand, semanticAnalyzer).toDouble();
 		if (rightOperandValue != 0) {
 			return leftOperandValue / rightOperandValue;
 		} else {
-			mErrors.append(core::Error(root->start(), QObject::tr("Division by zero")
-					, core::ErrorType::runtimeError, core::Severity::error));
+			mErrors.append(core::Error(root->start(), QObject::tr("Division by zero"),
+				core::ErrorType::runtimeError, core::Severity::error));
 			return 0;
 		}
 	} else if (root->is<ast::IntegerDivision>()) {
@@ -270,96 +268,91 @@ QVariant LuaInterpreter::interpretBinaryOperator(const QSharedPointer<core::ast:
 		if (rightOperandValue != 0) {
 			return leftOperandValue / rightOperandValue;
 		} else {
-			mErrors.append(core::Error(root->start(), QObject::tr("Division by zero")
-					, core::ErrorType::runtimeError, core::Severity::error));
+			mErrors.append(core::Error(root->start(), QObject::tr("Division by zero"),
+				core::ErrorType::runtimeError, core::Severity::error));
 			return 0;
 		}
 	} else if (root->is<ast::Exponentiation>()) {
-		return qPow(interpret(leftOperand, semanticAnalyzer).toDouble()
-				, interpret(rightOperand, semanticAnalyzer).toDouble());
+		return qPow(interpret(leftOperand, semanticAnalyzer).toDouble(),
+			interpret(rightOperand, semanticAnalyzer).toDouble());
 	} else if (root->is<ast::Modulo>()) {
 		const auto leftOperandValue = interpret(leftOperand, semanticAnalyzer).toInt();
 		const auto rightOperandValue = interpret(rightOperand, semanticAnalyzer).toInt();
 		if (rightOperandValue != 0) {
 			return leftOperandValue % rightOperandValue;
 		} else {
-			mErrors.append(core::Error(root->start(), QObject::tr("Division by zero")
-					, core::ErrorType::runtimeError, core::Severity::error));
+			mErrors.append(core::Error(root->start(), QObject::tr("Division by zero"),
+				core::ErrorType::runtimeError, core::Severity::error));
 			return 0;
 		}
 	} else if (root->is<ast::BitwiseAnd>()) {
 		return interpret(leftOperand, semanticAnalyzer).toInt()
-				& interpret(rightOperand, semanticAnalyzer).toInt();
+		       & interpret(rightOperand, semanticAnalyzer).toInt();
 	} else if (root->is<ast::BitwiseOr>()) {
 		return interpret(leftOperand, semanticAnalyzer).toInt()
-				| interpret(rightOperand, semanticAnalyzer).toInt();
+		       | interpret(rightOperand, semanticAnalyzer).toInt();
 	} else if (root->is<ast::BitwiseXor>()) {
 		return interpret(leftOperand, semanticAnalyzer).toInt()
-				^ interpret(rightOperand, semanticAnalyzer).toInt();
+		       ^ interpret(rightOperand, semanticAnalyzer).toInt();
 	} else if (root->is<ast::BitwiseLeftShift>()) {
 		return interpret(leftOperand, semanticAnalyzer).toInt()
-				<< interpret(rightOperand, semanticAnalyzer).toInt();
+		       << interpret(rightOperand, semanticAnalyzer).toInt();
 	} else if (root->is<ast::BitwiseRightShift>()) {
 		return interpret(leftOperand, semanticAnalyzer).toInt()
-				>> interpret(rightOperand, semanticAnalyzer).toInt();
+		       >> interpret(rightOperand, semanticAnalyzer).toInt();
 
 	} else if (root->is<ast::Concatenation>()) {
 		return interpret(leftOperand, semanticAnalyzer).toString()
-				+ interpret(rightOperand, semanticAnalyzer).toString();
+		       + interpret(rightOperand, semanticAnalyzer).toString();
 
-	/// @todo String comparison.
+		/// @todo String comparison.
 	} else if (root->is<ast::LessThan>()) {
 		return interpret(leftOperand, semanticAnalyzer).toDouble()
-				< interpret(rightOperand, semanticAnalyzer).toDouble();
+		       < interpret(rightOperand, semanticAnalyzer).toDouble();
 	} else if (root->is<ast::LessOrEqual>()) {
 		return interpret(leftOperand, semanticAnalyzer).toDouble()
-				<= interpret(rightOperand, semanticAnalyzer).toDouble();
+		       <= interpret(rightOperand, semanticAnalyzer).toDouble();
 	} else if (root->is<ast::GreaterThan>()) {
 		return interpret(leftOperand, semanticAnalyzer).toDouble()
-				> interpret(rightOperand, semanticAnalyzer).toDouble();
+		       > interpret(rightOperand, semanticAnalyzer).toDouble();
 	} else if (root->is<ast::GreaterOrEqual>()) {
 		return interpret(leftOperand, semanticAnalyzer).toDouble()
-				>= interpret(rightOperand, semanticAnalyzer).toDouble();
+		       >= interpret(rightOperand, semanticAnalyzer).toDouble();
 	} else if (root->is<ast::Equality>()) {
 		return interpret(leftOperand, semanticAnalyzer) == interpret(rightOperand, semanticAnalyzer);
 	} else if (root->is<ast::Inequality>()) {
 		return interpret(leftOperand, semanticAnalyzer) != interpret(rightOperand, semanticAnalyzer);
 	} else if (root->is<ast::LogicalAnd>()) {
 		return interpret(leftOperand, semanticAnalyzer).toInt()
-				&& interpret(rightOperand, semanticAnalyzer).toInt();
+		       && interpret(rightOperand, semanticAnalyzer).toInt();
 	} else if (root->is<ast::LogicalOr>()) {
 		return interpret(leftOperand, semanticAnalyzer).toInt()
-				|| interpret(rightOperand, semanticAnalyzer).toInt();
+		       || interpret(rightOperand, semanticAnalyzer).toInt();
 	}
 
 	return QVariant();
 }
 
-
-QVariant LuaInterpreter::operateOnIndexingExpression(const QSharedPointer<core::ast::Node> &indexingExpression
-		, const core::SemanticAnalyzer &semanticAnalyzer
-		, const std::function<QVariant(const QString &
-				, const QVariantList &
-				, const QVector<int> &
-				, const core::Connection &)> &action)
+QVariant LuaInterpreter::operateOnIndexingExpression(const QSharedPointer<core::ast::Node> &indexingExpression,
+	const core::SemanticAnalyzer &semanticAnalyzer,
+	const std::function<QVariant(const QString &, const QVariantList &, const QVector<int> &,
+		const core::Connection &)> &action)
 {
 	return operateOnIndexingExpressionRecursive(indexingExpression, {}, semanticAnalyzer, action);
 }
 
-QVariant LuaInterpreter::operateOnIndexingExpressionRecursive(const QSharedPointer<core::ast::Node> &indexingExpression
-		, const QVector<int> &currentIndex, const core::SemanticAnalyzer &semanticAnalyzer
-		, const std::function<QVariant(const QString &
-				, const QVariantList &
-				, const QVector<int> &
-				, const core::Connection &)> &action)
+QVariant LuaInterpreter::operateOnIndexingExpressionRecursive(const QSharedPointer<core::ast::Node> &indexingExpression,
+	const QVector<int> &currentIndex, const core::SemanticAnalyzer &semanticAnalyzer,
+	const std::function<QVariant(const QString &, const QVariantList &, const QVector<int> &,
+		const core::Connection &)> &action)
 {
 	const auto node = as<ast::IndexingExpression>(indexingExpression);
 
-	const auto reportError = [this, &node](){
-		mErrors.append(core::Error(node->start()
-				, QObject::tr("Currently interpreter allows only tables denoted by identifier and "
-						"by integer expression index, as in 'a[1 + 2][3]'")
-				, core::ErrorType::runtimeError, core::Severity::error));
+	const auto reportError = [this, &node]() {
+		mErrors.append(core::Error(node->start(),
+			QObject::tr("Currently interpreter allows only tables denoted by identifier and "
+				    "by integer expression index, as in 'a[1 + 2][3]'"),
+			core::ErrorType::runtimeError, core::Severity::error));
 	};
 
 	if (node->table()->is<ast::Identifier>()) {
@@ -368,7 +361,7 @@ QVariant LuaInterpreter::operateOnIndexingExpressionRecursive(const QSharedPoint
 			const auto index = interpret(node->indexer(), semanticAnalyzer).toInt();
 			const auto table = mIdentifierValues.value(name).value<QVariantList>();
 
-			return action(name, table, QVector<int>{index} + currentIndex, node->start());
+			return action(name, table, QVector<int> {index} + currentIndex, node->start());
 		}
 
 		reportError();
@@ -376,8 +369,8 @@ QVariant LuaInterpreter::operateOnIndexingExpressionRecursive(const QSharedPoint
 	} else if (node->table()->is<ast::IndexingExpression>()) {
 		if (semanticAnalyzer.type(node->indexer())->is<types::Number>()) {
 			const auto index = interpret(node->indexer(), semanticAnalyzer).toInt();
-			return operateOnIndexingExpressionRecursive(node->table()
-					, QVector<int>{index} + currentIndex, semanticAnalyzer, action);
+			return operateOnIndexingExpressionRecursive(node->table(), QVector<int> {index} + currentIndex,
+				semanticAnalyzer, action);
 		}
 
 		reportError();
@@ -387,15 +380,15 @@ QVariant LuaInterpreter::operateOnIndexingExpressionRecursive(const QSharedPoint
 	/// @todo Support more complex cases of table slice, like
 	///       "f(x)['a'] = 1". Note that field access in form of "a.x = 1" is parsed as "a['x'] = 1", so
 	///       no special handling is needed for that case.
-	mErrors.append(core::Error(node->start()
-			, QObject::tr("Tables denoted by something other than identifier (like f(x)[0]) are not allowed")
-			, core::ErrorType::runtimeError, core::Severity::error));
+	mErrors.append(core::Error(node->start(),
+		QObject::tr("Tables denoted by something other than identifier (like f(x)[0]) are not allowed"),
+		core::ErrorType::runtimeError, core::Severity::error));
 
 	return QVariant();
 }
 
-QVariant LuaInterpreter::constructTable(const QSharedPointer<core::ast::Node> &tableConstructor
-		, const core::SemanticAnalyzer &semanticAnalyzer)
+QVariant LuaInterpreter::constructTable(const QSharedPointer<core::ast::Node> &tableConstructor,
+	const core::SemanticAnalyzer &semanticAnalyzer)
 {
 	QVariantList temp;
 	for (const auto &node : as<ast::TableConstructor>(tableConstructor)->initializers()) {
@@ -413,9 +406,9 @@ QVariant LuaInterpreter::constructTable(const QSharedPointer<core::ast::Node> &t
 
 				temp[index] = interpret(node->value(), semanticAnalyzer).value<QString>();
 			} else {
-				mErrors.append(core::Error(tableConstructor->start()
-						, QObject::tr("Explicit table indexes of non-integer type are not supported")
-						, core::ErrorType::runtimeError, core::Severity::error));
+				mErrors.append(core::Error(tableConstructor->start(),
+					QObject::tr("Explicit table indexes of non-integer type are not supported"),
+					core::ErrorType::runtimeError, core::Severity::error));
 			}
 		}
 	}
@@ -423,15 +416,11 @@ QVariant LuaInterpreter::constructTable(const QSharedPointer<core::ast::Node> &t
 	return QVariant(temp);
 }
 
-void LuaInterpreter::assignToTableElement(const QSharedPointer<core::ast::Node> &variable
-		, const QVariant &interpretedValue, const core::SemanticAnalyzer &semanticAnalyzer)
+void LuaInterpreter::assignToTableElement(const QSharedPointer<core::ast::Node> &variable,
+	const QVariant &interpretedValue, const core::SemanticAnalyzer &semanticAnalyzer)
 {
-	const auto action = [this, &interpretedValue] (
-			const QString &name
-			, const QVariantList &table
-			, const QVector<int> &index
-			, const core::Connection &connection)
-	{
+	const auto action = [this, &interpretedValue](const QString &name, const QVariantList &table,
+				    const QVector<int> &index, const core::Connection &connection) {
 		mIdentifierValues.insert(name, doAssignToTableElement(table, interpretedValue, index, connection));
 		return QVariant();
 	};
@@ -439,18 +428,15 @@ void LuaInterpreter::assignToTableElement(const QSharedPointer<core::ast::Node> 
 	operateOnIndexingExpression(variable, semanticAnalyzer, action);
 }
 
-QVariantList LuaInterpreter::doAssignToTableElement(const QVariantList &table
-		, const QVariant &value
-		, const QVector<int> &index
-		, const core::Connection &connection)
+QVariantList LuaInterpreter::doAssignToTableElement(const QVariantList &table, const QVariant &value,
+	const QVector<int> &index, const core::Connection &connection)
 {
 	QVariantList result;
 	int i = 0;
 	const int currentIndex = index.first();
 	if (currentIndex < 0) {
-		mErrors.append(core::Error(connection
-				, QObject::tr("Negative index for a table")
-				, core::ErrorType::runtimeError, core::Severity::error));
+		mErrors.append(core::Error(connection, QObject::tr("Negative index for a table"),
+			core::ErrorType::runtimeError, core::Severity::error));
 		return table;
 	}
 
@@ -465,9 +451,8 @@ QVariantList LuaInterpreter::doAssignToTableElement(const QVariantList &table
 		if (currentIndex >= 0) {
 			result[currentIndex] = value;
 		} else {
-			mErrors.append(core::Error(connection
-					, QObject::tr("Negative index for a table")
-					, core::ErrorType::runtimeError, core::Severity::error));
+			mErrors.append(core::Error(connection, QObject::tr("Negative index for a table"),
+				core::ErrorType::runtimeError, core::Severity::error));
 		}
 
 		return result;
@@ -475,10 +460,8 @@ QVariantList LuaInterpreter::doAssignToTableElement(const QVariantList &table
 
 	for (const auto &element : table) {
 		if (i == currentIndex) {
-			result << QVariant(doAssignToTableElement(element.value<QVariantList>()
-					, value
-					, remainingIndex
-					, connection));
+			result << QVariant(doAssignToTableElement(element.value<QVariantList>(), value, remainingIndex,
+				connection));
 		} else {
 			result << element;
 		}
@@ -497,14 +480,11 @@ QVariantList LuaInterpreter::doAssignToTableElement(const QVariantList &table
 	return result;
 }
 
-QVariant LuaInterpreter::slice(const QSharedPointer<core::ast::Node> &indexingExpression
-		, const core::SemanticAnalyzer &semanticAnalyzer)
+QVariant LuaInterpreter::slice(const QSharedPointer<core::ast::Node> &indexingExpression,
+	const core::SemanticAnalyzer &semanticAnalyzer)
 {
-	const auto action = [this] (const QString &name
-			, const QVariantList &table
-			, const QVector<int> &index
-			, const core::Connection &connection)
-	{
+	const auto action = [this](const QString &name, const QVariantList &table, const QVector<int> &index,
+				    const core::Connection &connection) {
 		Q_UNUSED(name);
 
 		QVariantList slice = table;
@@ -519,9 +499,8 @@ QVariant LuaInterpreter::slice(const QSharedPointer<core::ast::Node> &indexingEx
 			}
 
 			if (i < 0) {
-				mErrors.append(core::Error(connection
-						, QObject::tr("Negative index for a table")
-						, core::ErrorType::runtimeError, core::Severity::error));
+				mErrors.append(core::Error(connection, QObject::tr("Negative index for a table"),
+					core::ErrorType::runtimeError, core::Severity::error));
 				return QVariant();
 			}
 
@@ -533,9 +512,8 @@ QVariant LuaInterpreter::slice(const QSharedPointer<core::ast::Node> &indexingEx
 		}
 
 		if (lastIndex < 0) {
-			mErrors.append(core::Error(connection
-					, QObject::tr("Negative index for a table")
-					, core::ErrorType::runtimeError, core::Severity::error));
+			mErrors.append(core::Error(connection, QObject::tr("Negative index for a table"),
+				core::ErrorType::runtimeError, core::Severity::error));
 			return QVariant();
 		}
 

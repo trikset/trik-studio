@@ -63,7 +63,7 @@ public:
 	qreal friction() const override;
 	qreal onePercentAngularVelocity() const override;
 	QList<QPointF> wheelsPosition() const override;
-	QPair<qreal, int> rangeSensorAngleAndDistance (const kitBase::robotModel::DeviceInfo &deviceType) const override;
+	QPair<qreal, int> rangeSensorAngleAndDistance(const kitBase::robotModel::DeviceInfo &deviceType) const override;
 
 	void setWheelPorts(const QString &leftWheelPort, const QString &rightWheelPort);
 
@@ -76,10 +76,8 @@ public:
 	void setMailbox(trikNetwork::MailboxInterface &mailbox);
 
 private:
-	kitBase::robotModel::robotParts::Device *createDevice(
-			const kitBase::robotModel::PortInfo &port
-			, const kitBase::robotModel::DeviceInfo &deviceInfo
-			) override;
+	kitBase::robotModel::robotParts::Device *createDevice(const kitBase::robotModel::PortInfo &port,
+		const kitBase::robotModel::DeviceInfo &deviceInfo) override;
 
 	void onInterpretationStarted() override;
 

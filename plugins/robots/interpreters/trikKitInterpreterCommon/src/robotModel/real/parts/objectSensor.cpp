@@ -17,8 +17,8 @@
 using namespace trik::robotModel::real::parts;
 using namespace kitBase::robotModel;
 
-ObjectSensor::ObjectSensor(const DeviceInfo &info, const PortInfo &port
-		, utils::robotCommunication::TcpRobotCommunicator &robotCommunicator)
+ObjectSensor::ObjectSensor(const DeviceInfo &info, const PortInfo &port,
+	utils::robotCommunication::TcpRobotCommunicator &robotCommunicator)
 	: robotModel::parts::TrikObjectSensor(info, port)
 	, mRobotCommunicator(robotCommunicator)
 {

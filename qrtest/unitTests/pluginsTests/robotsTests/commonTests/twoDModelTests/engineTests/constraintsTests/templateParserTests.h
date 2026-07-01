@@ -44,41 +44,52 @@ struct ErrorTestCase {
 	std::string testName;
 };
 
-class XmlTemplateErrorTest : public XmlTemplateTestBase,
-			    public ::testing::WithParamInterface<ErrorTestCase> {
+class XmlTemplateErrorTest : public XmlTemplateTestBase, public ::testing::WithParamInterface<ErrorTestCase>
+{
 protected:
-	void SetUp() override {
+	void SetUp() override
+	{
 		XmlTemplateTestBase::SetUp();
 		mCurrentTestCase = GetParam();
 		mMockTemplate = std::make_unique<XmlTemplateMock>("test_template");
 	}
 
-	void TearDown() override {
+	void TearDown() override
+	{
 		mMockTemplate.reset();
 	}
 
-	const ErrorTestCase& testCase() const { return mCurrentTestCase; }
+	const ErrorTestCase &testCase() const
+	{
+		return mCurrentTestCase;
+	}
 	std::unique_ptr<XmlTemplateMock> mMockTemplate;
 
 private:
 	ErrorTestCase mCurrentTestCase;
 };
 
-class XmlTemplateParserErrorTest : public XmlTemplateTestBase,
-			    public ::testing::WithParamInterface<ErrorTestCase> {
+class XmlTemplateParserErrorTest : public XmlTemplateTestBase, public ::testing::WithParamInterface<ErrorTestCase>
+{
 protected:
-	void SetUp() override {
+	void SetUp() override
+	{
 		XmlTemplateTestBase::SetUp();
 		mCurrentTestCase = GetParam();
 		mMockTemplateParser = std::make_unique<XmlTemplateParserMock>();
 	}
 
-	void TearDown() override {
+	void TearDown() override
+	{
 		mMockTemplateParser.reset();
 	}
 
-	const ErrorTestCase& testCase() const { return mCurrentTestCase; }
+	const ErrorTestCase &testCase() const
+	{
+		return mCurrentTestCase;
+	}
 	std::unique_ptr<XmlTemplateParserMock> mMockTemplateParser;
+
 private:
 	ErrorTestCase mCurrentTestCase;
 };
@@ -92,18 +103,24 @@ struct SubstitutionErrorTestCase {
 };
 
 class XmlTemplateSubstitutionErrorTest : public XmlTemplateTestBase,
-			    public ::testing::WithParamInterface<SubstitutionErrorTestCase> {
+					 public ::testing::WithParamInterface<SubstitutionErrorTestCase>
+{
 protected:
-	void SetUp() override {
+	void SetUp() override
+	{
 		XmlTemplateTestBase::SetUp();
 		mMockTemplate = std::make_unique<XmlTemplateMock>("test_template");
 	}
 
-	void TearDown() override {
+	void TearDown() override
+	{
 		mMockTemplate.reset();
 	}
 
-	const SubstitutionErrorTestCase& testCase() const { return mCurrentTestCase; }
+	const SubstitutionErrorTestCase &testCase() const
+	{
+		return mCurrentTestCase;
+	}
 	std::unique_ptr<XmlTemplateMock> mMockTemplate;
 	//std::unique_ptr<XmlTemplateParserMock> mMockTemplateParser;
 private:
@@ -111,23 +128,30 @@ private:
 };
 
 class XmlTemplateParserSubstitutionErrorTest : public XmlTemplateTestBase,
-			    public ::testing::WithParamInterface<SubstitutionErrorTestCase> {
+					       public ::testing::WithParamInterface<SubstitutionErrorTestCase>
+{
 protected:
-	void SetUp() override {
+	void SetUp() override
+	{
 		XmlTemplateTestBase::SetUp();
 		mTemplateManager = std::make_unique<twoDModel::templates::details::TemplatesManager>();
 		mMockTemplateParser = std::make_unique<XmlTemplateParserMock>();
 		mMockTemplateProcessor = std::make_unique<XmlTemplateProcessorMock>(mTemplateManager.get());
 	}
 
-	void TearDown() override {
+	void TearDown() override
+	{
 		mMockTemplateProcessor.reset();
 	}
 
-	const SubstitutionErrorTestCase& testCase() const { return mCurrentTestCase; }
+	const SubstitutionErrorTestCase &testCase() const
+	{
+		return mCurrentTestCase;
+	}
 	std::unique_ptr<twoDModel::templates::details::TemplatesManager> mTemplateManager;
 	std::unique_ptr<XmlTemplateParserMock> mMockTemplateParser;
 	std::unique_ptr<XmlTemplateProcessorMock> mMockTemplateProcessor;
+
 private:
 	SubstitutionErrorTestCase mCurrentTestCase;
 };

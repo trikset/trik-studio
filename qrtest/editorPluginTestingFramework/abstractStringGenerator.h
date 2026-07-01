@@ -23,7 +23,7 @@ class AbstractStringGenerator
 {
 public:
 	/// clones StringGenerator and inits cloned generator
-	virtual AbstractStringGenerator* clone() const = 0;
+	virtual AbstractStringGenerator *clone() const = 0;
 
 	/// generates string of results for one method of one interface
 	virtual QString generateString() const = 0;
@@ -36,7 +36,9 @@ public:
 
 	/// generates name of tested method
 	virtual QString methodName() const = 0;
-	virtual ~AbstractStringGenerator() {}
+	virtual ~AbstractStringGenerator()
+	{
+	}
 };
 
 }

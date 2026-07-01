@@ -24,7 +24,7 @@ public:
 	explicit ShortcutEdit(QWidget *parent = nullptr);
 
 	bool event(QEvent *event);
-	
+
 Q_SIGNALS:
 	void newKey(const int key);
 	void newModifiers(Qt::KeyboardModifiers modifiers);

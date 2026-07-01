@@ -28,12 +28,7 @@ class TWO_D_MODEL_EXPORT SizeUnit
 {
 public:
 	/// Possible units of measurement
-	enum class Unit {
-		Pixels
-		, Centimeters
-		, Meters
-		, Millimeters
-	};
+	enum class Unit { Pixels, Centimeters, Meters, Millimeters };
 
 	SizeUnit() = default;
 
@@ -66,9 +61,10 @@ public:
 	static std::map<QString, Unit> currentValues();
 
 	static Unit defaultUnit();
+
 private:
-	Unit mSizeUnit { Unit::Centimeters };
-	qreal mPixelsInCm { twoDModel::pixelsInCm };
+	Unit mSizeUnit {Unit::Centimeters};
+	qreal mPixelsInCm {twoDModel::pixelsInCm};
 };
 
 }

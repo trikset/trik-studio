@@ -59,8 +59,8 @@ bool TouchSupportManager::eventFilter(QObject *object, QEvent *event)
 		return false;
 	}
 
-	QMouseEvent * const mouseEvent = dynamic_cast<QMouseEvent *>(event);
-#if(QT_VERSION >= QT_VERSION_CHECK(5, 3, 0))
+	QMouseEvent *const mouseEvent = dynamic_cast<QMouseEvent *>(event);
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 3, 0))
 	if (isMouseEvent && mouseEvent->source() != Qt::MouseEventNotSynthesized) {
 		// Starting from version 5.3.0 Qt generates extra mouse events even on
 		// accepted touch events, filtering out such case...
@@ -69,21 +69,21 @@ bool TouchSupportManager::eventFilter(QObject *object, QEvent *event)
 #endif
 
 	switch (eventType) {
-		case QEvent::Gesture:
-			return handleGesture(static_cast<QGestureEvent *>(event));
-		case QEvent::MouseButtonPress:
-			mScroller.onMousePress(mouseEvent);
-			break;
-		case QEvent::MouseMove:
-			mScroller.onMouseMove(mouseEvent);
-			break;
-		case QEvent::MouseButtonRelease:
-			mScroller.onMouseRelease(object, mouseEvent);
-			break;
-		// For some reason touch events can`t be processed here and must be
-		// processed in scroll area`s viewport event
-		default:
-			break;
+	case QEvent::Gesture:
+		return handleGesture(static_cast<QGestureEvent *>(event));
+	case QEvent::MouseButtonPress:
+		mScroller.onMousePress(mouseEvent);
+		break;
+	case QEvent::MouseMove:
+		mScroller.onMouseMove(mouseEvent);
+		break;
+	case QEvent::MouseButtonRelease:
+		mScroller.onMouseRelease(object, mouseEvent);
+		break;
+	// For some reason touch events can`t be processed here and must be
+	// processed in scroll area`s viewport event
+	default:
+		break;
 	}
 
 	return false;
@@ -94,8 +94,7 @@ void TouchSupportManager::grabTapAndHold()
 	mEditorView->grabGesture(Qt::TapAndHoldGesture);
 }
 
-void TouchSupportManager::simulateMouse(QObject *reciever, QEvent::Type event, QPointF pos
-		, Qt::MouseButtons buttons)
+void TouchSupportManager::simulateMouse(QObject *reciever, QEvent::Type event, QPointF pos, Qt::MouseButtons buttons)
 {
 	QMouseEvent *mouseEvent = new QMouseEvent(event, pos, mButton, buttons, Qt::NoModifier);
 	QApplication::postEvent(reciever, mouseEvent);
@@ -138,7 +137,7 @@ void TouchSupportManager::simulateRightClick(QTapAndHoldGesture *gesture)
 
 bool TouchSupportManager::isElementUnder(QPointF pos)
 {
-	for (QGraphicsItem * const item : mEditorView->items(pos.toPoint())) {
+	for (QGraphicsItem *const item : mEditorView->items(pos.toPoint())) {
 		if (dynamic_cast<Element *>(item)) {
 			return true;
 		}
@@ -202,7 +201,7 @@ bool TouchSupportManager::processTouchEvent(QTouchEvent *event)
 void TouchSupportManager::handleOneFingerTouch(QTouchEvent *event)
 {
 	const QPointF touchPoint = event->touchPoints()[0].pos();
-	switch(event->type()) {
+	switch (event->type()) {
 	case QEvent::TouchBegin: {
 		mEditorView->scene()->clearSelection();
 		const bool elementUnder = isElementUnder(event->touchPoints()[0].pos());
@@ -229,8 +228,8 @@ void TouchSupportManager::handleOneFingerTouch(QTouchEvent *event)
 			} else {
 				// Simulating right button click for mouse gestures drawing or left button click
 				// for clearing selection
-				simulatePress(event, mEditorView->scene()->selectedItems().isEmpty()
-						? Qt::RightButton : Qt::LeftButton);
+				simulatePress(event, mEditorView->scene()->selectedItems().isEmpty() ? Qt::RightButton
+												     : Qt::LeftButton);
 			}
 		}
 
@@ -251,7 +250,7 @@ void TouchSupportManager::handleOneFingerTouch(QTouchEvent *event)
 		// under this point will be selected.
 		const qreal maxDistance = 10;
 		if (isElementUnder(touchPoint)
-				&& mathUtils::Geometry::distance(mLastTouchBeginPoint, touchPoint) < maxDistance) {
+			&& mathUtils::Geometry::distance(mLastTouchBeginPoint, touchPoint) < maxDistance) {
 			// Selecting the element under the finger
 			simulatePress(event);
 			simulateRelease(event);

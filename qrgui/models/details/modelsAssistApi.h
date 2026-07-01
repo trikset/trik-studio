@@ -38,20 +38,19 @@ class AbstractModel;
 class ModelsAssistApi
 {
 public:
-	ModelsAssistApi(details::modelsImplementation::AbstractModel &model
-			, const EditorManagerInterface &editorManagerInterface);
+	ModelsAssistApi(details::modelsImplementation::AbstractModel &model,
+		const EditorManagerInterface &editorManagerInterface);
 	const EditorManagerInterface &editorManagerInterface() const;
 
 	/// @todo: use ElementInfo here.
-	Id createElement(const Id &parent, const Id &id, const Id &logicalId
-			, bool isFromLogicalModel, const QString &name, QPointF position);
+	Id createElement(const Id &parent, const Id &id, const Id &logicalId, bool isFromLogicalModel,
+		const QString &name, QPointF position);
 
 	/// Stacks item element before sibling (they should have the same parent)
 	void stackBefore(const Id &element, const Id &sibling);
 
 	void setTo(const Id &elem, const Id &newValue);
 	Id to(const Id &elem) const;
-
 
 	void setFrom(const Id &elem, const Id &newValue);
 	Id from(const Id &elem) const;
@@ -72,7 +71,7 @@ public:
 private:
 
 	ModelsAssistApi(const ModelsAssistApi &);
-	ModelsAssistApi& operator =(const ModelsAssistApi &);
+	ModelsAssistApi &operator=(const ModelsAssistApi &);
 
 	details::modelsImplementation::AbstractModel &mModel;
 	const EditorManagerInterface &mEditorManagerInterface;

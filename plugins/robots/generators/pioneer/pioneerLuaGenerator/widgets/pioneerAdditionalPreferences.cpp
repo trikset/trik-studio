@@ -63,7 +63,7 @@ void PioneerAdditionalPreferences::restoreSettings()
 	updateComboBox(mUi->baseStationModeComboBox, settings::pioneerBaseStationMode);
 }
 
-void PioneerAdditionalPreferences::onRobotModelChanged(kitBase::robotModel::RobotModelInterface * const robotModel)
+void PioneerAdditionalPreferences::onRobotModelChanged(kitBase::robotModel::RobotModelInterface *const robotModel)
 {
 	Q_UNUSED(robotModel);
 }

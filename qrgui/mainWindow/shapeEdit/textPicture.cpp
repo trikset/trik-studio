@@ -33,7 +33,7 @@ TextPicture::TextPicture(int x, int y, const QString &text)
 	init(x, y, text);
 }
 
-void TextPicture::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
+void TextPicture::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 	Q_UNUSED(option);
 	Q_UNUSED(widget);
@@ -51,8 +51,8 @@ void TextPicture::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* op
 		QString temp = str.left(i);
 		str.remove(0, i + 1);
 		QRectF rect;
-		painter->drawText(QRectF(static_cast<int>(x), static_cast<int>(y), 500, 500)
-				, Qt::AlignLeft | Qt::AlignTop, temp, &rect);
+		painter->drawText(QRectF(static_cast<int>(x), static_cast<int>(y), 500, 500),
+			Qt::AlignLeft | Qt::AlignTop, temp, &rect);
 		y += painter->font().pixelSize();
 		mBoundingRect |= rect;
 		countStr++;
@@ -60,7 +60,7 @@ void TextPicture::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* op
 	drawForPictureText(painter, mBoundingRect);
 }
 
-void TextPicture::drawForPictureText(QPainter* painter, QRectF rect)
+void TextPicture::drawForPictureText(QPainter *painter, QRectF rect)
 {
 	QPen pen(Qt::gray);
 	pen.setWidth(1);
@@ -95,7 +95,7 @@ void TextPicture::setTextName(const QString &name)
 	mText.setPlainText(name);
 }
 
-void TextPicture::setFontFamily(const QFont& font)
+void TextPicture::setFontFamily(const QFont &font)
 {
 	mFont.setFamily(font.family());
 }
@@ -128,7 +128,7 @@ void TextPicture::setFontUnderline(bool isChecked)
 void TextPicture::readFont(const QDomElement &docItem)
 {
 	const QDomElement &dom = docItem;
-	if(!dom.isNull()) {
+	if (!dom.isNull()) {
 		if (dom.hasAttribute("font-fill")) {
 			const QColor color = dom.attribute("font-fill");
 			setPen(QPen(color));
@@ -139,12 +139,10 @@ void TextPicture::readFont(const QDomElement &docItem)
 			if (fontsize.endsWith("%")) {
 				fontsize.chop(1);
 				mFont.setPixelSize(fontsize.toInt() / 100);
-			}
-			else if (fontsize.endsWith("a")) {
+			} else if (fontsize.endsWith("a")) {
 				fontsize.chop(1);
 				mFont.setPixelSize(fontsize.toInt());
-			}
-			else {
+			} else {
 				mFont.setPixelSize(fontsize.toInt());
 			}
 		}
@@ -180,8 +178,8 @@ QDomElement TextPicture::setFontToDoc(QDomDocument &document, const QString &dom
 	return dom;
 }
 
-QPair<QDomElement, Item::DomElementTypes> TextPicture::generateItem(QDomDocument &document
-		, const QPoint &topLeftPicture)
+QPair<QDomElement, Item::DomElementTypes> TextPicture::generateItem(QDomDocument &document,
+	const QPoint &topLeftPicture)
 {
 	QDomElement text = setFontToDoc(document, "text");
 	const int x1 = static_cast<int>(mapToScene(mBoundingRect).boundingRect().left() - topLeftPicture.x());
