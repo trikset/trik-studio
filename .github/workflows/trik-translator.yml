@@ -57,7 +57,7 @@ jobs:
       - name: Run machine
         working-directory: ${{ env.TRIK_TRANSLATOR_PATH }}
         run: |
-          for lang in "$GITHUB_WORKSPACE"/qtranslations/*/; do
+          for lang in "$GITHUB_WORKSPACE"/qrtranslations/*/; do
             lang=$(basename "$lang")
             uv run main.py "$GITHUB_WORKSPACE" "$lang" --max_tokens 10000
           done
