@@ -13,11 +13,11 @@
     </message>
     <message>
         <source>true</source>
-        <translation type="vanished">vrai</translation>
+        <translation>vrai</translation>
     </message>
     <message>
         <source>false</source>
-        <translation type="vanished">faux</translation>
+        <translation>faux</translation>
     </message>
 </context>
 <context>
@@ -32,342 +32,342 @@
     </message>
     <message>
         <source>true</source>
-        <translation type="vanished">vrai</translation>
+        <translation>vrai</translation>
     </message>
     <message>
         <source>false</source>
-        <translation type="vanished">faux</translation>
+        <translation>faux</translation>
     </message>
 </context>
 <context>
     <name>QtCharEdit</name>
     <message>
         <source>Clear Char</source>
-        <translation type="vanished">Effacer</translation>
+        <translation>Effacer</translation>
     </message>
 </context>
 <context>
     <name>QtColorEditWidget</name>
     <message>
         <source>...</source>
-        <translation type="vanished">...</translation>
+        <translation>...</translation>
     </message>
 </context>
 <context>
     <name>QtColorPropertyManager</name>
     <message>
         <source>Red</source>
-        <translation type="vanished">Rouge</translation>
+        <translation>Rouge</translation>
     </message>
     <message>
         <source>Green</source>
-        <translation type="vanished">Vert</translation>
+        <translation>Vert</translation>
     </message>
     <message>
         <source>Blue</source>
-        <translation type="vanished">Bleu</translation>
+        <translation>Bleu</translation>
     </message>
     <message>
         <source>Alpha</source>
-        <translation type="vanished">Alpha</translation>
+        <translation>Alpha</translation>
     </message>
 </context>
 <context>
     <name>QtCursorDatabase</name>
     <message>
         <source>Arrow</source>
-        <translation type="vanished">Pointe</translation>
+        <translation>Pointe</translation>
     </message>
     <message>
         <source>Up Arrow</source>
-        <translation type="vanished">Flèche vers le haut</translation>
+        <translation>Flèche vers le haut</translation>
     </message>
     <message>
         <source>Cross</source>
-        <translation type="vanished">Croix</translation>
+        <translation>Croix</translation>
     </message>
     <message>
         <source>Wait</source>
-        <translation type="vanished">Attendre</translation>
+        <translation>Attendre</translation>
     </message>
     <message>
         <source>IBeam</source>
-        <translation type="vanished">IBeam</translation>
+        <translation>IBeam</translation>
     </message>
     <message>
         <source>Size Vertical</source>
-        <translation type="vanished">Hauteur</translation>
+        <translation>Hauteur</translation>
     </message>
     <message>
         <source>Size Horizontal</source>
-        <translation type="vanished">Largeur</translation>
+        <translation>Largeur</translation>
     </message>
     <message>
         <source>Size Backslash</source>
-        <translation type="vanished">Taille barre oblique inverse</translation>
+        <translation>Taille barre oblique inverse</translation>
     </message>
     <message>
         <source>Size Slash</source>
-        <translation type="vanished">Taille barre oblique</translation>
+        <translation>Taille barre oblique</translation>
     </message>
     <message>
         <source>Size All</source>
-        <translation type="vanished">Taille tout</translation>
+        <translation>Taille tout</translation>
     </message>
     <message>
         <source>Blank</source>
-        <translation type="vanished">Vide</translation>
+        <translation>Vide</translation>
     </message>
     <message>
         <source>Split Vertical</source>
-        <translation type="vanished">Fractionner verticalement</translation>
+        <translation>Fractionner verticalement</translation>
     </message>
     <message>
         <source>Split Horizontal</source>
-        <translation type="vanished">Fractionner horizontalement</translation>
+        <translation>Fractionner horizontalement</translation>
     </message>
     <message>
         <source>Pointing Hand</source>
-        <translation type="vanished">Main pointant</translation>
+        <translation>Main pointant</translation>
     </message>
     <message>
         <source>Forbidden</source>
-        <translation type="vanished">Interdit</translation>
+        <translation>Interdit</translation>
     </message>
     <message>
         <source>Open Hand</source>
-        <translation type="vanished">Main ouverte</translation>
+        <translation>Main ouverte</translation>
     </message>
     <message>
         <source>Closed Hand</source>
-        <translation type="vanished">Main fermée</translation>
+        <translation>Main fermée</translation>
     </message>
     <message>
         <source>What&apos;s This</source>
-        <translation type="vanished">Qu&apos;est-ce que c&apos;est</translation>
+        <translation>Qu&apos;est-ce que c&apos;est</translation>
     </message>
     <message>
         <source>Busy</source>
-        <translation type="vanished">Occupé</translation>
+        <translation>Occupé</translation>
     </message>
 </context>
 <context>
     <name>QtFontEditWidget</name>
     <message>
         <source>...</source>
-        <translation type="vanished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <source>Select Font</source>
-        <translation type="vanished">Choisir la police</translation>
+        <translation>Choisir la police</translation>
     </message>
 </context>
 <context>
     <name>QtFontPropertyManager</name>
     <message>
         <source>Family</source>
-        <translation type="vanished">Famille</translation>
+        <translation>Famille</translation>
     </message>
     <message>
         <source>Point Size</source>
-        <translation type="vanished">Taille de point</translation>
+        <translation>Taille de point</translation>
     </message>
     <message>
         <source>Bold</source>
-        <translation type="vanished">Gras</translation>
+        <translation>Gras</translation>
     </message>
     <message>
         <source>Italic</source>
-        <translation type="vanished">Italique</translation>
+        <translation>Italique</translation>
     </message>
     <message>
         <source>Underline</source>
-        <translation type="vanished">Souligné</translation>
+        <translation>Souligné</translation>
     </message>
     <message>
         <source>Strikeout</source>
-        <translation type="vanished">Barré</translation>
+        <translation>Barré</translation>
     </message>
     <message>
         <source>Kerning</source>
-        <translation type="vanished">Crénage</translation>
+        <translation>Crénage</translation>
     </message>
 </context>
 <context>
     <name>QtKeySequenceEdit</name>
     <message>
         <source>Clear Shortcut</source>
-        <translation type="vanished">Effacer</translation>
+        <translation>Effacer</translation>
     </message>
 </context>
 <context>
     <name>QtLocalePropertyManager</name>
     <message>
         <source>%1, %2</source>
-        <translation type="vanished">%1, %2</translation>
+        <translation>%1, %2</translation>
     </message>
     <message>
         <source>Language</source>
-        <translation type="vanished">Langage</translation>
+        <translation>Langage</translation>
     </message>
     <message>
         <source>Country</source>
-        <translation type="vanished">Pays</translation>
+        <translation>Pays</translation>
     </message>
 </context>
 <context>
     <name>QtPointFPropertyManager</name>
     <message>
         <source>(%1, %2)</source>
-        <translation type="vanished">(%1, %2)</translation>
+        <translation>(%1, %2)</translation>
     </message>
     <message>
         <source>X</source>
-        <translation type="vanished">X</translation>
+        <translation>X</translation>
     </message>
     <message>
         <source>Y</source>
-        <translation type="vanished">Y</translation>
+        <translation>Y</translation>
     </message>
 </context>
 <context>
     <name>QtPointPropertyManager</name>
     <message>
         <source>(%1, %2)</source>
-        <translation type="vanished">(%1, %2)</translation>
+        <translation>(%1, %2)</translation>
     </message>
     <message>
         <source>X</source>
-        <translation type="vanished">X</translation>
+        <translation>X</translation>
     </message>
     <message>
         <source>Y</source>
-        <translation type="vanished">Y</translation>
+        <translation>Y</translation>
     </message>
 </context>
 <context>
     <name>QtPropertyBrowserUtils</name>
     <message>
         <source>[%1, %2, %3] (%4)</source>
-        <translation type="vanished">[%1, %2, %3] (%4)</translation>
+        <translation>[%1, %2, %3] (%4)</translation>
     </message>
     <message>
         <source>[%1, %2]</source>
-        <translation type="vanished">[%1, %2]</translation>
+        <translation>[%1, %2]</translation>
     </message>
 </context>
 <context>
     <name>QtRectFPropertyManager</name>
     <message>
         <source>[(%1, %2), %3 x %4]</source>
-        <translation type="vanished">[(%1, %2), %3 x %4]</translation>
+        <translation>[(%1, %2), %3 x %4]</translation>
     </message>
     <message>
         <source>X</source>
-        <translation type="vanished">X</translation>
+        <translation>X</translation>
     </message>
     <message>
         <source>Y</source>
-        <translation type="vanished">Y</translation>
+        <translation>Y</translation>
     </message>
     <message>
         <source>Width</source>
-        <translation type="vanished">Largeur</translation>
+        <translation>Largeur</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation type="vanished">Hauteur</translation>
+        <translation>Hauteur</translation>
     </message>
 </context>
 <context>
     <name>QtRectPropertyManager</name>
     <message>
         <source>[(%1, %2), %3 x %4]</source>
-        <translation type="vanished">[(%1, %2), %3 x %4]</translation>
+        <translation>[(%1, %2), %3 x %4]</translation>
     </message>
     <message>
         <source>X</source>
-        <translation type="vanished">X</translation>
+        <translation>X</translation>
     </message>
     <message>
         <source>Y</source>
-        <translation type="vanished">Y</translation>
+        <translation>Y</translation>
     </message>
     <message>
         <source>Width</source>
-        <translation type="vanished">Largeur</translation>
+        <translation>Largeur</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation type="vanished">Hauteur</translation>
+        <translation>Hauteur</translation>
     </message>
 </context>
 <context>
     <name>QtSizeFPropertyManager</name>
     <message>
         <source>%1 x %2</source>
-        <translation type="vanished">%1 x %2</translation>
+        <translation>%1 x %2</translation>
     </message>
     <message>
         <source>Width</source>
-        <translation type="vanished">Largeur</translation>
+        <translation>Largeur</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation type="vanished">Hauteur</translation>
+        <translation>Hauteur</translation>
     </message>
 </context>
 <context>
     <name>QtSizePolicyPropertyManager</name>
     <message>
         <source>&lt;Invalid&gt;</source>
-        <translation type="vanished">&lt;valeur incorrecte&gt;</translation>
+        <translation>&lt;valeur incorrecte&gt;</translation>
     </message>
     <message>
         <source>[%1, %2, %3, %4]</source>
-        <translation type="vanished">[%1, %2, %3, %4]</translation>
+        <translation>[%1, %2, %3, %4]</translation>
     </message>
     <message>
         <source>Horizontal Policy</source>
-        <translation type="vanished">Politique horizontale</translation>
+        <translation>Politique horizontale</translation>
     </message>
     <message>
         <source>Vertical Policy</source>
-        <translation type="vanished">Politique verticale</translation>
+        <translation>Politique verticale</translation>
     </message>
     <message>
         <source>Horizontal Stretch</source>
-        <translation type="vanished">Étirement horizontal</translation>
+        <translation>Étirement horizontal</translation>
     </message>
     <message>
         <source>Vertical Stretch</source>
-        <translation type="vanished">Étirement vertical</translation>
+        <translation>Étirement vertical</translation>
     </message>
 </context>
 <context>
     <name>QtSizePropertyManager</name>
     <message>
         <source>%1 x %2</source>
-        <translation type="vanished">%1 x %2</translation>
+        <translation>%1 x %2</translation>
     </message>
     <message>
         <source>Width</source>
-        <translation type="vanished">Largeur</translation>
+        <translation>Largeur</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation type="vanished">Hauteur</translation>
+        <translation>Hauteur</translation>
     </message>
 </context>
 <context>
     <name>QtTreePropertyBrowser</name>
     <message>
         <source>Property</source>
-        <translation type="vanished">Propriété</translation>
+        <translation>Propriété</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="vanished">Valeur</translation>
+        <translation>Valeur</translation>
     </message>
 </context>
 </TS>
