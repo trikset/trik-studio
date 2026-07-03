@@ -5,353 +5,353 @@
     <name>QtBoolEdit</name>
     <message>
         <source>true</source>
-        <translation>истина</translation>
+        <translation type="vanished">истина</translation>
     </message>
     <message>
         <source>false</source>
-        <translation>ложь</translation>
+        <translation type="vanished">ложь</translation>
     </message>
 </context>
 <context>
     <name>QtBoolPropertyManager</name>
     <message>
         <source>true</source>
-        <translation>истина</translation>
+        <translation type="vanished">истина</translation>
     </message>
     <message>
         <source>false</source>
-        <translation>ложь</translation>
+        <translation type="vanished">ложь</translation>
     </message>
 </context>
 <context>
     <name>QtCharEdit</name>
     <message>
         <source>Clear Char</source>
-        <translation>Очистить</translation>
+        <translation type="vanished">Очистить</translation>
     </message>
 </context>
 <context>
     <name>QtColorEditWidget</name>
     <message>
         <source>...</source>
-        <translation>...</translation>
+        <translation type="vanished">...</translation>
     </message>
 </context>
 <context>
     <name>QtColorPropertyManager</name>
     <message>
         <source>Red</source>
-        <translation>Красный</translation>
+        <translation type="vanished">Красный</translation>
     </message>
     <message>
         <source>Green</source>
-        <translation>Зеленый</translation>
+        <translation type="vanished">Зеленый</translation>
     </message>
     <message>
         <source>Blue</source>
-        <translation>Синий</translation>
+        <translation type="vanished">Синий</translation>
     </message>
     <message>
         <source>Alpha</source>
-        <translation>Прозрачность (Альфа)</translation>
+        <translation type="vanished">Прозрачность (Альфа)</translation>
     </message>
 </context>
 <context>
     <name>QtCursorDatabase</name>
     <message>
         <source>Arrow</source>
-        <translation>Стрелка</translation>
+        <translation type="vanished">Стрелка</translation>
     </message>
     <message>
         <source>Up Arrow</source>
-        <translation>Стрелка вверх</translation>
+        <translation type="vanished">Стрелка вверх</translation>
     </message>
     <message>
         <source>Cross</source>
-        <translation>Крест</translation>
+        <translation type="vanished">Крест</translation>
     </message>
     <message>
         <source>Wait</source>
-        <translation>Ожидание</translation>
+        <translation type="vanished">Ожидание</translation>
     </message>
     <message>
         <source>IBeam</source>
-        <translation>Курсор в виде буквы I</translation>
+        <translation type="vanished">Курсор в виде буквы I</translation>
     </message>
     <message>
         <source>Size Vertical</source>
-        <translation>Изменение размера по вертикали</translation>
+        <translation type="vanished">Изменение размера по вертикали</translation>
     </message>
     <message>
         <source>Size Horizontal</source>
-        <translation>Изменение размера по горизонтали</translation>
+        <translation type="vanished">Изменение размера по горизонтали</translation>
     </message>
     <message>
         <source>Size Backslash</source>
-        <translation>Изменение размера по диагонали (обратный слеш)</translation>
+        <translation type="vanished">Изменение размера по диагонали (обратный слеш)</translation>
     </message>
     <message>
         <source>Size Slash</source>
-        <translation>Изменение размера по диагонали (прямой слеш)</translation>
+        <translation type="vanished">Изменение размера по диагонали (прямой слеш)</translation>
     </message>
     <message>
         <source>Size All</source>
-        <translation>Изменение размера во всех направлениях</translation>
+        <translation type="vanished">Изменение размера во всех направлениях</translation>
     </message>
     <message>
         <source>Blank</source>
-        <translation>Пусто</translation>
+        <translation type="vanished">Пусто</translation>
     </message>
     <message>
         <source>Split Vertical</source>
-        <translation>Вертикальное разделение</translation>
+        <translation type="vanished">Вертикальное разделение</translation>
     </message>
     <message>
         <source>Split Horizontal</source>
-        <translation>Горизонтальное разделение</translation>
+        <translation type="vanished">Горизонтальное разделение</translation>
     </message>
     <message>
         <source>Pointing Hand</source>
-        <translation>Указывающая рука</translation>
+        <translation type="vanished">Указывающая рука</translation>
     </message>
     <message>
         <source>Forbidden</source>
-        <translation>Запрещено</translation>
+        <translation type="vanished">Запрещено</translation>
     </message>
     <message>
         <source>Open Hand</source>
-        <translation>Открытая рука</translation>
+        <translation type="vanished">Открытая рука</translation>
     </message>
     <message>
         <source>Closed Hand</source>
-        <translation>Закрытая рука</translation>
+        <translation type="vanished">Закрытая рука</translation>
     </message>
     <message>
         <source>What&apos;s This</source>
-        <translation>Что это такое</translation>
+        <translation type="vanished">Что это такое</translation>
     </message>
     <message>
         <source>Busy</source>
-        <translation>Занято</translation>
+        <translation type="vanished">Занято</translation>
     </message>
 </context>
 <context>
     <name>QtFontEditWidget</name>
     <message>
         <source>...</source>
-        <translation>...</translation>
+        <translation type="vanished">...</translation>
     </message>
     <message>
         <source>Select Font</source>
-        <translation>Выберите шрифт</translation>
+        <translation type="vanished">Выберите шрифт</translation>
     </message>
 </context>
 <context>
     <name>QtFontPropertyManager</name>
     <message>
         <source>Family</source>
-        <translation>Семейство</translation>
+        <translation type="vanished">Семейство</translation>
     </message>
     <message>
         <source>Point Size</source>
-        <translation>Размер</translation>
+        <translation type="vanished">Размер</translation>
     </message>
     <message>
         <source>Bold</source>
-        <translation>Жирный</translation>
+        <translation type="vanished">Жирный</translation>
     </message>
     <message>
         <source>Italic</source>
-        <translation>Курсив</translation>
+        <translation type="vanished">Курсив</translation>
     </message>
     <message>
         <source>Underline</source>
-        <translation>Подчеркнутый</translation>
+        <translation type="vanished">Подчеркнутый</translation>
     </message>
     <message>
         <source>Strikeout</source>
-        <translation>Перечеркнутый</translation>
+        <translation type="vanished">Перечеркнутый</translation>
     </message>
     <message>
         <source>Kerning</source>
-        <translation>Кернинг</translation>
+        <translation type="vanished">Кернинг</translation>
     </message>
 </context>
 <context>
     <name>QtKeySequenceEdit</name>
     <message>
         <source>Clear Shortcut</source>
-        <translation>Очистить</translation>
+        <translation type="vanished">Очистить</translation>
     </message>
 </context>
 <context>
     <name>QtLocalePropertyManager</name>
     <message>
         <source>%1, %2</source>
-        <translation>%1, %2</translation>
+        <translation type="vanished">%1, %2</translation>
     </message>
     <message>
         <source>Language</source>
-        <translation>Язык</translation>
+        <translation type="vanished">Язык</translation>
     </message>
     <message>
         <source>Country</source>
-        <translation>Страна</translation>
+        <translation type="vanished">Страна</translation>
     </message>
 </context>
 <context>
     <name>QtPointFPropertyManager</name>
     <message>
         <source>(%1, %2)</source>
-        <translation>(%1, %2)</translation>
+        <translation type="vanished">(%1, %2)</translation>
     </message>
     <message>
         <source>X</source>
-        <translation>X</translation>
+        <translation type="vanished">X</translation>
     </message>
     <message>
         <source>Y</source>
-        <translation>Y</translation>
+        <translation type="vanished">Y</translation>
     </message>
 </context>
 <context>
     <name>QtPointPropertyManager</name>
     <message>
         <source>(%1, %2)</source>
-        <translation>(%1, %2)</translation>
+        <translation type="vanished">(%1, %2)</translation>
     </message>
     <message>
         <source>X</source>
-        <translation>X</translation>
+        <translation type="vanished">X</translation>
     </message>
     <message>
         <source>Y</source>
-        <translation>Y</translation>
+        <translation type="vanished">Y</translation>
     </message>
 </context>
 <context>
     <name>QtPropertyBrowserUtils</name>
     <message>
         <source>[%1, %2, %3] (%4)</source>
-        <translation>[%1, %2, %3] (%4)</translation>
+        <translation type="vanished">[%1, %2, %3] (%4)</translation>
     </message>
     <message>
         <source>[%1, %2]</source>
-        <translation>[%1, %2]</translation>
+        <translation type="vanished">[%1, %2]</translation>
     </message>
 </context>
 <context>
     <name>QtRectFPropertyManager</name>
     <message>
         <source>[(%1, %2), %3 x %4]</source>
-        <translation>[(%1, %2), %3 x %4]</translation>
+        <translation type="vanished">[(%1, %2), %3 x %4]</translation>
     </message>
     <message>
         <source>X</source>
-        <translation>X</translation>
+        <translation type="vanished">X</translation>
     </message>
     <message>
         <source>Y</source>
-        <translation>Y</translation>
+        <translation type="vanished">Y</translation>
     </message>
     <message>
         <source>Width</source>
-        <translation>Ширина</translation>
+        <translation type="vanished">Ширина</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation>Высота</translation>
+        <translation type="vanished">Высота</translation>
     </message>
 </context>
 <context>
     <name>QtRectPropertyManager</name>
     <message>
         <source>[(%1, %2), %3 x %4]</source>
-        <translation>[(%1, %2), %3 x %4]</translation>
+        <translation type="vanished">[(%1, %2), %3 x %4]</translation>
     </message>
     <message>
         <source>X</source>
-        <translation>X</translation>
+        <translation type="vanished">X</translation>
     </message>
     <message>
         <source>Y</source>
-        <translation>Y</translation>
+        <translation type="vanished">Y</translation>
     </message>
     <message>
         <source>Width</source>
-        <translation>Ширина</translation>
+        <translation type="vanished">Ширина</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation>Высота</translation>
+        <translation type="vanished">Высота</translation>
     </message>
 </context>
 <context>
     <name>QtSizeFPropertyManager</name>
     <message>
         <source>%1 x %2</source>
-        <translation>%1 x %2</translation>
+        <translation type="vanished">%1 x %2</translation>
     </message>
     <message>
         <source>Width</source>
-        <translation>Ширина</translation>
+        <translation type="vanished">Ширина</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation>Высота</translation>
+        <translation type="vanished">Высота</translation>
     </message>
 </context>
 <context>
     <name>QtSizePolicyPropertyManager</name>
     <message>
         <source>&lt;Invalid&gt;</source>
-        <translation>&lt;Некорректное значение&gt;</translation>
+        <translation type="vanished">&lt;Некорректное значение&gt;</translation>
     </message>
     <message>
         <source>[%1, %2, %3, %4]</source>
-        <translation>[%1, %2, %3, %4]</translation>
+        <translation type="vanished">[%1, %2, %3, %4]</translation>
     </message>
     <message>
         <source>Horizontal Policy</source>
-        <translation>Горизонтальная политика</translation>
+        <translation type="vanished">Горизонтальная политика</translation>
     </message>
     <message>
         <source>Vertical Policy</source>
-        <translation>Вертикальная политика</translation>
+        <translation type="vanished">Вертикальная политика</translation>
     </message>
     <message>
         <source>Horizontal Stretch</source>
-        <translation>Растяжимость по горизонтали</translation>
+        <translation type="vanished">Растяжимость по горизонтали</translation>
     </message>
     <message>
         <source>Vertical Stretch</source>
-        <translation>Растяжимость по вертикали</translation>
+        <translation type="vanished">Растяжимость по вертикали</translation>
     </message>
 </context>
 <context>
     <name>QtSizePropertyManager</name>
     <message>
         <source>%1 x %2</source>
-        <translation>%1 x %2</translation>
+        <translation type="vanished">%1 x %2</translation>
     </message>
     <message>
         <source>Width</source>
-        <translation>Ширина</translation>
+        <translation type="vanished">Ширина</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation>Высота</translation>
+        <translation type="vanished">Высота</translation>
     </message>
 </context>
 <context>
     <name>QtTreePropertyBrowser</name>
     <message>
         <source>Property</source>
-        <translation>Свойство</translation>
+        <translation type="vanished">Свойство</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation>Значение</translation>
+        <translation type="vanished">Значение</translation>
     </message>
 </context>
 </TS>

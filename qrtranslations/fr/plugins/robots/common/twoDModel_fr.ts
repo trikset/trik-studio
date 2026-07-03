@@ -85,7 +85,7 @@
     </message>
     <message>
         <source>When using the extended form for the %1 tag, the number of arguments starting with _ must be %2, %3 was provided</source>
-        <translation type="unfinished"></translation>
+        <translation>Lors de l&apos;utilisation de la forme étendue pour la balise %1, le nombre d&apos;arguments commençant par _ doit être %2, %3 a été fourni</translation>
     </message>
     <message>
         <source>%1 tag must have exactly %2 child tag(s)</source>
@@ -201,91 +201,91 @@
     </message>
     <message>
         <source>The &amp;lt;template&amp;gt; tag was provided, but the required &quot;name&quot; attribute was missing.</source>
-        <translation type="unfinished"></translation>
+        <translation>La balise &amp;lt;template&amp;gt; a été fournie, mais l&apos;attribut requis \&quot;name\&quot; manquait.</translation>
     </message>
     <message>
         <source>Redefinition a template %1 that already exists</source>
-        <translation type="unfinished"></translation>
+        <translation>Redéfinition du modèle %1 qui existe déjà</translation>
     </message>
     <message>
         <source>the &amp;lt;templates&amp;gt; tag can only contain the &amp;lt;template&amp;gt; tag as a child tag, actual %1</source>
-        <translation type="unfinished"></translation>
+        <translation>la balise &amp;lt;templates&amp;gt; ne peut contenir que la balise &amp;lt;template&amp;gt; comme balise enfant, balise actuelle : %1</translation>
     </message>
     <message>
         <source>The &amp;lt;use&amp;gt; tag must contain a &quot;template&quot; attribute</source>
-        <translation type="unfinished"></translation>
+        <translation>La balise &amp;lt;use&amp;gt; doit contenir un attribut \&quot;template\&quot;</translation>
     </message>
     <message>
         <source>Recursive template expansion detected: %1 -&gt; %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Expansion récursive de modèle détectée : %1 -&gt; %2</translation>
     </message>
     <message>
         <source>The &amp;lt;use&amp;gt; tag contains a template=%1 attribute that is not the name of a declared template</source>
-        <translation type="unfinished"></translation>
+        <translation>La balise &amp;lt;use&amp;gt; contient un attribut template=%1 qui ne correspond pas au nom d&apos;un modèle déclaré</translation>
     </message>
     <message>
         <source>After substituting the parameters for the template %1, it did not become a valid xml node</source>
-        <translation type="unfinished"></translation>
+        <translation>Après substitution des paramètres du modèle %1, celui-ci ne constitue pas un nœud XML valide</translation>
     </message>
     <message>
         <source>line %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ligne %1</translation>
     </message>
     <message>
         <source>template %1</source>
-        <translation type="unfinished"></translation>
+        <translation>modèle %1</translation>
     </message>
     <message>
         <source>relative the beginning of the &amp;lt;constraints&amp;gt; tag</source>
-        <translation type="unfinished"></translation>
+        <translation>par rapport au début de la balise &amp;lt;constraints&amp;gt;</translation>
     </message>
     <message>
         <source>relative to the beginning of the %1 template body</source>
-        <translation type="unfinished"></translation>
+        <translation>par rapport au début du corps du modèle %1</translation>
     </message>
     <message>
         <source>Substitution chain: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Chaîne de substitution : %1.</translation>
     </message>
     <message>
         <source>Currently, this method of setting &amp;lt;content&amp;gt; tag for the template %1 is not supported.</source>
-        <translation type="unfinished"></translation>
+        <translation>Actuellement, cette méthode de définition de la balise &amp;lt;content&amp;gt; pour le modèle %1 n&apos;est pas prise en charge.</translation>
     </message>
     <message>
         <source>When defining the template %1, the syntax %2 was used to substitute an offset %3 for an undeclared parameter %4.</source>
-        <translation type="unfinished"></translation>
+        <translation>Lors de la définition du modèle %1, la syntaxe %2 a été utilisée pour substituer un décalage %3 à un paramètre %4 non déclaré.</translation>
     </message>
     <message>
         <source>the &amp;lt;params&amp;gt; tag can only contain the &amp;lt;param&amp;gt; tag as a child tag for template %1, actual tag is &amp;lt;%2&amp;gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>la balise &amp;lt;params&amp;gt; ne peut contenir que la balise &amp;lt;param&amp;gt; comme balise enfant pour le modèle %1, la balise actuelle est &amp;lt;%2&amp;gt;</translation>
     </message>
     <message>
         <source>The &amp;lt;param&amp;gt; tag of template %1 was provided, but the required &quot;name&quot; attribute was missing.</source>
-        <translation type="unfinished"></translation>
+        <translation>La balise &amp;lt;param&amp;gt; du modèle %1 a été fournie, mais l&apos;attribut requis \&quot;name\&quot; manquait.</translation>
     </message>
     <message>
         <source>The &amp;lt;template&amp;gt; of template %1 tag was provided, but the required child tag &amp;lt;content&amp;gt; was missing</source>
-        <translation type="unfinished"></translation>
+        <translation>La balise &amp;lt;template&amp;gt; du modèle %1 a été fournie, mais la balise enfant requise &amp;lt;content&amp;gt; manquait</translation>
     </message>
     <message>
         <source>The using an undeclared parameter %1 for template %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Utilisation d&apos;un paramètre %1 non déclaré pour le modèle %2</translation>
     </message>
     <message>
         <source>The &amp;lt;use&amp;gt; tag can only contain a child tag &amp;lt;with&amp;gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>La balise &amp;lt;use&amp;gt; ne peut contenir que la balise enfant &amp;lt;with&amp;gt;</translation>
     </message>
     <message>
         <source>The parameter %1 of template %2 has no default value and was not explicitly specified by the user</source>
-        <translation type="unfinished"></translation>
+        <translation>Le paramètre %1 du modèle %2 n&apos;a pas de valeur par défaut et n&apos;a pas été spécifié explicitement par l&apos;utilisateur</translation>
     </message>
     <message>
         <source>Error while template substitution: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur lors de la substitution du modèle : %1</translation>
     </message>
     <message>
         <source>Error while parsing template: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur lors de l&apos;analyse du modèle : %1</translation>
     </message>
     <message>
         <source>Change visibility</source>
@@ -411,7 +411,7 @@
     </message>
     <message>
         <source>Warning while parsing constraints: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Avertissement lors de l&apos;analyse des contraintes : %1</translation>
     </message>
     <message>
         <source>Program has finished, but the task is not accomplished.</source>
@@ -665,7 +665,7 @@
     </message>
     <message>
         <source>Load templates...</source>
-        <translation type="unfinished"></translation>
+        <translation>Chargement des modèles...</translation>
     </message>
     <message>
         <source>Load world model without robot configuration...</source>

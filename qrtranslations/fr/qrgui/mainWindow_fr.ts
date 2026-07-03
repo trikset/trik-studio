@@ -407,11 +407,11 @@
     </message>
     <message>
         <source>Open Examples...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir les exemples...</translation>
     </message>
     <message>
         <source>Ctrl+E</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+E</translation>
     </message>
 </context>
 <context>
@@ -618,7 +618,7 @@ AVERTISSEMENT : Les paramètres seront rétablis après le redémarrage de l&apo
     </message>
     <message>
         <source>Open examples</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir les exemples</translation>
     </message>
     <message>
         <source>Save project</source>

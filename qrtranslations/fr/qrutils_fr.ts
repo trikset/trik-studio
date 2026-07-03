@@ -369,11 +369,11 @@
     <name>qReal::ui::ColorDialog</name>
     <message>
         <source>Select background color in the 2D-model editor...</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionner la couleur de fond dans l&apos;éditeur de modèle 2D...</translation>
     </message>
     <message>
         <source>Select the background color of the scene</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionner la couleur de fond de la scène</translation>
     </message>
 </context>
 <context>
