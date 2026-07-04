@@ -335,11 +335,11 @@
     <name>qReal::ui::ColorDialog</name>
     <message>
         <source>Select background color in the 2D-model editor...</source>
-        <translation type="unfinished"></translation>
+        <translation>Chọn màu nền trong trình chỉnh sửa mô hình 2D...</translation>
     </message>
     <message>
         <source>Select the background color of the scene</source>
-        <translation type="unfinished"></translation>
+        <translation>Chọn màu nền của cảnh</translation>
     </message>
 </context>
 <context>

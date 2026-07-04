@@ -93,7 +93,7 @@
     </message>
     <message>
         <source>When using the extended form for the %1 tag, the number of arguments starting with _ must be %2, %3 was provided</source>
-        <translation type="unfinished"></translation>
+        <translation>Khi sử dụng dạng mở rộng cho thẻ %1, số lượng đối số bắt đầu bằng _ phải là %2, nhưng đã cung cấp %3</translation>
     </message>
     <message>
         <source>%1 tag must have exactly %2 child tag(s)</source>
@@ -201,91 +201,91 @@
     </message>
     <message>
         <source>The &amp;lt;template&amp;gt; tag was provided, but the required &quot;name&quot; attribute was missing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Thẻ &amp;lt;template&amp;gt; đã được cung cấp, nhưng thiếu thuộc tính \&quot;name\&quot; bắt buộc.</translation>
     </message>
     <message>
         <source>Redefinition a template %1 that already exists</source>
-        <translation type="unfinished"></translation>
+        <translation>Định nghĩa lại template %1 đã tồn tại</translation>
     </message>
     <message>
         <source>the &amp;lt;templates&amp;gt; tag can only contain the &amp;lt;template&amp;gt; tag as a child tag, actual %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Thẻ &amp;lt;templates&amp;gt; chỉ có thể chứa thẻ &amp;lt;template&amp;gt; làm thẻ con, thực tế là %1</translation>
     </message>
     <message>
         <source>The &amp;lt;use&amp;gt; tag must contain a &quot;template&quot; attribute</source>
-        <translation type="unfinished"></translation>
+        <translation>Thẻ &amp;lt;use&amp;gt; phải chứa thuộc tính \&quot;template\&quot;</translation>
     </message>
     <message>
         <source>Recursive template expansion detected: %1 -&gt; %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Phát hiện mở rộng template đệ quy: %1 -&gt; %2</translation>
     </message>
     <message>
         <source>The &amp;lt;use&amp;gt; tag contains a template=%1 attribute that is not the name of a declared template</source>
-        <translation type="unfinished"></translation>
+        <translation>Thẻ &amp;lt;use&amp;gt; chứa thuộc tính template=%1 không phải là tên của một template đã được khai báo</translation>
     </message>
     <message>
         <source>After substituting the parameters for the template %1, it did not become a valid xml node</source>
-        <translation type="unfinished"></translation>
+        <translation>Sau khi thay thế các tham số cho template %1, kết quả không tạo thành một node XML hợp lệ</translation>
     </message>
     <message>
         <source>line %1</source>
-        <translation type="unfinished"></translation>
+        <translation>dòng %1</translation>
     </message>
     <message>
         <source>template %1</source>
-        <translation type="unfinished"></translation>
+        <translation>template %1</translation>
     </message>
     <message>
         <source>relative the beginning of the &amp;lt;constraints&amp;gt; tag</source>
-        <translation type="unfinished"></translation>
+        <translation>tương đối so với điểm bắt đầu của thẻ &amp;lt;constraints&amp;gt;</translation>
     </message>
     <message>
         <source>relative to the beginning of the %1 template body</source>
-        <translation type="unfinished"></translation>
+        <translation>tương đối so với điểm bắt đầu của thân template %1</translation>
     </message>
     <message>
         <source>Substitution chain: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Chuỗi thay thế: %1.</translation>
     </message>
     <message>
         <source>Currently, this method of setting &amp;lt;content&amp;gt; tag for the template %1 is not supported.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hiện tại, phương pháp đặt thẻ &amp;lt;content&amp;gt; cho template %1 này không được hỗ trợ.</translation>
     </message>
     <message>
         <source>When defining the template %1, the syntax %2 was used to substitute an offset %3 for an undeclared parameter %4.</source>
-        <translation type="unfinished"></translation>
+        <translation>Khi định nghĩa template %1, cú pháp %2 đã được sử dụng để thay thế độ lệch %3 cho tham số chưa được khai báo %4.</translation>
     </message>
     <message>
         <source>the &amp;lt;params&amp;gt; tag can only contain the &amp;lt;param&amp;gt; tag as a child tag for template %1, actual tag is &amp;lt;%2&amp;gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Thẻ &amp;lt;params&amp;gt; chỉ có thể chứa thẻ &amp;lt;param&amp;gt; làm thẻ con cho template %1, thẻ thực tế là &amp;lt;%2&amp;gt;</translation>
     </message>
     <message>
         <source>The &amp;lt;param&amp;gt; tag of template %1 was provided, but the required &quot;name&quot; attribute was missing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Thẻ &amp;lt;param&amp;gt; của template %1 đã được cung cấp, nhưng thiếu thuộc tính \&quot;name\&quot; bắt buộc.</translation>
     </message>
     <message>
         <source>The &amp;lt;template&amp;gt; of template %1 tag was provided, but the required child tag &amp;lt;content&amp;gt; was missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Thẻ &amp;lt;template&amp;gt; của template %1 đã được cung cấp, nhưng thiếu thẻ con bắt buộc &amp;lt;content&amp;gt;</translation>
     </message>
     <message>
         <source>The using an undeclared parameter %1 for template %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Sử dụng tham số chưa được khai báo %1 cho template %2</translation>
     </message>
     <message>
         <source>The &amp;lt;use&amp;gt; tag can only contain a child tag &amp;lt;with&amp;gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Thẻ &amp;lt;use&amp;gt; chỉ có thể chứa thẻ con &amp;lt;with&amp;gt;</translation>
     </message>
     <message>
         <source>The parameter %1 of template %2 has no default value and was not explicitly specified by the user</source>
-        <translation type="unfinished"></translation>
+        <translation>Tham số %1 của template %2 không có giá trị mặc định và không được người dùng chỉ định rõ ràng</translation>
     </message>
     <message>
         <source>Error while template substitution: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Lỗi khi thay thế template: %1</translation>
     </message>
     <message>
         <source>Error while parsing template: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Lỗi khi phân tích cú pháp template: %1</translation>
     </message>
     <message>
         <source>Change visibility</source>
@@ -403,7 +403,7 @@
     </message>
     <message>
         <source>Warning while parsing constraints: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Cảnh báo khi phân tích cú pháp ràng buộc: %1</translation>
     </message>
     <message>
         <source>Program has finished, but the task is not accomplished.</source>
@@ -657,7 +657,7 @@
     </message>
     <message>
         <source>Load templates...</source>
-        <translation type="unfinished"></translation>
+        <translation>Tải template...</translation>
     </message>
     <message>
         <source>Load world model without robot configuration...</source>

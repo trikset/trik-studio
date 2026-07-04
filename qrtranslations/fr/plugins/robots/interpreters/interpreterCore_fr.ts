@@ -98,7 +98,7 @@
     </message>
     <message>
         <source>Advanced settings for creating restrictions</source>
-        <translation type="unfinished"></translation>
+        <translation>Paramètres avancés pour la création de restrictions</translation>
     </message>
     <message>
         <source>Sensors Settings</source>
@@ -435,11 +435,11 @@
     <name>interpreterCore::ui::RobotsSettingsPage</name>
     <message>
         <source>Templates directory:</source>
-        <translation type="unfinished"></translation>
+        <translation>Répertoire des modèles :</translation>
     </message>
     <message>
         <source>Choose templates directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionner le répertoire des modèles</translation>
     </message>
     <message>
         <source>No constructor kit plugins loaded</source>

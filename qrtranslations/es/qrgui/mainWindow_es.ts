@@ -395,11 +395,11 @@
     </message>
     <message>
         <source>Open Examples...</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir ejemplos...</translation>
     </message>
     <message>
         <source>Ctrl+E</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+E</translation>
     </message>
 </context>
 <context>
@@ -602,7 +602,7 @@ ADVERTENCIA: La configuración se restablecerá tras reiniciar la aplicación</t
     </message>
     <message>
         <source>Open examples</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir ejemplos</translation>
     </message>
     <message>
         <source>Save project</source>

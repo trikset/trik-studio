@@ -49,7 +49,7 @@
     </message>
     <message>
         <source>Advanced settings for creating restrictions</source>
-        <translation type="unfinished"></translation>
+        <translation>Cài đặt nâng cao để tạo giới hạn</translation>
     </message>
     <message>
         <source>Sensors Settings</source>
@@ -304,11 +304,11 @@
     <name>interpreterCore::ui::RobotsSettingsPage</name>
     <message>
         <source>Templates directory:</source>
-        <translation type="unfinished"></translation>
+        <translation>Thư mục mẫu:</translation>
     </message>
     <message>
         <source>Choose templates directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Chọn thư mục mẫu</translation>
     </message>
     <message>
         <source>No constructor kit plugins loaded</source>

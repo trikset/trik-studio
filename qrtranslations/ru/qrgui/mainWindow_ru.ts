@@ -407,11 +407,11 @@
     </message>
     <message>
         <source>Open Examples...</source>
-        <translation type="unfinished"></translation>
+        <translation>Открыть примеры...</translation>
     </message>
     <message>
         <source>Ctrl+E</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+E</translation>
     </message>
 </context>
 <context>
@@ -653,7 +653,7 @@ WARNING: The settings will be restored after application restart</source>
     </message>
     <message>
         <source>Open examples</source>
-        <translation type="unfinished"></translation>
+        <translation>Открыть примеры</translation>
     </message>
     <message>
         <source>Undo</source>

@@ -395,11 +395,11 @@
     </message>
     <message>
         <source>Open Examples...</source>
-        <translation type="unfinished"></translation>
+        <translation>Mở Ví dụ...</translation>
     </message>
     <message>
         <source>Ctrl+E</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+E</translation>
     </message>
 </context>
 <context>
@@ -602,7 +602,7 @@ CẢNH BÁO: Cài đặt sẽ được khôi phục sau khi khởi động lại
     </message>
     <message>
         <source>Open examples</source>
-        <translation type="unfinished"></translation>
+        <translation>Mở ví dụ</translation>
     </message>
     <message>
         <source>Save project</source>

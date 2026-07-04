@@ -407,91 +407,91 @@
     </message>
     <message>
         <source>The &amp;lt;template&amp;gt; tag was provided, but the required &quot;name&quot; attribute was missing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Тег &amp;lt;template&amp;gt; указан, но отсутствует обязательный атрибут &quot;name&quot;.</translation>
     </message>
     <message>
         <source>Redefinition a template %1 that already exists</source>
-        <translation type="unfinished"></translation>
+        <translation>Переопределение уже существующего шаблона %1</translation>
     </message>
     <message>
         <source>the &amp;lt;templates&amp;gt; tag can only contain the &amp;lt;template&amp;gt; tag as a child tag, actual %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Тег &amp;lt;templates&amp;gt; может содержать только дочерний тег &amp;lt;template&amp;gt;, фактически %1</translation>
     </message>
     <message>
         <source>The &amp;lt;use&amp;gt; tag must contain a &quot;template&quot; attribute</source>
-        <translation type="unfinished"></translation>
+        <translation>Тег &amp;lt;use&amp;gt; должен содержать атрибут &quot;template&quot;</translation>
     </message>
     <message>
         <source>Recursive template expansion detected: %1 -&gt; %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Обнаружено рекурсивное раскрытие шаблона: %1 -&gt; %2</translation>
     </message>
     <message>
         <source>The &amp;lt;use&amp;gt; tag contains a template=%1 attribute that is not the name of a declared template</source>
-        <translation type="unfinished"></translation>
+        <translation>Тег &amp;lt;use&amp;gt; содержит атрибут template=%1, который не соответствует имени объявленного шаблона</translation>
     </message>
     <message>
         <source>After substituting the parameters for the template %1, it did not become a valid xml node</source>
-        <translation type="unfinished"></translation>
+        <translation>После подстановки параметров в шаблон %1 он не сформировал допустимый XML-узел</translation>
     </message>
     <message>
         <source>line %1</source>
-        <translation type="unfinished"></translation>
+        <translation>строка %1</translation>
     </message>
     <message>
         <source>template %1</source>
-        <translation type="unfinished"></translation>
+        <translation>шаблон %1</translation>
     </message>
     <message>
         <source>relative the beginning of the &amp;lt;constraints&amp;gt; tag</source>
-        <translation type="unfinished"></translation>
+        <translation>относительно начала тега &amp;lt;constraints&amp;gt;</translation>
     </message>
     <message>
         <source>relative to the beginning of the %1 template body</source>
-        <translation type="unfinished"></translation>
+        <translation>относительно начала тела шаблона %1</translation>
     </message>
     <message>
         <source>Substitution chain: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Цепочка подстановки: %1.</translation>
     </message>
     <message>
         <source>Currently, this method of setting &amp;lt;content&amp;gt; tag for the template %1 is not supported.</source>
-        <translation type="unfinished"></translation>
+        <translation>В настоящее время данный способ задания тега &amp;lt;content&amp;gt; для шаблона %1 не поддерживается.</translation>
     </message>
     <message>
         <source>When defining the template %1, the syntax %2 was used to substitute an offset %3 for an undeclared parameter %4.</source>
-        <translation type="unfinished"></translation>
+        <translation>При определении шаблона %1 использован синтаксис %2 для подстановки смещения %3 для необъявленного параметра %4.</translation>
     </message>
     <message>
         <source>the &amp;lt;params&amp;gt; tag can only contain the &amp;lt;param&amp;gt; tag as a child tag for template %1, actual tag is &amp;lt;%2&amp;gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Тег &amp;lt;params&amp;gt; может содержать только дочерний тег &amp;lt;param&amp;gt; для шаблона %1, фактически тег &amp;lt;%2&amp;gt;</translation>
     </message>
     <message>
         <source>The &amp;lt;param&amp;gt; tag of template %1 was provided, but the required &quot;name&quot; attribute was missing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Для шаблона %1 указан тег &amp;lt;param&amp;gt;, но отсутствует обязательный атрибут &quot;name&quot;.</translation>
     </message>
     <message>
         <source>The &amp;lt;template&amp;gt; of template %1 tag was provided, but the required child tag &amp;lt;content&amp;gt; was missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Для шаблона %1 указан тег &amp;lt;template&amp;gt;, но отсутствует обязательный дочерний тег &amp;lt;content&amp;gt;</translation>
     </message>
     <message>
         <source>The using an undeclared parameter %1 for template %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Использование необъявленного параметра %1 в шаблоне %2</translation>
     </message>
     <message>
         <source>The &amp;lt;use&amp;gt; tag can only contain a child tag &amp;lt;with&amp;gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Тег &amp;lt;use&amp;gt; может содержать только дочерний тег &amp;lt;with&amp;gt;</translation>
     </message>
     <message>
         <source>The parameter %1 of template %2 has no default value and was not explicitly specified by the user</source>
-        <translation type="unfinished"></translation>
+        <translation>Параметр %1 шаблона %2 не имеет значения по умолчанию и не был задан пользователем явно</translation>
     </message>
     <message>
         <source>Error while template substitution: %1</source>
-        <translation type="unfinished">Ошибка при раскрытии шаблона: %1</translation>
+        <translation>Ошибка при подстановке шаблона: %1</translation>
     </message>
     <message>
         <source>Error while parsing template: %1</source>
-        <translation type="unfinished">Ошибка при разборе шаблона: %1</translation>
+        <translation>Ошибка при разборе шаблона: %1</translation>
     </message>
     <message>
         <source>Change visibility</source>
