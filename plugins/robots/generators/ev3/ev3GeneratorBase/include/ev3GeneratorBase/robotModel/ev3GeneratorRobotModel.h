@@ -36,7 +36,7 @@ public:
 	Ev3GeneratorRobotModel(const QString &kitId, const QString &robotId
 			, const QString &name, const QString &friendlyName, int priority
 			, const QSharedPointer<communication::Ev3RobotCommunicationThread> &communicator);
-	~Ev3GeneratorRobotModel();
+	~Ev3GeneratorRobotModel() override;
 
 	QString name() const override;
 	QString friendlyName() const override;

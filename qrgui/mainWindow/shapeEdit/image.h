@@ -23,12 +23,12 @@ class Image : public Item
 	Q_OBJECT
 public:
 	Image(const QString &fileName, qreal x, qreal y, Item* parent = nullptr);
-	virtual QRectF boundingRect() const;
-	virtual void drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr);
-	virtual void setItemZValue(int zValue);
+	QRectF boundingRect() const override;
+	void drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr) override;
+	void setItemZValue(int zValue) override;
 
-	virtual QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document
-			, const QPoint &topLeftPicture);
+	QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document
+			, const QPoint &topLeftPicture) override;
 private:
 	QGraphicsPixmapItem* mPixmapItem;
 	QImage mImage;

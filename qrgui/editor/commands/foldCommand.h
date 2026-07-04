@@ -26,11 +26,11 @@ class FoldCommand : public NodeElementCommand
 	Q_OBJECT
 public:
 	FoldCommand(const NodeElement *element);
-	virtual ~FoldCommand() {}
+	~FoldCommand() override {}
 
 protected:
-	bool execute();
-	bool restoreState();
+	bool execute() override;
+	bool restoreState() override;
 
 private:
 	void changeFoldState();

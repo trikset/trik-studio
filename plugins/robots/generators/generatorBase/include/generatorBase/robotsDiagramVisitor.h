@@ -29,7 +29,7 @@ class ROBOTS_GENERATOR_EXPORT RobotsDiagramVisitor : public utils::DeepFirstSear
 {
 public:
 	RobotsDiagramVisitor(const qrRepo::RepoApi &repo, GeneratorCustomizer &customizer);
-	virtual ~RobotsDiagramVisitor();
+	~RobotsDiagramVisitor() override;
 
 protected:
 	// TODO: move this enum to global robots definitions and use it
@@ -81,7 +81,7 @@ protected:
 	virtual void visitUnknown(const qReal::Id &id, QList<utils::DeepFirstSearcher::LinkInfo> const &links);
 
 	/// This method is called on every block and it is supposed to call all other visit* methods. Override with caution.
-	virtual void visit(const qReal::Id &nodeId, QList<utils::DeepFirstSearcher::LinkInfo> &links);
+	void visit(const qReal::Id &nodeId, QList<utils::DeepFirstSearcher::LinkInfo> &links) override;
 
 private:
 	const qrRepo::RepoApi &mRepo;

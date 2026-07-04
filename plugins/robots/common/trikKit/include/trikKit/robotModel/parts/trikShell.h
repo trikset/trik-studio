@@ -29,7 +29,7 @@ public:
 	/// Constructor, takes device type info and port on which this motor is configured.
 	TrikShell(const kitBase::robotModel::DeviceInfo &info
 			, const kitBase::robotModel::PortInfo &port);
-	virtual ~TrikShell();
+	~TrikShell() override;
 
 	/// Run current command in the trik
 	virtual void runCommand(const QString &command) = 0;

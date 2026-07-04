@@ -26,13 +26,13 @@ class PreferencesFeaturesPage : public qReal::gui::PreferencesPage
 
 public:
 	explicit PreferencesFeaturesPage(QWidget *parent = nullptr);
-	~PreferencesFeaturesPage();
+	~PreferencesFeaturesPage() override;
 
-	void save();
-	virtual void restoreSettings();
+	void save() override;
+	void restoreSettings() override;
 
 protected:
-	void changeEvent(QEvent *e);
+	void changeEvent(QEvent *e) override;
 
 private:
 	Ui::PreferencesFeaturesPage *mUi;

@@ -80,7 +80,7 @@ Q_SIGNALS:
 	void signalReadyToRefresh();
 
 protected:
-	void mousePressEvent(QMouseEvent *event);
+	void mousePressEvent(QMouseEvent *event) override;
 
 private:
 	/// Adds group of editor's elements to appropriate tree to some top element.

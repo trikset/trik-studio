@@ -28,13 +28,13 @@ class ROBOTS_GENERATOR_EXPORT Sensors : public InitTerminateCodeGenerator
 {
 public:
 	Sensors(const QStringList &pathsToTemplates, const simple::Binding::ConverterInterface *inputPortConverter);
-	virtual ~Sensors();
+	~Sensors() override;
 
 	virtual void reinitDevices(const QMap<kitBase::robotModel::PortInfo, kitBase::robotModel::DeviceInfo> &devices);
 
-	virtual QString initCode();
-	virtual QString terminateCode();
-	virtual QString isrHooksCode();
+	QString initCode() override;
+	QString terminateCode() override;
+	QString isrHooksCode() override;
 
 protected:
 	void reinitPort(const kitBase::robotModel::PortInfo &port

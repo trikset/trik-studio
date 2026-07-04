@@ -27,7 +27,7 @@ public:
 	CircleWidget(QSize size, const QString &icon, QWidget *parent = nullptr);
 
 protected:
-	virtual void paintEvent(QPaintEvent *) override;
+	void paintEvent(QPaintEvent *) override;
 };
 
 }

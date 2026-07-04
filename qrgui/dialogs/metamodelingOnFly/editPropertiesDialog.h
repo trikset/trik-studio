@@ -45,7 +45,7 @@ public:
 			, QWidget *parent = nullptr);
 
 	/// Destructor.
-	~EditPropertiesDialog();
+	~EditPropertiesDialog() override;
 
 	/// Selects a property for editing.
 	/// @param propertyItem Item in a list of properties which we edit.

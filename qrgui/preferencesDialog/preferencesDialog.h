@@ -37,7 +37,7 @@ class QRGUI_PREFERENCES_DIALOG_EXPORT PreferencesDialog : public utils::QRealDia
 
 public:
 	explicit PreferencesDialog(QWidget *parent = nullptr);
-	~PreferencesDialog();
+	~PreferencesDialog() override;
 
 	void init();
 
@@ -48,8 +48,8 @@ public:
 	QList<PreferencesPage *> pages() const;
 
 protected:
-	void changeEvent(QEvent *e);
-	void showEvent(QShowEvent *e);
+	void changeEvent(QEvent *e) override;
+	void showEvent(QShowEvent *e) override;
 
 Q_SIGNALS:
 	/// Emitted each time when user presses "OK" or "Apply" button.

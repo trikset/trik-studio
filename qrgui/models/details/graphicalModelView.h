@@ -32,10 +32,10 @@ public:
 	GraphicalModelView(LogicalModel * const model);
 
 protected Q_SLOTS:
-	virtual void rowsInserted(const QModelIndex &parent, int start, int end);
-	virtual void dataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight
-			, QVector<int> const &roles = QVector<int>());
-	virtual void rowsAboutToBeRemoved(const QModelIndex &parent, int start, int end);
+	void rowsInserted(const QModelIndex &parent, int start, int end) override;
+	void dataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight
+			, QVector<int> const &roles = QVector<int>()) override;
+	void rowsAboutToBeRemoved(const QModelIndex &parent, int start, int end) override;
 
 };
 

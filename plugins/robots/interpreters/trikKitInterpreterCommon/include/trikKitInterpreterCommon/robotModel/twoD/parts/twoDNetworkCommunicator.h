@@ -34,7 +34,7 @@ public:
 	TwoDNetworkCommunicator(const kitBase::robotModel::DeviceInfo &info
 			, const kitBase::robotModel::PortInfo &port
 			, trikNetwork::MailboxInterface *mailbox);
-	~TwoDNetworkCommunicator();
+	~TwoDNetworkCommunicator() override;
 
 	/// Send a message to a robot
 	void send(const QString& message, int hullNumber) override;

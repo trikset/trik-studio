@@ -28,7 +28,7 @@ class Ev3AdditionalPreferences : public kitBase::AdditionalPreferences
 
 public:
 	explicit Ev3AdditionalPreferences(QWidget *parent = nullptr);
-	~Ev3AdditionalPreferences();
+	~Ev3AdditionalPreferences() override;
 
 	void save() override;
 	void restoreSettings() override;

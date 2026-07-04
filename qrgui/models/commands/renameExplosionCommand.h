@@ -34,11 +34,11 @@ public:
 		, const models::Exploser &exploser
 		, const Id &target);
 
-	virtual ~RenameExplosionCommand();
+	~RenameExplosionCommand() override;
 
 protected:
-	virtual bool execute();
-	virtual bool restoreState();
+	bool execute() override;
+	bool restoreState() override;
 
 private:
 	void ensureLogicalId();

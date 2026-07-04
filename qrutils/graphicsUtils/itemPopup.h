@@ -33,7 +33,7 @@ class QRUTILS_EXPORT ItemPopup : public QFrame
 
 public:
 	explicit ItemPopup(AbstractScene &scene, QWidget *parent = nullptr);
-	~ItemPopup();
+	~ItemPopup() override;
 
 	/// Enables or disables automatic popping up.
 	void setEnabled(bool enabled);

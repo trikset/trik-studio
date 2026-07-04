@@ -27,11 +27,11 @@ class ExpandCommand : public NodeElementCommand
 	Q_OBJECT
 public:
 	ExpandCommand(const NodeElement *node);
-	virtual ~ExpandCommand();
+	~ExpandCommand() override;
 
 protected:
-	bool execute();
-	bool restoreState();
+	bool execute() override;
+	bool restoreState() override;
 
 private:
 	void changeExpanded();

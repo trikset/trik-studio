@@ -23,8 +23,8 @@ class LinePort : public Line
 public:
 	LinePort(qreal x1, qreal y1, qreal x2, qreal y2, Line* parent = nullptr);
 
-	virtual QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document
-			, const QPoint &topLeftPicture);
+	QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document
+			, const QPoint &topLeftPicture) override;
 
 	void setType(const QString &type);
 	QString getType() const;

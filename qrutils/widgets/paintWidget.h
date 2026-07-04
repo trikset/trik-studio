@@ -36,7 +36,7 @@ public:
 	void setPainter(PainterInterface *painter);
 
 protected:
-	void paintEvent(QPaintEvent *event);
+	void paintEvent(QPaintEvent *event) override;
 
 private:
 	PainterInterface* mPainter {};  // doesn't have ownership

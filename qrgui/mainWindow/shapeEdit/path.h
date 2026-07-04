@@ -23,14 +23,14 @@ class Path : public Item
 	Q_OBJECT
 public:
 	Path(const QPainterPath &path);
-	virtual QRectF boundingRect() const;
-	virtual void drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr) ;
-	virtual QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document
-			, const QPoint &topLeftPicture);
+	QRectF boundingRect() const override;
+	void drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr) override ;
+	QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document
+			, const QPoint &topLeftPicture) override;
 
-	virtual void drawExtractionForItem(QPainter* painter);
-	virtual void drawFieldForResizeItem(QPainter* painter);
-	virtual void drawScalingRects(QPainter* painter);
+	void drawExtractionForItem(QPainter* painter) override;
+	void drawFieldForResizeItem(QPainter* painter) override;
+	void drawScalingRects(QPainter* painter) override;
 
 private:
 	QPainterPath mPath;

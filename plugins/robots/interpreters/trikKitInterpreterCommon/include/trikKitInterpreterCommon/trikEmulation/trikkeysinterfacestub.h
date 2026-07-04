@@ -42,13 +42,13 @@ public:
 
 	void init();
 	void start();
-	virtual Status status() const override { return Status::ready; }
+	Status status() const override { return Status::ready; }
 
 public Q_SLOTS:
-	virtual void reset() override;
-	virtual bool wasPressed(int code) override;
-	virtual bool isPressed(int code) override;
-	virtual int buttonCode(bool wait) override;
+	void reset() override;
+	bool wasPressed(int code) override;
+	bool isPressed(int code) override;
+	int buttonCode(bool wait) override;
 
 private Q_SLOTS:
 	void handleNewData(kitBase::robotModel::robotParts::Button *button, int value);

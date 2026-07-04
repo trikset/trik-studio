@@ -27,9 +27,9 @@ public:
 
 	IntermediateStructurizatorNode *bodyNode() const;
 
-	bool analyzeBreak();
-	Type type() const;
-	qReal::Id firstId() const;
+	bool analyzeBreak() override;
+	Type type() const override;
+	qReal::Id firstId() const override;
 private:
 	IntermediateStructurizatorNode *mBodyNode;
 };

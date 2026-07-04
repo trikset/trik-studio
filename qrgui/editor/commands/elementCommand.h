@@ -31,7 +31,7 @@ class ElementCommand : public qReal::commands::AbstractCommand
 
 public:
 	ElementCommand(const EditorViewScene *scene, const Id &id);
-	virtual ~ElementCommand();
+	~ElementCommand() override;
 
 	const EditorViewScene *scene() const;
 	Id elementId() const;
@@ -42,8 +42,8 @@ protected:
 	/// Called when our element instance possibly has changed
 	virtual bool reinitElement();
 
-	virtual bool execute();
-	virtual bool restoreState();
+	bool execute() override;
+	bool restoreState() override;
 
 	Element *elementById(const Id &id);
 

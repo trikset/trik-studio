@@ -30,7 +30,7 @@ public:
 			, QObject *parent = nullptr);
 
 protected:
-	virtual void drawBmp(QPainter *painter);
+	void drawBmp(QPainter *painter) override;
 };
 
 }

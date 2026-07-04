@@ -25,9 +25,9 @@ class BreakStructurizatorNode : public IntermediateStructurizatorNode
 public:
 	explicit BreakStructurizatorNode(const qReal::Id &id, QObject *parent);
 
-	Type type() const;
-	qReal::Id firstId() const;
-	bool analyzeBreak();
+	Type type() const override;
+	qReal::Id firstId() const override;
+	bool analyzeBreak() override;
 
 private:
 	const qReal::Id mId;

@@ -39,11 +39,11 @@ public:
 			, bool isFromLogicalModel
 			, qReal::commands::CreateElementsCommand *createCommand = nullptr);
 
-	~InsertIntoEdgeCommand();
+	~InsertIntoEdgeCommand() override;
 
 protected:
-	virtual bool execute();
-	virtual bool restoreState();
+	bool execute() override;
+	bool restoreState() override;
 
 private:
 	void initCommand(qReal::commands::CreateElementsCommand *&command, const Id &type

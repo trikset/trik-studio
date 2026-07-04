@@ -35,7 +35,7 @@ class PhysicsEngineBase : public QObject
 
 public:
 	PhysicsEngineBase(const WorldModel &worldModel, const QList<RobotModel *> &robots);
-	virtual ~PhysicsEngineBase();
+	~PhysicsEngineBase() override;
 
 	/// Returns item`s position delta after last recalculation.
 	virtual QVector2D positionShift(RobotModel &robot) const = 0;

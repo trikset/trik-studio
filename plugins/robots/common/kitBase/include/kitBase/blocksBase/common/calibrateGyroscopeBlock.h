@@ -37,7 +37,7 @@ public:
 	explicit CalibrateGyroscopeBlock(kitBase::robotModel::RobotModelInterface &robotModel);
 
 protected:
-	virtual void doJob(kitBase::robotModel::robotParts::GyroscopeSensor &gyro);
+	void doJob(kitBase::robotModel::robotParts::GyroscopeSensor &gyro) override;
 };
 
 }

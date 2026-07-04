@@ -35,11 +35,11 @@ public:
 			, const models::GraphicalModelAssistApi * const graphicalApi
 			, const Id &source, const Id &target, bool mustAdd);
 
-	virtual ~ExplosionCommand();
+	~ExplosionCommand() override;
 
 protected:
-	virtual bool execute();
-	virtual bool restoreState();
+	bool execute() override;
+	bool restoreState() override;
 
 private:
 	bool processExplosion(bool add);

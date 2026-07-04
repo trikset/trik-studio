@@ -69,7 +69,7 @@ public:
 	qReal::Id parent(const qReal::Id &id) const override;
 	void setParent(const qReal::Id &id, const qReal::Id &parent) override;
 
-	virtual void stackBefore(const qReal::Id &id, const qReal::Id &child, const qReal::Id &sibling) override;
+	void stackBefore(const qReal::Id &id, const qReal::Id &child, const qReal::Id &sibling) override;
 
 	qReal::IdList outgoingLinks(const qReal::Id &id) const override;
 	qReal::IdList incomingLinks(const qReal::Id &id) const override;

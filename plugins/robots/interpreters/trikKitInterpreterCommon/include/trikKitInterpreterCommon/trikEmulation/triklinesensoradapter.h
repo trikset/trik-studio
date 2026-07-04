@@ -24,7 +24,7 @@ Q_OBJECT
 
 public:
 	TrikLineSensorAdapter(trik::robotModel::parts::TrikLineSensor *sensor);
-	virtual Status status() const override;
+	Status status() const override;
 
 public Q_SLOTS:
 	void init(bool showOnDisplay) override;

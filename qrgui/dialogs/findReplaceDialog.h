@@ -44,7 +44,7 @@ public:
 
 	/// Stets dialog state as starter.
 	void stateClear();
-	~FindReplaceDialog();
+	~FindReplaceDialog() override;
 
 Q_SIGNALS:
 	/// Signal of find button clicked.

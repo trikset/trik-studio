@@ -30,18 +30,18 @@ public:
 	void init(int x, int y, const QString &text);
 	bool isDynamicText();
 	virtual void setIsDynamicText(bool isDynamic);
-	virtual QRectF boundingRect() const;
-	virtual QRectF realBoundingRect() const;
-	virtual void drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr);
-	virtual void drawExtractionForItem(QPainter* painter);
-	virtual void drawFieldForResizeItem(QPainter* painter);
-	virtual void drawScalingRects(QPainter* painter);
-	virtual void changeScalingPointState(qreal x, qreal y);
+	QRectF boundingRect() const override;
+	QRectF realBoundingRect() const override;
+	void drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr) override;
+	void drawExtractionForItem(QPainter* painter) override;
+	void drawFieldForResizeItem(QPainter* painter) override;
+	void drawScalingRects(QPainter* painter) override;
+	void changeScalingPointState(qreal x, qreal y) override;
 	QGraphicsTextItem const& getText();
-	virtual void setItemZValue(int zValue);
+	void setItemZValue(int zValue) override;
 
-	virtual QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document
-			, const QPoint &topLeftPicture);
+	QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document
+			, const QPoint &topLeftPicture) override;
 
 protected:
 	int mX1 {};

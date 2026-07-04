@@ -29,7 +29,7 @@ public:
 	DetectLineBlock(kitBase::robotModel::RobotModelInterface &robotModel);
 
 protected:
-	virtual void doJob(robotModel::parts::TrikLineSensor &camera);
+	void doJob(robotModel::parts::TrikLineSensor &camera) override;
 };
 
 }

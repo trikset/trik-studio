@@ -26,18 +26,18 @@ public:
 	Curve(QPointF start, QPointF end, QPointF c1);
 	void  setCXandCY(qreal x, qreal y);
 	QRectF searchMaxMinCoord() const;
-	virtual QRectF boundingRect() const;
-	QPainterPath shape() const;
-	virtual void drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr);
-	virtual void drawExtractionForItem(QPainter* painter);
-	virtual void drawScalingRects(QPainter* painter);
-	virtual void drawFieldForResizeItem(QPainter* painter);
+	QRectF boundingRect() const override;
+	QPainterPath shape() const override;
+	void drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr) override;
+	void drawExtractionForItem(QPainter* painter) override;
+	void drawScalingRects(QPainter* painter) override;
+	void drawFieldForResizeItem(QPainter* painter) override;
 
-	virtual void changeDragState(qreal x, qreal y);
-	virtual void calcResizeItem(QGraphicsSceneMouseEvent *event);
+	void changeDragState(qreal x, qreal y) override;
+	void calcResizeItem(QGraphicsSceneMouseEvent *event) override;
 
-	virtual QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document
-			, const QPoint &topLeftPicture);
+	QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document
+			, const QPoint &topLeftPicture) override;
 
 private:
 	QPointF mC1;

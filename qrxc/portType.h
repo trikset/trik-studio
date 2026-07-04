@@ -19,10 +19,10 @@
 class PortType : public NonGraphicType
 {
 public:
-	virtual bool init(const QDomElement &element, const QString &context);
-	virtual Type *clone() const;
+	bool init(const QDomElement &element, const QString &context) override;
+	Type *clone() const override;
 
-	virtual void generateCode(utils::OutFile &out);
+	void generateCode(utils::OutFile &out) override;
 
 	virtual bool generateEnumValues(utils::OutFile &out, bool isNotFirst);
 	virtual void generatePropertyTypes(utils::OutFile &out);

@@ -68,7 +68,7 @@ public:
 		mKey = getKey(path);
 	}
 
-	virtual qreal getMaxDistance(const QString &object) override = 0;
+	qreal getMaxDistance(const QString &object) override = 0;
 
 protected:
 	TKey mKey;

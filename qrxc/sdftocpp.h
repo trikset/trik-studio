@@ -32,7 +32,7 @@ public:
 	SdfRenderer();
 	explicit SdfRenderer(const QString &path);
 	explicit SdfRenderer(const QDomNode &bla);
-	~SdfRenderer();
+	~SdfRenderer() override;
 
 	bool load (const QString &filename);
 	QString render();
@@ -85,7 +85,7 @@ class SdfIconEngineV2: public QIconEngine
 {
 public:
 	SdfIconEngineV2(const QString &file);
-	virtual void paint(QPainter *painter, const QRect &rect, QIcon::Mode mode, QIcon::State state);
+	void paint(QPainter *painter, const QRect &rect, QIcon::Mode mode, QIcon::State state) override;
 private:
 	SdfRenderer mRenderer;
 };

@@ -33,22 +33,22 @@ public:
 	explicit PropertyEditorModel(const qReal::EditorManagerInterface &editorManagerInterface
 			, QObject *parent = nullptr);
 
-	QModelIndex parent(const QModelIndex &index) const;
+	QModelIndex parent(const QModelIndex &index) const override;
 
 	QString getValueFromIndex(const QModelIndex &index);
 
-	int rowCount(const QModelIndex &index) const;
-	int columnCount(const QModelIndex &index) const;
-	QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const;
+	int rowCount(const QModelIndex &index) const override;
+	int columnCount(const QModelIndex &index) const override;
+	QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const override;
 
 	int countOfChilds(const QModelIndex &index) const;
 
-	Qt::ItemFlags flags(const QModelIndex &index) const;
+	Qt::ItemFlags flags(const QModelIndex &index) const override;
 
-	QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
-	QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
+	QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
+	QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
-	bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole);
+	bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) override;
 
 	void setSourceModels(QAbstractItemModel * const logicalSourceModel
 				, QAbstractItemModel * const graphicalSourceModel);

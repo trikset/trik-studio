@@ -38,7 +38,7 @@ public:
 	explicit RestorePropertiesDialog(QWidget *parent, const EditorManagerInterface &editorManagerProxy);
 
 	/// Destructor.
-	~RestorePropertiesDialog();
+	~RestorePropertiesDialog() override;
 
 	/// Filling the same name properties table widget.
 	/// @param propertiesWithTheSameNameList IdList of elements with the same name.

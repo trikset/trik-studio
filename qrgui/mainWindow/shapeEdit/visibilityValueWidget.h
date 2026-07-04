@@ -24,7 +24,7 @@ class VisibilityValueWidget : public QWidget
 	Q_OBJECT
 public:
 	explicit VisibilityValueWidget(QWidget *parent = nullptr);
-	~VisibilityValueWidget();
+	~VisibilityValueWidget() override;
 
 	void setPropertyInfo(const VisibilityConditionsDialog::PropertyInfo &info);
 	void setValue(const QString &value);

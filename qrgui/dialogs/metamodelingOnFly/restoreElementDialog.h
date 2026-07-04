@@ -40,7 +40,7 @@ public:
 			, const IdList &elementsWithTheSameNameList);
 
 	/// Destructor.
-	~RestoreElementDialog();
+	~RestoreElementDialog() override;
 
 Q_SIGNALS:
 	/// Emitted when element was restored and everything must be reloaded.

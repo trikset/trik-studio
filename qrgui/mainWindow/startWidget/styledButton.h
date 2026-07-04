@@ -32,8 +32,8 @@ public:
 	void bindHighlightedOnHover(QWidget * const widget);
 
 protected:
-	virtual void enterEvent(QEvent *event) override;
-	virtual void leaveEvent(QEvent *event) override;
+	void enterEvent(QEvent *event) override;
+	void leaveEvent(QEvent *event) override;
 
 private:
 	void highlight(bool on);

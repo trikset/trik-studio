@@ -73,7 +73,7 @@ public:
 	};
 
 	/// Destructor.
-	virtual ~RobotModelInterface() = default;
+	~RobotModelInterface() override = default;
 
 	virtual QString robotId() const = 0;
 

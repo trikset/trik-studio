@@ -32,7 +32,7 @@ class CommunicatorInterface : public QObject
 
 public:
 	/// Virtual destructor, because C++ is horrible.
-	virtual ~CommunicatorInterface() {}
+	~CommunicatorInterface() override {}
 
 	/// Uploads current program to a quadcopter.
 	virtual void uploadProgram(const QFileInfo &program) = 0;

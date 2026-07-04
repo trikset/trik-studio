@@ -23,7 +23,7 @@ class ShortcutEdit : public QLineEdit
 public:
 	explicit ShortcutEdit(QWidget *parent = nullptr);
 
-	bool event(QEvent *event);
+	bool event(QEvent *event) override;
 	
 Q_SIGNALS:
 	void newKey(const int key);

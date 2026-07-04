@@ -28,15 +28,15 @@ class PreferencesEditorPage : public qReal::gui::PreferencesPage
 
 public:
 	explicit PreferencesEditorPage(QWidget *parent = nullptr);
-	~PreferencesEditorPage();
+	~PreferencesEditorPage() override;
 
 	/// Sets value to palette combo box and spin box respectively/
 	void changePaletteParameters();
-	void save();
-	virtual void restoreSettings();
+	void save() override;
+	void restoreSettings() override;
 
 protected:
-	void changeEvent(QEvent *e);
+	void changeEvent(QEvent *e) override;
 
 private Q_SLOTS:
 	void widthGridSliderMoved(int value);

@@ -32,13 +32,13 @@ public:
 	void setPoint(QPoint point);
 	QFont font() const;
 	QString name() const;
-	virtual void setIsDynamicText(bool isDynamic);
+	void setIsDynamicText(bool isDynamic) override;
 	void drawForPictureText(QPainter* painter, QRectF rect);
-	virtual void drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr);
+	void drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr) override;
 
 	QDomElement setFontToDoc(QDomDocument &document, const QString &domName);
-	virtual QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document
-			, const QPoint &topLeftPicture);
+	QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document
+			, const QPoint &topLeftPicture) override;
 
 	void readFont(const QDomElement &docItem);
 

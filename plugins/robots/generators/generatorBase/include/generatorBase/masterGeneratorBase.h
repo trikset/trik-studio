@@ -59,7 +59,7 @@ public:
 			, const utils::ParserErrorReporter &parserErrorReporter
 			, const qReal::Id &diagramId);
 
-	~MasterGeneratorBase();
+	~MasterGeneratorBase() override;
 
 	void setProjectDir(const QFileInfo &fileInfo);
 

@@ -23,7 +23,7 @@ Q_OBJECT
 
 public:
 	TrikColorSensorAdapter(trik::robotModel::parts::TrikColorSensor *sensor);
-	virtual Status status() const override;
+	Status status() const override;
 
 public Q_SLOTS:
 	void init(bool showOnDisplay) override;

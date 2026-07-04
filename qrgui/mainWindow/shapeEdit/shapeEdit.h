@@ -52,7 +52,7 @@ public:
 	ShapeEdit(const Id &id, const EditorManagerInterface &editorManagerProxy
 		, const qrRepo::GraphicalRepoApi &graphicalRepoApi, MainWindow *mainWindow
 		, qReal::gui::editor::EditorView *editorView, bool useTypedPorts);
-	~ShapeEdit();
+	~ShapeEdit() override;
 
 	graphicsUtils::AbstractView* getView();
 	void load(const QString &text);

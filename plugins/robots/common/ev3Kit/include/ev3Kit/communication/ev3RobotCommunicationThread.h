@@ -25,7 +25,7 @@ class Ev3RobotCommunicationThread : public utils::robotCommunication::RobotCommu
 	Q_OBJECT
 
 public:
-	virtual ~Ev3RobotCommunicationThread();
+	~Ev3RobotCommunicationThread() override;
 
 public Q_SLOTS:
 	/// Uploads file on the local machine to a remote device via Bluetooth.

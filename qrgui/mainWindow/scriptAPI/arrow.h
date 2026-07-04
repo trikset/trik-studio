@@ -30,7 +30,7 @@ public:
 	Arrow(QPoint sourcePoint, QPoint destPoint, int lifeTime, QWidget *parent);
 
 protected:
-	void paintEvent(QPaintEvent *);
+	void paintEvent(QPaintEvent *) override;
 
 private Q_SLOTS:
 	void disappear();

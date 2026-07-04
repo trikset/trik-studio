@@ -30,9 +30,9 @@ public:
 	IntermediateStructurizatorNode *firstNode() const;
 	IntermediateStructurizatorNode *secondNode() const;
 
-	bool analyzeBreak();
-	Type type() const;
-	qReal::Id firstId() const;
+	bool analyzeBreak() override;
+	Type type() const override;
+	qReal::Id firstId() const override;
 private:
 	IntermediateStructurizatorNode *mFirstNode;
 	IntermediateStructurizatorNode *mSecondNode;

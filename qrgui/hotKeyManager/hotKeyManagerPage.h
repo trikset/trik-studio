@@ -31,10 +31,10 @@ class QRGUI_HOTKEY_MANAGER_EXPORT PreferencesHotKeyManagerPage : public qReal::g
 
 public:
 	explicit PreferencesHotKeyManagerPage(QWidget *parent = nullptr);
-	~PreferencesHotKeyManagerPage();
+	~PreferencesHotKeyManagerPage() override;
 
-	void save();
-	void restoreSettings();
+	void save() override;
+	void restoreSettings() override;
 
 private Q_SLOTS:
 	void doubleClicked(const int row, const int column);
@@ -45,7 +45,7 @@ private Q_SLOTS:
 	void resetAllShortcuts();
 
 protected:
-	void showEvent(QShowEvent *e);
+	void showEvent(QShowEvent *e) override;
 
 private:
 	void loadHotKeys();

@@ -30,16 +30,16 @@ public:
 			, const GraphicalModelAssistInterface &graphicalModel);
 
 	/// Draws Bezier curve
-	virtual void drawLine(QPainter *painter, bool drawSavedLine);
+	void drawLine(QPainter *painter, bool drawSavedLine) override;
 
 	/// Draw ports and control lines for editing curve link
-	virtual void drawPorts(QPainter *painter);
+	void drawPorts(QPainter *painter) override;
 
 	/// @return Link's Bezier curve
-	virtual QPainterPath shape() const;
+	QPainterPath shape() const override;
 
 	/// Adjust end points and update curve configuration
-	virtual void adjust();
+	void adjust() override;
 
 protected:
 	/// Create correct curve configuration (two ports, two intermediate points)
@@ -49,10 +49,10 @@ protected:
 	QPainterPath bezierCurve(const QPolygonF &line) const;
 
 	/// If user is dragging a point then move it. Otherwise, do nothing
-	virtual void handleEdgeMove(QPointF pos);
+	void handleEdgeMove(QPointF pos) override;
 
 	/// Draw ordinary port or special curve control point
-	virtual void drawPort(QPainter *painter, int portNumber);
+	void drawPort(QPainter *painter, int portNumber) override;
 
 	/// Draw dash lines used for editing of Bezier curve
 	void drawControlLines(QPainter *painter);

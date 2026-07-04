@@ -29,14 +29,14 @@ public:
 
 	/// Returns reference to a mutable logical repository.
 	virtual qrRepo::LogicalRepoApi &mutableLogicalRepoApi() const = 0;
-	virtual qrRepo::CommonRepoApi &mutableRepoApi() const {return mutableLogicalRepoApi();}
+	qrRepo::CommonRepoApi &mutableRepoApi() const override {return mutableLogicalRepoApi();}
 
-	virtual Id createElement(const Id &parent, const Id &type) = 0;
-	virtual Id createElement(const Id &parent, const Id &id
+	Id createElement(const Id &parent, const Id &type) override = 0;
+	Id createElement(const Id &parent, const Id &id
 			, bool isFromLogicalModel, const QString &name
-			, const QPointF &position, const Id &preferedLogicalId = Id()) = 0;
-	virtual IdList children(const Id &element) const = 0;
-	virtual void changeParent(const Id &element, const Id &parent, const QPointF &position = QPointF()) = 0;
+			, const QPointF &position, const Id &preferedLogicalId = Id()) override = 0;
+	IdList children(const Id &element) const override = 0;
+	void changeParent(const Id &element, const Id &parent, const QPointF &position = QPointF()) override = 0;
 
 	virtual void addExplosion(const Id &source, const Id &destination) = 0;
 	virtual void removeExplosion(const Id &source, const Id &destination) = 0;

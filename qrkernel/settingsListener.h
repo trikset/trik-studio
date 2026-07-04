@@ -107,7 +107,7 @@ private Q_SLOTS:
 
 private:
 	SettingsListener();
-	~SettingsListener();
+	~SettingsListener() override;
 
 	static SettingsListener &instance();
 

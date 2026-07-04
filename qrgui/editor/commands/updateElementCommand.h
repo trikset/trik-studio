@@ -27,13 +27,13 @@ class UpdateElementCommand : public ElementCommand
 public:
 	UpdateElementCommand(const EditorViewScene *scene, const Id &id);
 	UpdateElementCommand(const EditorView *view, const Id &id);
-	virtual ~UpdateElementCommand();
+	~UpdateElementCommand() override;
 
-	virtual bool equals(const AbstractCommand &other) const;
+	bool equals(const AbstractCommand &other) const override;
 
 protected:
-	virtual bool execute();
-	virtual bool restoreState();
+	bool execute() override;
+	bool restoreState() override;
 
 private:
 	bool update();

@@ -44,7 +44,7 @@ public:
 			, qrtext::DebuggerInterface &textLanguageToolbox
 			);
 
-	~SensorVariablesUpdater();
+	~SensorVariablesUpdater() override;
 
 	/// Stops background polling process.
 	void suspend();

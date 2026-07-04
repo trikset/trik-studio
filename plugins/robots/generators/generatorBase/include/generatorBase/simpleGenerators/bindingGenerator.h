@@ -33,9 +33,9 @@ public:
 			, QList<Binding *> const &bindings
 			, QObject *parent = nullptr);
 
-	virtual ~BindingGenerator();
+	~BindingGenerator() override;
 
-	virtual QString generate();
+	QString generate() override;
 
 protected:
 	void setPathToTemplate(const QString &pathToTemplate);

@@ -80,8 +80,8 @@ private Q_SLOTS:
 	void checkElementForRootDiagramNode();
 
 protected:
-	virtual bool event(QEvent *event);
-	virtual void mousePressEvent(QMouseEvent *event);
+	bool event(QEvent *event) override;
+	void mousePressEvent(QMouseEvent *event) override;
 
 private:
 	void checkElementForChildren();

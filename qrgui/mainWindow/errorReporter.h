@@ -64,9 +64,9 @@ Q_SIGNALS:
 
 public Q_SLOTS:
 	/// Clears only widget with errors.
-	virtual void clear() override;
+	void clear() override;
 	/// Clears only error list.
-	virtual void clearErrors() override;
+	void clearErrors() override;
 
 private:
 	static QString severityMessage(const Error &error);

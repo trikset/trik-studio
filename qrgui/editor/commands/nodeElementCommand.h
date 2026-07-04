@@ -28,10 +28,10 @@ class NodeElementCommand : public ElementCommand
 public:
 	NodeElementCommand(const EditorViewScene *scene, const Id &id);
 	NodeElementCommand(const EditorView *view, const Id &id);
-	virtual ~NodeElementCommand();
+	~NodeElementCommand() override;
 
 protected:
-	virtual bool reinitElement();
+	bool reinitElement() override;
 
 	NodeElement *nodeById(const Id &id);
 

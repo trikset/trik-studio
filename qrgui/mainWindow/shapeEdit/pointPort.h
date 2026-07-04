@@ -24,17 +24,17 @@ class PointPort : public Item
 	Q_OBJECT
 public:
 	PointPort(qreal x, qreal y, Item *parent = nullptr);
-	virtual QRectF boundingRect() const;
-	virtual void drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr);
-	virtual void drawExtractionForItem(QPainter* painter);
-	virtual void drawFieldForResizeItem(QPainter* painter);
-	virtual void drawScalingRects(QPainter* painter);
-	virtual void changeDragState(qreal x, qreal y);
-	virtual void changeScalingPointState(qreal x, qreal y);
-	virtual void resizeItem(QGraphicsSceneMouseEvent *event);
+	QRectF boundingRect() const override;
+	void drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr) override;
+	void drawExtractionForItem(QPainter* painter) override;
+	void drawFieldForResizeItem(QPainter* painter) override;
+	void drawScalingRects(QPainter* painter) override;
+	void changeDragState(qreal x, qreal y) override;
+	void changeScalingPointState(qreal x, qreal y) override;
+	void resizeItem(QGraphicsSceneMouseEvent *event) override;
 
-	virtual QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document
-			, const QPoint &topLeftPicture);
+	QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document
+			, const QPoint &topLeftPicture) override;
 
 	void setType(const QString &type);
 	QString getType() const;

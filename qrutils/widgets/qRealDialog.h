@@ -40,8 +40,8 @@ public:
 	void resumeSerialization();
 
 protected:
-	virtual void showEvent(QShowEvent *);
-	virtual void closeEvent(QCloseEvent *);
+	void showEvent(QShowEvent *) override;
+	void closeEvent(QCloseEvent *) override;
 
 	void serializeParameters();
 	void deserializeParameters();

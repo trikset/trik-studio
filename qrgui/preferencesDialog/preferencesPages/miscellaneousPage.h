@@ -26,13 +26,13 @@ class PreferencesMiscellaneousPage : public qReal::gui::PreferencesPage
 
 public:
 	explicit PreferencesMiscellaneousPage(QWidget *parent = nullptr);
-	~PreferencesMiscellaneousPage();
+	~PreferencesMiscellaneousPage() override;
 
-	void save();
-	virtual void restoreSettings();
+	void save() override;
+	void restoreSettings() override;
 
 protected:
-	void changeEvent(QEvent *e);
+	void changeEvent(QEvent *e) override;
 
 private Q_SLOTS:
 	void browseImagesPath();

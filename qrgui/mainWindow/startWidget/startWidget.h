@@ -58,7 +58,7 @@ private:
 
 	void centralizeButton(QPushButton * const styledButton);
 
-	virtual void paintEvent(QPaintEvent *event) override;
+	void paintEvent(QPaintEvent *event) override;
 
 	MainWindow *mMainWindow;  // Doesn't have ownership.
 	ProjectManager *mProjectManager;  // Doesn't have ownership.
