@@ -41,6 +41,11 @@ DetailsTab::DetailsTab(QWidget *parent)
 	initItem(mPhysicsRoot, tr("Physics"), false);
 	initItem(mParamsRoot, tr("Model parameters"), false);
 	initItem(mMetricRoot, tr("Metric system"), false);
+	// A workaround so that there is a visible indentation between
+	// the last child widget to be expanded and the end of the visible area
+	auto *emptyRoot = new QTreeWidgetItem(this);
+	emptyRoot->setFlags(Qt::NoItemFlags);
+	emptyRoot->setSizeHint(0, QSize(0, 20));
 }
 
 DetailsTab::~DetailsTab()
