@@ -12,11 +12,13 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TRIK_TRANSLATOR_PATH: trik-translator
+      TS_APPLICATION_PATH: trik-studio
     steps:
       - name: Checkout current repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          path: ${{ env.TS_APPLICATION_PATH }}
 
       - name: Checkout trik-translator
         uses: actions/checkout@v4
@@ -57,9 +59,9 @@ jobs:
       - name: Run machine
         working-directory: ${{ env.TRIK_TRANSLATOR_PATH }}
         run: |
-          for lang in "$GITHUB_WORKSPACE"/qrtranslations/*/; do
+          for lang in "$GITHUB_WORKSPACE/${{ env.TS_APPLICATION_PATH }}/qrtranslations"/*/; do
             lang=$(basename "$lang")
-            uv run main.py "$GITHUB_WORKSPACE" "$lang" --max_tokens 10000
+            uv run main.py "$GITHUB_WORKSPACE/${{ env.TS_APPLICATION_PATH }}" "$lang" --max_tokens 10000
           done
 
       - name: Remove secrets
@@ -69,6 +71,7 @@ jobs:
           rm -f .env
 
       - name: Check changes
+        working-directory: ${{ env.TS_APPLICATION_PATH }}
         id: changes
         run: |
           if git diff --quiet; then
@@ -81,6 +84,7 @@ jobs:
         if: steps.changes.outputs.changed == 'true'
         uses: peter-evans/create-pull-request@v7
         with:
+          path: ${{ env.TS_APPLICATION_PATH }}
           branch: lupdatebot/lupdate-${{ github.run_id }}
           title: "TRIK Translator: automatic update"
           commit-message: "TRIK Translator: automatic update"
