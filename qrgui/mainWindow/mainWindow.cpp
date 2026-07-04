@@ -719,8 +719,6 @@ bool MainWindow::windowsIsInDarkTheme()
 }
 
 void MainWindow::initDarkPalette() {
-	constexpr auto logPrefix = "Initializing color theme";
-
 	auto useDarkThemeVariant = SettingsManager::value("UseDarkTheme");
 	bool useDarkTheme {};
 	// If there is no value in the setting manager, we try to determine the current theme automatically
