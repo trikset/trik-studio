@@ -50,7 +50,8 @@ public:
 	Qt::DropActions supportedDropActions() const override;
 	QStringList mimeTypes() const override;
 	virtual qReal::details::ModelsAssistInterface* modelAssistInterface() const = 0;
-	bool dropMimeData(const QMimeData *data, Qt::DropAction action, int row, int column, const QModelIndex &parent) override;
+	bool dropMimeData(const QMimeData *data, Qt::DropAction action, int row,
+						int column, const QModelIndex &parent) override;
 
 	/// Creates element described by the given parameters set.
 	/// @param elementInfo Element properties container describing element that must be created.
