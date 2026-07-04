@@ -68,7 +68,6 @@ private:
 	QTreeWidgetItem *mPhysicsRoot;  // Takes ownership
 	QTreeWidgetItem *mParamsRoot;  // Takes ownership
 	QTreeWidgetItem *mMetricRoot;  // Takes ownership
-	QTreeWidgetItem *mEmptyRoot;  // Takes ownership
 	QTreeWidgetItem *mDisplayItem;  // Takes ownership
 	QTreeWidgetItem *mDevicesItem;  // Takes ownership
 	QTreeWidgetItem *mMotorsItem;   // Takes ownership

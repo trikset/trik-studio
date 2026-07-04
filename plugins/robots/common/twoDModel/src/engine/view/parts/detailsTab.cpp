@@ -43,9 +43,9 @@ DetailsTab::DetailsTab(QWidget *parent)
 	initItem(mMetricRoot, tr("Metric system"), false);
 	// A workaround so that there is a visible indentation between
 	// the last child widget to be expanded and the end of the visible area
-	mEmptyRoot = new QTreeWidgetItem(this);
-	mEmptyRoot->setFlags(Qt::NoItemFlags);
-	mEmptyRoot->setSizeHint(0, QSize(0, 20));
+	auto *emptyRoot = new QTreeWidgetItem(this);
+	emptyRoot->setFlags(Qt::NoItemFlags);
+	emptyRoot->setSizeHint(0, QSize(0, 20));
 }
 
 DetailsTab::~DetailsTab()
