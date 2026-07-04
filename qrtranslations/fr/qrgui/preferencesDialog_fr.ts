@@ -12,6 +12,10 @@
         <translation>Langage</translation>
     </message>
     <message>
+        <source>Use dark theme</source>
+        <translation>Utiliser le thème sombre</translation>
+    </message>
+    <message>
         <source>Automatics</source>
         <translation>Automatique</translation>
     </message>

@@ -12,6 +12,10 @@
         <translation>Язык</translation>
     </message>
     <message>
+        <source>Use dark theme</source>
+        <translation>Использовать тёмную тему</translation>
+    </message>
+    <message>
         <source>Automatics</source>
         <translation>Автоматизация</translation>
     </message>

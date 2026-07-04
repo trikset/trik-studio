@@ -12,6 +12,10 @@
         <translation>Ngôn ngữ</translation>
     </message>
     <message>
+        <source>Use dark theme</source>
+        <translation>Dùng giao diện tối</translation>
+    </message>
+    <message>
         <source>Automatics</source>
         <translation>Tự động hóa</translation>
     </message>

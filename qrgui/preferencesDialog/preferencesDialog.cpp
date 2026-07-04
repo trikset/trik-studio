@@ -70,8 +70,8 @@ void PreferencesDialog::applyChanges()
 	for (PreferencesPage * const page : mCustomPages.values()) {
 		page->save();
 		Q_EMIT page->saved();
-		shouldRestart |= page->mShouldRestartSystemToApply;
-		page->mShouldRestartSystemToApply = false;
+		shouldRestart |= page->getRestartFlag();
+		page->setRestartFlag(false);
 	}
 
 	SettingsManager::instance()->saveData();
@@ -97,8 +97,6 @@ void PreferencesDialog::changeEvent(QEvent *e)
 	switch (e->type()) {
 		case QEvent::LanguageChange:
 			mUi->retranslateUi(this);
-			for (PreferencesPage *page : mCustomPages.values())
-				page->changeEvent(e);
 			break;
 		default:
 			break;
