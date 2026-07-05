@@ -35,24 +35,24 @@ void VisibilityValueWidget::setPropertyInfo(const VisibilityConditionsDialog::Pr
 
 void VisibilityValueWidget::setValue(const QString &value)
 {
-	if (QComboBox *comboBox = dynamic_cast<QComboBox *>(mWidget)) {
+	if (auto *comboBox = dynamic_cast<QComboBox *>(mWidget)) {
 		comboBox->setCurrentIndex(comboBox->findText(value));
-	} else if (QLineEdit *lineEdit = dynamic_cast<QLineEdit *>(mWidget)) {
+	} else if (auto *lineEdit = dynamic_cast<QLineEdit *>(mWidget)) {
 		lineEdit->setText(value);
-	} else if (QSpinBox *spinBox = dynamic_cast<QSpinBox *>(mWidget)) {
+	} else if (auto *spinBox = dynamic_cast<QSpinBox *>(mWidget)) {
 		spinBox->setValue(value.toInt());
 	}
 }
 
 QString VisibilityValueWidget::value() const
 {
-	if (QComboBox *comboBox = dynamic_cast<QComboBox *>(mWidget)) {
+	if (auto *comboBox = dynamic_cast<QComboBox *>(mWidget)) {
 		return comboBox->currentText();
 	}
-	if (QLineEdit *lineEdit = dynamic_cast<QLineEdit *>(mWidget)) {
+	if (auto *lineEdit = dynamic_cast<QLineEdit *>(mWidget)) {
 		return lineEdit->text();
 	}
-	if (QSpinBox *spinBox = dynamic_cast<QSpinBox *>(mWidget)) {
+	if (auto *spinBox = dynamic_cast<QSpinBox *>(mWidget)) {
 		return QString::number(spinBox->value());
 	}
 	return QString();
@@ -64,7 +64,7 @@ void VisibilityValueWidget::makeWidget(VisibilityConditionsDialog::Type type)
 	{
 		case VisibilityConditionsDialog::Int:
 				{
-					QSpinBox *spinBox = new QSpinBox(this);
+					auto *spinBox = new QSpinBox(this);
 					spinBox->setMinimum(INT_MIN);
 					spinBox->setMaximum(INT_MAX);
 					mWidget = spinBox;
@@ -83,7 +83,7 @@ void VisibilityValueWidget::makeWidget(VisibilityConditionsDialog::Type type)
 
 void VisibilityValueWidget::addValues(const QStringList &values)
 {
-	if (QComboBox *widget = dynamic_cast<QComboBox *>(mWidget)) {
+	if (auto *widget = dynamic_cast<QComboBox *>(mWidget)) {
 		widget->clear();
 		widget->addItems(values);
 	}

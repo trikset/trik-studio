@@ -102,7 +102,7 @@ bool ImageItemPopup::attachTo(const QList<QGraphicsItem *> &items)
 
 void ImageItemPopup::initWidget()
 {
-	QVBoxLayout * const layout = new QVBoxLayout(this);
+	auto * const layout = new QVBoxLayout(this);
 	layout->addWidget(initMemorizationPicker());
 	layout->addWidget(initBackgroundPicker());
 	layout->addWidget(initPathPicker());

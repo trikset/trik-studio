@@ -56,7 +56,7 @@ void RenameCommand::initExplosions(const models::Exploser * const exploser)
 		return;
 	}
 
-	GraphicalModelAssistInterface *graphicalModel = dynamic_cast<GraphicalModelAssistInterface *>(&mModel);
+	auto *graphicalModel = dynamic_cast<GraphicalModelAssistInterface *>(&mModel);
 	const Id logicalId = graphicalModel ? graphicalModel->logicalId(mId) : mId;
 	addPostAction(exploser->renameCommands(logicalId, mNewName));
 }

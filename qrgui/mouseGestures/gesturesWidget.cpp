@@ -63,7 +63,7 @@ void GesturesWidget::setElements(QList<QPair<QString, qReal::Id> > const &elemen
 	QListIterator<QPair<QString, qReal::Id> > iterator(elements);
 	while (iterator.hasNext()) {
 		QPair<QString, qReal::Id> const element(iterator.next());
-		QListWidgetItem *item = new QListWidgetItem(element.first);
+		auto *item = new QListWidgetItem(element.first);
 		item->setData(Qt::UserRole, QVariant::fromValue(element.second));
 		mUi->listWidget->addItem(item);
 	}

@@ -86,7 +86,7 @@ AbstractModelItem *AbstractModel::parentAbstractItem(const QModelIndex &parent) 
 QModelIndex AbstractModel::parent(const QModelIndex &index) const
 {
 	if (index.isValid()) {
-		AbstractModelItem *item = static_cast<AbstractModelItem *>(index.internalPointer());
+		auto *item = static_cast<AbstractModelItem *>(index.internalPointer());
 		AbstractModelItem *parentItem = item->parent();
 		if (parentItem == mRootItem || parentItem == nullptr) {
 			return QModelIndex();
@@ -154,7 +154,7 @@ QModelIndex AbstractModel::indexById(const Id &id) const
 
 Id AbstractModel::idByIndex(const QModelIndex &index) const
 {
-	AbstractModelItem *item = static_cast<AbstractModelItem*>(index.internalPointer());
+	auto *item = static_cast<AbstractModelItem*>(index.internalPointer());
 	return mModelItems.key(item);
 }
 

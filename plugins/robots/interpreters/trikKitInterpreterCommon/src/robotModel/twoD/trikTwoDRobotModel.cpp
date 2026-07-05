@@ -97,7 +97,7 @@ robotParts::Device *TrikTwoDRobotModel::createDevice(const PortInfo &port, const
 	}
 
 	if (deviceInfo.isA<robotModel::parts::TrikShell>()) {
-		parts::Shell * const shell = new parts::Shell(deviceInfo, port, *engine());
+		auto * const shell = new parts::Shell(deviceInfo, port, *engine());
 		// Error reporter will come only after global plugin init() is called. Shell is however
 		// configured even later. So setting error reporter only when everything will be ready.
 		connect(shell, &parts::Shell::configured, this, [=]() { shell->setErrorReporter(*mErrorReporter); });
@@ -129,7 +129,7 @@ robotParts::Device *TrikTwoDRobotModel::createDevice(const PortInfo &port, const
 
 void TrikTwoDRobotModel::onInterpretationStarted()
 {
-	robotModel::parts::TrikDisplay * const display =
+	auto * const display =
 			RobotModelUtils::findDevice<robotModel::parts::TrikDisplay>(*this, "DisplayPort");
 	if (display) {
 		display->clearScreen();
@@ -139,7 +139,7 @@ void TrikTwoDRobotModel::onInterpretationStarted()
 		QLOG_WARN() << "TRIK display is not configured before intepretation start!";
 	}
 
-	parts::Shell * const shell = RobotModelUtils::findDevice<parts::Shell>(*this, "ShellPort");
+	auto * const shell = RobotModelUtils::findDevice<parts::Shell>(*this, "ShellPort");
 	if (shell) {
 		shell->reset();
 	} else {

@@ -54,8 +54,8 @@ bool ArrangeLinksCommand::restoreState()
 
 void ArrangeLinksCommand::arrange()
 {
-	NodeElement *node = dynamic_cast<NodeElement *>(mElement);
-	EdgeElement *edge = dynamic_cast<EdgeElement *>(mElement);
+	auto *node = dynamic_cast<NodeElement *>(mElement);
+	auto *edge = dynamic_cast<EdgeElement *>(mElement);
 	if (node) {
 		arrange(node);
 	}

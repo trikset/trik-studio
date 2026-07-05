@@ -41,7 +41,7 @@ RestoreElementDialog::~RestoreElementDialog()
 
 void RestoreElementDialog::fillSameNameElementsTreeView()
 {
-	QStandardItemModel *standardModel = new QStandardItemModel();
+	auto *standardModel = new QStandardItemModel();
 
 	QStandardItem *item = standardModel->invisibleRootItem();
 	for (const auto &element: mElementsWithTheSameNameList) {

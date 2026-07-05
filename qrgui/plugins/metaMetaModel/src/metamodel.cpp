@@ -187,7 +187,7 @@ void Metamodel::setPaletteSorted(const QString &diagram, bool sorted)
 
 void Metamodel::addNode(qrgraph::Node *entity)
 {
-	ElementType * const type = dynamic_cast<ElementType *>(entity);
+	auto * const type = dynamic_cast<ElementType *>(entity);
 	Q_ASSERT_X(type, Q_FUNC_INFO, "Attempt to add non-metamodel enitity!");
 	Q_ASSERT_X(&type->metamodel() == this, Q_FUNC_INFO, "Attempt to add entity from other metamodel!");
 
@@ -203,7 +203,7 @@ void Metamodel::addNode(qrgraph::Node *entity)
 
 void Metamodel::addExplosion(ElementType &source, ElementType &target, bool isReusable, bool requiresImmediateLinkage)
 {
-	Explosion *explosion = new Explosion(*this, isReusable, requiresImmediateLinkage);
+	auto *explosion = new Explosion(*this, isReusable, requiresImmediateLinkage);
 	addEdge(*explosion);
 	explosion->connectBegin(source);
 	explosion->connectEnd(target);

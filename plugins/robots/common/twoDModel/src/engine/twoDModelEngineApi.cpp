@@ -363,9 +363,9 @@ void TwoDModelEngineApi::enableBackgroundSceneDebugging()
 	// but this is a pretty convenient way to debug a fake scene.
 	// If called from constructor (where robotModels are not initialized yet)
 	// then NXT and TRIK 2D fake scenes will be shown.
-	QGraphicsView * const fakeScene = new QGraphicsView;
+	auto * const fakeScene = new QGraphicsView;
 	fakeScene->setScene(mFakeScene.data());
-	QTimer * const timer = new QTimer(fakeScene);
+	auto * const timer = new QTimer(fakeScene);
 	QObject::connect(timer, &QTimer::timeout, &*mFakeScene, [this](){mFakeScene->update();});
 	timer->setTimerType(Qt::TimerType::PreciseTimer);
 	timer->setInterval(300);

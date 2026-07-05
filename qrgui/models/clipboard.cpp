@@ -114,7 +114,7 @@ void Clipboard::pushDataToClipboard(const QList<NodeInfo> &nodesData, const QLis
 	stream << nodesData;
 	stream << edgesData;
 
-	QMimeData *mimeData = new QMimeData();
+	auto *mimeData = new QMimeData();
 	mimeData->setData(DEFAULT_MIME_TYPE, data);
 
 	QClipboard *clipboard = QApplication::clipboard();
@@ -129,7 +129,7 @@ bool Clipboard::isEmpty() const
 
 void Clipboard::paste(const Id &parent, QPointF position, bool isGraphicalCopy)
 {
-	qReal::commands::PasteCommand *pasteCommand = new qReal::commands::PasteCommand(
+	auto *pasteCommand = new qReal::commands::PasteCommand(
 			mModels
 			, isGraphicalCopy
 			, position

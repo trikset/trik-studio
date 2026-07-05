@@ -187,7 +187,7 @@ QString TrikQtsGeneratorPluginBase::generatorName() const
 void TrikQtsGeneratorPluginBase::addShellDevice(robotModel::GeneratorModelExtensionInterface &robotModel) const
 {
 	const PortInfo shellPort("ShellPort", output);
-	EmptyShell * const shell = new EmptyShell(DeviceInfo::create<trik::robotModel::parts::TrikShell>(), shellPort);
+	auto * const shell = new EmptyShell(DeviceInfo::create<trik::robotModel::parts::TrikShell>(), shellPort);
 	connect(mCommunicator.data(), &TcpRobotCommunicator::printText, shell, &EmptyShell::print);
 	robotModel.addDevice(shellPort, shell);
 }

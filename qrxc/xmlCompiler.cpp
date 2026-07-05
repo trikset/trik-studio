@@ -103,7 +103,7 @@ Editor* XmlCompiler::loadXmlFile(const QDir &currentDir, const QString &inputXml
 					<< "Could not parse XML. Error:" << errorMessage;
 		}
 
-		Editor *editor = new Editor(inputXmlDomDocument, this);
+		auto *editor = new Editor(inputXmlDomDocument, this);
 		if (!editor->load(currentDir)) {
 			qDebug() << "ERROR: Failed to load file";
 			delete editor;
@@ -296,7 +296,7 @@ void XmlCompiler::generateInitMultigraph(OutFile &out)
 
 	for (const Diagram *diagram : mEditors[mCurrentEditor]->diagrams()) {
 		for (const Type *type : diagram->types()) {
-			if (const GraphicType *graphicType = dynamic_cast<const GraphicType *>(type)) {
+			if (const auto *graphicType = dynamic_cast<const GraphicType *>(type)) {
 				generateLinks(out, graphicType, graphicType->immediateParents(), "generalizationLinkType", false);
 				generateLinks(out, graphicType, graphicType->containedTypes(), "containmentLinkType", true);
 				generateExplosionsMappings(out, graphicType);

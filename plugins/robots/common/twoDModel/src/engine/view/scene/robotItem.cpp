@@ -72,7 +72,7 @@ RobotItem::RobotItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 		auto port = it.key();
 		auto device = it.value();
 
-		SensorItem *sensorItem = new SensorItem(coordinateSystem(), robotModel.configuration(), port
+		auto *sensorItem = new SensorItem(coordinateSystem(), robotModel.configuration(), port
 				, robotModel.info().sensorImagePath(device), robotModel.info().sensorImageRect(device));
 		addSensor(port, sensorItem);
 
@@ -174,8 +174,8 @@ void RobotItem::deserialize(const QDomElement &element)
 	auto *coordSystem = coordinateSystem();
 	const QString positionStr = element.attribute("position", "0:0");
 	const QStringList splittedStr = positionStr.split(":");
-	const qreal x = static_cast<qreal>(splittedStr[0].toDouble());
-	const qreal y = static_cast<qreal>(splittedStr[1].toDouble());
+	const auto x = static_cast<qreal>(splittedStr[0].toDouble());
+	const auto y = static_cast<qreal>(splittedStr[1].toDouble());
 	setPos(coordSystem->toPx(QPointF(x, y)));
 
 	setRotation(element.attribute("direction", "0").toDouble());

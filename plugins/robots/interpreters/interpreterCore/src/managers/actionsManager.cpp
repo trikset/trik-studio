@@ -247,12 +247,12 @@ void ActionsManager::updateEnabledActions()
 
 void ActionsManager::initKitPluginActions()
 {
-	QSignalMapper * const robotModelMapper = new QSignalMapper(this);
+	auto * const robotModelMapper = new QSignalMapper(this);
 	connect(robotModelMapper, SIGNAL(mapped(QObject*)), this, SLOT(onRobotModelActionChecked(QObject*)));
 
 	for (const QString &kitId : mKitPluginManager.kitIds()) {
 		const QList<kitBase::KitPluginInterface *> kits = mKitPluginManager.kitsById(kitId);
-		QActionGroup * const group = new QActionGroup(this);
+		auto * const group = new QActionGroup(this);
 		QList<kitBase::robotModel::RobotModelInterface *> robotModels;
 		QMap<kitBase::robotModel::RobotModelInterface *, QIcon> fastSelectorIcons;
 		for (kitBase::KitPluginInterface * const kitPlugin : kits) {
@@ -274,7 +274,7 @@ void ActionsManager::initKitPluginActions()
 		kitBase::robotModel::RobotModelUtils::sortRobotModels(robotModels);
 		for (kitBase::robotModel::RobotModelInterface * const robotModel : robotModels) {
 			const QString &text = robotModel->friendlyName();
-			QAction * const fastSelectionAction = new QAction(fastSelectorIcons[robotModel], text, group);
+			auto * const fastSelectionAction = new QAction(fastSelectorIcons[robotModel], text, group);
 			robotModelMapper->setMapping(fastSelectionAction, robotModel);
 			connect(fastSelectionAction, SIGNAL(triggered()), robotModelMapper, SLOT(map()));
 			fastSelectionAction->setObjectName("switchTo" + kitId + robotModel->name());
@@ -319,7 +319,7 @@ QAction *ActionsManager::produceMenuAction(const QString &kitId, const QString &
 		return result;
 	}
 
-	QAction * const menuAction = new QAction(subActions.first()->icon(), name, this);
+	auto * const menuAction = new QAction(subActions.first()->icon(), name, this);
 	menuAction->setCheckable(true);
 	menuAction->setMenu(new QMenu(&mDummyWidget));
 	menuAction->menu()->addActions(subActions);

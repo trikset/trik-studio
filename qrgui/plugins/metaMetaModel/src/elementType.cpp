@@ -98,7 +98,7 @@ IdList ElementType::containedTypes() const
 	qrgraph::Queries::treeLift(*this, [&result](const Node &parent) {
 		const QList<const Node *> nodes = qrgraph::Queries::immediateFollowers(parent, containmentLinkType);
 		for (const qrgraph::Node *node : nodes) {
-			if (const ElementType *type = dynamic_cast<const ElementType *>(node)) {
+			if (const auto *type = dynamic_cast<const ElementType *>(node)) {
 				result.insert(type->typeId());
 			}
 		}
@@ -116,7 +116,7 @@ QList<const Explosion *> ElementType::explosions() const
 	QMap<const ElementType *, const Explosion *> result;
 	qrgraph::Queries::treeLift(*this, [&result](const Node &parent) {
 		for (const qrgraph::Edge *edge : parent.outgoingEdges(explosionLinkType)) {
-			const Explosion *explosion = dynamic_cast<const Explosion *>(edge);
+			const auto *explosion = dynamic_cast<const Explosion *>(edge);
 			if (explosion && !result.contains(&explosion->target())) {
 				result[&explosion->target()] = explosion;
 			}

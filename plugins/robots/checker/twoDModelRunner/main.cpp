@@ -42,7 +42,7 @@ bool loadTranslators(const QString &locale)
 	bool hasTranslations = false;
 	while (directories.hasNext()) {
 		for (auto &&translatorFile : QDir(directories.next()).entryInfoList(QDir::Files)) {
-			QTranslator *translator = new QTranslator(qApp);
+			auto *translator = new QTranslator(qApp);
 			translator->load(translatorFile.absoluteFilePath());
 			QCoreApplication::installTranslator(translator);
 			hasTranslations = true;

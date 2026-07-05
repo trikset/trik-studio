@@ -79,7 +79,7 @@ NodeElement::NodeElement(const NodeElementType &type, const Id &id, const models
 
 	const auto &labelInfos = mType.labels();
 	for (const auto &labelInfo : labelInfos) {
-		Label * const label = new Label(mGraphicalAssistApi, mLogicalAssistApi, mId, labelInfo);
+		auto * const label = new Label(mGraphicalAssistApi, mLogicalAssistApi, mId, labelInfo);
 		label->init(mContents);
 		label->setParentItem(this);
 		mLabels.append(label);
@@ -256,7 +256,7 @@ void NodeElement::updateDynamicProperties(const Id &target)
 			labelInfo->setHard(false);
 			labelInfo->setPrefix(text);
 			labelInfo->setPlainTextMode(true);
-			Label *label = new Label(mGraphicalAssistApi, mLogicalAssistApi, mId, labelInfo);
+			auto *label = new Label(mGraphicalAssistApi, mLogicalAssistApi, mId, labelInfo);
 			label->init(mContents);
 			label->setParentItem(this);
 			label->setTextInteractionFlags(Qt::TextEditorInteraction);
@@ -308,7 +308,7 @@ void NodeElement::adjustLinks()
 	}
 
 	for (QGraphicsItem *child : childItems()) {
-		NodeElement *element = dynamic_cast<NodeElement*>(child);
+		auto *element = dynamic_cast<NodeElement*>(child);
 		if (element) {
 			element->adjustLinks();
 		}
@@ -443,7 +443,7 @@ void NodeElement::mousePressEvent(QGraphicsSceneMouseEvent *event)
 void NodeElement::alignToGrid()
 {
 	if (SettingsManager::value("ActivateGrid").toBool()) {
-		NodeElement *parent = dynamic_cast<NodeElement *>(parentItem());
+		auto *parent = dynamic_cast<NodeElement *>(parentItem());
 		if (!parent || !parent->mType.isSortingContainer()) {
 			mGrid->alignToGrid();
 		}
@@ -484,7 +484,7 @@ void NodeElement::recalculateHighlightedNode(QPointF mouseScenePos)
 			break;
 	}
 
-	EditorViewScene *evScene = dynamic_cast<EditorViewScene*>(scene());
+	auto *evScene = dynamic_cast<EditorViewScene*>(scene());
 	NodeElement *newParent = evScene->findNewParent(newParentInnerPoint, this);
 
 	// it would be nice optimization to do nothing in case of
@@ -625,7 +625,7 @@ void NodeElement::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 		Element::mouseReleaseEvent(event);
 	}
 
-	EditorViewScene *evScene = dynamic_cast<EditorViewScene *>(scene());
+	auto *evScene = dynamic_cast<EditorViewScene *>(scene());
 
 	bool shouldProcessResize = true;
 
@@ -757,7 +757,7 @@ void NodeElement::initEmbeddedLinkers()
 
 		const EdgeElementType &edge = elementType.toEdge();
 		if (!edge.fromPortTypes().toSet().intersect(mType.portTypes().toSet()).isEmpty()) {
-			EmbeddedLinker* embeddedLinker = new EmbeddedLinker();
+			auto* embeddedLinker = new EmbeddedLinker();
 			scene()->addItem(embeddedLinker);
 			embeddedLinker->setEdgeType(edge.typeId());
 			embeddedLinker->setDirected(true);
@@ -796,7 +796,7 @@ void NodeElement::setVisibleEmbeddedLinkers(const bool show)
 QVariant NodeElement::itemChange(GraphicsItemChange change, const QVariant &value)
 {
 	bool isItemAddedOrDeleted = false;
-	NodeElement *item = dynamic_cast<NodeElement*>(value.value<QGraphicsItem*>());
+	auto *item = dynamic_cast<NodeElement*>(value.value<QGraphicsItem*>());
 	switch (change) {
 	case ItemPositionHasChanged:
 		if (mDragState == None) {
@@ -1046,7 +1046,7 @@ void NodeElement::changeFoldState()
 	mIsFolded = !mIsFolded;
 
 	for (QGraphicsItem* childItem : childItems()) {
-		NodeElement* curItem = dynamic_cast<NodeElement*>(childItem);
+		auto* curItem = dynamic_cast<NodeElement*>(childItem);
 		if (curItem) {
 			curItem->setVisible(!mIsFolded);
 			curItem->setLinksVisible(!mIsFolded);
@@ -1064,7 +1064,7 @@ void NodeElement::changeFoldState()
 	}
 	mGraphicalAssistApi.mutableGraphicalRepoApi().setProperty(mId, "folded", mIsFolded ? "true" : "false");
 
-	NodeElement* parent = dynamic_cast<NodeElement*>(parentItem());
+	auto* parent = dynamic_cast<NodeElement*>(parentItem());
 	if (parent) {
 		parent->resize();
 	}
@@ -1116,7 +1116,7 @@ void NodeElement::setLinksVisible(bool isVisible)
 	}
 
 	for (QGraphicsItem* childItem : childItems()) {
-		NodeElement* curItem = dynamic_cast<NodeElement*>(childItem);
+		auto* curItem = dynamic_cast<NodeElement*>(childItem);
 		if (curItem) {
 			curItem->setLinksVisible(isVisible);
 		}
@@ -1135,7 +1135,7 @@ void NodeElement::drawPlaceholder(QGraphicsRectItem *placeholder, QPointF pos)
 	NodeElement *nextItem = nullptr;
 
 	for (QGraphicsItem* childItem : childItems()) {
-		NodeElement *curItem = dynamic_cast<NodeElement*>(childItem);
+		auto *curItem = dynamic_cast<NodeElement*>(childItem);
 		if (curItem) {
 			if (curItem->scenePos().y() > pos.y()) {
 				nextItem = curItem;
@@ -1162,7 +1162,7 @@ Element* NodeElement::getPlaceholderNextElement() const
 	bool found = false;
 	// loking for child following the placeholder
 	for (QGraphicsItem *childItem : childItems()) {
-		Element *element = dynamic_cast<Element*>(childItem);
+		auto *element = dynamic_cast<Element*>(childItem);
 		if (found && element != nullptr) {
 			return element;
 		}
@@ -1206,7 +1206,7 @@ void NodeElement::updateByChild(NodeElement* item, bool isItemAddedOrDeleted)
 
 void NodeElement::updateByNewParent()
 {
-	NodeElement* parent = dynamic_cast<NodeElement*>(parentItem());
+	auto* parent = dynamic_cast<NodeElement*>(parentItem());
 	if (!parent || parent->mType.hasMovableChildren()) {
 		setFlag(ItemIsMovable, true);
 	} else {
@@ -1236,7 +1236,7 @@ void NodeElement::updateChildrenOrder()
 		ids = mGraphicalAssistApi.graphicalRepoApi().property(mId, "childrenOrder").toStringList();
 	}
 
-	EditorViewScene *evScene = dynamic_cast<EditorViewScene *>(scene());
+	auto *evScene = dynamic_cast<EditorViewScene *>(scene());
 	if (evScene) {
 		QStringList idsForRemoving;
 		for (const QString &id : ids) {
@@ -1346,7 +1346,7 @@ QList<NodeElement *> const NodeElement::childNodes() const
 {
 	QList<NodeElement *> result;
 	for (QGraphicsItem *item : childItems()) {
-		NodeElement *child = dynamic_cast<NodeElement *>(item);
+		auto *child = dynamic_cast<NodeElement *>(item);
 		if (child) {
 			result << child;
 		}
@@ -1357,8 +1357,8 @@ QList<NodeElement *> const NodeElement::childNodes() const
 
 AbstractCommand *NodeElement::changeParentCommand(const Id &newParent, QPointF position) const
 {
-	EditorViewScene *evScene = dynamic_cast<EditorViewScene *>(scene());
-	Element *oldParentElem = dynamic_cast<Element *>(parentItem());
+	auto *evScene = dynamic_cast<EditorViewScene *>(scene());
+	auto *oldParentElem = dynamic_cast<Element *>(parentItem());
 	const Id oldParent = oldParentElem ? oldParentElem->id() : evScene->rootItemId();
 	if (oldParent == newParent) {
 		return nullptr;
@@ -1373,12 +1373,12 @@ AbstractCommand *NodeElement::changeParentCommand(const Id &newParent, QPointF p
 	// root, then translate into a new position and change parent to a new one.
 	// Also that element itself doesn`t change position in change parent command
 	// so using translation command
-	ChangeParentCommand *changeParentToSceneCommand =
+	auto *changeParentToSceneCommand =
 			new ChangeParentCommand(mLogicalAssistApi, mGraphicalAssistApi, false
 					, id(), oldParent, evScene->rootItemId(), oldPos, oldScenePos);
 	AbstractCommand *translateCommand = ResizeCommand::create(this, mContents
 			, position, mContents, oldScenePos);
-	ChangeParentCommand *result = new ChangeParentCommand(
+	auto *result = new ChangeParentCommand(
 			mLogicalAssistApi, mGraphicalAssistApi, false
 			, id(), evScene->rootItemId(), newParent, position, position);
 	result->addPreAction(changeParentToSceneCommand);
@@ -1410,7 +1410,7 @@ void NodeElement::initRenderedDiagram()
 		return;
 	}
 
-	EditorViewScene *evScene = dynamic_cast<EditorViewScene *>(scene());
+	auto *evScene = dynamic_cast<EditorViewScene *>(scene());
 	if (!evScene) {
 		return;
 	}

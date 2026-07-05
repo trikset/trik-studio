@@ -89,7 +89,7 @@ void ResizeCommand::resizeHierarchy(QMap<Id, QRectF> const &snapshot)
 	// Updating linker position
 	if (mScene->selectedItems().size() == 1) {
 		QGraphicsItem *selectedItem = mScene->selectedItems()[0];
-		NodeElement *selectedNode = dynamic_cast<NodeElement *>(selectedItem);
+		auto *selectedNode = dynamic_cast<NodeElement *>(selectedItem);
 		if (selectedNode) {
 			selectedNode->setVisibleEmbeddedLinkers(true);
 		}
@@ -146,11 +146,11 @@ void ResizeCommand::makeCommonSnapshot(QMap<Id, QRectF> &target)
 	makeHierarchySnapshot(mNode, target);
 	const QList<QGraphicsItem *> selectedItems = mNode->scene()->selectedItems();
 	for (QGraphicsItem *const item : selectedItems) {
-		NodeElement * const node = dynamic_cast<NodeElement *>(item);
+		auto * const node = dynamic_cast<NodeElement *>(item);
 		if (node && node != mNode) {
 			makeHierarchySnapshot(node, target);
 		} else {
-			EdgeElement * const edge = dynamic_cast<EdgeElement *>(item);
+			auto * const edge = dynamic_cast<EdgeElement *>(item);
 			if (edge) {
 				mEdges.insert(edge);
 			}
@@ -177,7 +177,7 @@ void ResizeCommand::makeChildrenSnapshot(const NodeElement *element, QMap<Id, QR
 	target.insert(element->id(), geometryOf(element));
 	addEdges(element);
 	for (const QGraphicsItem * const childItem : element->childItems()) {
-		const NodeElement * const child = dynamic_cast<const NodeElement * const>(childItem);
+		const auto * const child = dynamic_cast<const NodeElement * const>(childItem);
 		if (child) {
 			makeChildrenSnapshot(child, target);
 		}
@@ -194,7 +194,7 @@ void ResizeCommand::addEdges(const NodeElement *node)
 void ResizeCommand::startEdgeTracking()
 {
 	for (EdgeElement * const edge : mEdges) {
-		ReshapeEdgeCommand *reshapeCommand = new ReshapeEdgeCommand(edge);
+		auto *reshapeCommand = new ReshapeEdgeCommand(edge);
 		mEdgeCommands << reshapeCommand;
 		reshapeCommand->startTracking();
 		addPostAction(reshapeCommand);

@@ -79,7 +79,7 @@ void TrikBrick::printToShell(const QString &msg)
 {
 	using namespace kitBase::robotModel;
 	using namespace trik::robotModel;
-	parts::TrikShell* sh = RobotModelUtils::findDevice<parts::TrikShell>(*mTwoDRobotModel, "ShellPort");
+	auto* sh = RobotModelUtils::findDevice<parts::TrikShell>(*mTwoDRobotModel, "ShellPort");
 	if (sh == nullptr) {
 		Q_EMIT error(tr("2d model shell part was not found"));
 		return;
@@ -184,7 +184,7 @@ trikControl::MotorInterface *TrikBrick::motor(const QString &port)
 {
 	using namespace kitBase::robotModel;
 	if (!mMotors.contains(port)) {
-		robotParts::Motor * motor =
+		auto * motor =
 				RobotModelUtils::findDevice<robotParts::Motor>(*mTwoDRobotModel, port);
 		if (motor == nullptr) {
 			Q_EMIT error(tr("No configured motor on port: %1").arg(port));
@@ -202,7 +202,7 @@ trikControl::MarkerInterface *TrikBrick::marker()
 			, kitBase::robotModel::Direction::output);
 	if (markerPort.isValid()) {
 		using Marker = twoDModel::robotModel::parts::Marker;
-		Marker* marker = kitBase::robotModel::RobotModelUtils::findDevice<Marker>(*mTwoDRobotModel, markerPort);
+		auto* marker = kitBase::robotModel::RobotModelUtils::findDevice<Marker>(*mTwoDRobotModel, markerPort);
 		mTrikProxyMarker.reset(new TrikProxyMarker(marker));
 		return mTrikProxyMarker.data();
 	}
@@ -215,7 +215,7 @@ trikControl::SensorInterface *TrikBrick::sensor(const QString &port)
 	//testing
 	using namespace kitBase::robotModel;
 	if (!mSensors.contains(port)) {
-		robotParts::ScalarSensor * sens =
+		auto * sens =
 				RobotModelUtils::findDevice<robotParts::ScalarSensor>(*mTwoDRobotModel, port);
 		if (sens == nullptr) {
 			Q_EMIT error(tr("No configured scalar sensor on port: %1").arg(port));
@@ -338,7 +338,7 @@ trikControl::ObjectSensorInterface *TrikBrick::objectSensor(const QString &port)
 trikControl::EncoderInterface *TrikBrick::encoder(const QString &port) {
 	using namespace kitBase::robotModel;
 	if (!mEncoders.contains(port)) {
-		robotParts::EncoderSensor * enc =
+		auto * enc =
 				RobotModelUtils::findDevice<robotParts::EncoderSensor>(*mTwoDRobotModel, port);
 		if (enc == nullptr) {
 			Q_EMIT error(tr("No configured encoder on port: %1").arg(port));

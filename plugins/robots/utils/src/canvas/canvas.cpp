@@ -90,28 +90,28 @@ const QList<TextObject *> &Canvas::labels() const
 
 void Canvas::printText(int x, int y, const QString &text, int fontSize)
 {
-	TextObject * const object = new TextObject(x, y, text, mCurrentPenColor, mCurrentPenWidth, fontSize);
+	auto * const object = new TextObject(x, y, text, mCurrentPenColor, mCurrentPenWidth, fontSize);
 	mObjects << object;
 	mLabels << object;
 }
 
 void Canvas::drawPixel(int x, int y)
 {
-	PointObject * const object = new PointObject(x, y, mCurrentPenColor, mCurrentPenWidth);
+	auto * const object = new PointObject(x, y, mCurrentPenColor, mCurrentPenWidth);
 	mObjects << object;
 	mPixels << object;
 }
 
 void Canvas::drawLine(int x1, int y1, int x2, int y2)
 {
-	LineObject * const object = new LineObject(QPoint(x1, y1), QPoint(x2, y2), mCurrentPenColor, mCurrentPenWidth);
+	auto * const object = new LineObject(QPoint(x1, y1), QPoint(x2, y2), mCurrentPenColor, mCurrentPenWidth);
 	mObjects << object;
 	mLines << object;
 }
 
 void Canvas::drawRect(int x, int y, int width, int height, bool filled)
 {
-	RectangleObject * const object = new RectangleObject(QRect(x, y, width, height)
+	auto * const object = new RectangleObject(QRect(x, y, width, height)
 			, mCurrentPenColor, mCurrentPenWidth, filled);
 	mObjects << object;
 	mRectangles << object;
@@ -119,7 +119,7 @@ void Canvas::drawRect(int x, int y, int width, int height, bool filled)
 
 void Canvas::drawEllipse(int centerX, int centerY, int semiDiameterX, int semiDiameterY, bool filled)
 {
-	EllipseObject * const object = new EllipseObject(QPoint(centerX, centerY)
+	auto * const object = new EllipseObject(QPoint(centerX, centerY)
 			, semiDiameterX, semiDiameterY, mCurrentPenColor, mCurrentPenWidth, filled);
 	mObjects << object;
 	mEllipses << object;
@@ -127,7 +127,7 @@ void Canvas::drawEllipse(int centerX, int centerY, int semiDiameterX, int semiDi
 
 void Canvas::drawArc(int x, int y, int width, int height, int startAngle, int spanAngle)
 {
-	ArcObject * const object = new ArcObject(QRect(x, y, width, height)
+	auto * const object = new ArcObject(QRect(x, y, width, height)
 			, startAngle, spanAngle, mCurrentPenColor, mCurrentPenWidth);
 	mObjects << object;
 	mArcs << object;

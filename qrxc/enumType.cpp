@@ -46,7 +46,7 @@ bool EnumType::init(const QDomElement &element, const QString &context)
 
 Type* EnumType::clone() const
 {
-	EnumType *result = new EnumType();
+	auto *result = new EnumType();
 	Type::copyFields(result);
 	result->mValues = mValues;
 	result->mIsEditable = mIsEditable;

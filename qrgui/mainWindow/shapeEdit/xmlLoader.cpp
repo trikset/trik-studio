@@ -322,7 +322,7 @@ void XmlLoader::readLine(const QDomElement &line)
 void XmlLoader::readEllipse(const QDomElement &ellipse)
 {
 	QRectF rect = readRectOfXandY(ellipse);
-	QRealEllipse* item = new QRealEllipse(rect.left(), rect.top(), rect.right(), rect.bottom(), nullptr);
+	auto* item = new QRealEllipse(rect.left(), rect.top(), rect.right(), rect.bottom(), nullptr);
 	item->readPenBrush(ellipse);
 	item->setListScalePoint(mListScalePoint);
 	item->setVisibilityCondition(readVisibility(ellipse));
@@ -344,7 +344,7 @@ void XmlLoader::readArch(const QDomElement &arch)
 void XmlLoader::readRectangle(const QDomElement &rectangle)
 {
 	QRectF rect = readRectOfXandY(rectangle);
-	QRealRectangle* item = new QRealRectangle(rect.left(), rect.top(), rect.right(), rect.bottom(), nullptr);
+	auto* item = new QRealRectangle(rect.left(), rect.top(), rect.right(), rect.bottom(), nullptr);
 	item->readPenBrush(rectangle);
 	item->setListScalePoint(mListScalePoint);
 	item->setVisibilityCondition(readVisibility(rectangle));
@@ -358,7 +358,7 @@ void XmlLoader::readImage(const QDomElement &image)
 	QString fileName = image.attribute("name", "error");
 	const QString workingDirName = QFileInfo(QApplication::applicationFilePath()).absoluteDir().absolutePath();
 	const QString fullFileName = workingDirName + "/" + fileName;
-	Image* item = new Image(fullFileName, rect.left(), rect.top(), nullptr);
+	auto* item = new Image(fullFileName, rect.left(), rect.top(), nullptr);
 	item->setX2(rect.right());
 	item->setY2(rect.bottom());
 	item->setListScalePoint(mListScalePoint);
@@ -371,7 +371,7 @@ void XmlLoader::readStylus(const QDomElement &stylus)
 {
 	QDomNodeList stylusAttributes = stylus.childNodes();
 
-	Stylus* stylusItem = new Stylus(0, 0, nullptr);
+	auto* stylusItem = new Stylus(0, 0, nullptr);
 	for (int i = 0; i < stylusAttributes.length(); ++i) {
 		QDomElement type = stylusAttributes.at(i).toElement();
 		if (type.tagName() == "line") {
@@ -563,7 +563,7 @@ void XmlLoader::readCurve(const QDomElement &curve)
 		}
 	}
 
-	Curve* item = new Curve(QPointF(x1, y1), QPointF(x2, y2), QPointF(x3, y3));
+	auto* item = new Curve(QPointF(x1, y1), QPointF(x2, y2), QPointF(x3, y3));
 	item->readPenBrush(curve);
 	item->setVisibilityCondition(readVisibility(curve));
 	mScene->addItem(item);
@@ -576,7 +576,7 @@ void XmlLoader::readText(const QDomElement &text)
 	qreal x = point.left();
 	qreal y = point.top();
 	QString str = text.text();
-	TextPicture* item = new TextPicture(x, y, str);
+	auto* item = new TextPicture(x, y, str);
 	item->readFont(text);
 	item->setListScalePoint(mListScalePoint);
 	item->setVisibilityCondition(readVisibility(text));
@@ -622,7 +622,7 @@ void XmlLoader::readLinePort(const QDomElement &linePort)
 	}
 
 	QPair<QPointF, QPointF> rect = readLinePortOfXandY(start, end);
-	LinePort* item = new LinePort(rect.first.x(), rect.first.y(), rect.second.x(), rect.second.y(), nullptr);
+	auto* item = new LinePort(rect.first.x(), rect.first.y(), rect.second.x(), rect.second.y(), nullptr);
 	item->setListScalePoint(mListScalePoint);
 	item->setVisibilityCondition(readVisibility(linePort));
 	item->setType(linePort.attribute("type", "NonTyped"));
@@ -633,7 +633,7 @@ void XmlLoader::readLinePort(const QDomElement &linePort)
 void XmlLoader::readPointPort(const QDomElement &pointPort)
 {
 	QPointF point = readXandY(pointPort);
-	PointPort* item = new PointPort(point.x(), point.y(), nullptr);
+	auto* item = new PointPort(point.x(), point.y(), nullptr);
 	item->setListScalePoint(mListScalePoint);
 	item->setVisibilityCondition(readVisibility(pointPort));
 	item->setType(pointPort.attribute("type", "NonTyped"));

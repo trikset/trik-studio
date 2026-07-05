@@ -266,7 +266,7 @@ void TextManager::showInTextEditor(const QFileInfo &fileInfo, const text::Langua
 
 bool TextManager::saveText(bool saveAs)
 {
-	QScintillaTextEdit * const area = dynamic_cast<QScintillaTextEdit *>(mMainWindow.currentTab());
+	auto * const area = dynamic_cast<QScintillaTextEdit *>(mMainWindow.currentTab());
 	if (!area) {
 		return false;
 	}

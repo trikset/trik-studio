@@ -34,7 +34,7 @@ SearchLineEdit::SearchLineEdit(QWidget *parent, bool borderEnabled)
 	, mRegularExpression(new QAction(tr("Regular expression"), this))
 	, mCurrentOption(SearchOptions::CaseInsensitive)
 {
-	QHBoxLayout * const layout = new QHBoxLayout(this);
+	auto * const layout = new QHBoxLayout(this);
 	layout->setContentsMargins(2, 2, 2, 2);
 	layout->setSpacing(2);
 
@@ -106,7 +106,7 @@ void SearchLineEdit::clearText()
 
 QToolButton *SearchLineEdit::initButton(const QIcon &icon, const QString &toolTip)
 {
-	QToolButton * const result = new QToolButton(this);
+	auto * const result = new QToolButton(this);
 	result->setIcon(icon);
 	result->setToolTip(toolTip);
 	result->setStyleSheet("QToolButton { border: 0; } QToolButton:menu-indicator { image: none; }");
@@ -137,7 +137,7 @@ void SearchLineEdit::makeContextMenu()
 		notifyTextChanged();
 	});
 
-	QActionGroup * const group = new QActionGroup(this);
+	auto * const group = new QActionGroup(this);
 	group->setExclusive(true);
 	group->addAction(mCaseInsensitive);
 	group->addAction(mCaseSensitive);
@@ -147,7 +147,7 @@ void SearchLineEdit::makeContextMenu()
 		action->setCheckable(true);
 	}
 
-	QMenu * const menu = new QMenu(this);
+	auto * const menu = new QMenu(this);
 	menu->addActions(group->actions());
 	mOptionsButton->setMenu(menu);
 }

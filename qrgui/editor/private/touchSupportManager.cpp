@@ -59,7 +59,7 @@ bool TouchSupportManager::eventFilter(QObject *object, QEvent *event)
 		return false;
 	}
 
-	QMouseEvent * const mouseEvent = dynamic_cast<QMouseEvent *>(event);
+	auto * const mouseEvent = dynamic_cast<QMouseEvent *>(event);
 #if(QT_VERSION >= QT_VERSION_CHECK(5, 3, 0))
 	if (isMouseEvent && mouseEvent->source() != Qt::MouseEventNotSynthesized) {
 		// Starting from version 5.3.0 Qt generates extra mouse events even on
@@ -97,7 +97,7 @@ void TouchSupportManager::grabTapAndHold()
 void TouchSupportManager::simulateMouse(QObject *reciever, QEvent::Type event, QPointF pos
 		, Qt::MouseButtons buttons)
 {
-	QMouseEvent *mouseEvent = new QMouseEvent(event, pos, mButton, buttons, Qt::NoModifier);
+	auto *mouseEvent = new QMouseEvent(event, pos, mButton, buttons, Qt::NoModifier);
 	QApplication::postEvent(reciever, mouseEvent);
 }
 
@@ -164,7 +164,7 @@ bool TouchSupportManager::handleGesture(QGestureEvent *gestureEvent)
 		}
 	} else if (QGesture *pinch = gestureEvent->gesture(Qt::PinchGesture)) {
 		processGestureState(pinch);
-		QPinchGesture *pinchGesture = static_cast<QPinchGesture *>(pinch);
+		auto *pinchGesture = static_cast<QPinchGesture *>(pinch);
 		mEditorView->setTransformationAnchor(QGraphicsView::AnchorViewCenter);
 		mEditorView->zoom(pinchGesture->scaleFactor());
 		mEditorView->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);

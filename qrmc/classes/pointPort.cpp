@@ -30,7 +30,7 @@ bool PointPort::init(const QDomElement &element, int width, int height)
 
 Port* PointPort::clone() const
 {
-	PointPort *result = new PointPort();
+	auto *result = new PointPort();
 	result->mX = mX;
 	result->mY = mY;
 	return result;

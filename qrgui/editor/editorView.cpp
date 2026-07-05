@@ -120,7 +120,7 @@ void EditorView::checkGrid()
 
 void EditorView::startAnimation(char const *slot)
 {
-	QTimeLine *anim = new QTimeLine(zoomAnimationTimes * zoomAnimationInterval, this);
+	auto *anim = new QTimeLine(zoomAnimationTimes * zoomAnimationInterval, this);
 	anim->setUpdateInterval(zoomAnimationInterval);
 
 	connect(anim, SIGNAL(valueChanged(qreal)), this, slot);

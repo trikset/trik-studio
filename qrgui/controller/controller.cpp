@@ -98,7 +98,7 @@ void Controller::moduleOpened(const QString &moduleId)
 		return;
 	}
 
-	UndoStack *stack = new UndoStack(this);
+	auto *stack = new UndoStack(this);
 	connectStack(stack);
 	mModuleStacks.insert(moduleId, stack);
 	resetAll();

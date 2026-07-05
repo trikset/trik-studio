@@ -44,7 +44,7 @@ LineHandler * LineFactory::createHandler(LinkShape type) const
 
 QMenu *LineFactory::shapeTypeMenu() const
 {
-	QMenu * const menu = new QMenu();
+	auto * const menu = new QMenu();
 
 	QAction * const brokenLine = menu->addAction(tr("Broken"));
 	connect(brokenLine, SIGNAL(triggered()), this, SLOT(setBrokenLine()));

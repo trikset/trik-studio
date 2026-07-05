@@ -27,14 +27,14 @@ Explosion::Explosion(Metamodel &metamodel, bool isReusable, bool requiresImmedia
 
 ElementType &Explosion::source() const
 {
-	ElementType *result = dynamic_cast<ElementType *>(begin());
+	auto *result = dynamic_cast<ElementType *>(begin());
 	Q_ASSERT(result);
 	return *result;
 }
 
 ElementType &Explosion::target() const
 {
-	ElementType *result = dynamic_cast<ElementType *>(end());
+	auto *result = dynamic_cast<ElementType *>(end());
 	Q_ASSERT(result);
 	return *result;
 }

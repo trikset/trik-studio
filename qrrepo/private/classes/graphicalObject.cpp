@@ -39,7 +39,7 @@ GraphicalObject::GraphicalObject(const QDomElement &element)
 	const QDomElement graphicalParts = element.firstChildElement("graphicalParts");
 	if (!graphicalParts.isNull()) {
 		for (QDomElement part = graphicalParts.firstChildElement(); !part.isNull(); part = part.nextSiblingElement()) {
-			GraphicalPart * const deserializedPart = new GraphicalPart(part);
+			auto * const deserializedPart = new GraphicalPart(part);
 
 			const QString indexString = part.attribute("index");
 			if (indexString.isEmpty()) {
@@ -81,7 +81,7 @@ void GraphicalObject::createGraphicalPart(int index)
 		throw Exception("Part with that index already exists");
 	}
 
-	GraphicalPart * const part = new GraphicalPart();
+	auto * const part = new GraphicalPart();
 	mGraphicalParts.insert(index, part);
 }
 
@@ -110,7 +110,7 @@ void GraphicalObject::setGraphicalPartProperty(int index, const QString &name, c
 
 Object *GraphicalObject::createClone() const
 {
-	GraphicalObject * const clone = new GraphicalObject(mId.sameTypeId(), mParent, mLogicalId);
+	auto * const clone = new GraphicalObject(mId.sameTypeId(), mParent, mLogicalId);
 
 	for (QHash<int, GraphicalPart *>::const_iterator i = mGraphicalParts.constBegin();
 			i != mGraphicalParts.constEnd();

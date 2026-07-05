@@ -308,7 +308,7 @@ QString EditorManager::mouseGesture(const Id &id) const
 		return QString();
 	}
 
-	const NodeElementType *node = dynamic_cast<const NodeElementType *>(&elementType(id));
+	const auto *node = dynamic_cast<const NodeElementType *>(&elementType(id));
 	return node ? node->mouseGesture() : QString();
 }
 
@@ -343,7 +343,7 @@ const QStringList &EditorManager::propertyNames(const Id &id) const
 QStringList EditorManager::portTypes(const Id &id) const
 {
 	Q_ASSERT(id.idSize() == 3); // Applicable only to element types
-	const NodeElementType *nodeType = dynamic_cast<const NodeElementType *>(&elementType(id));
+	const auto *nodeType = dynamic_cast<const NodeElementType *>(&elementType(id));
 	return nodeType ? nodeType->portTypes() : QStringList();
 }
 
@@ -637,7 +637,7 @@ void EditorManager::addNodeElement(const Id &diagram, const QString &name, const
 		return;
 	}
 
-	NodeElementType *node = new NodeElementType(*metamodel);
+	auto *node = new NodeElementType(*metamodel);
 	node->setDiagram(diagram.diagram());
 	node->setName(name);
 	node->setFriendlyName(displayedName);
@@ -673,7 +673,7 @@ void EditorManager::addEdgeElement(const Id &diagram, const QString &name, const
 	const Qt::PenStyle style = lineType == "dashLine" ? Qt::DashLine :
 			(lineType == "dotLine" ? Qt::DotLine : Qt::SolidLine);
 
-	EdgeElementType *edge = new EdgeElementType(*metamodel);
+	auto *edge = new EdgeElementType(*metamodel);
 	edge->setDiagram(diagram.diagram());
 	edge->setName(name);
 	edge->setFriendlyName(displayedName);
@@ -707,11 +707,11 @@ void EditorManager::createEditorAndDiagram(const QString &name)
 	interpretedMetamodel->addDiagram(name);
 	interpretedMetamodel->setDiagramFriendlyName(name, name);
 
-	NodeElementType * const diagramNode = new NodeElementType(*interpretedMetamodel);
+	auto * const diagramNode = new NodeElementType(*interpretedMetamodel);
 	diagramNode->setDiagram(name);
 	diagramNode->setName(name);
 	diagramNode->setFriendlyName(name);
-	NodeElementType * const abstractNode = new NodeElementType(*interpretedMetamodel);
+	auto * const abstractNode = new NodeElementType(*interpretedMetamodel);
 	abstractNode->setDiagram(name);
 	abstractNode->setName("AbstractNode");
 	abstractNode->setFriendlyName("AbstractNode");

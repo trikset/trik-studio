@@ -242,7 +242,7 @@ bool UsbRobotCommunicationThread::send(const QByteArray &buffer, int responseSiz
 		newBuffer[i - packetHeaderSize] = buffer[i];
 	}
 
-	uchar *cmd = reinterpret_cast<uchar *>(const_cast<char *>(newBuffer.data()));
+	auto *cmd = reinterpret_cast<uchar *>(const_cast<char *>(newBuffer.data()));
 	int actualLength = 0;
 	int err = libusb_bulk_transfer(mHandle, NXT_EP_OUT, cmd, newBuffer.length(), &actualLength, NXT_USB_TIMEOUT);
 	if (err == LIBUSB_ERROR_IO || err == LIBUSB_ERROR_PIPE

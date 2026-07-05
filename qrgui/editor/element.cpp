@@ -167,7 +167,7 @@ void Element::updateEnabledState()
 		setGraphicsEffect(nullptr);
 		setOpacity(1);
 	} else {
-		QGraphicsColorizeEffect * const grayScale = new QGraphicsColorizeEffect(this);
+		auto * const grayScale = new QGraphicsColorizeEffect(this);
 		grayScale->setColor(Qt::gray);
 		grayScale->setStrength(disabledEffectStrength);
 		setGraphicsEffect(grayScale);
