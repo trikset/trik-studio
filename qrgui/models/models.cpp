@@ -21,13 +21,13 @@ using namespace models;
 
 Models::Models(const QString &workingCopy, const EditorManagerInterface &editorManager)
 {
-	qrRepo::RepoApi *repoApi = new qrRepo::RepoApi(workingCopy);
+	auto *repoApi = new qrRepo::RepoApi(workingCopy);
 	mRepoApi.reset(repoApi);
 
 	mGraphicalModel.reset(new models::details::GraphicalModel(repoApi, editorManager));
 	mGraphicalPartModel.reset(new models::details::GraphicalPartModel(*repoApi, *mGraphicalModel));
 
-	GraphicalModelAssistApi * const graphicalAssistApi
+	auto * const graphicalAssistApi
 			= new GraphicalModelAssistApi(*mGraphicalModel, *mGraphicalPartModel, editorManager);
 
 	mGraphicalModel->setAssistApi(graphicalAssistApi);

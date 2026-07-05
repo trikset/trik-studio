@@ -96,7 +96,7 @@ SearchLinePanel::SearchLinePanel(QWidget *parent)
 
 void SearchLinePanel::reportError()
 {
-	QPropertyAnimation *animation = new QPropertyAnimation(this, "searchLineColor");
+	auto *animation = new QPropertyAnimation(this, "searchLineColor");
 	animation->setDuration(300);
 	animation->setStartValue(QColor(255, 0, 0, 0));
 	animation->setKeyValueAt(0.5, QColor(255, 0, 0, 255));

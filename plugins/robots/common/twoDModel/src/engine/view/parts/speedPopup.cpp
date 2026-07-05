@@ -31,7 +31,7 @@ SpeedPopup::SpeedPopup(QWidget *parent)
 	, mHideTimer(new QTimer(this))
 {
 	setAutoFillBackground(true);
-	QVBoxLayout * const layout = new QVBoxLayout(this);
+	auto * const layout = new QVBoxLayout(this);
 	mText->setAlignment(Qt::AlignCenter);
 	connect(mResetButton, &QAbstractButton::clicked, this, &SpeedPopup::resetToDefault);
 	layout->addWidget(mText);

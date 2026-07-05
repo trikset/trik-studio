@@ -103,7 +103,7 @@ Editor* XmlCompiler::loadXmlFile(const QDir &currentDir, const QString &inputXml
 					<< "Could not parse XML. Error:" << errorMessage;
 		}
 
-		Editor *editor = new Editor(inputXmlDomDocument, this);
+		auto *editor = new Editor(inputXmlDomDocument, this);
 		if (!editor->load(currentDir)) {
 			qDebug() << "ERROR: Failed to load file";
 			delete editor;
@@ -296,7 +296,7 @@ void XmlCompiler::generateInitMultigraph(OutFile &out)
 
 	for (const Diagram *diagram : mEditors[mCurrentEditor]->diagrams()) {
 		for (const Type *type : diagram->types()) {
-			if (const GraphicType *graphicType = dynamic_cast<const GraphicType *>(type)) {
+			if (const auto *graphicType = dynamic_cast<const GraphicType *>(type)) {
 				generateLinks(out, graphicType, graphicType->immediateParents(), "generalizationLinkType", false);
 				generateLinks(out, graphicType, graphicType->containedTypes(), "containmentLinkType", true);
 				generateExplosionsMappings(out, graphicType);
@@ -356,7 +356,7 @@ void XmlCompiler::generatePaletteGroupsLists(utils::OutFile &out)
 		const QList<QPair<QString, QStringList>> paletteGroups = diagram->paletteGroups();
 		for (const QPair<QString, QStringList> &group : paletteGroups) {
 			const QString groupName = group.first;
-			const QString groupParameters = QString("\"%1\", QObject::tr(\"%2\")").arg(diagramName, groupName);
+			const QString groupParameters = QString(R"("%1", QObject::tr("%2"))").arg(diagramName, groupName);
 			out() << "\tmMetamodel->appendDiagramPaletteGroup(" << groupParameters << ");\n";
 
 			for (const QString &name : group.second) {
@@ -376,7 +376,7 @@ void XmlCompiler::generatePaletteGroupsDescriptions(utils::OutFile &out)
 		const QString diagramName = NameNormalizer::normalize(diagram->name());
 		const QMap<QString, QString> paletteGroupsDescriptions = diagram->paletteGroupsDescriptions();
 		for (const QString &groupName : paletteGroupsDescriptions.keys()) {
-			const QString groupParameters = QString("\"%1\", QObject::tr(\"%2\")").arg(diagramName, groupName);
+			const QString groupParameters = QString(R"("%1", QObject::tr("%2"))").arg(diagramName, groupName);
 			const QString descriptionName = paletteGroupsDescriptions[groupName];
 			if (!descriptionName.isEmpty()) {
 				out() << "\tmMetamodel->setDiagramPaletteGroupDescription(" << groupParameters << ", QObject::tr(\""
@@ -438,7 +438,7 @@ void XmlCompiler::generateEnumValues(OutFile &out)
 		QStringList pairs;
 		const QMap<QString, QString> &values = type->values();
 		for (auto &&key : values.keys()) {
-			pairs << QString("qMakePair(QString(\"%1\"), tr(\"%2\"))").arg(key, values[key]);
+			pairs << QString(R"(qMakePair(QString("%1"), tr("%2")))").arg(key, values[key]);
 		}
 
 		out() << pairs.join(", ");

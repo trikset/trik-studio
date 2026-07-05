@@ -91,7 +91,7 @@ void Configuration::onDeviceConfigured(bool success)
 	/// @todo Do something with failure of configuration.
 	Q_UNUSED(success);
 
-	robotParts::Device *device = dynamic_cast<robotParts::Device *>(sender());
+	auto *device = dynamic_cast<robotParts::Device *>(sender());
 	if (!device) {
 		/// @todo Implement more adequate assertions mechanism.
 		throw "Incorrect device configuration";

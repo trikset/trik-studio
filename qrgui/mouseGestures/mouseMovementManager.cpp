@@ -55,7 +55,7 @@ QWidget *MouseMovementManager::producePainter() const
 	}
 
 	/// @todo: Remove copy-paste in DummyMouseMovementManager
-	GesturesWidget * const result = new GesturesWidget;
+	auto * const result = new GesturesWidget;
 	QList<QPair<QString, Id> > elements;
 	for (const Id &element : mEditorManagerInterface.elements(mDiagram)) {
 		if (!mEditorManagerInterface.mouseGesture(element).isEmpty()) {
@@ -84,7 +84,7 @@ void MouseMovementManager::drawIdealPath()
 		return;
 	}
 
-	GesturesWidget * const gesturesPainter = static_cast<GesturesWidget *>(sender());
+	auto * const gesturesPainter = static_cast<GesturesWidget *>(sender());
 	const Id currentElement = gesturesPainter->currentElement();
 	if (mEditorManagerInterface.elements(mDiagram).contains(currentElement)) {
 		const QString paths = mEditorManagerInterface.mouseGesture(currentElement);

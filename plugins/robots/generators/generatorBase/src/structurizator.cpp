@@ -478,7 +478,7 @@ bool Structurizator::checkNodes(const QSet<int> &verticesWithExits)
 
 void Structurizator::reduceBlock(QSet<QPair<int, int>> &edgesToRemove, QMap<QString, int> &verticesRoles)
 {
-	BlockStructurizatorNode *block = new BlockStructurizatorNode(mTrees[verticesRoles["block1"]]
+	auto *block = new BlockStructurizatorNode(mTrees[verticesRoles["block1"]]
 			, mTrees[verticesRoles["block2"]], this);
 	replace(appendVertex(block), edgesToRemove, verticesRoles);
 }
@@ -491,7 +491,7 @@ void Structurizator::reduceIfThenElse(QSet<QPair<int, int>> &edgesToRemove, QMap
 		verticesRoles.remove("exit");
 	}
 
-	IfStructurizatorNode *ifNode = new IfStructurizatorNode(mTrees[verticesRoles["condition"]]
+	auto *ifNode = new IfStructurizatorNode(mTrees[verticesRoles["condition"]]
 			, mTrees[verticesRoles["then"]]
 			, mTrees[verticesRoles["else"]]
 			, exit
@@ -507,7 +507,7 @@ void Structurizator::reduceIfThen(QSet<QPair<int, int>> &edgesToRemove, QMap<QSt
 		verticesRoles.remove("exit");
 	}
 
-	IfStructurizatorNode *ifNode = new IfStructurizatorNode(mTrees[verticesRoles["condition"]],
+	auto *ifNode = new IfStructurizatorNode(mTrees[verticesRoles["condition"]],
 			mTrees[verticesRoles["then"]]
 			, nullptr
 			, exit
@@ -534,21 +534,21 @@ void Structurizator::reduceSwitch(QSet<QPair<int, int>> &edgesToRemove, QMap<QSt
 	}
 
 	IntermediateStructurizatorNode *exitNode = exitNodeNumber == -1 ? nullptr : mTrees[exitNodeNumber];
-	SwitchStructurizatorNode *switchNode = new SwitchStructurizatorNode(mTrees[v], branches, exitNode, this);
+	auto *switchNode = new SwitchStructurizatorNode(mTrees[v], branches, exitNode, this);
 
 	replace(appendVertex(switchNode), edgesToRemove, verticesRoles);
 }
 
 void Structurizator::reduceInfiniteLoop(QSet<QPair<int, int>> &edgesToRemove, QMap<QString, int> &verticesRoles)
 {
-	SelfLoopStructurizatorNode *loopNode = new SelfLoopStructurizatorNode(mTrees[verticesRoles["body"]], this);
+	auto *loopNode = new SelfLoopStructurizatorNode(mTrees[verticesRoles["body"]], this);
 
 	replace(appendVertex(loopNode), edgesToRemove, verticesRoles);
 }
 
 void Structurizator::reduceWhileLoop(QSet<QPair<int, int>> &edgesToRemove, QMap<QString, int> &verticesRoles)
 {
-	WhileStructurizatorNode *whileNode = new WhileStructurizatorNode(mTrees[verticesRoles["head"]]
+	auto *whileNode = new WhileStructurizatorNode(mTrees[verticesRoles["head"]]
 			, mTrees[verticesRoles["body"]]
 			, mTrees[verticesRoles["exit"]]
 			, this);
@@ -585,7 +585,7 @@ void Structurizator::reduceConditionsWithBreaks(int &v, QMap<int, QSet<int>> &no
 			exitBranches.append(node);
 		}
 
-		StructurizatorNodeWithBreaks *nodeWithBreaks = new StructurizatorNodeWithBreaks(mTrees[u]
+		auto *nodeWithBreaks = new StructurizatorNodeWithBreaks(mTrees[u]
 				, exitBranches, this);
 		replace(appendVertex(nodeWithBreaks), edgesToRemove, vertices);
 

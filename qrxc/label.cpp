@@ -56,7 +56,7 @@ bool Label::init(const QDomElement &element, int index, bool nodeLabel, int widt
 
 Label *Label::clone()
 {
-	Label *returnLabel = new Label();
+	auto *returnLabel = new Label();
 	returnLabel->mX = mX;
 	returnLabel->mY = mY;
 

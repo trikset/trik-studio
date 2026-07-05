@@ -41,7 +41,7 @@ DummyMouseMovementManager::DummyMouseMovementManager(const Id &diagram
 
 QWidget *DummyMouseMovementManager::producePainter() const
 {
-	GesturesWidget * const result = new GesturesWidget;
+	auto * const result = new GesturesWidget;
 	QList<QPair<QString, Id> > elements;
 	for (const Id &element : mEditorManagerInterface.elements(mDiagram)) {
 		if (!mEditorManagerInterface.mouseGesture(element).isEmpty()) {
@@ -57,7 +57,7 @@ QWidget *DummyMouseMovementManager::producePainter() const
 
 void DummyMouseMovementManager::drawIdealPath()
 {
-	GesturesWidget * const gesturesPainter = static_cast<GesturesWidget *>(sender());
+	auto * const gesturesPainter = static_cast<GesturesWidget *>(sender());
 	const Id currentElement = gesturesPainter->currentElement();
 	if (mEditorManagerInterface.elements(mDiagram).contains(currentElement)) {
 		const QString paths = mEditorManagerInterface.mouseGesture(currentElement);

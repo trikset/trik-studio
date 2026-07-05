@@ -48,7 +48,7 @@ void SceneGridHandler::deleteGuides()
 
 void SceneGridHandler::drawLineY(qreal pointY, const QRectF &sceneRect)
 {
-	QGraphicsLineItem * const newLine = new QGraphicsLineItem(sceneRect.x()
+	auto * const newLine = new QGraphicsLineItem(sceneRect.x()
 			, pointY, sceneRect.x() + sceneRect.width(), pointY);
 	newLine->setPen(mGuidesPen);
 
@@ -69,7 +69,7 @@ void SceneGridHandler::drawLineY(qreal pointY, const QRectF &sceneRect)
 
 void SceneGridHandler::drawLineX(qreal pointX, const QRectF &sceneRect)
 {
-	QGraphicsLineItem * const newLine = new QGraphicsLineItem(pointX
+	auto * const newLine = new QGraphicsLineItem(pointX
 			, sceneRect.y(), pointX, sceneRect.y() + sceneRect.height());
 	newLine->setPen(mGuidesPen);
 
@@ -264,7 +264,7 @@ void SceneGridHandler::drawGuides()
 	qreal myY2 = myY1 + contentsRect.height();
 
 	for (QGraphicsItem *graphicsItem : list) {
-		NodeElement *item = dynamic_cast<NodeElement *>(graphicsItem);
+		auto *item = dynamic_cast<NodeElement *>(graphicsItem);
 		if (item == nullptr || item->parentItem() != nullptr || item == mNode) {
 			continue;
 		}

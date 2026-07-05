@@ -193,7 +193,7 @@ bool GraphicType::initProperties()
 			; !propertyElement.isNull()
 			; propertyElement = propertyElement.nextSiblingElement("property"))
 	{
-		Property *property = new Property();
+		auto *property = new Property();
 		if (!property->init(propertyElement)) {
 			delete property;
 			continue;
@@ -326,8 +326,8 @@ bool GraphicType::initPossibleEdges()
 
 		if (beginName.isEmpty() || endName.isEmpty() || ((temp != "true") && (temp != "false"))) {
 			qWarning() << "Error: one of attributes is incorrect " <<
-				"(perhaps, \"beginName\" or \"endName\" is empty or " <<
-				"\"directed\" isn't \"true\" or \"false\".')" << qualifiedName();
+				R"((perhaps, "beginName" or "endName" is empty or )" <<
+				R"("directed" isn't "true" or "false".'))" << qualifiedName();
 			return false;
 		}
 
@@ -375,7 +375,7 @@ bool GraphicType::initLabels()
 		!element.isNull();
 		element = element.nextSiblingElement("label"))
 	{
-		Label *label = new Label();
+		auto *label = new Label();
 		if (!initLabel(label, element, count)) {
 			delete label;
 		} else {
@@ -459,7 +459,7 @@ bool GraphicType::resolve()
 			}
 		}
 
-		GraphicType * const graphicParent = dynamic_cast<GraphicType*>(parent);
+		auto * const graphicParent = dynamic_cast<GraphicType*>(parent);
 		if (graphicParent != nullptr) {
 			if (!generalization.overrideLabels) {
 				copyLabels(graphicParent);
@@ -469,7 +469,7 @@ bool GraphicType::resolve()
 				copyPictures(graphicParent);
 			}
 
-			NodeType* const nodeParent = dynamic_cast<NodeType*>(parent);
+			auto* const nodeParent = dynamic_cast<NodeType*>(parent);
 			if (nodeParent != nullptr) {
 				if (!generalization.overridePorts) {
 					copyPorts(nodeParent);

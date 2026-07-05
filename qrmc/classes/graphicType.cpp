@@ -102,7 +102,7 @@ bool GraphicType::init(const QString &context)
 		}
 
 		if (id.element() == metaEntityAttribute) {
-			Property *property = new Property(mApi, id);
+			auto *property = new Property(mApi, id);
 			if (!property->init()) {
 				delete property;
 				continue;
@@ -140,8 +140,8 @@ bool GraphicType::initPossibleEdges()
 
 		if (beginName.isEmpty() || endName.isEmpty() || ((directedField != "true") && (directedField != "false"))) {
 				qDebug() << "Error: one of attributes is incorrect " <<
-					"(perhaps, \"beginName\" or \"emptyName\" is empty or " <<
-					"\"directed\" isn't \"true\" or \"false\".')" << qualifiedName();
+					R"((perhaps, "beginName" or "emptyName" is empty or )" <<
+					R"("directed" isn't "true" or "false".'))" << qualifiedName();
 				return false;
 		}
 
@@ -232,7 +232,7 @@ bool GraphicType::resolve()
 			}
 		}
 
-		GraphicType* gParent = dynamic_cast<GraphicType*>(parent);
+		auto* gParent = dynamic_cast<GraphicType*>(parent);
 		if (gParent) {
 			for (const PossibleEdge &pEdge : gParent->mPossibleEdges) {
 				mPossibleEdges.append(qMakePair(pEdge.first,qMakePair(pEdge.second.first,name())));
@@ -513,7 +513,7 @@ QString GraphicType::generatePossibleEdges(const QString &lineTemplate) const
 
 	QString edgesList;
 	QString line = lineTemplate;
-	const char templ[] = "<< qMakePair(qMakePair(QString(\"%1\"),QString(\"%2\")),qMakePair(%3,QString(\"%4\"))) ";
+	const char templ[] = R"(<< qMakePair(qMakePair(QString("%1"),QString("%2")),qMakePair(%3,QString("%4"))) )";
 	QString directed = "false";
 	for (const PossibleEdge &edge : mPossibleEdges) {
 		if (edge.second.first) {

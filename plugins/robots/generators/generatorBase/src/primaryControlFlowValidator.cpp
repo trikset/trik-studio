@@ -131,7 +131,7 @@ void PrimaryControlFlowValidator::visitConditional(const Id &id
 
 		default:
 			if (nonMarkedLink) {
-				error(QObject::tr("There must be at least one link with \"true\" or \"false\" marker on it"), id);
+				error(QObject::tr(R"(There must be at least one link with "true" or "false" marker on it)"), id);
 				return;
 			} else {
 				nonMarkedLink = &link;

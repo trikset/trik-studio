@@ -87,7 +87,7 @@ LogicalModelItem *LogicalModel::loadElement(LogicalModelItem *parentItem, const 
 	const int newRow = parentItem->children().size();
 
 	beginInsertRows(index(parentItem), newRow, newRow);
-	LogicalModelItem *item = new LogicalModelItem(id, parentItem);
+	auto *item = new LogicalModelItem(id, parentItem);
 	addInsufficientProperties(id);
 	parentItem->addChild(item);
 	mModelItems.insert(id, item);
@@ -152,7 +152,7 @@ QMimeData* LogicalModel::mimeData(const QModelIndexList &indexes) const
 	QDataStream stream(&data, QIODevice::WriteOnly);
 	for (const QModelIndex &index : indexes) {
 		if (index.isValid()) {
-			AbstractModelItem *item = static_cast<AbstractModelItem*>(index.internalPointer());
+			auto *item = static_cast<AbstractModelItem*>(index.internalPointer());
 			const Id id = item->id();
 			const bool isEdge = mLogicalAssistApi->editorManagerInterface().isNodeOrEdge(id.type()) == -1;
 
@@ -163,7 +163,7 @@ QMimeData* LogicalModel::mimeData(const QModelIndexList &indexes) const
 		}
 	}
 
-	QMimeData *mimeData = new QMimeData();
+	auto *mimeData = new QMimeData();
 	mimeData->setData(DEFAULT_MIME_TYPE, data);
 	return mimeData;
 }
@@ -279,7 +279,7 @@ void LogicalModel::initializeElement(const ElementInfo &elementInfo
 QVariant LogicalModel::data(const QModelIndex &index, int role) const
 {
 	if (index.isValid()) {
-		AbstractModelItem *item = static_cast<AbstractModelItem*>(index.internalPointer());
+		auto *item = static_cast<AbstractModelItem*>(index.internalPointer());
 		Q_ASSERT(item);
 		switch (role) {
 			case Qt::DisplayRole:
@@ -338,7 +338,7 @@ QVariant LogicalModel::dynamicPropertyData(const Id &id, int role) const
 bool LogicalModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
 	if (index.isValid()) {
-		AbstractModelItem *item = static_cast<AbstractModelItem *>(index.internalPointer());
+		auto *item = static_cast<AbstractModelItem *>(index.internalPointer());
 		switch (role) {
 		case Qt::DisplayRole:
 		case Qt::EditRole:
@@ -402,7 +402,7 @@ void LogicalModel::changeParent(const QModelIndex &element, const QModelIndex &p
 	int destinationRow = parentAbstractItem(parent)->children().size();
 
 	if (beginMoveRows(element.parent(), element.row(), element.row(), parent, destinationRow)) {
-		AbstractModelItem *elementItem = static_cast<AbstractModelItem*>(element.internalPointer());
+		auto *elementItem = static_cast<AbstractModelItem*>(element.internalPointer());
 		elementItem->parent()->removeChild(elementItem);
 		AbstractModelItem *parentItem = parentAbstractItem(parent);
 

@@ -63,7 +63,7 @@ QList<QSharedPointer<Metamodel> > QrsMetamodelLoader::load(const QString &pathTo
 
 Metamodel *QrsMetamodelLoader::parseMetamodel(const qrRepo::RepoApi &repo, const Id &metamodelDiagram)
 {
-	Metamodel *result = new Metamodel();
+	auto *result = new Metamodel();
 	result->setId(validateName(repo, metamodelDiagram));
 	result->setFriendlyName(stringProperty(repo, metamodelDiagram, "displayedName"));
 	result->setVersion(stringProperty(repo, metamodelDiagram, "version"));
@@ -127,7 +127,7 @@ void QrsMetamodelLoader::parseImport(const qrRepo::RepoApi &repo, Metamodel &met
 void QrsMetamodelLoader::parseNode(const qrRepo::RepoApi &repo
 		, Metamodel &metamodel, const Id &diagram, const Id &id)
 {
-	NodeElementType *node = new NodeElementType(metamodel);
+	auto *node = new NodeElementType(metamodel);
 
 	node->setName(validateName(repo, id));
 	node->setFriendlyName(repo.stringProperty(id, "displayedName"));
@@ -148,7 +148,7 @@ void QrsMetamodelLoader::parseNode(const qrRepo::RepoApi &repo
 void QrsMetamodelLoader::parseEdge(const qrRepo::RepoApi &repo
 		, Metamodel &metamodel, const Id &diagram, const Id &id)
 {
-	EdgeElementType *edge = new EdgeElementType(metamodel);
+	auto *edge = new EdgeElementType(metamodel);
 
 	edge->setName(validateName(repo, id));
 	edge->setFriendlyName(repo.stringProperty(id, "displayedName"));
@@ -210,7 +210,7 @@ void QrsMetamodelLoader::parseGroup(const qrRepo::RepoApi &repo
 	groupElement.setAttribute("rootNode", stringProperty(repo, id, "rootNode"));
 	document.appendChild(groupElement);
 	parseGroupNodes(repo, groupElement, id);
-	PatternType *pattern = new PatternType(metamodel);
+	auto *pattern = new PatternType(metamodel);
 	pattern->setXml(document.toString(4));
 	pattern->setDiagram(repo.name(diagram));
 	metamodel.addElement(*pattern);
@@ -525,7 +525,7 @@ void QrsMetamodelLoader::resolveInheritance(QSet<ElementType *> &elements
 			// Checking that all parents are already visited.
 			bool allParentsAreVisited = true;
 			for (const qrgraph::Edge *edge : child->outgoingEdges(ElementType::generalizationLinkType)) {
-				ElementType *parent = static_cast<ElementType *>(edge->end());
+				auto *parent = static_cast<ElementType *>(edge->end());
 				if (elements.contains(parent)) {
 					allParentsAreVisited = false;
 					break;
@@ -535,7 +535,7 @@ void QrsMetamodelLoader::resolveInheritance(QSet<ElementType *> &elements
 			if (allParentsAreVisited) {
 				elements.remove(child);
 				for (const qrgraph::Edge *edge : child->outgoingEdges(ElementType::generalizationLinkType)) {
-					ElementType *parent = static_cast<ElementType *>(edge->end());
+					auto *parent = static_cast<ElementType *>(edge->end());
 					inherit(*child, *parent, overridingProperties[qMakePair(child, parent)]);
 				}
 

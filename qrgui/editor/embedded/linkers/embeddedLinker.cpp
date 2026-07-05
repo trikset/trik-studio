@@ -241,7 +241,7 @@ void EmbeddedLinker::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
 	if (mPressed) {
 		mPressed = false;
-		EditorViewScene *scene = dynamic_cast<EditorViewScene*>(mMaster->scene());
+		auto *scene = dynamic_cast<EditorViewScene*>(mMaster->scene());
 
 		if (!scene) {
 			return;
@@ -274,7 +274,7 @@ void EmbeddedLinker::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 	hide();
 	mMaster->setConnectingState(false);
 	mMaster->setSelected(false);
-	EditorViewScene* scene = dynamic_cast<EditorViewScene*>(mMaster->scene());
+	auto* scene = dynamic_cast<EditorViewScene*>(mMaster->scene());
 
 	if (!mPressed && scene && mEdge) {
 		mEdge->hide();
@@ -300,7 +300,7 @@ void EmbeddedLinker::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 			}
 		}
 
-		NodeElement *target = dynamic_cast<NodeElement*>(scene->lastCreatedFromLinker());
+		auto *target = dynamic_cast<NodeElement*>(scene->lastCreatedFromLinker());
 
 		if (result == -1) {
 			mEdge = nullptr;
@@ -317,7 +317,7 @@ void EmbeddedLinker::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 			mEdge->placeEndTo(mEdge->mapFromScene(event->scenePos()));
 			mEdge->connectToPort();
 			// This will restore edge state after undo/redo
-			commands::ReshapeEdgeCommand *reshapeEdge = new commands::ReshapeEdgeCommand(mEdge);
+			auto *reshapeEdge = new commands::ReshapeEdgeCommand(mEdge);
 			reshapeEdge->startTracking();
 			mEdge->layOut();
 			reshapeEdge->stopTracking();

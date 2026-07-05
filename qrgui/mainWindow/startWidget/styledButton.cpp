@@ -28,7 +28,7 @@ StyledButton::StyledButton(const QString &text, const QString &icon, QWidget *pa
 	setMouseTracking(true);
 
 	auto direction = icon.isEmpty() ? QBoxLayout::LeftToRight : QBoxLayout::TopToBottom;
-	QBoxLayout * const layout = new QBoxLayout(direction);
+	auto * const layout = new QBoxLayout(direction);
 
 	if (!icon.isEmpty()) {
 		setObjectName("withIcon");
@@ -39,7 +39,7 @@ StyledButton::StyledButton(const QString &text, const QString &icon, QWidget *pa
 		bindHighlightedOnHover(circleWidget);
 	}
 
-	QLabel * const textLabel = new QLabel(text);
+	auto * const textLabel = new QLabel(text);
 	textLabel->setWordWrap(true);
 	textLabel->setAttribute(Qt::WA_Hover);
 	if (!icon.isEmpty()) {

@@ -127,7 +127,7 @@ void Display::printText(int x, int y, const QString &text, int fontSize)
 		mLabelsMap[coords]->setText(text);
 		mLabelsMap[coords]->setFontSize(fontSize);
 	} else {
-		utils::TextObject * const textObject = new utils::TextObject(x, y, text
+		auto * const textObject = new utils::TextObject(x, y, text
 			, mCurrentPenColor, mCurrentPenWidth, fontSize);
 		mObjects << textObject;
 		mLabelsMap[coords] = textObject;

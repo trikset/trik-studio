@@ -29,11 +29,11 @@ RenameDialog::RenameDialog(const QString &initialText, QWidget *parent)
 	mTextBox = new QLineEdit(mInitialName);
 	mTextBox->setPlaceholderText(mInitialName);
 
-	QDialogButtonBox *buttons = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
+	auto *buttons = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
 	connect(buttons, SIGNAL(accepted()), this, SLOT(accept()));
 	connect(buttons, SIGNAL(rejected()), this, SLOT(reject()));
 
-	QVBoxLayout *layout = new QVBoxLayout;
+	auto *layout = new QVBoxLayout;
 	layout->addWidget(mTextBox);
 	layout->addWidget(buttons, 0, Qt::AlignRight);
 	setLayout(layout);
@@ -50,7 +50,7 @@ QString RenameDialog::name() const
 
 QString RenameDialog::selectNewName(const QString &currentName, QWidget *parent)
 {
-	RenameDialog *dialog = new RenameDialog(currentName, parent);
+	auto *dialog = new RenameDialog(currentName, parent);
 	dialog->exec();
 	const QString result = dialog->name();
 	if (!parent) {

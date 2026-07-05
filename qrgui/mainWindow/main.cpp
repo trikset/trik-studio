@@ -61,7 +61,7 @@ static void loadTranslators(QLocale &locale)
 	QDirIterator directories(translationsDirectory, QDirIterator::Subdirectories);
 	while (directories.hasNext()) {
 		for (const QFileInfo &translatorFile : QDir(directories.next()).entryInfoList(QDir::Files)) {
-			QTranslator *translator = new QTranslator(qApp);
+			auto *translator = new QTranslator(qApp);
 			translator->load(translatorFile.absoluteFilePath());
 			QCoreApplication::installTranslator(translator);
 		}
@@ -111,7 +111,7 @@ int main(int argc, char *argv[])
 		return 0;
 	}
 
-	qsrand(time(0));
+	qsrand(time(nullptr));
 	setDefaultLocale(app->arguments().contains("--no-locale"));
 
 	const QString defaultPlatformConfigPath = PlatformInfo::defaultPlatformConfigPath();

@@ -24,7 +24,7 @@ Image::Image(const QString &fileName, qreal x, qreal y, Item* parent)
 	, mImage(fileName)
 {
 	mFileName = fileName;
-	QPixmap* pixmap = new QPixmap(fileName);
+	auto* pixmap = new QPixmap(fileName);
 	mPixmapItem = new QGraphicsPixmapItem(*pixmap);
 	mNeedScalingRect = true;
 	mDomElementType = pictureType;

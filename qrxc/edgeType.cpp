@@ -46,7 +46,7 @@ bool EdgeType::copyPorts(NodeType *parent)
 
 Type *EdgeType::clone() const
 {
-	EdgeType *result = new EdgeType(mDiagram);
+	auto *result = new EdgeType(mDiagram);
 	GraphicType::copyFields(result);
 	for (RoleType * const role : mRoles) {
 		result->mRoles.append(role->clone());
@@ -64,7 +64,7 @@ Type *EdgeType::clone() const
 
 bool EdgeType::copyPictures(GraphicType *parent)
 {
-	EdgeType *pictureParent = dynamic_cast<EdgeType*>(parent);
+	auto *pictureParent = dynamic_cast<EdgeType*>(parent);
 	if (pictureParent != nullptr) {
 		for (auto role : pictureParent->mRoles) {
 			mRoles.append(role->clone());
@@ -102,7 +102,7 @@ bool EdgeType::initRoles()
 		QString name = element->displayedName();
 
 		if (name == mBeginRoleName || name == mEndRoleName) {
-			RoleType *temp = dynamic_cast<RoleType *> (element->clone());
+			auto *temp = dynamic_cast<RoleType *> (element->clone());
 			mRoles.append(temp);
 		}
 	}

@@ -86,8 +86,8 @@ void DevicesConfigurationWidget::prependCustomWidget(RobotModelInterface &robotM
 QWidget *DevicesConfigurationWidget::configurerForRobotModel(RobotModelInterface &robotModel)
 {
 	/// @todo: What if robot model has no configurable sensors?
-	QWidget *result = new QWidget;
-	QVBoxLayout * const layout = new QVBoxLayout(result);
+	auto *result = new QWidget;
+	auto * const layout = new QVBoxLayout(result);
 	layout->setContentsMargins(0, 0, 0, 0);
 	QList<PortInfo> const configurablePorts = robotModel.configurablePorts();
 	for (const PortInfo &port : configurablePorts) {
@@ -101,8 +101,8 @@ QLayout *DevicesConfigurationWidget::initPort(const QString &robotModelName
 		, const PortInfo &port, const QList<DeviceInfo> &sensors)
 {
 	const QString labelText = mCompactMode ? tr("%1:") : tr("Port %1:");
-	QLabel * const portLabel = new QLabel(labelText.arg(port.userFriendlyName()), this);
-	QComboBox * const comboBox = new QComboBox(this);
+	auto * const portLabel = new QLabel(labelText.arg(port.userFriendlyName()), this);
+	auto * const comboBox = new QComboBox(this);
 	comboBox->setObjectName("Port " + port.name() + " DeviceConfig");
 	comboBox->setSizeAdjustPolicy(QComboBox::AdjustToMinimumContentsLengthWithIcon);
 	comboBox->setProperty("robotModelName", robotModelName);
@@ -119,7 +119,7 @@ QLayout *DevicesConfigurationWidget::initPort(const QString &robotModelName
 		});
 	}
 
-	QHBoxLayout * const layout = new QHBoxLayout;
+	auto * const layout = new QHBoxLayout;
 	layout->addWidget(portLabel);
 	layout->addWidget(comboBox);
 	layout->setStretch(0, 0);

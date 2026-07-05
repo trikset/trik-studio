@@ -186,7 +186,7 @@ void ScriptAPI::scroll(QAbstractScrollArea *area, QWidget *widget, int duration)
 
 	const QPoint target = mVirtualCursor->parentWidget()->mapFromGlobal(QPoint(xcoord, ycoord));
 
-	QPropertyAnimation *anim = new QPropertyAnimation(area->verticalScrollBar(), "value");
+	auto *anim = new QPropertyAnimation(area->verticalScrollBar(), "value");
 	anim->setDuration(duration / 2);
 	anim->setStartValue(0);
 	anim->setEndValue(diff);

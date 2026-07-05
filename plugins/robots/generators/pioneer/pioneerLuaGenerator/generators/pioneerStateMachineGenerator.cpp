@@ -50,7 +50,7 @@ void PioneerStateMachineGenerator::performGeneration()
 	mSemanticTreeManager.reset(new SemanticTreeManager(*mSemanticTree, mErrorReporter, mErrorsOccured));
 	GotoControlFlowGenerator::performGeneration();
 	if (mConditionals != mConditionalEnds && not errorsOccured()) {
-		reportError(tr("The diagram must have the same number of \"Conditonal\" and \"End If\" blocks."));
+		reportError(tr(R"(The diagram must have the same number of "Conditonal" and "End If" blocks.)"));
 	}
 }
 
@@ -149,7 +149,7 @@ void PioneerStateMachineGenerator::processNode(NonZoneNode *thisNode, const qRea
 						return;
 					}
 				} else {
-					reportError(tr("\"End If\" block occurs before \"If block\""));
+					reportError(tr(R"("End If" block occurs before "If block")"));
 					return;
 				}
 			}
@@ -234,7 +234,7 @@ void PioneerStateMachineGenerator::processNode(NonZoneNode *thisNode, const qRea
 			if (target.element() == "FiBlock") {
 				nextNode = mSemanticTreeManager->produceNode(target);
 				if (mConditionZonesQueue.isEmpty()) {
-					reportError(tr("\"End If\" block occurs before \"If block\""));
+					reportError(tr(R"("End If" block occurs before "If block")"));
 				} else {
 					auto conditionZone = mConditionZonesQueue.last();
 					SemanticNode *conditionalZone = std::get<0>(conditionZone);
@@ -296,7 +296,7 @@ void PioneerStateMachineGenerator::visitConditional(const qReal::Id &id, const Q
 	const auto nodes = mSemanticTreeManager->nodes(id);
 
 	for (const auto node : nodes) {
-		IfNode * const thisNode = static_cast<IfNode *>(node);
+		auto * const thisNode = static_cast<IfNode *>(node);
 
 		mSemanticTreeManager->addToZone(thisNode->thenZone(), thenLink.target);
 		mSemanticTreeManager->addToZone(thisNode->elseZone(), elseLink.target);
@@ -368,7 +368,7 @@ NonZoneNode *PioneerStateMachineGenerator::copySynchronousFragment(NonZoneNode *
 			+ (withLabel ? "true" : "false"));
 
 	// Here "from" may have many corresponding nodes in a semantic tree, but any node will do, so using findNodeFor.
-	NonZoneNode *oldFragmentStart = dynamic_cast<NonZoneNode *>(mSemanticTree->findNodeFor(from));
+	auto *oldFragmentStart = dynamic_cast<NonZoneNode *>(mSemanticTree->findNodeFor(from));
 	if (!oldFragmentStart) {
 		reportError(tr("Generation internal error, zone node corresponds to a block in a diagram."));
 		return nullptr;

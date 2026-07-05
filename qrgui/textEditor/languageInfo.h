@@ -146,8 +146,8 @@ public:
 				, 2                                                          /* folding margin */
 				, "#"                                                        /* line comment start */
 				, QString()                                                  /* line comment end */
-				, "\"\"\""                                                   /* multiline comment start */
-				, "\"\"\""                                                   /* multiline comment end */
+				, R"(""")"                                                   /* multiline comment start */
+				, R"(""")"                                                   /* multiline comment end */
 				, QSharedPointer<QsciLexer> { new QsciLexerPython() }        /* lexer */
 				, additionalTokens                                           /* additional autocompletion tokens */
 		};

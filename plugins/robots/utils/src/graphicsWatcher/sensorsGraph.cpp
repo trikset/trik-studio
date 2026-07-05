@@ -217,7 +217,7 @@ void SensorsGraph::updateValues()
 	TrackObject currentObject(mCurrentSlot);
 	const int index = mWatchList.indexOf(currentObject);
 	if (index != notExists) {
-		double number = mParser.value<double>(mWatchList.at(index).inParserName);
+		auto number = mParser.value<double>(mWatchList.at(index).inParserName);
 		if (number) {
 			sensorsInput(mCurrentSlot, number);
 		}

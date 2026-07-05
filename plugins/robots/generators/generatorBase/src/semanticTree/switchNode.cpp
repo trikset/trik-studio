@@ -29,7 +29,7 @@ SwitchNode::SwitchNode(const Id &idBinded, QObject *parent)
 
 void SwitchNode::addBranch(const QString &value, SemanticNode * const node)
 {
-	ZoneNode * const zone = new ZoneNode(this);
+	auto * const zone = new ZoneNode(this);
 	zone->setParentNode(this);
 	bind(value, zone);
 	if (node) {

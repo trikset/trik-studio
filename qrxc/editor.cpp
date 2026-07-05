@@ -77,7 +77,7 @@ bool Editor::load(const QDir &currentDir)
 		const QString nodeName = diagramElement.attribute("nodeName", "");
 		const QString diagramDisplayedName = diagramElement.attribute("displayedName", diagramName);
 
-		Diagram *diagram = new Diagram(diagramName, nodeName, diagramDisplayedName, this);
+		auto *diagram = new Diagram(diagramName, nodeName, diagramDisplayedName, this);
 		qDebug() << "Parsing diagram" << diagramName;
 		if (!diagram->init(diagramElement)) {
 			qCritical() << "Diagram" << diagramName << "can't be parsed";

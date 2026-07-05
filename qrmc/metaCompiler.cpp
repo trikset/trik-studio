@@ -133,7 +133,7 @@ Editor* MetaCompiler::loadMetaModel(const Id &metamodelId)
 			return nullptr;
 		}
 	} else {
-		Editor * const editor = new Editor(*this, mApi, metamodelId, mTargetDirectory);
+		auto * const editor = new Editor(*this, mApi, metamodelId, mTargetDirectory);
 		if (!editor->load()) {
 			qDebug() << "ERROR: Failed to load file";
 			delete editor;

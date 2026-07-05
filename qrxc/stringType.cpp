@@ -30,7 +30,7 @@ bool StringType::init(const QDomElement &element, const QString &context)
 
 Type* StringType::clone() const
 {
-	StringType *result = new StringType();
+	auto *result = new StringType();
 	Type::copyFields(result);
 	result->mRegularExpression = mRegularExpression;
 	return result;

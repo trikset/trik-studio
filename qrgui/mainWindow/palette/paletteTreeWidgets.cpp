@@ -117,8 +117,8 @@ void PaletteTreeWidgets::initUserTree()
 
 void PaletteTreeWidgets::addTopItemType(const PaletteElement &data, QTreeWidget *tree)
 {
-	QTreeWidgetItem *item = new QTreeWidgetItem;
-	DraggableElement *element = new DraggableElement(*mMainWindow, data, mParentPalette->iconsView(), *mEditorManager);
+	auto *item = new QTreeWidgetItem;
+	auto *element = new DraggableElement(*mMainWindow, data, mParentPalette->iconsView(), *mEditorManager);
 
 	mPaletteElements.insert(data.id(), element);
 
@@ -142,7 +142,7 @@ void PaletteTreeWidgets::resizeIcons()
 				}
 
 				for (QObject *child : field->children()) {
-					DraggableElement *element = dynamic_cast<DraggableElement*>(child);
+					auto *element = dynamic_cast<DraggableElement*>(child);
 					if (element) {
 						element->setIconSize(newSize);
 					}
@@ -268,7 +268,7 @@ void PaletteTreeWidgets::refreshUserPalette(bool force)
 			} else {
 				QDomDocument doc;
 				doc.setContent(shape);
-				SdfIconEngineV2 * const engine = new SdfIconEngineV2(doc);
+				auto * const engine = new SdfIconEngineV2(doc);
 				icon = QIcon(engine);
 			}
 

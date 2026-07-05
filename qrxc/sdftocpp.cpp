@@ -121,7 +121,7 @@ QString SdfRenderer::render()
 		}
 		node = node.nextSibling();
 	}
-	this->painter = 0;
+	this->painter = nullptr;
 	return toGenerator;
 }
 
@@ -284,7 +284,7 @@ void SdfRenderer::point(QDomElement &element)
 
 QPoint *SdfRenderer::getpoints(QDomElement &element, int n)
 {
-	QPoint *array = new QPoint[n];
+	auto *array = new QPoint[n];
 	float x = 0;
 	float y = 0;
 	for (int i = 0; i < n; i++)

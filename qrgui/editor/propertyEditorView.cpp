@@ -258,14 +258,14 @@ void PropertyEditorView::dataChanged(const QModelIndex &, const QModelIndex &)
 		QList<QtProperty*> childs = property->subProperties();
 		if (childs.isEmpty()) {
 			if (dynamic_cast<QtVariantProperty*>(property)) {
-				QtVariantProperty *prop = dynamic_cast<QtVariantProperty*>(property);
+				auto *prop = dynamic_cast<QtVariantProperty*>(property);
 				const QModelIndex &valueIndex = mModel->index(row, 0);
 				setPropertyFromDataChanged(valueIndex, prop, i);
 			}
 		}
 
 		for (int j = 0; j < childs.count(); ++j) {
-			QtVariantProperty *child = dynamic_cast<QtVariantProperty*>(childs.at(j));
+			auto *child = dynamic_cast<QtVariantProperty*>(childs.at(j));
 			const QModelIndex &valueIndex = mModel->index(row, j + 1);
 			setPropertyFromDataChanged(valueIndex, child, i);
 		}
@@ -398,7 +398,7 @@ void PropertyEditorView::editorValueChanged(QtProperty *prop, QVariant value)
 
 	// TODO: edit included Qt Property Browser framework or inherit new browser
 	// from it and create propertyCommited() and propertyCancelled() signal
-	qReal::commands::ChangePropertyCommand *changeCommand =
+	auto *changeCommand =
 			new qReal::commands::ChangePropertyCommand(mLogicalModelAssistApi, firstPart + propertyName, id, value);
 	mController->execute(changeCommand);
 }

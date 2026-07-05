@@ -166,7 +166,7 @@ void UiManager::onRobotModelChanged(kitBase::robotModel::RobotModelInterface &mo
 	}
 
 	auto subscribeShell = [this, &model]() {
-		if (kitBase::robotModel::robotParts::Shell * const shell = kitBase::robotModel::RobotModelUtils::findDevice
+		if (auto * const shell = kitBase::robotModel::RobotModelUtils::findDevice
 				<kitBase::robotModel::robotParts::Shell>(model, "ShellPort"))
 		{
 			connect(shell, &kitBase::robotModel::robotParts::Shell::textPrinted
@@ -228,7 +228,7 @@ void UiManager::toggleModeButtons()
 
 QDockWidget *UiManager::produceDockWidget(const QString &title, QWidget *content)
 {
-	QDockWidget * const dock = new QDockWidget(title);
+	auto * const dock = new QDockWidget(title);
 	mDockWidgets.insert(dock);
 	dock->setWidget(content);
 	updateDocksSettings();
@@ -407,7 +407,7 @@ void UiManager::hack2dModelDock() const
 	// 2D model is placed into smart dock: it may be embedded into instance of QDialog
 	// that is not influeced by mMainWindow::restoreState. So we must first switch to a docked form
 	// and then restore docks state.
-	if (utils::SmartDock * const twoDModel = mMainWindow.windowWidget()->findChild<utils::SmartDock *>()) {
+	if (auto * const twoDModel = mMainWindow.windowWidget()->findChild<utils::SmartDock *>()) {
 		twoDModel->switchToDocked();
 	}
 }
@@ -416,12 +416,12 @@ void UiManager::enableDocksSnapshotter() const
 {
 	// This method provides tools only for development.
 	// It must not be called in master branch code.
-	QWidget * const mainWindow = dynamic_cast<QWidget *>(&mMainWindow);
-	QDialog * const dialog = new QDialog(mainWindow);
-	QVBoxLayout * const layout = new QVBoxLayout;
+	auto * const mainWindow = dynamic_cast<QWidget *>(&mMainWindow);
+	auto * const dialog = new QDialog(mainWindow);
+	auto * const layout = new QVBoxLayout;
 	dialog->setLayout(layout);
-	QPushButton * const button = new QPushButton("Snapshot docks", mainWindow);
-	QLineEdit * const lineEdit = new QLineEdit(mainWindow);
+	auto * const button = new QPushButton("Snapshot docks", mainWindow);
+	auto * const lineEdit = new QLineEdit(mainWindow);
 	connect(button, &QPushButton::clicked, this, [=]() {
 		const QString tempSettingsFileName = "tempFileForStoringWindowState";
 		QSettings tempSettings(tempSettingsFileName, QSettings::IniFormat);

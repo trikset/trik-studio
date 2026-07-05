@@ -56,7 +56,7 @@ void ReferenceList::addItem(const qReal::Id &element)
 {
 	QString name = mWindow->models().logicalRepoApi().name(element);
 
-	QListWidgetItem *item = new QListWidgetItem(name, mUi->listWidget);
+	auto *item = new QListWidgetItem(name, mUi->listWidget);
 	item->setData(Qt::UserRole, element.toString());
 }
 

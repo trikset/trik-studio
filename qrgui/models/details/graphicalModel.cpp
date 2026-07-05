@@ -86,7 +86,7 @@ GraphicalModelItem *GraphicalModel::loadElement(GraphicalModelItem *parentItem, 
 
 	beginInsertRows(index(parentItem), newRow, newRow);
 	const Id logicalId = mApi.logicalId(id);
-	GraphicalModelItem *item = new GraphicalModelItem(id, logicalId, parentItem);
+	auto *item = new GraphicalModelItem(id, logicalId, parentItem);
 	parentItem->addChild(item);
 	mModelItems.insert(id, item);
 	endInsertRows();
@@ -107,7 +107,7 @@ AbstractModelItem *GraphicalModel::createModelItem(const Id &id, AbstractModelIt
 void GraphicalModel::updateElements(const Id &logicalId, const QString &name)
 {
 	for (AbstractModelItem *item :  mModelItems.values()) {
-		GraphicalModelItem *graphicalItem = static_cast<GraphicalModelItem *>(item);
+		auto *graphicalItem = static_cast<GraphicalModelItem *>(item);
 		if (graphicalItem->logicalId() == logicalId) {
 			setNewName(graphicalItem->id(), name);
 			Q_EMIT dataChanged(index(graphicalItem), index(graphicalItem));
@@ -210,7 +210,7 @@ AbstractModelItem *GraphicalModel::createElementWithoutCommit(ElementInfo &eleme
 		actualLogicalId = static_cast<GraphicalModelItem *>(result)->logicalId();
 		elementInfo.setLogicalId(actualLogicalId);
 	} else {
-		GraphicalModelItem *graphicalParentItem = static_cast<GraphicalModelItem *>(parentItem);
+		auto *graphicalParentItem = static_cast<GraphicalModelItem *>(parentItem);
 		result = new GraphicalModelItem(elementInfo.id(), elementInfo.logicalId(), graphicalParentItem);
 	}
 
@@ -241,7 +241,7 @@ void GraphicalModel::initializeElement(const ElementInfo &elementInfo
 QVariant GraphicalModel::data(const QModelIndex &index, int role) const
 {
 	if (index.isValid()) {
-		GraphicalModelItem *item = static_cast<GraphicalModelItem*>(index.internalPointer());
+		auto *item = static_cast<GraphicalModelItem*>(index.internalPointer());
 		Q_ASSERT(item);
 		switch (role) {
 		case Qt::DisplayRole:
@@ -279,7 +279,7 @@ QVariant GraphicalModel::data(const QModelIndex &index, int role) const
 bool GraphicalModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
 	if (index.isValid()) {
-		AbstractModelItem *item = static_cast<AbstractModelItem *>(index.internalPointer());
+		auto *item = static_cast<AbstractModelItem *>(index.internalPointer());
 		switch (role) {
 		case Qt::DisplayRole:
 		case Qt::EditRole:
@@ -337,7 +337,7 @@ void GraphicalModel::changeParent(const QModelIndex &element, const QModelIndex 
 	int destinationRow = parentAbstractItem(parent)->children().size();
 
 	if (beginMoveRows(element.parent(), element.row(), element.row(), parent, destinationRow)) {
-		AbstractModelItem *elementItem = static_cast<AbstractModelItem*>(element.internalPointer());
+		auto *elementItem = static_cast<AbstractModelItem*>(element.internalPointer());
 		QVariant configuration = mApi.configuration(elementItem->id());
 		elementItem->parent()->removeChild(elementItem);
 		AbstractModelItem *parentItem = parentAbstractItem(parent);
@@ -366,8 +366,8 @@ void GraphicalModel::stackBefore(const QModelIndex &element, const QModelIndex &
 
 	if (beginMoveRows(element.parent(), element.row(), element.row(), element.parent(), sibling.row())) {
 		AbstractModelItem *parent = static_cast<AbstractModelItem *>(element.parent().internalPointer());
-		AbstractModelItem *item = static_cast<AbstractModelItem *>(element.internalPointer());
-		AbstractModelItem *siblingItem = static_cast<AbstractModelItem *>(sibling.internalPointer());
+		auto *item = static_cast<AbstractModelItem *>(element.internalPointer());
+		auto *siblingItem = static_cast<AbstractModelItem *>(sibling.internalPointer());
 
 		parent->stackBefore(item, siblingItem);
 		mApi.stackBefore(parent->id(), item->id(), siblingItem->id());

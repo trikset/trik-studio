@@ -180,7 +180,7 @@ QString MasterGeneratorBase::generate(const QString &indentString)
 
 void MasterGeneratorBase::generateLinkingInfo(QString &resultCode)
 {
-	const QString open = "@~(qrm:(/\\w+)+/\\{(\\w+-)+\\w+\\})~@";
+	const QString open = R"(@~(qrm:(/\w+)+/\{(\w+-)+\w+\})~@)";
 	const QString close = "@#%1#@";
 	QRegExp re;
 	QStack<QPair<QString, int>> stack;
@@ -226,7 +226,7 @@ void MasterGeneratorBase::generateLinkingInfo(QString &resultCode)
 
 void MasterGeneratorBase::cleanUpLinkingInfo(QString &code)
 {
-	code.remove(QRegExp("@(~|#)qrm:(((/\\w+)+/\\{(\\w+-)+\\w+\\})|(/))(~|#)@"));
+	code.remove(QRegExp(R"(@(~|#)qrm:(((/\w+)+/\{(\w+-)+\w+\})|(/))(~|#)@)"));
 }
 
 lua::LuaProcessor *MasterGeneratorBase::createLuaProcessor()

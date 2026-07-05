@@ -174,7 +174,7 @@ void SdfRenderer::render(QPainter *painter, const QRectF &bounds, bool isIcon)
 		}
 		node = node.nextSibling();
 	}
-	this->painter = 0;
+	this->painter = nullptr;
 }
 
 bool SdfRenderer::checkShowConditions(const QDomElement &element, bool isIcon) const
@@ -355,7 +355,7 @@ void SdfRenderer::point(QDomElement &element)
 
 QPoint *SdfRenderer::getpoints(QDomElement &element, int n)
 {
-	QPoint *array = new QPoint[n];
+	auto *array = new QPoint[n];
 	float x = 0;
 	float y = 0;
 	for (int i = 0; i < n; i++)
@@ -889,7 +889,7 @@ SdfIconLoader::~SdfIconLoader()
 QIcon SdfIconLoader::loadPixmap(const Id &id, const QDomElement &sdf)
 {
 	if (!instance()->mLoadedIcons.contains(id)) {
-		SdfIconEngineV2 * const engine = new SdfIconEngineV2(sdf);
+		auto * const engine = new SdfIconEngineV2(sdf);
 		// QIcon takes ownership over SdfIconEngineV2
 		QIcon icon(engine);
 		instance()->mLoadedIcons[id] = icon;

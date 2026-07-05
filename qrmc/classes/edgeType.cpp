@@ -36,7 +36,7 @@ EdgeType::~EdgeType()
 
 Type* EdgeType::clone() const
 {
-	EdgeType *result = new EdgeType(*mDiagram, mApi, mId, targetDirectory());
+	auto *result = new EdgeType(*mDiagram, mApi, mId, targetDirectory());
 	GraphicType::copyFields(result);
 	result->mBeginType = mBeginType;
 	result->mEndType = mEndType;
@@ -231,7 +231,7 @@ void EdgeType::initLabels()
 		!element.isNull();
 		element = element.nextSiblingElement("label"))
 	{
-		Label *label = new Label();
+		auto *label = new Label();
 		if (!label->init(element, count, true, mWidth, mHeight)) {
 			delete label;
 		} else {

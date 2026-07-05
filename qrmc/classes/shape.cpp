@@ -76,7 +76,7 @@ void Shape::initLabels(const QDomElement &graphics)
 		!element.isNull();
 		element = element.nextSiblingElement("label"))
 	{
-		Label *label = new Label();
+		auto *label = new Label();
 		if (!label->init(element, count, true, mWidth, mHeight)) {
 			delete label;
 		} else {

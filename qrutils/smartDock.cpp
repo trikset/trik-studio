@@ -56,7 +56,7 @@ void SmartDock::hideCloseButton(QDockWidget *dock)
 	const QString buttonName = "qt_dockwidget_closebutton";
 	for (QObject *child : dock->children()) {
 		if (child->objectName() == buttonName) {
-			if (QWidget *button = dynamic_cast<QWidget *>(child)) {
+			if (auto *button = dynamic_cast<QWidget *>(child)) {
 				button->installEventFilter(&filter);
 				button->hide();
 			}
@@ -181,7 +181,7 @@ bool SmartDock::isAnimating()
 QMainWindow *SmartDock::findMainWindow() const
 {
 	for (QWidget * const topLevelWidget : QApplication::topLevelWidgets()) {
-		if (QMainWindow * const window = dynamic_cast<QMainWindow *>(topLevelWidget)) {
+		if (auto * const window = dynamic_cast<QMainWindow *>(topLevelWidget)) {
 			return window;
 		}
 	}
@@ -239,7 +239,7 @@ void SmartDock::initDialog()
 	mDialog->setWindowTitle(mInnerWidget->windowTitle());
 	mDialog->setWindowIcon(mInnerWidget->windowIcon());
 	mDialog->setWindowFlags(mDialog->windowFlags() | Qt::WindowMinMaxButtonsHint);
-	QVBoxLayout * const layout = new QVBoxLayout;
+	auto * const layout = new QVBoxLayout;
 	layout->setMargin(0);
 	layout->setSpacing(0);
 	layout->setContentsMargins(0, 0, 0, 0);

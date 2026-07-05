@@ -58,7 +58,7 @@ bool UpdateElementCommand::update()
 
 bool UpdateElementCommand::equals(const AbstractCommand &other) const
 {
-	const UpdateElementCommand *updateCommand = dynamic_cast<const UpdateElementCommand *>(&other);
+	const auto *updateCommand = dynamic_cast<const UpdateElementCommand *>(&other);
 	if (updateCommand) {
 		return scene() == updateCommand->scene() && elementId() == updateCommand->elementId();
 	}

@@ -42,7 +42,7 @@ public:
 	/// Constructor.
 	/// @param autosaveMode - should save happen on each modification or would be called manually.
 	/// @param compactMode - widget must minimize its horizontal size.
-	explicit DevicesConfigurationWidget(QWidget *parent = 0, bool autosaveMode = false, bool compactMode = false);
+	explicit DevicesConfigurationWidget(QWidget *parent = nullptr, bool autosaveMode = false, bool compactMode = false);
 	~DevicesConfigurationWidget() override;
 
 	/// Creates configuration widgets for all robot models in a list and prepares them to be shown when

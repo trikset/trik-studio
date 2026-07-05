@@ -30,7 +30,7 @@ bool RoleType::init(const QDomElement &element, const QString &context)
 		 ; !propertyElement.isNull()
 		 ; propertyElement = propertyElement.nextSiblingElement("property"))
 	{
-		Property *property = new Property();
+		auto *property = new Property();
 		property->init(propertyElement);
 		mProperties.append(property);
 	}
@@ -40,7 +40,7 @@ bool RoleType::init(const QDomElement &element, const QString &context)
 
 RoleType* RoleType::clone() const
 {
-	RoleType *result = new RoleType();
+	auto *result = new RoleType();
 	result->mArrowType = mArrowType;
 	result->mEnd = mEnd;
 	result->mNavigable = mNavigable;

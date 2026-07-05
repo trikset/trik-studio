@@ -192,7 +192,7 @@ void RobotsBlockParser::addIntrinsicFuctions()
 	});
 
 	add1aryFunction("print", new types::Nil, new qrtext::core::types::Any, [this](const QVariant &text) {
-		kitBase::robotModel::robotParts::Shell *shell = kitBase::robotModel::RobotModelUtils::findDevice
+		auto *shell = kitBase::robotModel::RobotModelUtils::findDevice
 				<kitBase::robotModel::robotParts::Shell>(mRobotModelManager.model(), "ShellPort");
 		if (shell) {
 			shell->print(text.toString().append('\n'));

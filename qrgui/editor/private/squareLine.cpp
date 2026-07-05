@@ -235,9 +235,9 @@ bool SquareLine::intersects(const QLineF &line, NodeElement *node) const
 	QLineF secondLine(isLineVertical ? rect.bottomLeft() : rect.topRight(), rect.bottomRight());
 
 	if ((side == EdgeElement::top) || (side == EdgeElement::left)) {
-		return line.intersect(secondLine, 0) == QLineF::BoundedIntersection;
+		return line.intersect(secondLine, nullptr) == QLineF::BoundedIntersection;
 	} else {
-		return line.intersect(firstLine, 0) == QLineF::BoundedIntersection;
+		return line.intersect(firstLine, nullptr) == QLineF::BoundedIntersection;
 	}
 }
 

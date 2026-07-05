@@ -222,7 +222,7 @@ void Thread::turnOn(BlockInterface * const block)
 
 void Thread::interpretAfterEventsProcessing(QObject *blockObject)
 {
-	BlockInterface * const block = dynamic_cast<BlockInterface *>(blockObject);
+	auto * const block = dynamic_cast<BlockInterface *>(blockObject);
 	if (block) {
 		block->interpret(this);
 	}
@@ -242,7 +242,7 @@ void Thread::turnOff(BlockInterface * const block)
 
 	// Restoring old properties...
 	const QList<QPair<QString, QVariant>> &oldProperties = mStack.top().properties();
-	Block * const topBlock = dynamic_cast<Block *>(mStack.top().block());
+	auto * const topBlock = dynamic_cast<Block *>(mStack.top().block());
 	for (const QPair<QString, QVariant> &property : oldProperties) {
 		const QString propertyName = property.first;
 		const QVariant propertyValue = property.second;
@@ -277,7 +277,7 @@ void Thread::connectBlock(BlockInterface * const block)
 void Thread::newMessage(const QString &message)
 {
 	if (mMessages.isEmpty()) {
-		blocks::ReceiveThreadMessageBlock *block = dynamic_cast<blocks::ReceiveThreadMessageBlock *>(mCurrentBlock);
+		auto *block = dynamic_cast<blocks::ReceiveThreadMessageBlock *>(mCurrentBlock);
 		if (block) {
 			block->receiveMessage(message);
 			return;

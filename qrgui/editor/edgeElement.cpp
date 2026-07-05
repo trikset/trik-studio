@@ -623,7 +623,7 @@ NodeElement *EdgeElement::getNodeAt(QPointF position, bool isStart)
 
 	// Searching for the node with closest port to our point
 	for (QGraphicsItem * const item : items) {
-		NodeElement * const currentNode = dynamic_cast<NodeElement *>(item);
+		auto * const currentNode = dynamic_cast<NodeElement *>(item);
 		if (currentNode) {
 			const QPointF nearestPortPoint = currentNode->closestPortPoint(positionInSceneCoordinates
 					, isStart ? fromPortTypes() : toPortTypes());
@@ -827,7 +827,7 @@ NodeElement * EdgeElement::otherSide(const NodeElement *node) const
 		return mSrc;
 	}
 
-	return 0;
+	return nullptr;
 }
 
 void EdgeElement::reconnectToNearestPorts(bool reconnectSrc, bool reconnectDst)

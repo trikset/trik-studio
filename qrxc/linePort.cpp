@@ -58,7 +58,7 @@ void LinePort::generateCode(OutFile &out)
 
 Port *LinePort::clone() const
 {
-	LinePort *result = new LinePort();
+	auto *result = new LinePort();
 	result->mEndX = mEndX;
 	result->mEndY = mEndY;
 	result->mStartX = mStartX;

@@ -38,7 +38,7 @@ ModelExplorer::ModelExplorer(QWidget *parent)
 	connect(&mDeleteAction, &QAction::triggered, this, &ModelExplorer::elementRemoved);
 	mDeleteAction.setEnabled(false);
 
-	QAction * const deleteActionSeparator = new QAction(this);
+	auto * const deleteActionSeparator = new QAction(this);
 	deleteActionSeparator->setSeparator(true);
 
 	addAction(&mDeleteAction);

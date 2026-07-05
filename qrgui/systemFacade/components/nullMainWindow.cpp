@@ -334,7 +334,7 @@ void NullMainWindow::setCorner(Qt::Corner corner, Qt::DockWidgetArea area)
 
 void NullMainWindow::registerEditor(EditorInterface &editor)
 {
-	QAction *dummyAction = new QAction(this);
+	auto *dummyAction = new QAction(this);
 	editor.configure(*dummyAction, *dummyAction, *dummyAction, *dummyAction, *dummyAction, *dummyAction
 			, *dummyAction, *dummyAction, *dummyAction, *dummyAction);
 }

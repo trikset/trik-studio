@@ -123,7 +123,7 @@ bool Diagram::initNonGraphicTypes(const QDomElement &nonGraphicTypesElement)
 				group.save(stream, 1);
 				xml.replace("\"", "\\\"");
 				xml.replace("\n", "\\n");
-				PatternType *patternType = new PatternType(this, xml);
+				auto *patternType = new PatternType(this, xml);
 				if (!patternType->init(group, mDiagramName)) {
 					delete patternType;
 					qWarning() << "Can't parse pattern";

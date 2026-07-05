@@ -92,7 +92,7 @@ QStringList SceneAPI::nodeList(const QString &diagram, const QString &element)
 	const QList<QGraphicsItem *> items = mMainWindow.getCurrentTab()->editorViewScene().items();
 	QStringList result;
 	for (const QGraphicsItem * const item : items) {
-		const NodeElement * const node = dynamic_cast<NodeElement const *>(item);
+		const auto * const node = dynamic_cast<NodeElement const *>(item);
 		if (node && node->id().diagram() == diagram && node->id().element() == element) {
 			result << node->id().toString();
 		}

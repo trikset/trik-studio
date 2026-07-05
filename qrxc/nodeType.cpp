@@ -44,7 +44,7 @@ NodeType::~NodeType()
 
 Type* NodeType::clone() const
 {
-	NodeType *result = new NodeType(mDiagram);
+	auto *result = new NodeType(mDiagram);
 	GraphicType::copyFields(result);
 
 	for (Port *port : mPointPorts) {

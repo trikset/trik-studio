@@ -76,7 +76,7 @@ QString Property::defaultValue() const
 
 Property * Property::clone() const
 {
-	Property *result = new Property(mApi, mId);
+	auto *result = new Property(mApi, mId);
 	result->mName = mName;
 	result->mType = mType;
 	result->mIsEnum = mIsEnum;

@@ -41,7 +41,7 @@ bool SemanticTreeManager::isSynthetic(const SemanticNode * const node)
 
 SemanticNode *SemanticTreeManager::nonSyntheticRightSibling(SemanticNode * const node)
 {
-	NonZoneNode * const nonZoneNode = dynamic_cast<NonZoneNode * const>(node);
+	auto * const nonZoneNode = dynamic_cast<NonZoneNode * const>(node);
 	if (!nonZoneNode) {
 		return nullptr;
 	}
@@ -62,7 +62,7 @@ SemanticNode *SemanticTreeManager::nonSyntheticRightSibling(SemanticNode * const
 
 SemanticNode *SemanticTreeManager::anyRightSibling(SemanticNode * const node)
 {
-	NonZoneNode * const nonZoneNode = dynamic_cast<NonZoneNode * const>(node);
+	auto * const nonZoneNode = dynamic_cast<NonZoneNode * const>(node);
 	if (!nonZoneNode) {
 		return nullptr;
 	}
@@ -130,7 +130,7 @@ NonZoneNode *SemanticTreeManager::produceLabeledNode(const qReal::Id &block)
 SemanticNode *SemanticTreeManager::findSibling(SemanticNode *node
 											   , const std::function<bool (SemanticNode *)> &predicate)
 {
-	NonZoneNode *nonZoneNode = dynamic_cast<NonZoneNode *>(node);
+	auto *nonZoneNode = dynamic_cast<NonZoneNode *>(node);
 	if (!nonZoneNode) {
 		return nullptr;
 	}
@@ -154,7 +154,7 @@ SemanticNode *SemanticTreeManager::findSibling(SemanticNode *node
 std::vector<SemanticNode *> SemanticTreeManager::copyRightSiblingsUntil(SemanticNode *node
 		, const std::function<bool(SemanticNode *)> &predicate)
 {
-	NonZoneNode *nonZoneNode = dynamic_cast<NonZoneNode *>(node);
+	auto *nonZoneNode = dynamic_cast<NonZoneNode *>(node);
 	if (!nonZoneNode) {
 		reportError(QObject::tr("Generation internal error, synchronous zone parent is a zone node."));
 		return {};

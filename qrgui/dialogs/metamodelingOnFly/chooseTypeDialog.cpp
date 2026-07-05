@@ -43,7 +43,7 @@ ChooseTypeDialog::~ChooseTypeDialog()
 
 void ChooseTypeDialog::nodeButtonClicked()
 {
-	AddNodeDialog *nodeDialog = new AddNodeDialog(mDiagram, mEditorManagerProxy, parentWidget());
+	auto *nodeDialog = new AddNodeDialog(mDiagram, mEditorManagerProxy, parentWidget());
 	connect(nodeDialog, &AddNodeDialog::jobDone, this, &ChooseTypeDialog::jobDone);
 	nodeDialog->setModal(true);
 	nodeDialog->show();
@@ -51,7 +51,7 @@ void ChooseTypeDialog::nodeButtonClicked()
 
 void ChooseTypeDialog::edgeButtonClicked()
 {
-	EdgePropertiesDialog *edgeDialog = new EdgePropertiesDialog(mDiagram, mEditorManagerProxy, parentWidget());
+	auto *edgeDialog = new EdgePropertiesDialog(mDiagram, mEditorManagerProxy, parentWidget());
 	connect(edgeDialog, &EdgePropertiesDialog::jobDone, this, &ChooseTypeDialog::jobDone);
 	edgeDialog->setModal(true);
 	edgeDialog->show();
