@@ -36,7 +36,7 @@ public:
 	};
 
 	explicit IntermediateStructurizatorNode(QObject *parent);
-	virtual ~IntermediateStructurizatorNode();
+	~IntermediateStructurizatorNode() override;
 
 	virtual Type type() const = 0;
 	virtual qReal::Id firstId() const = 0;

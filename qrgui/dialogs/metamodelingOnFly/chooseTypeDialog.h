@@ -40,7 +40,7 @@ public:
 	ChooseTypeDialog(const Id &diagram, const EditorManagerInterface &editorManagerProxy, QWidget *parent = nullptr);
 
 	/// Destructor.
-	~ChooseTypeDialog();
+	~ChooseTypeDialog() override;
 
 	/// Prevously it was a private slot
 	void nodeButtonClicked();

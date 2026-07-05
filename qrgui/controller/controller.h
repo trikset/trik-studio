@@ -31,7 +31,7 @@ class QRGUI_CONTROLLER_EXPORT Controller : public ControllerInterface
 
 public:
 	Controller();
-	~Controller();
+	~Controller() override;
 
 	bool canUndo() const override;
 	bool canRedo() const override;

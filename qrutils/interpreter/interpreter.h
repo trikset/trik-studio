@@ -49,7 +49,7 @@ public:
 			, qrtext::LanguageToolboxInterface &languageToolbox
 			, const Id &initialNodeType);
 
-	~Interpreter();
+	~Interpreter() override;
 
 public Q_SLOTS:
 	void startInterpretation();

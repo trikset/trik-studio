@@ -35,7 +35,7 @@ class GesturesWidget : public QWidget
 
 public:
 	explicit GesturesWidget(QWidget *parent = nullptr);
-	~GesturesWidget();
+	~GesturesWidget() override;
 
 	void draw(const QString &paths);
 	Id currentElement() const;

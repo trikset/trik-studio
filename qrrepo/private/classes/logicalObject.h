@@ -32,11 +32,11 @@ public:
 	explicit LogicalObject(const QDomElement &element);
 
 	// Override.
-	virtual bool isLogicalObject() const;
+	bool isLogicalObject() const override;
 
 protected:
 	// Override.
-	virtual Object *createClone() const;
+	Object *createClone() const override;
 
 };
 

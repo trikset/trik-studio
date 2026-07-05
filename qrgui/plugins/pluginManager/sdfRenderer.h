@@ -44,7 +44,7 @@ class QRGUI_PLUGINS_MANAGER_EXPORT SdfRenderer : public QObject
 public:
 	SdfRenderer();
 	explicit SdfRenderer(const QString &path);
-	~SdfRenderer();
+	~SdfRenderer() override;
 
 	bool load (const QString &filename);
 	bool load(const QDomDocument &document);
@@ -129,8 +129,8 @@ public:
 	explicit SdfIconEngineV2(const QDomDocument &document);
 	explicit SdfIconEngineV2(const QDomElement &picture);
 	QSize preferedSize() const;
-	virtual void paint(QPainter *painter, const QRect &rect, QIcon::Mode mode, QIcon::State state);
-	virtual QIconEngine *clone() const;
+	void paint(QPainter *painter, const QRect &rect, QIcon::Mode mode, QIcon::State state) override;
+	QIconEngine *clone() const override;
 
 private:
 	SdfRenderer mRenderer;

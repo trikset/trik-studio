@@ -40,7 +40,7 @@ Q_SIGNALS:
 	void lowLevelEvent(QObject *obj, QEvent *e);
 
 protected:
-	bool notify(QObject *receiver, QEvent *event);
+	bool notify(QObject *receiver, QEvent *event) override;
 
 private Q_SLOTS:
 	void logMouse(QWidget * const target, QMouseEvent * const event);

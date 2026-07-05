@@ -33,7 +33,7 @@ class UsbRobotCommunicationThread : public utils::robotCommunication::RobotCommu
 
 public:
 	UsbRobotCommunicationThread();
-	~UsbRobotCommunicationThread();
+	~UsbRobotCommunicationThread() override;
 
 public Q_SLOTS:
 	bool send(QObject *addressee, const QByteArray &buffer, int responseSize) override;

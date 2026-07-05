@@ -24,10 +24,10 @@ namespace qrRepo {
 class LogicalRepoApi : public CommonRepoApi
 {
 public:
-	virtual ~LogicalRepoApi(){}
+	~LogicalRepoApi() override{}
 
 	virtual void addChild(const qReal::Id &id, const qReal::Id &child) = 0;
-	virtual qReal::Id otherEntityFromLink(const qReal::Id &linkId, const qReal::Id &firstNode) const = 0;
+	qReal::Id otherEntityFromLink(const qReal::Id &linkId, const qReal::Id &firstNode) const override = 0;
 
 	virtual qReal::Id outgoingExplosion(const qReal::Id &id) const = 0;
 	virtual qReal::IdList incomingExplosions(const qReal::Id &id) const = 0;

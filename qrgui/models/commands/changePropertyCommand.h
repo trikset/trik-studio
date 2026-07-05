@@ -42,8 +42,8 @@ public:
 			, const QString &property, const Id &id, const QVariant &oldValue, const QVariant &newValue);
 
 protected:
-	virtual bool execute();
-	virtual bool restoreState();
+	bool execute() override;
+	bool restoreState() override;
 
 private:
 	bool setProperty(const QVariant &value);

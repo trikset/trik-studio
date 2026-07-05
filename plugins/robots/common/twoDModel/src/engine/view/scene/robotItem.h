@@ -86,8 +86,8 @@ private:
 	class BeepItem : public QGraphicsItem
 	{
 	protected:
-		void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-		QRectF boundingRect() const;
+		void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
+		QRectF boundingRect() const override;
 
 	private:
 		void drawBeep(QPainter *painter);

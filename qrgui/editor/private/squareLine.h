@@ -32,13 +32,13 @@ public:
 		, const GraphicalModelAssistInterface &graphicalModel);
 
 	/// Adjust link's ends, keep end segments strait
-	virtual void adjust();
+	void adjust() override;
 
 	/// @return criteria for sorting square links on a linear port
-	virtual EdgeArrangeCriteria arrangeCriteria(const NodeElement *node, const QLineF &portLine) const;
+	EdgeArrangeCriteria arrangeCriteria(const NodeElement *node, const QLineF &portLine) const override;
 
 	/// @return list of context menu actions available for square link at position pos
-	virtual QList<ContextMenuAction *> extraActions(QPointF pos);
+	QList<ContextMenuAction *> extraActions(QPointF pos) override;
 
 protected:
 	enum LineType {
@@ -50,14 +50,14 @@ protected:
 
 	/// If link reshaping is started on a segment, move that segment to position pos (in link's local coordinates)
 	/// If user is trying to move port, do it. Otherwise do nothing
-	virtual void handleEdgeMove(QPointF pos);
+	void handleEdgeMove(QPointF pos) override;
 
 	/// Move segment at point oldPos to newPos, keeping the link square
 	void moveSegment(QPointF oldPos, QPointF newPos);
 
 	/// Remove loops, too short segments and coinciding points,
 	/// ensure that link doesn't intersect adjacent nodes and stays square
-	virtual void improveAppearance();
+	void improveAppearance() override;
 
 	/// Delete very short (non-end) segments
 	void deleteShortSegments();
@@ -130,7 +130,7 @@ protected:
 	QRectF dstRect() const;
 
 	/// Draw port with index portNumber is its non-end
-	virtual void drawPort(QPainter *painter, int portNumber);
+	void drawPort(QPainter *painter, int portNumber) override;
 
 	ContextMenuAction mLayOutAction;
 };

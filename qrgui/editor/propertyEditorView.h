@@ -39,7 +39,7 @@ class QRGUI_EDITOR_EXPORT PropertyEditorView : public QWidget
 
 public:
 	explicit PropertyEditorView(QWidget *parent = nullptr);
-	~PropertyEditorView();
+	~PropertyEditorView() override;
 
 	// QAbstractItemView's methods
 	void setModel(PropertyEditorModel *model);
@@ -74,7 +74,7 @@ public Q_SLOTS:
 	void reset();
 
 protected:
-	virtual void resizeEvent(QResizeEvent *event);
+	void resizeEvent(QResizeEvent *event) override;
 
 protected Q_SLOTS:
 	// QAbstractItemView's methods

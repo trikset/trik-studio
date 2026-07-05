@@ -33,12 +33,12 @@ class TrikEncoderAdapter : public trikControl::EncoderInterface
 public:
 	TrikEncoderAdapter(const kitBase::robotModel::PortInfo &port, twoDModel::engine::TwoDModelEngineInterface *engine);
 
-	virtual Status status() const override {return Status::ready;}
+	Status status() const override {return Status::ready;}
 	// EncoderInterface interface
 public Q_SLOTS:
-	virtual int read() override;
-	virtual int readRawData() override { return read(); }
-	virtual void reset() override;
+	int read() override;
+	int readRawData() override { return read(); }
+	void reset() override;
 
 private:
 	kitBase::robotModel::PortInfo mPort;

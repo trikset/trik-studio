@@ -31,10 +31,10 @@ public:
 			, const GraphicalModelAssistInterface &graphicalModel);
 
 	/// Align every non-end point of the link to grid
-	virtual void alignToGrid();
+	void alignToGrid() override;
 
 	/// @return List of context menu actions that may be done on a link at the point pos
-	virtual QList<ContextMenuAction *> extraActions(QPointF pos);
+	QList<ContextMenuAction *> extraActions(QPointF pos) override;
 
 protected Q_SLOTS:
 	/// Delete non-end point at position pos (given in link's coordinates), if any
@@ -47,7 +47,7 @@ protected:
 	/// Move point to position pos (given in link's coordinates)
 	/// Point is determined earlier (when mouse button is pressed)
 	/// If there is no point make the one then move it
-	virtual void handleEdgeMove(QPointF pos);
+	void handleEdgeMove(QPointF pos) override;
 
 	/// Add a new point at position pos, if there is a link's segment containing pos
 	int addPoint(QPointF pos);
@@ -56,7 +56,7 @@ protected:
 	QPointF alignedPoint(QPointF point) const;
 
 	/// Remove unneeded points, lines and loops (if the link intersects itself)
-	virtual void improveAppearance();
+	void improveAppearance() override;
 
 	/// Remove points and lines that are so close to each other that look like single point or line
 	void deleteUnneededPoints();

@@ -37,16 +37,16 @@ public:
 	/// @param element - root of XML DOM subtree with serialized object.
 	explicit GraphicalObject(const QDomElement &element);
 
-	virtual ~GraphicalObject();
+	~GraphicalObject() override;
 
 	/// Returns id of corresponding logical object.
 	qReal::Id logicalId() const;
 
 	// Override.
-	virtual bool isLogicalObject() const;
+	bool isLogicalObject() const override;
 
 	// Override.
-	virtual QDomElement serialize(QDomDocument &document) const;
+	QDomElement serialize(QDomDocument &document) const override;
 
 	/// Creates empty graphical part with given index inside this object.
 	void createGraphicalPart(int index);
@@ -68,7 +68,7 @@ public:
 
 protected:
 	// Override.
-	virtual Object *createClone() const;
+	Object *createClone() const override;
 
 private:
 	/// Id of logical object corresponding to this graphical object.

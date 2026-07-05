@@ -26,14 +26,14 @@ class GraphicalModelAssistInterface : public details::ModelsAssistInterface
 public:
 	virtual const qrRepo::GraphicalRepoApi &graphicalRepoApi() const = 0;
 	virtual qrRepo::GraphicalRepoApi &mutableGraphicalRepoApi() const = 0;
-	virtual qrRepo::CommonRepoApi &mutableRepoApi() const {return mutableGraphicalRepoApi();}
-	virtual Id createElement(const Id &parent, const Id &type) = 0;
-	virtual Id createElement(const Id &parent, const Id &id, bool isFromLogicalModel
+	qrRepo::CommonRepoApi &mutableRepoApi() const override {return mutableGraphicalRepoApi();}
+	Id createElement(const Id &parent, const Id &type) override = 0;
+	Id createElement(const Id &parent, const Id &id, bool isFromLogicalModel
 		, const QString &name, const QPointF &position
-		, const Id &preferedLogicalId = Id()) = 0;
+		, const Id &preferedLogicalId = Id()) override = 0;
 	virtual Id copyElement(const Id &source) = 0;
-	virtual IdList children(const Id &element) const = 0;
-	virtual void changeParent(const Id &element, const Id &parent, const QPointF &position) = 0;
+	IdList children(const Id &element) const override = 0;
+	void changeParent(const Id &element, const Id &parent, const QPointF &position) override = 0;
 	virtual void copyProperties(const Id &dest, const Id &src) = 0;
 	virtual QMap<QString, QVariant> properties(const Id &id) = 0;
 	virtual IdList temporaryRemovedLinksFrom(const Id &elem) const = 0;

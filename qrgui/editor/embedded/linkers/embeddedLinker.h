@@ -36,7 +36,7 @@ class EmbeddedLinker : public QObject, public QGraphicsItem
 public:
 	EmbeddedLinker();
 	EmbeddedLinker(QGraphicsItem *parent);
-	virtual ~EmbeddedLinker();
+	~EmbeddedLinker() override;
 
 	void initTitle();
 	void generateColor();
@@ -51,12 +51,12 @@ public:
 
 	void takePosition(int index, int maxIndex);
 
-	virtual QRectF boundingRect() const;
-	virtual void paint(QPainter *p, const QStyleOptionGraphicsItem *opt, QWidget *w);
+	QRectF boundingRect() const override;
+	void paint(QPainter *p, const QStyleOptionGraphicsItem *opt, QWidget *w) override;
 
-	virtual void mouseMoveEvent(QGraphicsSceneMouseEvent* event);
-	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event);
-	virtual void mousePressEvent(QGraphicsSceneMouseEvent* event);
+	void mouseMoveEvent(QGraphicsSceneMouseEvent* event) override;
+	void mouseReleaseEvent(QGraphicsSceneMouseEvent* event) override;
+	void mousePressEvent(QGraphicsSceneMouseEvent* event) override;
 
 private:
 	EdgeElement *mEdge;

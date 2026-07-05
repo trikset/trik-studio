@@ -30,7 +30,7 @@ class ImageItemPopup : public graphicsUtils::ItemPopup
 
 public:
 	ImageItemPopup(graphicsUtils::AbstractScene &scene, QWidget *parent = nullptr);
-	~ImageItemPopup();
+	~ImageItemPopup() override;
 
 	/// Returns true if user selected to embed image into save last time.
 	bool isMemorized() const;

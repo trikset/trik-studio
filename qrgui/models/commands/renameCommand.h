@@ -37,8 +37,8 @@ public:
 			, const models::Exploser * const exploser = nullptr);
 
 protected:
-	virtual bool execute();
-	virtual bool restoreState();
+	bool execute() override;
+	bool restoreState() override;
 
 private:
 	void initExplosions(const models::Exploser * const exploser);

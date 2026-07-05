@@ -53,7 +53,7 @@ public:
 	class ROBOTS_GENERATOR_EXPORT EmptyConverter : public ConverterInterface
 	{
 	public:
-		virtual QString convert(const QString &data) const;
+		QString convert(const QString &data) const override;
 	};
 
 	/// Creates new instance of binding that simply replaces given label with a given value

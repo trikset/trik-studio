@@ -27,7 +27,7 @@ class QRUTILS_EXPORT InitialBlock : public Block
 	Q_OBJECT
 
 public:
-	virtual void run();
+	void run() override;
 };
 
 }

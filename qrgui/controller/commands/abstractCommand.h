@@ -28,10 +28,10 @@ class QRGUI_CONTROLLER_EXPORT AbstractCommand : public QObject, public QUndoComm
 
 public:
 	AbstractCommand();
-	virtual ~AbstractCommand();
+	~AbstractCommand() override;
 
-	virtual void redo();
-	virtual void undo();
+	void redo() override;
+	void undo() override;
 
 	void setRedoEnabled(bool enabled);
 	void setUndoEnabled(bool enabled);

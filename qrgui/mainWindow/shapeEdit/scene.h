@@ -156,9 +156,9 @@ private:
 	void setNullZValueItems();
 	QPair<bool, Item *> checkOnResize(qreal x, qreal y);
 
-	virtual void mousePressEvent(QGraphicsSceneMouseEvent *event);
-	virtual void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
-	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+	void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+	void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
+	void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
 
-	virtual void keyPressEvent(QKeyEvent *keyEvent);
+	void keyPressEvent(QKeyEvent *keyEvent) override;
 };

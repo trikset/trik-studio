@@ -42,7 +42,7 @@ class PaletteTree: public QWidget
 
 public:
 	explicit PaletteTree(QWidget *parent = nullptr);
-	~PaletteTree();
+	~PaletteTree() override;
 
 	/** Adds all editor's elements to appropriate tree.
 	  @param editorManager Editor manager which all editors with elements are taken from.
@@ -135,7 +135,7 @@ private:
 	/// Forbids to make copies of the object.
 	explicit PaletteTree(const PaletteTree &paletteTree);
 
-	virtual void resizeEvent(QResizeEvent *);
+	void resizeEvent(QResizeEvent *) override;
 
 	void initUi();
 

@@ -29,7 +29,7 @@ public:
 	InitVideoStreamingBlock(kitBase::robotModel::RobotModelInterface &robotModel);
 
 protected:
-	virtual void doJob(robotModel::parts::TrikShell &shell);
+	void doJob(robotModel::parts::TrikShell &shell) override;
 };
 
 }

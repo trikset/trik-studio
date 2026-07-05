@@ -40,7 +40,7 @@ public:
 			, QWidget *parent = nullptr);
 
 	/// Destructor.
-	~PropertiesDialog();
+	~PropertiesDialog() override;
 
 private Q_SLOTS:
 	void closeDialog();

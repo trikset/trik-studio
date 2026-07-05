@@ -32,7 +32,7 @@ public:
 			, const qReal::Id &id
 			, QObject *parent = nullptr);
 
-	virtual QString generate();
+	QString generate() override;
 
 protected:
 	/// Implementation must draw resulting picture using given painter

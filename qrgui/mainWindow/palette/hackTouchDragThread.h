@@ -29,7 +29,7 @@ public:
 	static void simulateSystemRelease();
 
 protected:
-	virtual void run();
+	void run() override;
 };
 
 

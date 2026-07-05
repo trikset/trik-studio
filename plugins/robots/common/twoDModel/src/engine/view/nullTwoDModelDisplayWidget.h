@@ -27,7 +27,7 @@ class NullTwoDModelDisplayWidget : public twoDModel::engine::TwoDModelDisplayWid
 public:
 	explicit NullTwoDModelDisplayWidget(QWidget *parent = nullptr);
 
-	~NullTwoDModelDisplayWidget();
+	~NullTwoDModelDisplayWidget() override;
 
 	void setPainter(qReal::ui::PainterInterface *painter) override;
 	bool buttonIsDown(const QString &buttonId) const override;

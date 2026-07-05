@@ -39,7 +39,7 @@ public:
 			, QWidget *parent = nullptr);
 
 	/// Destructor.
-	~AddNodeDialog();
+	~AddNodeDialog() override;
 
 Q_SIGNALS:
 	/// Emitted when node is added and editors must be reloaded.

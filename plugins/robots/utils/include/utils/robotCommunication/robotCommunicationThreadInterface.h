@@ -28,7 +28,7 @@ class ROBOTS_UTILS_EXPORT RobotCommunicationThreadInterface : public QObject
 	Q_OBJECT
 
 public:
-	virtual ~RobotCommunicationThreadInterface() {}
+	~RobotCommunicationThreadInterface() override {}
 
 public Q_SLOTS:
 	virtual bool send(QObject *addressee, const QByteArray &buffer, int responseSize) = 0;

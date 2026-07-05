@@ -27,13 +27,13 @@ class TrikLedAdapter : public trikControl::LedInterface
 public:
 	TrikLedAdapter(trik::robotModel::parts::TrikLed *led);
 
-	virtual Status status() const override { return Status::ready; }
+	Status status() const override { return Status::ready; }
 
 public Q_SLOTS:
-	virtual void red() override;
-	virtual void green() override;
-	virtual void orange() override;
-	virtual void off() override;
+	void red() override;
+	void green() override;
+	void orange() override;
+	void off() override;
 
 private:
 	trik::robotModel::parts::TrikLed *mLed;

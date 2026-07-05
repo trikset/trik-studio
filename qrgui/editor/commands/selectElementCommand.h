@@ -33,11 +33,11 @@ public:
 			, bool shouldSelect = true, bool forceValueChange = false);
 	SelectElementCommand(const EditorView *view, const Id &id
 			, bool shouldSelect = true, bool forceValueChange = false);
-	virtual ~SelectElementCommand();
+	~SelectElementCommand() override;
 
 protected:
-	virtual bool execute();
-	virtual bool restoreState();
+	bool execute() override;
+	bool restoreState() override;
 
 private:
 	bool setSelectionState(bool select);

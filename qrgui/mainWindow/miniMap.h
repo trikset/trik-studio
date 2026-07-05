@@ -48,13 +48,13 @@ public Q_SLOTS:
 	void ensureVisible(const QList<QRectF> &region);
 
 protected:
-	void wheelEvent(QWheelEvent *event);
-	void mousePressEvent(QMouseEvent *event);
-	void mouseMoveEvent(QMouseEvent *event);
-	void mouseReleaseEvent(QMouseEvent *event);
-	void resizeEvent(QResizeEvent *event);
+	void wheelEvent(QWheelEvent *event) override;
+	void mousePressEvent(QMouseEvent *event) override;
+	void mouseMoveEvent(QMouseEvent *event) override;
+	void mouseReleaseEvent(QMouseEvent *event) override;
+	void resizeEvent(QResizeEvent *event) override;
 
-	void drawForeground(QPainter *painter, const QRectF &rect);
+	void drawForeground(QPainter *painter, const QRectF &rect) override;
 	/// painting out the areas which aren't to be painted on the minimap (not in the scene rect)
 	void drawNonExistentAreas(QPainter *painter, const QRectF &rect);
 	/// @return list of areas visible on the minimap but not included in the scene rectangle

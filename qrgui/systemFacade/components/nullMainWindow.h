@@ -34,7 +34,7 @@ public:
 	NullMainWindow(ErrorReporterInterface &errorReporter, SystemEvents &events
 			, const ProjectManagementInterface *projectManager = nullptr
 			, const GraphicalModelAssistInterface *graphicalModel = nullptr);
-	~NullMainWindow();
+	~NullMainWindow() override;
 
 	void selectItem(const Id &graphicalId) override;
 	void selectItemOrDiagram(const Id &graphicalId) override;

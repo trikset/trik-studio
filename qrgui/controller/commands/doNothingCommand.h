@@ -28,8 +28,8 @@ public:
 	DoNothingCommand();
 
 protected:
-	virtual bool execute();
-	virtual bool restoreState();
+	bool execute() override;
+	bool restoreState() override;
 };
 
 }

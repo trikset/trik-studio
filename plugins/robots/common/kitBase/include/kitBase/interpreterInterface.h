@@ -26,7 +26,7 @@ class ROBOTS_KIT_BASE_EXPORT InterpreterInterface : public kitBase::InterpreterC
 	Q_OBJECT
 
 public:
-	virtual ~InterpreterInterface() {}
+	~InterpreterInterface() override {}
 
 	/// Returns time in ms that passed from the moment of last intepretation start.
 	/// @warning: may return unreal time (for example when 2D model is being interpreted).

@@ -46,7 +46,7 @@ class ScriptAPI : public QObject
 
 public:
 	ScriptAPI();
-	~ScriptAPI();
+	~ScriptAPI() override;
 
 	/// Initializes scripting API.
 	void init(MainWindow *mainWindow);

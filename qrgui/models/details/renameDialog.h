@@ -27,12 +27,12 @@ public:
 	static QString selectNewName(const QString &currentName, QWidget *parent = nullptr);
 
 private Q_SLOTS:
-	virtual void accept();
-	virtual void reject();
+	void accept() override;
+	void reject() override;
 
 private:
 	explicit RenameDialog(const QString &initialText = "", QWidget *parent = nullptr);
-	virtual ~RenameDialog();
+	~RenameDialog() override;
 
 	QString name() const;
 

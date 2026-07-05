@@ -55,7 +55,7 @@ public:
 	Runner(const QString &report, const QString &trajectory, const QString &input,
 	       const QString &mode, const QString &qrsFile, uint32_t delayBeforeExit);
 
-	~Runner();
+	~Runner() override;
 
 	/// Starts the interpretation process. The given save file will be opened and interpreted in 2D model window.
 	/// @param saveFile QReal save file (qrs) that will be opened and interpreted.

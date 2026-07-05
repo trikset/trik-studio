@@ -26,17 +26,17 @@ namespace qrmc {
 	public:
 		NodeType(const Diagram &diagram, const qrRepo::LogicalRepoApi &api, const qReal::Id &id
 				, const QString &targetDirectory);
-		virtual Type* clone() const;
-		virtual ~NodeType();
+		Type* clone() const override;
+		~NodeType() override;
 
-		virtual bool init(const QString &context);
+		bool init(const QString &context) override;
 
-		virtual void print();
+		void print() override;
 
-		virtual QString generateIsNodeOrEdge(const QString &lineTemplate) const;
-		virtual QString generateNodeClass(const QString &classTemplate);
-		virtual QString generateEdgeClass(const QString &classTemplate) const;
-		virtual QString generateResourceLine(const QString &resourceTemplate) const;
+		QString generateIsNodeOrEdge(const QString &lineTemplate) const override;
+		QString generateNodeClass(const QString &classTemplate) override;
+		QString generateEdgeClass(const QString &classTemplate) const override;
+		QString generateResourceLine(const QString &resourceTemplate) const override;
 
 	private:
 		void generateContainerStuff(QString &classTemplate) const;

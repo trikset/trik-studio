@@ -39,18 +39,19 @@ class QRGUI_MODELS_EXPORT AbstractModel : public QAbstractItemModel, public Mode
 	Q_OBJECT
 
 public:
-	virtual ~AbstractModel();
+	~AbstractModel() override;
 	AbstractModel(const EditorManagerInterface &editorManagerInterface);
-	virtual QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
-	virtual int rowCount(const QModelIndex &parent = QModelIndex()) const;
-	virtual int columnCount(const QModelIndex &parent = QModelIndex()) const;
-	virtual QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const;
-	virtual QModelIndex parent(const QModelIndex &index) const;
-	virtual Qt::ItemFlags flags(const QModelIndex &index) const;
-	virtual Qt::DropActions supportedDropActions() const;
-	virtual QStringList mimeTypes() const;
+	QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
+	int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+	int columnCount(const QModelIndex &parent = QModelIndex()) const override;
+	QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const override;
+	QModelIndex parent(const QModelIndex &index) const override;
+	Qt::ItemFlags flags(const QModelIndex &index) const override;
+	Qt::DropActions supportedDropActions() const override;
+	QStringList mimeTypes() const override;
 	virtual qReal::details::ModelsAssistInterface* modelAssistInterface() const = 0;
-	bool dropMimeData(const QMimeData *data, Qt::DropAction action, int row, int column, const QModelIndex &parent);
+	bool dropMimeData(const QMimeData *data, Qt::DropAction action, int row,
+						int column, const QModelIndex &parent) override;
 
 	/// Creates element described by the given parameters set.
 	/// @param elementInfo Element properties container describing element that must be created.

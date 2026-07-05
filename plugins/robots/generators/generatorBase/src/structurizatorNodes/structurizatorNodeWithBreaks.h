@@ -32,9 +32,9 @@ public:
 	QList<IntermediateStructurizatorNode *> restBranches() const;
 
 	void setRestBranches(const QList<IntermediateStructurizatorNode *> &restBranches);
-	bool analyzeBreak();
-	Type type() const;
-	qReal::Id firstId() const;
+	bool analyzeBreak() override;
+	Type type() const override;
+	qReal::Id firstId() const override;
 private:
 	IntermediateStructurizatorNode *mCondition;
 	QList<IntermediateStructurizatorNode *> mExitBranches;

@@ -38,7 +38,7 @@ class ModelExplorer : public QTreeView, public EditorInterface
 
 public:
 	explicit ModelExplorer(QWidget *parent = nullptr);
-	~ModelExplorer();
+	~ModelExplorer() override;
 
 	/// Configures models explorer to use given external system components.
 	void initialize(Controller &controller, const models::Models &models, details::ModelsAssistInterface &model);

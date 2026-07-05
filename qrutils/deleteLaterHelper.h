@@ -38,7 +38,7 @@ private:
 	{
 	}
 
-	~DeleteLaterHelper()
+	~DeleteLaterHelper() override
 	{
 		delete mToDelete;
 	}

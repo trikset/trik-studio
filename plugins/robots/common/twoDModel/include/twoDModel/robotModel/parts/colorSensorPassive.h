@@ -41,7 +41,7 @@ public:
 			, const kitBase::robotModel::PortInfo &port
 			, engine::TwoDModelEngineInterface &engine);
 
-	void read();
+	void read() override;
 
 private:
 	engine::TwoDModelEngineInterface &mEngine;

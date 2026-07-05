@@ -30,16 +30,16 @@ class ReshapeEdgeCommand : public EdgeElementCommand, public qReal::commands::Tr
 public:
 	ReshapeEdgeCommand(const EdgeElement *edge);
 	ReshapeEdgeCommand(const EditorViewScene *scene, const Id &id);
-	virtual ~ReshapeEdgeCommand() {}
+	~ReshapeEdgeCommand() override {}
 
-	virtual void startTracking();
-	virtual void stopTracking();
+	void startTracking() override;
+	void stopTracking() override;
 
 	bool somethingChanged() const;
 
 protected:
-	bool execute();
-	bool restoreState();
+	bool execute() override;
+	bool restoreState() override;
 
 private:
 	void saveConfiguration(QPolygonF &target, Id &src, Id &dst, QPointF &pos, qreal &fromPort, qreal &toPort);

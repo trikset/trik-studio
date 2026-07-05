@@ -28,10 +28,10 @@ class EdgeElementCommand : public ElementCommand
 public:
 	EdgeElementCommand(const EditorViewScene *scene, const Id &id);
 	EdgeElementCommand(const EditorView *view, const Id &id);
-	virtual ~EdgeElementCommand();
+	~EdgeElementCommand() override;
 
 protected:
-	virtual bool reinitElement();
+	bool reinitElement() override;
 
 	EdgeElement *mEdge {};
 };

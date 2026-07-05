@@ -44,7 +44,7 @@ class ReferenceList : public QDialog
 public:
 	ReferenceList(qReal::MainWindow *mainWindow, const QPersistentModelIndex &index
 			, const QString &refType, const QStringList &currentValue, int role, QWidget *parent = nullptr);
-	~ReferenceList();
+	~ReferenceList() override;
 
 public Q_SLOTS:
 	void activateElement(QListWidgetItem *);

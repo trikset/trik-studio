@@ -35,7 +35,7 @@ public:
 			, const qReal::Id &id
 			, QObject *parent = nullptr);
 
-	virtual ~AbstractSimpleGenerator();
+	~AbstractSimpleGenerator() override;
 
 	/// Returns a reference to repository used by this generator.
 	const qrRepo::RepoApi &repo() const;

@@ -55,7 +55,7 @@ public:
 			, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
 			, lua::LuaProcessor &luaProcessor);
 
-	virtual ~GeneratorFactoryBase();
+	~GeneratorFactoryBase() override;
 
 	virtual void initialize();
 

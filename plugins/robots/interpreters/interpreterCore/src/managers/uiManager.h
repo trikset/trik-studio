@@ -50,7 +50,7 @@ public:
 			, kitBase::EventsForKitPluginInterface &kitPluginEvents
 			, kitBase::robotModel::RobotModelManagerInterface &robotModelManager);
 
-	~UiManager();
+	~UiManager() override;
 
 	/// Embeds the given widget into main window`s left dock panel
 	void placeDevicesConfig(QWidget *devicesWidget);

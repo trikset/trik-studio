@@ -27,8 +27,8 @@ class QRGUI_DIALOGS_EXPORT ManagedClosableDialog : public QDialog
 
 public:
 	explicit ManagedClosableDialog(QWidget *parent = nullptr, bool isClosable = true);
-	void closeEvent(QCloseEvent *event);
-	void keyPressEvent(QKeyEvent *event);
+	void closeEvent(QCloseEvent *event) override;
+	void keyPressEvent(QKeyEvent *event) override;
 
 public Q_SLOTS:
 	void setClosability(bool isClosable);

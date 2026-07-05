@@ -62,9 +62,9 @@ public:
 	int itemZValue();
 	static int sign(int x);
 	static qreal length(QPointF point1, QPointF point2);
-	virtual QRectF calcNecessaryBoundingRect() const;
-	virtual void drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr) = 0;
-	virtual void drawExtractionForItem(QPainter* painter);
+	QRectF calcNecessaryBoundingRect() const override;
+	void drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr) override = 0;
+	void drawExtractionForItem(QPainter* painter) override;
 	virtual void drawScalingRects(QPainter* painter);
 
 	static void swap(qreal &x, qreal &y);
@@ -82,7 +82,7 @@ public:
 	//for save to xml
 	QString setScaleForDoc(int i, QRect rect);
 	QString setSingleScaleForDoc(int i, int x, int y);
-	virtual void setXandY(QDomElement& dom, const QRectF &rect);
+	void setXandY(QDomElement& dom, const QRectF &rect) override;
 
 	QPair<QDomElement, Item::DomElementTypes> generateDom(QDomDocument &document, QPoint topLeftPicture);
 	virtual QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document

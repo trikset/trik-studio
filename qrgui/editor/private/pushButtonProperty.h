@@ -30,7 +30,7 @@ class PushButtonPropertyManager : public QtAbstractPropertyManager
 	Q_OBJECT
 public:
 	PushButtonPropertyManager(QObject *parent = nullptr);
-	~PushButtonPropertyManager();
+	~PushButtonPropertyManager() override;
 
 	bool value(const QtProperty *property) const;
 
@@ -41,10 +41,10 @@ Q_SIGNALS:
 	void buttonClicked(QtProperty *property);
 
 protected:
-	QString valueText(const QtProperty *property) const;
-	QIcon valueIcon(const QtProperty *property) const;
-	virtual void initializeProperty(QtProperty *){}
-	virtual void uninitializeProperty(QtProperty *){}
+	QString valueText(const QtProperty *property) const override;
+	QIcon valueIcon(const QtProperty *property) const override;
+	void initializeProperty(QtProperty *) override{}
+	void uninitializeProperty(QtProperty *) override{}
 private:
 	class {} *d_ptr;
 	Q_DISABLE_COPY(PushButtonPropertyManager)
@@ -57,12 +57,12 @@ class PushButtonFactory : public QtAbstractEditorFactory<PushButtonPropertyManag
 
 public:
 	PushButtonFactory(QObject *parent = nullptr);
-	~PushButtonFactory();
+	~PushButtonFactory() override;
 
 protected:
-	void connectPropertyManager(PushButtonPropertyManager *manager);
-	QWidget *createEditor(PushButtonPropertyManager *manager, QtProperty *property, QWidget *parent);
-	void disconnectPropertyManager(PushButtonPropertyManager *manager);
+	void connectPropertyManager(PushButtonPropertyManager *manager) override;
+	QWidget *createEditor(PushButtonPropertyManager *manager, QtProperty *property, QWidget *parent) override;
+	void disconnectPropertyManager(PushButtonPropertyManager *manager) override;
 
 private:
 	class {} *d_ptr;

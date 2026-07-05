@@ -30,7 +30,7 @@ class QRGUI_TOOL_PLUGIN_INTERFACE_EXPORT ProjectManagementInterface : public QOb
 	Q_OBJECT
 
 public:
-	virtual ~ProjectManagementInterface() {}
+	~ProjectManagementInterface() override {}
 
 public Q_SLOTS:
 	/// Tries to open an existing file, prompts you to save changes, if any. Checks for the presence of a file and the

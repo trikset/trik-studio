@@ -37,12 +37,12 @@ class SensorViewer : public QGraphicsView
 
 public:
 	explicit SensorViewer(QWidget *parent = nullptr);
-	~SensorViewer();
+	~SensorViewer() override;
 
 	/// @note All intervals in ms
 	void configureUserOptions(int fpsDelay, int autoScaleDelay, int textInfoUpdateDelay);
 
-	void resizeEvent(QResizeEvent *event = nullptr);
+	void resizeEvent(QResizeEvent *event = nullptr) override;
 
 public Q_SLOTS:
 	void setTimeline(utils::TimelineInterface &timeline);
@@ -59,11 +59,11 @@ public Q_SLOTS:
 
 protected:
 	void drawNextFrame();
-	void drawBackground(QPainter *painter, const QRectF &rect);
+	void drawBackground(QPainter *painter, const QRectF &rect) override;
 	/// Renders hint with value under cursor
-	void mouseMoveEvent(QMouseEvent *event);
-	void leaveEvent(QEvent *);
-	void mouseDoubleClickEvent(QMouseEvent *event);
+	void mouseMoveEvent(QMouseEvent *event) override;
+	void leaveEvent(QEvent *) override;
+	void mouseDoubleClickEvent(QMouseEvent *event) override;
 
 private Q_SLOTS:
 	void visualTimerEvent();

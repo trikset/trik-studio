@@ -39,21 +39,21 @@ public:
 	/// Creating new instance of command in usial style
 	ResizeCommand(const EditorViewScene *scene, const Id &id
 			, const QRectF &oldGeometry, const QRectF &newGeometry);
-	virtual ~ResizeCommand() {}
+	~ResizeCommand() override {}
 
 	static ResizeCommand *create(const NodeElement * const element, const QRectF &newContents
 			, QPointF newPos, const QRectF &oldContents, QPointF oldPos);
 
-	virtual void startTracking();
-	virtual void stopTracking();
-	virtual void rejectTracking();
+	void startTracking() override;
+	void stopTracking() override;
+	void rejectTracking() override;
 
 	QRectF geometryBeforeDrag() const;
 	bool modificationsHappened() const;
 
 protected:
-	bool execute();
-	bool restoreState();
+	bool execute() override;
+	bool restoreState() override;
 
 private:
 	void resize(NodeElement * const element, const QRectF &geometry);

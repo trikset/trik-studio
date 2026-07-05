@@ -28,11 +28,11 @@ class ArrangeLinksCommand : public ElementCommand
 public:
 	ArrangeLinksCommand(const EditorViewScene *scene, const Id &id, bool needAdjusting = false);
 	ArrangeLinksCommand(const EditorView *view, const Id &id, bool needAdjusting = false);
-	virtual ~ArrangeLinksCommand();
+	~ArrangeLinksCommand() override;
 
 protected:
-	virtual bool execute();
-	virtual bool restoreState();
+	bool execute() override;
+	bool restoreState() override;
 
 private:
 	void arrange();

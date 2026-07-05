@@ -40,7 +40,7 @@ public:
 			, QWidget *parent = nullptr);
 
 	/// Destructor.
-	~EdgePropertiesDialog();
+	~EdgePropertiesDialog() override;
 
 Q_SIGNALS:
 	/// Emitted when edge`s properties were modified and everything must be reloaded.

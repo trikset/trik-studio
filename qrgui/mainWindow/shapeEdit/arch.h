@@ -29,15 +29,15 @@ public:
 	void setStartAngle(int start);
 	void setSpanAngle(int span);
 
-	virtual QRectF boundingRect() const;
-	virtual QRectF sceneBoundingRectCoord(QPoint topLeftPicture);
-	virtual void drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr);
-	virtual void drawExtractionForItem(QPainter* painter);
-	virtual void drawScalingRects(QPainter* painter);
-	virtual void resizeItem(QGraphicsSceneMouseEvent *event);
+	QRectF boundingRect() const override;
+	QRectF sceneBoundingRectCoord(QPoint topLeftPicture) override;
+	void drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr) override;
+	void drawExtractionForItem(QPainter* painter) override;
+	void drawScalingRects(QPainter* painter) override;
+	void resizeItem(QGraphicsSceneMouseEvent *event) override;
 
-	virtual QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document
-			, const QPoint &topLeftPicture);
+	QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document
+			, const QPoint &topLeftPicture) override;
 
 private:
 	int mStartAngle;

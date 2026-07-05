@@ -32,7 +32,7 @@ public:
 	BaseGraphTransformationUnit(LogicalModelAssistInterface &logicalModelApi
 			, GraphicalModelAssistInterface &graphicalModelApi
 			, gui::MainWindowInterpretersInterface &interpretersInterface);
-	~BaseGraphTransformationUnit();
+	~BaseGraphTransformationUnit() override;
 
 	/// True if match was found
 	virtual bool findMatch() = 0;

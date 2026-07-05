@@ -26,13 +26,13 @@ class PreferencesDebuggerPage : public qReal::gui::PreferencesPage
 
 public:
 	explicit PreferencesDebuggerPage(QWidget *parent = nullptr);
-	~PreferencesDebuggerPage();
+	~PreferencesDebuggerPage() override;
 
-	void save();
-	virtual void restoreSettings();
+	void save() override;
+	void restoreSettings() override;
 
 protected:
-	void changeEvent(QEvent *e);
+	void changeEvent(QEvent *e) override;
 
 private:
 	Ui::PreferencesDebuggerPage *mUi;

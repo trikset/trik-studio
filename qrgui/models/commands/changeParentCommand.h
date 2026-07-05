@@ -32,8 +32,8 @@ public:
 			, QPointF newPosition);
 
 protected:
-	bool execute();
-	bool restoreState();
+	bool execute() override;
+	bool restoreState() override;
 
 private:
 	void changeParent(const Id &parent, QPointF position);

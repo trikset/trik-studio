@@ -30,7 +30,7 @@ class Palette : public QWidget
 
 public:
 	explicit Palette(QWidget *parent = nullptr);
-	~Palette();
+	~Palette() override;
 
 	/// Returns a pointer to 'none' tool that triggered when no other tool selected.
 	const QAction &cursorAction() const;

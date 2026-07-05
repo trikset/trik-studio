@@ -31,6 +31,6 @@ Q_SIGNALS:
 	void deleteItem();
 
 protected:
-	virtual void keyPressEvent(QKeyEvent *event);
-	virtual void wheelEvent(QWheelEvent *event);
+	void keyPressEvent(QKeyEvent *event) override;
+	void wheelEvent(QWheelEvent *event) override;
 };

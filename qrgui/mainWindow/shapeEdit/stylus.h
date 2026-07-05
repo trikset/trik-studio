@@ -30,19 +30,19 @@ public:
 	void addLine(qreal x2, qreal y2);
 	void addLineInList(Line *line);
 
-	virtual QRectF boundingRect() const;
-	virtual QPainterPath shape() const;
-	virtual void drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr);
-	virtual void drawExtractionForItem(QPainter* painter);
-	virtual void drawFieldForResizeItem(QPainter* painter);
-	virtual void drawScalingRects(QPainter* painter);
-	virtual void setPenStyle(const QString &text);
+	QRectF boundingRect() const override;
+	QPainterPath shape() const override;
+	void drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr) override;
+	void drawExtractionForItem(QPainter* painter) override;
+	void drawFieldForResizeItem(QPainter* painter) override;
+	void drawScalingRects(QPainter* painter) override;
+	void setPenStyle(const QString &text) override;
 	virtual void setPenWidth(int width);
-	virtual void setPenColor(const QString &text);
-	virtual void setBrushStyle(const QString &text);
-	virtual void setBrushColor(const QString &text);
-	virtual QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document
-			, const QPoint &topLeftPicture);
+	void setPenColor(const QString &text) override;
+	void setBrushStyle(const QString &text) override;
+	void setBrushColor(const QString &text) override;
+	QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document
+			, const QPoint &topLeftPicture) override;
 
 private:
 	qreal mTmpX1;

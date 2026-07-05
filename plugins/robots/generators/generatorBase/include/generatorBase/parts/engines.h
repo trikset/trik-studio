@@ -30,11 +30,11 @@ public:
 	Engines(const QStringList &pathsToTemplates
 			, const simple::Binding::ConverterInterface *outputPortConverter
 			, const simple::Binding::MultiConverterInterface *outputPortsConverter);
-	virtual ~Engines();
+	~Engines() override;
 
-	virtual void reinit();
-	virtual QString initCode();
-	virtual QString terminateCode();
+	void reinit() override;
+	QString initCode() override;
+	QString terminateCode() override;
 
 	/// Marks given output port used in resulting program. Adds init/termnate code for it.
 	void registerUsageOnPort(const QString &outputPort);
