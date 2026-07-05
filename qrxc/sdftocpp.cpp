@@ -121,7 +121,7 @@ QString SdfRenderer::render()
 		}
 		node = node.nextSibling();
 	}
-	this->painter = 0;
+	this->painter = nullptr;
 	return toGenerator;
 }
 

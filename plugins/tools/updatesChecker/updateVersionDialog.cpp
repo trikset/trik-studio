@@ -25,5 +25,5 @@ bool UpdateVersionDialog::promptUpdate(QWidget *parent)
 	const QString laterButtonText = QObject::tr("Later");
 
 	return 0 == QMessageBox::information(parent, QObject::tr("Yeah!"), message
-			, updateButtonText, laterButtonText, 0, 1);
+			, updateButtonText, laterButtonText, nullptr, 1);
 }

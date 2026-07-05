@@ -28,7 +28,7 @@ using namespace qReal;
 using namespace qReal::gui::editor;
 
 EditorViewMViface::EditorViewMViface(EditorView *view, EditorViewScene *scene)
-	: QAbstractItemView(0)
+	: QAbstractItemView(nullptr)
 	, mScene(scene)
 	, mView(view)
 	, mGraphicalAssistApi(nullptr)

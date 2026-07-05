@@ -34,7 +34,7 @@ public:
 			, GeneratorCustomizer &customizer
 			, PrimaryControlFlowValidator &validator
 			, const qReal::Id &diagramId
-			, QObject *parent = 0
+			, QObject *parent = nullptr
 			, bool isThisDiagramMain = true
 			);
 

@@ -30,7 +30,7 @@ class QRUTILS_EXPORT ColorListEditor : public QComboBox
 
 public:
 	/// @param minimalistic If true then only colors will be shown; otherwise color will be written by text.
-	explicit ColorListEditor(QWidget *widget = 0, bool minimalistic = false);
+	explicit ColorListEditor(QWidget *widget = nullptr, bool minimalistic = false);
 
 Q_SIGNALS:
 	/// Emitted when user picked another color.

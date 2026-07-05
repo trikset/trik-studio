@@ -28,7 +28,7 @@ class QRGUI_DIALOGS_EXPORT SuggestToCreateDiagramDialog : public ManagedClosable
 
 public:
 	explicit SuggestToCreateDiagramDialog(const EditorManagerInterface &editorManager
-			, QWidget *parent = 0, bool isClosable = true);
+			, QWidget *parent = nullptr, bool isClosable = true);
 
 Q_SIGNALS:
 	/// Emitted when user selects some item in diagrams list wishing thus to create

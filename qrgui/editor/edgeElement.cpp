@@ -827,7 +827,7 @@ NodeElement * EdgeElement::otherSide(const NodeElement *node) const
 		return mSrc;
 	}
 
-	return 0;
+	return nullptr;
 }
 
 void EdgeElement::reconnectToNearestPorts(bool reconnectSrc, bool reconnectDst)
