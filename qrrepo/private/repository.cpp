@@ -573,7 +573,7 @@ QMapIterator<QString, QVariant> Repository::propertiesIterator(const qReal::Id &
 
 void Repository::createGraphicalPart(const qReal::Id &id, int partIndex)
 {
-	GraphicalObject * const graphicalObject = dynamic_cast<GraphicalObject *>(mObjects[id]);
+	auto * const graphicalObject = dynamic_cast<GraphicalObject *>(mObjects[id]);
 	if (!graphicalObject) {
 		throw Exception("Trying to create graphical part for non-graphical object");
 	}
@@ -583,7 +583,7 @@ void Repository::createGraphicalPart(const qReal::Id &id, int partIndex)
 
 QList<int> Repository::graphicalParts(const qReal::Id &id) const
 {
-	GraphicalObject * const graphicalObject = dynamic_cast<GraphicalObject *>(mObjects[id]);
+	auto * const graphicalObject = dynamic_cast<GraphicalObject *>(mObjects[id]);
 	if (!graphicalObject) {
 		return QList<int>();
 	}
@@ -593,7 +593,7 @@ QList<int> Repository::graphicalParts(const qReal::Id &id) const
 
 QVariant Repository::graphicalPartProperty(const qReal::Id &id, int partIndex, const QString &propertyName) const
 {
-	GraphicalObject * const graphicalObject = dynamic_cast<GraphicalObject *>(mObjects[id]);
+	auto * const graphicalObject = dynamic_cast<GraphicalObject *>(mObjects[id]);
 	if (!graphicalObject) {
 		throw Exception("Trying to obtain graphical part property for non-graphical item");
 	}
@@ -608,7 +608,7 @@ void Repository::setGraphicalPartProperty(
 		, const QVariant &value
 		)
 {
-	GraphicalObject * const graphicalObject = dynamic_cast<GraphicalObject *>(mObjects[id]);
+	auto * const graphicalObject = dynamic_cast<GraphicalObject *>(mObjects[id]);
 	if (!graphicalObject) {
 		throw Exception("Trying to obtain graphical part property for non-graphical item");
 	}

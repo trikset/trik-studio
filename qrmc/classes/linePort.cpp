@@ -49,7 +49,7 @@ void LinePort::initCoordinate(ScalableCoordinate &field, QString coordinate, int
 
 Port *LinePort::clone() const
 {
-	LinePort *result = new LinePort();
+	auto *result = new LinePort();
 	result->mEndX = mEndX;
 	result->mEndY = mEndY;
 	result->mStartX = mStartX;

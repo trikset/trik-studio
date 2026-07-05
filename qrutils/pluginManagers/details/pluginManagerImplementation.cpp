@@ -60,7 +60,7 @@ QList<QObject *> PluginManagerImplementation::loadAllPlugins()
 
 QPair<QObject *, QString> PluginManagerImplementation::loadPluginByName(const QString &pluginName)
 {
-	QPluginLoader * const loader = new QPluginLoader(mPluginsDir.absoluteFilePath(pluginName), qApp);
+	auto * const loader = new QPluginLoader(mPluginsDir.absoluteFilePath(pluginName), qApp);
 	loader->load();
 	QObject * const plugin = loader->instance();
 

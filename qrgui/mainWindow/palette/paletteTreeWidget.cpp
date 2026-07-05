@@ -79,7 +79,7 @@ void PaletteTreeWidget::addGroups(QList<QPair<QString, QList<PaletteElement>>> &
 
 	int expandedCount = 0;
 	for (auto &group : groups) {
-		QTreeWidgetItem * const item = new QTreeWidgetItem;
+		auto * const item = new QTreeWidgetItem;
 		item->setText(0, group.first);
 		item->setToolTip(0, descriptions[group.first]);
 
@@ -103,8 +103,8 @@ void PaletteTreeWidget::addGroups(QList<QPair<QString, QList<PaletteElement>>> &
 
 void PaletteTreeWidget::addItemType(const PaletteElement &data, QTreeWidgetItem *parent)
 {
-	QTreeWidgetItem *leaf = new QTreeWidgetItem;
-	DraggableElement *element = new DraggableElement(mMainWindow, data, mPaletteTree.iconsView(), *mEditorManager);
+	auto *leaf = new QTreeWidgetItem;
+	auto *element = new DraggableElement(mMainWindow, data, mPaletteTree.iconsView(), *mEditorManager);
 
 	mElementsSet.insert(data);
 	mPaletteElements.insert(data.id(), element);
@@ -126,18 +126,18 @@ void PaletteTreeWidget::addItemsRow(QList<PaletteElement> const &items, QTreeWid
 	}
 
 	for (QList<PaletteElement>::ConstIterator it = items.begin(); it != items.end();) {
-		QWidget *field = new QWidget;
-		QHBoxLayout *layout = new QHBoxLayout;
+		auto *field = new QWidget;
+		auto *layout = new QHBoxLayout;
 		int count = mPaletteTree.itemsCountInARow();
 		for (; it != items.end() && --count > 0; ++it) {
-			DraggableElement *element = new DraggableElement(mMainWindow, *it, true, *mEditorManager);
+			auto *element = new DraggableElement(mMainWindow, *it, true, *mEditorManager);
 			element->setToolTip((*it).description());
 			layout->addWidget(element, count > 0 ? 50 : 0);
 		}
 
 		field->setLayout(layout);
 		field->setMinimumHeight(80);
-		QTreeWidgetItem *leaf = new QTreeWidgetItem;
+		auto *leaf = new QTreeWidgetItem;
 		parent->addChild(leaf);
 		if (mEditable) {
 			leaf->setFlags(leaf->flags() | Qt::ItemIsEditable);
@@ -152,7 +152,7 @@ void PaletteTreeWidget::mousePressEvent(QMouseEvent *event)
 	if (event->button() == Qt::RightButton) {
 		if (mEditorManager->isInterpretationMode()) {
 			QMenu menu;
-			ChooseTypeDialog *chooseTypeDialog = new ChooseTypeDialog(mPaletteTree.currentEditor()
+			auto *chooseTypeDialog = new ChooseTypeDialog(mPaletteTree.currentEditor()
 					, *mEditorManager, &mMainWindow);
 			QAction * const addNodePaletteAction = menu.addAction(tr("Add Entity"));
 			QAction * const addEdgePaletteAction = menu.addAction(tr("Add Relastionship"));
@@ -265,7 +265,7 @@ void PaletteTreeWidget::filter(const QRegExp &regexp)
 {
 	QHash<QTreeWidgetItem *, int> visibleCount;
 	traverse([this, &regexp, &visibleCount](QTreeWidgetItem *item) {
-		if (DraggableElement * const element = dynamic_cast<DraggableElement *>(itemWidget(item, 0))) {
+		if (auto * const element = dynamic_cast<DraggableElement *>(itemWidget(item, 0))) {
 			const QString text = element->text();
 			const bool itemDisabledBySystem = mItemsVisible.contains(item) && !mItemsVisible[item];
 			item->setHidden(itemDisabledBySystem || !text.contains(regexp));

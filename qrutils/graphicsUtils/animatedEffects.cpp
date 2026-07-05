@@ -28,7 +28,7 @@ void AnimatedEffects::highlight(QGraphicsItem * const item)
 		return;
 	}
 
-	QVariantAnimation *const animation = new QVariantAnimation;
+	auto *const animation = new QVariantAnimation;
 	animation->setDuration(500);
 	animation->setStartValue(1.0);
 	animation->setEndValue(0.0);
@@ -47,10 +47,10 @@ void AnimatedEffects::disappear(QWidget *widget, int duration)
 		return;
 	}
 
-	QGraphicsOpacityEffect * const opacityEffect = new QGraphicsOpacityEffect(widget);
+	auto * const opacityEffect = new QGraphicsOpacityEffect(widget);
 	opacityEffect->setOpacity(1);
 	widget->setGraphicsEffect(opacityEffect);
-	QPropertyAnimation *opacityAnim = new QPropertyAnimation(opacityEffect, "opacity", widget);
+	auto *opacityAnim = new QPropertyAnimation(opacityEffect, "opacity", widget);
 	opacityAnim->setDuration(duration);
 	opacityAnim->setStartValue(opacityEffect->opacity());
 	opacityAnim->setEndValue(0);

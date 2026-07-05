@@ -44,7 +44,7 @@ void PreferencesDialog::init()
 {
 	PreferencesPage *behaviourPage = new PreferencesBehaviourPage(mUi->pageContentWidget);
 	// Debugger page removed due to #736
-	PreferencesMiscellaneousPage *miscellaneousPage = new PreferencesMiscellaneousPage(mUi->pageContentWidget);
+	auto *miscellaneousPage = new PreferencesMiscellaneousPage(mUi->pageContentWidget);
 	PreferencesPage *editorPage = new PreferencesEditorPage(mUi->pageContentWidget);
 
 	connect(mUi->listWidget, &QListWidget::clicked, this, &PreferencesDialog::chooseTab);

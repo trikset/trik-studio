@@ -339,7 +339,7 @@ void ShapeEdit::save()
 		for (const Id &graphicalElement : mGraphicalElements) {
 			mEditorManager->updateShape(graphicalElement, mDocument.documentElement());
 			for (QGraphicsItem * const item : mEditorView->editorViewScene().items()) {
-				qReal::gui::editor::NodeElement * const element = dynamic_cast<qReal::gui::editor::NodeElement *>(item);
+				auto * const element = dynamic_cast<qReal::gui::editor::NodeElement *>(item);
 				if (element && element->id().type() == mId.type()) {
 					element->updateShape(mDocument.documentElement());
 				}
@@ -666,7 +666,7 @@ QMap<QString, VisibilityConditionsDialog::PropertyInfo> ShapeEdit::getProperties
 
 	QMap<QString, PropertyInfo> result;
 
-	qrRepo::RepoApi *repoApi = dynamic_cast<qrRepo::RepoApi *>(&mModel->mutableApi());
+	auto *repoApi = dynamic_cast<qrRepo::RepoApi *>(&mModel->mutableApi());
 	qReal::IdList enums = repoApi->elementsByType("MetaEntityEnum");
 
 	for (const qReal::Id &child : repoApi->children(mModel->idByIndex(mIndex))) {
@@ -708,7 +708,7 @@ QStringList ShapeEdit::getPortTypes() const
 	result << "NonTyped";
 
 	if (mUseTypedPorts) {
-		qrRepo::RepoApi *repoApi = dynamic_cast<qrRepo::RepoApi *>(&mModel->mutableApi());
+		auto *repoApi = dynamic_cast<qrRepo::RepoApi *>(&mModel->mutableApi());
 		if (repoApi) {
 			for (const qReal::Id &port : repoApi->elementsByType("MetaEntityPort")) {
 				if (repoApi->isLogicalElement(port)) {

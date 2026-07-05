@@ -45,7 +45,7 @@ void GraphicalPartModel::reinit()
 
 QVariant GraphicalPartModel::data(const QModelIndex &index, int role) const
 {
-	const GraphicalPartModelItem * const item = static_cast<const GraphicalPartModelItem *>(index.internalPointer());
+	const auto * const item = static_cast<const GraphicalPartModelItem *>(index.internalPointer());
 	switch (role) {
 	case positionRole:
 		return mRepoApi.graphicalPartProperty(item->id(), item->index(), "position");
@@ -62,7 +62,7 @@ bool GraphicalPartModel::setData(const QModelIndex &index, const QVariant &value
 		return false;
 	}
 
-	const GraphicalPartModelItem * const item = static_cast<const GraphicalPartModelItem *>(index.internalPointer());
+	const auto * const item = static_cast<const GraphicalPartModelItem *>(index.internalPointer());
 	switch (role) {
 	case positionRole:
 		mRepoApi.setGraphicalPartProperty(item->id(), item->index(), "position", value);
@@ -122,7 +122,7 @@ QModelIndex GraphicalPartModel::parent(const QModelIndex &index) const
 		return QModelIndex();
 	}
 
-	const GraphicalPartModelItem * const item = static_cast<const GraphicalPartModelItem *>(index.internalPointer());
+	const auto * const item = static_cast<const GraphicalPartModelItem *>(index.internalPointer());
 	const int row = mIdPositions[item->id()];
 	return createIndex(row, 0, static_cast<void *>(nullptr));
 }

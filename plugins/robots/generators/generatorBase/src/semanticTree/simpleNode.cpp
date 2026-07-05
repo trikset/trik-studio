@@ -51,7 +51,7 @@ void SimpleNode::bindToSyntheticConstruction(SimpleNode::SyntheticBlockType type
 
 SimpleNode *SimpleNode::createBreakNode(QObject *parent)
 {
-	SimpleNode *breakNode = new SimpleNode(qReal::Id(), parent);
+	auto *breakNode = new SimpleNode(qReal::Id(), parent);
 	breakNode->bindToSyntheticConstruction(SyntheticBlockType::breakNode);
 	return breakNode;
 }

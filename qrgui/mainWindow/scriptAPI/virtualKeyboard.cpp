@@ -40,7 +40,7 @@ void VirtualKeyboard::printValue(const QString &value, int duration)
 {
 	const int charDuration = duration / value.length();
 	for (QChar ch : value) {
-		QTimer *timer = new QTimer(this);
+		auto *timer = new QTimer(this);
 		timer->setInterval(charDuration);
 		timer->setSingleShot(true);
 		connect(timer, &QTimer::timeout, &mScriptAPI, &ScriptAPI::breakWaiting);

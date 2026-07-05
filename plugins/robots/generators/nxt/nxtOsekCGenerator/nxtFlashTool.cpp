@@ -187,7 +187,7 @@ void NxtFlashTool::information(const QString &message)
 	if (QThread::currentThread() == qApp->thread()) {
 		// We are currently in GUI thread, simply calling method of error reporter.
 		mErrorReporter.addInformation(message);
-	} else if (QObject * const object = dynamic_cast<QObject *>(&mErrorReporter)) {
+	} else if (auto * const object = dynamic_cast<QObject *>(&mErrorReporter)) {
 		// We are not in GUI thread, calling of error reporter asynchroniously.
 		QMetaObject::invokeMethod(object, "addInformation", Q_ARG(QString, message));
 	} else {
@@ -200,7 +200,7 @@ void NxtFlashTool::error(const QString &message)
 	if (QThread::currentThread() == qApp->thread()) {
 		// We are currently in GUI thread, simply calling method of error reporter.
 		mErrorReporter.addError(message);
-	} else if (QObject * const object = dynamic_cast<QObject *>(&mErrorReporter)) {
+	} else if (auto * const object = dynamic_cast<QObject *>(&mErrorReporter)) {
 		// We are not in GUI thread, calling of error reporter asynchroniously.
 		QMetaObject::invokeMethod(object, "addError", Q_ARG(QString, message));
 	} else {

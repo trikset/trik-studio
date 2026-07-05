@@ -23,7 +23,7 @@ bool PortType::init(const QDomElement &element, const QString &context)
 
 Type * PortType::clone() const
 {
-	PortType *result = new PortType();
+	auto *result = new PortType();
 	Type::copyFields(result);
 	return result;
 }

@@ -24,7 +24,7 @@ CreateAndUpdatePatternCommand::CreateAndUpdatePatternCommand(EditorViewScene &sc
 	: CreatePatternCommand(models, pattern)
 	, mScene(scene)
 {
-	InsertIntoEdgeCommand * const insertCommand = new InsertIntoEdgeCommand(mScene, mModels
+	auto * const insertCommand = new InsertIntoEdgeCommand(mScene, mModels
 			, mCreatedNodes[mPattern.inNode()]
 			, mCreatedNodes[mPattern.outNode()]
 			, pattern.graphicalParent(), pattern.position()

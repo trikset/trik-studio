@@ -42,7 +42,7 @@ void PaletteTree::initUi()
 {
 	mLayout = new QVBoxLayout(this);
 	mLayout->setSpacing(0);
-	QHBoxLayout * const controlButtonsLayout = new QHBoxLayout;
+	auto * const controlButtonsLayout = new QHBoxLayout;
 	controlButtonsLayout->setSpacing(0);
 
 	mComboBox = new QComboBox;
@@ -50,7 +50,7 @@ void PaletteTree::initUi()
 	mLayout->addWidget(mComboBox);
 	mLayout->addLayout(controlButtonsLayout);
 
-	ui::SearchLineEdit * const searchField = new ui::SearchLineEdit(this);
+	auto * const searchField = new ui::SearchLineEdit(this);
 	connect(searchField, &ui::SearchLineEdit::textChanged, this, &PaletteTree::onSearchTextChanged);
 	mLayout->addWidget(searchField);
 	mTemporarySpacer = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -97,7 +97,7 @@ void PaletteTree::addEditorElements(EditorManagerInterface &editorManagerProxy, 
 
 	mComboBox->addItem(mEditorManager->friendlyName(diagram));
 
-	PaletteTreeWidgets *editorTree = new PaletteTreeWidgets(*this, mMainWindow, *mEditorManager, editor, diagram);
+	auto *editorTree = new PaletteTreeWidgets(*this, mMainWindow, *mEditorManager, editor, diagram);
 	editorTree->hide();
 
 	mEditorsTrees.push_back(editorTree);

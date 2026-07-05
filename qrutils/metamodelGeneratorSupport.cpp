@@ -75,7 +75,7 @@ void MetamodelGeneratorSupport::loadPlugin(const QString &directoryName
 
 	const QString normalizeDirName = metamodelName.at(0).toUpper() + metamodelName.mid(1);
 
-	QProgressBar * const progress = new QProgressBar(mMainWindowInterface->windowWidget());
+	auto * const progress = new QProgressBar(mMainWindowInterface->windowWidget());
 	progress->show();
 
 	QApplication::processEvents();

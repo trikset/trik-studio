@@ -43,7 +43,7 @@ ExerciseExportDialog::ExerciseExportDialog(QWidget *parent)
 	mSimulationSettingsReadOnlyCheckBox->setChecked(
 			qReal::SettingsManager::value("simulationSettingsReadOnlyDefault").toBool());
 
-	QVBoxLayout * const mainLayout = new QVBoxLayout(this);
+	auto * const mainLayout = new QVBoxLayout(this);
 
 	mainLayout->addWidget(mWorldReadOnlyCheckBox.data());
 	mainLayout->addWidget(mSensorsReadOnlyCheckBox.data());
@@ -51,15 +51,15 @@ ExerciseExportDialog::ExerciseExportDialog(QWidget *parent)
 	mainLayout->addWidget(mRobotSetupReadOnlyCheckBox.data());
 	mainLayout->addWidget(mSimulationSettingsReadOnlyCheckBox.data());
 
-	QHBoxLayout * const buttonsLayout = new QHBoxLayout();
+	auto * const buttonsLayout = new QHBoxLayout();
 
 	mainLayout->addLayout(buttonsLayout);
 
-	QPushButton * const okButton = new QPushButton(tr("Ok"), this);
+	auto * const okButton = new QPushButton(tr("Ok"), this);
 	okButton->setDefault(true);
 	connect(okButton, &QPushButton::clicked, this, &ExerciseExportDialog::accept);
 
-	QPushButton * const cancelButton = new QPushButton(tr("Cancel"), this);
+	auto * const cancelButton = new QPushButton(tr("Cancel"), this);
 	connect(cancelButton, &QPushButton::clicked, this, &ExerciseExportDialog::reject);
 
 	buttonsLayout->addWidget(okButton);

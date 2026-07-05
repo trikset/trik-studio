@@ -57,11 +57,11 @@ void ErrorReporter::updateVisibility(bool isVisible)
 
 void ErrorReporter::reportOperation(const QFuture<void> &operation, const QString &description)
 {
-	ProgressBar * const progressBar = new ProgressBar;
+	auto * const progressBar = new ProgressBar;
 	progressBar->reportOperation(operation, description);
 	progressBar->setToolTip(description);
 
-	QListWidgetItem *item = new QListWidgetItem(mErrorListWidget);
+	auto *item = new QListWidgetItem(mErrorListWidget);
 	progressBar->hide();
 
 	connect(&progressBar->currentOperation(), &QFutureWatcher<void>::started, this, [=]() {
@@ -177,7 +177,7 @@ void ErrorReporter::showError(const Error &error, ErrorListWidget * const errorL
 		mErrorList->setVisible(true);
 	}
 
-	QListWidgetItem *item = new QListWidgetItem(errorListWidget);
+	auto *item = new QListWidgetItem(errorListWidget);
 	item->setData(ErrorListWidget::positionRole, error.position().toString());
 	QString message = QString(" <font color='gray'>%1</font> <u>%2</u> %3").arg(
 			error.timestamp(), severityMessage(error), error.message()).trimmed();

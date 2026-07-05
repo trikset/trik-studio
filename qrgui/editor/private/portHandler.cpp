@@ -165,7 +165,7 @@ QPointF PortHandler::transformPortForNodeSize(const StatPoint * const port) cons
 void PortHandler::connectTemporaryRemovedLinksToPort(const IdList &temporaryRemovedLinks, const QString &direction)
 {
 	for (const Id &edgeId : temporaryRemovedLinks) {
-		EdgeElement *edge = dynamic_cast<EdgeElement *>(
+		auto *edge = dynamic_cast<EdgeElement *>(
 				static_cast<EditorViewScene *>(mNode->scene())->getElem(edgeId)
 				);
 
@@ -487,7 +487,7 @@ void PortHandler::connectLinksToPorts()
 {
 	const QList<QGraphicsItem *> items = mNode->scene()->items(mNode->boundingRect().translated(mNode->pos()));
 	for (QGraphicsItem * const item : items) {
-		EdgeElement * const edge = dynamic_cast<EdgeElement *>(item);
+		auto * const edge = dynamic_cast<EdgeElement *>(item);
 		if (edge && edge->isHanging()) {
 			edge->connectToPort();
 			return;

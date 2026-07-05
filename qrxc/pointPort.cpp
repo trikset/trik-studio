@@ -46,7 +46,7 @@ void PointPort::generateCode(OutFile &out)
 
 Port* PointPort::clone() const
 {
-	PointPort *result = new PointPort();
+	auto *result = new PointPort();
 	result->mX = mX;
 	result->mY = mY;
 	result->mType = mType;

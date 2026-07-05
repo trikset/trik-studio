@@ -51,7 +51,7 @@ void WaitForSensorBlock::timerTimeout()
 {
 	/// @todo True horror.
 	robotParts::Device * const device = mRobotModel.configuration().device(mPort);
-	robotParts::ScalarSensor * const sensor = dynamic_cast<robotParts::ScalarSensor *>(device);
+	auto * const sensor = dynamic_cast<robotParts::ScalarSensor *>(device);
 	if (sensor) {
 		sensor->read();
 	}

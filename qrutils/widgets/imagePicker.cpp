@@ -32,8 +32,8 @@ ImagePicker::ImagePicker(QWidget *parent)
 {
 	mLabel = new QLabel(this);
 	mPathEditor = new QLineEdit(this);
-	QPushButton *button = new QPushButton(style()->standardIcon(QStyle::SP_DirIcon), tr("Browse..."), this);
-	QHBoxLayout *layout = new QHBoxLayout(this);
+	auto *button = new QPushButton(style()->standardIcon(QStyle::SP_DirIcon), tr("Browse..."), this);
+	auto *layout = new QHBoxLayout(this);
 	layout->addWidget(mLabel);
 	layout->addWidget(mPathEditor);
 	layout->addWidget(button);

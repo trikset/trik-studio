@@ -91,7 +91,7 @@ void ShapePropertyWidget::shapeClicked()
 void ShapePropertyWidget::addShape(int &index, qreal &x, const QString &shape, const QString &currentShape
 		, bool &foundCurrentShape)
 {
-	ShapeWidget *shapeWidget = new ShapeWidget(index, this);
+	auto *shapeWidget = new ShapeWidget(index, this);
 	shapeWidget->setGeometry(static_cast<int>(x), 0, 0, 0);
 	mShapes << shapeWidget;
 	shapeWidget->setShape(shape);

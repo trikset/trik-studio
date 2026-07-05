@@ -93,7 +93,7 @@ void CommonRobotModel::disconnectFromRobot()
 void CommonRobotModel::updateSensorsValues() const
 {
 	for (robotParts::Device * const device : mConfiguration.devices()) {
-		robotParts::AbstractSensor * const sensor = dynamic_cast<robotParts::AbstractSensor *>(device);
+		auto * const sensor = dynamic_cast<robotParts::AbstractSensor *>(device);
 		if (sensor && !sensor->port().reservedVariable().isEmpty()) {
 
 			if (!sensor->ready() || sensor->isLocked()) {

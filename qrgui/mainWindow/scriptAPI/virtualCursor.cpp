@@ -86,7 +86,7 @@ void VirtualCursor::sceneMoveTo(QWidget *target, int duration, int xSceneCoord, 
 		const int xcoord = target->mapTo(parentWidget(), QPoint(0, 0)).x() + xSceneCoord + 20;
 		const int ycoord = target->mapTo(parentWidget(), QPoint(0, 0)).y() + ySceneCoord + 20;
 
-		QTimer * const timer = new QTimer(this);
+		auto * const timer = new QTimer(this);
 		if (mRightButtonPressed) {
 			timer->setInterval(100);
 
@@ -164,7 +164,7 @@ void VirtualCursor::moved(QWidget *target)
 void VirtualCursor::simulateMouse(QObject *reciever, QEvent::Type event, QPointF pos
 		, Qt::MouseButton button)
 {
-	QMouseEvent *mouseEvent = new QMouseEvent(event, pos, button, button, Qt::NoModifier);
+	auto *mouseEvent = new QMouseEvent(event, pos, button, button, Qt::NoModifier);
 	QApplication::postEvent(reciever, mouseEvent);
 }
 

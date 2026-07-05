@@ -102,7 +102,7 @@ bool GraphicType::init(const QString &context)
 		}
 
 		if (id.element() == metaEntityAttribute) {
-			Property *property = new Property(mApi, id);
+			auto *property = new Property(mApi, id);
 			if (!property->init()) {
 				delete property;
 				continue;
@@ -232,7 +232,7 @@ bool GraphicType::resolve()
 			}
 		}
 
-		GraphicType* gParent = dynamic_cast<GraphicType*>(parent);
+		auto* gParent = dynamic_cast<GraphicType*>(parent);
 		if (gParent) {
 			for (const PossibleEdge &pEdge : gParent->mPossibleEdges) {
 				mPossibleEdges.append(qMakePair(pEdge.first,qMakePair(pEdge.second.first,name())));

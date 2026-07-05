@@ -42,7 +42,7 @@ bool Autoconfigurer::configure(QList<qReal::Id> const &diagrams, const QString &
 		const IdList children = mGraphicalModelApi.graphicalRepoApi().children(diagram);
 
 		for (const Id &child : children) {
-			kitBase::blocksBase::RobotsBlock * const block
+			auto * const block
 					= dynamic_cast<kitBase::blocksBase::RobotsBlock *>(mBlocksTable.block(child));
 			if (!block) {
 				continue;

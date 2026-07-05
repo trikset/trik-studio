@@ -45,7 +45,7 @@ bool EnumType::init(const QString &context)
 
 Type* EnumType::clone() const
 {
-	EnumType *result = new EnumType(diagram(), mApi, mId);
+	auto *result = new EnumType(diagram(), mApi, mId);
 	Type::copyFields(result);
 	result->mValues = mValues;
 	return result;

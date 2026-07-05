@@ -114,7 +114,7 @@ void FindReplaceDialog::initIds(QMap<QString, QString> foundData)
 		qReal::Id parentId = mCommonApi.parent(qReal::Id::loadFromString(currentId));
 		QString parentName = mCommonApi.name(parentId);
 		if (!parentName.contains("qrm:/")) {
-			QListWidgetItem *item = new QListWidgetItem();
+			auto *item = new QListWidgetItem();
 			item->setText(parentName + tr(" / ") +
 				mCommonApi.name(qReal::Id::loadFromString(currentId)) + foundData[currentId]);
 			item->setData(Qt::ToolTipRole, currentId);

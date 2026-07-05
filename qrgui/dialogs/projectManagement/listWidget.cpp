@@ -23,7 +23,7 @@ ListWidget::ListWidget(QWidget *parent)
 	: QWidget(parent)
 	, mListWidget(new QListWidget())
 {
-	QVBoxLayout *mainLayout = new QVBoxLayout;
+	auto *mainLayout = new QVBoxLayout;
 	mainLayout->addWidget(mListWidget);
 	setLayout(mainLayout);
 
@@ -33,7 +33,7 @@ ListWidget::ListWidget(QWidget *parent)
 
 void ListWidget::addItem(const QString &text, const QString &userData, const QString &toolTip)
 {
-	QListWidgetItem *currentItem = new QListWidgetItem(text, mListWidget);
+	auto *currentItem = new QListWidgetItem(text, mListWidget);
 	currentItem->setData(Qt::UserRole, userData);
 	currentItem->setToolTip(toolTip);
 	mListWidget->addItem(currentItem);

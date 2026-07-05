@@ -22,7 +22,7 @@ QMessageBox::StandardButton utils::QRealMessageBox::question(QWidget *parent
 		, const QString &text
 		, QMessageBox::StandardButtons buttons)
 {
-	QMessageBox *messageBox = new QMessageBox(parent);
+	auto *messageBox = new QMessageBox(parent);
 	messageBox->setWindowTitle(title);
 	messageBox->setText(text);
 	messageBox->setStandardButtons(buttons);

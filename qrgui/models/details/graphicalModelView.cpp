@@ -53,7 +53,7 @@ void GraphicalModelView::rowsInserted(const QModelIndex &parent, int start, int 
 		// and graphical model hierarchy. It is not always easy since
 		// some elements have no correspondences in another model, and tree
 		// structures may be very different by themselves.
-		LogicalModel * const logicalModel = static_cast<LogicalModel *>(mModel);
+		auto * const logicalModel = static_cast<LogicalModel *>(mModel);
 
 		const bool isEdge = mModel->editorManagerInterface().isNodeOrEdge(logicalId.type());
 

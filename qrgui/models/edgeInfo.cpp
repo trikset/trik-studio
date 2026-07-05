@@ -99,7 +99,7 @@ QDataStream &EdgeInfo::deserialize(QDataStream &in)
 
 bool EdgeInfo::equals(const EdgeInfo &other) const
 {
-	const EdgeInfo *otherEdge = dynamic_cast<const EdgeInfo *>(&other);
+	const auto *otherEdge = dynamic_cast<const EdgeInfo *>(&other);
 	if (!otherEdge) {
 		return false;
 	}

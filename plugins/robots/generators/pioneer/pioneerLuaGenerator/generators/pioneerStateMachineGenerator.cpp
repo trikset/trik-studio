@@ -296,7 +296,7 @@ void PioneerStateMachineGenerator::visitConditional(const qReal::Id &id, const Q
 	const auto nodes = mSemanticTreeManager->nodes(id);
 
 	for (const auto node : nodes) {
-		IfNode * const thisNode = static_cast<IfNode *>(node);
+		auto * const thisNode = static_cast<IfNode *>(node);
 
 		mSemanticTreeManager->addToZone(thisNode->thenZone(), thenLink.target);
 		mSemanticTreeManager->addToZone(thisNode->elseZone(), elseLink.target);
@@ -368,7 +368,7 @@ NonZoneNode *PioneerStateMachineGenerator::copySynchronousFragment(NonZoneNode *
 			+ (withLabel ? "true" : "false"));
 
 	// Here "from" may have many corresponding nodes in a semantic tree, but any node will do, so using findNodeFor.
-	NonZoneNode *oldFragmentStart = dynamic_cast<NonZoneNode *>(mSemanticTree->findNodeFor(from));
+	auto *oldFragmentStart = dynamic_cast<NonZoneNode *>(mSemanticTree->findNodeFor(from));
 	if (!oldFragmentStart) {
 		reportError(tr("Generation internal error, zone node corresponds to a block in a diagram."));
 		return nullptr;

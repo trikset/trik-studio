@@ -35,7 +35,7 @@ PatternType::~PatternType()
 
 Type *PatternType::clone() const
 {
-	PatternType *result = new PatternType(mDiagram, mXml);
+	auto *result = new PatternType(mDiagram, mXml);
 	GraphicType::copyFields(result);
 	return result;
 }

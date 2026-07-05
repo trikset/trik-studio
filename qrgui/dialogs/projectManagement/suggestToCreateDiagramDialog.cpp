@@ -24,9 +24,9 @@ SuggestToCreateDiagramDialog::SuggestToCreateDiagramDialog(const EditorManagerIn
 		, QWidget *parent, bool isClosable)
 	: ManagedClosableDialog(parent, isClosable)
 {
-	SuggestToCreateDiagramWidget *suggestWidget = new SuggestToCreateDiagramWidget(editorManager, this);
+	auto *suggestWidget = new SuggestToCreateDiagramWidget(editorManager, this);
 
-	QVBoxLayout *mainLayout = new QVBoxLayout;
+	auto *mainLayout = new QVBoxLayout;
 	mainLayout->addWidget(suggestWidget);
 	setLayout(mainLayout);
 	setWindowTitle(tr("Create diagram"));

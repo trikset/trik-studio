@@ -38,7 +38,7 @@ NodeType::~NodeType()
 
 Type* NodeType::clone() const
 {
-	NodeType *result = new NodeType(diagram(), mApi, mId, targetDirectory());
+	auto *result = new NodeType(diagram(), mApi, mId, targetDirectory());
 	GraphicType::copyFields(result);
 	return result;
 }

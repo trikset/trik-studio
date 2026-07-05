@@ -90,7 +90,7 @@ QString Property::description() const
 
 Property * Property::clone()
 {
-	Property *result = new Property();
+	auto *result = new Property();
 	result->mName = mName;
 	result->mDisplayedName = mDisplayedName;
 	result->mType = mType;

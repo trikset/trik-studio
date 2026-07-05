@@ -90,7 +90,7 @@ QMimeData *ElementInfo::mimeData() const
 	QByteArray data;
 	QDataStream stream(&data, QIODevice::WriteOnly);
 	stream << *this;
-	QMimeData * const mimeData = new QMimeData;
+	auto * const mimeData = new QMimeData;
 	mimeData->setData(DEFAULT_MIME_TYPE, data);
 	return mimeData;
 }

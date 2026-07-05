@@ -202,7 +202,7 @@ AbstractCommand *Exploser::removeExplosionCommand(const Id &source, const Id &ta
 
 AbstractCommand *Exploser::renameCommands(const Id &oneOfIds, const QString &newNames) const
 {
-	DoNothingCommand *result = new DoNothingCommand;
+	auto *result = new DoNothingCommand;
 
 	const IdList idsToRename = explosionsHierarchy(oneOfIds);
 	for (const Id &id : idsToRename) {

@@ -62,7 +62,7 @@ QModelIndex PropertyEditorModel::index(int row, int column, const QModelIndex &p
 
 QModelIndex PropertyEditorModel::parent(const QModelIndex &index) const
 {
-	Field *childItem = static_cast<Field*>(index.internalPointer());
+	auto *childItem = static_cast<Field*>(index.internalPointer());
 	Field *parentItem = childItem->parentItem();
 
 	if (parentItem == mField->parentItem()) {

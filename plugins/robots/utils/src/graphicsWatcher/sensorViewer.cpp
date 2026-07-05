@@ -141,7 +141,7 @@ void SensorViewer::drawNextFrame()
 	mPointsDataProcessor->makeShiftLeft(stepSize);
 
 	for (QGraphicsItem *item : mScene->items()) {
-		QGraphicsLineItem *curLine = qgraphicsitem_cast<QGraphicsLineItem *>(item);
+		auto *curLine = qgraphicsitem_cast<QGraphicsLineItem *>(item);
 		if (curLine == nullptr) {
 			continue;
 		}

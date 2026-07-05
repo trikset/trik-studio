@@ -73,7 +73,7 @@ void QScintillaTextEdit::setCurrentLanguage(const LanguageInfo &language)
 	if (mLanguage.lexer) {
 		mFont.setPointSize(mLanguage.lexer->defaultFont().pointSize());
 		mLanguage.lexer->setFont(mFont);
-		QsciAPIs * const api = new QsciAPIs(mLanguage.lexer.get());
+		auto * const api = new QsciAPIs(mLanguage.lexer.get());
 		for (const QString &additionalToken : mLanguage.additionalAutocompletionTokens) {
 			api->add(additionalToken);
 		}
@@ -210,15 +210,15 @@ void QScintillaTextEdit::setDefaultSettings()
 	setUtf8(true);
 
 	// Ctrl + Space Autocomplete
-	QShortcut * const ctrlSpace = new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_Space), this);
+	auto * const ctrlSpace = new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_Space), this);
 	connect(ctrlSpace, &QShortcut::activated, this, &QScintillaTextEdit::autoCompleteFromAll);
 
 	// Ctrl + / comment/uncomment
-	QShortcut * const ctrlSlash = new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_Slash), this);
+	auto * const ctrlSlash = new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_Slash), this);
 	connect(ctrlSlash, &QShortcut::activated, this, &QScintillaTextEdit::commentUncommentLines);
 
 	// Ctrl + L Go to line and column
-	QShortcut * const ctrlL = new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_L), this);
+	auto * const ctrlL = new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_L), this);
 	connect(ctrlL, &QShortcut::activated, this, &QScintillaTextEdit::goToLineColumn);
 }
 

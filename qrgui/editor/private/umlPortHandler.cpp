@@ -37,7 +37,7 @@ void UmlPortHandler::handleMoveEvent(const bool leftPressed
 	}
 
 	QGraphicsItem* const item = mNode->scene()->items(scenePos).value(1);
-	NodeElement* const actionItem = dynamic_cast<NodeElement * const>(item);
+	auto* const actionItem = dynamic_cast<NodeElement * const>(item);
 	const BorderChecker actionItemBorderChecker(actionItem);
 	QPointF posInItem = QPointF(0, 0);
 	if (actionItem && ((actionItem == parentNode) || (!parentNode))) {

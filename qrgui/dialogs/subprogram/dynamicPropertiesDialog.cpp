@@ -115,13 +115,13 @@ QString DynamicPropertiesDialog::generateShapeXml(const QString &foreground, con
 
 void DynamicPropertiesDialog::addLabelButtonClicked()
 {
-	QPushButton *button = new QPushButton(tr("Delete"), this);
+	auto *button = new QPushButton(tr("Delete"), this);
 	const int rowCount = mUi->labels->rowCount();
 	mUi->labels->setRowCount(rowCount + 1);
 	mUi->labels->setCellWidget(rowCount, 3, button);
 	connect(button, &QPushButton::clicked, this, &DynamicPropertiesDialog::deleteButtonClicked);
 
-	QComboBox *types = new QComboBox(this);
+	auto *types = new QComboBox(this);
 	types->addItems({"int", "float", "bool", "string"});
 	mUi->labels->setCellWidget(rowCount, 1, types);
 	connect(types, &QComboBox::currentTextChanged, this, &DynamicPropertiesDialog::typeChanged);
@@ -281,7 +281,7 @@ void DynamicPropertiesDialog::typeChanged(const QString &newType)
 	}
 
 	if (newType == "bool") {
-		QComboBox *boolValues = new QComboBox();
+		auto *boolValues = new QComboBox();
 		boolValues->addItems({"false", "true"});
 		mUi->labels->setCellWidget(row, 2, boolValues);
 	} else {
@@ -392,28 +392,28 @@ QString DynamicPropertiesDialog::tryToSave() const
 
 void DynamicPropertiesDialog::addLabel(const QString &name, const QString &type, const QString &value)
 {
-	QPushButton *button = new QPushButton(tr("Delete"));
+	auto *button = new QPushButton(tr("Delete"));
 	int rowCount = mUi->labels->rowCount();
 	mUi->labels->setRowCount(rowCount + 1);
 	mUi->labels->setCellWidget(rowCount, 3, button);
 	connect(button, &QPushButton::clicked, this, &DynamicPropertiesDialog::deleteButtonClicked);
 
-	QComboBox *types = new QComboBox(this);
+	auto *types = new QComboBox(this);
 	types->addItems({"int", "float", "bool", "string"});
 	types->setCurrentText(type);
 	mUi->labels->setCellWidget(rowCount, 1, types);
 	connect(types, &QComboBox::currentTextChanged, this, &DynamicPropertiesDialog::typeChanged);
 
-	QTableWidgetItem *nameItem = new QTableWidgetItem(name);
+	auto *nameItem = new QTableWidgetItem(name);
 	mUi->labels->setItem(rowCount, 0, nameItem);
 
 	if (type == "bool") {
-		QComboBox *boolValues = new QComboBox(this);
+		auto *boolValues = new QComboBox(this);
 		boolValues->addItems({"false", "true"});
 		boolValues->setCurrentText(value);
 		mUi->labels->setCellWidget(rowCount, 2, boolValues);
 	} else {
-		QTableWidgetItem *valueItem = new QTableWidgetItem(value);
+		auto *valueItem = new QTableWidgetItem(value);
 		mUi->labels->setItem(rowCount, 2, valueItem);
 	}
 }

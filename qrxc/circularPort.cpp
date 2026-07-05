@@ -44,7 +44,7 @@ void CircularPort::generateCode(OutFile &out)
 
 Port *CircularPort::clone() const
 {
-	CircularPort *result = new CircularPort();
+	auto *result = new CircularPort();
 	result->mX = mX;
 	result->mY = mY;
 	result->mR = mR;

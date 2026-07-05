@@ -41,7 +41,7 @@ void SensorVariablesUpdater::run()
 	resetVariables();
 
 	for (robotParts::Device * const device : mRobotModelManager.model().configuration().devices()) {
-		robotParts::ScalarSensor * const scalarSensor = dynamic_cast<robotParts::ScalarSensor *>(device);
+		auto * const scalarSensor = dynamic_cast<robotParts::ScalarSensor *>(device);
 		if (scalarSensor && !scalarSensor->port().reservedVariable().isEmpty()) {
 
 			if (!scalarSensor->ready()) {
@@ -70,7 +70,7 @@ void SensorVariablesUpdater::run()
 			continue;
 		}
 
-		robotParts::VectorSensor * const vectorSensor = dynamic_cast<robotParts::VectorSensor *>(device);
+		auto * const vectorSensor = dynamic_cast<robotParts::VectorSensor *>(device);
 		if (vectorSensor && !vectorSensor->port().reservedVariable().isEmpty()) {
 
 			if (!vectorSensor->ready()) {
@@ -114,7 +114,7 @@ void SensorVariablesUpdater::suspend()
 
 void SensorVariablesUpdater::onScalarSensorResponse(int reading)
 {
-	robotParts::ScalarSensor * const scalarSensor = dynamic_cast<robotParts::ScalarSensor *>(sender());
+	auto * const scalarSensor = dynamic_cast<robotParts::ScalarSensor *>(sender());
 	if (!scalarSensor) {
 		/// @todo Error reporting.
 		return;
@@ -125,7 +125,7 @@ void SensorVariablesUpdater::onScalarSensorResponse(int reading)
 
 void SensorVariablesUpdater::onVectorSensorResponse(const QVector<int> &reading)
 {
-	robotParts::VectorSensor * const vectorSensor = dynamic_cast<robotParts::VectorSensor *>(sender());
+	auto * const vectorSensor = dynamic_cast<robotParts::VectorSensor *>(sender());
 	if (!vectorSensor) {
 		/// @todo Error reporting.
 		return;
@@ -181,12 +181,12 @@ void SensorVariablesUpdater::resetVariables()
 		// Sensor state must be unlocked before interpretation starts even if it was not unlocked previous session.
 		sensor->setLocked(false);
 
-		robotParts::ScalarSensor * const scalarSensor = dynamic_cast<robotParts::ScalarSensor *>(device);
+		auto * const scalarSensor = dynamic_cast<robotParts::ScalarSensor *>(device);
 		if (scalarSensor) {
 			updateScalarSensorVariables(scalarSensor->port(), 0);
 		}
 
-		robotParts::VectorSensor * const vectorSensor = dynamic_cast<robotParts::VectorSensor *>(device);
+		auto * const vectorSensor = dynamic_cast<robotParts::VectorSensor *>(device);
 		if (vectorSensor) {
 			scalarSensor->setLocked(false);
 			updateVectorSensorVariables(vectorSensor->port(), {});

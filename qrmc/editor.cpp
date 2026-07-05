@@ -447,7 +447,7 @@ bool Editor::loadDiagrams()
 		}
 
 		qDebug() << "\tloading diagram" << diagramName;
-		Diagram * const diagram = new Diagram(diagramId, mApi, *this, mTargetDirectory);
+		auto * const diagram = new Diagram(diagramId, mApi, *this, mTargetDirectory);
 		if (!diagram->init()) {
 			qDebug() << "ERROR: error loading diagram" << diagramName;
 			delete diagram;

@@ -562,11 +562,11 @@ void Scene::changePortsType(const QString &type)
 	mPortType = type;
 
 	for (auto &&item : selectedItems()) {
-		PointPort *point = dynamic_cast<PointPort *>(item);
+		auto *point = dynamic_cast<PointPort *>(item);
 		if (point) {
 			point->setType(type);
 		} else {
-			LinePort *line = dynamic_cast<LinePort *>(item);
+			auto *line = dynamic_cast<LinePort *>(item);
 			if (line) {
 				line->setType(type);
 			}
@@ -614,12 +614,12 @@ void Scene::changeFontPalette()
 void Scene::changePortsComboBox()
 {
 	for (auto &&item : selectedItems()) {
-		PointPort *point = dynamic_cast<PointPort *>(item);
+		auto *point = dynamic_cast<PointPort *>(item);
 		if (point) {
 			Q_EMIT existSelectedPortItems(point->getType());
 			return;
 		}
-		LinePort *line = dynamic_cast<LinePort *>(item);
+		auto *line = dynamic_cast<LinePort *>(item);
 		if (line) {
 			Q_EMIT existSelectedPortItems(line->getType());
 			return;

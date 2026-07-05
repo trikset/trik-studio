@@ -58,7 +58,7 @@ QStringList UpdatesCheckerPlugin::defaultSettingsFiles()
 void UpdatesCheckerPlugin::checkForUpdates(bool reportNoUpdates)
 {
 	if (qReal::SettingsManager::value("updaterActive").toBool()) {
-		Updater * const updater = new Updater(this);
+		auto * const updater = new Updater(this);
 		connect(updater, &Updater::newVersionAvailable, this, &UpdatesCheckerPlugin::showUpdatesDialog);
 		if (reportNoUpdates) {
 			connect(updater, &Updater::noNewVersionAvailable, this, &UpdatesCheckerPlugin::reportNoUpdates);
@@ -82,13 +82,13 @@ void UpdatesCheckerPlugin::reportNoUpdates()
 
 void UpdatesCheckerPlugin::initSettingsUi(qReal::gui::PreferencesPage &behaviourPage)
 {
-	QGridLayout * const automaticsLayout = behaviourPage.findChild<QGridLayout *>("automaticsFrameLayout");
+	auto * const automaticsLayout = behaviourPage.findChild<QGridLayout *>("automaticsFrameLayout");
 	if (!automaticsLayout) {
 		QLOG_ERROR() << "Could not find 'automaticsFrameLayout' on preferences behaviour page";
 		return;
 	}
 
-	QCheckBox * const box = new QCheckBox(tr("Check for updates on start"), automaticsLayout->widget());
+	auto * const box = new QCheckBox(tr("Check for updates on start"), automaticsLayout->widget());
 	automaticsLayout->addWidget(box, automaticsLayout->rowCount(), 0, 1, automaticsLayout->columnCount());
 	connect(&behaviourPage, &qReal::gui::PreferencesPage::saved, this, [box]() {
 		qReal::SettingsManager::setValue("updaterActive", box->isChecked());
@@ -101,7 +101,7 @@ void UpdatesCheckerPlugin::initSettingsUi(qReal::gui::PreferencesPage &behaviour
 void UpdatesCheckerPlugin::showUpdatesDialog()
 {
 	QLOG_INFO() << "New updates found!";
-	Updater * const updater = dynamic_cast<Updater *>(sender());
+	auto * const updater = dynamic_cast<Updater *>(sender());
 	if (updater && UpdateVersionDialog::promptUpdate(mMainWindowWidget)) {
 		updater->start();
 

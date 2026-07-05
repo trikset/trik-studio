@@ -360,7 +360,7 @@ void QrsMetamodelSaver::saveLinksInMetamodel(qrRepo::RepoApi &repo, const Metamo
 			}
 			case ElementType::explosionLinkType: {
 				const Id linkId = metamodelExplosionLinkType.sameTypeId();
-				const Explosion *explosion = static_cast<const Explosion *>(edge);
+				const auto *explosion = static_cast<const Explosion *>(edge);
 				repo.addChild(diagram, linkId);
 				repo.setFrom(linkId, from);
 				repo.setTo(linkId, to);

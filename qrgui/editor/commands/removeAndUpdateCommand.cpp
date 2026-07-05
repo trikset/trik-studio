@@ -249,17 +249,17 @@ void RemoveAndUpdateCommand::appendGraphicalDelete(const Id &id
 	RemoveElementsCommand::appendGraphicalDelete(id, nodes, edges);
 
 	// correcting unremoved edges
-	ArrangeLinksCommand *arrangeCommand = new ArrangeLinksCommand(&mScene, id, true);
+	auto *arrangeCommand = new ArrangeLinksCommand(&mScene, id, true);
 	arrangeCommand->setRedoEnabled(false);
 	addPreAction(arrangeCommand);
 
-	UpdateElementCommand *updateCommand = new UpdateElementCommand(&mScene, id);
+	auto *updateCommand = new UpdateElementCommand(&mScene, id);
 	updateCommand->setRedoEnabled(false);
 	addPreAction(updateCommand);
 
 	const IdList links = mGraphicalApi.graphicalRepoApi().links(id);
 	for (const Id &link : links) {
-		UpdateElementCommand *updateLinkCommand = new UpdateElementCommand(&mScene, link);
+		auto *updateLinkCommand = new UpdateElementCommand(&mScene, link);
 		updateLinkCommand->setRedoEnabled(false);
 		addPreAction(updateLinkCommand);
 	}

@@ -49,12 +49,12 @@ CircleWidget::CircleWidget(QSize size, const QString &icon, QWidget *parent)
 				- (targetHeight - targetWidth * pictureHeight / pictureWidth) / 2);
 	}
 
-	QLabel * const iconLabel = new QLabel;
+	auto * const iconLabel = new QLabel;
 	iconLabel->setFixedSize(resultingRect.size());
 	iconLabel->setScaledContents(true);
 	iconLabel->setPixmap(pixmap);
 
-	QVBoxLayout * const circleLayout = new QVBoxLayout;
+	auto * const circleLayout = new QVBoxLayout;
 	circleLayout->setContentsMargins(0, 0, 0, 0);
 	circleLayout->setSpacing(0);
 	circleLayout->setMargin(0);
