@@ -713,7 +713,7 @@ bool MainWindow::windowsDarkThemeAvailiable()
 bool MainWindow::windowsIsInDarkTheme()
 {
 	QSettings settings( 
-		"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize"
+		R"(HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize)"
 		, QSettings::NativeFormat);
 	return settings.value("AppsUseLightTheme", 1).toInt() == 0;
 }

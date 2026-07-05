@@ -50,7 +50,7 @@ void PioneerStateMachineGenerator::performGeneration()
 	mSemanticTreeManager.reset(new SemanticTreeManager(*mSemanticTree, mErrorReporter, mErrorsOccured));
 	GotoControlFlowGenerator::performGeneration();
 	if (mConditionals != mConditionalEnds && not errorsOccured()) {
-		reportError(tr("The diagram must have the same number of \"Conditonal\" and \"End If\" blocks."));
+		reportError(tr(R"(The diagram must have the same number of "Conditonal" and "End If" blocks.)"));
 	}
 }
 
@@ -149,7 +149,7 @@ void PioneerStateMachineGenerator::processNode(NonZoneNode *thisNode, const qRea
 						return;
 					}
 				} else {
-					reportError(tr("\"End If\" block occurs before \"If block\""));
+					reportError(tr(R"("End If" block occurs before "If block")"));
 					return;
 				}
 			}
@@ -234,7 +234,7 @@ void PioneerStateMachineGenerator::processNode(NonZoneNode *thisNode, const qRea
 			if (target.element() == "FiBlock") {
 				nextNode = mSemanticTreeManager->produceNode(target);
 				if (mConditionZonesQueue.isEmpty()) {
-					reportError(tr("\"End If\" block occurs before \"If block\""));
+					reportError(tr(R"("End If" block occurs before "If block")"));
 				} else {
 					auto conditionZone = mConditionZonesQueue.last();
 					SemanticNode *conditionalZone = std::get<0>(conditionZone);

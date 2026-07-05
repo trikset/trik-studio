@@ -326,8 +326,8 @@ bool GraphicType::initPossibleEdges()
 
 		if (beginName.isEmpty() || endName.isEmpty() || ((temp != "true") && (temp != "false"))) {
 			qWarning() << "Error: one of attributes is incorrect " <<
-				"(perhaps, \"beginName\" or \"endName\" is empty or " <<
-				"\"directed\" isn't \"true\" or \"false\".')" << qualifiedName();
+				R"((perhaps, "beginName" or "endName" is empty or )" <<
+				R"("directed" isn't "true" or "false".'))" << qualifiedName();
 			return false;
 		}
 

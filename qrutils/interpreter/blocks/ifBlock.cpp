@@ -63,7 +63,7 @@ bool IfBlock::initNextBlocks()
 			if (nonMarkedBlockId.isNull()) {
 				nonMarkedBlockId = targetBlockId;
 			} else {
-				error(tr("There must be at least one link with \"true\" or \"false\" marker on it"));
+				error(tr(R"(There must be at least one link with "true" or "false" marker on it)"));
 				return false;
 			}
 		}

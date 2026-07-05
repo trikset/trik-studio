@@ -129,7 +129,7 @@ int main(int argc, char *argv[])
 				, QObject::tr("The complete file path, including the filename"\
 					      ", to save the generated JavaScript or Python code.")
 				, "path-to-save-code", QString());
-	QCommandLineOption generateModeOption("generate-mode", QObject::tr("Select \"python\" or \"javascript\".")
+	QCommandLineOption generateModeOption("generate-mode", QObject::tr(R"(Select "python" or "javascript".)")
 					      , "generate-mode", "javascript");
 	QCommandLineOption directScriptExecutionPathOption("script-path"
 						, QObject::tr("The path to the Python or JavaScript file that will be used for interpretation.")

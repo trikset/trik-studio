@@ -59,7 +59,7 @@ public:
 			return true;
 		} else {
 			mErrorList << Error(next().range().start()
-					, QString(QObject::tr("Expected \"%1\", got \"%2\""))
+					, QString(QObject::tr(R"(Expected "%1", got "%2")"))
 							.arg(mTokenUserFriendlyNames[token])
 							.arg(mTokenUserFriendlyNames[next().token()])
 					, ErrorType::syntaxError

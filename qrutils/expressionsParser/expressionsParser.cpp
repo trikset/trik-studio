@@ -262,7 +262,7 @@ QSharedPointer<Number> ExpressionsParser::parseTerm(const QString &stream, int &
 			}
 		} else {
 			error(unexpectedSymbol, QString::number(pos + 1)
-					, "\'digit\' or \'letter\' or \'bracket\' or \'sign\'", QString(stream.at(pos)));
+					, R"('digit' or 'letter' or 'bracket' or 'sign')", QString(stream.at(pos)));
 		}
 		break;
 	}
@@ -434,7 +434,7 @@ bool ExpressionsParser::parseSingleComprasion(const QString &stream, int &pos)
 		break;
 	}
 
-	error(unexpectedSymbol, QString::number(pos + 1), "=\',\'!\',\'>\',\'<"
+	error(unexpectedSymbol, QString::number(pos + 1), R"(=','!','>','<)"
 			, QString(stream.at(pos)));
 	return false;
 }
@@ -480,7 +480,7 @@ bool ExpressionsParser::parseDisjunction(const QString &stream, int &pos)
 			res = parseSingleComprasion(stream, pos);
 		} else {
 			error(unexpectedSymbol, QString::number(pos + 1)
-				, "\'digit\' or \'letter\' or \'sign\'", QString(stream.at(pos)));
+				, R"('digit' or 'letter' or 'sign')", QString(stream.at(pos)));
 		}
 		break;
 	}
