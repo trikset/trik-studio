@@ -66,9 +66,7 @@ ExerciseExportDialog::ExerciseExportDialog(QWidget *parent)
 	buttonsLayout->addWidget(cancelButton);
 }
 
-ExerciseExportDialog::~ExerciseExportDialog()
-{
-}
+ExerciseExportDialog::~ExerciseExportDialog() = default;
 
 ReadOnlyFlags ExerciseExportDialog::readOnlyFlags() const
 {

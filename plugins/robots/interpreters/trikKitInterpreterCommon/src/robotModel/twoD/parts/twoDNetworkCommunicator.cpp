@@ -27,8 +27,7 @@ TwoDNetworkCommunicator::TwoDNetworkCommunicator(const DeviceInfo &info
 {}
 
 
-TwoDNetworkCommunicator::~TwoDNetworkCommunicator(){
-}
+TwoDNetworkCommunicator::~TwoDNetworkCommunicator() = default;
 
 void TwoDNetworkCommunicator::send(const QString& message, int hullNumber)
 {

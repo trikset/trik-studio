@@ -23,18 +23,14 @@
 
 using namespace generatorBase;
 
-TemplateParametrizedEntity::TemplateParametrizedEntity()
-{
-}
+TemplateParametrizedEntity::TemplateParametrizedEntity() = default;
 
 TemplateParametrizedEntity::TemplateParametrizedEntity(const QStringList &pathsToTemplates)
 	: mPathsToRoot(pathsToTemplates)
 {
 }
 
-TemplateParametrizedEntity::~TemplateParametrizedEntity()
-{
-}
+TemplateParametrizedEntity::~TemplateParametrizedEntity() = default;
 
 QString TemplateParametrizedEntity::readTemplate(const QString &pathFromRoot) const
 {

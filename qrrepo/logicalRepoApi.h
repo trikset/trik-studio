@@ -24,7 +24,7 @@ namespace qrRepo {
 class LogicalRepoApi : public CommonRepoApi
 {
 public:
-	~LogicalRepoApi() override{}
+	~LogicalRepoApi() override= default;
 
 	virtual void addChild(const qReal::Id &id, const qReal::Id &child) = 0;
 	qReal::Id otherEntityFromLink(const qReal::Id &linkId, const qReal::Id &firstNode) const override = 0;

@@ -39,9 +39,7 @@ NxtGeneratorFactory::NxtGeneratorFactory(const qrRepo::RepoApi &repo
 {
 }
 
-NxtGeneratorFactory::~NxtGeneratorFactory()
-{
-}
+NxtGeneratorFactory::~NxtGeneratorFactory() = default;
 
 parts::Images &NxtGeneratorFactory::images()
 {

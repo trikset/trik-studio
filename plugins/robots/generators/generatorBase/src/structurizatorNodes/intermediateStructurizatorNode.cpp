@@ -23,9 +23,7 @@ IntermediateStructurizatorNode::IntermediateStructurizatorNode(QObject *parent)
 {
 }
 
-IntermediateStructurizatorNode::~IntermediateStructurizatorNode()
-{
-}
+IntermediateStructurizatorNode::~IntermediateStructurizatorNode() = default;
 
 bool IntermediateStructurizatorNode::hasBreakInside() const
 {

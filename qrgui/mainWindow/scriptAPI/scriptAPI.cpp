@@ -36,13 +36,9 @@ using namespace qReal;
 using namespace gui;
 using namespace utils;
 
-ScriptAPI::ScriptAPI()
-{
-}
+ScriptAPI::ScriptAPI() = default;
 
-ScriptAPI::~ScriptAPI()
-{
-}
+ScriptAPI::~ScriptAPI() = default;
 
 void ScriptAPI::init(MainWindow *mainWindow)
 {

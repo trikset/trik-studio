@@ -78,9 +78,7 @@ LuaPrinter::LuaPrinter(const QStringList &pathsToTemplates
 {
 }
 
-LuaPrinter::~LuaPrinter()
-{
-}
+LuaPrinter::~LuaPrinter() = default;
 
 QStringList LuaPrinter::addSuffix(const QStringList &list)
 {

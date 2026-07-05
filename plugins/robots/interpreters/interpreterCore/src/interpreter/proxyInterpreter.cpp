@@ -21,9 +21,7 @@ ProxyInterpreter::ProxyInterpreter()
 {
 }
 
-ProxyInterpreter::~ProxyInterpreter()
-{
-}
+ProxyInterpreter::~ProxyInterpreter() = default;
 
 void ProxyInterpreter::resetInterpreter(InterpreterInterface * const interpreter)
 {

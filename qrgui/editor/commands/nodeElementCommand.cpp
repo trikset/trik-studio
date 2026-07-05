@@ -27,9 +27,7 @@ NodeElementCommand::NodeElementCommand(const EditorView *view, const Id &id)
 {
 }
 
-NodeElementCommand::~NodeElementCommand()
-{
-}
+NodeElementCommand::~NodeElementCommand() = default;
 
 bool NodeElementCommand::reinitElement()
 {

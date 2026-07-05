@@ -48,9 +48,7 @@ DetailsTab::DetailsTab(QWidget *parent)
 	emptyRoot->setSizeHint(0, QSize(0, 20));
 }
 
-DetailsTab::~DetailsTab()
-{
-}
+DetailsTab::~DetailsTab() = default;
 
 void DetailsTab::initItem(QTreeWidgetItem *item, const QString &text, bool expanded)
 {

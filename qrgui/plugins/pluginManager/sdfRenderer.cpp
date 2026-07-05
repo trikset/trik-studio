@@ -46,9 +46,7 @@ SdfRenderer::SdfRenderer(const QString &path)
 	}
 }
 
-SdfRenderer::~SdfRenderer()
-{
-}
+SdfRenderer::~SdfRenderer() = default;
 
 bool SdfRenderer::load(const QString &filename)
 {
@@ -878,13 +876,9 @@ SdfIconLoader *SdfIconLoader::instance()
 	return &instance;
 }
 
-SdfIconLoader::SdfIconLoader()
-{
-}
+SdfIconLoader::SdfIconLoader() = default;
 
-SdfIconLoader::~SdfIconLoader()
-{
-}
+SdfIconLoader::~SdfIconLoader() = default;
 
 QIcon SdfIconLoader::loadPixmap(const Id &id, const QDomElement &sdf)
 {

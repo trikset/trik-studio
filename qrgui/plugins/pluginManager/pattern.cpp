@@ -32,9 +32,7 @@ GroupEdge::GroupEdge(const QString &type, const QString &from, const QString &to
 {
 }
 
-Pattern::Pattern()
-{
-}
+Pattern::Pattern() = default;
 
 Pattern::Pattern(const QString &editor, const QString &diagram, const QString &name
 		, const QString &inNode, const QString &outNode, const QString &rootNode)

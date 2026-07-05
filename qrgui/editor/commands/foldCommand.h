@@ -26,7 +26,7 @@ class FoldCommand : public NodeElementCommand
 	Q_OBJECT
 public:
 	FoldCommand(const NodeElement *element);
-	~FoldCommand() override {}
+	~FoldCommand() override = default;
 
 protected:
 	bool execute() override;

@@ -21,9 +21,7 @@
 using namespace qrRepo::details;
 using namespace qReal;
 
-GraphicalPart::GraphicalPart()
-{
-}
+GraphicalPart::GraphicalPart() = default;
 
 GraphicalPart::GraphicalPart(const QDomElement &element)
 {

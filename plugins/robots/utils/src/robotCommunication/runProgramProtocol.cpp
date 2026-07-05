@@ -52,9 +52,7 @@ RunProgramProtocol::RunProgramProtocol(TcpRobotCommunicatorInterface &communicat
 	connect(mProtocol.data(), &Protocol::timeout, this, &RunProgramProtocol::timeout);
 }
 
-RunProgramProtocol::~RunProgramProtocol()
-{
-}
+RunProgramProtocol::~RunProgramProtocol() = default;
 
 void RunProgramProtocol::run(const QFileInfo &fileToRun)
 {

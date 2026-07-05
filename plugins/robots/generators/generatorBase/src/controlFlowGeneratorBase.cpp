@@ -45,9 +45,7 @@ ControlFlowGeneratorBase::ControlFlowGeneratorBase(const qrRepo::RepoApi &repo
 {
 }
 
-ControlFlowGeneratorBase::~ControlFlowGeneratorBase()
-{
-}
+ControlFlowGeneratorBase::~ControlFlowGeneratorBase() = default;
 
 bool ControlFlowGeneratorBase::preGenerationCheck()
 {

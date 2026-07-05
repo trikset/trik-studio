@@ -16,9 +16,7 @@
 
 using namespace qReal;
 
-Tree::Tree()
-{
-}
+Tree::Tree() = default;
 
 QListIterator<Tree *> Tree::children() const
 {

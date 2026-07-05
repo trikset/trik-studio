@@ -34,7 +34,7 @@ public:
 				, &InterpreterControlInterface::stopRobot);
 	}
 
-	~InterpreterControlInterface() override {}
+	~InterpreterControlInterface() override = default;
 
 Q_SIGNALS:
 	/// Emitted when connection to robot is established, devices are configured and interpretation is started.

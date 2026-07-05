@@ -74,9 +74,7 @@ BlockInterpreter::BlockInterpreter(const GraphicalModelAssistInterface &graphica
 	connectDevicesConfigurationProvider(&mAutoconfigurer);
 }
 
-BlockInterpreter::~BlockInterpreter()
-{
-}
+BlockInterpreter::~BlockInterpreter() = default;
 
 bool BlockInterpreter::isRunning() const
 {

@@ -32,9 +32,7 @@ NodeType::NodeType(const Diagram &diagram, const qrRepo::LogicalRepoApi &api
 {
 }
 
-NodeType::~NodeType()
-{
-}
+NodeType::~NodeType() = default;
 
 Type* NodeType::clone() const
 {

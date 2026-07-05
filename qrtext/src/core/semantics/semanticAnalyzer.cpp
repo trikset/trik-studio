@@ -24,9 +24,7 @@ SemanticAnalyzer::SemanticAnalyzer(QSharedPointer<GeneralizationsTableInterface>
 {
 }
 
-SemanticAnalyzer::~SemanticAnalyzer()
-{
-}
+SemanticAnalyzer::~SemanticAnalyzer() = default;
 
 QSharedPointer<ast::Node> SemanticAnalyzer::analyze(QSharedPointer<ast::Node> const &root)
 {

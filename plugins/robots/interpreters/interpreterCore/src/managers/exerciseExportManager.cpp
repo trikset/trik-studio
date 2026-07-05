@@ -35,9 +35,7 @@ ExerciseExportManager::ExerciseExportManager(qReal::LogicalModelAssistInterface 
 {
 }
 
-ExerciseExportManager::~ExerciseExportManager()
-{
-}
+ExerciseExportManager::~ExerciseExportManager() = default;
 
 bool ExerciseExportManager::save()
 {

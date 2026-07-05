@@ -26,9 +26,7 @@ using namespace qReal;
 using namespace gui;
 using namespace mathUtils;
 
-HintAPI::HintAPI()
-{
-}
+HintAPI::HintAPI() = default;
 
 void HintAPI::addHint(const QString &message, int lifeTime, QWidget *parent)
 {

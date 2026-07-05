@@ -31,7 +31,7 @@ class QRUTILS_EXPORT BlockInterface : public QObject
 	Q_OBJECT
 
 public:
-	~BlockInterface() override {}
+	~BlockInterface() override = default;
 
 	/// Starts block execution inside a given thread.
 	virtual void interpret(Thread *thread) = 0;

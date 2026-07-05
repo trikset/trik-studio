@@ -30,9 +30,7 @@ ExplosionCommand::ExplosionCommand(models::LogicalModelAssistApi &logicalApi
 {
 }
 
-ExplosionCommand::~ExplosionCommand()
-{
-}
+ExplosionCommand::~ExplosionCommand() = default;
 
 bool ExplosionCommand::execute()
 {

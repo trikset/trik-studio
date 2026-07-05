@@ -49,9 +49,7 @@ PushButtonFactory::PushButtonFactory(QObject *parent)
 	d_ptr = nullptr; // new PushButtonFactoryPrivate();
 }
 
-PushButtonFactory::~PushButtonFactory()
-{
-}
+PushButtonFactory::~PushButtonFactory() = default;
 
 void PushButtonFactory::connectPropertyManager(PushButtonPropertyManager *)
 {

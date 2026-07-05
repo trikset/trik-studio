@@ -29,9 +29,7 @@ PatternType::PatternType(Diagram *diagram, const QString &xml)
 {
 }
 
-PatternType::~PatternType()
-{
-}
+PatternType::~PatternType() = default;
 
 Type *PatternType::clone() const
 {

@@ -26,9 +26,7 @@ AbstractView::AbstractView(AbstractModel * const model)
 {
 }
 
-AbstractView::~AbstractView()
-{
-}
+AbstractView::~AbstractView() = default;
 
 void AbstractView::rowsAboutToBeMoved(const QModelIndex &sourceParent
 		, int sourceStart, int sourceEnd, const QModelIndex &destinationParent, int destinationRow)

@@ -16,9 +16,7 @@
 
 using namespace qReal::interpretation::blocks;
 
-PreconditionalLoopBlock::PreconditionalLoopBlock()
-{
-}
+PreconditionalLoopBlock::PreconditionalLoopBlock() = default;
 
 void PreconditionalLoopBlock::run()
 {

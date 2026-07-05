@@ -42,9 +42,7 @@ CommonRobotModel::CommonRobotModel(const QString &kitId, const QString &robotId)
 	addAllowedConnection(PortInfo("RandomPort", input), { DeviceInfo::create<robotParts::Random>() });
 }
 
-CommonRobotModel::~CommonRobotModel()
-{
-}
+CommonRobotModel::~CommonRobotModel() = default;
 
 QString CommonRobotModel::robotId() const
 {

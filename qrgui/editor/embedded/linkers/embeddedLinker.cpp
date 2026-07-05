@@ -57,9 +57,7 @@ EmbeddedLinker::EmbeddedLinker()
 	setAcceptHoverEvents(true);
 }
 
-EmbeddedLinker::~EmbeddedLinker()
-{
-}
+EmbeddedLinker::~EmbeddedLinker() = default;
 
 NodeElement* EmbeddedLinker::master() const
 {

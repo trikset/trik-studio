@@ -16,9 +16,7 @@
 
 using namespace trik::blocks::details;
 
-LineDetectorToVariableBlock::LineDetectorToVariableBlock()
-{
-}
+LineDetectorToVariableBlock::LineDetectorToVariableBlock() = default;
 
 void LineDetectorToVariableBlock::run()
 {

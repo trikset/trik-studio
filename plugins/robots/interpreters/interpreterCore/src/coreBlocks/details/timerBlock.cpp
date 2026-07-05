@@ -26,9 +26,7 @@ TimerBlock::TimerBlock(kitBase::robotModel::RobotModelInterface &robotModel)
 	connect(mTimer, &utils::AbstractTimer::timeout, this, &TimerBlock::timeout);
 }
 
-TimerBlock::~TimerBlock()
-{
-}
+TimerBlock::~TimerBlock() = default;
 
 void TimerBlock::run()
 {

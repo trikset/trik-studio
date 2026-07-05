@@ -53,9 +53,7 @@ Object::Object(const QDomElement &element)
 	ValuesSerializer::deserializeNamedVariantsMap(mProperties, properties);
 }
 
-Object::~Object()
-{
-}
+Object::~Object() = default;
 
 void Object::replaceProperties(const QString &value, const QString &newValue)
 {
