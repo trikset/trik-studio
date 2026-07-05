@@ -111,7 +111,7 @@ int main(int argc, char *argv[])
 		return 0;
 	}
 
-	qsrand(time(0));
+	qsrand(time(nullptr));
 	setDefaultLocale(app->arguments().contains("--no-locale"));
 
 	const QString defaultPlatformConfigPath = PlatformInfo::defaultPlatformConfigPath();

@@ -174,7 +174,7 @@ void SdfRenderer::render(QPainter *painter, const QRectF &bounds, bool isIcon)
 		}
 		node = node.nextSibling();
 	}
-	this->painter = 0;
+	this->painter = nullptr;
 }
 
 bool SdfRenderer::checkShowConditions(const QDomElement &element, bool isIcon) const

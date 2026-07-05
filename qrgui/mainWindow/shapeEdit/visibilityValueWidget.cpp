@@ -18,7 +18,7 @@
 #include <QtWidgets/QLineEdit>
 
 VisibilityValueWidget::VisibilityValueWidget(QWidget *parent)
-	: QWidget(parent), mWidget(0)
+	: QWidget(parent), mWidget(nullptr)
 {}
 
 VisibilityValueWidget::~VisibilityValueWidget()
