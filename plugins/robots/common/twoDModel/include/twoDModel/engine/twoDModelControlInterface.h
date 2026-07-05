@@ -39,7 +39,7 @@ class TWO_D_MODEL_EXPORT TwoDModelControlInterface : public QObject
 	Q_OBJECT
 
 public:
-	~TwoDModelControlInterface() override {}
+	~TwoDModelControlInterface() override = default;
 
 	/// Returns a reference to the devices configurator.
 	/// Can be used by outside enviroment to connect it to other ones.

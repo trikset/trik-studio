@@ -39,7 +39,7 @@ public:
 	/// Creating new instance of command in usial style
 	ResizeCommand(const EditorViewScene *scene, const Id &id
 			, const QRectF &oldGeometry, const QRectF &newGeometry);
-	~ResizeCommand() override {}
+	~ResizeCommand() override = default;
 
 	static ResizeCommand *create(const NodeElement * const element, const QRectF &newContents
 			, QPointF newPos, const QRectF &oldContents, QPointF oldPos);

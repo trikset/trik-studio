@@ -24,7 +24,7 @@ namespace qrRepo {
 class GraphicalRepoApi : public CommonRepoApi
 {
 public:
-	~GraphicalRepoApi() override {}
+	~GraphicalRepoApi() override = default;
 
 	virtual qReal::Id copy(const qReal::Id &src) = 0;
 
