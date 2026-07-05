@@ -93,7 +93,7 @@ TokenPatterns<LuaTokenTypes> LuaLexer::initPatterns()
 	tokenDefinitions.defineToken(LuaTokenTypes::comma, QRegularExpression(","), ",");
 	tokenDefinitions.defineToken(LuaTokenTypes::dot, QRegularExpression("\\."), ".");
 	tokenDefinitions.defineToken(LuaTokenTypes::doubleDot, QRegularExpression("\\.\\."), "..");
-	tokenDefinitions.defineToken(LuaTokenTypes::tripleDot, QRegularExpression("\\.\\.\\."), "...");
+	tokenDefinitions.defineToken(LuaTokenTypes::tripleDot, QRegularExpression(R"(\.\.\.)"), "...");
 
 	tokenDefinitions.defineToken(LuaTokenTypes::string
 			, QRegularExpression(R"~(("[^"\\]*(\\(.|\n)[^"\\]*)*")|('[^'\\]*(\\(.|\n)[^'\\]*)*'))~")

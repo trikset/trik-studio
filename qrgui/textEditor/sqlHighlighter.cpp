@@ -50,12 +50,12 @@ SQLHighlighter::SQLHighlighter(QTextDocument *document)
 	mHighlightingRules.append(rule);
 
 	mSomeStringFormat.setForeground(Qt::black);
-	rule.pattern = QRegExp("\\\"[A-Za-z0-9]+\\\"");
+	rule.pattern = QRegExp(R"(\"[A-Za-z0-9]+\")");
 	rule.format = mSomeStringFormat;
 	mHighlightingRules.append(rule);
 
 	mDigitalFormat.setForeground(Qt::magenta);
-	rule.pattern = QRegExp("\\b[0-9]+\\.?[0-9]+\\b");
+	rule.pattern = QRegExp(R"(\b[0-9]+\.?[0-9]+\b)");
 	rule.format = mDigitalFormat;
 	mHighlightingRules.append(rule);
 

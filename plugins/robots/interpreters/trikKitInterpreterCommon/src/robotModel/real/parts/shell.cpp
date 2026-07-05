@@ -75,7 +75,7 @@ void Shell::removeFile(const QString &filePath)
 
 void Shell::readFile(const QString &filePath)
 {
-	const QString directCommand = "script.sendMessage(\"fileContents: \" + script.readAll(\"" + filePath + "\"))";
+	const QString directCommand = R"(script.sendMessage("fileContents: " + script.readAll(")" + filePath + "\"))";
 	mRobotCommunicator.runDirectCommand(directCommand);
 }
 
