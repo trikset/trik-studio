@@ -40,7 +40,7 @@ jobs:
     uses: ./.github/workflows/setup_environment.yml
     with:
       os: ubuntu-latest
-      lint_vera: true
+      lint_vera: ${{ github.ref_type != 'tag' }}
       build: false
       build_installer: false
       trik_python3_version_minor: 12
