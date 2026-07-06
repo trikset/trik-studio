@@ -15,13 +15,13 @@ jobs:
       TS_APPLICATION_PATH: trik-studio
     steps:
       - name: Checkout current repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
           path: ${{ env.TS_APPLICATION_PATH }}
 
       - name: Checkout trik-translator
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: vkutuev/trik-translator
           ref: main
