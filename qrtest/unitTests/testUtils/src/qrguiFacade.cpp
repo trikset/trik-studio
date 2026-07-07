@@ -46,11 +46,11 @@ QrguiFacade::QrguiFacade(QString const &modelName)
 	ON_CALL(mTextManagerMock, isModifiedEver(_)).WillByDefault(Return(false));
 	ON_CALL(mTextManagerMock, generatorName(_)).WillByDefault(Return(QString("trikQts")));
 
-	ON_CALL(mErrorReporterMock, addError(_, _)).WillByDefault(Invoke(
+	ON_CALL(mErrorReporterMock, addErrorMock(_, _)).WillByDefault(Invoke(
 			[this](const QString &message, const qReal::Id &position) {
-				Q_UNUSED(message)
 				Q_UNUSED(position)
-				Q_EMIT mErrorReporterMock.error();
+				qDebug() << "Error:" << qUtf8Printable(message);
+				Q_EMIT mErrorReporterMock.error(message);
 				mWereErrors = true;
 			}));
 
@@ -79,7 +79,7 @@ QrguiFacade::QrguiFacade(QString const &modelName)
 
 	EXPECT_CALL(mErrorReporterMock, addInformation(_, _)).Times(AtLeast(0));
 	EXPECT_CALL(mErrorReporterMock, addWarning(_, _)).Times(AtLeast(0));
-	EXPECT_CALL(mErrorReporterMock, addError(_, _)).Times(AtLeast(0));
+	EXPECT_CALL(mErrorReporterMock, addErrorMock(_, _)).Times(AtLeast(0));
 	EXPECT_CALL(mErrorReporterMock, clear()).Times(AtLeast(0));
 	EXPECT_CALL(mErrorReporterMock, clearErrors()).Times(AtLeast(0));
 	EXPECT_CALL(mErrorReporterMock, wereErrors()).Times(AtLeast(0));
