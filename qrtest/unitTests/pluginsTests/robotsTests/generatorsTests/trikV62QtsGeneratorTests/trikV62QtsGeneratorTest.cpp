@@ -130,7 +130,7 @@ TEST_F(TrikV62QtsGeneratorTest, incorrectCasingVersionTest)
 	qReal::ActionInfo const &runProgramAction = actions.at(2);
 	runProgramAction.action()->trigger();
 
-	Wait waiter(10000);
+	Wait waiter(1000);
 	waiter.stopAt(errorReporterMock, &ErrorReporterMock::error, [](const QString &message) {
 		constexpr const char *expected = "Casing model mismatch";
 
