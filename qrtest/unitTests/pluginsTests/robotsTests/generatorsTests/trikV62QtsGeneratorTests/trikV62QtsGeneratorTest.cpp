@@ -131,7 +131,20 @@ TEST_F(TrikV62QtsGeneratorTest, incorrectCasingVersionTest)
 	runProgramAction.action()->trigger();
 
 	Wait waiter(1000);
-	waiter.stopAt(errorReporterMock, &ErrorReporterMock::error);
+	waiter.stopAt(errorReporterMock, &ErrorReporterMock::error, [](const QString &message) {
+		constexpr const char *expected = "Casing model mismatch";
+
+		if (!message.contains(expected)) {
+			qDebug() << "Expected error message containing:"
+				<< expected
+				<< "but got:"
+				<< message
+				<< "we are waiting further";
+			return false;
+		}
+
+		return true;
+	});
 	waiter.wait();
 
 	EXPECT_TRUE(controlSimulator().configVersionRequestReceived());

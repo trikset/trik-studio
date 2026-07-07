@@ -41,6 +41,16 @@ public:
 		QObject::connect(object, signal, &mLoop, &QEventLoop::quit);
 	}
 
+	template <typename Func, typename Checker>
+	void stopAt(const typename QtPrivate::FunctionPointer<Func>::Object *object, Func signal, Checker checker)
+	{
+		QObject::connect(object, signal, &mLoop, [this, checker](auto &&...args) {
+			if (checker(std::forward<decltype(args)>(args)...)) {
+				mLoop.quit();
+			}
+		});
+	}
+
 	/// Starts waiting event loop.
 	void wait();
 

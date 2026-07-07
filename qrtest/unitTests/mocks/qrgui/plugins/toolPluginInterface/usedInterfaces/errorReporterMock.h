@@ -27,12 +27,17 @@ namespace qrTest {
 class ErrorReporterMock : public QObject, public qReal::ErrorReporterInterface
 {
 	Q_OBJECT
+public Q_SLOTS:
+	void addError(const QString &message, const qReal::Id &position) override
+	{
+		addErrorMock(message, position);
+	}
 
 public:
 	explicit ErrorReporterMock(QObject *parent = nullptr): QObject(parent) {}
 	MOCK_METHOD2(addInformation, void(const QString &message, const qReal::Id &position));
 	MOCK_METHOD2(addWarning, void(const QString &message, const qReal::Id &position));
-	MOCK_METHOD2(addError, void(const QString &message, const qReal::Id &position));
+	MOCK_METHOD2(addErrorMock, void(const QString &message, const qReal::Id &position));
 	MOCK_METHOD2(addCritical, void(const QString &message, const qReal::Id &position));
 	MOCK_METHOD3(sendBubblingMessage, void(const QString &message, int duration, QWidget *parent));
 	MOCK_METHOD2(reportOperation, void(const QFuture<void> & operation, const QString &description));
@@ -44,7 +49,7 @@ public:
 Q_SIGNALS:
 	/// Intended to be emitted as a reaction to addError() call, but it is up to mock object configuration to do so.
 	/// Use QrguiFacade for a properly configured error reporter.
-	void error();
+	void error(const QString &message);
 };
 
 }
