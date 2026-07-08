@@ -45,7 +45,7 @@ EditorViewMViface::~EditorViewMViface()
 
 QRect EditorViewMViface::visualRect(const QModelIndex &) const
 {
-	return QRect();
+	return {};
 }
 
 void EditorViewMViface::scrollTo(const QModelIndex &, ScrollHint)
@@ -54,7 +54,7 @@ void EditorViewMViface::scrollTo(const QModelIndex &, ScrollHint)
 
 QModelIndex EditorViewMViface::indexAt(const QPoint &) const
 {
-	return QModelIndex();
+	return {};
 }
 
 bool EditorViewMViface::isDescendentOf(const QModelIndex &descendent, const QModelIndex &ancestor)
@@ -74,7 +74,7 @@ bool EditorViewMViface::isDescendentOf(const QModelIndex &descendent, const QMod
 QModelIndex EditorViewMViface::moveCursor(QAbstractItemView::CursorAction
 		, Qt::KeyboardModifiers)
 {
-	return QModelIndex();
+	return {};
 }
 
 int EditorViewMViface::horizontalOffset() const
@@ -98,7 +98,7 @@ void EditorViewMViface::setSelection(const QRect&, QItemSelectionModel::Selectio
 
 QRegion EditorViewMViface::visualRegionForSelection(const QItemSelection &) const
 {
-	return QRegion();
+	return {};
 }
 
 void EditorViewMViface::reset()

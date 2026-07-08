@@ -192,7 +192,7 @@ QPointF CurveItem::deserializePoint(const QString &string) const
 		return coordSystem->toPx({x, y});
 	}
 
-	return QPointF();
+	return {};
 }
 
 void CurveItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
@@ -245,7 +245,7 @@ MarkerItem::MarkerItem(QGraphicsItem *parent)
 
 QRectF MarkerItem::boundingRect() const
 {
-	return QRectF(-markerSize.width() / 2, -markerSize.height() / 2, markerSize.width(), markerSize.height());
+	return {-markerSize.width() / 2, -markerSize.height() / 2, markerSize.width(), markerSize.height()};
 }
 
 void MarkerItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

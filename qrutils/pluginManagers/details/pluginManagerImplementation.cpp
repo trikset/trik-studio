@@ -110,10 +110,10 @@ QString PluginManagerImplementation::unloadPlugin(const QString &pluginName)
 	}
 
 	if (stateUnload) {
-		return QString();
+		return {};
 	}
 
-	return QString("Plugin was not found");
+	return {"Plugin was not found"};
 }
 
 QList<QString> PluginManagerImplementation::namesOfPlugins() const

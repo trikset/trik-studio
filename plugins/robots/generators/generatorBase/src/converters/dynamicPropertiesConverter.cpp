@@ -57,5 +57,5 @@ QString DynamicPropertiesConverter::convert(const QString &properties) const
 		return result;
 	}
 
-	return QString();
+	return {};
 }

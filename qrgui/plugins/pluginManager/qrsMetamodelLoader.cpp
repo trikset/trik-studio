@@ -585,7 +585,7 @@ void QrsMetamodelLoader::inherit(ElementType &child, const ElementType &parent
 QString QrsMetamodelLoader::validateRootNode(const qrRepo::RepoApi &repo, const Id &diagram)
 {
 	if (!repo.hasProperty(diagram, "nodeName")) {
-		return QString();
+		return {};
 	}
 
 	const QString rootNode = repo.property(diagram, "nodeName").toString();

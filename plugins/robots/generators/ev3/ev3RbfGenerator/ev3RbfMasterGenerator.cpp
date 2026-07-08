@@ -58,7 +58,7 @@ QString Ev3RbfMasterGenerator::generate(const QString &indentString)
 {
 	if (mDiagram.isNull()) {
 		mErrorReporter.addCritical(QObject::tr("There is no opened diagram"));
-		return QString();
+		return {};
 	}
 
 	beforeGeneration();
@@ -86,7 +86,7 @@ QString Ev3RbfMasterGenerator::generate(const QString &indentString)
 	}
 
 	if (mainCode.isEmpty()) {
-		return QString();
+		return {};
 	}
 
 	QString resultCode = readTemplate("main.t");

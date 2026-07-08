@@ -229,5 +229,5 @@ DeviceInfo DevicesConfigurationWidget::convertibleDevice(const RobotModelInterfa
 		}
 	}
 
-	return DeviceInfo();
+	return {};
 }

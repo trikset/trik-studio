@@ -326,5 +326,5 @@ QSizeF GraphicalModelAssistApi::labelSize(const Id &graphicalId, int index) cons
 {
 	const QModelIndex modelIndex = mGraphicalPartModel.findIndex(graphicalId, index);
 	const QPolygonF configuration = modelIndex.data(GraphicalPartModel::configurationRole).value<QPolygonF>();
-	return QSizeF(configuration.at(0).x(), configuration.at(0).y());
+	return {configuration.at(0).x(), configuration.at(0).y()};
 }

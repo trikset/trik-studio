@@ -74,7 +74,7 @@ QString EditorManager::loadPlugin(const QString &pluginName)
 	const QString error = mPluginManager.pluginLoadedByName<MetamodelLoaderInterface>(pluginName).second;
 
 	if (loader && registerPlugin(loader)) {
-		return QString();
+		return {};
 	}
 
 	QLOG_WARN() << "Editor plugin" << pluginName << "loading failed: " << error;
@@ -284,7 +284,7 @@ QString EditorManager::propertyDescription(const Id &id, const QString &property
 	Q_ASSERT(mMetamodels.contains(id.editor()));
 
 	if (id.idSize() < 3) {
-		return QString();
+		return {};
 	}
 
 	return mMetamodels[id.editor()]->elementType(id.diagram(), id.element()).propertyDescription(propertyName);
@@ -295,7 +295,7 @@ QString EditorManager::propertyDisplayedName(const Id &id, const QString &proper
 	Q_ASSERT(mMetamodels.contains(id.editor()));
 
 	if (id.idSize() != 4) {
-		return QString();
+		return {};
 	}
 
 	return mMetamodels[id.editor()]->elementType(id.diagram(), id.element()).propertyDisplayedName(propertyName);
@@ -305,7 +305,7 @@ QString EditorManager::mouseGesture(const Id &id) const
 {
 	Q_ASSERT(mMetamodels.contains(id.editor()));
 	if (id.idSize() != 3) {
-		return QString();
+		return {};
 	}
 
 	const auto *node = dynamic_cast<const NodeElementType *>(&elementType(id));
@@ -315,7 +315,7 @@ QString EditorManager::mouseGesture(const Id &id) const
 QIcon EditorManager::icon(const Id &id) const
 {
 	if (!mMetamodels.contains(id.editor())) {
-		return QIcon();
+		return {};
 	}
 
 	return SdfIconLoader::iconOf(id, elementType(id).sdf());
@@ -453,7 +453,7 @@ QStringList EditorManager::allChildrenTypesOf(const Id &parent) const
 {
 	const auto &plugin = mMetamodels[parent.editor()];
 	if (!plugin) {
-		return QStringList();
+		return {};
 	}
 
 	QStringList result;
@@ -496,7 +496,7 @@ Pattern EditorManager::parsePattern(const Id &id) const
 {
 	PatternParser parser;
 	if (!parser.parseGroup(this, elementType(id).toPattern())) {
-		return Pattern();
+		return {};
 	}
 
 	return parser.pattern();
@@ -573,7 +573,7 @@ QString EditorManager::propertyNameByDisplayedName(const Id &id, const QString &
 		}
 	}
 
-	return QString();
+	return {};
 }
 
 IdList EditorManager::children(const Id &parent) const
@@ -760,7 +760,7 @@ IdList EditorManager::propertiesWithTheSameName(const Id &id, const QString &pro
 	Q_UNUSED(id)
 	Q_UNUSED(propertyCurrentName)
 	Q_UNUSED(propertyNewName)
-	return IdList();
+	return {};
 }
 
 void EditorManager::updateGenerationRule(const Id &id, const QString &newRule) const
@@ -772,7 +772,7 @@ void EditorManager::updateGenerationRule(const Id &id, const QString &newRule) c
 QString EditorManager::generationRule(const Id &id) const
 {
 	Q_UNUSED(id)
-	return QString();
+	return {};
 }
 
 QStringList EditorManager::getPropertiesInformation(const Id &id) const
@@ -793,7 +793,7 @@ QStringList EditorManager::getSameNamePropertyParams(const Id &propertyId, const
 {
 	Q_UNUSED(propertyId)
 	Q_UNUSED(propertyName)
-	return QStringList();
+	return {};
 }
 
 void EditorManager::restoreRemovedProperty(const Id &propertyId, const QString &previousName) const

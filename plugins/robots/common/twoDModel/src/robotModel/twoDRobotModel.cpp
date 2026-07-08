@@ -154,12 +154,12 @@ qreal TwoDRobotModel::wheelMass() const
 
 QSizeF TwoDRobotModel::size() const
 {
-	return QSizeF(50, 50);
+	return {50, 50};
 }
 
 QPointF TwoDRobotModel::robotCenter() const
 {
-	return QPointF(size().width() / 2, size().height() / 2);
+	return {size().width() / 2, size().height() / 2};
 }
 
 QPointF TwoDRobotModel::rotationCenter() const

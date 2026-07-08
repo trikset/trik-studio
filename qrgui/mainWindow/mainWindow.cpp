@@ -2283,7 +2283,7 @@ void MainWindow::arrangeElementsByDotRunner(const QString &algorithm, const QStr
 IdList MainWindow::selectedElementsOnActiveDiagram()
 {
 	if (!getCurrentTab()) {
-		return IdList();
+		return {};
 	}
 	QList<QGraphicsItem*> items = getCurrentTab()->scene()->items();
 

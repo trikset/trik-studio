@@ -26,7 +26,7 @@ QString InFile::readAll(const QString &fileName, QString *errorString)
 		if (errorString) {
 			*errorString = file.errorString();
 		}
-		return QString();
+		return {};
 	}
 
 	QTextStream input;

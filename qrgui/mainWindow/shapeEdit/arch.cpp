@@ -100,7 +100,7 @@ QRectF Arch::sceneBoundingRectCoord(QPoint topLeftPicture)
 {
 	const qreal x1 = scenePos().x() + mRect.x() - topLeftPicture.x();
 	const qreal y1 = scenePos().y() + mRect.y() - topLeftPicture.y();
-	return QRectF(x1, y1, mRect.width(), mRect.height());
+	return {x1, y1, mRect.width(), mRect.height()};
 }
 
 QPair<QDomElement, Item::DomElementTypes> Arch::generateItem(QDomDocument &document, const QPoint &topLeftPicture)

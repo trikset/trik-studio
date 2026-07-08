@@ -131,12 +131,12 @@ QPoint DummyMouseMovementManager::parsePoint(const QString &str)
 	bool isInt = true;
 	int x = str.section(comma, 0, 0).toInt(&isInt, 0);
 	int y = str.section(comma, 1, 1).toInt(&isInt, 0);
-	return QPoint(x, y);
+	return {x, y};
 }
 
 DummyMouseMovementManager::GestureResult DummyMouseMovementManager::result()
 {
-	return GestureResult();
+	return {};
 }
 
 QPointF DummyMouseMovementManager::firstPoint()
@@ -144,7 +144,7 @@ QPointF DummyMouseMovementManager::firstPoint()
 	if (!mPath.isEmpty() && !mPath.at(0).empty()) {
 		return QPointF(mPath.at(0).at(0));
 	}
-	return QPointF(0, 0);
+	return {0, 0};
 }
 
 QPointF DummyMouseMovementManager::lastPoint()
@@ -152,7 +152,7 @@ QPointF DummyMouseMovementManager::lastPoint()
 	if (!mPath.isEmpty() && !mPath.back().empty()) {
 		return QPointF(mPath.back().back());
 	}
-	return QPointF(0, 0);
+	return {0, 0};
 }
 
 bool DummyMouseMovementManager::wasMoving()

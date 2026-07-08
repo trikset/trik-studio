@@ -51,7 +51,7 @@ QString IfNode::toStringImpl(GeneratorCustomizer &customizer, int indent, const 
 	}
 
 	if (mThenZone->isEmpty() && mElseZone->isEmpty()) {
-		return QString();
+		return {};
 	}
 
 	const bool elseIsEmpty = mElseZone->isEmpty();

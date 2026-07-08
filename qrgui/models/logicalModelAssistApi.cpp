@@ -136,7 +136,7 @@ QVariant LogicalModelAssistApi::propertyByRoleName(const Id &elem, const QString
 {
 	int roleIndex = mModelsAssistApi.roleIndexByName(elem, roleName);
 	if (roleIndex < roles::customPropertiesBeginRole)
-		return QVariant();
+		return {};
 	return mModelsAssistApi.property(elem, roleIndex);
 }
 

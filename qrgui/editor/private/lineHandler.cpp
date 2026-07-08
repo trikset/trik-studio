@@ -237,7 +237,7 @@ EdgeArrangeCriteria LineHandler::arrangeCriteria(const NodeElement *node, const 
 	arrangeLine.setAngle(arrangeLine.angle() - portLine.angle());
 
 	const bool turningLeft = arrangeLine.dx() < 0;
-	return EdgeArrangeCriteria(turningLeft ? -1 : 1, 0.0, arrangeLine.dx());
+	return {turningLeft ? -1 : 1, 0.0, arrangeLine.dx()};
 }
 
 
@@ -420,7 +420,7 @@ bool LineHandler::isReshapeStarted() const
 QList<ContextMenuAction *> LineHandler::extraActions(QPointF pos)
 {
 	Q_UNUSED(pos)
-	return QList<ContextMenuAction *>();
+	return {};
 }
 
 void LineHandler::connectAction(ContextMenuAction *action, QObject *receiver, char const *slot) const

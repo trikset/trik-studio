@@ -145,7 +145,7 @@ QString DynamicPropertiesDialog::defaultLabelValue(const QString &type) const
 		return "true";
 	}
 
-	return QString();
+	return {};
 }
 
 void DynamicPropertiesDialog::saveButtonClicked()
@@ -387,7 +387,7 @@ QString DynamicPropertiesDialog::tryToSave() const
 		return tr("Duplicate names");
 	}
 
-	return QString();
+	return {};
 }
 
 void DynamicPropertiesDialog::addLabel(const QString &name, const QString &type, const QString &value)

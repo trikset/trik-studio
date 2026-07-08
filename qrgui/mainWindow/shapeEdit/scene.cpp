@@ -54,14 +54,14 @@ QRectF Scene::selectedItemsBoundingRect() const
 
 QPoint Scene::centerEmpty()
 {
-	return QPoint(sizeEmptyRectX / 2, sizeEmptyRectY / 2);
+	return {sizeEmptyRectX / 2, sizeEmptyRectY / 2};
 }
 
 QPointF Scene::setCXandCY(QGraphicsSceneMouseEvent *event)
 {
 	qreal x = event->scenePos().x();
 	qreal y = event->scenePos().y();
-	return QPointF(x, y);
+	return {x, y};
 }
 
 void Scene::reshapeLine(QGraphicsSceneMouseEvent *event)

@@ -27,7 +27,7 @@ PortInfo RobotModelUtils::findPort(const RobotModelInterface &robotModel, const 
 				return port;
 		}
 	}
-	return PortInfo();
+	return {};
 }
 
 QMap<QString, QMap<PortInfo, DeviceInfo>> RobotModelUtils::deserializeFromWorldModel(const QString &worldModel)

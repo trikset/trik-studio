@@ -55,7 +55,7 @@ void GetButtonCodeBlock::timerTimeout()
 
 DeviceInfo GetButtonCodeBlock::device() const
 {
-	return DeviceInfo();
+	return {};
 }
 
 void GetButtonCodeBlock::returnCode(int code)

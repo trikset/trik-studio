@@ -116,7 +116,7 @@ QString Pattern::rootType() const
 		}
 	}
 
-	return QString();
+	return {};
 }
 
 void Pattern::setRootNode(const QString &rootId)

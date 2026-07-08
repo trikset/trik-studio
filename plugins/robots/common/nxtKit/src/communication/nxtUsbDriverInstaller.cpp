@@ -139,7 +139,7 @@ QString NxtUsbDriverInstaller::checkWindowsDriverComponents() const
 		}
 	}
 
-	return QString();
+	return {};
 }
 
 QString NxtUsbDriverInstaller::findBossaProgramPortDriver() const
@@ -161,12 +161,12 @@ QString NxtUsbDriverInstaller::findBossaProgramPortDriver() const
 	pnpUtil.start("cmd", { "/c", QString("chcp 437 & %1 -e").arg(pnpUtilPath) }, QProcess::ReadOnly);
 	if (!pnpUtil.waitForStarted()) {
 		QLOG_ERROR() << "Could not spawn pnputil process. Args:" << pnpUtil.arguments();
-		return QString();
+		return {};
 	}
 
 	if (!pnpUtil.waitForFinished()) {
 		QLOG_ERROR() << "pnpUtil.exe timed out (strangely). Args:" << pnpUtil.arguments();
-		return QString();
+		return {};
 	}
 
 	QRegExp driverNameRegexp(QString(R"(.*Published name :\s+([A-Za-z0-9_\.]+)\s+Driver package provider :\s+%1.*)")

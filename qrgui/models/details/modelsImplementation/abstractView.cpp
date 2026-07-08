@@ -73,13 +73,13 @@ void AbstractView::rowsInserted(const QModelIndex &parent, int start, int end)
 QModelIndex AbstractView::indexAt(const QPoint &point) const
 {
 	Q_UNUSED(point)
-	return QModelIndex();
+	return {};
 }
 
 QRect AbstractView::visualRect(const QModelIndex &index) const
 {
 	Q_UNUSED(index)
-	return QRect();
+	return {};
 }
 
 void AbstractView::scrollTo(const QModelIndex &index, ScrollHint hint)
@@ -99,7 +99,7 @@ QModelIndex AbstractView::moveCursor(QAbstractItemView::CursorAction cursorActio
 {
 	Q_UNUSED(cursorAction)
 	Q_UNUSED(modifiers)
-	return QModelIndex();
+	return {};
 }
 
 int AbstractView::horizontalOffset() const
@@ -127,5 +127,5 @@ void AbstractView::setSelection(const QRect& rect, QItemSelectionModel::Selectio
 QRegion AbstractView::visualRegionForSelection(const QItemSelection &selection ) const
 {
 	Q_UNUSED(selection)
-	return QRegion();
+	return {};
 }

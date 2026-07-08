@@ -585,7 +585,7 @@ QList<int> Repository::graphicalParts(const qReal::Id &id) const
 {
 	auto * const graphicalObject = dynamic_cast<GraphicalObject *>(mObjects[id]);
 	if (!graphicalObject) {
-		return QList<int>();
+		return {};
 	}
 
 	return graphicalObject->graphicalParts();

@@ -217,7 +217,7 @@ QRectF XmlLoader::readRectOfXandY(const QDomElement &docItem)
 
 	checkScale(pointX1, pointX2, pointY1, pointY2);
 
-	return QRectF(x1, y1, x2 - x1, y2 - y1);
+	return {x1, y1, x2 - x1, y2 - y1};
 }
 
 QPair<QPointF, QPointF> XmlLoader::calcLineOfXandY(const QPair<QString, bool> &pointX1
@@ -305,7 +305,7 @@ QPointF XmlLoader::readXandY(const QDomElement &docItem)
 	qreal y = pointY.first.toDouble() + mDrift.y();
 
 	checkScale(pointX, QPair<QString, bool>("", false), pointY, QPair<QString, bool>("", false));
-	return QPointF(x, y);
+	return {x, y};
 }
 
 void XmlLoader::readLine(const QDomElement &line)
@@ -646,7 +646,7 @@ Item::VisibilityCondition XmlLoader::readVisibility(const QDomElement &item)
 {
 	QDomElement visibility = item.elementsByTagName("showIf").item(0).toElement();
 	if (visibility.isNull()) {
-		return Item::VisibilityCondition();
+		return {};
 	}
 
 	Item::VisibilityCondition result;

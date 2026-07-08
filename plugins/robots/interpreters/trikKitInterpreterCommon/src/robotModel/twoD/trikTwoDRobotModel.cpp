@@ -195,7 +195,7 @@ QString TrikTwoDRobotModel::sensorImagePath(const DeviceInfo &deviceType) const
 		return ":icons/twoDIrRangeSensor.svg";
 	}
 
-	return QString();
+	return {};
 }
 
 void TrikTwoDRobotModel::setWheelPorts(const QString &leftWheelPort, const QString &rightWheelPort)
@@ -207,20 +207,20 @@ void TrikTwoDRobotModel::setWheelPorts(const QString &leftWheelPort, const QStri
 QRect TrikTwoDRobotModel::sensorImageRect(const kitBase::robotModel::DeviceInfo &deviceType) const
 {
 	if (deviceType.isA<robotParts::TouchSensor>()) {
-			return QRect(-12, -5, 25, 10);
+			return {-12, -5, 25, 10};
 	} else if (deviceType.isA<robotParts::LightSensor>()) {
-		return QRect(-6, -6, 12, 12);
+		return {-6, -6, 12, 12};
 	} else if (deviceType.isA<robotModel::parts::TrikInfraredSensor>()) {
-		return QRect(-18, -18, 36, 36);
+		return {-18, -18, 36, 36};
 	} else if (deviceType.isA<robotModel::parts::TrikSonarSensor>()) {
-		return QRect(-18, -18, 36, 36);
+		return {-18, -18, 36, 36};
 	} else if (deviceType.isA<robotModel::parts::TrikVideoCamera>()) {
-		return QRect(-9, -9, 18, 18);
+		return {-9, -9, 18, 18};
 	} else if (deviceType.isA<robotParts::LidarSensor>()) {
-		return QRect(-18, -18, 36, 36);
+		return {-18, -18, 36, 36};
 	}
 
-	return QRect();
+	return {};
 }
 
 QHash<kitBase::robotModel::PortInfo, kitBase::robotModel::DeviceInfo> TrikTwoDRobotModel::specialDevices() const

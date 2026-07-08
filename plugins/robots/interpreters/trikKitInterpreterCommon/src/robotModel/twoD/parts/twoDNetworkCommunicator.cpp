@@ -42,7 +42,7 @@ QString TwoDNetworkCommunicator::receive(bool wait)
 		return mMailbox->receive(wait);
 	}
 
-	return QString();
+	return {};
 }
 
 void TwoDNetworkCommunicator::stopWaiting()

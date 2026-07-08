@@ -156,7 +156,7 @@ QVariant Block::property(const Id &id, const QString &propertyName)
 		// graphical id existed when this Block instance was constructed (or we just will not get here),
 		// but now the logical instance has suddenly disppeared.
 		error(tr("Block has disappeared!"));
-		return QVariant();
+		return {};
 	}
 
 	return mLogicalModelApi->propertyByRoleName(logicalId, propertyName);

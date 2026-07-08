@@ -54,5 +54,5 @@ QString ReservedFunctionsConverter::convert(const QString &name, const QStringLi
 		return readTemplate("sensors/vector.t").replace("@@PORT@@", !args.empty() ? args[0] : QString());
 	}
 
-	return QString();
+	return {};
 }

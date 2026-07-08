@@ -137,7 +137,7 @@ void NullMainWindow::arrangeElementsByDotRunner(const QString &algorithm, const 
 
 IdList NullMainWindow::selectedElementsOnActiveDiagram()
 {
-	return IdList();
+	return {};
 }
 
 void NullMainWindow::activateItemOrDiagram(const Id &id, bool setSelected)
@@ -316,7 +316,7 @@ void NullMainWindow::addToolBar(Qt::ToolBarArea area, QToolBar * const toolbar)
 QByteArray NullMainWindow::saveState(int version) const
 {
 	Q_UNUSED(version)
-	return QByteArray();
+	return {};
 }
 
 bool NullMainWindow::restoreState(const QByteArray &state, int version)

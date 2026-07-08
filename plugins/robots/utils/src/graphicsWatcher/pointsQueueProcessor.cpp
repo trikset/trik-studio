@@ -149,7 +149,7 @@ void PointsQueueProcessor::checkPeaks()
 QPointF PointsQueueProcessor::pointOfVerticalIntersection(QPointF position) const
 {
 	if (mPointsQueue.isEmpty())
-		return QPointF(0, 0);
+		return {0, 0};
 	const qreal accuracyCoefficient = 2; // accuracy = diameter * accCoefficient
 	const qreal diameter = (mPointsQueue.last().x() - mPointsQueue.first().x()) / mPointsQueue.size();
 

@@ -58,5 +58,5 @@ SimpleNode *SimpleNode::createBreakNode(QObject *parent)
 
 QLinkedList<SemanticNode *> SimpleNode::children() const
 {
-	return QLinkedList<SemanticNode *>();
+	return {};
 }

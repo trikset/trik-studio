@@ -31,7 +31,7 @@ TwoDLed::TwoDLed(const DeviceInfo &info
 QColor TwoDLed::color() const
 {
 	/// @todo
-	return QColor();
+	return {};
 }
 
 void TwoDLed::setColor(const QColor &color)

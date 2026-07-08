@@ -81,7 +81,7 @@ PortInfo PortInfo::fromString(const QString &string)
 {
 	const QStringList parts = string.split("###");
 	if (parts.count() != 4) {
-		return PortInfo();
+		return {};
 	}
 
 	return PortInfo(parts[0], parts[1] == "input" ? input : output

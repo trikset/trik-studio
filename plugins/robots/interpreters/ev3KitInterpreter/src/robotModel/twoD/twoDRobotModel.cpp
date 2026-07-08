@@ -111,7 +111,7 @@ QString TwoDRobotModel::sensorImagePath(const DeviceInfo &deviceType) const
 	} else if (deviceType.isA<kitBase::robotModel::robotParts::RangeSensor>()) {
 		return ":/ev3/interpreter/images/ev3-sonar.png";
 	} else {
-		return QString();
+		return {};
 	}
 }
 
@@ -119,17 +119,17 @@ QString TwoDRobotModel::sensorImagePath(const DeviceInfo &deviceType) const
 QRect TwoDRobotModel::sensorImageRect(const kitBase::robotModel::DeviceInfo &deviceType) const
 {
 	if (deviceType.isA<robotParts::TouchSensor>()) {
-		return QRect(-12, -5, 25, 10);
+		return {-12, -5, 25, 10};
 	} else if (deviceType.isA<robotParts::ColorSensor>()
 			|| deviceType.isA<robotParts::ColorSensorRaw>()
 			|| deviceType.isA<robotParts::LightSensor>()) {
-		return QRect(-6, -6, 12, 12);
+		return {-6, -6, 12, 12};
 	}
 	if (deviceType.isA<robotParts::RangeSensor>()) {
-		return QRect(-20, -10, 40, 20);
+		return {-20, -10, 40, 20};
 	} else {
 		Q_ASSERT(!"Unknown sensor type");
-		return QRect();
+		return {};
 	}
 }
 

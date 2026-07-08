@@ -757,7 +757,7 @@ QPointF EditorViewScene::currentMousePos() const
 	}
 
 	if (!editor) {
-		return QPointF();
+		return {};
 	}
 
 	return editor->mapToScene(editor->mapFromGlobal(QCursor::pos()));
@@ -833,16 +833,16 @@ QPointF EditorViewScene::offsetByDirection(int direction)
 
 	switch (direction) {
 		case Qt::Key_Left:
-			return QPointF(-offset, 0);
+			return {static_cast<qreal>(-offset), 0};
 		case Qt::Key_Right:
-			return QPointF(offset, 0);
+			return {static_cast<qreal>(offset), 0};
 		case Qt::Key_Down:
-			return QPointF(0, offset);
+			return {0, static_cast<qreal>(offset)};
 		case Qt::Key_Up:
-			return QPointF(0, -offset);
+			return {0, static_cast<qreal>(-offset)};
 		default:
 			qDebug() << "Incorrect direction";
-			return QPointF(0, 0);
+			return {0, 0};
 	}
 }
 

@@ -182,7 +182,7 @@ Id Exploser::immediateExplosionTarget(const Id &id)
 		return explosions[0]->target().typeId();
 	}
 
-	return Id();
+	return {};
 }
 
 AbstractCommand *Exploser::addExplosionCommand(const Id &source, const Id &target

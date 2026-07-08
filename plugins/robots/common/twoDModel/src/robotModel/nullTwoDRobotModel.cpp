@@ -33,11 +33,11 @@ QString NullTwoDRobotModel::friendlyName() const
 
 QList<kitBase::robotModel::PortInfo> NullTwoDRobotModel::configurablePorts() const
 {
-	return QList<kitBase::robotModel::PortInfo>();
+	return {};
 }
 QList<kitBase::robotModel::DeviceInfo> NullTwoDRobotModel::convertibleBases() const
 {
-	return QList<kitBase::robotModel::DeviceInfo>();
+	return {};
 }
 
 QString NullTwoDRobotModel::robotImage() const
@@ -47,12 +47,12 @@ QString NullTwoDRobotModel::robotImage() const
 
 kitBase::robotModel::PortInfo NullTwoDRobotModel::defaultLeftWheelPort() const
 {
-	return kitBase::robotModel::PortInfo();
+	return {};
 }
 
 kitBase::robotModel::PortInfo NullTwoDRobotModel::defaultRightWheelPort() const
 {
-	return kitBase::robotModel::PortInfo();
+	return {};
 }
 
 twoDModel::engine::TwoDModelDisplayWidget *NullTwoDRobotModel::displayWidget() const

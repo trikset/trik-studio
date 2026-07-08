@@ -310,7 +310,7 @@ void RobotItem::BeepItem::paint(QPainter *painter, const QStyleOptionGraphicsIte
 
 QRectF RobotItem::BeepItem::boundingRect() const
 {
-	return QRectF(0, 0, beepWavesSize, beepWavesSize);
+	return {0, 0, beepWavesSize, beepWavesSize};
 }
 
 void RobotItem::BeepItem::drawBeep(QPainter *painter)

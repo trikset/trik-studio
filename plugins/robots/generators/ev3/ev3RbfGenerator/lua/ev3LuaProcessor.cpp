@@ -52,7 +52,7 @@ QString Ev3LuaProcessor::translate(const QString &data
 	if (!mVariables) {
 		qWarning() << "Variables instance is null in Ev3LuaProcessor. Something went wrong.";
 		QLOG_ERROR() << "Variables instance is null in Ev3LuaProcessor. Something went wrong.";
-		return QString();
+		return {};
 	}
 
 	mTextLanguage.setNeedGeneralization(false);
@@ -73,7 +73,7 @@ QString Ev3LuaProcessor::castTo(const QSharedPointer<qrtext::core::types::TypeEx
 	if (!mVariables) {
 		qWarning() << "Variables instance is null in Ev3LuaProcessor. Something went wrong.";
 		QLOG_ERROR() << "Variables instance is null in Ev3LuaProcessor. Something went wrong.";
-		return QString();
+		return {};
 	}
 
 	const QSharedPointer<qrtext::core::ast::Node> tree = parse(data, id, propertyName);

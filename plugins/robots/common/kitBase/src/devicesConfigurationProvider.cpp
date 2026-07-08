@@ -119,7 +119,7 @@ robotModel::DeviceInfo DevicesConfigurationProvider::currentConfiguration(const 
 		, const robotModel::PortInfo &port) const
 {
 	if (!mCurrentConfiguration.contains(modelName) || !mCurrentConfiguration[modelName].contains(port)) {
-		return robotModel::DeviceInfo();
+		return {};
 	}
 
 	return mCurrentConfiguration[modelName][port];

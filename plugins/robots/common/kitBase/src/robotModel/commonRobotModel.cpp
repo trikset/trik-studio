@@ -228,7 +228,7 @@ void CommonRobotModel::applyConfiguration()
 
 QHash<QString, int> CommonRobotModel::buttonCodes() const
 {
-	return QHash<QString, int>();
+	return {};
 }
 
 QList<DeviceInfo> CommonRobotModel::convertibleBases() const

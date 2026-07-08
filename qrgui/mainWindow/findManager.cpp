@@ -45,7 +45,7 @@ qReal::IdList FindManager::foundByMode(const QString &key, const QString &curren
 	} else if (currentMode == tr("by property content")) {
 		return mControlApi.elementsByPropertyContent(key, sensitivity, regExpression);
 	} else {
-		return qReal::IdList();
+		return {};
 	}
 }
 

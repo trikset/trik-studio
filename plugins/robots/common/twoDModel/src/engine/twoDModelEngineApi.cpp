@@ -178,7 +178,7 @@ int TwoDModelEngineApi::spoilRangeReading(const int distance) const
 QColor TwoDModelEngineApi::readColorSensor(const PortInfo &port) const
 {
 	const QImage image = areaUnderSensor(port, 0.3);
-	if (image.isNull()) return QColor();
+	if (image.isNull()) return {};
 
 	qreal averageB = 0, averageG = 0, averageR = 0;
 	auto arr = image.constBits();
@@ -203,7 +203,7 @@ QColor TwoDModelEngineApi::readColorSensor(const PortInfo &port) const
 	auto g = mathUtils::Math::truncateToInterval(0, 255, qRound(averageG));
 	auto b = mathUtils::Math::truncateToInterval(0, 255, qRound(averageB));
 
-	return QColor(r, g, b);
+	return {r, g, b};
 }
 
 uint TwoDModelEngineApi::spoilColor(const uint color) const
@@ -229,7 +229,7 @@ QImage TwoDModelEngineApi::areaUnderSensor(const PortInfo &port, qreal widthFact
 	if (device.isNull()) {
 		device = robotModels[0]->info().specialDevices()[port];
 		if (device.isNull()) {
-			return QImage();
+			return {};
 		}
 	}
 

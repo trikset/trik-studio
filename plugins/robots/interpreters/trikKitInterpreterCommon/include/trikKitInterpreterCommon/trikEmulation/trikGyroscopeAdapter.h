@@ -46,7 +46,7 @@ public Q_SLOTS:
 	bool isCalibrated() const override;
 	QVector<int> readRawData() const override;
 	void setCalibrationValues(const QVector<int> &) override {}
-	QVector<int> getCalibrationValues() override { return QVector<int>(); }
+	QVector<int> getCalibrationValues() override { return {}; }
 
 private Q_SLOTS:
 	void countTilt(const QVector<int> &oldFormat);

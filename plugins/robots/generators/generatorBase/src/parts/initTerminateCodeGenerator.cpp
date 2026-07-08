@@ -29,15 +29,15 @@ void InitTerminateCodeGenerator::reinit()
 
 QString InitTerminateCodeGenerator::initCode()
 {
-	return QString();
+	return {};
 }
 
 QString InitTerminateCodeGenerator::terminateCode()
 {
-	return QString();
+	return {};
 }
 
 QString InitTerminateCodeGenerator::isrHooksCode()
 {
-	return QString();
+	return {};
 }

@@ -131,13 +131,13 @@ public:
 	{
 		Q_UNUSED(deviceType)
 
-		return QRect();
+		return {};
 	}
 
 	/// Returns ports and info of devices that are specific to a particular robot model and non-configurable.
 	virtual QHash<kitBase::robotModel::PortInfo, kitBase::robotModel::DeviceInfo> specialDevices() const
 	{
-		return QHash<kitBase::robotModel::PortInfo, kitBase::robotModel::DeviceInfo>();
+		return {};
 	}
 
 	/// Returns position and direction of a special device image relative to robot image center

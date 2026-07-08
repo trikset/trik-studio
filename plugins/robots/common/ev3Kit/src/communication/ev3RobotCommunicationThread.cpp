@@ -53,13 +53,13 @@ QString Ev3RobotCommunicationThread::uploadFile(const QString &sourceFile, const
 		Q_EMIT errorOccured(tr("EV3 limits filename length to %1 characters, "
 				"but you have %2, please, rename your project.").arg(EV3_MAX_ALLOWED_FILENAME_LENGTH)
 				.arg(filenameLength));
-		return QString();
+		return {};
 	}
 
 	QFile file(sourceFile);
 	if (!file.open(QIODevice::ReadOnly)) {
 		QLOG_ERROR() << "Failed to open" << sourceFile;
-		return QString();
+		return {};
 	}
 
 	QByteArray data = file.readAll();
@@ -109,7 +109,7 @@ QString Ev3RobotCommunicationThread::uploadFile(const QString &sourceFile, const
 
 	if (!send1(commandBegin)) {
 		QLOG_ERROR() << "EV3USB" << "Failed to start program upload to robot";
-		return QString();
+		return {};
 	}
 
 	QByteArray commandBeginResponse = receive(EV3_BEGIN_DOWNLOAD_RESPONSE_SIZE);
@@ -125,7 +125,7 @@ QString Ev3RobotCommunicationThread::uploadFile(const QString &sourceFile, const
 						<< commandBeginResponse.right(commandBeginResponse.size()-7).toHex();
 		}
 
-		return QString();
+		return {};
 	}
 
 	char handle = commandBeginResponse.at(7);
@@ -148,7 +148,7 @@ QString Ev3RobotCommunicationThread::uploadFile(const QString &sourceFile, const
 		if (!send1(commandContinue)) {
 			QLOG_ERROR() << "EV3USB" << QString("Failed to send program data to robot bytes %1..%2")
 					.arg(sizeSent-sizeToSend).arg(sizeSent-1);
-			return QString();
+			return {};
 		}
 
 		QByteArray commandContinueResponse = receive(EV3_CONTINUE_DOWNLOAD_RESPONSE_SIZE);
@@ -162,7 +162,7 @@ QString Ev3RobotCommunicationThread::uploadFile(const QString &sourceFile, const
 				QLOG_INFO() << "EV3USB" << "Reply additional:"
 							<< commandContinueResponse.right(commandContinueResponse.size()-7).toHex();
 			}
-			return QString();
+			return {};
 		}
 	}
 

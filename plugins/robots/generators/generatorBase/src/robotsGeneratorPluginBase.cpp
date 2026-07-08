@@ -42,7 +42,7 @@ QString RobotsGeneratorPluginBase::defaultFilePath(const QString &projectName) c
 
 QString RobotsGeneratorPluginBase::generatorName() const
 {
-	return QString();
+	return {};
 }
 
 QString RobotsGeneratorPluginBase::defaultProjectName() const
@@ -162,7 +162,7 @@ void RobotsGeneratorPluginBase::init(const kitBase::KitPluginConfigurator &confi
 QString RobotsGeneratorPluginBase::friendlyKitName() const
 {
 	// Kit friendly name is already defined in interpreter kit plugins.
-	return QString();
+	return {};
 }
 
 QString RobotsGeneratorPluginBase::generateCode(bool openTab)
@@ -179,7 +179,7 @@ QString RobotsGeneratorPluginBase::generateCode(bool openTab)
 	const QString generatedSrcPath = generator->generate(language().indent());
 
 	if (mMainWindowInterface->errorReporter()->wereErrors()) {
-		return QString();
+		return {};
 	}
 
 	const Id activeDiagram = mMainWindowInterface->activeDiagram();

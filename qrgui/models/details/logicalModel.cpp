@@ -286,7 +286,7 @@ QVariant LogicalModel::data(const QModelIndex &index, int role) const
 			case Qt::EditRole:
 				return mApi.name(item->id());
 			case Qt::DecorationRole:
-				return QVariant();
+				return {};
 				// return mEditorManager.icon(item->id());
 			case roles::idRole:
 				return item->id().toVariant();
@@ -304,9 +304,9 @@ QVariant LogicalModel::data(const QModelIndex &index, int role) const
 		}
 
 		Q_ASSERT(role < Qt::UserRole);
-		return QVariant();
+		return {};
 	} else {
-		return QVariant();
+		return {};
 	}
 }
 
@@ -332,7 +332,7 @@ QVariant LogicalModel::dynamicPropertyData(const Id &id, int role) const
 		}
 	}
 
-	return QVariant();
+	return {};
 }
 
 bool LogicalModel::setData(const QModelIndex &index, const QVariant &value, int role)

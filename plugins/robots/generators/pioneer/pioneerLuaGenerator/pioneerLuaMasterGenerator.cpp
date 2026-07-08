@@ -109,7 +109,7 @@ QString PioneerLuaMasterGenerator::generate(const QString &indentString)
 {
 	if (mDiagram.isNull()) {
 		mErrorReporter.addCritical(QObject::tr("There is no opened diagram"));
-		return QString();
+		return {};
 	}
 
 	QLOG_INFO() << "Starting Pioneer program generation to " << mProjectDir;
@@ -145,7 +145,7 @@ QString PioneerLuaMasterGenerator::generate(const QString &indentString)
 		const QString errorMessage = tr("Generation failed. Possible causes are internal error in generator or too "
 				"complex program structure.");
 		mErrorReporter.addError(errorMessage);
-		return QString();
+		return {};
 	}
 
 	QString resultCode = readTemplate("main.t");

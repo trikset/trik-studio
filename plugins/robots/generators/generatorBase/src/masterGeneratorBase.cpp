@@ -77,7 +77,7 @@ QString MasterGeneratorBase::generate(const QString &indentString)
 {
 	if (mDiagram.isNull()) {
 		mErrorReporter.addCritical(QObject::tr("There is no opened diagram"));
-		return QString();
+		return {};
 	}
 
 	beforeGeneration();
@@ -107,11 +107,11 @@ QString MasterGeneratorBase::generate(const QString &indentString)
 			mainCode = QString();
 			break;
 		case parts::Subprograms::GenerationResult::fatalError:
-			return QString();
+			return {};
 		}
 	} else {
 		if (mStructuralControlFlowGenerator->errorsOccured()) {
-			return QString();
+			return {};
 		}
 	}
 
@@ -135,7 +135,7 @@ QString MasterGeneratorBase::generate(const QString &indentString)
 						"statements. Please contact the developers.")
 				: tr("This diagram cannot be generated into the structured code.");
 		mErrorReporter.addError(errorMessage);
-		return QString();
+		return {};
 	}
 
 	QString resultCode = readTemplate("main.t");
