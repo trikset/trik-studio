@@ -60,7 +60,7 @@ QPointF StatPoint::transformForContents(const QRectF &contents) const
 	const qreal x = mPoint.x() * (mPropX ? mInitWidth : contents.width());
 	const qreal y = mPoint.y() * (mPropY ? mInitHeight : contents.height());
 
-	return QPointF(x, y);
+	return {x, y};
 }
 
 QString StatPoint::type() const

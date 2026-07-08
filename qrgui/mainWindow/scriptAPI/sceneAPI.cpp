@@ -79,7 +79,7 @@ QString SceneAPI::createBlockOnScene(const DraggableElement * const paletteEleme
 		return uuid;
 	}
 
-	return QString();
+	return {};
 }
 
 QStringList SceneAPI::nodeList(const QString &diagram, const QString &element)

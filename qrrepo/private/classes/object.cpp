@@ -160,10 +160,10 @@ QVariant Object::property(const QString &name) const
 	if (mProperties.contains(name)) {
 		return mProperties[name];
 	} else if (name == "backReferences") {
-		return QVariant();
+		return {};
 	} else {
 		// TODO: replace with exception when there is some kind of model migration tool
-		return QVariant();
+		return {};
 	}
 }
 

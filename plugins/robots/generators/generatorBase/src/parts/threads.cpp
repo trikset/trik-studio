@@ -87,7 +87,7 @@ QString Threads::generateDeclarations() const
 	const QStringList threads = threadNames();
 	const QString forwardDeclaration = readTemplate("threads/forwardDeclaration.t");
 	if (forwardDeclaration.isEmpty() || threads.isEmpty()) {
-		return QString();
+		return {};
 	}
 
 	const QString declarationsHeader = readTemplate("threads/declarationsSectionHeader.t");
@@ -104,7 +104,7 @@ QString Threads::generateImplementations(const QString &indentString) const
 	QList<semantics::SemanticTree *> const threads = this->threads();
 	const QString implementation = readTemplate("threads/implementation.t");
 	if (implementation.isEmpty() || threads.isEmpty()) {
-		return QString();
+		return {};
 	}
 
 	const QString implementationsHeader = readTemplate("threads/implementationsSectionHeader.t");

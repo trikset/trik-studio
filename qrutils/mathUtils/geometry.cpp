@@ -43,8 +43,8 @@ QVector2D Geometry::projection(QVector2D projected, QVector2D target)
 QVector2D Geometry::rotateVector(QVector2D vector, qreal angleInDegrees)
 {
 	const qreal angle = angleInDegrees * pi / 180;
-	return QVector2D(vector.x() * qCos(angle) - vector.y() * sin(angle)
-			, vector.x() * sin(angle) + vector.y() * cos(angle));
+	return {static_cast<float>(vector.x() * qCos(angle) - vector.y() * sin(angle))
+			, static_cast<float>(vector.x() * sin(angle) + vector.y() * cos(angle))};
 }
 
 QPointF Geometry::normalPoint(const QLineF &line, QPointF point)
@@ -57,14 +57,14 @@ QPointF Geometry::normalPoint(const QLineF &line, QPointF point)
 	const qreal y3 = point.y();
 
 	if (x1 == x2) {
-		return QPointF(x2, y3);
+		return {x2, y3};
 	}
 
 	const qreal x = (x1 * Math::sqr(y2 - y1) + x3 * Math::sqr(x2 - x1) + (x2 - x1) * (y2 - y1) * (y3 - y1))
 			/ (Math::sqr(y2 - y1) + Math::sqr(x2 - x1));
 	const qreal y = ((y2 - y1) * (x - x1) / (x2 - x1)) + y1;
 
-	return QPointF(x, y);
+	return {x, y};
 }
 
 QLineF Geometry::normalLine(const QLineF &line, QPointF point)
@@ -96,7 +96,7 @@ QVector2D Geometry::directionVector(qreal angleInDegrees)
 
 QVector2D Geometry::directionVectorRad(qreal angleInRadians)
 {
-	return QVector2D(cos(angleInRadians), sin(angleInRadians));
+	return {static_cast<float>(cos(angleInRadians)), static_cast<float>(sin(angleInRadians))};
 }
 
 qreal Geometry::tangentLineAt(const QPainterPath &path, QPointF point)
@@ -146,7 +146,7 @@ QList<QPointF> Geometry::pathToPoints(const QPainterPath &path)
 		if (square(polygon) < polygonIsPointCondition) {
 			result << polygon[0];
 		} else {
-			return QList<QPointF>();
+			return {};
 		}
 	}
 
@@ -168,8 +168,8 @@ qreal Geometry::square(const QPolygonF &polygon)
 QLineF Geometry::veryLongLine(QPointF pointOnLine, QVector2D directionVector)
 {
 	const qreal halfLength = 10000;
-	return QLineF(pointOnLine + halfLength * directionVector.toPointF()
-			, pointOnLine - halfLength * directionVector.toPointF());
+	return {pointOnLine + halfLength * directionVector.toPointF()
+			, pointOnLine - halfLength * directionVector.toPointF()};
 }
 
 QList<QPointF> Geometry::intersection(const QLineF &line, const QPainterPath &path, qreal eps)

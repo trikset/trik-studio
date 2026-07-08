@@ -131,7 +131,8 @@ QSize Image::preferedSvgSize() const
 	}
 
 	// SVG viewbox may be too large. Cropping it here.
-	return QSize(svgSize.width() * maxSvgSize / maxDimension, svgSize.height() * maxSvgSize / maxDimension);
+	return {static_cast<int>(svgSize.width() * maxSvgSize / maxDimension),
+				static_cast<int>(svgSize.height() * maxSvgSize / maxDimension)};
 }
 
 bool Image::external() const

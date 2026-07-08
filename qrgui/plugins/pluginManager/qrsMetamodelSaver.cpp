@@ -166,7 +166,7 @@ Id QrsMetamodelSaver::saveGroup(qrRepo::RepoApi &repo, const PatternType &patter
 	Q_UNUSED(repo)
 	Q_UNUSED(pattern)
 	Q_UNUSED(diagramId)
-	return Id();
+	return {};
 }
 
 void QrsMetamodelSaver::saveEnum(qrRepo::RepoApi &repo, const Metamodel &metamodel
@@ -387,7 +387,7 @@ QString QrsMetamodelSaver::penStyleToString(Qt::PenStyle style)
 		return "dotLine";
 	default:
 		Q_EMIT errorOccured(tr("Unknown link style type %1").arg(static_cast<int>(style)), Id());
-		return QString();
+		return {};
 	}
 }
 

@@ -132,7 +132,7 @@ QString QRealFileDialog::lastFilterKey(const QString &id)
 QString QRealFileDialog::directoryOf(const QString &file)
 {
 	if (file.isEmpty()) {
-		return QString();
+		return {};
 	}
 
 	return QFileInfo(file).absoluteDir().absolutePath();

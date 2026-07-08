@@ -106,7 +106,7 @@ DeviceInfo &DeviceInfo::fromString(const QString &string)
 QString DeviceInfo::property(const QMetaObject * const metaObject, const QString &name)
 {
 	if (!metaObject) {
-		return QString();
+		return {};
 	}
 
 	// Superclass infos are have less indeces so iterating backwards for meeting device`s
@@ -118,5 +118,5 @@ QString DeviceInfo::property(const QMetaObject * const metaObject, const QString
 		}
 	}
 
-	return QString();
+	return {};
 }

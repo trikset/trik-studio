@@ -62,7 +62,7 @@ QRectF Curve::searchMaxMinCoord() const
 	qreal minY = qMin(qMin(y1(), y2()), mC1.y());
 	qreal maxX = qMax(qMax(x1(), x2()), mC1.x());
 	qreal maxY = qMax(qMax(y1(), y2()), mC1.y());
-	return QRectF(minX, minY, maxX - minX, maxY - minY);
+	return {minX, minY, maxX - minX, maxY - minY};
 }
 
 QRectF Curve::boundingRect() const

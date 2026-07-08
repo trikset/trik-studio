@@ -55,7 +55,7 @@ void PointObject::setY(int y)
 
 QPoint PointObject::pos() const
 {
-	return QPoint(mX, mY);
+	return {mX, mY};
 }
 
 void PointObject::paint(QPainter *painter, QRect outputRect)

@@ -34,7 +34,7 @@ StartPosition::StartPosition(graphicsUtils::AbstractCoordinateSystem *metricSyst
 
 QRectF StartPosition::boundingRect() const
 {
-	return QRectF(-size.width() / 2, -size.height() / 2, size.width(), size.height());
+	return {-size.width() / 2, -size.height() / 2, size.width(), size.height()};
 }
 
 void StartPosition::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

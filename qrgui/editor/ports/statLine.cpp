@@ -68,7 +68,7 @@ QLineF StatLine::transformForContents(const QRectF &contents) const
 	const qreal x2 = mLine.x2() * (mPropX2 ? mInitWidth : contents.width());
 	const qreal y2 = mLine.y2() * (mPropY2 ? mInitHeight : contents.height());
 
-	return QLineF(x1, y1, x2, y2);
+	return {x1, y1, x2, y2};
 }
 
 QString StatLine::type() const

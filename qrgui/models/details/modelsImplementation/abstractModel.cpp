@@ -44,7 +44,7 @@ QVariant AbstractModel::headerData(int section, Qt::Orientation orientation, int
 	if (orientation == Qt::Horizontal && role == Qt::DisplayRole && section == 0) {
 		return QVariant(tr("name"));
 	} else {
-		return QVariant();
+		return {};
 	}
 }
 
@@ -64,7 +64,7 @@ QModelIndex AbstractModel::index(int row, int column, const QModelIndex &parent)
 	AbstractModelItem *parentItem = parentAbstractItem(parent);
 
 	if (parentItem->children().size() <= row) {
-		return QModelIndex();
+		return {};
 	}
 
 	AbstractModelItem *item = parentItem->children().at(row);
@@ -89,12 +89,12 @@ QModelIndex AbstractModel::parent(const QModelIndex &index) const
 		auto *item = static_cast<AbstractModelItem *>(index.internalPointer());
 		AbstractModelItem *parentItem = item->parent();
 		if (parentItem == mRootItem || parentItem == nullptr) {
-			return QModelIndex();
+			return {};
 		} else {
 			return createIndex(parentItem->row(), 0, parentItem);
 		}
 	} else {
-		return QModelIndex();
+		return {};
 	}
 }
 
@@ -149,7 +149,7 @@ QModelIndex AbstractModel::indexById(const Id &id) const
 		return index(mModelItems.find(id).value());
 	}
 
-	return QModelIndex();
+	return {};
 }
 
 Id AbstractModel::idByIndex(const QModelIndex &index) const

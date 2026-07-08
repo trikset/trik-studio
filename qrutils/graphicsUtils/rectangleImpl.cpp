@@ -37,7 +37,7 @@ QPainterPath RectangleImpl::shape(qreal x1, qreal y1, qreal x2, qreal y2, const 
 
 QRectF RectangleImpl::calcRect(qreal x1, qreal y1, qreal x2, qreal y2)
 {
-	return QRectF(qMin(x1, x2), qMin(y1, y2), qAbs(x2 - x1), qAbs(y2 - y1));
+	return {qMin(x1, x2), qMin(y1, y2), qAbs(x2 - x1), qAbs(y2 - y1)};
 }
 
 void RectangleImpl::drawRectItem(QPainter *painter, qreal x1, qreal y1, qreal x2, qreal y2)
@@ -77,8 +77,8 @@ QPointF RectangleImpl::deserializePoint(const QString &string)
 	if (splittedStr.count() == 2) {
 		const qreal x = splittedStr[0].toDouble();
 		const qreal y = splittedStr[1].toDouble();
-		return QPointF(x, y);
+		return {x, y};
 	}
 
-	return QPointF();
+	return {};
 }

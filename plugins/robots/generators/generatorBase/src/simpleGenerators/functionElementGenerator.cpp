@@ -36,7 +36,7 @@ QString FunctionElementGenerator::generate()
 	const QString body = BindingGenerator::generate();
 	if (mGenerateToInit) {
 		mCustomizer.factory()->functions()->registerFunctionInInitialization(body);
-		return QString();
+		return {};
 	}
 
 	return body;

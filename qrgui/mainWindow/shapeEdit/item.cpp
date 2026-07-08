@@ -190,9 +190,9 @@ Item::ScalingPointState Item::getScalingPointState() const
 QColor Item::changeScaleColor(const QPair<Item::ScalingPointState, QColor> &point)
 {
 	if(point.second == QColor(Qt::black)) {
-		return QColor(Qt::red);
+		return {Qt::red};
 	} else {
-		return QColor(Qt::black);
+		return {Qt::black};
 	}
 }
 

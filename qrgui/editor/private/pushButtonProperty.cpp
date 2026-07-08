@@ -40,7 +40,7 @@ QString PushButtonPropertyManager::valueText(const QtProperty *) const
 
 QIcon PushButtonPropertyManager::valueIcon(const QtProperty *) const
 {
-	return QIcon();
+	return {};
 }
 
 PushButtonFactory::PushButtonFactory(QObject *parent)

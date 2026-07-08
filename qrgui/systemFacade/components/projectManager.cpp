@@ -372,13 +372,13 @@ bool ProjectManager::saveAs(const QString &fileName)
 QString ProjectManager::openFileName(const QString &promptPhrase) const
 {
 	Q_UNUSED(promptPhrase)
-	return QString();
+	return {};
 }
 
 QString ProjectManager::openExamplesFileName(const QString &promptPhrase) const
 {
 	Q_UNUSED(promptPhrase)
-	return QString();
+	return {};
 }
 
 void ProjectManager::showMessage(const QString &title, const QString &message) const
@@ -390,7 +390,7 @@ void ProjectManager::showMessage(const QString &title, const QString &message) c
 QString ProjectManager::saveFileName(const QString &promptPhrase) const
 {
 	Q_UNUSED(promptPhrase)
-	return QString();
+	return {};
 }
 
 void ProjectManager::setUnsavedIndicator(bool isUnsaved)

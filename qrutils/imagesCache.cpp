@@ -108,7 +108,7 @@ QByteArray ImagesCache::loadPixmap(const QFileInfo &fileInfo)
 {
 	QFile file(fileInfo.absoluteFilePath());
 	if (!file.open(QIODevice::ReadOnly)) {
-		return QByteArray();
+		return {};
 	}
 
 	return file.readAll();

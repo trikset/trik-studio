@@ -44,7 +44,7 @@ IdList BaseGraphTransformationUnit::elementsFromActiveDiagram() const
 	const Id activeDiagram = mInterpretersInterface.activeDiagram();
 	if (activeDiagram.idSize() < validIdSize) {
 		mInterpretersInterface.errorReporter()->addError(tr("no current diagram"));
-		return IdList();
+		return {};
 	}
 	const IdList activeDiagramElements = children(activeDiagram);
 	IdList activeDiagramGraphicalElements;

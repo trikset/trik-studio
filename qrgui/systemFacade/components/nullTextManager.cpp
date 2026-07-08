@@ -77,13 +77,13 @@ bool NullTextManager::contains(const QString &filePath) const
 Id NullTextManager::diagram(text::QScintillaTextEdit *code) const
 {
 	Q_UNUSED(code)
-	return Id();
+	return {};
 }
 
 QString NullTextManager::path(text::QScintillaTextEdit *code) const
 {
 	Q_UNUSED(code)
-	return QString();
+	return {};
 }
 
 bool NullTextManager::isDefaultPath(const QString &path) const
@@ -127,5 +127,5 @@ bool NullTextManager::saveText(bool saveAs)
 QString NullTextManager::generatorName(const QString &filePath) const
 {
 	Q_UNUSED(filePath)
-	return QString();
+	return {};
 }

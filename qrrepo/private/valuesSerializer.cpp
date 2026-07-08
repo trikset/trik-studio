@@ -28,7 +28,7 @@ IdList ValuesSerializer::deserializeIdList(const QDomElement &elem, const QStrin
 	QDomNodeList list = elem.elementsByTagName(name);
 	if (list.count() != 1) {
 		QLOG_ERROR() << "Incorrect element: " + name + " list must appear once";
-		return IdList();
+		return {};
 	}
 
 	IdList result;
@@ -42,7 +42,7 @@ IdList ValuesSerializer::deserializeIdList(const QDomElement &elem, const QStrin
 		QString elementStr = element.attribute("id", "");
 		if (elementStr == "") {
 			QLOG_ERROR() << "Incorrect Child XML node";
-			return IdList();
+			return {};
 		}
 
 		result.append(Id::loadFromString(elementStr));
@@ -58,19 +58,19 @@ Id ValuesSerializer::deserializeId(const QString &elementStr)
 QVariant ValuesSerializer::deserializeQVariant(const QString &typeName, const QString &valueStr)
 {
 	if (typeName.toLower() == "int") {
-		return QVariant(valueStr.toInt());
+		return {valueStr.toInt()};
 	} else if (typeName.toLower() == "uint") {
-		return QVariant(valueStr.toUInt());
+		return {valueStr.toUInt()};
 	} else if (typeName.toLower() == "double") {
-		return QVariant(valueStr.toDouble());
+		return {valueStr.toDouble()};
 	} else if (typeName.toLower() == "bool") {
-		return QVariant(valueStr.toLower() == "true");
+		return {valueStr.toLower() == "true"};
 	} else if (typeName == "QString") {
 		return QVariant(valueStr);
 	} else if (typeName == "QStringList") {
 		return QVariant(valueStr.split(',', QString::SkipEmptyParts));
 	} else if (typeName.toLower() == "char") {
-		return QVariant(valueStr[0]);
+		return {valueStr[0]};
 	} else if (typeName == "QPointF") {
 		return QVariant(deserializeQPointF(valueStr));
 	} else if (typeName == "QPolygon" || typeName == "QPolygonF") {
@@ -88,7 +88,7 @@ QVariant ValuesSerializer::deserializeQVariant(const QString &typeName, const QS
 		return Id::loadFromString(valueStr).toVariant();
 	} else {
 		Q_ASSERT(!"Unknown property type");
-		return QVariant();
+		return {};
 	}
 }
 
@@ -96,7 +96,7 @@ QPointF ValuesSerializer::deserializeQPointF(const QString &str)
 {
 	qreal x = str.section(", ", 0, 0).toDouble();
 	qreal y = str.section(", ", 1, 1).toDouble();
-	return QPointF(x, y);
+	return {x, y};
 }
 
 QString ValuesSerializer::serializeQVariant(const QVariant &v)

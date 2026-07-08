@@ -37,5 +37,5 @@ QString EnumConverterBase::convert(const QString &data) const
 		}
 	}
 
-	return QString();
+	return {};
 }

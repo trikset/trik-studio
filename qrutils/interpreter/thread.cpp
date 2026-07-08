@@ -164,7 +164,7 @@ Id Thread::findStartingElement(const Id &diagram) const
 		}
 	}
 
-	return Id();
+	return {};
 }
 
 void Thread::turnOn(BlockInterface * const block)

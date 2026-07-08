@@ -186,18 +186,18 @@ QRectF SensorItem::calculateImageRect() const
 {
 	const DeviceInfo sensor = mConfiguration.type(mPort);
 	if (sensor.isA<robotParts::TouchSensor>()) {
-		return QRectF(-12, -5, 25, 10);
+		return {-12, -5, 25, 10};
 	} else if (sensor.isA<robotParts::ColorSensor>()
 			|| sensor.isA<robotParts::ColorSensorRaw>()
 			|| sensor.isA<robotParts::LightSensor>()) {
-		return QRectF(-6, -6, 12, 12);
+		return {-6, -6, 12, 12};
 	}
 	if (sensor.isA<robotParts::RangeSensor>()
 			|| sensor.isA<robotParts::LidarSensor>()) {
-		return QRectF(-20, -10, 40, 20);
+		return {-20, -10, 40, 20};
 	} else {
 		Q_ASSERT(!"Unknown sensor type");
-		return QRectF();
+		return {};
 	}
 }
 

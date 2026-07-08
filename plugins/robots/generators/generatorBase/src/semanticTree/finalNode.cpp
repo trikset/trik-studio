@@ -33,5 +33,5 @@ QString FinalNode::toStringImpl(GeneratorCustomizer &customizer, int indent, con
 
 QLinkedList<SemanticNode *> FinalNode::children() const
 {
-	return QLinkedList<SemanticNode *>();
+	return {};
 }

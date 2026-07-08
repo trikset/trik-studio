@@ -55,7 +55,7 @@ QModelIndex PropertyEditorModel::index(int row, int column, const QModelIndex &p
 	if (childItem) {
 		return createIndex(row, column, childItem);
 	} else {
-		return QModelIndex();
+		return {};
 	}
 }
 
@@ -66,7 +66,7 @@ QModelIndex PropertyEditorModel::parent(const QModelIndex &index) const
 	Field *parentItem = childItem->parentItem();
 
 	if (parentItem == mField->parentItem()) {
-		return QModelIndex();
+		return {};
 	}
 
 	return createIndex(parentItem->row(), 0, parentItem);
@@ -102,14 +102,14 @@ QVariant PropertyEditorModel::headerData(int section, Qt::Orientation orientatio
 	if (role == Qt::DisplayRole && orientation == Qt::Horizontal) {
 		return QString(section == 1 ? "value" : "name");
 	} else {
-		return QVariant();
+		return {};
 	}
 }
 
 QVariant PropertyEditorModel::data(const QModelIndex &index, int role) const
 {
 	if (!isValid()) {
-		return QVariant();
+		return {};
 	}
 
 	Field* child = mField->child(index.row() + index.column());
@@ -417,7 +417,7 @@ QModelIndex PropertyEditorModel::modelIndex(int row) const
 		throw Exception("PropertyEditorModel::modelIndex: called for incorrect field,"
 				"which is not graphical nor logical attribute");
 	}
-	return QModelIndex();
+	return {};
 }
 
 int PropertyEditorModel::roleByIndex(int row) const
@@ -528,6 +528,6 @@ Id PropertyEditorModel::idByIndex(const QModelIndex &index) const
 		case graphicalAttribute:
 			return mTargetGraphicalObject.data(roles::idRole).value<Id>();
 		default:
-			return Id();
+			return {};
 	}
 }

@@ -75,7 +75,7 @@ QString PlatformInfo::defaultPlatformConfigPath()
 		}
 	}
 
-	return QString();
+	return {};
 }
 
 QString PlatformInfo::invariantPath(const QString &path)

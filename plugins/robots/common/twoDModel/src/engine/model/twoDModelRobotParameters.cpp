@@ -171,7 +171,7 @@ qreal TwoDRobotModelParameters::wheelDiameter() const
 
 QPointF TwoDRobotModelParameters::robotCenter() const
 {
-	return QPointF(mWidth / 2, mHeight / 2);
+	return {mWidth / 2, mHeight / 2};
 }
 
 qreal TwoDRobotModelParameters::onePercentAngularVelocity() const

@@ -220,7 +220,7 @@ QString ActionsManager::kitIdOf(kitBase::robotModel::RobotModelInterface &model)
 	}
 
 	/// @todo: Impossible scenario, something wrong if we get here.
-	return QString();
+	return {};
 }
 
 void ActionsManager::setEnableRobotActions(bool enableRobotActions)

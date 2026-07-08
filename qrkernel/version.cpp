@@ -23,7 +23,7 @@ Version Version::fromString(const QString &version)
 	const QStringList dashParts = version.split("-", QString::SkipEmptyParts);
 	const QStringList spaceParts = version.split(" ", QString::SkipEmptyParts);
 	if (dashParts.isEmpty() || spaceParts.isEmpty() || dashParts.count() > 2 || spaceParts.count() > 2) {
-		return Version();
+		return {};
 	}
 
 	const QStringList parts = dashParts.count() == 2 ? dashParts : spaceParts;
@@ -35,7 +35,7 @@ Version Version::fromString(const QString &version)
 
 	const QStringList numbers = prefix.split(".", QString::SkipEmptyParts);
 	if (numbers.isEmpty() || numbers.count() > 3) {
-		return Version();
+		return {};
 	}
 
 	const QString majorString = numbers[0];
@@ -50,7 +50,7 @@ Version Version::fromString(const QString &version)
 	success &= currentIsOk;
 
 	if (suffix.isEmpty() && success) {
-		return Version(major, minor, build);
+		return {major, minor, build};
 	}
 
 	// Splitting string into two parts: first is maximum letter prefix, second is remaining part.
@@ -79,10 +79,10 @@ Version Version::fromString(const QString &version)
 	success &= currentIsOk;
 
 	if (!success) {
-		return Version();
+		return {};
 	}
 
-	return Version(major, minor, build, stage, stageNumber);
+	return {major, minor, build, stage, stageNumber};
 }
 
 Version::Stage Version::parseStage(const QString &stage, bool &ok)
@@ -167,6 +167,6 @@ QString Version::suffixString() const
 	case releaseCandidate:
 		return QString("-rc%1").arg(QString::number(mStageNumber));
 	default:
-		return QString();
+		return {};
 	}
 }

@@ -73,7 +73,7 @@ QVariant LuaInterpreter::interpret(const QSharedPointer<core::ast::Node> &root
 	Q_UNUSED(semanticAnalyzer);
 
 	if (!root) {
-		return QVariant();
+		return {};
 	}
 
 	if (root->is<ast::Block>()) {
@@ -107,20 +107,20 @@ QVariant LuaInterpreter::interpret(const QSharedPointer<core::ast::Node> &root
 				mErrors.append(core::Error(root->start(), QObject::tr("Variable %1 is read-only")
 						, core::ErrorType::runtimeError, core::Severity::error));
 
-				return QVariant();
+				return {};
 			}
 
 			mIdentifierValues.insert(name, interpretedValue);
-			return QVariant();
+			return {};
 		} else if (variable->is<ast::IndexingExpression>()) {
 			assignToTableElement(variable, interpretedValue, semanticAnalyzer);
-			return QVariant();
+			return {};
 		} else {
 			mErrors.append(core::Error(root->start(), QObject::tr("This construction is not supported by interpreter")
 					, core::ErrorType::runtimeError, core::Severity::error));
 		}
 
-		return QVariant();
+		return {};
 
 	} else if (root->is<ast::Identifier>()) {
 		auto name = as<ast::Identifier>(root)->name();
@@ -153,12 +153,12 @@ QVariant LuaInterpreter::interpret(const QSharedPointer<core::ast::Node> &root
 	} else if (root->is<ast::False>()) {
 		return false;
 	} else if (root->is<ast::Nil>()) {
-		return QVariant();
+		return {};
 	} else {
 		mErrors.append(core::Error(root->start(), QObject::tr("This construction is not supported by interpreter")
 				, core::ErrorType::runtimeError, core::Severity::error));
 
-		return QVariant();
+		return {};
 	}
 }
 
@@ -235,7 +235,7 @@ QVariant LuaInterpreter::interpretUnaryOperator(const QSharedPointer<core::ast::
 		return ~(interpret(operand, semanticAnalyzer).toInt());
 	}
 
-	return QVariant();
+	return {};
 }
 
 QVariant LuaInterpreter::interpretBinaryOperator(const QSharedPointer<core::ast::Node> &root
@@ -332,7 +332,7 @@ QVariant LuaInterpreter::interpretBinaryOperator(const QSharedPointer<core::ast:
 				|| interpret(rightOperand, semanticAnalyzer).toInt();
 	}
 
-	return QVariant();
+	return {};
 }
 
 
@@ -372,7 +372,7 @@ QVariant LuaInterpreter::operateOnIndexingExpressionRecursive(const QSharedPoint
 		}
 
 		reportError();
-		return QVariant();
+		return {};
 	} else if (node->table()->is<ast::IndexingExpression>()) {
 		if (semanticAnalyzer.type(node->indexer())->is<types::Number>()) {
 			const auto index = interpret(node->indexer(), semanticAnalyzer).toInt();
@@ -381,7 +381,7 @@ QVariant LuaInterpreter::operateOnIndexingExpressionRecursive(const QSharedPoint
 		}
 
 		reportError();
-		return QVariant();
+		return {};
 	}
 
 	/// @todo Support more complex cases of table slice, like
@@ -391,7 +391,7 @@ QVariant LuaInterpreter::operateOnIndexingExpressionRecursive(const QSharedPoint
 			, QObject::tr("Tables denoted by something other than identifier (like f(x)[0]) are not allowed")
 			, core::ErrorType::runtimeError, core::Severity::error));
 
-	return QVariant();
+	return {};
 }
 
 QVariant LuaInterpreter::constructTable(const QSharedPointer<core::ast::Node> &tableConstructor

@@ -267,12 +267,12 @@ QVariant GraphicalModel::data(const QModelIndex &index, int role) const
 			return mApi.configuration(item->id());
 		}
 		if (role >= roles::customPropertiesBeginRole) {
-			return QVariant();  // Custom properties are invalid for graphical objects for now.
+			return {};  // Custom properties are invalid for graphical objects for now.
 		}
 		Q_ASSERT(role < Qt::UserRole);
-		return QVariant();
+		return {};
 	} else {
-		return QVariant();
+		return {};
 	}
 }
 

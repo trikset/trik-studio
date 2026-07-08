@@ -52,7 +52,7 @@ QVariant GraphicalPartModel::data(const QModelIndex &index, int role) const
 	case configurationRole:
 		return mRepoApi.graphicalPartProperty(item->id(), item->index(), "configuration");
 	default:
-		return QVariant();
+		return {};
 	}
 }
 
@@ -97,7 +97,7 @@ int GraphicalPartModel::columnCount(const QModelIndex &parent) const
 QModelIndex GraphicalPartModel::index(int row, int column, const QModelIndex &parent) const
 {
 	if (column >= columnCount(parent) || row >= rowCount(parent)) {
-		return QModelIndex();
+		return {};
 	}
 
 	if (!parent.isValid()) {
@@ -106,7 +106,7 @@ QModelIndex GraphicalPartModel::index(int row, int column, const QModelIndex &pa
 
 	const QModelIndex grandParent = parent.parent();
 	if (grandParent.isValid()) {
-		return QModelIndex();
+		return {};
 	}
 
 	return createIndex(row, column, mItems[parent.row()].at(row));
@@ -115,11 +115,11 @@ QModelIndex GraphicalPartModel::index(int row, int column, const QModelIndex &pa
 QModelIndex GraphicalPartModel::parent(const QModelIndex &index) const
 {
 	if (!index.isValid()) {
-		return QModelIndex();
+		return {};
 	}
 
 	if (!index.internalPointer()) {
-		return QModelIndex();
+		return {};
 	}
 
 	const auto * const item = static_cast<const GraphicalPartModelItem *>(index.internalPointer());
@@ -164,7 +164,7 @@ QModelIndex GraphicalPartModel::addGraphicalPart(const Id &element, int index)
 QModelIndex GraphicalPartModel::findIndex(const Id &element, int index) const
 {
 	if (!mIdPositions.contains(element)) {
-		return QModelIndex();
+		return {};
 	}
 
 	const int parentRow = mIdPositions.value(element);
@@ -179,7 +179,7 @@ QModelIndex GraphicalPartModel::findIndex(const Id &element, int index) const
 	}
 
 	if (partRow == mItems[parentRow].size()) {
-		return QModelIndex();
+		return {};
 	}
 
 	return this->index(partRow, 0, parent);

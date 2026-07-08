@@ -60,7 +60,7 @@ void TextObject::setY(int y)
 
 QPoint TextObject::pos() const
 {
-	return QPoint(mX, mY);
+	return {mX, mY};
 }
 
 QString TextObject::text() const

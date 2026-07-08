@@ -62,7 +62,7 @@ Id DevicesConfigurationManager::mainDiagramId() const
 		if (logicalDiagramId.element() == diagramName && mLogicalModelAssistInterface.isLogicalId(logicalDiagramId)) {
 			if (!result.isNull()) {
 				// Then there are more than two robot diagrams in this save, ignoring all of them...
-				return Id();
+				return {};
 			}
 
 			result = logicalDiagramId;

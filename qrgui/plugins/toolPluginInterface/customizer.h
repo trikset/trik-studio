@@ -60,7 +60,7 @@ public:
 	/// Customizes QReal's icon
 	virtual QIcon applicationIcon() const
 	{
-		return QIcon();
+		return {};
 	}
 
 	/// Customizes QReal`s logo in large format
@@ -85,7 +85,7 @@ public:
 	/// Empty string as result means that the system doesn`t have examples
 	virtual QString examplesDirectory() const
 	{
-		return QString();
+		return {};
 	}
 
 	/// Customizes the visibility of the actions on the toolbar and main menu.

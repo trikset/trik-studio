@@ -109,7 +109,7 @@ public:
 	/// If empty string is returned (like in default implementation) default settings are ignored for this kit plugin.
 	virtual QString defaultSettingsFile() const
 	{
-		return QString();
+		return {};
 	}
 
 	/// Returns an icon for toolbar action of fast robot model switching.

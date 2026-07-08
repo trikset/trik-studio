@@ -95,20 +95,20 @@ twoDModel::engine::TwoDModelDisplayWidget *TwoDRobotModel::displayWidget() const
 QRect TwoDRobotModel::sensorImageRect(const kitBase::robotModel::DeviceInfo &deviceType) const
 {
 	if (deviceType.isA<robotParts::TouchSensor>()) {
-		return QRect(-12, -5, 25, 10);
+		return {-12, -5, 25, 10};
 	}
 
 	if (deviceType.isA<robotParts::ColorSensor>()
 			|| deviceType.isA<robotParts::ColorSensorRaw>()
 			|| deviceType.isA<robotParts::LightSensor>()) {
-		return QRect(-6, -6, 12, 12);
+		return {-6, -6, 12, 12};
 	}
 
 	if (deviceType.isA<robotParts::RangeSensor>()) {
-		return QRect(-20, -10, 40, 20);;
+		return {-20, -10, 40, 20};;
 	}
 
-	return QRect();
+	return {};
 }
 
 QPolygonF TwoDRobotModel::collidingPolygon() const

@@ -523,7 +523,7 @@ EdgeArrangeCriteria SquareLine::arrangeCriteria(const NodeElement *node, const Q
 	if ((turningLeft && above) || (!turningLeft && !above)) {
 		yOffset = -yOffset;
 	}
-	return EdgeArrangeCriteria(turningLeft ? -1 : 1, yOffset, arrangeLine.dx());
+	return {turningLeft ? -1 : 1, yOffset, arrangeLine.dx()};
 }
 
 QPointF SquareLine::portArrangePoint(const NodeElement *node) const
@@ -538,7 +538,7 @@ QPointF SquareLine::portArrangePoint(const NodeElement *node) const
 	if (node == dst) {
 		return (line.count() == 2) ? mEdge->mapToItem(src, line[0]) : mEdge->mapToItem(dst, line[line.count() - 3]);
 	}
-	return QPointF();
+	return {};
 }
 
 QList<ContextMenuAction *> SquareLine::extraActions(QPointF pos)

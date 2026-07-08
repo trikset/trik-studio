@@ -55,7 +55,7 @@ QString VisibilityValueWidget::value() const
 	if (auto *spinBox = dynamic_cast<QSpinBox *>(mWidget)) {
 		return QString::number(spinBox->value());
 	}
-	return QString();
+	return {};
 }
 
 void VisibilityValueWidget::makeWidget(VisibilityConditionsDialog::Type type)

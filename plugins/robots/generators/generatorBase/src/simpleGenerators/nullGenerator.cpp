@@ -27,5 +27,5 @@ NullGenerator::NullGenerator(const qrRepo::RepoApi &repo
 
 QString NullGenerator::generate()
 {
-	return QString();
+	return {};
 }

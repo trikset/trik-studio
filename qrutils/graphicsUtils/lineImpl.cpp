@@ -65,7 +65,7 @@ QPainterPath LineImpl::fieldForResizeItem(const int resizeDrift, qreal x1, qreal
 
 QLineF LineImpl::line(qreal x1, qreal y1, qreal x2, qreal y2) const
 {
-	return QLineF(x1, y1, x2, y2);
+	return {x1, y1, x2, y2};
 }
 
 QPainterPath LineImpl::shape(const int width, qreal x1, qreal y1, qreal x2, qreal y2) const
@@ -125,8 +125,8 @@ QPointF LineImpl::deserializePoint(const QString &string) const
 	if (splittedStr.count() == 2) {
 		const qreal x = splittedStr[0].toDouble();
 		const qreal y = splittedStr[1].toDouble();
-		return QPointF(x, y);
+		return {x, y};
 	}
 
-	return QPointF();
+	return {};
 }
