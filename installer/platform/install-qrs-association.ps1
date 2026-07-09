@@ -1,6 +1,6 @@
 param(
     [string]$TargetDir,
-    [bool]$AllUsers = $false
+    [string]$AllUsers = "false"
 )
 
 if (-not $TargetDir) {
@@ -17,7 +17,9 @@ $icon = Join-Path $TargetDir "trik-studio.ico"
 
 $command = "C:\Windows\System32\wscript.exe //nologo //b // `"$vbs`" `"%1`""
 
-if ($AllUsers) {
+$allUsersEnabled = $AllUsers -eq "true"
+
+if ($allUsersEnabled) {
     $root = "HKLM:"
 } else {
     $root = "HKCU:"
