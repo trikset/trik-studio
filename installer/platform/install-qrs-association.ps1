@@ -1,5 +1,5 @@
 param(
-    [string]$TargetDir,
+    [string]$TargetDir = $PSScriptRoot,
     [string]$AllUsers = "false"
 )
 
@@ -85,3 +85,16 @@ Set-ItemProperty `
     -Path $iconPath `
     -Name "(default)" `
     -Value $icon
+
+Add-Type -TypeDefinition @"
+using System;
+using System.Runtime.InteropServices;
+public class ShellNotify {
+    [DllImport("shell32.dll")]
+    public static extern void SHChangeNotify(uint wEventId, uint uFlags, IntPtr dwItem1, IntPtr dwItem2);
+}
+"@
+$SHCNE_ASSOCCHANGED = 0x08000000
+$SHCNF_FLUSH = 0x1000
+
+[ShellNotify]::SHChangeNotify($SHCNE_ASSOCCHANGED, $SHCNF_FLUSH, [IntPtr]::Zero, [IntPtr]::Zero)
