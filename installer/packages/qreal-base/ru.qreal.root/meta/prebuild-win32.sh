@@ -32,6 +32,7 @@ rsync -a "$BIN_DIR/checkapp.exe"                                         "$PWD/.
 rsync -a "$BIN_DIR"/trik-studio.exe                                      "$PWD/../data/$PRODUCT.bin"
 rsync -a "$INSTALLER_ROOT/platform/$PRODUCT-safe.cmd"                    "$PWD"/../data/
 rsync -a "$INSTALLER_ROOT/platform/$PRODUCT.vbs"                         "$PWD/../data/"
+rsync -a "$INSTALLER_ROOT/platform/install-qrs-association.ps1"          "$PWD/../data/"
 rsync -a "$INSTALLER_ROOT/images/trik-studio.ico"                        "$PWD/../data/"
 rsync -a "$INSTALLER_ROOT/reinstall-trik-studio.cmd"                     "$PWD/../data/scripts"
 rsync -a "$BIN_DIR"/plugins/tools/updatesChecker.dll                     "$PWD"/../data/plugins/tools/
