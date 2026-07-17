@@ -32,8 +32,8 @@ ChooseTypeDialog::ChooseTypeDialog(const Id &diagram
 		, mEditorManagerProxy(editorManagerProxy)
 {
 	mUi->setupUi(this);
-	connect(mUi->nodeButton, SIGNAL(clicked()), this, SLOT(nodeButtonClicked()));
-	connect(mUi->edgeButton, SIGNAL(clicked()), this, SLOT(edgeButtonClicked()));
+	connect(mUi->nodeButton, &QAbstractButton::clicked, this, &ChooseTypeDialog::nodeButtonClicked);
+	connect(mUi->edgeButton, &QAbstractButton::clicked, this, &ChooseTypeDialog::edgeButtonClicked);
 }
 
 ChooseTypeDialog::~ChooseTypeDialog()

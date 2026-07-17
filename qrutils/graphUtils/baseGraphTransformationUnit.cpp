@@ -554,7 +554,7 @@ QList<QHash<Id, Id> > BaseGraphTransformationUnit::matches()
 void BaseGraphTransformationUnit::pause(int time)
 {
 	QEventLoop loop;
-	QTimer::singleShot(time, &loop, SLOT(quit()));
+	QTimer::singleShot(time, &loop, &QEventLoop::quit);
 	loop.exec();
 }
 

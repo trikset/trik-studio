@@ -125,7 +125,7 @@ void ScriptAPI::pickComboBoxItem(QComboBox *comboBox, const QString &name, int d
 void ScriptAPI::wait(int duration)
 {
 	if (duration != -1) {
-		QTimer::singleShot(duration, &mEventLoop, SLOT(quit()));
+		QTimer::singleShot(duration, &mEventLoop, &QEventLoop::quit);
 	}
 
 	mEventLoop.exec();
