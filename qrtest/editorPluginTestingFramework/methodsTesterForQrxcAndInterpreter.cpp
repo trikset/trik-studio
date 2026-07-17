@@ -680,7 +680,8 @@ class MethodsTesterForQrxcAndInterpreter::ExplosionsListGenerator
 			return editorManagerInterface->explosions(elementId);
 		});
 
-		//		return ConvertingMethods::convertExplosionListIntoStringList(editorManagerInterface->explosions(elementId));
+		//return ConvertingMethods::convertExplosionListIntoStringList(
+		//					editorManagerInterface->explosions(elementId));
 		return {};
 	}
 
