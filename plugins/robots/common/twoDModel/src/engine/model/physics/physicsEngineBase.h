@@ -44,10 +44,10 @@ public:
 	virtual qreal rotation(RobotModel &robot) const = 0;
 
 	/// Adds new robot model for its position and rotation tracking.
-	virtual void addRobot(RobotModel * const robot);
+	virtual void addRobot(RobotModel *const robot);
 
 	/// Stops tracking robot`s position and rotation.
-	virtual void removeRobot(RobotModel * const robot);
+	virtual void removeRobot(RobotModel *const robot);
 
 	/// Recalculates all solid items positions and angles.
 	virtual void recalculateParameters(qreal timeInterval) = 0;
@@ -76,10 +76,10 @@ protected Q_SLOTS:
 	virtual void onPixelsInCmChanged(qreal value);
 
 	/// Starts tracking item`s position and rotation.
-	virtual void itemAdded(QGraphicsItem * const item);
+	virtual void itemAdded(QGraphicsItem *const item);
 
 	/// Stops tracking item`s position and rotation.
-	virtual void itemRemoved(QGraphicsItem * const item);
+	virtual void itemRemoved(QGraphicsItem *const item);
 };
 
 }

@@ -14,11 +14,8 @@
 
 #include "findManager.h"
 
-FindManager::FindManager(qrRepo::RepoControlInterface &controlApi
-		, qrRepo::LogicalRepoApi &logicalApi
-		, qReal::gui::MainWindowInterpretersInterface *mainWindow
-		, FindReplaceDialog *findReplaceDialog
-		, QObject *parent)
+FindManager::FindManager(qrRepo::RepoControlInterface &controlApi, qrRepo::LogicalRepoApi &logicalApi,
+	qReal::gui::MainWindowInterpretersInterface *mainWindow, FindReplaceDialog *findReplaceDialog, QObject *parent)
 	: QObject(parent)
 	, mControlApi(controlApi)
 	, mLogicalApi(logicalApi)
@@ -32,8 +29,8 @@ void FindManager::handleRefsDialog(const qReal::Id &id)
 	mMainWindow->selectItemOrDiagram(id);
 }
 
-qReal::IdList FindManager::foundByMode(const QString &key, const QString &currentMode, bool sensitivity
-		, bool regExpression)
+qReal::IdList FindManager::foundByMode(const QString &key, const QString &currentMode, bool sensitivity,
+	bool regExpression)
 {
 	// TODO: replace mode string with modifiers
 	if (currentMode == tr("by name")) {
@@ -55,10 +52,9 @@ QMap<QString, QString> FindManager::findItems(const QStringList &searchData)
 	bool sensitivity = searchData.contains(tr("case sensitivity"));
 	bool regExpression = searchData.contains(tr("by regular expression"));
 
-	for(int i = 1; i < searchData.length(); i++) {
+	for (int i = 1; i < searchData.length(); i++) {
 		if (searchData[i] != tr("case sensitivity") && searchData[i] != tr("by regular expression")) {
-			auto const& byMode = foundByMode(searchData.first(), searchData[i], sensitivity
-					, regExpression);
+			auto const &byMode = foundByMode(searchData.first(), searchData[i], sensitivity, regExpression);
 			for (const qReal::Id &currentId : byMode) {
 				if (found.contains(currentId.toString())) {
 					found[currentId.toString()] += tr(", ") + searchData[i];
@@ -79,18 +75,16 @@ void FindManager::handleFindDialog(const QStringList &searchData)
 void FindManager::handleReplaceDialog(QStringList &searchData)
 {
 	if (searchData.contains(tr("by name"))) {
-		qReal::IdList toRename = foundByMode(searchData.first(), tr("by name")
-				, searchData.contains(tr("case sensitivity"))
-				, searchData.contains(tr("by regular expression")));
+		qReal::IdList toRename = foundByMode(searchData.first(), tr("by name"),
+			searchData.contains(tr("case sensitivity")), searchData.contains(tr("by regular expression")));
 		for (const qReal::Id &currentId : toRename) {
 			mLogicalApi.setName(currentId, searchData[1]);
 		}
 	}
 
 	if (searchData.contains(tr("by property content"))) {
-		qReal::IdList toRename = foundByMode(searchData.first(), tr("by property content")
-				, searchData.contains(tr("case sensitivity"))
-				, searchData.contains(tr("by regular expression")));
+		qReal::IdList toRename = foundByMode(searchData.first(), tr("by property content"),
+			searchData.contains(tr("case sensitivity")), searchData.contains(tr("by regular expression")));
 		mLogicalApi.replaceProperties(toRename, searchData[0], searchData[1]);
 	}
 }

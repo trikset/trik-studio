@@ -20,10 +20,9 @@
 
 using namespace nxt;
 
-NxtGeneratorPluginBase::NxtGeneratorPluginBase(const QString &robotName, const QString &robotFriendlyName
-		, int priority)
-	: mRobotModel(new robotModel::NxtGeneratorRobotModel(kitId()
-			, "nxtGeneratorRobot", robotName, robotFriendlyName, priority))
+NxtGeneratorPluginBase::NxtGeneratorPluginBase(const QString &robotName, const QString &robotFriendlyName, int priority)
+	: mRobotModel(new robotModel::NxtGeneratorRobotModel(kitId(), "nxtGeneratorRobot", robotName, robotFriendlyName,
+		  priority))
 	, mBlocksFactory(new blocks::NxtBlocksFactory)
 {
 }
@@ -37,11 +36,11 @@ QString NxtGeneratorPluginBase::kitId() const
 
 QList<kitBase::robotModel::RobotModelInterface *> NxtGeneratorPluginBase::robotModels()
 {
-	return { mRobotModel.data() };
+	return {mRobotModel.data()};
 }
 
 QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> NxtGeneratorPluginBase::blocksFactoryFor(
-		const kitBase::robotModel::RobotModelInterface *model)
+	const kitBase::robotModel::RobotModelInterface *model)
 {
 	Q_UNUSED(model)
 	return mBlocksFactory;

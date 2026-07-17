@@ -28,7 +28,7 @@ void VirtualKeyboard::show()
 		return;
 	}
 
-	switch(QSysInfo::windowsVersion()) {
+	switch (QSysInfo::windowsVersion()) {
 	case QSysInfo::WV_WINDOWS8:
 		showWindows8Keyboard();
 		break;

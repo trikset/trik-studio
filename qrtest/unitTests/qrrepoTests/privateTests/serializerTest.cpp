@@ -31,9 +31,8 @@ void SerializerTest::removeDirectory(QString const &dirName)
 {
 	QDir const dir(dirName);
 
-	for (const QFileInfo &info : dir.entryInfoList(QDir::Hidden
-			| QDir::NoDotAndDotDot | QDir::Dirs | QDir::Files, QDir::DirsFirst))
-	{
+	for (const QFileInfo &info :
+		dir.entryInfoList(QDir::Hidden | QDir::NoDotAndDotDot | QDir::Dirs | QDir::Files, QDir::DirsFirst)) {
 		if (info.isDir()) {
 			removeDirectory(info.absoluteFilePath());
 		} else {
@@ -146,8 +145,8 @@ TEST_F(SerializerTest, saveAndLoadGraphicalPartsTest)
 
 	ASSERT_TRUE(map.contains(graphicalElement));
 
-	const GraphicalObject * const deserializedGraphicalObject
-			= dynamic_cast<GraphicalObject const *>(map.value(graphicalElement));
+	const GraphicalObject *const deserializedGraphicalObject =
+		dynamic_cast<GraphicalObject const *>(map.value(graphicalElement));
 
 	ASSERT_EQ(QPointF(10, 20), deserializedGraphicalObject->graphicalPartProperty(0, "Coord"));
 	qDeleteAll(map);

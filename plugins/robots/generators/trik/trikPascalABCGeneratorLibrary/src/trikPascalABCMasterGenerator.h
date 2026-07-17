@@ -24,13 +24,11 @@ class TrikPascalABCMasterGenerator : public TrikMasterGeneratorBase
 {
 	Q_OBJECT
 public:
-	TrikPascalABCMasterGenerator(const qrRepo::RepoApi &repo
-			, qReal::ErrorReporterInterface &errorReporter
-			, const utils::ParserErrorReporter &parserErrorReporter
-			, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
-			, qrtext::LanguageToolboxInterface &textLanguage
-			, const qReal::Id &diagramId
-			, const QStringList &pathsToTemplates);
+	TrikPascalABCMasterGenerator(const qrRepo::RepoApi &repo, qReal::ErrorReporterInterface &errorReporter,
+		const utils::ParserErrorReporter &parserErrorReporter,
+		const kitBase::robotModel::RobotModelManagerInterface &robotModelManager,
+		qrtext::LanguageToolboxInterface &textLanguage, const qReal::Id &diagramId,
+		const QStringList &pathsToTemplates);
 
 protected:
 	QString targetPath() override;
@@ -41,5 +39,3 @@ protected:
 
 }
 }
-
-

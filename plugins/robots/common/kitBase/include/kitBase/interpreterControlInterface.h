@@ -27,11 +27,10 @@ class ROBOTS_KIT_BASE_EXPORT InterpreterControlInterface : public QObject
 	Q_OBJECT
 
 public:
-	InterpreterControlInterface() {
-		connect(this
-				, &InterpreterControlInterface::stopAllInterpretation
-				, this
-				, &InterpreterControlInterface::stopRobot);
+	InterpreterControlInterface()
+	{
+		connect(this, &InterpreterControlInterface::stopAllInterpretation, this,
+			&InterpreterControlInterface::stopRobot);
 	}
 
 	~InterpreterControlInterface() override = default;
@@ -47,7 +46,8 @@ Q_SIGNALS:
 	void errored();
 
 	/// @todo: temporary hack while js interpreter is separated from regular interpreter logic
-	void stopAllInterpretation(qReal::interpretation::StopReason reason = qReal::interpretation::StopReason::userStop);
+	void stopAllInterpretation(
+		qReal::interpretation::StopReason reason = qReal::interpretation::StopReason::userStop);
 
 	/// same
 	void startScriptInterpretation();

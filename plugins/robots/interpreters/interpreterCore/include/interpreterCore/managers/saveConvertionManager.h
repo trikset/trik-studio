@@ -32,8 +32,8 @@ private:
 	typedef std::function<bool(const qReal::Id &, qReal::LogicalModelAssistInterface &)> LogicalFilter;
 	typedef std::function<bool(const qReal::Id &, qReal::GraphicalModelAssistInterface &)> GraphicalFilter;
 	typedef std::function<qReal::Id(const qReal::Id &, qReal::GraphicalModelAssistInterface &)> GraphicalReplacer;
-	typedef std::function<void(const qReal::Id &, const qReal::Id &
-			, qReal::GraphicalModelAssistInterface &)> GraphicalConstructor;
+	typedef std::function<void(const qReal::Id &, const qReal::Id &, qReal::GraphicalModelAssistInterface &)>
+		GraphicalConstructor;
 
 	/// Returns a converter that restricts all saves made by editors till 3.0.0 alpha1.
 	static qReal::ProjectConverter before300Alpha1Converter();
@@ -77,8 +77,8 @@ private:
 	static bool isEdgeType(const qReal::Id &element);
 	static qReal::IdList elementsOfRobotsDiagrams(const qReal::LogicalModelAssistInterface &logicalApi);
 	static QString editor();
-	static void reconnectEdges(const qReal::Id &newBlock, const qReal::Id &block
-							   , qReal::details::ModelsAssistInterface &Api);
+	static void reconnectEdges(const qReal::Id &newBlock, const qReal::Id &block,
+		qReal::details::ModelsAssistInterface &Api);
 
 	/// Helper method, creates "typical" that applies a list of filters to a block if block satisfies given condition.
 	/// @param oldVersion - version from which converter can convert.
@@ -87,12 +87,11 @@ private:
 	///        and logical model API and shall return true if it has changed something or false if it did nothing.
 	///        Every filter will be called for every logical block in a save.
 	/// @param condition - logical predicate that shall be true for a block to be processed.
-	static qReal::ProjectConverter constructConverter(const QString &oldVersion, const QString &newVersion
-			, const QList<LogicalFilter> &logicalFilters
-			, const QList<GraphicalFilter> &graphicalFilters = {}
-			, const std::function<bool(const qReal::Id &)> &condition
-					= [] (const qReal::Id &block) { return !block.isNull(); }
-			);
+	static qReal::ProjectConverter constructConverter(const QString &oldVersion, const QString &newVersion,
+		const QList<LogicalFilter> &logicalFilters, const QList<GraphicalFilter> &graphicalFilters = {},
+		const std::function<bool(const qReal::Id &)> &condition = [](const qReal::Id &block) {
+			return !block.isNull();
+		});
 
 	/// Helper method, constructs property replace filter. Takes map in form { {<from>, <to>}, ... } and applies
 	/// replacements coded in this map to every property of a block.
@@ -114,8 +113,8 @@ private:
 	/// to replace current block with the returned one.
 	/// @param constructor A fucntion that will initialize new element right after its creation.
 	/// The id of the new block, old block and graphical model will be passed there in this exact order.
-	static GraphicalFilter graphicalRecreate(const GraphicalReplacer &replacer
-			, const GraphicalConstructor &constructor);
+	static GraphicalFilter graphicalRecreate(const GraphicalReplacer &replacer,
+		const GraphicalConstructor &constructor);
 };
 
 }

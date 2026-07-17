@@ -28,23 +28,23 @@ class AbstractView : public QAbstractItemView
 	Q_OBJECT
 
 public:
-	explicit AbstractView(AbstractModel * const model);
+	explicit AbstractView(AbstractModel *const model);
 	~AbstractView() override;
 
 public Q_SLOTS:
-	void rowsAboutToBeMoved(const QModelIndex &sourceParent, int sourceStart, int sourceEnd
-			, const QModelIndex &destinationParent, int destinationRow);
-	void rowsMoved(const QModelIndex &sourceParent, int sourceStart, int sourceEnd
-			, const QModelIndex &destinationParent, int destinationRow);
+	void rowsAboutToBeMoved(const QModelIndex &sourceParent, int sourceStart, int sourceEnd,
+		const QModelIndex &destinationParent, int destinationRow);
+	void rowsMoved(const QModelIndex &sourceParent, int sourceStart, int sourceEnd,
+		const QModelIndex &destinationParent, int destinationRow);
 
 protected Q_SLOTS:
-	void dataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight
-			, QVector<int> const &roles = QVector<int>()) override;
+	void dataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight,
+		QVector<int> const &roles = QVector<int>()) override;
 	void rowsAboutToBeRemoved(const QModelIndex &parent, int start, int end) override;
 	void rowsInserted(const QModelIndex &parent, int start, int end) override;
 
 protected:
-	AbstractModel * const mModel;
+	AbstractModel *const mModel;
 
 	// Unneeded stuff from QAbstractItemView. It would be helpful if Qt Model/View framework
 	// were moved to QtCore and got separated from GUI concerns, since Model/View pattern
@@ -57,8 +57,8 @@ protected:
 	int horizontalOffset() const override;
 	int verticalOffset() const override;
 	bool isIndexHidden(const QModelIndex &index) const override;
-	void setSelection(const QRect& rect, QItemSelectionModel::SelectionFlags command) override;
-	QRegion visualRegionForSelection(const QItemSelection &selection ) const override;
+	void setSelection(const QRect &rect, QItemSelectionModel::SelectionFlags command) override;
+	QRegion visualRegionForSelection(const QItemSelection &selection) const override;
 };
 
 }

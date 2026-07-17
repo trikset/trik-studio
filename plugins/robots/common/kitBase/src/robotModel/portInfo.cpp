@@ -16,17 +16,14 @@
 
 using namespace kitBase::robotModel;
 
-PortInfo::PortInfo(const QString &name, Direction direction
-		, const QStringList &nameAliases, const QString &reservedVariableName
-		, ReservedVariableType reservedVariableType)
+PortInfo::PortInfo(const QString &name, Direction direction, const QStringList &nameAliases,
+	const QString &reservedVariableName, ReservedVariableType reservedVariableType)
 	: PortInfo(name, name, direction, nameAliases, reservedVariableName, reservedVariableType)
 {
 }
 
-PortInfo::PortInfo(const QString &name, const QString &userFriendlyName, Direction direction
-		, const QStringList &nameAliases
-		, const QString &reservedVariableName
-		, ReservedVariableType reservedVariableType)
+PortInfo::PortInfo(const QString &name, const QString &userFriendlyName, Direction direction,
+	const QStringList &nameAliases, const QString &reservedVariableName, ReservedVariableType reservedVariableType)
 	: mName(name)
 	, mUserFriendlyName(userFriendlyName)
 	, mDirection(direction)
@@ -73,8 +70,8 @@ PortInfo::ReservedVariableType PortInfo::reservedVariableType() const
 
 QString PortInfo::toString() const
 {
-	return QString("%1###%2###%3###%4").arg(mName, mDirection == input ? "input" : "output"
-			, mNameAliases.join("$$$"), mReservedVariable);
+	return QString("%1###%2###%3###%4")
+	        .arg(mName, mDirection == input ? "input" : "output", mNameAliases.join("$$$"), mReservedVariable);
 }
 
 PortInfo PortInfo::fromString(const QString &string)
@@ -84,6 +81,6 @@ PortInfo PortInfo::fromString(const QString &string)
 		return {};
 	}
 
-	return PortInfo(parts[0], parts[1] == "input" ? input : output
-			, parts[2].split("$$$", QString::SkipEmptyParts), parts[3]);
+	return PortInfo(parts[0], parts[1] == "input" ? input : output, parts[2].split("$$$", QString::SkipEmptyParts),
+		parts[3]);
 }

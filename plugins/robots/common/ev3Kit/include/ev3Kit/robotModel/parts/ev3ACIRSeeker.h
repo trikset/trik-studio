@@ -27,8 +27,7 @@ class Ev3ACIRSeeker : public kitBase::robotModel::robotParts::VectorSensor
 	Q_CLASSINFO("friendlyName", tr("NXT IRSeeker V2 (AC)"))
 
 public:
-	Ev3ACIRSeeker(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port);
+	Ev3ACIRSeeker(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port);
 };
 
 }

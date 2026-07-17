@@ -25,8 +25,7 @@ class TrikDisplay : public kitBase::robotModel::robotParts::Display
 	Q_OBJECT
 
 public:
-	TrikDisplay(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port);
+	TrikDisplay(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port);
 
 	/// Show happy or sad smile.
 	/// @param sad - if sad is true, then show sad smile.

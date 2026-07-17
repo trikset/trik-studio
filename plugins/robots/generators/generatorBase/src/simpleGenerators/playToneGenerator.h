@@ -24,10 +24,8 @@ class PlayToneGenerator : public BindingGenerator
 {
 	Q_OBJECT
 public:
-	PlayToneGenerator(const qrRepo::RepoApi &repo
-			, GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent = nullptr);
+	PlayToneGenerator(const qrRepo::RepoApi &repo, GeneratorCustomizer &customizer, const qReal::Id &id,
+		QObject *parent = nullptr);
 };
 
 }

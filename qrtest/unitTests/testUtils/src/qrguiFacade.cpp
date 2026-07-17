@@ -23,9 +23,9 @@ QrguiFacade::QrguiFacade(QString const &modelName)
 
 	ON_CALL(mMainWindowInterpretersInterfaceMock, errorReporter()).WillByDefault(Return(&mErrorReporterMock));
 
-	ON_CALL(mMainWindowInterpretersInterfaceMock, activeDiagram()).WillByDefault(Invoke(
-			[this] () { return activeTab(); }
-	));
+	ON_CALL(mMainWindowInterpretersInterfaceMock, activeDiagram()).WillByDefault(Invoke([this]() {
+		return activeTab();
+	}));
 
 	ON_CALL(mMainWindowInterpretersInterfaceMock, highlight(_, _, _)).WillByDefault(Return());
 	ON_CALL(mMainWindowInterpretersInterfaceMock, dehighlight(_)).WillByDefault(Return());
@@ -34,40 +34,31 @@ QrguiFacade::QrguiFacade(QString const &modelName)
 	ON_CALL(mProjectManagementInterfaceMock, saveFilePath()).WillByDefault(Return(QString("./test")));
 	ON_CALL(mProjectManagementInterfaceMock, save()).WillByDefault(Return(true));
 
-	ON_CALL(mTextManagerMock, showInTextEditor(_, _, _)).WillByDefault(Invoke(
-			[this](const QFileInfo &file, const QString & genName, const qReal::text::LanguageInfo &language) {
-				Q_UNUSED(genName)
-				Q_UNUSED(language)
-				Q_EMIT mSystemEvents.newCodeAppeared(activeTab(), QFileInfo(file));
-			}
-			));
+	ON_CALL(mTextManagerMock, showInTextEditor(_, _, _))
+		.WillByDefault(Invoke([this](const QFileInfo &file, const QString &genName,
+					      const qReal::text::LanguageInfo &language) {
+		Q_UNUSED(genName)
+		Q_UNUSED(language)
+		Q_EMIT mSystemEvents.newCodeAppeared(activeTab(), QFileInfo(file));
+	}));
 
 	ON_CALL(mTextManagerMock, isDefaultPath(_)).WillByDefault(Return(true));
 	ON_CALL(mTextManagerMock, isModifiedEver(_)).WillByDefault(Return(false));
 	ON_CALL(mTextManagerMock, generatorName(_)).WillByDefault(Return(QString("trikQts")));
 
-	ON_CALL(mErrorReporterMock, addErrorMock(_, _)).WillByDefault(Invoke(
-			[this](const QString &message, const qReal::Id &position) {
-				Q_UNUSED(position)
-				qDebug() << "Error:" << qUtf8Printable(message);
-				Q_EMIT mErrorReporterMock.error(message);
-				mWereErrors = true;
-			}));
+	ON_CALL(mErrorReporterMock, addErrorMock(_, _))
+		.WillByDefault(Invoke([this](const QString &message, const qReal::Id &position) {
+		Q_UNUSED(position)
+		qDebug() << "Error:" << qUtf8Printable(message);
+		Q_EMIT mErrorReporterMock.error(message);
+		mWereErrors = true;
+	}));
 
-	ON_CALL(mErrorReporterMock, clear()).WillByDefault(Invoke(
-			[this]() {
-				mWereErrors = false;
-			}));
+	ON_CALL(mErrorReporterMock, clear()).WillByDefault(Invoke([this]() { mWereErrors = false; }));
 
-	ON_CALL(mErrorReporterMock, clearErrors()).WillByDefault(Invoke(
-			[this]() {
-				mWereErrors = false;
-			}));
+	ON_CALL(mErrorReporterMock, clearErrors()).WillByDefault(Invoke([this]() { mWereErrors = false; }));
 
-	ON_CALL(mErrorReporterMock, wereErrors()).WillByDefault(Invoke(
-			[this]() {
-				return mWereErrors;
-			}));
+	ON_CALL(mErrorReporterMock, wereErrors()).WillByDefault(Invoke([this]() { return mWereErrors; }));
 
 	EXPECT_CALL(mMainWindowInterpretersInterfaceMock, errorReporter()).Times(AtLeast(0));
 	EXPECT_CALL(mMainWindowInterpretersInterfaceMock, activeDiagram()).Times(AtLeast(0));
@@ -146,7 +137,8 @@ qReal::TextManagerInterface &QrguiFacade::textManager()
 const qReal::Id &QrguiFacade::activeTab()
 {
 	if (mActiveTab.isNull()) {
-		auto const &tabs = mModels.graphicalModelAssistApi().children(mModels.graphicalModelAssistApi().rootId());
+		auto const &tabs =
+			mModels.graphicalModelAssistApi().children(mModels.graphicalModelAssistApi().rootId());
 		EXPECT_FALSE(tabs.empty());
 		Q_ASSERT(!tabs.empty());
 		mActiveTab = tabs[0];

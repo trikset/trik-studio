@@ -20,7 +20,7 @@
 #include <QtWidgets/QStyleOptionGraphicsItem>
 #include <QtCore/QList>
 
-Item::Item(graphicsUtils::AbstractItem* parent)
+Item::Item(graphicsUtils::AbstractItem *parent)
 	: AbstractItem(parent)
 {
 	setFlag(QGraphicsItem::ItemIsSelectable, true);
@@ -73,7 +73,7 @@ QRectF Item::calcNecessaryBoundingRect() const
 		return boundingRect();
 }
 
-void Item::drawExtractionForItem(QPainter* painter)
+void Item::drawExtractionForItem(QPainter *painter)
 {
 	AbstractItem::drawExtractionForItem(painter);
 
@@ -82,10 +82,10 @@ void Item::drawExtractionForItem(QPainter* painter)
 	drawScalingRects(painter);
 }
 
-void Item::drawScalingRects(QPainter* painter)
+void Item::drawScalingRects(QPainter *painter)
 {
 	QRectF itemBoundingRect = calcNecessaryBoundingRect();
-	qreal x1= itemBoundingRect.left();
+	qreal x1 = itemBoundingRect.left();
 	qreal x2 = itemBoundingRect.right();
 	qreal y1 = itemBoundingRect.top();
 	qreal y2 = itemBoundingRect.bottom();
@@ -119,54 +119,50 @@ void Item::setNoneDragState()
 	setDragState(None);
 }
 
-void Item::calcForChangeScalingState(QPointF pos, QPointF point1, QPointF point2
-		, int correction)
+void Item::calcForChangeScalingState(QPointF pos, QPointF point1, QPointF point2, int correction)
 {
 	qreal x = pos.x();
 	qreal y = pos.y();
-	qreal x1= point1.x();
+	qreal x1 = point1.x();
 	qreal x2 = point2.x();
 	qreal y1 = point1.y();
 	qreal y2 = point2.y();
 
-	if (QRectF(x1 + scenePos().x() - correction, y1 - scalingRect + scenePos().y() - correction
-			, scalingRect, scalingRect).contains(QPointF(x, y)))
-	{
+	if (QRectF(x1 + scenePos().x() - correction, y1 - scalingRect + scenePos().y() - correction, scalingRect,
+		    scalingRect)
+			.contains(QPointF(x, y))) {
 		mScalingState = topLeftX;
-	} else if (QRectF(x2 - scalingRect + scenePos().x() + correction, y1 - scalingRect + scenePos().y() - correction
-			, scalingRect, scalingRect).contains(QPointF(x, y)))
-	{
+	} else if (QRectF(x2 - scalingRect + scenePos().x() + correction,
+			   y1 - scalingRect + scenePos().y() - correction, scalingRect, scalingRect)
+			   .contains(QPointF(x, y))) {
 		mScalingState = topRightX;
-	} else if (QRectF(x1 + scenePos().x() - correction, y2 + scenePos().y(), scalingRect + correction
-			, scalingRect).contains(QPointF(x, y)))
-	{
+	} else if (QRectF(x1 + scenePos().x() - correction, y2 + scenePos().y(), scalingRect + correction, scalingRect)
+			   .contains(QPointF(x, y))) {
 		mScalingState = bottomLeftX;
-	} else if (QRectF(x2 - scalingRect + scenePos().x() + correction, y2 + scenePos().y() + correction
-			, scalingRect, scalingRect).contains(QPointF(x, y)))
-	{
+	} else if (QRectF(x2 - scalingRect + scenePos().x() + correction, y2 + scenePos().y() + correction, scalingRect,
+			   scalingRect)
+			   .contains(QPointF(x, y))) {
 		mScalingState = bottomRightX;
-	} else if (QRectF(x1 - scalingRect + scenePos().x() - correction, y1 + scenePos().y() - correction
-			, scalingRect, scalingRect).contains(QPointF(x, y)))
-	{
+	} else if (QRectF(x1 - scalingRect + scenePos().x() - correction, y1 + scenePos().y() - correction, scalingRect,
+			   scalingRect)
+			   .contains(QPointF(x, y))) {
 		mScalingState = topLeftY;
-	} else if (QRectF(x2 + scenePos().x() + correction, y1 + scenePos().y() - correction
-			, scalingRect, scalingRect).contains(QPointF(x, y)))
-	{
+	} else if (QRectF(x2 + scenePos().x() + correction, y1 + scenePos().y() - correction, scalingRect, scalingRect)
+			   .contains(QPointF(x, y))) {
 		mScalingState = topRightY;
-	} else if (QRectF(x1 - scalingRect + scenePos().x() - correction, y2 - scalingRect + scenePos().y() + correction
-			, scalingRect, scalingRect).contains(QPointF(x, y)))
-	{
+	} else if (QRectF(x1 - scalingRect + scenePos().x() - correction,
+			   y2 - scalingRect + scenePos().y() + correction, scalingRect, scalingRect)
+			   .contains(QPointF(x, y))) {
 		mScalingState = bottomLeftY;
-	} else if (QRectF(x2 + scenePos().x() + correction, y2 - scalingRect + scenePos().y() + correction
-			, scalingRect, scalingRect).contains(QPointF(x, y)))
-	{
+	} else if (QRectF(x2 + scenePos().x() + correction, y2 - scalingRect + scenePos().y() + correction, scalingRect,
+			   scalingRect)
+			   .contains(QPointF(x, y))) {
 		mScalingState = bottomRightY;
 	} else {
 		mScalingState = noneScale;
 	}
 	if (mScalingState == topLeftX || mScalingState == topLeftY || mScalingState == bottomRightX
-			|| mScalingState == bottomRightY)
-	{
+		|| mScalingState == bottomRightY) {
 		setNoneDragState();
 	}
 }
@@ -174,7 +170,7 @@ void Item::calcForChangeScalingState(QPointF pos, QPointF point1, QPointF point2
 void Item::changeScalingPointState(qreal x, qreal y)
 {
 	QRectF itemBoundingRect = calcNecessaryBoundingRect();
-	qreal x1= itemBoundingRect.left();
+	qreal x1 = itemBoundingRect.left();
 	qreal x2 = itemBoundingRect.right();
 	qreal y1 = itemBoundingRect.top();
 	qreal y2 = itemBoundingRect.bottom();
@@ -189,7 +185,7 @@ Item::ScalingPointState Item::getScalingPointState() const
 
 QColor Item::changeScaleColor(const QPair<Item::ScalingPointState, QColor> &point)
 {
-	if(point.second == QColor(Qt::black)) {
+	if (point.second == QColor(Qt::black)) {
 		return {Qt::red};
 	} else {
 		return {Qt::black};
@@ -201,14 +197,15 @@ void Item::setScalingPointColor()
 	for (int i = 0; i < mListScalePoint.size(); ++i) {
 		QPair<Item::ScalingPointState, QColor> point = mListScalePoint.at(i);
 		if (point.first == mScalingState) {
-			mListScalePoint.insert(i, QPair<Item::ScalingPointState, QColor>(mScalingState, changeScaleColor(point)));
+			mListScalePoint.insert(i,
+				QPair<Item::ScalingPointState, QColor>(mScalingState, changeScaleColor(point)));
 			mListScalePoint.removeAt(i + 1);
 			return;
 		}
 	}
 }
 
-void Item::setListScalePoint(const QList<QPair<ScalingPointState, QColor> > &list)
+void Item::setListScalePoint(const QList<QPair<ScalingPointState, QColor>> &list)
 {
 	mListScalePoint = list;
 }
@@ -267,7 +264,7 @@ QString Item::setSingleScaleForDoc(int i, int x, int y)
 	return text;
 }
 
-void Item::setXandY(QDomElement& dom, const QRectF &rect)
+void Item::setXandY(QDomElement &dom, const QRectF &rect)
 {
 	dom.setAttribute("y1", setScaleForDoc(4, rect.toRect()));
 	dom.setAttribute("x1", setScaleForDoc(0, rect.toRect()));
@@ -309,8 +306,7 @@ QPair<QDomElement, Item::DomElementTypes> Item::generateDom(QDomDocument &docume
 
 bool Item::VisibilityCondition::operator==(const Item::VisibilityCondition &other) const
 {
-	return this->property == other.property && this->sign == other.sign
-			&& this->value == other.value;
+	return this->property == other.property && this->sign == other.sign && this->value == other.value;
 }
 
 bool Item::VisibilityCondition::operator!=(const Item::VisibilityCondition &other) const

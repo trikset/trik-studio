@@ -34,7 +34,6 @@ public:
 	void repaintDisplay() override;
 	int displayWidth() const override;
 	int displayHeight() const override;
-
 };
 
 }

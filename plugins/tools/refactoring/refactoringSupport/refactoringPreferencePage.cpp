@@ -22,8 +22,8 @@
 using namespace qReal;
 
 RefactoringPreferencesPage::RefactoringPreferencesPage(QWidget *parent)
-		: PreferencesPage(parent)
-		, mUi(new Ui::refactoringPreferencesPage)
+	: PreferencesPage(parent)
+	, mUi(new Ui::refactoringPreferencesPage)
 {
 	setWindowIcon(QIcon(":/icons/preferences/pencil.png"));
 	mUi->setupUi(this);

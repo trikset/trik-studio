@@ -21,8 +21,8 @@
 using namespace qReal;
 
 VisualInterpreterPreferencesPage::VisualInterpreterPreferencesPage(QWidget *parent)
-		: PreferencesPage(parent)
-		, mUi(new Ui::visualInterpreterPreferencesPage)
+	: PreferencesPage(parent)
+	, mUi(new Ui::visualInterpreterPreferencesPage)
 {
 	setWindowIcon(QIcon(":/icons/preferences/bug.png"));
 	mUi->setupUi(this);
@@ -32,8 +32,9 @@ VisualInterpreterPreferencesPage::VisualInterpreterPreferencesPage(QWidget *pare
 	binDir.cdUp();
 	SettingsManager::setValue("qrealSourcesLocation", binDir.absolutePath());
 
-	mUi->qrealSourcesLineEdit->setText(SettingsManager::value("qrealSourcesLocation"
-			, binFolder.mid(0, binFolder.lastIndexOf("/"))).toString());
+	mUi->qrealSourcesLineEdit->setText(
+		SettingsManager::value("qrealSourcesLocation", binFolder.mid(0, binFolder.lastIndexOf("/")))
+			.toString());
 	mUi->pythonPathLineEdit->setText(SettingsManager::value("pythonPath").toString());
 	mUi->tempPathLineEdit->setText(SettingsManager::value("tempScriptPath", binFolder + "/temp.py").toString());
 	mUi->genTimeoutSpinBox->setValue(SettingsManager::value("generationTimeout").toInt());
@@ -78,4 +79,3 @@ void VisualInterpreterPreferencesPage::restoreSettings()
 {
 	mUi->qrealSourcesLineEdit->setText(SettingsManager::value("qrealSourcesLocation").toString());
 }
-

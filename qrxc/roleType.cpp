@@ -26,10 +26,8 @@ bool RoleType::init(const QDomElement &element, const QString &context)
 
 	QDomElement first = element.firstChildElement("properties");
 
-	for (QDomElement propertyElement = first.firstChildElement("property")
-		 ; !propertyElement.isNull()
-		 ; propertyElement = propertyElement.nextSiblingElement("property"))
-	{
+	for (QDomElement propertyElement = first.firstChildElement("property"); !propertyElement.isNull();
+		propertyElement = propertyElement.nextSiblingElement("property")) {
 		auto *property = new Property();
 		property->init(propertyElement);
 		mProperties.append(property);
@@ -38,7 +36,7 @@ bool RoleType::init(const QDomElement &element, const QString &context)
 	return true;
 }
 
-RoleType* RoleType::clone() const
+RoleType *RoleType::clone() const
 {
 	auto *result = new RoleType();
 	result->mArrowType = mArrowType;
@@ -64,7 +62,7 @@ QString RoleType::typeOfArrow()
 	return mArrowType;
 }
 
-QList<Property*> RoleType::getPropertiesOfRole()
+QList<Property *> RoleType::getPropertiesOfRole()
 {
 	return mProperties;
 }

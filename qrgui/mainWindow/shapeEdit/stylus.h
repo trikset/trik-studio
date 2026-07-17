@@ -26,23 +26,23 @@ class Stylus : public Item
 	Q_OBJECT
 public:
 	QList<Line *> mListLine;
-	Stylus(qreal x1, qreal y1, Item* parent);
+	Stylus(qreal x1, qreal y1, Item *parent);
 	void addLine(qreal x2, qreal y2);
 	void addLineInList(Line *line);
 
 	QRectF boundingRect() const override;
 	QPainterPath shape() const override;
-	void drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr) override;
-	void drawExtractionForItem(QPainter* painter) override;
-	void drawFieldForResizeItem(QPainter* painter) override;
-	void drawScalingRects(QPainter* painter) override;
+	void drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
+	void drawExtractionForItem(QPainter *painter) override;
+	void drawFieldForResizeItem(QPainter *painter) override;
+	void drawScalingRects(QPainter *painter) override;
 	void setPenStyle(const QString &text) override;
 	virtual void setPenWidth(int width);
 	void setPenColor(const QString &text) override;
 	void setBrushStyle(const QString &text) override;
 	void setBrushColor(const QString &text) override;
-	QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document
-			, const QPoint &topLeftPicture) override;
+	QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document,
+		const QPoint &topLeftPicture) override;
 
 private:
 	qreal mTmpX1;

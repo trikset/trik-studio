@@ -28,11 +28,9 @@ using namespace nxt;
 using namespace nxt::simple;
 using namespace generatorBase::simple;
 
-NxtGeneratorFactory::NxtGeneratorFactory(const qrRepo::RepoApi &repo
-		, qReal::ErrorReporterInterface &errorReporter
-		, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
-		, generatorBase::lua::LuaProcessor &luaProcessor
-		, const QString &generatorName)
+NxtGeneratorFactory::NxtGeneratorFactory(const qrRepo::RepoApi &repo, qReal::ErrorReporterInterface &errorReporter,
+	const kitBase::robotModel::RobotModelManagerInterface &robotModelManager,
+	generatorBase::lua::LuaProcessor &luaProcessor, const QString &generatorName)
 	: GeneratorFactoryBase(repo, errorReporter, robotModelManager, luaProcessor)
 	, mGeneratorName(generatorName)
 	, mImages(pathsToTemplates())
@@ -46,8 +44,8 @@ parts::Images &NxtGeneratorFactory::images()
 	return mImages;
 }
 
-generatorBase::simple::AbstractSimpleGenerator *NxtGeneratorFactory::simpleGenerator(const qReal::Id &id
-		, generatorBase::GeneratorCustomizer &customizer)
+generatorBase::simple::AbstractSimpleGenerator *NxtGeneratorFactory::simpleGenerator(const qReal::Id &id,
+	generatorBase::GeneratorCustomizer &customizer)
 {
 	const QString elementType = id.element();
 	if (elementType == "ClearScreen") {

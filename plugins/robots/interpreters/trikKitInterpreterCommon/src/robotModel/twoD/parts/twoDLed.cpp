@@ -19,13 +19,12 @@
 using namespace trik::robotModel::twoD::parts;
 using namespace kitBase::robotModel;
 
-TwoDLed::TwoDLed(const DeviceInfo &info
-		, const PortInfo &port
-		, twoDModel::engine::TwoDModelEngineInterface &engine)
+TwoDLed::TwoDLed(const DeviceInfo &info, const PortInfo &port, twoDModel::engine::TwoDModelEngineInterface &engine)
 	: robotModel::parts::TrikLed(info, port)
 	, mEngine(engine)
 {
-	connect(this, &TwoDLed::colorChanged, this, [=](const QColor &color) { Q_EMIT propertyChanged("color", color); });
+	connect(this, &TwoDLed::colorChanged, this,
+		[=](const QColor &color) { Q_EMIT propertyChanged("color", color); });
 }
 
 QColor TwoDLed::color() const

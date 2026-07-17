@@ -24,8 +24,8 @@ SignalsTester::SignalsTester(OrderEnum order)
 	: mInOrder(order)
 {
 	mTimer.setSingleShot(true);
-	connect(&mMapper, static_cast<void (QSignalMapper::*)(const QString &)>(&QSignalMapper::mapped)
-			, this, &SignalsTester::onSignal);
+	connect(&mMapper, static_cast<void (QSignalMapper::*)(const QString &)>(&QSignalMapper::mapped), this,
+		&SignalsTester::onSignal);
 
 	connect(&mTimer, &QTimer::timeout, this, &SignalsTester::onTimeout);
 }
@@ -72,7 +72,7 @@ void SignalsTester::onSignal(const QString &signalName)
 
 bool SignalsTester::allIsGood() const
 {
-	return std::all_of(mSignals.constBegin(), mSignals.constEnd(), [] (int count) { return count > 0; } );
+	return std::all_of(mSignals.constBegin(), mSignals.constEnd(), [](int count) { return count > 0; });
 }
 
 void SignalsTester::wait(int timeout)

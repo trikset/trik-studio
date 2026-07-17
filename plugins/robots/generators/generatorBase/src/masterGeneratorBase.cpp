@@ -36,12 +36,10 @@
 using namespace generatorBase;
 using namespace qReal;
 
-MasterGeneratorBase::MasterGeneratorBase(const qrRepo::RepoApi &repo
-		, ErrorReporterInterface &errorReporter
-		, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
-		, qrtext::LanguageToolboxInterface &textLanguage
-		, const utils::ParserErrorReporter &parserErrorReporter
-		, const Id &diagramId)
+MasterGeneratorBase::MasterGeneratorBase(const qrRepo::RepoApi &repo, ErrorReporterInterface &errorReporter,
+	const kitBase::robotModel::RobotModelManagerInterface &robotModelManager,
+	qrtext::LanguageToolboxInterface &textLanguage, const utils::ParserErrorReporter &parserErrorReporter,
+	const Id &diagramId)
 	: mRepo(repo)
 	, mErrorReporter(errorReporter)
 	, mRobotModelManager(robotModelManager)
@@ -67,10 +65,10 @@ void MasterGeneratorBase::initialize()
 
 	mValidator = createValidator();
 
-	mGotoControlFlowGenerator.reset(new GotoControlFlowGenerator(mRepo
-			, mErrorReporter, *mCustomizer, *mValidator, mDiagram, this));
-	mStructuralControlFlowGenerator.reset(new StructuralControlFlowGenerator(mRepo
-			, mErrorReporter, *mCustomizer, *mValidator, mDiagram, this));
+	mGotoControlFlowGenerator.reset(
+		new GotoControlFlowGenerator(mRepo, mErrorReporter, *mCustomizer, *mValidator, mDiagram, this));
+	mStructuralControlFlowGenerator.reset(
+		new StructuralControlFlowGenerator(mRepo, mErrorReporter, *mCustomizer, *mValidator, mDiagram, this));
 }
 
 QString MasterGeneratorBase::generate(const QString &indentString)
@@ -92,14 +90,13 @@ QString MasterGeneratorBase::generate(const QString &indentString)
 		generator->reinit();
 	}
 
-
-
 	QString mainCode;
 	const semantics::SemanticTree *mainControlFlow = mStructuralControlFlowGenerator->generate();
 	if (mainControlFlow && !mStructuralControlFlowGenerator->cantBeGeneratedIntoStructuredCode()) {
 		mainCode = mainControlFlow->toString(1, indentString);
-		const parts::Subprograms::GenerationResult subprogramsResult = mCustomizer->factory()->subprograms()->generate(
-				mStructuralControlFlowGenerator.get(), indentString);
+		const parts::Subprograms::GenerationResult subprogramsResult =
+			mCustomizer->factory()->subprograms()->generate(mStructuralControlFlowGenerator.get(),
+				indentString);
 		switch (subprogramsResult) {
 		case parts::Subprograms::GenerationResult::success:
 			break;
@@ -116,13 +113,14 @@ QString MasterGeneratorBase::generate(const QString &indentString)
 	}
 
 	if (mainCode.isEmpty() && supportsGotoGeneration()) {
-		mErrorReporter.addInformation(tr("This diagram cannot be generated into the structured code."\
-				" Generating it into the code with 'goto' statements."));
+		mErrorReporter.addInformation(tr("This diagram cannot be generated into the structured code."
+						 " Generating it into the code with 'goto' statements."));
 		const semantics::SemanticTree *gotoMainControlFlow = mGotoControlFlowGenerator->generate();
 		if (gotoMainControlFlow) {
 			mainCode = gotoMainControlFlow->toString(1, indentString);
-			const parts::Subprograms::GenerationResult gotoSubprogramsResult = mCustomizer->factory()
-					->subprograms()->generate(mGotoControlFlowGenerator.get(), indentString);
+			const parts::Subprograms::GenerationResult gotoSubprogramsResult =
+				mCustomizer->factory()->subprograms()->generate(mGotoControlFlowGenerator.get(),
+					indentString);
 			if (gotoSubprogramsResult != parts::Subprograms::GenerationResult::success) {
 				mainCode = QString();
 			}
@@ -130,30 +128,29 @@ QString MasterGeneratorBase::generate(const QString &indentString)
 	}
 
 	if (mainCode.isEmpty()) {
-		const QString errorMessage = supportsGotoGeneration()
-				? tr("This diagram cannot be even generated into the code with 'goto'"\
-						"statements. Please contact the developers.")
-				: tr("This diagram cannot be generated into the structured code.");
+		const QString errorMessage =
+			supportsGotoGeneration() ? tr("This diagram cannot be even generated into the code with 'goto'"
+						      "statements. Please contact the developers.")
+						 : tr("This diagram cannot be generated into the structured code.");
 		mErrorReporter.addError(errorMessage);
 		return {};
 	}
 
 	QString resultCode = readTemplate("main.t");
-	replaceWithAutoIndent(resultCode, "@@SUBPROGRAMS_FORWARDING@@"
-			, mCustomizer->factory()->subprograms()->forwardDeclarations());
-	replaceWithAutoIndent(resultCode, "@@SUBPROGRAMS@@"
-			, mCustomizer->factory()->subprograms()->implementations());
-	replaceWithAutoIndent(resultCode, "@@THREADS_FORWARDING@@"
-			, mCustomizer->factory()->threads().generateDeclarations());
-	replaceWithAutoIndent(resultCode, "@@THREADS@@"
-			, mCustomizer->factory()->threads().generateImplementations(indentString));
+	replaceWithAutoIndent(resultCode, "@@SUBPROGRAMS_FORWARDING@@",
+		mCustomizer->factory()->subprograms()->forwardDeclarations());
+	replaceWithAutoIndent(resultCode, "@@SUBPROGRAMS@@", mCustomizer->factory()->subprograms()->implementations());
+	replaceWithAutoIndent(resultCode, "@@THREADS_FORWARDING@@",
+		mCustomizer->factory()->threads().generateDeclarations());
+	replaceWithAutoIndent(resultCode, "@@THREADS@@",
+		mCustomizer->factory()->threads().generateImplementations(indentString));
 	replaceWithAutoIndent(resultCode, "@@MAIN_CODE@@", mainCode);
-	replaceWithAutoIndent(resultCode, "@@INITHOOKS@@", utils::StringUtils::addIndent(
-			mCustomizer->factory()->initCode(), 1, indentString));
-	replaceWithAutoIndent(resultCode, "@@TERMINATEHOOKS@@", utils::StringUtils::addIndent(
-			mCustomizer->factory()->terminateCode(), 1, indentString));
-	replaceWithAutoIndent(resultCode, "@@USERISRHOOKS@@", utils::StringUtils::addIndent(
-			mCustomizer->factory()->isrHooksCode(), 1, indentString));
+	replaceWithAutoIndent(resultCode, "@@INITHOOKS@@",
+		utils::StringUtils::addIndent(mCustomizer->factory()->initCode(), 1, indentString));
+	replaceWithAutoIndent(resultCode, "@@TERMINATEHOOKS@@",
+		utils::StringUtils::addIndent(mCustomizer->factory()->terminateCode(), 1, indentString));
+	replaceWithAutoIndent(resultCode, "@@USERISRHOOKS@@",
+		utils::StringUtils::addIndent(mCustomizer->factory()->isrHooksCode(), 1, indentString));
 	const QString constantsString = mCustomizer->factory()->variables()->generateConstantsString();
 	const QString variablesString = mCustomizer->factory()->variables()->generateVariableString();
 	if (resultCode.contains("@@CONSTANTS@@")) {
@@ -187,7 +184,7 @@ void MasterGeneratorBase::generateLinkingInfo(QString &resultCode)
 	QList<QPair<QString, QPair<int, int>>> results;
 	int lineNumber = 1;
 
-	for (const QString &line : resultCode.split("\n")){
+	for (const QString &line : resultCode.split("\n")) {
 		re.setPattern(open);
 		const int pos = re.indexIn(line);
 		if (pos > -1) {
@@ -208,15 +205,14 @@ void MasterGeneratorBase::generateLinkingInfo(QString &resultCode)
 
 	QString out;
 
-	std::sort(results.begin(), results.end()
-			, [](const QPair<QString, QPair<int, int>> &r1, const QPair<QString, QPair<int, int>> &r2) -> bool {
-				return r1.second.first < r2.second.first;
-			});
+	std::sort(results.begin(), results.end(),
+		[](const QPair<QString, QPair<int, int>> &r1, const QPair<QString, QPair<int, int>> &r2) -> bool {
+		return r1.second.first < r2.second.first;
+	});
 
 	for (const auto &res : results) {
-		out += QString("%1@%2@%3\n").arg(res.first
-				, QString::number(res.second.first)
-				, QString::number(res.second.second));
+		out += QString("%1@%2@%3\n")
+		               .arg(res.first, QString::number(res.second.first), QString::number(res.second.second));
 	}
 
 	outputCode(targetPath() + ".dbg", out);
@@ -272,8 +268,8 @@ void MasterGeneratorBase::outputCode(const QString &path, const QString &code)
 void MasterGeneratorBase::replaceWithAutoIndent(QString &where, const QString &what, const QString &withWhat)
 {
 	const QRegularExpression regexp(QString("^(([ \\t]*)%1)$").arg(what), QRegularExpression::MultilineOption);
-	const QRegularExpressionMatch match = regexp.match(where, 0
-			, QRegularExpression::NormalMatch, QRegularExpression::NoMatchOption);
+	const QRegularExpressionMatch match =
+		regexp.match(where, 0, QRegularExpression::NormalMatch, QRegularExpression::NoMatchOption);
 	if (match.hasMatch()) {
 		const QString wholeString = match.captured(1);
 		const QString indentString = match.captured(2);

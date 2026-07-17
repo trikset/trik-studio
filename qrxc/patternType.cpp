@@ -43,14 +43,14 @@ void PatternType::generateCode(OutFile &out)
 	const QString className = NameNormalizer::normalize(qualifiedName());
 
 	out() << "\tclass " << className << " : public qReal::PatternType\n\t{\n"
-			<< "\tpublic:\n";
+	      << "\tpublic:\n";
 
 	out() << "\t\texplicit " << className << "(qReal::Metamodel &metamodel)\n"
-			<< "\t\t\t: PatternType(metamodel)\n"
-			<< "\t\t{\n";
+	      << "\t\t\t: PatternType(metamodel)\n"
+	      << "\t\t{\n";
 	generateCommonData(out);
 	out() << "\t\t\tsetXml(QString::fromUtf8(\"" << mXml << "\"));\n"
-			<< "\t\t}\n\n";
+	      << "\t\t}\n\n";
 
 	out() << "\t};";
 	out() << "\n\n";

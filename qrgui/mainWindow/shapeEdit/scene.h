@@ -48,7 +48,7 @@ public:
 	Scene(graphicsUtils::AbstractView *view, QObject *parent = nullptr);
 	QPoint centerEmpty();
 	void changeTextName(const QString &name);
-	void setZValue(Item* item);
+	void setZValue(Item *item);
 	void addImage(const QString &fileName);
 
 	void drawLine(bool checked);
@@ -86,7 +86,7 @@ private Q_SLOTS:
 	void changeFontPalette();
 	void changePortsComboBox();
 
-	void changeFontFamily(const QFont& font);
+	void changeFontFamily(const QFont &font);
 	void changeFontPixelSize(int size);
 	void changeFontColor(const QString &text);
 	void changeFontItalic(bool isChecked);
@@ -98,30 +98,26 @@ private Q_SLOTS:
 
 private:
 	enum ItemTypes {
-		none
-		, line
-		, ellipse
-		, rectangle
-		, text
-		, dynamicText
-		, textPicture
-		, pointPort
-		, linePort
-		, stylus
-		, curve
-		, image
+		none,
+		line,
+		ellipse,
+		rectangle,
+		text,
+		dynamicText,
+		textPicture,
+		pointPort,
+		linePort,
+		stylus,
+		curve,
+		image
 	};
 
-	enum CopyPasteType {
-		nonePaste
-		, copy
-		, cut
-	};
+	enum CopyPasteType { nonePaste, copy, cut };
 
 	int mZValue {};
 	ItemTypes mItemType;
 	bool mWaitMove {};
-	int mCount { -1 };
+	int mCount {-1};
 	Line *mLine {};
 	QRealEllipse *mEllipse {};
 	QRealRectangle *mRectangle {};
@@ -130,8 +126,8 @@ private:
 	PointPort *mPointPort {};
 	LinePort *mLinePort {};
 	Stylus *mStylus {};
-	Curve* mCurve {};
-	Image* mImage {};
+	Curve *mCurve {};
+	Image *mImage {};
 	QString mFileName;
 	QPointF mC1;
 	CopyPasteType mCopyPaste;

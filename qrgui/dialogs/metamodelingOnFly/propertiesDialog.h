@@ -34,10 +34,8 @@ public:
 	/// Constructor.
 	/// @param interpreterEditorManager Editor manager.
 	/// @param id Id of current metamodel element in which we need to change properties.
-	PropertiesDialog(const EditorManagerInterface &interpreterEditorManager
-			, qrRepo::LogicalRepoApi &logicalRepoApi
-			, const Id &id
-			, QWidget *parent = nullptr);
+	PropertiesDialog(const EditorManagerInterface &interpreterEditorManager, qrRepo::LogicalRepoApi &logicalRepoApi,
+		const Id &id, QWidget *parent = nullptr);
 
 	/// Destructor.
 	~PropertiesDialog() override;
@@ -56,13 +54,13 @@ private:
 	void findElementsOnDiagram(const qrRepo::LogicalRepoApi &api, Id &id);
 	void disableParentProperties(const QStringList &propertiesDisplayedNames);
 
-	Ui::PropertiesDialog *mUi;  // Has ownership.
+	Ui::PropertiesDialog *mUi; // Has ownership.
 	const EditorManagerInterface &mInterpreterEditorManager;
 	qrRepo::LogicalRepoApi &mLogicalRepoApi;
 	Id mId;
 	QStringList mPropertiesNames;
 	qReal::IdList *mElementsOnDiagram;
-	EditPropertiesDialog mEditPropertiesDialog;  // Has ownership.
+	EditPropertiesDialog mEditPropertiesDialog; // Has ownership.
 };
 
 }

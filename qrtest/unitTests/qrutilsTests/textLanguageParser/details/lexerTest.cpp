@@ -94,7 +94,7 @@ TEST_F(LexerTest, keywords)
 TEST_F(LexerTest, lexemeTypes)
 {
 	QString stream = "ololo and break do else elseif end false for function goto if in local nil not or repeat"
-			" return then true until while";
+			 " return then true until while";
 
 	auto result = mLexer->tokenize(stream);
 	ASSERT_EQ(23, result.tokens.size());
@@ -266,7 +266,7 @@ TEST_F(LexerTest, numericLiterals)
 	}
 
 	stream = "3.0     3.1416     314.16e-2     0.31416E1     34e1\n"
-			"0x0.1E  0xA23p-4   0X1.921FB54442D18P+1";
+		 "0x0.1E  0xA23p-4   0X1.921FB54442D18P+1";
 
 	result = mLexer->tokenize(stream);
 
@@ -280,9 +280,8 @@ TEST_F(LexerTest, numericLiterals)
 TEST_F(LexerTest, strings)
 {
 	QString stream = "a = 'alo\\n123\"'\n"
-			"   a = \"alo\\n123\\\"\"\n"
-			"   a = '\\97lo\\10\\04923\"'"
-			;
+			 "   a = \"alo\\n123\\\"\"\n"
+			 "   a = '\\97lo\\10\\04923\"'";
 
 	auto result = mLexer->tokenize(stream);
 
@@ -350,10 +349,9 @@ TEST_F(LexerTest, strings)
 TEST_F(LexerTest, comments)
 {
 	QString stream = "a = 1 --ololo\n"
-			"---- x\n"
-			"a = 'no -- comment in a string' end\n"
-			"--"
-			;
+			 "---- x\n"
+			 "a = 'no -- comment in a string' end\n"
+			 "--";
 
 	auto result = mLexer->tokenize(stream);
 

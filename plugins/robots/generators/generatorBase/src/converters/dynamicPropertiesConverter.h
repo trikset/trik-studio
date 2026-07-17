@@ -27,15 +27,13 @@ namespace converters {
 class DynamicPropertiesConverter : public simple::Binding::ConverterInterface, public TemplateParametrizedEntity
 {
 public:
-	DynamicPropertiesConverter(lua::LuaProcessor &luaTranslator
-			, const qReal::Id &id
-			, const QStringList &pathsToTemplates
-			, simple::Binding::ConverterInterface *reservedVariablesConverter
-	);
+	DynamicPropertiesConverter(lua::LuaProcessor &luaTranslator, const qReal::Id &id,
+		const QStringList &pathsToTemplates, simple::Binding::ConverterInterface *reservedVariablesConverter);
 
 	~DynamicPropertiesConverter() override;
 
 	QString convert(const QString &properties) const override;
+
 private:
 	lua::LuaProcessor &mLuaTranslator;
 	const qReal::Id mId;

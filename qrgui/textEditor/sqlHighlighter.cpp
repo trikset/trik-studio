@@ -25,7 +25,7 @@ SQLHighlighter::SQLHighlighter(QTextDocument *document)
 	mSignFormat.setForeground(Qt::green);
 	QStringList signPatterns;
 	signPatterns << "," << ">" << "<" << "-" << "\\*" << "\\+"
-				 << "\\." << "=" << "\\(" << "\\)";
+		     << "\\." << "=" << "\\(" << "\\)";
 	for (const QString &pattern : signPatterns) {
 		rule.pattern = QRegExp(pattern);
 		rule.format = mSignFormat;
@@ -36,8 +36,8 @@ SQLHighlighter::SQLHighlighter(QTextDocument *document)
 	mKeywordFormat.setFontWeight(QFont::Bold);
 	QStringList keywordPatterns;
 	keywordPatterns << "\\bSELECT\\b" << "\\bFROM\\b" << "\\bWHERE\\b" << "\\bORDER BY\\b"
-					<< "\\bCOUNT\\b" << "\\bAS\\b" << "\\bJOIN\\b" << "\\bON\\b"
-					<< "\\bGROUP BY\\b" << "\\bHAVING\\b" << "\\bNATURAL JOIN\\b"  ;
+			<< "\\bCOUNT\\b" << "\\bAS\\b" << "\\bJOIN\\b" << "\\bON\\b"
+			<< "\\bGROUP BY\\b" << "\\bHAVING\\b" << "\\bNATURAL JOIN\\b";
 	for (const QString &pattern : keywordPatterns) {
 		rule.pattern = QRegExp(pattern);
 		rule.format = mKeywordFormat;
@@ -101,5 +101,4 @@ void SQLHighlighter::highlightBlock(const QString &text)
 		setFormat(startIndex, commentLength, mMultiLineCommentFormat);
 		startIndex = mCommentStartExpression.indexIn(text, startIndex + commentLength);
 	}
-
 }

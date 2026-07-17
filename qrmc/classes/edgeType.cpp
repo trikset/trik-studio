@@ -21,8 +21,8 @@
 using namespace qrmc;
 using namespace qReal;
 
-EdgeType::EdgeType(const Diagram &diagram, const qrRepo::LogicalRepoApi &api, const qReal::Id &id
-		, const QString &targetDirectory)
+EdgeType::EdgeType(const Diagram &diagram, const qrRepo::LogicalRepoApi &api, const qReal::Id &id,
+	const QString &targetDirectory)
 	: GraphicType(diagram, api, id, targetDirectory)
 {
 	mLineType = mApi.stringProperty(id, "lineType");
@@ -34,7 +34,7 @@ EdgeType::~EdgeType()
 	qDeleteAll(mLabels);
 }
 
-Type* EdgeType::clone() const
+Type *EdgeType::clone() const
 {
 	auto *result = new EdgeType(*mDiagram, mApi, mId, targetDirectory());
 	GraphicType::copyFields(result);
@@ -80,7 +80,7 @@ QString EdgeType::generateEdgeClass(const QString &classTemplate) const
 	generateSdf();
 	generateArrows(edgeClass);
 
-	for (const Label * const label : mLabels) {
+	for (const Label *const label : mLabels) {
 		labelsInitLine += label->generateInit(compiler, false) + endline;
 		labelsUpdateLine += label->generateUpdate(compiler) + endline;
 		labelsDefinitionLine += label->generateDefinition(compiler) + endline;
@@ -88,8 +88,7 @@ QString EdgeType::generateEdgeClass(const QString &classTemplate) const
 
 	if (mLabels.isEmpty()) { // no labels
 		labelsUpdateLine = nodeIndent + "Q_UNUSED(repo)" + endline;
-		labelsInitLine = nodeIndent + "Q_UNUSED(factory)" + endline +
-						 nodeIndent + "Q_UNUSED(titles)" + endline;
+		labelsInitLine = nodeIndent + "Q_UNUSED(factory)" + endline + nodeIndent + "Q_UNUSED(titles)" + endline;
 	}
 
 	QString lineType = mApi.stringProperty(mId, "lineType");
@@ -102,12 +101,12 @@ QString EdgeType::generateEdgeClass(const QString &classTemplate) const
 	const QString portsForFromPortTypes = generatePorts(mFromPorts);
 
 	edgeClass.replace(edgeInitTag, labelsInitLine)
-			.replace(updateDataTag, labelsUpdateLine)
-			.replace(labelDefinitionTag, labelsDefinitionLine)
-			.replace(lineTypeTag, lineType)
-			.replace(portsForFromPortTypesTag, portsForFromPortTypes)
-			.replace(elementNameTag, name())
-			.replace("\\n", "\n");
+		.replace(updateDataTag, labelsUpdateLine)
+		.replace(labelDefinitionTag, labelsDefinitionLine)
+		.replace(lineTypeTag, lineType)
+		.replace(portsForFromPortTypesTag, portsForFromPortTypes)
+		.replace(elementNameTag, name())
+		.replace("\\n", "\n");
 
 	return edgeClass + endline;
 }
@@ -129,8 +128,8 @@ void EdgeType::generateArrows(QString &edgeClass) const
 	generateArrowEnd(edgeClass, endType, endArrowCustomizationTag, endArrowBrushColorTag);
 }
 
-void EdgeType::generateArrowEnd(QString &edgeClass, const QString &arrowEnd,
-								const QString &customTag, const QString &brushTag) const
+void EdgeType::generateArrowEnd(QString &edgeClass, const QString &arrowEnd, const QString &customTag,
+	const QString &brushTag) const
 {
 	MetaCompiler &compiler = diagram().editor()->metaCompiler();
 	if (arrowEnd.isEmpty() || arrowEnd == "no_arrow") {
@@ -140,34 +139,33 @@ void EdgeType::generateArrowEnd(QString &edgeClass, const QString &arrowEnd,
 
 	if (arrowEnd == "empty_arrow") {
 		edgeClass.replace(customTag, compiler.getTemplateUtils(arrowTemplateTag))
-				.replace(brushTag, compiler.getTemplateUtils(emptyArrowColorTag));
+			.replace(brushTag, compiler.getTemplateUtils(emptyArrowColorTag));
 	} else if (arrowEnd == "filled_arrow") {
 		edgeClass.replace(customTag, compiler.getTemplateUtils(arrowTemplateTag))
-				.replace(brushTag, compiler.getTemplateUtils(filledArrowColorTag));
+			.replace(brushTag, compiler.getTemplateUtils(filledArrowColorTag));
 	} else if (arrowEnd == "open_arrow") {
-		edgeClass.replace(customTag, compiler.getTemplateUtils(openArrowTemplateTag))
-				.replace(brushTag, "");
+		edgeClass.replace(customTag, compiler.getTemplateUtils(openArrowTemplateTag)).replace(brushTag, "");
 	} else if (arrowEnd == "complex_arrow") {
 		edgeClass.replace(customTag, compiler.getTemplateUtils(complexArrowTemplateTag))
-				.replace(brushTag, compiler.getTemplateUtils(emptyArrowColorTag));
+			.replace(brushTag, compiler.getTemplateUtils(emptyArrowColorTag));
 	} else if (arrowEnd == "empty_rhomb") {
 		edgeClass.replace(customTag, compiler.getTemplateUtils(rhombTemplateTag))
-				.replace(brushTag, compiler.getTemplateUtils(emptyArrowColorTag));
+			.replace(brushTag, compiler.getTemplateUtils(emptyArrowColorTag));
 	} else if (arrowEnd == "filled_rhomb") {
 		edgeClass.replace(customTag, compiler.getTemplateUtils(rhombTemplateTag))
-				.replace(brushTag, compiler.getTemplateUtils(filledArrowColorTag));
+			.replace(brushTag, compiler.getTemplateUtils(filledArrowColorTag));
 	} else if (arrowEnd == "crossed_line") {
 		edgeClass.replace(customTag, compiler.getTemplateUtils(crossedLineTemplateTag))
-				.replace(brushTag, compiler.getTemplateUtils(emptyArrowColorTag));
+			.replace(brushTag, compiler.getTemplateUtils(emptyArrowColorTag));
 	} else if (arrowEnd == "empty_circle") {
 		edgeClass.replace(customTag, compiler.getTemplateUtils(emptyCircleTemplateTag))
-				.replace(brushTag, compiler.getTemplateUtils(emptyArrowColorTag));
+			.replace(brushTag, compiler.getTemplateUtils(emptyArrowColorTag));
 	} else if (arrowEnd == "signal") {
 		edgeClass.replace(customTag, compiler.getTemplateUtils(signalTemplateTag))
-				.replace(brushTag, compiler.getTemplateUtils(emptyArrowColorTag));
+			.replace(brushTag, compiler.getTemplateUtils(emptyArrowColorTag));
 	} else if (arrowEnd == "timer") {
 		edgeClass.replace(customTag, compiler.getTemplateUtils(timerTemplateTag))
-				.replace(brushTag, compiler.getTemplateUtils(emptyArrowColorTag));
+			.replace(brushTag, compiler.getTemplateUtils(emptyArrowColorTag));
 	}
 }
 
@@ -206,8 +204,7 @@ void EdgeType::generateSdf() const
 	const MetaCompiler &compiler = diagram().editor()->metaCompiler();
 
 	QString result = compiler.getTemplateUtils(lineSdfTag);
-	result.replace(lineTypeTag, mApi.stringProperty(mId, "lineType"))
-			.replace("\\n", "\n");
+	result.replace(lineTypeTag, mApi.stringProperty(mId, "lineType")).replace("\\n", "\n");
 
 	QTextStream out(&file);
 	out << result;
@@ -227,10 +224,8 @@ void EdgeType::initLabels()
 	}
 
 	int count = 1;
-	for (QDomElement element = graphics.firstChildElement("labels").firstChildElement("label");
-		!element.isNull();
-		element = element.nextSiblingElement("label"))
-	{
+	for (QDomElement element = graphics.firstChildElement("labels").firstChildElement("label"); !element.isNull();
+		element = element.nextSiblingElement("label")) {
 		auto *label = new Label();
 		if (!label->init(element, count, true, mWidth, mHeight)) {
 			delete label;

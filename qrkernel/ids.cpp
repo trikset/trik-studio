@@ -27,13 +27,17 @@ Id Id::loadFromString(const QString &string)
 
 	Id result;
 	switch (path.count()) {
-	case 5: result.mId = path[4];
+	case 5:
+		result.mId = path[4];
 		// Fall-thru
-	case 4: result.mElement = path[3];
+	case 4:
+		result.mElement = path[3];
 		// Fall-thru
-	case 3: result.mDiagram = path[2];
+	case 3:
+		result.mDiagram = path[2];
 		// Fall-thru
-	case 2: result.mEditor = path[1];
+	case 2:
+		result.mEditor = path[1];
 		// Fall-thru
 	}
 	Q_ASSERT(string == result.toString());
@@ -50,20 +54,20 @@ Id Id::rootId()
 	return Id("ROOT_ID", "ROOT_ID", "ROOT_ID", "ROOT_ID");
 }
 
-Id::Id(const QString &editor, QString  const &diagram, QString  const &element, QString  const &id)
-		: mEditor(editor)
-		, mDiagram(diagram)
-		, mElement(element)
-		, mId(id)
+Id::Id(const QString &editor, QString const &diagram, QString const &element, QString const &id)
+	: mEditor(editor)
+	, mDiagram(diagram)
+	, mElement(element)
+	, mId(id)
 {
 	Q_ASSERT(checkIntegrity());
 }
 
 Id::Id(const Id &base, const QString &additional)
-		: mEditor(base.mEditor)
-		, mDiagram(base.mDiagram)
-		, mElement(base.mElement)
-		, mId(base.mId)
+	: mEditor(base.mEditor)
+	, mDiagram(base.mDiagram)
+	, mElement(base.mElement)
+	, mId(base.mId)
 {
 	const unsigned baseSize = base.idSize();
 	switch (baseSize) {
@@ -85,11 +89,9 @@ Id::Id(const Id &base, const QString &additional)
 	Q_ASSERT(checkIntegrity());
 }
 
-
 bool Id::isNull() const
 {
-	return mEditor.isEmpty() && mDiagram.isEmpty()
-			&& mElement.isEmpty() && mId.isEmpty();
+	return mEditor.isEmpty() && mDiagram.isEmpty() && mElement.isEmpty() && mId.isEmpty();
 }
 
 QString Id::editor() const
@@ -126,11 +128,14 @@ unsigned Id::idSize() const
 {
 	if (!mId.isEmpty()) {
 		return 4;
-	} if (!mElement.isEmpty()) {
+	}
+	if (!mElement.isEmpty()) {
 		return 3;
-	} if (!mDiagram.isEmpty()) {
+	}
+	if (!mDiagram.isEmpty()) {
 		return 2;
-	} if (!mEditor.isEmpty()) {
+	}
+	if (!mEditor.isEmpty()) {
 		return 1;
 	}
 	return 0;
@@ -146,9 +151,11 @@ QString Id::toString() const
 	QString path = "qrm:/" + mEditor;
 	if (mDiagram != "") {
 		path += "/" + mDiagram;
-	} if (mElement != "") {
+	}
+	if (mElement != "") {
 		path += "/" + mElement;
-	} if (mId != "") {
+	}
+	if (mId != "") {
 		path += "/" + mId;
 	}
 	return path;
@@ -195,13 +202,13 @@ QVariant IdListHelper::toVariant(const IdList &list)
 	return v;
 }
 
-QDataStream& operator<< (QDataStream &out, const Id &id)
+QDataStream &operator<<(QDataStream &out, const Id &id)
 {
 	out << id.toString();
 	return out;
 }
 
-QDataStream& operator>> (QDataStream &in, Id &id)
+QDataStream &operator>>(QDataStream &in, Id &id)
 {
 	QString idString;
 	in >> idString;

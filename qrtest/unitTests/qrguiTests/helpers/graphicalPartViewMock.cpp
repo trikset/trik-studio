@@ -53,7 +53,8 @@ void GraphicalPartViewMock::dataChanged(QModelIndex const &topLeft, QModelIndex 
 		return;
 	}
 
-	GraphicalPartModelItem const * const item = static_cast<GraphicalPartModelItem const *>(topLeft.internalPointer());
+	GraphicalPartModelItem const *const item =
+		static_cast<GraphicalPartModelItem const *>(topLeft.internalPointer());
 	if (!item) {
 		return;
 	}
@@ -84,8 +85,8 @@ void GraphicalPartViewMock::rowsInserted(QModelIndex const &parent, int start, i
 		return;
 	}
 
-	GraphicalPartModelItem const * const item
-			= static_cast<GraphicalPartModelItem const *>(parent.child(start, 0).internalPointer());
+	GraphicalPartModelItem const *const item =
+		static_cast<GraphicalPartModelItem const *>(parent.child(start, 0).internalPointer());
 	if (!item) {
 		return;
 	}

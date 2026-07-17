@@ -26,8 +26,8 @@ using namespace gui;
 
 const EditorManagerInterface *PaletteTreeWidget::mEditorManager = nullptr;
 
-PaletteTreeWidget::PaletteTreeWidget(PaletteTree &palette, MainWindow &mainWindow
-		, const EditorManagerInterface &editorManagerProxy, bool editable)
+PaletteTreeWidget::PaletteTreeWidget(PaletteTree &palette, MainWindow &mainWindow,
+	const EditorManagerInterface &editorManagerProxy, bool editable)
 	: mMainWindow(mainWindow)
 	, mPaletteTree(palette)
 	, mEditable(editable)
@@ -37,21 +37,18 @@ PaletteTreeWidget::PaletteTreeWidget(PaletteTree &palette, MainWindow &mainWindo
 
 bool PaletteTreeWidget::readyToRefresh()
 {
-	for (auto& draggableElement: mDraggableElements) {
+	for (auto &draggableElement : mDraggableElements) {
 		if (!draggableElement->getReadyForDelete()) {
-			connect(draggableElement, &DraggableElement::signalReadyForDelete,
-				this, &PaletteTreeWidget::signalReadyToRefresh);
+			connect(draggableElement, &DraggableElement::signalReadyForDelete, this,
+				&PaletteTreeWidget::signalReadyToRefresh);
 			return false;
 		}
 	}
 	return true;
 }
 
-void PaletteTreeWidget::addGroups(QList<QPair<QString, QList<PaletteElement>>> &groups
-		, QMap<QString, QString> const &descriptions
-		, bool hideIfEmpty
-		, const QString &diagramFriendlyName
-		, bool sort)
+void PaletteTreeWidget::addGroups(QList<QPair<QString, QList<PaletteElement>>> &groups,
+	QMap<QString, QString> const &descriptions, bool hideIfEmpty, const QString &diagramFriendlyName, bool sort)
 {
 	mPaletteItems.clear();
 	mPaletteElements.clear();
@@ -68,18 +65,14 @@ void PaletteTreeWidget::addGroups(QList<QPair<QString, QList<PaletteElement>>> &
 	show();
 
 	if (sort) {
-		std::sort(groups.begin(), groups.end()
-				, [](QPair<QString, QList<PaletteElement>> const &e1
-						, QPair<QString, QList<PaletteElement>> const &e2)
-					{
-						return e1.first < e2.first;
-					}
-				);
+		std::sort(groups.begin(), groups.end(),
+			[](QPair<QString, QList<PaletteElement>> const &e1,
+				QPair<QString, QList<PaletteElement>> const &e2) { return e1.first < e2.first; });
 	}
 
 	int expandedCount = 0;
 	for (auto &group : groups) {
-		auto * const item = new QTreeWidgetItem;
+		auto *const item = new QTreeWidgetItem;
 		item->setText(0, group.first);
 		item->setToolTip(0, descriptions[group.first]);
 
@@ -152,13 +145,16 @@ void PaletteTreeWidget::mousePressEvent(QMouseEvent *event)
 	if (event->button() == Qt::RightButton) {
 		if (mEditorManager->isInterpretationMode()) {
 			QMenu menu;
-			auto *chooseTypeDialog = new ChooseTypeDialog(mPaletteTree.currentEditor()
-					, *mEditorManager, &mMainWindow);
-			QAction * const addNodePaletteAction = menu.addAction(tr("Add Entity"));
-			QAction * const addEdgePaletteAction = menu.addAction(tr("Add Relastionship"));
-			connect(addNodePaletteAction, &QAction::triggered, chooseTypeDialog, &ChooseTypeDialog::nodeButtonClicked);
-			connect(addEdgePaletteAction, &QAction::triggered, chooseTypeDialog, &ChooseTypeDialog::edgeButtonClicked);
-			connect(chooseTypeDialog, &ChooseTypeDialog::jobDone, &mMainWindow, &MainWindow::loadEditorPlugins);
+			auto *chooseTypeDialog =
+				new ChooseTypeDialog(mPaletteTree.currentEditor(), *mEditorManager, &mMainWindow);
+			QAction *const addNodePaletteAction = menu.addAction(tr("Add Entity"));
+			QAction *const addEdgePaletteAction = menu.addAction(tr("Add Relastionship"));
+			connect(addNodePaletteAction, &QAction::triggered, chooseTypeDialog,
+				&ChooseTypeDialog::nodeButtonClicked);
+			connect(addEdgePaletteAction, &QAction::triggered, chooseTypeDialog,
+				&ChooseTypeDialog::edgeButtonClicked);
+			connect(chooseTypeDialog, &ChooseTypeDialog::jobDone, &mMainWindow,
+				&MainWindow::loadEditorPlugins);
 			menu.exec(QCursor::pos());
 		}
 	}
@@ -185,7 +181,7 @@ void PaletteTreeWidget::sortByFriendlyName(QList<PaletteElement> &elements)
 	std::sort(elements.begin(), elements.end(), paletteElementLessThan);
 }
 
-void PaletteTreeWidget::editItem(QTreeWidgetItem * const item)
+void PaletteTreeWidget::editItem(QTreeWidgetItem *const item)
 {
 	edit(indexFromItem(item));
 }
@@ -256,7 +252,7 @@ void PaletteTreeWidget::setElementEnabled(const Id &metatype, bool enabled)
 
 void PaletteTreeWidget::setEnabledForAllElements(bool enabled)
 {
-	for (QWidget * const element : mPaletteElements.values()) {
+	for (QWidget *const element : mPaletteElements.values()) {
 		element->setEnabled(enabled);
 	}
 }
@@ -265,7 +261,7 @@ void PaletteTreeWidget::filter(const QRegExp &regexp)
 {
 	QHash<QTreeWidgetItem *, int> visibleCount;
 	traverse([this, &regexp, &visibleCount](QTreeWidgetItem *item) {
-		if (auto * const element = dynamic_cast<DraggableElement *>(itemWidget(item, 0))) {
+		if (auto *const element = dynamic_cast<DraggableElement *>(itemWidget(item, 0))) {
 			const QString text = element->text();
 			const bool itemDisabledBySystem = mItemsVisible.contains(item) && !mItemsVisible[item];
 			item->setHidden(itemDisabledBySystem || !text.contains(regexp));
@@ -276,7 +272,7 @@ void PaletteTreeWidget::filter(const QRegExp &regexp)
 	});
 
 	for (int i = 0; i < topLevelItemCount(); ++i) {
-		QTreeWidgetItem * const item = topLevelItem(i);
+		QTreeWidgetItem *const item = topLevelItem(i);
 		item->setHidden(visibleCount[item] == 0);
 	}
 }
@@ -293,7 +289,7 @@ const QSet<PaletteElement> &PaletteTreeWidget::elementsSet() const
 	return mElementsSet;
 }
 
-void PaletteTreeWidget::traverse(QTreeWidgetItem * const item, const PaletteTreeWidget::Action &action) const
+void PaletteTreeWidget::traverse(QTreeWidgetItem *const item, const PaletteTreeWidget::Action &action) const
 {
 	action(item);
 	for (int i = 0; i < item->childCount(); ++i) {
@@ -301,7 +297,7 @@ void PaletteTreeWidget::traverse(QTreeWidgetItem * const item, const PaletteTree
 	}
 }
 
-void PaletteTreeWidget::updateGroupVisibility(const QTreeWidgetItem * const item)
+void PaletteTreeWidget::updateGroupVisibility(const QTreeWidgetItem *const item)
 {
 	const auto parent = item->parent();
 	bool hasVisible = false;

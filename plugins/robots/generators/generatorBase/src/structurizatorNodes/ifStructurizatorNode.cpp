@@ -16,11 +16,9 @@
 
 using namespace generatorBase;
 
-IfStructurizatorNode::IfStructurizatorNode(IntermediateStructurizatorNode *condition
-		, IntermediateStructurizatorNode *thenBranch
-		, IntermediateStructurizatorNode *elseBranch
-		, IntermediateStructurizatorNode *exit
-		, QObject *parent)
+IfStructurizatorNode::IfStructurizatorNode(IntermediateStructurizatorNode *condition,
+	IntermediateStructurizatorNode *thenBranch, IntermediateStructurizatorNode *elseBranch,
+	IntermediateStructurizatorNode *exit, QObject *parent)
 	: IntermediateStructurizatorNode(parent)
 	, mCondition(condition)
 	, mThenBranch(thenBranch)

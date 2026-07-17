@@ -17,24 +17,23 @@
 #include <QObject>
 class QPolygonF;
 
-namespace twoDModel{
+namespace twoDModel {
 namespace items {
-	class SolidItem;
+class SolidItem;
 }
 
 namespace model {
 namespace physics {
-	class Box2DPhysicsEngine;
+class Box2DPhysicsEngine;
 
 namespace parts {
-
 
 class Box2DItem
 {
 	Q_DISABLE_COPY(Box2DItem)
 public:
-	Box2DItem(twoDModel::model::physics::Box2DPhysicsEngine *mEngine
-			, const items::SolidItem *mItem, b2Vec2 pos, float angle);
+	Box2DItem(twoDModel::model::physics::Box2DPhysicsEngine *mEngine, const items::SolidItem *mItem, b2Vec2 pos,
+		float angle);
 
 	~Box2DItem();
 	/// Transform item to a new position, IMPORTANT: \a pos is a center point of box2d object.

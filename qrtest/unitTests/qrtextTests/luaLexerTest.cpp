@@ -74,7 +74,7 @@ TEST_F(LuaLexerTest, keywords)
 TEST_F(LuaLexerTest, lexemeTypes)
 {
 	QString stream = "ololo and break do else elseif end false for function goto if in local nil not or repeat"
-			" return then true until while";
+			 " return then true until while";
 
 	auto result = mLexer->tokenize(stream);
 	ASSERT_EQ(23, result.size());
@@ -211,7 +211,7 @@ TEST_F(LuaLexerTest, multilineErrorReporting)
 	EXPECT_EQ(ErrorType::lexicalError, mErrors[0].errorType());
 	EXPECT_EQ(Severity::error, mErrors[0].severity());
 
-	EXPECT_FALSE( mErrors[1].errorMessage().isEmpty());
+	EXPECT_FALSE(mErrors[1].errorMessage().isEmpty());
 	EXPECT_EQ(Connection(11, 1, 1), mErrors[1].connection());
 	EXPECT_EQ(ErrorType::lexicalError, mErrors[1].errorType());
 	EXPECT_EQ(Severity::error, mErrors[1].severity());
@@ -250,7 +250,7 @@ TEST_F(LuaLexerTest, numericLiterals)
 	}
 
 	stream = "3.0     3.1416     314.16e-2     0.31416E1     34e1\n"
-			"0x0.1E  0xA23p-4   0X1.921FB54442D18P+1";
+		 "0x0.1E  0xA23p-4   0X1.921FB54442D18P+1";
 
 	result = mLexer->tokenize(stream);
 
@@ -264,9 +264,8 @@ TEST_F(LuaLexerTest, numericLiterals)
 TEST_F(LuaLexerTest, strings)
 {
 	QString stream = "a = 'alo\\n123\"'\n"
-			"   a = \"alo\\n123\\\"\"\n"
-			"   a = '\\97lo\\10\\04923\"'"
-			;
+			 "   a = \"alo\\n123\\\"\"\n"
+			 "   a = '\\97lo\\10\\04923\"'";
 
 	auto result = mLexer->tokenize(stream);
 
@@ -334,17 +333,15 @@ TEST_F(LuaLexerTest, strings)
 TEST_F(LuaLexerTest, comments)
 {
 	QString stream = "a = 1 --ololo\n"
-			"---- x\n"
-			"a = 'no -- comment in a string' end\n"
-			"--"
-			;
+			 "---- x\n"
+			 "a = 'no -- comment in a string' end\n"
+			 "--";
 
 	auto result = mLexer->tokenize(stream);
 	auto comments = mLexer->comments();
 
 	ASSERT_EQ(7, result.size());
 	ASSERT_EQ(3, comments.size());
-
 
 	EXPECT_EQ(LuaTokenTypes::identifier, result[0].token());
 	EXPECT_EQ(LuaTokenTypes::equals, result[1].token());

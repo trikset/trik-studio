@@ -38,8 +38,7 @@ UpdatesCheckerPlugin::UpdatesCheckerPlugin()
 
 QList<qReal::ActionInfo> UpdatesCheckerPlugin::actions()
 {
-	return { qReal::ActionInfo(mSeparator, "", "help")
-		, qReal::ActionInfo(mCheckForUpdatesAction, "", "help") };
+	return {qReal::ActionInfo(mSeparator, "", "help"), qReal::ActionInfo(mCheckForUpdatesAction, "", "help")};
 }
 
 void UpdatesCheckerPlugin::init(const qReal::PluginConfigurator &configurator)
@@ -52,21 +51,23 @@ void UpdatesCheckerPlugin::init(const qReal::PluginConfigurator &configurator)
 
 QStringList UpdatesCheckerPlugin::defaultSettingsFiles()
 {
-	return { ":/updatesCheckerDefaultSettings.ini" };
+	return {":/updatesCheckerDefaultSettings.ini"};
 }
 
 void UpdatesCheckerPlugin::checkForUpdates(bool reportNoUpdates)
 {
 	if (qReal::SettingsManager::value("updaterActive").toBool()) {
-		auto * const updater = new Updater(this);
+		auto *const updater = new Updater(this);
 		connect(updater, &Updater::newVersionAvailable, this, &UpdatesCheckerPlugin::showUpdatesDialog);
 		if (reportNoUpdates) {
 			connect(updater, &Updater::noNewVersionAvailable, this, &UpdatesCheckerPlugin::reportNoUpdates);
-			connect(updater, &Updater::networkError, this, [this](){
-				mErrorReporter->addInformation(tr("There is some connection problem, may be network is disabled"));
+			connect(updater, &Updater::networkError, this, [this]() {
+				mErrorReporter->addInformation(
+					tr("There is some connection problem, may be network is disabled"));
 			});
-			connect(updater, &Updater::unidentifiedError, this, [this](){
-				mErrorReporter->addInformation(tr("There is some unrecognized error with updating process"));
+			connect(updater, &Updater::unidentifiedError, this, [this]() {
+				mErrorReporter->addInformation(
+					tr("There is some unrecognized error with updating process"));
 			});
 		}
 
@@ -82,26 +83,24 @@ void UpdatesCheckerPlugin::reportNoUpdates()
 
 void UpdatesCheckerPlugin::initSettingsUi(qReal::gui::PreferencesPage &behaviourPage)
 {
-	auto * const automaticsLayout = behaviourPage.findChild<QGridLayout *>("automaticsFrameLayout");
+	auto *const automaticsLayout = behaviourPage.findChild<QGridLayout *>("automaticsFrameLayout");
 	if (!automaticsLayout) {
 		QLOG_ERROR() << "Could not find 'automaticsFrameLayout' on preferences behaviour page";
 		return;
 	}
 
-	auto * const box = new QCheckBox(tr("Check for updates on start"), automaticsLayout->widget());
+	auto *const box = new QCheckBox(tr("Check for updates on start"), automaticsLayout->widget());
 	automaticsLayout->addWidget(box, automaticsLayout->rowCount(), 0, 1, automaticsLayout->columnCount());
-	connect(&behaviourPage, &qReal::gui::PreferencesPage::saved, this, [box]() {
-		qReal::SettingsManager::setValue("updaterActive", box->isChecked());
-	});
-	connect(&behaviourPage, &qReal::gui::PreferencesPage::restored, this, [box]() {
-		box->setChecked(qReal::SettingsManager::value("updaterActive").toBool());
-	});
+	connect(&behaviourPage, &qReal::gui::PreferencesPage::saved, this,
+		[box]() { qReal::SettingsManager::setValue("updaterActive", box->isChecked()); });
+	connect(&behaviourPage, &qReal::gui::PreferencesPage::restored, this,
+		[box]() { box->setChecked(qReal::SettingsManager::value("updaterActive").toBool()); });
 }
 
 void UpdatesCheckerPlugin::showUpdatesDialog()
 {
 	QLOG_INFO() << "New updates found!";
-	auto * const updater = dynamic_cast<Updater *>(sender());
+	auto *const updater = dynamic_cast<Updater *>(sender());
 	if (updater && UpdateVersionDialog::promptUpdate(mMainWindowWidget)) {
 		updater->start();
 

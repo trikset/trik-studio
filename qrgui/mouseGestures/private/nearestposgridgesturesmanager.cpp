@@ -47,7 +47,7 @@ qreal NearestPosGridGesturesManager::getDistance(const key_type &key1, const key
 NearestPosGridGesturesManager::key_type NearestPosGridGesturesManager::getKey(const PathVector &path)
 {
 	const auto &key = KeyBuilder::getKey(path, gridSize, gridSize);
-	key_type finalKey (gridSize * gridSize);
+	key_type finalKey(gridSize * gridSize);
 	for (int i = 0; i < gridSize * gridSize; ++i) {
 		finalKey[i] = gridSize;
 	}

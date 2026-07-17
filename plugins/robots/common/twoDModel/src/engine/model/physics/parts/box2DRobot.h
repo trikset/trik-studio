@@ -23,25 +23,22 @@ class b2Body;
 
 namespace twoDModel {
 namespace view {
-	class SensorItem;
+class SensorItem;
 }
 
 namespace model {
-	class RobotModel;
+class RobotModel;
 namespace physics {
 namespace parts {
 
 class Box2DWheel;
 class Box2DItem;
 
-
 class Box2DRobot
 {
 public:
-	Box2DRobot(twoDModel::model::physics::Box2DPhysicsEngine *mEngine
-			, twoDModel::model::RobotModel * const robotModel
-			, b2Vec2 pos
-			, float angle);
+	Box2DRobot(twoDModel::model::physics::Box2DPhysicsEngine *mEngine,
+		twoDModel::model::RobotModel *const robotModel, b2Vec2 pos, float angle);
 	~Box2DRobot();
 
 	void stop();
@@ -59,13 +56,16 @@ public:
 
 	void applyForceToCenter(b2Vec2 force, bool wake);
 
-	b2BodyId getBodyId() { return mBodyId; };
+	b2BodyId getBodyId()
+	{
+		return mBodyId;
+	};
 	twoDModel::model::RobotModel *getRobotModel() const;
-	Box2DWheel* getWheelAt(int i) const;
+	Box2DWheel *getWheelAt(int i) const;
 
 	// For debugging purpose
-	const QPolygonF & getDebuggingPolygon() const;
-	const std::unordered_map<const twoDModel::view::SensorItem*, std::unique_ptr<Box2DItem>> &getSensors() const;
+	const QPolygonF &getDebuggingPolygon() const;
+	const std::unordered_map<const twoDModel::view::SensorItem *, std::unique_ptr<Box2DItem>> &getSensors() const;
 
 private:
 	void connectWheels();
@@ -75,9 +75,9 @@ private:
 
 	b2BodyId mBodyId {b2_nullBodyId};
 	std::vector<std::unique_ptr<Box2DWheel>> mWheels;
-	std::unordered_map<const twoDModel::view::SensorItem*, std::unique_ptr<Box2DItem>> mSensors;
+	std::unordered_map<const twoDModel::view::SensorItem *, std::unique_ptr<Box2DItem>> mSensors;
 
-	twoDModel::model::RobotModel * const mModel; // Doesn't take ownership
+	twoDModel::model::RobotModel *const mModel; // Doesn't take ownership
 	twoDModel::model::physics::Box2DPhysicsEngine *mEngine; // Doesn't take ownership
 	b2WorldId mWorldId; // Doesn't take ownership
 	std::unique_ptr<b2Vec2[]> mPolygon;

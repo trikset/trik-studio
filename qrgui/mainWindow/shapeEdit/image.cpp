@@ -19,12 +19,12 @@
 
 using namespace graphicsUtils;
 
-Image::Image(const QString &fileName, qreal x, qreal y, Item* parent)
+Image::Image(const QString &fileName, qreal x, qreal y, Item *parent)
 	: Item(parent)
 	, mImage(fileName)
 {
 	mFileName = fileName;
-	auto* pixmap = new QPixmap(fileName);
+	auto *pixmap = new QPixmap(fileName);
 	mPixmapItem = new QGraphicsPixmapItem(*pixmap);
 	mNeedScalingRect = true;
 	mDomElementType = pictureType;
@@ -39,7 +39,7 @@ QRectF Image::boundingRect() const
 	return RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), scalingDrift);
 }
 
-void Image::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
+void Image::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 	Q_UNUSED(option);
 	Q_UNUSED(widget);

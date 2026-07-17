@@ -27,13 +27,11 @@ class Ev3RbfMasterGenerator : public Ev3MasterGeneratorBase
 {
 	Q_OBJECT
 public:
-	Ev3RbfMasterGenerator(const qrRepo::RepoApi &repo
-			, qReal::ErrorReporterInterface &errorReporter
-			, const utils::ParserErrorReporter &parserErrorReporter
-			, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
-			, qrtext::LanguageToolboxInterface &textLanguage
-			, const qReal::Id &diagramId
-			, const QString &generatorName);
+	Ev3RbfMasterGenerator(const qrRepo::RepoApi &repo, qReal::ErrorReporterInterface &errorReporter,
+		const utils::ParserErrorReporter &parserErrorReporter,
+		const kitBase::robotModel::RobotModelManagerInterface &robotModelManager,
+		qrtext::LanguageToolboxInterface &textLanguage, const qReal::Id &diagramId,
+		const QString &generatorName);
 
 	void initialize() override;
 	QString generate(const QString &indentString) override;
@@ -50,4 +48,3 @@ private:
 
 }
 }
-

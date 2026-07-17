@@ -16,9 +16,8 @@
 
 using namespace twoDModel::commands;
 
-RemoveSensorCommand::RemoveSensorCommand(model::SensorsConfiguration &configurator
-		, const QString &robotModel
-		, const kitBase::robotModel::PortInfo &port)
+RemoveSensorCommand::RemoveSensorCommand(model::SensorsConfiguration &configurator, const QString &robotModel,
+	const kitBase::robotModel::PortInfo &port)
 	: mImpl(configurator, robotModel, port, kitBase::robotModel::DeviceInfo(), QPointF(), 0)
 {
 }

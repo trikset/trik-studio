@@ -38,7 +38,7 @@ public:
 	/// onDeviceConfigurationChanged will be called in other.
 	/// Does nothing if otherProvider is null.
 	/// Does not take ownership.
-	void connectDevicesConfigurationProvider(DevicesConfigurationProvider * const otherProvider);
+	void connectDevicesConfigurationProvider(DevicesConfigurationProvider *const otherProvider);
 	void disconnectDevicesConfigurationProvider();
 
 protected:
@@ -48,11 +48,13 @@ protected:
 		userAction
 
 		/// Configuration change occured during loading of diagram or save with model.
-		, loading
+		,
+		loading
 
 		/// Configuration was changed by autoconfigurer, so everything shall work just as if it is done by user, but
 		/// user shall be notified about it.
-		, automaticConfiguration
+		,
+		automaticConfiguration
 	};
 
 	/// Shall be called by descendants when device configuration is changed. Change is propagated automatically
@@ -62,17 +64,13 @@ protected:
 	/// @param device - new type of a device on a given port.
 	/// @param reason - reason for configuration change. It allows different reactions to, for example, changes during
 	///        save loading and to changes made by user or autoconfigurer.
-	void deviceConfigurationChanged(const QString &robotId
-			, const robotModel::PortInfo &port
-			, const robotModel::DeviceInfo &device
-			, Reason reason);
+	void deviceConfigurationChanged(const QString &robotId, const robotModel::PortInfo &port,
+		const robotModel::DeviceInfo &device, Reason reason);
 
 	/// Must be implemented in descendants to react to device configuration changes and refresh their internal data.
 	/// Symmetric to deviceConfigurationChanged. Default implementation does nothing.
-	virtual void onDeviceConfigurationChanged(const QString &robotId
-			, const robotModel::PortInfo &port
-			, const robotModel::DeviceInfo &device
-			, Reason reason);
+	virtual void onDeviceConfigurationChanged(const QString &robotId, const robotModel::PortInfo &port,
+		const robotModel::DeviceInfo &device, Reason reason);
 
 	/// Sets null devices to each known port of each known robot model.
 	void clearConfiguration(Reason reason);
@@ -90,7 +88,7 @@ protected:
 	robotModel::DeviceInfo currentConfiguration(const QString &modelName, const robotModel::PortInfo &port) const;
 
 private:
-	void disconnectDevicesConfigurationProvider(DevicesConfigurationProvider * const provider);
+	void disconnectDevicesConfigurationProvider(DevicesConfigurationProvider *const provider);
 
 	/// Redundant current devices configuration.
 	/// If configuration is not changed by incoming message, it is not broadcasted.
@@ -101,7 +99,7 @@ private:
 	QString mName;
 
 	/// A list of providers connected to this one, to send notifications about configuration changes.
-	QList<DevicesConfigurationProvider *> mConnectedProviders;  // Doesn't have ownership.
+	QList<DevicesConfigurationProvider *> mConnectedProviders; // Doesn't have ownership.
 };
 
 }

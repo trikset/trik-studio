@@ -52,8 +52,8 @@ public:
 	/// @param input A path to a file where JSON with inputs for JavaScript.
 	/// @param mode Interpret mode.
 	/// @param qrsFile Path to TRIK Studio project
-	Runner(const QString &report, const QString &trajectory, const QString &input,
-	       const QString &mode, const QString &qrsFile, uint32_t delayBeforeExit);
+	Runner(const QString &report, const QString &trajectory, const QString &input, const QString &mode,
+		const QString &qrsFile, uint32_t delayBeforeExit);
 
 	~Runner() override;
 
@@ -65,9 +65,8 @@ public:
 	/// @param closeOnSuccessMode If true then model will be closed if the program finishes without errors.
 	/// @param showConsole If true then robot's console will be showed.
 	/// @param filePath If not QString() interpret code on this path instead of the code in the TRIK Studio file format.
-	bool interpret(bool background, int speedFactor
-				   , bool closeOnFinish, bool closeOnSuccess, bool showConsole,
-					bool showDisplay, const QString &filePath);
+	bool interpret(bool background, int speedFactor, bool closeOnFinish, bool closeOnSuccess, bool showConsole,
+		bool showDisplay, const QString &filePath);
 
 	/// Generate code from TRIK Studio save file
 	/// @param generatePath The path to save the generated code
@@ -78,10 +77,10 @@ private Q_SLOTS:
 	void close();
 
 private:
-	void connectRobotModel(const model::RobotModel *robotModel, const qReal::ui::ConsoleDock* console);
+	void connectRobotModel(const model::RobotModel *robotModel, const qReal::ui::ConsoleDock *console);
 	void onRobotRided(QPointF newPosition, const qreal newRotation);
-	void onDeviceStateChanged(const QString &robotId, const kitBase::robotModel::robotParts::Device *device
-			, const QString &property, const QVariant &value);
+	void onDeviceStateChanged(const QString &robotId, const kitBase::robotModel::robotParts::Device *device,
+		const QString &property, const QVariant &value);
 	void attachNewConsoleTo(view::TwoDModelWidget *twoDModelWindow);
 
 	QScopedPointer<qReal::SystemFacade> mQRealFacade;

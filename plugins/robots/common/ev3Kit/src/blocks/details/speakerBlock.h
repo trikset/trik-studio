@@ -42,7 +42,7 @@ private Q_SLOTS:
 	void timeout();
 
 private:
-	utils::AbstractTimer * const mTimer;  // Takes ownership
+	utils::AbstractTimer *const mTimer; // Takes ownership
 };
 
 }

@@ -43,8 +43,8 @@ using namespace kitBase::robotModel;
 TwoDRobotModel::TwoDRobotModel(RobotModelInterface &realModel)
 	: twoDModel::robotModel::TwoDRobotModel(realModel)
 	, mDisplayWidget(new NxtDisplayWidget())
-	, mCollidingPolygon({QPointF(10, 10), QPointF(42, 10), QPointF(45, 20)
-			, QPointF(45, 30), QPointF(42, 40), QPointF(10, 40)})
+	, mCollidingPolygon({QPointF(10, 10), QPointF(42, 10), QPointF(45, 20), QPointF(45, 30), QPointF(42, 40),
+		  QPointF(10, 40)})
 {
 }
 
@@ -98,14 +98,14 @@ QRect TwoDRobotModel::sensorImageRect(const kitBase::robotModel::DeviceInfo &dev
 		return {-12, -5, 25, 10};
 	}
 
-	if (deviceType.isA<robotParts::ColorSensor>()
-			|| deviceType.isA<robotParts::ColorSensorRaw>()
-			|| deviceType.isA<robotParts::LightSensor>()) {
+	if (deviceType.isA<robotParts::ColorSensor>() || deviceType.isA<robotParts::ColorSensorRaw>()
+		|| deviceType.isA<robotParts::LightSensor>()) {
 		return {-6, -6, 12, 12};
 	}
 
 	if (deviceType.isA<robotParts::RangeSensor>()) {
-		return {-20, -10, 40, 20};;
+		return {-20, -10, 40, 20};
+		;
 	}
 
 	return {};
@@ -118,12 +118,12 @@ QPolygonF TwoDRobotModel::collidingPolygon() const
 
 qreal TwoDRobotModel::mass() const
 {
-	return 0.5;  /// @todo: measure it
+	return 0.5; /// @todo: measure it
 }
 
 qreal TwoDRobotModel::friction() const
 {
-	return 0.3;  /// @todo measure it
+	return 0.3; /// @todo measure it
 }
 
 qreal TwoDRobotModel::onePercentAngularVelocity() const

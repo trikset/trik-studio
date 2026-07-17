@@ -23,10 +23,8 @@ class DrawCircleGenerator : public generatorBase::simple::BindingGenerator
 {
 	Q_OBJECT
 public:
-	DrawCircleGenerator(const qrRepo::RepoApi &repo
-			, generatorBase::GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent);
+	DrawCircleGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+		const qReal::Id &id, QObject *parent);
 };
 
 }

@@ -36,6 +36,7 @@ public:
 	void setColor(const QColor &color);
 private Q_SLOTS:
 	void chooseColor();
+
 private:
 	QPixmap getColorPixMap() const;
 	QColor mSavedColor;

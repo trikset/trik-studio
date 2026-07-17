@@ -22,7 +22,7 @@ using namespace qReal;
 using namespace models::details;
 using namespace modelsImplementation;
 
-GraphicalModelView::GraphicalModelView(LogicalModel * const model)
+GraphicalModelView::GraphicalModelView(LogicalModel *const model)
 	: AbstractView(model)
 {
 }
@@ -36,8 +36,7 @@ void GraphicalModelView::rowsInserted(const QModelIndex &parent, int start, int 
 		const QPersistentModelIndex current = model()->index(row, 0, parent);
 		const Id logicalId = current.data(roles::logicalIdRole).value<Id>();
 		if (parentLogicalId.isNull() || parentLogicalId.editor() != "MetaEditor"
-				|| logicalId.editor() != "MetaEditor")
-		{
+			|| logicalId.editor() != "MetaEditor") {
 			parentLogicalId = Id::rootId();
 		}
 
@@ -53,17 +52,18 @@ void GraphicalModelView::rowsInserted(const QModelIndex &parent, int start, int 
 		// and graphical model hierarchy. It is not always easy since
 		// some elements have no correspondences in another model, and tree
 		// structures may be very different by themselves.
-		auto * const logicalModel = static_cast<LogicalModel *>(mModel);
+		auto *const logicalModel = static_cast<LogicalModel *>(mModel);
 
 		const bool isEdge = mModel->editorManagerInterface().isNodeOrEdge(logicalId.type());
 
-		ElementInfo elementInfo(logicalId, logicalId, parentLogicalId, Id(), {{"name", name}}, {}, Id(), isEdge);
+		ElementInfo elementInfo(logicalId, logicalId, parentLogicalId, Id(), {{"name", name}}, {}, Id(),
+			isEdge);
 		logicalModel->addElementToModel(elementInfo);
 	}
 }
 
-void GraphicalModelView::dataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight
-		, const QVector<int> &roles)
+void GraphicalModelView::dataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight,
+	const QVector<int> &roles)
 {
 	// Here we should update logical element`s names if they were changed in graphical model.
 	if (!roles.contains(Qt::DisplayRole)) {
@@ -73,7 +73,8 @@ void GraphicalModelView::dataChanged(const QModelIndex &topLeft, const QModelInd
 	for (int row = topLeft.row(); row <= bottomRight.row(); ++row) {
 		const QModelIndex current = topLeft.sibling(row, 0);
 		const Id logicalId = current.data(roles::logicalIdRole).value<Id>();
-		static_cast<LogicalModel *>(mModel)->updateElements(logicalId, current.data(Qt::DisplayRole).toString());
+		static_cast<LogicalModel *>(mModel)->updateElements(logicalId,
+			current.data(Qt::DisplayRole).toString());
 	}
 }
 

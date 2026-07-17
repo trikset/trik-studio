@@ -30,11 +30,10 @@ namespace deployment {
 class BlocksTable : public qReal::interpretation::BlocksTableBase
 {
 public:
-	BlocksTable(qReal::GraphicalModelAssistInterface const &graphicalModelApi
-			, qReal::LogicalModelAssistInterface const &logicalModelApi
-			, qReal::ErrorReporterInterface &errorReporter
-			, qrtext::LanguageToolboxInterface &textLanguageToolbox
-			, ShellWidget *shellWidget);
+	BlocksTable(qReal::GraphicalModelAssistInterface const &graphicalModelApi,
+		qReal::LogicalModelAssistInterface const &logicalModelApi, qReal::ErrorReporterInterface &errorReporter,
+		qrtext::LanguageToolboxInterface &textLanguageToolbox, ShellWidget *shellWidget);
+
 private:
 	qReal::interpretation::BlockInterface *produceBlock(qReal::Id const &element) override;
 	qReal::interpretation::Block *produceRawBlock(qReal::Id const &element);

@@ -16,7 +16,10 @@
 
 const int step = 3;
 
-PointPort::PointPort(qreal x, qreal y, Item *parent) : Item(parent), mPointImpl(), mType("NonTyped")
+PointPort::PointPort(qreal x, qreal y, Item *parent)
+	: Item(parent)
+	, mPointImpl()
+	, mType("NonTyped")
 {
 	mNeedScalingRect = true;
 	mRadius = 2;
@@ -35,7 +38,7 @@ QRectF PointPort::boundingRect() const
 	return mPointImpl.boundingRect(x1() + mUnrealRadius, y1() + mUnrealRadius, mRadius, scalingDrift);
 }
 
-void PointPort::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
+void PointPort::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 	Q_UNUSED(option);
 	Q_UNUSED(widget);
@@ -44,7 +47,7 @@ void PointPort::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* opti
 	mPointImpl.drawItem(painter, x1() + mUnrealRadius, y1() + mUnrealRadius, mRadius);
 }
 
-void PointPort::drawExtractionForItem(QPainter* painter)
+void PointPort::drawExtractionForItem(QPainter *painter)
 {
 	QPen pen(Qt::red);
 	pen.setWidth(2 * mRadius / 2.3);
@@ -53,16 +56,16 @@ void PointPort::drawExtractionForItem(QPainter* painter)
 	drawFieldForResizeItem(painter);
 }
 
-void PointPort::drawFieldForResizeItem(QPainter* painter)
+void PointPort::drawFieldForResizeItem(QPainter *painter)
 {
 	mPointImpl.drawFieldForResizeItem(painter);
 }
 
-void PointPort::drawScalingRects(QPainter* painter)
+void PointPort::drawScalingRects(QPainter *painter)
 {
 	QBrush brush(Qt::SolidPattern);
 	QRectF itemBoundingRect = boundingRect().adjusted(scalingDrift, scalingDrift, -scalingDrift, -scalingDrift);
-	qreal x1= itemBoundingRect.left();
+	qreal x1 = itemBoundingRect.left();
 	qreal y1 = itemBoundingRect.top();
 	int scalingPoint = scalingRect;
 
@@ -84,7 +87,7 @@ void PointPort::changeDragState(qreal x, qreal y)
 void PointPort::changeScalingPointState(qreal x, qreal y)
 {
 	QRectF itemBoundingRect = boundingRect().adjusted(scalingDrift, scalingDrift, -scalingDrift, -scalingDrift);
-	qreal x1= itemBoundingRect.left();
+	qreal x1 = itemBoundingRect.left();
 	qreal x2 = itemBoundingRect.right();
 	qreal y1 = itemBoundingRect.top();
 	qreal y2 = itemBoundingRect.bottom();

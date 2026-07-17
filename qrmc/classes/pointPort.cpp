@@ -28,7 +28,7 @@ bool PointPort::init(const QDomElement &element, int width, int height)
 	return true;
 }
 
-Port* PointPort::clone() const
+Port *PointPort::clone() const
 {
 	auto *result = new PointPort();
 	result->mX = mX;
@@ -48,7 +48,6 @@ QString PointPort::generateInit(const MetaCompiler &compiler) const
 	QString result = compiler.getTemplateUtils(nodePointPortInitTag);
 	result.replace(pointXTag, QString::number(mX)).replace(pointYTag, QString::number(mY));
 	return result;
-
 }
 
 void PointPort::generatePortList(const QStringList &portTypes)

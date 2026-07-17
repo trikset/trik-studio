@@ -72,9 +72,9 @@ private:
 
 	void execute(commands::AbstractCommand *command, UndoStack *stack);
 
-	UndoStack *mGlobalStack;                   // Has ownership.
-	UndoStack *mActiveStack;                   // Has ownership.
-	QMap<QString, UndoStack *> mModuleStacks;  // Has ownership.
+	UndoStack *mGlobalStack; // Has ownership.
+	UndoStack *mActiveStack; // Has ownership.
+	QMap<QString, UndoStack *> mModuleStacks; // Has ownership.
 	bool mModifiedState;
 	bool mCanRedoState;
 	bool mCanUndoState;

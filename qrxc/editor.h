@@ -29,7 +29,7 @@ class EnumType;
 class PortType;
 
 namespace utils {
-	class OutFile;
+class OutFile;
 }
 
 class Editor
@@ -51,7 +51,7 @@ public:
 
 	QSet<EnumType *> getAllEnumTypes();
 	Diagram *findDiagram(const QString &name);
-	QMap<QString, Diagram*> diagrams();
+	QMap<QString, Diagram *> diagrams();
 
 	/// Returns name of editor that is extended by this metamodel. In most cases this method will return empty string.
 	/// If some value is returned then this editor is some kind of "plugin" to the returned one.
@@ -65,6 +65,6 @@ private:
 	bool mLoadingComplete;
 	QString mExtendedMetamodel;
 	QString mVersion;
-	QList<Editor*> mIncludes;
-	QMap<QString, Diagram*> mDiagrams;
+	QList<Editor *> mIncludes;
+	QMap<QString, Diagram *> mDiagrams;
 };

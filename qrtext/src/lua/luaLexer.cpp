@@ -27,11 +27,11 @@ TokenPatterns<LuaTokenTypes> LuaLexer::initPatterns()
 {
 	TokenPatterns<LuaTokenTypes> tokenDefinitions;
 
-	tokenDefinitions.defineToken(LuaTokenTypes::whitespace, QRegularExpression("[ \t]+"), QObject::tr("whitespace"));
+	tokenDefinitions.defineToken(LuaTokenTypes::whitespace, QRegularExpression("[ \t]+"),
+		QObject::tr("whitespace"));
 	tokenDefinitions.defineToken(LuaTokenTypes::newline, QRegularExpression("[\n]"), QObject::tr("newline"));
-	tokenDefinitions.defineToken(LuaTokenTypes::identifier
-			, QRegularExpression(R"([\p{L}_][\p{L}0-9_]*)")
-			, QObject::tr("identifier"));
+	tokenDefinitions.defineToken(LuaTokenTypes::identifier, QRegularExpression(R"([\p{L}_][\p{L}0-9_]*)"),
+		QObject::tr("identifier"));
 
 	tokenDefinitions.defineKeyword(LuaTokenTypes::andKeyword, "and");
 	tokenDefinitions.defineKeyword(LuaTokenTypes::breakKeyword, "break");
@@ -95,29 +95,23 @@ TokenPatterns<LuaTokenTypes> LuaLexer::initPatterns()
 	tokenDefinitions.defineToken(LuaTokenTypes::doubleDot, QRegularExpression("\\.\\."), "..");
 	tokenDefinitions.defineToken(LuaTokenTypes::tripleDot, QRegularExpression(R"(\.\.\.)"), "...");
 
-	tokenDefinitions.defineToken(LuaTokenTypes::string
-			, QRegularExpression(R"~(("[^"\\]*(\\(.|\n)[^"\\]*)*")|('[^'\\]*(\\(.|\n)[^'\\]*)*'))~")
-			, QObject::tr("string")
-			);
+	tokenDefinitions.defineToken(LuaTokenTypes::string,
+		QRegularExpression(R"~(("[^"\\]*(\\(.|\n)[^"\\]*)*")|('[^'\\]*(\\(.|\n)[^'\\]*)*'))~"),
+		QObject::tr("string"));
 
-	tokenDefinitions.defineToken(LuaTokenTypes::integerLiteral
-			, QRegularExpression("(0[xX][0-9a-fA-F]+)|([0-9]+)")
-			, QObject::tr("integer literal")
-			);
+	tokenDefinitions.defineToken(LuaTokenTypes::integerLiteral, QRegularExpression("(0[xX][0-9a-fA-F]+)|([0-9]+)"),
+		QObject::tr("integer literal"));
 
-	tokenDefinitions.defineToken(LuaTokenTypes::floatLiteral
-			, QRegularExpression(
-					"(0[xX][0-9a-fA-F]+("
-							"(\\.[0-9a-fA-F]+[pP](([+-][0-9a-fA-F]+)|([0-9a-fA-F]*)))"
-							"|(\\.[0-9a-fA-F]+)"
-							"|([pP](([+-][0-9a-fA-F]+)|([0-9a-fA-F]*)))))"
-					"|([0-9]+("
-							"(\\.[0-9]+)[eE](([+-][0-9]+)|([0-9]*))"
-							"|(\\.[0-9]+)"
-							"|([eE](([+-][0-9]+)|([0-9]*)))))"
-					)
-			, QObject::tr("float literal")
-			);
+	tokenDefinitions.defineToken(LuaTokenTypes::floatLiteral,
+		QRegularExpression("(0[xX][0-9a-fA-F]+("
+				   "(\\.[0-9a-fA-F]+[pP](([+-][0-9a-fA-F]+)|([0-9a-fA-F]*)))"
+				   "|(\\.[0-9a-fA-F]+)"
+				   "|([pP](([+-][0-9a-fA-F]+)|([0-9a-fA-F]*)))))"
+				   "|([0-9]+("
+				   "(\\.[0-9]+)[eE](([+-][0-9]+)|([0-9]*))"
+				   "|(\\.[0-9]+)"
+				   "|([eE](([+-][0-9]+)|([0-9]*)))))"),
+		QObject::tr("float literal"));
 
 	tokenDefinitions.defineToken(LuaTokenTypes::comment, QRegularExpression("--.*"), QObject::tr("comment"));
 

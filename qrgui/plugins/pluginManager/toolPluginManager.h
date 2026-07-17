@@ -47,7 +47,7 @@ public:
 	void release();
 	void updateSettings();
 	QList<ActionInfo> actions() const;
-	QList<QPair<QString, gui::PreferencesPage *> > preferencesPages() const;
+	QList<QPair<QString, gui::PreferencesPage *>> preferencesPages() const;
 
 	/// Returns a list of hotkeys specified in plugins.
 	QList<HotKeyActionInfo> hotKeyActions() const;

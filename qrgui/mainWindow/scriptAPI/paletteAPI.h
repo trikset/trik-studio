@@ -36,8 +36,8 @@ public:
 	/// palette, redrawing with icon of palette element, then moving to scene. Creates block on scene
 	/// in the given coordinates.
 	/// @param paletteElementId A string representation of metatype of the element dragged out.
-	Q_INVOKABLE QString dragPaletteElement(const QString &paletteElementId, int duration
-			, int xSceneCoord, int ySceneCoord);
+	Q_INVOKABLE QString dragPaletteElement(const QString &paletteElementId, int duration, int xSceneCoord,
+		int ySceneCoord);
 
 private:
 	ScriptAPI &mScriptAPI;
@@ -46,4 +46,3 @@ private:
 
 }
 }
-

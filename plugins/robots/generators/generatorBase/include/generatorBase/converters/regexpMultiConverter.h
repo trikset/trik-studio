@@ -24,14 +24,14 @@ namespace converters {
 class ROBOTS_GENERATOR_EXPORT RegexpMultiConverter : public simple::Binding::MultiConverterInterface
 {
 public:
-	RegexpMultiConverter(const QString &splitRegexp, const simple::Binding::ConverterInterface * const converter);
+	RegexpMultiConverter(const QString &splitRegexp, const simple::Binding::ConverterInterface *const converter);
 	~RegexpMultiConverter() override;
 
 	QStringList convert(const QString &data) const override;
 
 private:
 	const QString mSplitRegexp;
-	const simple::Binding::ConverterInterface * const mSimpleConverter;
+	const simple::Binding::ConverterInterface *const mSimpleConverter;
 };
 
 }

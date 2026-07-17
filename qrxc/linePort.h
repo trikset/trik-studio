@@ -21,7 +21,7 @@
 #include "port.h"
 
 namespace utils {
-	class OutFile;
+class OutFile;
 }
 
 class LinePort : public Port
@@ -29,7 +29,7 @@ class LinePort : public Port
 public:
 	bool init(const QDomElement &element, int width, int height) override;
 	void generateCode(utils::OutFile &out) override;
-	Port* clone() const override;
+	Port *clone() const override;
 
 private:
 	utils::ScalableCoordinate mStartX;

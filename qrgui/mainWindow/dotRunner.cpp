@@ -16,20 +16,16 @@
 
 using namespace qReal;
 
-DotRunner::DotRunner(
-		const Id &diagramId
-		, const models::GraphicalModelAssistApi &graphicalModelApi
-		, const models::LogicalModelAssistApi &logicalModelApi
-		, const EditorManagerInterface &editorManagerProxy
-		, const QString &absolutePathToDotFiles
-		)
-		: QObject(nullptr)
-		, mDiagramId(diagramId)
-		, mGraphicalModelApi(graphicalModelApi)
-		, mLogicalModelApi(logicalModelApi)
-		, mEditorManagerInterface(editorManagerProxy)
-		, mAlgorithm("")
-		, mAbsolutePathToDotFiles(absolutePathToDotFiles)
+DotRunner::DotRunner(const Id &diagramId, const models::GraphicalModelAssistApi &graphicalModelApi,
+	const models::LogicalModelAssistApi &logicalModelApi, const EditorManagerInterface &editorManagerProxy,
+	const QString &absolutePathToDotFiles)
+	: QObject(nullptr)
+	, mDiagramId(diagramId)
+	, mGraphicalModelApi(graphicalModelApi)
+	, mLogicalModelApi(logicalModelApi)
+	, mEditorManagerInterface(editorManagerProxy)
+	, mAlgorithm("")
+	, mAbsolutePathToDotFiles(absolutePathToDotFiles)
 {
 	QObject::connect(&mProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(readFromProcess()));
 }
@@ -107,11 +103,18 @@ QString DotRunner::nameOfElement(const Id &id)
 {
 	QString idToString = id.toString();
 	idToString.chop(1);
-	idToString = idToString.mid(idToString.indexOf("{") + 1).remove("-")
-			.replace("0", "a").replace("1", "b").replace("2", "c")
-			.replace("3", "d").replace("4", "e").replace("5", "f")
-			.replace("6", "g").replace("7", "h").replace("8", "i")
-			.replace("9", "j");
+	idToString = idToString.mid(idToString.indexOf("{") + 1)
+	                     .remove("-")
+	                     .replace("0", "a")
+	                     .replace("1", "b")
+	                     .replace("2", "c")
+	                     .replace("3", "d")
+	                     .replace("4", "e")
+	                     .replace("5", "f")
+	                     .replace("6", "g")
+	                     .replace("7", "h")
+	                     .replace("8", "i")
+	                     .replace("9", "j");
 	mElementNamesForDOT.insert(idToString, id);
 	return idToString;
 }
@@ -121,7 +124,7 @@ void DotRunner::parseDOTCoordinates()
 	QString data = QString(mData);
 	QStringList list = data.split("\n", QString::SkipEmptyParts);
 	QRegExp regexp("\\s*(\\w+)\\s\\[pos=\"(\\d+\\,\\d+)\"\\,"
-			"\\swidth=\"(\\d+\\.\\d+)\",\\sheight=\"(\\d+\\.\\d+)\"\\]");
+		       "\\swidth=\"(\\d+\\.\\d+)\",\\sheight=\"(\\d+\\.\\d+)\"\\]");
 
 	for (const QString &string : list) {
 		if (string.indexOf(regexp) == -1) {
@@ -132,9 +135,10 @@ void DotRunner::parseDOTCoordinates()
 		if (qpointFCoordinates.count() < 2) {
 			continue;
 		}
-		const QPointF pointF = QPointF(qpointFCoordinates.at(0).toDouble(), qpointFCoordinates.at(1).toDouble());
-		QPair<qreal, qreal> const pair = qMakePair(regexp.capturedTexts().at(3).toDouble()
-				, regexp.capturedTexts().at(4).toDouble());
+		const QPointF pointF =
+			QPointF(qpointFCoordinates.at(0).toDouble(), qpointFCoordinates.at(1).toDouble());
+		QPair<qreal, qreal> const pair =
+			qMakePair(regexp.capturedTexts().at(3).toDouble(), regexp.capturedTexts().at(4).toDouble());
 		mDOTCoordinatesOfElements.insert(id, qMakePair(pointF, pair));
 	}
 	for (const Id &id : mDOTCoordinatesOfElements.keys()) {
@@ -144,8 +148,7 @@ void DotRunner::parseDOTCoordinates()
 		if (!configuration.isEmpty()) {
 			width = configuration.at(1).x() - configuration.at(0).x();
 			height = configuration.at(3).y() - configuration.at(1).y();
-		}
-		else {
+		} else {
 			width = 50; // because of bug about not saving configuration of element during it's creation
 			height = 50;
 		}
@@ -155,8 +158,7 @@ void DotRunner::parseDOTCoordinates()
 			x /= 3.0;
 			x -= width / 4.0;
 			y -= height / 4.0;
-		}
-		else if (mAlgorithm == "LR" || mAlgorithm == "RL") {
+		} else if (mAlgorithm == "LR" || mAlgorithm == "RL") {
 			x /= 3.0; // special for robots diagram
 			x -= height / 4.0;
 			y -= width / 4.0;

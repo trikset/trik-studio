@@ -71,8 +71,8 @@ protected:
 	/// Removes last values if they have no difference
 	void filterLastValues();
 
-	qreal pointToAbsoluteValue(const qreal yValue, const qreal minValue
-			, const qreal maxValue, const qreal graphHeight) const;
+	qreal pointToAbsoluteValue(const qreal yValue, const qreal minValue, const qreal maxValue,
+		const qreal graphHeight) const;
 
 	QList<QPointF> mPointsQueue;
 	qreal mMinCurrent;

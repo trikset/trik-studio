@@ -23,11 +23,15 @@ static const QString NON_TYPED = "NonTyped";
 
 /// Provides an information about the point port.
 /// Point port is a point on node element where edges (one or many) can be connected.
-struct PointPortInfo
-{
+struct PointPortInfo {
 public:
 	PointPortInfo(QPointF point, bool scalesX, bool scalesY, int initWidth, int initHeight, const QString &type)
-		: point(point), scalesX(scalesX), scalesY(scalesY), initWidth(initWidth), initHeight(initHeight), type(type)
+		: point(point)
+		, scalesX(scalesX)
+		, scalesY(scalesY)
+		, initWidth(initWidth)
+		, initHeight(initHeight)
+		, type(type)
 	{
 	}
 
@@ -54,13 +58,18 @@ public:
 
 /// Provides an information about the line port.
 /// Line port is a segment on the node element where edges (one or many) can be connected.
-struct LinePortInfo
-{
+struct LinePortInfo {
 public:
-	LinePortInfo(const QLineF &line, bool scalesX1, bool scalesY1, bool scalesX2, bool scalesY2
-			, int initWidth, int initHeight, const QString &type)
-		: line(line), scalesX1(scalesX1), scalesY1(scalesY1), scalesX2(scalesX2), scalesY2(scalesY2)
-		, initWidth(initWidth), initHeight(initHeight), type(type)
+	LinePortInfo(const QLineF &line, bool scalesX1, bool scalesY1, bool scalesX2, bool scalesY2, int initWidth,
+		int initHeight, const QString &type)
+		: line(line)
+		, scalesX1(scalesX1)
+		, scalesY1(scalesY1)
+		, scalesX2(scalesX2)
+		, scalesY2(scalesY2)
+		, initWidth(initWidth)
+		, initHeight(initHeight)
+		, type(type)
 	{
 	}
 
@@ -94,13 +103,17 @@ public:
 
 /// Provides an information about the circular port.
 /// Circular port is an ellipse on the node element where edges (one or many) can be connected.
-struct CircularPortInfo
-{
+struct CircularPortInfo {
 public:
-	CircularPortInfo(QPointF center, qreal radius, bool scalesX, bool scalesY, int initWidth
-			, int initHeight, const QString &type)
-		: center(center), radius(radius), scalesX(scalesX), scalesY(scalesY)
-		, initWidth(initWidth), initHeight(initHeight), type(type)
+	CircularPortInfo(QPointF center, qreal radius, bool scalesX, bool scalesY, int initWidth, int initHeight,
+		const QString &type)
+		: center(center)
+		, radius(radius)
+		, scalesX(scalesX)
+		, scalesY(scalesY)
+		, initWidth(initWidth)
+		, initHeight(initHeight)
+		, type(type)
 	{
 	}
 

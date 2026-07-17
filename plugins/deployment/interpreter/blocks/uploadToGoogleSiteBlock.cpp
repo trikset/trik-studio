@@ -43,12 +43,9 @@ QStringList UploadToGoogleSiteBlock::arguments()
 		return {};
 	}
 
-	QStringList result = {
-		QCoreApplication::applicationDirPath() + "/deployment-scripts/uploading/upload_to_google_site.py"
-		, stringProperty(id(), "Site")
-		, eval<QString>("Username")
-		, eval<QString>("Password")
-	};
+	QStringList result = {QCoreApplication::applicationDirPath()
+				      + "/deployment-scripts/uploading/upload_to_google_site.py",
+		stringProperty(id(), "Site"), eval<QString>("Username"), eval<QString>("Password")};
 
 	for (int i = 0; i < urls.count(); ++i) {
 		result << urls[i];

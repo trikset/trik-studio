@@ -35,7 +35,7 @@ public:
 		return getDistance(mKey, key);
 	}
 
-	key_type getKey(const PathVector & path) override;
+	key_type getKey(const PathVector &path) override;
 };
 
 }

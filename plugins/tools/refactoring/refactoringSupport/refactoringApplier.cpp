@@ -17,22 +17,19 @@
 
 using namespace qReal;
 
-QSet<QString> const defaultProperties = (QSet<QString>()
-		<< "from" << "incomingConnections" << "incomingUsages" << "links"
-		<< "name" << "outgoingConnections" << "outgoingUsages" << "to");
+QSet<QString> const defaultProperties =
+	(QSet<QString>() << "from" << "incomingConnections" << "incomingUsages" << "links"
+			 << "name" << "outgoingConnections" << "outgoingUsages" << "to");
 QSet<QString> const refactoringElements = (QSet<QString>() << "Element" << "Link" << "BeforeBlock" << "AfterBlock");
 
-RefactoringApplier::RefactoringApplier(
-		LogicalModelAssistInterface &logicalModelApi
-		, GraphicalModelAssistInterface &graphicalModelApi
-		, gui::MainWindowInterpretersInterface &interpretersInterface
-		, qrRepo::RepoApi *refactoringRepoApi
-		, QHash<Id, Id> *match)
-		: mInterpretersInterface(interpretersInterface)
-		, mLogicalModelApi(logicalModelApi)
-		, mGraphicalModelApi(graphicalModelApi)
-		, mRefactoringRepoApi(refactoringRepoApi)
-		, mMatch(match)
+RefactoringApplier::RefactoringApplier(LogicalModelAssistInterface &logicalModelApi,
+	GraphicalModelAssistInterface &graphicalModelApi, gui::MainWindowInterpretersInterface &interpretersInterface,
+	qrRepo::RepoApi *refactoringRepoApi, QHash<Id, Id> *match)
+	: mInterpretersInterface(interpretersInterface)
+	, mLogicalModelApi(logicalModelApi)
+	, mGraphicalModelApi(graphicalModelApi)
+	, mRefactoringRepoApi(refactoringRepoApi)
+	, mMatch(match)
 {
 }
 
@@ -67,8 +64,7 @@ IdList RefactoringApplier::elementsFromBlock(QString const &blockType) const
 				}
 				for (Id const &id : list) {
 					if (id.element() == "Link" && resultList.contains(toInRule(id))
-							&& resultList.contains(fromInRule(id)))
-					{
+						&& resultList.contains(fromInRule(id))) {
 						resultList.append(id);
 					}
 				}
@@ -98,14 +94,14 @@ void RefactoringApplier::loadRefactoringRule()
 	IdList const before = mMatch->keys();
 	IdList const after = elementsFromAfterBlock();
 
-	mRule = new QList<QPair<Id, Id> >;
-	mApply = new QList<QPair<Id, Id> >;
+	mRule = new QList<QPair<Id, Id>>;
+	mApply = new QList<QPair<Id, Id>>;
 
 	mInterpretersInterface.dehighlight();
 
 	for (Id const &beforeId : before) {
 		QString const beforeElementID =
-				refactoringProperty(mRefactoringRepoApi->logicalId(beforeId), "ID").toString();
+			refactoringProperty(mRefactoringRepoApi->logicalId(beforeId), "ID").toString();
 		if (beforeElementID == "noThisProperty") {
 			continue;
 		}
@@ -115,7 +111,7 @@ void RefactoringApplier::loadRefactoringRule()
 	}
 	for (Id const &afterId : after) {
 		QString const afterElementID =
-				refactoringProperty(mRefactoringRepoApi->logicalId(afterId), "ID").toString();
+			refactoringProperty(mRefactoringRepoApi->logicalId(afterId), "ID").toString();
 		Id const elementBeforeId = idElementWithID(afterElementID, before);
 		if (elementBeforeId == Id::rootId()) {
 			mRule->append(qMakePair(elementBeforeId, afterId));
@@ -129,8 +125,7 @@ bool RefactoringApplier::hasProperty(Id const &id, QString const &propertyName) 
 	if (mRefactoringRepoApi->isLogicalElement(id)) {
 		return mRefactoringRepoApi->hasProperty(id, propertyName);
 	} else {
-		return mRefactoringRepoApi->hasProperty(
-				mRefactoringRepoApi->logicalId(id), propertyName);
+		return mRefactoringRepoApi->hasProperty(mRefactoringRepoApi->logicalId(id), propertyName);
 	}
 }
 
@@ -147,8 +142,7 @@ QVariant RefactoringApplier::property(Id const &id, QString const &propertyName)
 	if (mRefactoringRepoApi->isLogicalElement(id)) {
 		return mRefactoringRepoApi->property(id, propertyName);
 	} else {
-		return mRefactoringRepoApi->property(
-				mRefactoringRepoApi->logicalId(id), propertyName);
+		return mRefactoringRepoApi->property(mRefactoringRepoApi->logicalId(id), propertyName);
 	}
 }
 
@@ -184,21 +178,18 @@ void RefactoringApplier::changeElement(Id const &changeFromId, Id const &changeT
 				return;
 			}
 			changeElementName(changeFromId, changeToId);
-		}
-		else if (changeToId.element() == "Link") {
+		} else if (changeToId.element() == "Link") {
 			if (mRefactoringRepoApi->name(changeToId) != "(Link)") {
 				changeElementName(changeFromId, changeToId);
 			}
 			checkDirection(changeFromId, changeToId, beforeId);
-		}
-		else {
+		} else {
 			changePropertiesInModel(changeFromId, changeToId);
 			if (!isNodeInRule(beforeId) && !isNodeInRule(changeToId)) {
 				checkDirection(changeFromId, changeToId, beforeId);
 			}
 		}
-	}
-	else {
+	} else {
 		changeElementInModel(changeFromId, changeToId);
 	}
 }
@@ -232,7 +223,7 @@ void RefactoringApplier::changePropertiesInModel(Id const &changeFromId, Id cons
 			QVariant propertyValue = property(changeToId, key);
 			if (propertyValue.toString().contains("EXIST")) {
 				setProperty(changeFromId, key,
-						propertyValue.toString().replace("EXIST", value.toString()));
+					propertyValue.toString().replace("EXIST", value.toString()));
 			} else {
 				setProperty(changeFromId, key, propertyValue);
 			}
@@ -254,9 +245,10 @@ void RefactoringApplier::changeElementInModel(const Id &changeFromId, const Id &
 		QString const refactoringsMetamodel = "RefactoringsMetamodel";
 		QString newEditor = changeToId.editor();
 		newEditor.chop(refactoringsMetamodel.length());
-		Id const newId = Id(newEditor, changeToId.diagram(), changeToId.element(), QUuid::createUuid().toString());
-		Id const newElementId = mGraphicalModelApi.createElement(parentId, newId
-				, isFromLogicalModel, "ololo", position.toPointF());
+		Id const newId =
+			Id(newEditor, changeToId.diagram(), changeToId.element(), QUuid::createUuid().toString());
+		Id const newElementId = mGraphicalModelApi.createElement(parentId, newId, isFromLogicalModel, "ololo",
+			position.toPointF());
 		for (Id idLink : inLinks) {
 			mGraphicalModelApi.mutableGraphicalRepoApi().setTo(idLink, newElementId);
 		}
@@ -268,14 +260,13 @@ void RefactoringApplier::changeElementInModel(const Id &changeFromId, const Id &
 	}
 }
 
-void RefactoringApplier::setProperty(Id const &id, QString const &propertyName
-		, QVariant const &value) const
+void RefactoringApplier::setProperty(Id const &id, QString const &propertyName, QVariant const &value) const
 {
 	if (mLogicalModelApi.isLogicalId(id)) {
 		return mLogicalModelApi.mutableLogicalRepoApi().setProperty(id, propertyName, value);
 	} else {
-		return mLogicalModelApi.mutableLogicalRepoApi().setProperty(
-				mGraphicalModelApi.logicalId(id), propertyName, value);
+		return mLogicalModelApi.mutableLogicalRepoApi().setProperty(mGraphicalModelApi.logicalId(id),
+			propertyName, value);
 	}
 }
 
@@ -284,10 +275,9 @@ QHash<QString, QVariant> RefactoringApplier::properties(Id const &id) const
 	QHash<QString, QVariant> result;
 
 	QMapIterator<QString, QVariant> properties =
-			(mLogicalModelApi.isLogicalId(id))
+		(mLogicalModelApi.isLogicalId(id))
 			? mLogicalModelApi.logicalRepoApi().propertiesIterator(id)
-			: mLogicalModelApi.logicalRepoApi().propertiesIterator(
-					mGraphicalModelApi.logicalId(id));
+			: mLogicalModelApi.logicalRepoApi().propertiesIterator(mGraphicalModelApi.logicalId(id));
 
 	while (properties.hasNext()) {
 		properties.next();
@@ -322,7 +312,6 @@ bool RefactoringApplier::isNodeInRule(Id const &id) const
 	return (toInRule(id) == Id::rootId() && fromInRule(id) == Id::rootId());
 }
 
-
 Id RefactoringApplier::toInRule(Id const &id) const
 {
 	return mRefactoringRepoApi->to(id);
@@ -343,8 +332,7 @@ Id RefactoringApplier::fromInModel(Id const &id) const
 	return mLogicalModelApi.logicalRepoApi().from(id);
 }
 
-void RefactoringApplier::checkDirection(Id const &changeFromId
-		, Id const &changeToId, Id const &beforeId)
+void RefactoringApplier::checkDirection(Id const &changeFromId, Id const &changeToId, Id const &beforeId)
 {
 	if (propertyID(toInRule(beforeId)) == propertyID(toInRule(changeToId)))
 		return;
@@ -359,8 +347,7 @@ Id RefactoringApplier::subprogramElementId() const
 	IdList result;
 	IdList const after = elementsFromAfterBlock();
 	for (Id const &id : after) {
-		if (mRefactoringRepoApi->isGraphicalElement(id)
-				&& (isNodeInRule(id)))
+		if (mRefactoringRepoApi->isGraphicalElement(id) && (isNodeInRule(id)))
 			result.append(id);
 	}
 	if (result.size() == 1)

@@ -20,20 +20,17 @@
 
 using namespace twoDModel::items;
 
-RectangularRegion::RectangularRegion(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-			     QGraphicsItem *parent)
+RectangularRegion::RectangularRegion(graphicsUtils::AbstractCoordinateSystem *metricSystem, QGraphicsItem *parent)
 	: RegionItem(metricSystem, parent)
 {
-	connect(this, &AbstractItem::mouseInteractionStarted, this, [this]() {mEstimatedPos = pos(); });
+	connect(this, &AbstractItem::mouseInteractionStarted, this, [this]() { mEstimatedPos = pos(); });
 }
 
-RectangularRegion::RectangularRegion(
-		QSharedPointer<graphicsUtils::AbstractItem> item,
-		graphicsUtils::AbstractCoordinateSystem *metricSystem,
-		QGraphicsItem *parent):
-	RegionItem(item, metricSystem, parent)
+RectangularRegion::RectangularRegion(QSharedPointer<graphicsUtils::AbstractItem> item,
+	graphicsUtils::AbstractCoordinateSystem *metricSystem, QGraphicsItem *parent)
+	: RegionItem(item, metricSystem, parent)
 {
-	connect(this, &AbstractItem::mouseInteractionStarted, this, [this]() {mEstimatedPos = pos(); });
+	connect(this, &AbstractItem::mouseInteractionStarted, this, [this]() { mEstimatedPos = pos(); });
 }
 
 void RectangularRegion::reshapeRectWithShift()
@@ -66,7 +63,7 @@ QPainterPath RectangularRegion::shape() const
 	// filled and not filled parent shapes with QPainterPathStroker, as the region cannot be a path at the moment.
 	result.addRect(graphicsUtils::RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), pen().width() / 2));
 	if (isSelected()) {
-		 result.addPath(resizeArea());
+		result.addPath(resizeArea());
 	}
 	return result;
 }
@@ -82,7 +79,6 @@ QRectF RectangularRegion::calcNecessaryBoundingRect() const
 {
 	return {qMin(x1(), x2()), qMin(y1(), y2()), qAbs(x2() - x1()), qAbs(y2() - y1())};
 }
-
 
 QPainterPath RectangularRegion::shapeWihoutResizeArea() const
 {

@@ -19,29 +19,18 @@
 using namespace pioneer::lua;
 using namespace generatorBase::simple;
 
-PioneerGetOrientation::PioneerGetOrientation(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, const qReal::Id &id
-		, QObject *parent)
-	: BindingGenerator(repo, customizer, id, "quadcopterCommands/getOrientation.t"
-		, {
-			Binding::createConverting(
-					"@@ROLL@@"
-					, "Roll"
-					, customizer.factory()->stringPropertyConverter(id, "Roll"))
-			, Binding::createConverting(
-					"@@PITCH@@"
-					, "Pitch"
-					, customizer.factory()->stringPropertyConverter(id, "Pitch"))
-			, Binding::createConverting(
-					"@@AZIMUTH@@"
-					, "Azimuth"
-					, customizer.factory()->stringPropertyConverter(id, "Azimuth"))
-			}
-		, parent)
+PioneerGetOrientation::PioneerGetOrientation(const qrRepo::RepoApi &repo,
+	generatorBase::GeneratorCustomizer &customizer, const qReal::Id &id, QObject *parent)
+	: BindingGenerator(repo, customizer, id, "quadcopterCommands/getOrientation.t",
+		  {Binding::createConverting("@@ROLL@@", "Roll",
+			   customizer.factory()->stringPropertyConverter(id, "Roll")),
+			  Binding::createConverting("@@PITCH@@", "Pitch",
+				  customizer.factory()->stringPropertyConverter(id, "Pitch")),
+			  Binding::createConverting("@@AZIMUTH@@", "Azimuth",
+				  customizer.factory()->stringPropertyConverter(id, "Azimuth"))},
+		  parent)
 {
-	customizer.factory()->functionBlockConverter(id, "")->convert(
-			QString("%1 = 0;%2 = 0;%3 = 0;")
-					.arg(repo.stringProperty(id, "Roll"),
-					repo.stringProperty(id, "Pitch"), repo.stringProperty(id, "Azimuth")));
+	customizer.factory()->functionBlockConverter(id, "")->convert(QString("%1 = 0;%2 = 0;%3 = 0;")
+			.arg(repo.stringProperty(id, "Roll"), repo.stringProperty(id, "Pitch"),
+				repo.stringProperty(id, "Azimuth")));
 }

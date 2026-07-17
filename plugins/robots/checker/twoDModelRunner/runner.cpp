@@ -29,9 +29,9 @@
 
 using namespace twoDModel;
 
-Runner::Runner(const QString &report, const QString &trajectory,
-	       const QString &input, const QString &mode, const QString &qrsFile, uint32_t delayBeforeExit):
-	mInputsFile(input)
+Runner::Runner(const QString &report, const QString &trajectory, const QString &input, const QString &mode,
+	const QString &qrsFile, uint32_t delayBeforeExit)
+	: mInputsFile(input)
 	, mMode(mode)
 	, mSaveFile(qrsFile)
 	, mDelayBeforeExit(delayBeforeExit)
@@ -39,22 +39,16 @@ Runner::Runner(const QString &report, const QString &trajectory,
 	mQRealFacade.reset(new qReal::SystemFacade());
 	mProjectManager.reset(new qReal::ProjectManager(mQRealFacade->models()));
 	mErrorReporter.reset(new qReal::ConsoleErrorReporter());
-	mMainWindow.reset(new qReal::NullMainWindow(*mErrorReporter, mQRealFacade->events()
-				, &*mProjectManager, &mQRealFacade->models().graphicalModelAssistApi()));
+	mMainWindow.reset(new qReal::NullMainWindow(*mErrorReporter, mQRealFacade->events(), &*mProjectManager,
+		&mQRealFacade->models().graphicalModelAssistApi()));
 
 	mController.reset(new qReal::Controller());
 	mSceneCustomizer.reset(new qReal::gui::editor::SceneCustomizer());
 	mTextManager.reset(new qReal::text::TextManager(mQRealFacade->events(), *mMainWindow));
-	mConfigurator.reset(new qReal::PluginConfigurator(mQRealFacade->models().repoControlApi()
-							 , mQRealFacade->models().graphicalModelAssistApi()
-							 , mQRealFacade->models().logicalModelAssistApi()
-							 , *mController
-							 , *mMainWindow
-							 , *mMainWindow
-							 , *mProjectManager
-							 , *mSceneCustomizer
-							 , mQRealFacade->events()
-							 , *mTextManager));
+	mConfigurator.reset(new qReal::PluginConfigurator(mQRealFacade->models().repoControlApi(),
+		mQRealFacade->models().graphicalModelAssistApi(), mQRealFacade->models().logicalModelAssistApi(),
+		*mController, *mMainWindow, *mMainWindow, *mProjectManager, *mSceneCustomizer, mQRealFacade->events(),
+		*mTextManager));
 	mReporter.reset(new Reporter(report, trajectory));
 	mPluginFacade.reset(new interpreterCore::RobotsPluginFacade());
 	mPluginFacade->init(*mConfigurator);
@@ -62,7 +56,8 @@ Runner::Runner(const QString &report, const QString &trajectory,
 		qReal::SettingsManager::loadDefaultSettings(defaultSettingsFile);
 	}
 
-	connect(&*mErrorReporter, &qReal::ConsoleErrorReporter::informationAdded, &*mReporter, &Reporter::addInformation);
+	connect(&*mErrorReporter, &qReal::ConsoleErrorReporter::informationAdded, &*mReporter,
+		&Reporter::addInformation);
 	connect(&*mErrorReporter, &qReal::ConsoleErrorReporter::errorAdded, &*mReporter, &Reporter::addError);
 	connect(&*mErrorReporter, &qReal::ConsoleErrorReporter::criticalAdded, &*mReporter, &Reporter::addError);
 	connect(&*mErrorReporter, &qReal::ConsoleErrorReporter::logAdded, &*mReporter, &Reporter::addLog);
@@ -97,7 +92,7 @@ Runner::~Runner()
 
 bool Runner::generate(const QString &generatePath, const QString &generateMode)
 {
-	for (auto&& action: mPluginFacade->actionsManager().actions()){
+	for (auto &&action : mPluginFacade->actionsManager().actions()) {
 		if (generateMode == "python") {
 			if (action.action()->objectName() == "generatePythonTrikCode") {
 				Q_EMIT action.action()->triggered();
@@ -129,8 +124,8 @@ bool Runner::generate(const QString &generatePath, const QString &generateMode)
 	return true;
 }
 
-bool Runner::interpret(const bool background, const int customSpeedFactor, bool closeOnFinish
-			, const bool closeOnSuccess, const bool showConsole, bool showDisplay, const QString &filePath)
+bool Runner::interpret(const bool background, const int customSpeedFactor, bool closeOnFinish,
+	const bool closeOnSuccess, const bool showConsole, bool showDisplay, const QString &filePath)
 {
 	/// @todo: A bit hacky way to get 2D model window. Actually we must not have need in this.
 	/// GUI must be separated from logic and not appear here at all.
@@ -145,22 +140,23 @@ bool Runner::interpret(const bool background, const int customSpeedFactor, bool 
 		}
 	}
 
-	connect(&mPluginFacade->eventsForKitPlugins(), &kitBase::EventsForKitPluginInterface::interpretationStopped
-			, this, [this, closeOnFinish, closeOnSuccess](qReal::interpretation::StopReason reason) {
+	connect(&mPluginFacade->eventsForKitPlugins(), &kitBase::EventsForKitPluginInterface::interpretationStopped,
+		this, [this, closeOnFinish, closeOnSuccess](qReal::interpretation::StopReason reason) {
 		if (closeOnFinish || (closeOnSuccess && reason == qReal::interpretation::StopReason::finished))
 			QTimer::singleShot(mDelayBeforeExit, this, &Runner::close);
 	});
 
 	if (closeOnFinish) {
-		connect(&mPluginFacade->eventsForKitPlugins(), &kitBase::EventsForKitPluginInterface::interpretationErrored
-				, this, [this]() { QTimer::singleShot(mDelayBeforeExit, this, &Runner::close); });
+		connect(&mPluginFacade->eventsForKitPlugins(),
+			&kitBase::EventsForKitPluginInterface::interpretationErrored, this,
+			[this]() { QTimer::singleShot(mDelayBeforeExit, this, &Runner::close); });
 	}
 
 	const auto robotName = mPluginFacade->robotModelManager().model().name();
 
 	for (auto &&twoDModelWindow : twoDModelWindows) {
-		connect(twoDModelWindow, &view::TwoDModelWidget::widgetClosed, &*mMainWindow
-				, [this]() { this->mMainWindow->emulateClose(); });
+		connect(twoDModelWindow, &view::TwoDModelWidget::widgetClosed, &*mMainWindow,
+			[this]() { this->mMainWindow->emulateClose(); });
 
 		if (showConsole) {
 			attachNewConsoleTo(twoDModelWindow);
@@ -189,22 +185,21 @@ bool Runner::interpret(const bool background, const int customSpeedFactor, bool 
 	return true;
 }
 
-void Runner::connectRobotModel(const model::RobotModel *robotModel, const qReal::ui::ConsoleDock* console)
+void Runner::connectRobotModel(const model::RobotModel *robotModel, const qReal::ui::ConsoleDock *console)
 {
-	connect(robotModel, &model::RobotModel::positionRecalculated
-			, this, &Runner::onRobotRided, Qt::UniqueConnection);
+	connect(robotModel, &model::RobotModel::positionRecalculated, this, &Runner::onRobotRided,
+		Qt::UniqueConnection);
 
-	connect(&robotModel->info().configuration(), &kitBase::robotModel::ConfigurationInterface::deviceConfigured
-			, this, [=](kitBase::robotModel::robotParts::Device *device)
-	{
-		connect(device, &kitBase::robotModel::robotParts::Device::propertyChanged, this
-				, [=](const QString &property, const QVariant &value) {
+	connect(&robotModel->info().configuration(), &kitBase::robotModel::ConfigurationInterface::deviceConfigured,
+		this, [=](kitBase::robotModel::robotParts::Device *device) {
+		connect(device, &kitBase::robotModel::robotParts::Device::propertyChanged, this,
+			[=](const QString &property, const QVariant &value) {
 			onDeviceStateChanged(robotModel->info().robotId(), device, property, value);
 		});
 		if (console) {
-			if (auto * shell = qobject_cast<kitBase::robotModel::robotParts::Shell*>(device)) {
-				connect(shell, &kitBase::robotModel::robotParts::Shell::textPrinted
-						, console, &qReal::ui::ConsoleDock::print);
+			if (auto *shell = qobject_cast<kitBase::robotModel::robotParts::Shell *>(device)) {
+				connect(shell, &kitBase::robotModel::robotParts::Shell::textPrinted, console,
+					&qReal::ui::ConsoleDock::print);
 			}
 		}
 	});
@@ -212,32 +207,21 @@ void Runner::connectRobotModel(const model::RobotModel *robotModel, const qReal:
 
 void Runner::onRobotRided(QPointF newPosition, const qreal newRotation)
 {
-	mReporter->newTrajectoryPoint(
-			static_cast<model::RobotModel *>(sender())->info().robotId()
-			, mPluginFacade->interpreter().timeElapsed()
-			, newPosition
-			, newRotation
-			);
+	mReporter->newTrajectoryPoint(static_cast<model::RobotModel *>(sender())->info().robotId(),
+		mPluginFacade->interpreter().timeElapsed(), newPosition, newRotation);
 }
 
-void Runner::onDeviceStateChanged(const QString &robotId
-		, const kitBase::robotModel::robotParts::Device *device
-		, const QString &property
-		, const QVariant &value)
+void Runner::onDeviceStateChanged(const QString &robotId, const kitBase::robotModel::robotParts::Device *device,
+	const QString &property, const QVariant &value)
 {
-	mReporter->newDeviceState(robotId
-			, mPluginFacade->interpreter().timeElapsed()
-			, device->deviceInfo().name()
-			, device->port().name()
-			, property
-			, value
-							 );
+	mReporter->newDeviceState(robotId, mPluginFacade->interpreter().timeElapsed(), device->deviceInfo().name(),
+		device->port().name(), property, value);
 }
 
 void Runner::attachNewConsoleTo(view::TwoDModelWidget *twoDModelWindow)
 {
-	qReal::ui::ConsoleDock* console = nullptr;
-	if (auto layout = dynamic_cast<QGridLayout*>(twoDModelWindow->layout())) {
+	qReal::ui::ConsoleDock *console = nullptr;
+	if (auto layout = dynamic_cast<QGridLayout *>(twoDModelWindow->layout())) {
 		console = new qReal::ui::ConsoleDock(tr("Robot console"), mMainWindow->windowWidget());
 		mRobotConsoles << console;
 		// TODO: hack to add console for each widget

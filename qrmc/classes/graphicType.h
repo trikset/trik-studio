@@ -30,8 +30,8 @@ class Diagram;
 class GraphicType : public Type
 {
 public:
-	GraphicType(const Diagram &diagram, const qrRepo::LogicalRepoApi &api
-			, const qReal::Id &id, const QString &targetDirectory);
+	GraphicType(const Diagram &diagram, const qrRepo::LogicalRepoApi &api, const qReal::Id &id,
+		const QString &targetDirectory);
 
 	~GraphicType() override;
 	bool init(const QString &context) override;
@@ -90,11 +90,13 @@ protected:
 	Shape mShape;
 
 private:
-	class ResolvingHelper {
-	Q_DISABLE_COPY_MOVE(ResolvingHelper)
+	class ResolvingHelper
+	{
+		Q_DISABLE_COPY_MOVE(ResolvingHelper)
 	public:
 		explicit ResolvingHelper(bool &resolvingFlag);
 		~ResolvingHelper();
+
 	private:
 		bool &mResolvingFlag;
 	};

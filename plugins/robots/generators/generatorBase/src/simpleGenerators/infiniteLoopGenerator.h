@@ -24,10 +24,8 @@ class InfiniteLoopGenerator : public BindingGenerator
 {
 	Q_OBJECT
 public:
-	InfiniteLoopGenerator(const qrRepo::RepoApi &repo
-			, GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent = nullptr);
+	InfiniteLoopGenerator(const qrRepo::RepoApi &repo, GeneratorCustomizer &customizer, const qReal::Id &id,
+		QObject *parent = nullptr);
 };
 
 }

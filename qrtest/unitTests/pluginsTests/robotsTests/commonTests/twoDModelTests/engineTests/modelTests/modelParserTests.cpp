@@ -46,7 +46,7 @@ void ModelParserTests::TearDown()
 {
 	// We do not initialize TwoDModelScene, which takes ownership
 	// of StartPosition in TwoDModelScene::onRobotAdd.
-	for (auto &&robotModel: mModel->robotModels()) {
+	for (auto &&robotModel : mModel->robotModels()) {
 		delete robotModel->startPositionMarker();
 	}
 }
@@ -72,7 +72,7 @@ TEST_F(ModelParserTests, defaultMetricSystemCustomObjectParametersTest)
 	EXPECT_FLOAT_EQ(wallItem->x2(), 0.0f);
 	EXPECT_FLOAT_EQ(wallItem->y2(), -250.0f);
 	EXPECT_FLOAT_EQ(wallItem->pen().widthF(), 2.1f);
-	const auto wallSolidItem = static_cast<twoDModel::items::SolidItem*>(wallItem.data());
+	const auto wallSolidItem = static_cast<twoDModel::items::SolidItem *>(wallItem.data());
 	EXPECT_FLOAT_EQ(wallSolidItem->friction(), 0.5f);
 	EXPECT_FLOAT_EQ(wallSolidItem->restitution(), 0.3f);
 
@@ -92,7 +92,7 @@ TEST_F(ModelParserTests, defaultMetricSystemCustomObjectParametersTest)
 	EXPECT_FLOAT_EQ(skittleWithBeginItem->x(), 250 + skittleWidth / 2);
 	EXPECT_FLOAT_EQ(skittleWithBeginItem->y(), 300 + skittleHeight / 2);
 
-	const auto skittleSolidItem = static_cast<twoDModel::items::SolidItem*>(skittleItem.data());
+	const auto skittleSolidItem = static_cast<twoDModel::items::SolidItem *>(skittleItem.data());
 	EXPECT_FLOAT_EQ(skittleSolidItem->friction(), 0.5f);
 	EXPECT_FLOAT_EQ(skittleSolidItem->restitution(), 0.2f);
 	EXPECT_FLOAT_EQ(skittleSolidItem->linearDamping(), 4.0f);
@@ -115,7 +115,7 @@ TEST_F(ModelParserTests, defaultMetricSystemCustomObjectParametersTest)
 	EXPECT_FLOAT_EQ(ballWithBeginItem->x(), 250 + ballWidth / 2);
 	EXPECT_FLOAT_EQ(ballWithBeginItem->y(), 300 + ballHeight / 2);
 
-	const auto ballSolidItem = static_cast<twoDModel::items::SolidItem*>(ballItem.data());
+	const auto ballSolidItem = static_cast<twoDModel::items::SolidItem *>(ballItem.data());
 	EXPECT_FLOAT_EQ(ballSolidItem->friction(), 0.4f);
 	EXPECT_FLOAT_EQ(ballSolidItem->restitution(), 0.7f);
 	EXPECT_FLOAT_EQ(ballSolidItem->linearDamping(), 6.0f);
@@ -162,10 +162,8 @@ TEST_F(ModelParserTests, defaultMetricSystemCustomObjectParametersTest)
 	auto robotModels = mModel->robotModels();
 	EXPECT_EQ(robotModels.size(), 1);
 	auto robotModel = robotModels[0];
-	auto leftWheelPortInfo = robotModel->getPortInfoOnWheel(
-	                        twoDModel::model::RobotModel::WheelEnum::left);
-	auto rightWheelPortInfo = robotModel->getPortInfoOnWheel(
-	                        twoDModel::model::RobotModel::WheelEnum::right);
+	auto leftWheelPortInfo = robotModel->getPortInfoOnWheel(twoDModel::model::RobotModel::WheelEnum::left);
+	auto rightWheelPortInfo = robotModel->getPortInfoOnWheel(twoDModel::model::RobotModel::WheelEnum::right);
 	EXPECT_EQ(leftWheelPortInfo.toString(), "M4###output###М4###");
 	EXPECT_EQ(rightWheelPortInfo.toString(), "M3###output###М3###");
 	EXPECT_FLOAT_EQ(robotModel->position().x(), 10.0f);
@@ -183,8 +181,7 @@ TEST_F(ModelParserTests, defaultMetricSystemCustomObjectParametersTest)
 constexpr auto epsilon = 1e-4;
 constexpr auto pixelsInCm = 16.0 / 5.6;
 
-#define EXPECT_LT_ABS(X, Y) \
-	EXPECT_NEAR(X, (Y) * pixelsInCm, epsilon)
+#define EXPECT_LT_ABS(X, Y) EXPECT_NEAR(X, (Y) * pixelsInCm, epsilon)
 
 TEST_F(ModelParserTests, cmConfugurationDefaultParametersTest)
 {
@@ -212,7 +209,7 @@ TEST_F(ModelParserTests, cmConfugurationDefaultParametersTest)
 	EXPECT_LT_ABS(wallItem->x2(), 0.0f);
 	EXPECT_LT_ABS(wallItem->y2(), -250.0f);
 	EXPECT_LT_ABS(wallItem->pen().widthF(), 2.1f);
-	const auto wallSolidItem = static_cast<twoDModel::items::SolidItem*>(wallItem.data());
+	const auto wallSolidItem = static_cast<twoDModel::items::SolidItem *>(wallItem.data());
 	EXPECT_FLOAT_EQ(wallSolidItem->friction(), 1.0f);
 	EXPECT_FLOAT_EQ(wallSolidItem->restitution(), 0.8f);
 
@@ -226,7 +223,7 @@ TEST_F(ModelParserTests, cmConfugurationDefaultParametersTest)
 	EXPECT_LT_ABS(skittleItem->y(), -25.0f);
 	EXPECT_FLOAT_EQ(skittleItem->rotation(), 10.0f);
 
-	const auto skittleSolidItem = static_cast<twoDModel::items::SolidItem*>(skittleItem.data());
+	const auto skittleSolidItem = static_cast<twoDModel::items::SolidItem *>(skittleItem.data());
 	EXPECT_FLOAT_EQ(skittleSolidItem->friction(), 0.2f);
 	EXPECT_FLOAT_EQ(skittleSolidItem->restitution(), 0.8f);
 	EXPECT_FLOAT_EQ(skittleSolidItem->linearDamping(), 6.0f);
@@ -243,7 +240,7 @@ TEST_F(ModelParserTests, cmConfugurationDefaultParametersTest)
 	EXPECT_LT_ABS(ballItem->y(), -25.0f);
 	EXPECT_FLOAT_EQ(ballItem->rotation(), 10.0f);
 
-	const auto ballSolidItem = static_cast<twoDModel::items::SolidItem*>(ballItem.data());
+	const auto ballSolidItem = static_cast<twoDModel::items::SolidItem *>(ballItem.data());
 	EXPECT_FLOAT_EQ(ballSolidItem->friction(), 1.0f);
 	EXPECT_FLOAT_EQ(ballSolidItem->restitution(), 0.8f);
 	EXPECT_FLOAT_EQ(ballSolidItem->linearDamping(), 0.09f);
@@ -284,10 +281,8 @@ TEST_F(ModelParserTests, cmConfugurationDefaultParametersTest)
 	auto robotModels = mModel->robotModels();
 	EXPECT_EQ(robotModels.size(), 1);
 	auto robotModel = robotModels[0];
-	auto leftWheelPortInfo = robotModel->getPortInfoOnWheel(
-	                        twoDModel::model::RobotModel::WheelEnum::left);
-	auto rightWheelPortInfo = robotModel->getPortInfoOnWheel(
-	                        twoDModel::model::RobotModel::WheelEnum::right);
+	auto leftWheelPortInfo = robotModel->getPortInfoOnWheel(twoDModel::model::RobotModel::WheelEnum::left);
+	auto rightWheelPortInfo = robotModel->getPortInfoOnWheel(twoDModel::model::RobotModel::WheelEnum::right);
 	EXPECT_EQ(leftWheelPortInfo.toString(), "M4###output###М4###");
 	EXPECT_EQ(rightWheelPortInfo.toString(), "M3###output###М3###");
 	EXPECT_LT_ABS(robotModel->position().x(), 10.0f);

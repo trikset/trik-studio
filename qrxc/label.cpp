@@ -99,34 +99,24 @@ void Label::generateCodeForConstructor(OutFile &out) const
 		if (mRoleName.isEmpty()) {
 			// It is binded label, text for it will be fetched from repo.
 			out() << QString("\t\t\tQSharedPointer<qReal::LabelProperties>"
-							 " %1(new qReal::LabelProperties(%2, %3, %4, \"%5\", %6, %7));\n").arg(labelName()
-					, QString::number(mIndex)
-					, QString::number(mX.value())
-					, QString::number(mY.value())
-					, mTextBinded, mReadOnly
-					, QString::number(mRotation));
+					 " %1(new qReal::LabelProperties(%2, %3, %4, \"%5\", %6, %7));\n")
+					 .arg(labelName(), QString::number(mIndex), QString::number(mX.value()),
+						 QString::number(mY.value()), mTextBinded, mReadOnly,
+						 QString::number(mRotation));
 		} else {
 			// It is binded label, with role logic.
 			out() << QString("\t\t\tQSharedPointer<qReal::LabelProperties>"
-							 " %1(new Real::LabelProperties(%2, %3, %4, \"%5\",\"%6\",\"%7\", %8, %9));\n")
-					 .arg(labelName()
-					, QString::number(mIndex)
-					, QString::number(mX.value())
-					, QString::number(mY.value())
-					, mLocation, mRoleName
-					, mNameOfPropertyRole
-					, mReadOnly
-					, QString::number(mRotation));
+					 " %1(new Real::LabelProperties(%2, %3, %4, \"%5\",\"%6\",\"%7\", %8, %9));\n")
+					 .arg(labelName(), QString::number(mIndex), QString::number(mX.value()),
+						 QString::number(mY.value()), mLocation, mRoleName, mNameOfPropertyRole,
+						 mReadOnly, QString::number(mRotation));
 		}
 	} else {
 		// It is a static label, text for it is fixed.
 		out() << QString("\t\t\tQSharedPointer<qReal::LabelProperties>"
-						 " %1(new qReal::LabelProperties(%2, %3, %4, QObject::tr(\"%5\"), %6));\n").arg(labelName()
-				, QString::number(mIndex)
-				, QString::number(mX.value())
-				, QString::number(mY.value())
-				, mText
-				, QString::number(mRotation));
+				 " %1(new qReal::LabelProperties(%2, %3, %4, QObject::tr(\"%5\"), %6));\n")
+				 .arg(labelName(), QString::number(mIndex), QString::number(mX.value()),
+					 QString::number(mY.value()), mText, QString::number(mRotation));
 	}
 
 	out() << QString("\t\t\t%1->setBackground(Qt::%2);\n").arg(labelName(), mBackground);

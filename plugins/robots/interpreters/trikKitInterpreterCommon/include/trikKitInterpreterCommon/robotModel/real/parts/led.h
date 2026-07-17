@@ -29,9 +29,8 @@ class ROBOTS_TRIK_KIT_INTERPRETER_COMMON_EXPORT Led : public robotModel::parts::
 	Q_OBJECT
 
 public:
-	Led(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port
-			, utils::robotCommunication::TcpRobotCommunicator &tcpRobotCommunicator);
+	Led(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+		utils::robotCommunication::TcpRobotCommunicator &tcpRobotCommunicator);
 
 public Q_SLOTS:
 	void setColor(const QString &color) override;

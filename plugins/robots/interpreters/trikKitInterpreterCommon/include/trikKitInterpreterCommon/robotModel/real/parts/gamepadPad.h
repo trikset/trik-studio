@@ -35,9 +35,8 @@ public:
 	/// @param port - port on which this device is configured.
 	/// @param tcpRobotCommunicator - communicator object that is used to send/receive data to/from telemetry
 	///        service on a robot.
-	GamepadPad(const kitBase::robotModel::DeviceInfo &info
-		, const kitBase::robotModel::PortInfo &port
-		, utils::robotCommunication::TcpRobotCommunicator &tcpRobotCommunicator);
+	GamepadPad(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+		utils::robotCommunication::TcpRobotCommunicator &tcpRobotCommunicator);
 
 	void read() override;
 

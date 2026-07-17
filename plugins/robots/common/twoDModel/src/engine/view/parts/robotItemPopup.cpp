@@ -60,7 +60,7 @@ bool RobotItemPopup::attachTo(const QList<QGraphicsItem *> &items)
 
 void RobotItemPopup::initWidget()
 {
-	auto * const layout = new QGridLayout(this);
+	auto *const layout = new QGridLayout(this);
 	layout->addWidget(initFollowButton(), 0, 0, Qt::AlignCenter);
 	layout->addWidget(initReturnButton(), 0, 1);
 	layout->addWidget(initSpinBox(), 1, 0);
@@ -75,8 +75,8 @@ QWidget *RobotItemPopup::initFollowButton()
 	mFollowButton->setCheckable(true);
 	connect(mFollowButton, &QAbstractButton::toggled, this, &RobotItemPopup::followingChanged);
 	connect(mFollowButton, &QAbstractButton::toggled, this, [=](bool enabled) {
-		mFollowButton->setToolTip(tr("Camera folowing robot: %1")
-				.arg(enabled ? tr("enabled") : tr("disabled")));
+		mFollowButton->setToolTip(
+			tr("Camera folowing robot: %1").arg(enabled ? tr("enabled") : tr("disabled")));
 	});
 	return mFollowButton;
 }
@@ -97,9 +97,8 @@ QWidget *RobotItemPopup::initSetStartButton()
 
 QAbstractButton *RobotItemPopup::initButton(const QString &icon, const QString &toolTip)
 {
-	auto * const result = new QPushButton(
-		graphicsUtils::AbstractItem::loadThemedIcon(icon, Qt::red), QString(), this
-	);
+	auto *const result =
+		new QPushButton(graphicsUtils::AbstractItem::loadThemedIcon(icon, Qt::red), QString(), this);
 	result->setToolTip(toolTip);
 	result->setFlat(true);
 	result->setFixedSize(24, 24);
@@ -108,15 +107,14 @@ QAbstractButton *RobotItemPopup::initButton(const QString &icon, const QString &
 
 QWidget *RobotItemPopup::initSpinBox()
 {
-	auto * const spinBox = new PopupMetricWidget(this);
+	auto *const spinBox = new PopupMetricWidget(this);
 	spinBox->setToolTip(tr("Marker thickness"));
 	QPalette spinBoxPalette;
 	spinBoxPalette.setColor(QPalette::Window, Qt::transparent);
 	spinBoxPalette.setColor(QPalette::Base, Qt::transparent);
 	spinBox->setPalette(spinBoxPalette);
-	connect(spinBox, &PopupMetricWidget::valueChanged, this, [=](qreal value) {
-		mCurrentItem->setPenWidth(value);
-	});
+	connect(spinBox, &PopupMetricWidget::valueChanged, this,
+		[=](qreal value) { mCurrentItem->setPenWidth(value); });
 
 	mSpinBox = spinBox;
 	return spinBox;

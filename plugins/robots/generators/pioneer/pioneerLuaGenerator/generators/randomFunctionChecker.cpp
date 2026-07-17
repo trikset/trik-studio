@@ -26,11 +26,9 @@ const auto randomKeyWord = "random";
 
 using namespace pioneer::lua;
 
-RandomFunctionChecker::RandomFunctionChecker(
-		const qrRepo::RepoApi &repo
-		, const qReal::EditorManagerInterface &metamodel
-		, qrtext::LanguageToolboxInterface &languageToolbox
-		, RandomGeneratorPart &randomGeneratorPart)
+RandomFunctionChecker::RandomFunctionChecker(const qrRepo::RepoApi &repo,
+	const qReal::EditorManagerInterface &metamodel, qrtext::LanguageToolboxInterface &languageToolbox,
+	RandomGeneratorPart &randomGeneratorPart)
 	: mRepo(repo)
 	, mMetamodel(metamodel)
 	, mLanguageToolbox(languageToolbox)

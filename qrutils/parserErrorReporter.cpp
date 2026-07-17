@@ -21,9 +21,8 @@
 
 using namespace utils;
 
-ParserErrorReporter::ParserErrorReporter(const qrtext::LanguageToolboxInterface &parser
-		, qReal::ErrorReporterInterface &errorReporter
-		, const qReal::EditorManagerInterface &editorManagerInterface)
+ParserErrorReporter::ParserErrorReporter(const qrtext::LanguageToolboxInterface &parser,
+	qReal::ErrorReporterInterface &errorReporter, const qReal::EditorManagerInterface &editorManagerInterface)
 	: mParser(parser)
 	, mErrorReporter(errorReporter)
 	, mEditorManagerInterface(editorManagerInterface)
@@ -34,10 +33,10 @@ void ParserErrorReporter::reportErrors(const qReal::Id &id, const QString &prope
 {
 	for (const qrtext::core::Error &error : mParser.diagnosticMessages()) {
 		const QString errorMessage = QString("'%1', %2:%3 %4")
-				.arg(mEditorManagerInterface.propertyDisplayedName(id, property))
-				.arg(error.connection().line() + 1)
-				.arg(error.connection().column() + 1)
-				.arg(error.errorMessage());
+		                                     .arg(mEditorManagerInterface.propertyDisplayedName(id, property))
+		                                     .arg(error.connection().line() + 1)
+		                                     .arg(error.connection().column() + 1)
+		                                     .arg(error.errorMessage());
 
 		switch (error.severity()) {
 		case qrtext::core::Severity::critical:

@@ -81,7 +81,7 @@ QString EditorManager::loadPlugin(const QString &pluginName)
 	return error;
 }
 
-bool EditorManager::registerPlugin(MetamodelLoaderInterface * const loader)
+bool EditorManager::registerPlugin(MetamodelLoaderInterface *const loader)
 {
 	bool allDependenciesAreLoaded = true;
 	const auto &dependencies = loader->dependencies();
@@ -98,9 +98,8 @@ bool EditorManager::registerPlugin(MetamodelLoaderInterface * const loader)
 	const QString pluginName = mPluginManager.fileName(loader);
 	// At the moment dependencies will contain maximally one element (this may change in future).
 	const QString extendedMetamodel = dependencies.isEmpty() ? QString() : dependencies.first();
-	const auto &metamodel = extendedMetamodel.isEmpty() ?
-								decltype(mMetamodels)::mapped_type(new Metamodel)
-							  : mMetamodels[extendedMetamodel];
+	const auto &metamodel = extendedMetamodel.isEmpty() ? decltype(mMetamodels)::mapped_type(new Metamodel)
+	                                                    : mMetamodels[extendedMetamodel];
 	loader->load(*metamodel);
 	mPluginFileNames[metamodel->id()] << pluginName;
 	mMetamodels[metamodel->id()] = metamodel;
@@ -355,7 +354,7 @@ QStringList EditorManager::referenceProperties(const Id &id) const
 
 IdList EditorManager::containedTypes(const Id &id) const
 {
-	Q_ASSERT(id.idSize() == 3);  // Applicable only to element types
+	Q_ASSERT(id.idSize() == 3); // Applicable only to element types
 	return elementType(id).containedTypes();
 }
 
@@ -415,7 +414,7 @@ Id EditorManager::findElementByType(const QString &type) const
 	throw Exception("No type " + type + " in loaded plugins");
 }
 
-Metamodel* EditorManager::metamodel(const QString &editor) const
+Metamodel *EditorManager::metamodel(const QString &editor) const
 {
 	return &*mMetamodels[editor];
 }
@@ -443,8 +442,8 @@ bool EditorManager::isParentOf(const Id &child, const Id &parent) const // child
 	return isParentOf(&*plugin, child.diagram(), child.element(), parentDiagram, parentElement);
 }
 
-bool EditorManager::isParentOf(const Metamodel *plugin, const QString &childDiagram
-		, const QString &child, const QString &parentDiagram, const QString &parent) const
+bool EditorManager::isParentOf(const Metamodel *plugin, const QString &childDiagram, const QString &child,
+	const QString &parentDiagram, const QString &parent) const
 {
 	return plugin->elementType(childDiagram, child).isParent(plugin->elementType(parentDiagram, parent));
 }
@@ -480,14 +479,13 @@ bool EditorManager::isGraphicalElementNode(const Id &id) const
 Id EditorManager::theOnlyDiagram() const
 {
 	const IdList allEditors(editors());
-	return (allEditors.length() == 1 && diagrams(allEditors[0]).length() == 1)
-			? diagrams(allEditors[0])[0] : Id();
+	return (allEditors.length() == 1 && diagrams(allEditors[0]).length() == 1) ? diagrams(allEditors[0])[0] : Id();
 }
 
 QString EditorManager::diagramNodeNameString(const Id &editor, const Id &diagram) const
 {
-	return QString("qrm:/%1/%2/%3").arg(editor.editor(), diagram.diagram()
-			, diagramNodeName(editor.editor(), diagram.diagram()));
+	return QString("qrm:/%1/%2/%3")
+	        .arg(editor.editor(), diagram.diagram(), diagramNodeName(editor.editor(), diagram.diagram()));
 }
 
 /// @todo: We should get rid of this function. Information should already be parsed by qrxc and qrmc and returned
@@ -508,8 +506,8 @@ int EditorManager::isNodeOrEdge(const Id &id) const
 	return type == ElementType::Type::node ? 1 : type == ElementType::Type::edge ? -1 : 0;
 }
 
-bool EditorManager::isParentOf(const QString &editor, const QString &parentDiagram, const QString &parentElement
-		, const QString &childDiagram, const QString &childElement) const
+bool EditorManager::isParentOf(const QString &editor, const QString &parentDiagram, const QString &parentElement,
+	const QString &childDiagram, const QString &childElement) const
 {
 	Id child(editor, childDiagram, childElement);
 	Id parent(editor, parentDiagram, parentElement);
@@ -554,8 +552,8 @@ void EditorManager::addProperty(const Id &id, const QString &propDisplayedName) 
 	elementType(id).addProperty(propDisplayedName, "string", QString(), propDisplayedName, QString(), false);
 }
 
-void EditorManager::updateProperties(const Id &id, const QString &property, const QString &propertyType
-		, const QString &propertyDefaultValue, const QString &propertyDisplayedName) const
+void EditorManager::updateProperties(const Id &id, const QString &property, const QString &propertyType,
+	const QString &propertyDefaultValue, const QString &propertyDisplayedName) const
 {
 	Q_UNUSED(id)
 	Q_UNUSED(property)
@@ -578,10 +576,10 @@ QString EditorManager::propertyNameByDisplayedName(const Id &id, const QString &
 
 IdList EditorManager::children(const Id &parent) const
 {
-	const QList<const qrgraph::Node *> childNodes = qrgraph::Queries::immediatePredecessors(elementType(parent)
-			, ElementType::generalizationLinkType);
+	const QList<const qrgraph::Node *> childNodes =
+		qrgraph::Queries::immediatePredecessors(elementType(parent), ElementType::generalizationLinkType);
 	IdList result;
-	for (const qrgraph::Node * const node : childNodes) {
+	for (const qrgraph::Node *const node : childNodes) {
 		if (auto child = dynamic_cast<const ElementType *>(node)) {
 			result << child->typeId();
 		}
@@ -622,13 +620,12 @@ void EditorManager::deleteElement(const Id &id) const
 	elementType(id).setHidden(true);
 }
 
-void EditorManager::addNodeElement(const Id &diagram, const QString &name, const QString &displayedName
-		, bool isRootDiagramNode) const
+void EditorManager::addNodeElement(const Id &diagram, const QString &name, const QString &displayedName,
+	bool isRootDiagramNode) const
 {
-	const QString shape =
-			"<picture sizex=\"50\" sizey=\"50\">\n"
-			"    <image y1=\"0\" name=\"\" x1=\"0\" y2=\"50\" x2=\"50\"/>\n"
-			"</picture>\n";
+	const QString shape = "<picture sizex=\"50\" sizey=\"50\">\n"
+			      "    <image y1=\"0\" name=\"\" x1=\"0\" y2=\"50\" x2=\"50\"/>\n"
+			      "</picture>\n";
 	QDomDocument document;
 	document.setContent(shape);
 
@@ -661,17 +658,17 @@ void EditorManager::addNodeElement(const Id &diagram, const QString &name, const
 	metamodel->produceEdge(*node, abstractNode, ElementType::containmentLinkType);
 }
 
-void EditorManager::addEdgeElement(const Id &diagram, const QString &name, const QString &displayedName
-		, const QString &labelText, const QString &labelType, const QString &lineType
-		, const QString &beginType, const QString &endType) const
+void EditorManager::addEdgeElement(const Id &diagram, const QString &name, const QString &displayedName,
+	const QString &labelText, const QString &labelType, const QString &lineType, const QString &beginType,
+	const QString &endType) const
 {
 	Metamodel *metamodel = this->metamodel(diagram.editor());
 	if (!metamodel) {
 		return;
 	}
 
-	const Qt::PenStyle style = lineType == "dashLine" ? Qt::DashLine :
-			(lineType == "dotLine" ? Qt::DotLine : Qt::SolidLine);
+	const Qt::PenStyle style =
+		lineType == "dashLine" ? Qt::DashLine : (lineType == "dotLine" ? Qt::DotLine : Qt::SolidLine);
 
 	auto *edge = new EdgeElementType(*metamodel);
 	edge->setDiagram(diagram.diagram());
@@ -707,11 +704,11 @@ void EditorManager::createEditorAndDiagram(const QString &name)
 	interpretedMetamodel->addDiagram(name);
 	interpretedMetamodel->setDiagramFriendlyName(name, name);
 
-	auto * const diagramNode = new NodeElementType(*interpretedMetamodel);
+	auto *const diagramNode = new NodeElementType(*interpretedMetamodel);
 	diagramNode->setDiagram(name);
 	diagramNode->setName(name);
 	diagramNode->setFriendlyName(name);
-	auto * const abstractNode = new NodeElementType(*interpretedMetamodel);
+	auto *const abstractNode = new NodeElementType(*interpretedMetamodel);
 	abstractNode->setDiagram(name);
 	abstractNode->setName("AbstractNode");
 	abstractNode->setFriendlyName("AbstractNode");
@@ -754,8 +751,8 @@ IdList EditorManager::elementsWithTheSameName(const Id &diagram, const QString &
 	return result;
 }
 
-IdList EditorManager::propertiesWithTheSameName(const Id &id, const QString &propertyCurrentName
-		, const QString &propertyNewName) const
+IdList EditorManager::propertiesWithTheSameName(const Id &id, const QString &propertyCurrentName,
+	const QString &propertyNewName) const
 {
 	Q_UNUSED(id)
 	Q_UNUSED(propertyCurrentName)

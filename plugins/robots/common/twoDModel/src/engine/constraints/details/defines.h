@@ -52,12 +52,12 @@ Q_SIGNALS:
 };
 
 /// Represents logical operations that can be used for concatenating conditions.
-enum class Glue
-{
+enum class Glue {
 	/// Logical 'and'
 	And = 0
 	/// Logical 'or'
-	, Or
+	,
+	Or
 };
 
 typedef std::function<bool()> Condition;

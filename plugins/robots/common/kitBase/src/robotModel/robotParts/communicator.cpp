@@ -19,4 +19,5 @@ using namespace robotParts;
 
 Communicator::Communicator(const DeviceInfo &info, const PortInfo &port)
 	: Device(info, port)
-{}
+{
+}

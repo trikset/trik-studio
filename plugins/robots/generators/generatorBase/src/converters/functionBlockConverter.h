@@ -24,10 +24,8 @@ namespace converters {
 class FunctionBlockConverter : public CodeConverterBase
 {
 public:
-	FunctionBlockConverter(lua::LuaProcessor &luaTranslator
-			, const qReal::Id &id
-			, const QString &propertyName
-			, simple::Binding::ConverterInterface *reservedVariablesConverter);
+	FunctionBlockConverter(lua::LuaProcessor &luaTranslator, const qReal::Id &id, const QString &propertyName,
+		simple::Binding::ConverterInterface *reservedVariablesConverter);
 };
 
 }

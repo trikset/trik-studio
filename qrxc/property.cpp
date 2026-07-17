@@ -31,12 +31,12 @@ bool Property::init(const QDomElement &element)
 		return false;
 	} else if (mType == "enum") {
 		if (initReferenceType("enum", element))
-			mIsEnum = true;	// TODO: Lookup enum
+			mIsEnum = true; // TODO: Lookup enum
 		else
 			return false;
 	} else if (mType == "reference") {
 		if (initReferenceType("reference", element)) {
-			mIsReference = true;  // TODO: Lookup reference
+			mIsReference = true; // TODO: Lookup reference
 		} else {
 			return false;
 		}
@@ -88,7 +88,7 @@ QString Property::description() const
 	return mDescription;
 }
 
-Property * Property::clone()
+Property *Property::clone()
 {
 	auto *result = new Property();
 	result->mName = mName;
@@ -101,19 +101,14 @@ Property * Property::clone()
 	return result;
 }
 
-bool Property::operator == (const Property &other) const
+bool Property::operator==(const Property &other) const
 {
-	return other.mName == mName
-		&& other.mDisplayedName == mDisplayedName
-		&& other.mType == mType
-		&& other.mIsEnum == mIsEnum
-		&& other.mIsReference == mIsReference
-		&& other.mDescription == mDescription
-		&& other.mDefaultValue == mDefaultValue
-		;
+	return other.mName == mName && other.mDisplayedName == mDisplayedName && other.mType == mType
+	       && other.mIsEnum == mIsEnum && other.mIsReference == mIsReference && other.mDescription == mDescription
+	       && other.mDefaultValue == mDefaultValue;
 }
 
-bool Property::operator != (const Property &other) const
+bool Property::operator!=(const Property &other) const
 {
 	return !(other == *this);
 }
@@ -128,4 +123,3 @@ void Property::dump() const
 	qDebug() << mDescription;
 	qDebug() << mDefaultValue;
 }
-

@@ -22,11 +22,11 @@ using namespace kitBase::robotModel;
 // The color of the pixel
 const int tolerance = 10;
 
-LineSensor::LineSensor(const DeviceInfo &info, const PortInfo &port
-		, twoDModel::engine::TwoDModelEngineInterface &engine)
+LineSensor::LineSensor(const DeviceInfo &info, const PortInfo &port,
+	twoDModel::engine::TwoDModelEngineInterface &engine)
 	: robotModel::parts::TrikLineSensor(info, port)
 	, mEngine(engine)
-	, mLineColor(qRgb(0, 0, 0))  // default line color is black
+	, mLineColor(qRgb(0, 0, 0)) // default line color is black
 {
 }
 
@@ -98,13 +98,14 @@ void LineSensor::read()
 	const int x = usefulRows ? qRound(xCoordinates / usefulRows) : 0;
 	const int cross = qRound(crossBlacks * 100.0 / (height * horizontalLineWidth));
 	const int lineWidth = blacks / height;
-	QVector<int> v = { x, cross, lineWidth };
+	QVector<int> v = {x, cross, lineWidth};
 	setLastData(v);
 }
 
 bool LineSensor::closeEnough(QRgb color) const
 {
-	return qAlpha(color) > 0 && qMax(qAbs(qRed(color) - qRed(mLineColor))
-		, qMax(qAbs(qGreen(color) - qGreen(mLineColor))
-		, qAbs(qBlue(color) - qBlue(mLineColor)))) < tolerance;
+	return qAlpha(color) > 0
+	       && qMax(qAbs(qRed(color) - qRed(mLineColor)),
+			  qMax(qAbs(qGreen(color) - qGreen(mLineColor)), qAbs(qBlue(color) - qBlue(mLineColor))))
+	                  < tolerance;
 }

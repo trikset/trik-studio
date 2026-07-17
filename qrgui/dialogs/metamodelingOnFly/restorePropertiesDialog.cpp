@@ -17,8 +17,8 @@
 
 using namespace qReal;
 
-RestorePropertiesDialog::RestorePropertiesDialog(QWidget *parent
-		, const EditorManagerInterface &interpreterEditorManager)
+RestorePropertiesDialog::RestorePropertiesDialog(QWidget *parent,
+	const EditorManagerInterface &interpreterEditorManager)
 	: QDialog(parent)
 	, mUi(new Ui::RestorePropertiesDialog)
 	, mInterpreterEditorManager(interpreterEditorManager)
@@ -45,14 +45,14 @@ RestorePropertiesDialog::~RestorePropertiesDialog()
 	delete mUi;
 }
 
-void RestorePropertiesDialog::fillSameNamePropertiesTW(const IdList &propertiesWithTheSameNameList
-		, const QString &propertyName)
+void RestorePropertiesDialog::fillSameNamePropertiesTW(const IdList &propertiesWithTheSameNameList,
+	const QString &propertyName)
 {
 	mPropertiesWithTheSameNameList = propertiesWithTheSameNameList;
 	for (int i = 0; i < mPropertiesWithTheSameNameList.count(); i++) {
 		mUi->sameNamePropertiesTW->insertRow(i);
 		QStringList propertyParams = mInterpreterEditorManager.getSameNamePropertyParams(
-				mPropertiesWithTheSameNameList[i], propertyName);
+			mPropertiesWithTheSameNameList[i], propertyName);
 		for (int j = 0; j < propertyParams.count(); j++) {
 			mUi->sameNamePropertiesTW->setItem(i, j, new QTableWidgetItem(propertyParams[j]));
 		}
@@ -66,12 +66,12 @@ void RestorePropertiesDialog::restoreButtonClicked()
 		QString state = mUi->sameNamePropertiesTW->item(firstSelectedRow, 1)->text();
 		QString propertyPreviousName = mUi->sameNamePropertiesTW->item(firstSelectedRow, 0)->text();
 		if (state == tr("Deleted")) {
-			mInterpreterEditorManager.restoreRemovedProperty(mPropertiesWithTheSameNameList[firstSelectedRow]
-					, propertyPreviousName);
+			mInterpreterEditorManager.restoreRemovedProperty(
+				mPropertiesWithTheSameNameList[firstSelectedRow], propertyPreviousName);
 		} else if (state != tr("Existed")) {
 			// Restore renamed property
-			mInterpreterEditorManager.restoreRenamedProperty(mPropertiesWithTheSameNameList[firstSelectedRow]
-					, propertyPreviousName);
+			mInterpreterEditorManager.restoreRenamedProperty(
+				mPropertiesWithTheSameNameList[firstSelectedRow], propertyPreviousName);
 		}
 		done(QDialog::Accepted);
 	}

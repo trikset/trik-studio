@@ -19,7 +19,7 @@
 using namespace trik::blocks::details;
 
 SetPainterColorBlock::SetPainterColorBlock(kitBase::robotModel::RobotModelInterface &robotModel)
-: kitBase::blocksBase::common::DisplayBlock(robotModel)
+	: kitBase::blocksBase::common::DisplayBlock(robotModel)
 {
 }
 

@@ -16,9 +16,8 @@
 
 using namespace generatorBase;
 
-StructurizatorNodeWithBreaks::StructurizatorNodeWithBreaks(IntermediateStructurizatorNode *condition
-		, const QList<IntermediateStructurizatorNode *> &exitBranches
-		, QObject *parent)
+StructurizatorNodeWithBreaks::StructurizatorNodeWithBreaks(IntermediateStructurizatorNode *condition,
+	const QList<IntermediateStructurizatorNode *> &exitBranches, QObject *parent)
 	: IntermediateStructurizatorNode(parent)
 	, mCondition(condition)
 	, mExitBranches(exitBranches)

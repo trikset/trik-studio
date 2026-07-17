@@ -40,9 +40,8 @@ class ROBOTS_TRIK_KIT_INTERPRETER_COMMON_EXPORT Shell : public robotModel::parts
 	Q_PROPERTY(QString lastPhrase READ lastPhrase WRITE say NOTIFY phraseTold)
 
 public:
-	Shell(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port
-			, twoDModel::engine::TwoDModelEngineInterface &engine);
+	Shell(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+		twoDModel::engine::TwoDModelEngineInterface &engine);
 
 	void runCommand(const QString &command) override;
 	void runCode(const QString &code) override;

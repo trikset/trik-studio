@@ -34,14 +34,15 @@ class QRUTILS_EXPORT SearchLinePanel : public QFrame
 
 public:
 	/// A enumeration of possible search options
-	enum class OperationOptions
-	{
+	enum class OperationOptions {
 		/// Search representation
 		Find
 		/// Search and replace representation
-		, FindAndReplace
+		,
+		FindAndReplace
 		/// Go to line and column representation
-		, GoToLineAndColumn
+		,
+		GoToLineAndColumn
 	};
 
 	explicit SearchLinePanel(QWidget *parent);
@@ -85,7 +86,7 @@ private:
 	QPushButton *mReplaceButton;
 	QLineEdit *mReplaceLineEdit;
 
-	OperationOptions mCurrentOption { OperationOptions::Find };
+	OperationOptions mCurrentOption {OperationOptions::Find};
 	QColor mSearchLineColor = "white";
 };
 

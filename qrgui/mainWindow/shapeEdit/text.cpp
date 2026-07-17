@@ -20,13 +20,15 @@
 #include <QtGui/QTextCursor>
 
 Text::Text(bool isDynamic)
-	: Item(nullptr), mIsDynamicText(isDynamic)
+	: Item(nullptr)
+	, mIsDynamicText(isDynamic)
 {
 	mDomElementType = labelType;
 }
 
 Text::Text(int x, int y, const QString &text, bool isDynamic)
-	: Item(nullptr), mIsDynamicText(isDynamic)
+	: Item(nullptr)
+	, mIsDynamicText(isDynamic)
 {
 	mDomElementType = labelType;
 	init(x, y, text);
@@ -44,7 +46,7 @@ void Text::init(int x, int y, const QString &text)
 	mY1 = y;
 }
 
-void Text::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
+void Text::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 	Q_UNUSED(option);
 	Q_UNUSED(widget);
@@ -53,7 +55,7 @@ void Text::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, Q
 		drawForDynamicText(painter);
 }
 
-void Text::drawExtractionForItem(QPainter* painter)
+void Text::drawExtractionForItem(QPainter *painter)
 {
 	QRectF rect = mBoundingRect;
 	painter->drawPoint(rect.left(), rect.top());
@@ -70,16 +72,16 @@ void Text::drawExtractionForItem(QPainter* painter)
 	drawScalingRects(painter);
 }
 
-void Text::drawFieldForResizeItem(QPainter* painter)
+void Text::drawFieldForResizeItem(QPainter *painter)
 {
 	Q_UNUSED(painter);
 }
 
-void Text::drawScalingRects(QPainter* painter)
+void Text::drawScalingRects(QPainter *painter)
 {
 	QBrush brush(Qt::SolidPattern);
 	QRectF rect = mBoundingRect;
-	qreal x1= rect.left();
+	qreal x1 = rect.left();
 	qreal y1 = rect.top();
 
 	brush.setColor(mListScalePoint.at(4).second);
@@ -101,7 +103,7 @@ QRectF Text::realBoundingRect() const
 	return mapToScene(mBoundingRect).boundingRect();
 }
 
-void Text::drawForDynamicText(QPainter* painter)
+void Text::drawForDynamicText(QPainter *painter)
 {
 	QPen pen(Qt::green);
 	pen.setWidth(2);
@@ -114,7 +116,7 @@ bool Text::isDynamicText()
 	return mIsDynamicText;
 }
 
-QGraphicsTextItem const& Text::getText()
+QGraphicsTextItem const &Text::getText()
 {
 	return mText;
 }
@@ -122,7 +124,7 @@ QGraphicsTextItem const& Text::getText()
 void Text::changeScalingPointState(qreal x, qreal y)
 {
 	QRectF rect = mBoundingRect;
-	qreal x1= rect.left();
+	qreal x1 = rect.left();
 	qreal x2 = rect.right();
 	qreal y1 = rect.top();
 	qreal y2 = rect.bottom();

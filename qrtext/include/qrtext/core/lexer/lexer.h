@@ -49,7 +49,8 @@ public:
 	/// @param patterns - object containing token patterns.
 	/// @param errors - error stream, to which lexer errors shall be added.
 	explicit Lexer(TokenPatterns<TokenType> const &patterns, QList<Error> &errors)
-		: mPatterns(patterns), mErrors(errors)
+		: mPatterns(patterns)
+		, mErrors(errors)
 	{
 		// Doing syntax check of lexeme regexps and searching for whitespace and newline definitions, they will be
 		// needed later for error recovery.
@@ -57,8 +58,8 @@ public:
 			const QRegularExpression &regExp = mPatterns.tokenPattern(tokenType);
 			if (!regExp.isValid()) {
 				qDebug() << "Invalid regexp: " + regExp.pattern();
-				mErrors << Error(Connection(), QObject::tr("Invalid regexp: ") + regExp.pattern()
-						, ErrorType::lexicalError, Severity::internalError);
+				mErrors << Error(Connection(), QObject::tr("Invalid regexp: ") + regExp.pattern(),
+					ErrorType::lexicalError, Severity::internalError);
 			} else {
 				if (tokenType == TokenType::whitespace) {
 					mWhitespaceRegexp = regExp;
@@ -90,14 +91,13 @@ public:
 				int tokenEndColumn = column;
 
 				if (bestMatch.candidate != TokenType::whitespace
-						&& bestMatch.candidate != TokenType::newline
-						&& bestMatch.candidate != TokenType::comment)
-				{
+					&& bestMatch.candidate != TokenType::newline
+					&& bestMatch.candidate != TokenType::comment) {
 					// Determining connection of the lexeme. String is the only token that can span multiple lines so
 					// special care is needed to maintain connection.
 					if (bestMatch.candidate == TokenType::string) {
-						QRegularExpressionMatchIterator matchIterator = mNewLineRegexp.globalMatch(
-								bestMatch.match.captured());
+						QRegularExpressionMatchIterator matchIterator =
+							mNewLineRegexp.globalMatch(bestMatch.match.captured());
 
 						QRegularExpressionMatch match;
 
@@ -108,9 +108,11 @@ public:
 
 						if (match.hasMatch()) {
 							const int relativeLastNewLineOffset = match.capturedEnd() - 1;
-							const int absoluteLastNewLineOffset = absolutePosition + relativeLastNewLineOffset;
+							const int absoluteLastNewLineOffset =
+								absolutePosition + relativeLastNewLineOffset;
 							const int absoluteTokenEnd = bestMatch.match.capturedEnd() - 1;
-							tokenEndColumn = absoluteTokenEnd - absoluteLastNewLineOffset - 1;
+							tokenEndColumn =
+								absoluteTokenEnd - absoluteLastNewLineOffset - 1;
 						} else {
 							tokenEndColumn += bestMatch.match.capturedLength() - 1;
 						}
@@ -118,32 +120,33 @@ public:
 						tokenEndColumn += bestMatch.match.capturedLength() - 1;
 					}
 
-					const Range range(Connection(bestMatch.match.capturedStart(), line, column)
-							, Connection(bestMatch.match.capturedEnd() - 1, tokenEndLine, tokenEndColumn));
+					const Range range(Connection(bestMatch.match.capturedStart(), line, column),
+						Connection(bestMatch.match.capturedEnd() - 1, tokenEndLine,
+							tokenEndColumn));
 
 					if (bestMatch.candidate == TokenType::identifier) {
 						// Keyword is an identifier which is separate lexeme.
 						bestMatch.candidate = checkForKeyword(bestMatch.match.captured());
 					}
 
-					result << Token<TokenType>(bestMatch.candidate
-							, range
-							, bestMatch.match.captured());
+					result << Token<TokenType>(bestMatch.candidate, range,
+						bestMatch.match.captured());
 				} else if (bestMatch.candidate == TokenType::comment) {
 					tokenEndColumn += bestMatch.match.capturedLength() - 1;
-					const Range range(Connection(bestMatch.match.capturedStart(), line, column)
-							, Connection(bestMatch.match.capturedEnd() - 1, tokenEndLine, tokenEndColumn));
+					const Range range(Connection(bestMatch.match.capturedStart(), line, column),
+						Connection(bestMatch.match.capturedEnd() - 1, tokenEndLine,
+							tokenEndColumn));
 
-					mComments << Token<TokenType>(bestMatch.candidate
-							, range
-							, bestMatch.match.captured());
+					mComments << Token<TokenType>(bestMatch.candidate, range,
+						bestMatch.match.captured());
 				}
 
 				// Keeping connection updated.
 				if (bestMatch.candidate == TokenType::newline) {
 					++line;
 					column = 0;
-				} else if (bestMatch.candidate == TokenType::whitespace || bestMatch.candidate == TokenType::comment) {
+				} else if (bestMatch.candidate == TokenType::whitespace
+					   || bestMatch.candidate == TokenType::comment) {
 					column += bestMatch.match.capturedLength();
 				} else {
 					line = tokenEndLine;
@@ -156,21 +159,23 @@ public:
 				QString skippedSymbols;
 
 				// Panic mode: syncing on nearest whitespace or newline token.
-				while (!mWhitespaceRegexp.match(input, absolutePosition
-						, QRegularExpression::NormalMatch, QRegularExpression::AnchoredMatchOption).hasMatch()
-						&& !mNewLineRegexp.match(input, absolutePosition
-								, QRegularExpression::NormalMatch, QRegularExpression::AnchoredMatchOption).hasMatch()
-						&& absolutePosition < input.length())
-				{
+				while (!mWhitespaceRegexp
+						.match(input, absolutePosition, QRegularExpression::NormalMatch,
+							QRegularExpression::AnchoredMatchOption)
+						.hasMatch()
+					&& !mNewLineRegexp
+						.match(input, absolutePosition, QRegularExpression::NormalMatch,
+							QRegularExpression::AnchoredMatchOption)
+						.hasMatch()
+					&& absolutePosition < input.length()) {
 					skippedSymbols += input.at(absolutePosition);
 					++absolutePosition;
 					++column;
 				}
 
-				mErrors << Error(errorConnection
-						, QObject::tr("Unknown sequence of symbols: ") + skippedSymbols
-						, ErrorType::lexicalError
-						, Severity::error);
+				mErrors << Error(errorConnection,
+					QObject::tr("Unknown sequence of symbols: ") + skippedSymbols,
+					ErrorType::lexicalError, Severity::error);
 			}
 		}
 
@@ -214,11 +219,8 @@ private:
 		for (const TokenType token : mPatterns.allPatterns()) {
 			const QRegularExpression &regExp = mPatterns.tokenPattern(token);
 
-			const QRegularExpressionMatch &match = regExp.match(
-					input
-					, absolutePosition
-					, QRegularExpression::NormalMatch
-					, QRegularExpression::AnchoredMatchOption);
+			const QRegularExpressionMatch &match = regExp.match(input, absolutePosition,
+				QRegularExpression::NormalMatch, QRegularExpression::AnchoredMatchOption);
 
 			if (match.hasMatch()) {
 				if (match.capturedLength() > bestMatch.capturedLength()) {
@@ -228,7 +230,7 @@ private:
 			}
 		}
 
-		return CandidateMatch{candidate, bestMatch};
+		return CandidateMatch {candidate, bestMatch};
 	}
 
 	TokenPatterns<TokenType> const mPatterns;

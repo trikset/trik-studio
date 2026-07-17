@@ -23,8 +23,7 @@ using namespace ev3::robotModel::real::parts;
 using namespace ev3::communication;
 using namespace kitBase::robotModel;
 
-Led::Led(const DeviceInfo &info, const PortInfo &port
-		, utils::robotCommunication::RobotCommunicator &robotCommunicator)
+Led::Led(const DeviceInfo &info, const PortInfo &port, utils::robotCommunication::RobotCommunicator &robotCommunicator)
 	: robotModel::parts::Ev3Led(info, port)
 	, mRobotCommunicator(robotCommunicator)
 {
@@ -32,8 +31,8 @@ Led::Led(const DeviceInfo &info, const PortInfo &port
 
 void Led::setColor(ev3::robotModel::parts::Ev3LedColor color)
 {
-	QByteArray command = Ev3DirectCommand::formCommand(11, 0, 0, 0
-			, enums::commandType::CommandTypeEnum::DIRECT_COMMAND_REPLY);
+	QByteArray command =
+		Ev3DirectCommand::formCommand(11, 0, 0, 0, enums::commandType::CommandTypeEnum::DIRECT_COMMAND_REPLY);
 	int index = 7;
 	Ev3DirectCommand::addOpcode(enums::opcode::OpcodeEnum::UI_WRITE_LED, command, index);
 	Ev3DirectCommand::addByteParameter(colorByte(color), command, index);

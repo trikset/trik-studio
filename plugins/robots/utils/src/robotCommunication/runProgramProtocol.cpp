@@ -29,21 +29,18 @@ RunProgramProtocol::RunProgramProtocol(TcpRobotCommunicatorInterface &communicat
 	, mWaitingForUploadingComplete(new QState())
 	, mWaitingForRunComplete(new QState())
 {
-	mProtocol->addCheckedTranstion(mWaitingForCasingModel, &TcpRobotCommunicatorInterface::casingVersionReceived
-			, mWaitingForUploadingComplete
-			, [this, configVersion](const QString &casingModel)
-				{
-					if (casingModel != configVersion) {
-						Q_EMIT configVersionMismatch(configVersion, casingModel);
-						return false;
-					}
+	mProtocol->addCheckedTranstion(mWaitingForCasingModel, &TcpRobotCommunicatorInterface::casingVersionReceived,
+		mWaitingForUploadingComplete, [this, configVersion](const QString &casingModel) {
+		if (casingModel != configVersion) {
+			Q_EMIT configVersionMismatch(configVersion, casingModel);
+			return false;
+		}
 
-					return true;
-				}
-	);
+		return true;
+	});
 
-	mProtocol->addTransition(mWaitingForUploadingComplete
-			, &TcpRobotCommunicatorInterface::uploadProgramDone, mWaitingForRunComplete);
+	mProtocol->addTransition(mWaitingForUploadingComplete, &TcpRobotCommunicatorInterface::uploadProgramDone,
+		mWaitingForRunComplete);
 	mProtocol->addErrorTransition(mWaitingForUploadingComplete, &TcpRobotCommunicatorInterface::uploadProgramError);
 	mProtocol->addSuccessTransition(mWaitingForRunComplete, &TcpRobotCommunicatorInterface::startedRunning);
 
@@ -56,9 +53,8 @@ RunProgramProtocol::~RunProgramProtocol() = default;
 
 void RunProgramProtocol::run(const QFileInfo &fileToRun)
 {
-	mProtocol->setAction(mWaitingForCasingModel, [](TcpRobotCommunicatorInterface &communicator) {
-		communicator.requestCasingVersion();
-	});
+	mProtocol->setAction(mWaitingForCasingModel,
+		[](TcpRobotCommunicatorInterface &communicator) { communicator.requestCasingVersion(); });
 
 	mProtocol->setAction(mWaitingForUploadingComplete, [fileToRun](TcpRobotCommunicatorInterface &communicator) {
 		communicator.uploadProgram(fileToRun.canonicalFilePath());

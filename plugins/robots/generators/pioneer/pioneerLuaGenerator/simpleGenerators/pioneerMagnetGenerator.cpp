@@ -24,15 +24,12 @@
 using namespace pioneer::lua;
 using namespace generatorBase::simple;
 
-PioneerMagnetGenerator::PioneerMagnetGenerator(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, const qReal::Id &id
-		, QObject *parent)
-	: BindingGenerator(repo, customizer, id, repo.property(id, "State").toBool()
-				? "quadcopterCommands/magnetOn.t"
-				: "quadcopterCommands/magnetOff.t"
-		, {}
-		, parent)
+PioneerMagnetGenerator::PioneerMagnetGenerator(const qrRepo::RepoApi &repo,
+	generatorBase::GeneratorCustomizer &customizer, const qReal::Id &id, QObject *parent)
+	: BindingGenerator(repo, customizer, id,
+		  repo.property(id, "State").toBool() ? "quadcopterCommands/magnetOn.t"
+						      : "quadcopterCommands/magnetOff.t",
+		  {}, parent)
 {
 	auto factory = dynamic_cast<PioneerLuaGeneratorFactory *>(mCustomizer.factory());
 	if (factory) {

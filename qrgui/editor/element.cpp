@@ -39,8 +39,8 @@ Element::Element(const ElementType &elementType, const Id &id, const models::Mod
 	, mController(nullptr)
 	, mType(elementType)
 {
-	setFlags(ItemIsSelectable | ItemIsMovable | ItemIsFocusable | ItemClipsChildrenToShape |
-			ItemClipsToShape | ItemSendsGeometryChanges);
+	setFlags(ItemIsSelectable | ItemIsMovable | ItemIsFocusable | ItemClipsChildrenToShape | ItemClipsToShape
+		 | ItemSendsGeometryChanges);
 
 	setAcceptDrops(true);
 	setCursor(Qt::PointingHandCursor);
@@ -68,7 +68,7 @@ QString Element::name() const
 void Element::updateData()
 {
 	setToolTip(mGraphicalAssistApi.toolTip(id()));
-	for (Label * const label : mLabels) {
+	for (Label *const label : mLabels) {
 		if (label->info().binding().isEmpty()) {
 			continue;
 		}
@@ -90,8 +90,8 @@ void Element::updateData()
 
 void Element::setName(const QString &value, bool withUndoRedo)
 {
-	commands::AbstractCommand *command = new commands::RenameCommand(mGraphicalAssistApi
-			, id(), value, &mModels.exploser());
+	commands::AbstractCommand *command =
+		new commands::RenameCommand(mGraphicalAssistApi, id(), value, &mModels.exploser());
 	if (withUndoRedo) {
 		mController->execute(command);
 		// Controller will take ownership
@@ -109,15 +109,14 @@ QString Element::logicalProperty(const QString &roleName) const
 	}
 
 	const QString dynamicProperties =
-			mLogicalAssistApi.mutableLogicalRepoApi().stringProperty(logicalId(), "dynamicProperties");
+		mLogicalAssistApi.mutableLogicalRepoApi().stringProperty(logicalId(), "dynamicProperties");
 	QDomDocument dynamicPropertiesDocument;
 	dynamicPropertiesDocument.setContent(dynamicProperties);
 	QMap<QString, QString> roleNameToPropertyValueMap;
 
-	for (QDomElement element = dynamicPropertiesDocument.firstChildElement("properties").firstChildElement("property")
-			; !element.isNull()
-			; element = element.nextSiblingElement("property"))
-	{
+	for (QDomElement element =
+			dynamicPropertiesDocument.firstChildElement("properties").firstChildElement("property");
+		!element.isNull(); element = element.nextSiblingElement("property")) {
 		const QString roleName = element.attribute("name");
 		const QString value = element.attribute("dynamicPropertyValue");
 		roleNameToPropertyValueMap[roleName] = value;
@@ -126,15 +125,15 @@ QString Element::logicalProperty(const QString &roleName) const
 	return roleNameToPropertyValueMap.value(roleName, "");
 }
 
-void Element::setLogicalProperty(const QString &roleName, const QString &oldValue
-		, const QString &newValue, bool withUndoRedo)
+void Element::setLogicalProperty(const QString &roleName, const QString &oldValue, const QString &newValue,
+	bool withUndoRedo)
 {
 	if ((oldValue == newValue) && withUndoRedo) {
 		return;
 	}
 
-	commands::AbstractCommand *command = new commands::ChangePropertyCommand(&mLogicalAssistApi
-			, roleName, logicalId(), oldValue, newValue);
+	commands::AbstractCommand *command =
+		new commands::ChangePropertyCommand(&mLogicalAssistApi, roleName, logicalId(), oldValue, newValue);
 	if (withUndoRedo) {
 		mController->execute(command);
 	} else {
@@ -148,7 +147,7 @@ void Element::setController(Controller *controller)
 	mController = controller;
 }
 
-Controller * Element::controller() const
+Controller *Element::controller() const
 {
 	return mController;
 }
@@ -159,15 +158,16 @@ void Element::initTitles()
 
 void Element::updateEnabledState()
 {
-	const bool enabled = mLogicalAssistApi.editorManagerInterface().elements(
-			Id(mId.editor(), mId.diagram())).contains(mId.type());
+	const bool enabled = mLogicalAssistApi.editorManagerInterface()
+	                             .elements(Id(mId.editor(), mId.diagram()))
+	                             .contains(mId.type());
 
 	mEnabled = enabled;
 	if (mEnabled) {
 		setGraphicsEffect(nullptr);
 		setOpacity(1);
 	} else {
-		auto * const grayScale = new QGraphicsColorizeEffect(this);
+		auto *const grayScale = new QGraphicsColorizeEffect(this);
 		grayScale->setColor(Qt::gray);
 		grayScale->setStrength(disabledEffectStrength);
 		setGraphicsEffect(grayScale);
@@ -177,7 +177,7 @@ void Element::updateEnabledState()
 
 void Element::setHideNonHardLabels(bool hide)
 {
-	for (Label * const label : mLabels) {
+	for (Label *const label : mLabels) {
 		label->setVisible(label->isHard() || !hide || (label->isSelected() && label->hasCursor()));
 	}
 }
@@ -185,7 +185,7 @@ void Element::setHideNonHardLabels(bool hide)
 void Element::keyPressEvent(QKeyEvent *event)
 {
 	if (event->key() == Qt::Key_F2) {
-		for (Label * const label : mLabels) {
+		for (Label *const label : mLabels) {
 			if (!label->isReadOnly()) {
 				label->startTextInteraction();
 				event->accept();

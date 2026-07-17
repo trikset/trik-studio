@@ -23,13 +23,11 @@
 using namespace qReal;
 using namespace gui;
 
-ChooseTypeDialog::ChooseTypeDialog(const Id &diagram
-		, const EditorManagerInterface &editorManagerProxy
-		, QWidget *parent)
-		: QDialog(parent)
-		, mUi(new Ui::ChooseTypeDialog)
-		, mDiagram(diagram)
-		, mEditorManagerProxy(editorManagerProxy)
+ChooseTypeDialog::ChooseTypeDialog(const Id &diagram, const EditorManagerInterface &editorManagerProxy, QWidget *parent)
+	: QDialog(parent)
+	, mUi(new Ui::ChooseTypeDialog)
+	, mDiagram(diagram)
+	, mEditorManagerProxy(editorManagerProxy)
 {
 	mUi->setupUi(this);
 	connect(mUi->nodeButton, SIGNAL(clicked()), this, SLOT(nodeButtonClicked()));

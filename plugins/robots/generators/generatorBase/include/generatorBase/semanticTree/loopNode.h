@@ -36,12 +36,13 @@ public:
 	ZoneNode *bodyZone();
 
 	qReal::Id id() const override;
+
 protected:
 	QLinkedList<SemanticNode *> children() const override;
 	QString toStringImpl(GeneratorCustomizer &customizer, int indent, const QString &indentString) const override;
 
 private:
-	ZoneNode *mBodyZone;  // Takes ownership
+	ZoneNode *mBodyZone; // Takes ownership
 	bool mDoWhileForm;
 };
 

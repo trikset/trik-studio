@@ -24,10 +24,8 @@ class WaitGamepadWheelGenerator : public generatorBase::simple::BindingGenerator
 {
 	Q_OBJECT
 public:
-	WaitGamepadWheelGenerator(const qrRepo::RepoApi &repo
-			, generatorBase::GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent = nullptr);
+	WaitGamepadWheelGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+		const qReal::Id &id, QObject *parent = nullptr);
 };
 
 }

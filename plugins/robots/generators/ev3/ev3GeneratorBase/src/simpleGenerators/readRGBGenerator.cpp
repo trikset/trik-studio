@@ -22,14 +22,12 @@ using namespace ev3::simple;
 using namespace generatorBase::simple;
 using namespace qReal;
 
-ReadRGBGenerator::ReadRGBGenerator(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, const Id &id
-		, QObject *parent)
-	: BindingGenerator(repo, customizer, id, "sensors/readRGBIntoVariables.t", QList<Binding *>()
-			<< Binding::createConverting("@@PORT@@", "Port"
-					, static_cast<Ev3GeneratorFactory *>(customizer.factory())->portNameConverter())
-			, parent)
+ReadRGBGenerator::ReadRGBGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+	const Id &id, QObject *parent)
+	: BindingGenerator(repo, customizer, id, "sensors/readRGBIntoVariables.t",
+		  QList<Binding *>() << Binding::createConverting("@@PORT@@", "Port",
+			  static_cast<Ev3GeneratorFactory *>(customizer.factory())->portNameConverter()),
+		  parent)
 {
 	Binding::ConverterInterface *nameNormalizer = customizer.factory()->nameNormalizerConverter();
 	const QString rVariable = nameNormalizer->convert(mRepo.property(mId, "RVariable").toString());
@@ -40,5 +38,5 @@ ReadRGBGenerator::ReadRGBGenerator(const qrRepo::RepoApi &repo
 	addBinding(Binding::createStatic("@@B_VARIABLE@@", bVariable));
 
 	customizer.factory()->functionBlockConverter(id, "")->convert(
-			QString("%1 = 0;%2 = 0;%3 = 0;").arg(rVariable, gVariable, bVariable));
+		QString("%1 = 0;%2 = 0;%3 = 0;").arg(rVariable, gVariable, bVariable));
 }

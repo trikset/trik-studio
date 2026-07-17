@@ -20,15 +20,11 @@
 using namespace pioneer::lua;
 using namespace generatorBase::simple;
 
-PioneerSystemGenerator::PioneerSystemGenerator(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, const qReal::Id &id
-		, QObject *parent)
-	: BindingGenerator(repo, customizer, id
-			, "nativeCode.t"
-			, { Binding::createStatic("@@COMMAND@@"
-						, utils::StringUtils::dequote(repo.property(id, "Command").toString()))
-			}
-			, parent)
+PioneerSystemGenerator::PioneerSystemGenerator(const qrRepo::RepoApi &repo,
+	generatorBase::GeneratorCustomizer &customizer, const qReal::Id &id, QObject *parent)
+	: BindingGenerator(repo, customizer, id, "nativeCode.t",
+		  {Binding::createStatic("@@COMMAND@@",
+			  utils::StringUtils::dequote(repo.property(id, "Command").toString()))},
+		  parent)
 {
 }

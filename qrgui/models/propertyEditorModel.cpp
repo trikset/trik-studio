@@ -20,10 +20,7 @@
 
 using namespace qReal;
 
-PropertyEditorModel::PropertyEditorModel(
-		const qReal::EditorManagerInterface &editorManagerInterface
-		, QObject *parent
-		)
+PropertyEditorModel::PropertyEditorModel(const qReal::EditorManagerInterface &editorManagerInterface, QObject *parent)
 	: QAbstractItemModel(parent)
 	, mTargetLogicalModel(nullptr)
 	, mTargetGraphicalModel(nullptr)
@@ -32,12 +29,12 @@ PropertyEditorModel::PropertyEditorModel(
 	mField.reset(new Field());
 }
 
-int PropertyEditorModel::rowCount(const QModelIndex&) const
+int PropertyEditorModel::rowCount(const QModelIndex &) const
 {
 	return mField->childCount();
 }
 
-int PropertyEditorModel::columnCount(const QModelIndex&) const
+int PropertyEditorModel::columnCount(const QModelIndex &) const
 {
 	return mField->childCount();
 }
@@ -59,10 +56,9 @@ QModelIndex PropertyEditorModel::index(int row, int column, const QModelIndex &p
 	}
 }
 
-
 QModelIndex PropertyEditorModel::parent(const QModelIndex &index) const
 {
-	auto *childItem = static_cast<Field*>(index.internalPointer());
+	auto *childItem = static_cast<Field *>(index.internalPointer());
 	Field *parentItem = childItem->parentItem();
 
 	if (parentItem == mField->parentItem()) {
@@ -72,10 +68,9 @@ QModelIndex PropertyEditorModel::parent(const QModelIndex &index) const
 	return createIndex(parentItem->row(), 0, parentItem);
 }
 
-
 int PropertyEditorModel::countOfChilds(const QModelIndex &index) const
 {
-	Field* temp = mField->child(index.row());
+	Field *temp = mField->child(index.row());
 	return mField->numberOfChildren(temp);
 }
 
@@ -112,7 +107,7 @@ QVariant PropertyEditorModel::data(const QModelIndex &index, int role) const
 		return {};
 	}
 
-	Field* child = mField->child(index.row() + index.column());
+	Field *child = mField->child(index.row() + index.column());
 	if (role == Qt::ToolTipRole) {
 		const Id id = mTargetLogicalObject.data(roles::idRole).value<Id>();
 		QString propertyName = fullPropertyName(index);
@@ -125,7 +120,6 @@ QVariant PropertyEditorModel::data(const QModelIndex &index, int role) const
 	const QString displayedName = mEditorManagerInterface.propertyDisplayedName(id, child->fieldName());
 
 	return displayedName.isEmpty() ? child->fieldName() : displayedName;
-
 }
 
 bool PropertyEditorModel::setData(const QModelIndex &index, const QVariant &value, int role)
@@ -136,7 +130,7 @@ bool PropertyEditorModel::setData(const QModelIndex &index, const QVariant &valu
 		return false;
 	}
 
-	Field* child = mField->child(index.row() + index.column());
+	Field *child = mField->child(index.row() + index.column());
 
 	if (role == Qt::DisplayRole || role == Qt::EditRole) {
 		switch (child->attributeClass()) {
@@ -181,9 +175,8 @@ bool PropertyEditorModel::enumEditable(const QModelIndex &index) const
 		return {};
 	}
 
-	const Id id = attrClass == logicalAttribute
-			? mTargetLogicalObject.data(roles::idRole).value<Id>()
-			: mTargetGraphicalObject.data(roles::idRole).value<Id>();
+	const Id id = attrClass == logicalAttribute ? mTargetLogicalObject.data(roles::idRole).value<Id>()
+	                                            : mTargetGraphicalObject.data(roles::idRole).value<Id>();
 
 	return mEditorManagerInterface.isEnumEditable(id, propertyName);
 }
@@ -200,9 +193,8 @@ QList<QPair<QString, QString>> PropertyEditorModel::enumValues(const QModelIndex
 		return {};
 	}
 
-	const Id id = attrClass == logicalAttribute
-			? mTargetLogicalObject.data(roles::idRole).value<Id>()
-			: mTargetGraphicalObject.data(roles::idRole).value<Id>();
+	const Id id = attrClass == logicalAttribute ? mTargetLogicalObject.data(roles::idRole).value<Id>()
+	                                            : mTargetGraphicalObject.data(roles::idRole).value<Id>();
 
 	QString propertyName = fullPropertyName(index);
 
@@ -213,9 +205,7 @@ QList<QPair<QString, QString>> PropertyEditorModel::enumValues(const QModelIndex
 	/// @todo: null id must not be met here but for some reason sometimes it happens.
 	/// This is pretty strange because mTargetLogicalObject without manual modification
 	/// becomes invalid index.
-	return id.isNull()
-			? QList<QPair<QString, QString>>()
-			: mEditorManagerInterface.enumValues(id, propertyName);
+	return id.isNull() ? QList<QPair<QString, QString>>() : mEditorManagerInterface.enumValues(id, propertyName);
 }
 
 void PropertyEditorModel::rereadData(const QModelIndex &topLeftIndex, const QModelIndex &bottomRightIndex)
@@ -223,8 +213,8 @@ void PropertyEditorModel::rereadData(const QModelIndex &topLeftIndex, const QMod
 	Q_EMIT dataChanged(topLeftIndex, bottomRightIndex);
 }
 
-void PropertyEditorModel::setSourceModels(QAbstractItemModel * const sourceLogicalModel
-		, QAbstractItemModel * const sourceGraphicalModel)
+void PropertyEditorModel::setSourceModels(QAbstractItemModel *const sourceLogicalModel,
+	QAbstractItemModel *const sourceGraphicalModel)
 {
 	mTargetLogicalModel = sourceLogicalModel;
 	mTargetGraphicalModel = sourceGraphicalModel;
@@ -245,8 +235,7 @@ void PropertyEditorModel::setSourceModels(QAbstractItemModel * const sourceLogic
 	// will cause full properties list rereading.
 }
 
-void PropertyEditorModel::setModelIndexes(const QModelIndex &logicalModelIndex
-		, const QModelIndex &graphicalModelIndex)
+void PropertyEditorModel::setModelIndexes(const QModelIndex &logicalModelIndex, const QModelIndex &graphicalModelIndex)
 {
 	beginResetModel();
 	mField.reset(new Field());
@@ -260,8 +249,10 @@ void PropertyEditorModel::setModelIndexes(const QModelIndex &logicalModelIndex
 	}
 
 	const Id logicalId = mTargetLogicalObject.data(roles::idRole).value<Id>();
-	const QString dynamicProperties = dynamic_cast<models::details::LogicalModel *>(mTargetLogicalModel)->
-			logicalModelAssistApi().logicalRepoApi().stringProperty(logicalId, "dynamicProperties");
+	const QString dynamicProperties = dynamic_cast<models::details::LogicalModel *>(mTargetLogicalModel)
+	                                          ->logicalModelAssistApi()
+	                                          .logicalRepoApi()
+	                                          .stringProperty(logicalId, "dynamicProperties");
 
 	if (logicalModelIndex != QModelIndex()) {
 		const QStringList logicalProperties = mEditorManagerInterface.propertyNames(logicalId.type());
@@ -288,15 +279,8 @@ void PropertyEditorModel::setModelIndexes(const QModelIndex &logicalModelIndex
 			auto parent = mField->child(i);
 
 			QString endPartName = roleName.mid(first + 1);
-			mField->appendChild(
-					new Field(
-							endPartName
-							, logicalAttribute
-							, role
-							, parent
-							, mTargetLogicalObject
-							, mTargetGraphicalObject)
-						);
+			mField->appendChild(new Field(endPartName, logicalAttribute, role, parent, mTargetLogicalObject,
+				mTargetGraphicalObject));
 			++i;
 			++role;
 
@@ -305,15 +289,8 @@ void PropertyEditorModel::setModelIndexes(const QModelIndex &logicalModelIndex
 				if (cloneWithRoles.at(j).mid(0, first) == beginPartName) {
 					QString roleName = cloneWithRoles.takeAt(j);
 					roleName = roleName.mid(first + 1);
-					mField->appendChild(
-							new Field(
-									roleName
-									, logicalAttribute
-									, role
-									, parent
-									, mTargetLogicalObject
-									, mTargetGraphicalObject)
-								);
+					mField->appendChild(new Field(roleName, logicalAttribute, role, parent,
+						mTargetLogicalObject, mTargetGraphicalObject));
 					++i;
 					++role;
 					j = 0;
@@ -325,17 +302,10 @@ void PropertyEditorModel::setModelIndexes(const QModelIndex &logicalModelIndex
 			++i;
 		}
 
-		while (cloneWithPure.size()  > 0) {
+		while (cloneWithPure.size() > 0) {
 			QString roleName = cloneWithPure.takeAt(0);
-			mField->appendChild(
-					new Field(
-							roleName
-							, logicalAttribute
-							, role
-							, nullptr
-							, mTargetLogicalObject
-							, mTargetGraphicalObject)
-						);
+			mField->appendChild(new Field(roleName, logicalAttribute, role, nullptr, mTargetLogicalObject,
+				mTargetGraphicalObject));
 			++i;
 			++role;
 		}
@@ -343,18 +313,11 @@ void PropertyEditorModel::setModelIndexes(const QModelIndex &logicalModelIndex
 		if (!dynamicProperties.isEmpty()) {
 			QDomDocument dynamProperties;
 			dynamProperties.setContent(dynamicProperties);
-			for (QDomElement element = dynamProperties.firstChildElement("properties").firstChildElement("property")
-					; !element.isNull()
-					; element = element.nextSiblingElement("property"))
-			{
-				mField->appendChild(
-						new Field(
-								element.attribute("displayedName")
-								, logicalAttribute
-								, role
-								, nullptr
-								, mTargetLogicalObject
-								, mTargetGraphicalObject));
+			for (QDomElement element =
+					dynamProperties.firstChildElement("properties").firstChildElement("property");
+				!element.isNull(); element = element.nextSiblingElement("property")) {
+				mField->appendChild(new Field(element.attribute("displayedName"), logicalAttribute,
+					role, nullptr, mTargetLogicalObject, mTargetGraphicalObject));
 				++role;
 			}
 		}
@@ -403,7 +366,7 @@ bool PropertyEditorModel::isCurrentIndex(const QModelIndex &index) const
 bool PropertyEditorModel::isValid() const
 {
 	return mTargetGraphicalModel && mTargetLogicalModel
-			&& (mTargetLogicalObject.isValid() || mTargetGraphicalObject.isValid());
+	       && (mTargetLogicalObject.isValid() || mTargetGraphicalObject.isValid());
 }
 
 QModelIndex PropertyEditorModel::modelIndex(int row) const
@@ -427,8 +390,8 @@ int PropertyEditorModel::roleByIndex(int row) const
 
 QString PropertyEditorModel::fullPropertyName(const QModelIndex &index) const
 {
-	Field* child = mField->child(index.row() + index.column());
-	Field* parent = child->parentItem();
+	Field *child = mField->child(index.row() + index.column());
+	Field *parent = child->parentItem();
 
 	QString childName = child->fieldName();
 
@@ -462,19 +425,19 @@ QString PropertyEditorModel::propertyName(const QModelIndex &index) const
 {
 	QString fieldName = mField->child(index.row())->fieldName();
 	const Id logicalId = mTargetLogicalObject.data(roles::idRole).value<Id>();
-	const QString dynamicProperties = dynamic_cast<models::details::LogicalModel *>(mTargetLogicalModel)->
-		logicalModelAssistApi().logicalRepoApi().stringProperty(logicalId, "dynamicProperties");
+	const QString dynamicProperties = dynamic_cast<models::details::LogicalModel *>(mTargetLogicalModel)
+	                                          ->logicalModelAssistApi()
+	                                          .logicalRepoApi()
+	                                          .stringProperty(logicalId, "dynamicProperties");
 
 	if (!dynamicProperties.isEmpty()) {
 		int propertiesCount = mEditorManagerInterface.propertyNames(logicalId.type()).count();
 		QDomDocument dynamProperties;
 		dynamProperties.setContent(dynamicProperties);
 		int i = 0;
-		for (QDomElement element
-				= dynamProperties.firstChildElement("properties").firstChildElement("property");
-				!element.isNull();
-				element = element.nextSiblingElement("property"), ++i)
-		{
+		for (QDomElement element =
+				dynamProperties.firstChildElement("properties").firstChildElement("property");
+			!element.isNull(); element = element.nextSiblingElement("property"), ++i) {
 			if (i == index.row() - propertiesCount) {
 				fieldName = element.attribute("name");
 				break;
@@ -494,8 +457,8 @@ bool PropertyEditorModel::setData(const Id &id, const QString &propertyName, con
 	int countOfChilds = mField->childCount();
 
 	for (int i = 0; i < countOfChilds; ++i) {
-		Field* child = mField->child(i);
-		Field* parent = child->parentItem();
+		Field *child = mField->child(i);
+		Field *parent = child->parentItem();
 		if (child->fieldName() == propertyName) {
 			setData(index(child->role(), 1), value);
 			return true;
@@ -520,14 +483,14 @@ bool PropertyEditorModel::isReference(const QModelIndex &index, const QString &p
 
 Id PropertyEditorModel::idByIndex(const QModelIndex &index) const
 {
-	Field* child = mField->child(index.row() + index.column());
+	Field *child = mField->child(index.row() + index.column());
 
 	switch (child->attributeClass()) {
-		case logicalAttribute:
-			return mTargetLogicalObject.data(roles::idRole).value<Id>();
-		case graphicalAttribute:
-			return mTargetGraphicalObject.data(roles::idRole).value<Id>();
-		default:
-			return {};
+	case logicalAttribute:
+		return mTargetLogicalObject.data(roles::idRole).value<Id>();
+	case graphicalAttribute:
+		return mTargetGraphicalObject.data(roles::idRole).value<Id>();
+	default:
+		return {};
 	}
 }

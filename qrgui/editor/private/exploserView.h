@@ -51,13 +51,11 @@ class ExploserView : public QObject
 	Q_OBJECT
 
 public:
-	explicit ExploserView(const models::Models &models
-			, Controller &controller
-			, const SceneCustomizer &sceneCustomizer
-			, QObject *parent = nullptr);
+	explicit ExploserView(const models::Models &models, Controller &controller,
+		const SceneCustomizer &sceneCustomizer, QObject *parent = nullptr);
 
 	/// Adds to @see contextMenu actions and submenus related to explosions
-	void createConnectionSubmenus(QMenu &contextMenu, const Element * const element) const;
+	void createConnectionSubmenus(QMenu &contextMenu, const Element *const element) const;
 
 	/// Activates binded with explosion element or creates default explosed element
 	void handleDoubleClick(const Id &id);
@@ -71,11 +69,11 @@ Q_SIGNALS:
 	void refreshPalette();
 
 	/// Emitted when user requested to change some element`s graphical representation.
-	void openShapeEditor(const qReal::Id &id
-		, const QString &propertyValue
+	void openShapeEditor(const qReal::Id &id,
+		const QString &propertyValue
 		/// @todo: whan passing it by reference the build on travis fails
-		, const qReal::EditorManagerInterface *editorManagerProxy
-		, bool useTypedPorts);
+		,
+		const qReal::EditorManagerInterface *editorManagerProxy, bool useTypedPorts);
 
 	/// Emitted each time when scene must invoke ExpandCommand to the child instance with the given id.
 	void expandElement(const qReal::Id &element);
@@ -91,15 +89,14 @@ private Q_SLOTS:
 	void addElementToPaletteActionTriggered();
 
 private:
-	void createAddExplosionMenu(const Element * const element
-			, QMenu &contextMenu, QList<const Explosion *> const &explosions
-			, const Id &alreadyConnectedElement) const;
+	void createAddExplosionMenu(const Element *const element, QMenu &contextMenu,
+		QList<const Explosion *> const &explosions, const Id &alreadyConnectedElement) const;
 
-	void createRemoveExplosionMenu(const Element * const element
-			, QMenu &contextMenu, const Id &outgoingConnection) const;
+	void createRemoveExplosionMenu(const Element *const element, QMenu &contextMenu,
+		const Id &outgoingConnection) const;
 
-	void createExpandAction(const Element * const element
-			, QMenu &contextMenu, const Id &alreadyConnectedElement) const;
+	void createExpandAction(const Element *const element, QMenu &contextMenu,
+		const Id &alreadyConnectedElement) const;
 
 	const models::Models &mModels;
 	models::LogicalModelAssistApi &mLogicalApi;

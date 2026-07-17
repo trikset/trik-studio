@@ -26,11 +26,11 @@ namespace kitBase {
 class KitPluginConfigurator
 {
 public:
-	KitPluginConfigurator(const qReal::PluginConfigurator &qRealConfigurator
-			, kitBase::robotModel::RobotModelManagerInterface &robotModelManager
-			, qrtext::LanguageToolboxInterface &textLanguage
-			, const kitBase::EventsForKitPluginInterface &eventsForKitPlugin
-			, kitBase::InterpreterControlInterface &interpreterControl)
+	KitPluginConfigurator(const qReal::PluginConfigurator &qRealConfigurator,
+		kitBase::robotModel::RobotModelManagerInterface &robotModelManager,
+		qrtext::LanguageToolboxInterface &textLanguage,
+		const kitBase::EventsForKitPluginInterface &eventsForKitPlugin,
+		kitBase::InterpreterControlInterface &interpreterControl)
 		: mQRealConfigurator(qRealConfigurator)
 		, mRobotModelManager(robotModelManager)
 		, mTextLanguage(textLanguage)

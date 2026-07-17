@@ -28,9 +28,8 @@ class TwoDSpeaker : public robotModel::parts::Ev3Speaker
 	Q_OBJECT
 
 public:
-	TwoDSpeaker(kitBase::robotModel::DeviceInfo const &info
-			, kitBase::robotModel::PortInfo const &port
-			, twoDModel::engine::TwoDModelEngineInterface &engine);
+	TwoDSpeaker(kitBase::robotModel::DeviceInfo const &info, kitBase::robotModel::PortInfo const &port,
+		twoDModel::engine::TwoDModelEngineInterface &engine);
 
 	void playTone(int volume, int frequency, int duration) override;
 

@@ -23,8 +23,7 @@
 using namespace qReal;
 using namespace qrmc;
 
-Diagram::Diagram(const qReal::Id &id, const qrRepo::LogicalRepoApi &api, Editor &editor
-		, const QString &targetDirectory)
+Diagram::Diagram(const qReal::Id &id, const qrRepo::LogicalRepoApi &api, Editor &editor, const QString &targetDirectory)
 	: mId(id)
 	, mApi(api)
 	, mEditor(editor)
@@ -32,7 +31,7 @@ Diagram::Diagram(const qReal::Id &id, const qrRepo::LogicalRepoApi &api, Editor 
 {
 	mDiagramName = mApi.name(id);
 	mDiagramDisplayedName = mApi.stringProperty(id, "displayedName");
-	mDiagramNodeName  = mApi.stringProperty(id, "nodeName");
+	mDiagramNodeName = mApi.stringProperty(id, "nodeName");
 }
 
 Diagram::~Diagram()
@@ -48,7 +47,7 @@ bool Diagram::init()
 		}
 
 		if (id.element() == metaEntityNode) {
-			Type * const nodeType = new NodeType(*this, mApi, id, mTargetDirectory);
+			Type *const nodeType = new NodeType(*this, mApi, id, mTargetDirectory);
 			if (!nodeType->init(mDiagramName)) {
 				delete nodeType;
 				qDebug() << "can't load node";
@@ -57,7 +56,7 @@ bool Diagram::init()
 
 			mTypes[nodeType->name()] = nodeType;
 		} else if (id.element() == metaEntityEdge) {
-			Type * const edgeType = new EdgeType(*this, mApi, id, mTargetDirectory);
+			Type *const edgeType = new EdgeType(*this, mApi, id, mTargetDirectory);
 			if (!edgeType->init(mDiagramName)) {
 				delete edgeType;
 				qDebug() << "can't load edge";
@@ -74,7 +73,7 @@ bool Diagram::init()
 
 			mImports.append(import);
 		} else if (id.element() == metaEntityEnum) {
-			Type * const enumType = new EnumType(*this, mApi, id);
+			Type *const enumType = new EnumType(*this, mApi, id);
 			if (!enumType->init(mDiagramName)) {
 				delete enumType;
 				qDebug() << "can't load enum";
@@ -94,13 +93,13 @@ bool Diagram::init()
 bool Diagram::resolve()
 {
 	for (const ImportSpecification &import : mImports) {
-		const Type * const importedType = mEditor.findType(import.name);
+		const Type *const importedType = mEditor.findType(import.name);
 		if (importedType == nullptr) {
 			qDebug() << "ERROR: imported type" << import.name << "not found, skipping";
 			continue;
 		}
 
-		Type * const copiedType = importedType->clone();
+		Type *const copiedType = importedType->clone();
 		copiedType->setName(import.as);
 		copiedType->setDisplayedName(import.displayedName);
 		copiedType->setDiagram(*this);
@@ -108,7 +107,7 @@ bool Diagram::resolve()
 		mTypes.insert(copiedType->qualifiedName(), copiedType);
 	}
 
-	for (Type * const type : mTypes.values()) {
+	for (Type *const type : mTypes.values()) {
 		if (!type->resolve()) {
 			qDebug() << "ERROR: can't resolve type" << type->name();
 			return false;
@@ -118,16 +117,16 @@ bool Diagram::resolve()
 	return true;
 }
 
-Editor* Diagram::editor() const
+Editor *Diagram::editor() const
 {
 	return &mEditor;
 }
 
-Type* Diagram::findType(const QString &name) const
+Type *Diagram::findType(const QString &name) const
 {
 	auto res = mTypes.value(name, nullptr);
 	if (!res)
-	       res = mEditor.findType(name);
+		res = mEditor.findType(name);
 	return res;
 }
 
@@ -151,11 +150,11 @@ QString Diagram::displayedName() const
 	return mDiagramDisplayedName;
 }
 
-QString Diagram::generateMapMethod(const QString& lineTemplate
-		, const std::function<QString(Type * const, const QString &)> &generator) const
+QString Diagram::generateMapMethod(const QString &lineTemplate,
+	const std::function<QString(Type *const, const QString &)> &generator) const
 {
 	QString result;
-	for (Type * const type : mTypes) {
+	for (Type *const type : mTypes) {
 		const QString line = generator(type, lineTemplate);
 		if (!line.isEmpty()) {
 			result += line + endline;
@@ -165,7 +164,7 @@ QString Diagram::generateMapMethod(const QString& lineTemplate
 	return result;
 }
 
-QString Diagram::generateNamesMap(const QString& lineTemplate) const
+QString Diagram::generateNamesMap(const QString &lineTemplate) const
 {
 	return generateMapMethod(lineTemplate, &Type::generateNames);
 }
@@ -245,12 +244,12 @@ QString Diagram::generatePossibleEdges(const QString &lineTemplate) const
 	return generateListMethod(lineTemplate, &Type::generatePossibleEdges);
 }
 
-QString Diagram::generateListMethod(const QString &lineTemplate
-		, const std::function<QString(const Type * const, const QString &)> &generator) const
+QString Diagram::generateListMethod(const QString &lineTemplate,
+	const std::function<QString(const Type *const, const QString &)> &generator) const
 {
 	QString result;
 	bool isFirstLine = true;
-	for (const Type * const type : mTypes) {
+	for (const Type *const type : mTypes) {
 		QString line = generator(type, lineTemplate);
 		if (line.isEmpty()) {
 			continue;
@@ -276,7 +275,7 @@ QString Diagram::generateEnums(const QString &lineTemplate) const
 	QString result;
 	bool isFirstLine = true;
 
-	for (const EnumType * const type : mEditor.getAllEnumTypes()) {
+	for (const EnumType *const type : mEditor.getAllEnumTypes()) {
 		QString line = type->generateEnums(lineTemplate);
 		if (line.isEmpty()) {
 			continue;

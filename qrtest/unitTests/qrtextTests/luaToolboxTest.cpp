@@ -55,9 +55,8 @@ TEST_F(LuaToolboxTest, easyTableInitializationSyntax)
 
 TEST_F(LuaToolboxTest, intrinsicFunction)
 {
-	mToolbox->addIntrinsicFunction("f", new types::Integer(), {new types::Integer()}
-			, [] (QList<QVariant> params) { return params[0].toInt() + 2; }
-			);
+	mToolbox->addIntrinsicFunction("f", new types::Integer(), {new types::Integer()},
+		[](QList<QVariant> params) { return params[0].toInt() + 2; });
 
 	qReal::Id const testId = qReal::Id("1", "2", "3", "test");
 
@@ -69,9 +68,8 @@ TEST_F(LuaToolboxTest, intrinsicFunction)
 
 TEST_F(LuaToolboxTest, intrinsicFunctionAsIdentifier)
 {
-	mToolbox->addIntrinsicFunction("f", new types::Integer(), {new types::Integer()}
-			, [] (QList<QVariant> params) { return params[0].toInt() + 2; }
-			);
+	mToolbox->addIntrinsicFunction("f", new types::Integer(), {new types::Integer()},
+		[](QList<QVariant> params) { return params[0].toInt() + 2; });
 
 	qReal::Id const testId = qReal::Id("1", "2", "3", "test");
 
@@ -154,27 +152,23 @@ TEST_F(LuaToolboxTest, twoDTables)
 
 TEST_F(LuaToolboxTest, twoFunctions)
 {
-	const auto add1aryFunction = [this] (const QString &name
-			, qrtext::core::types::TypeExpression * const returnType
-			, qrtext::core::types::TypeExpression * const argumentType
-			, std::function<QVariant(QVariant)> const &function)
-	{
-		mToolbox->addIntrinsicFunction(name, returnType
-				, {argumentType}
-				, [function] (const QList<QVariant> &params) {
-						Q_ASSERT(!params.isEmpty());
-						return function(params.first());
-				});
+	const auto add1aryFunction = [this](const QString &name, qrtext::core::types::TypeExpression *const returnType,
+					     qrtext::core::types::TypeExpression *const argumentType,
+					     std::function<QVariant(QVariant)> const &function) {
+		mToolbox->addIntrinsicFunction(name, returnType, {argumentType},
+			[function](const QList<QVariant> &params) {
+			Q_ASSERT(!params.isEmpty());
+			return function(params.first());
+		});
 	};
 
-	const auto addFloatFunction = [add1aryFunction] (const QString &name
-			, std::function<qreal(qreal)> const &function)
-	{
-		add1aryFunction(name, new types::Float, new types::Float
-				, [function](const QVariant &arg) { return function(arg.toReal()); });
+	const auto addFloatFunction = [add1aryFunction](const QString &name,
+					      std::function<qreal(qreal)> const &function) {
+		add1aryFunction(name, new types::Float, new types::Float,
+			[function](const QVariant &arg) { return function(arg.toReal()); });
 	};
 
-	addFloatFunction("cos", [](qreal x) {return std::cos(x); });
+	addFloatFunction("cos", [](qreal x) { return std::cos(x); });
 
 	mToolbox->interpret<int>("cos(1)");
 	mToolbox->interpret<int>("cos(1)");

@@ -38,7 +38,7 @@ QList<QObject *> PluginManagerImplementation::loadAllPlugins()
 {
 	if (!mPluginsDir.exists()) {
 		QLOG_INFO() << "Plugins directory" << mPluginsDir.path()
-				<< "does not exist, maybe we are in 'metamodeling on fly' mode";
+			    << "does not exist, maybe we are in 'metamodeling on fly' mode";
 		return {};
 	}
 
@@ -46,7 +46,7 @@ QList<QObject *> PluginManagerImplementation::loadAllPlugins()
 
 	for (const QString &fileName : mPluginsDir.entryList(QDir::Files)) {
 		const QPair<QObject *, QString> pluginAndError = loadPluginByName(fileName);
-		QObject * const pluginByName = pluginAndError.first;
+		QObject *const pluginByName = pluginAndError.first;
 		if (pluginByName) {
 			listOfPlugins.append(pluginByName);
 			mFileNameAndPlugin.insert(fileName, pluginByName);
@@ -60,9 +60,9 @@ QList<QObject *> PluginManagerImplementation::loadAllPlugins()
 
 QPair<QObject *, QString> PluginManagerImplementation::loadPluginByName(const QString &pluginName)
 {
-	auto * const loader = new QPluginLoader(mPluginsDir.absoluteFilePath(pluginName), qApp);
+	auto *const loader = new QPluginLoader(mPluginsDir.absoluteFilePath(pluginName), qApp);
 	loader->load();
-	QObject * const plugin = loader->instance();
+	QObject *const plugin = loader->instance();
 
 	if (plugin) {
 		mLoaders.append(qMakePair(pluginName, loader));

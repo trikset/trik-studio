@@ -24,17 +24,17 @@ using namespace models::details::modelsImplementation;
 AbstractModel::~AbstractModel() = default;
 
 AbstractModel::AbstractModel(const EditorManagerInterface &editorManagerInterface)
-		: mEditorManagerInterface(editorManagerInterface)
+	: mEditorManagerInterface(editorManagerInterface)
 {
 }
 
 Qt::ItemFlags AbstractModel::flags(const QModelIndex &index) const
 {
 	if (index.isValid()) {
-		return Qt::ItemIsSelectable | Qt::ItemIsEditable | Qt::ItemIsDragEnabled
-				| Qt::ItemIsDropEnabled | Qt::ItemIsEnabled;
+		return Qt::ItemIsSelectable | Qt::ItemIsEditable | Qt::ItemIsDragEnabled | Qt::ItemIsDropEnabled
+		       | Qt::ItemIsEnabled;
 	} else {
-	// root item has invalid index, but we should still be able to drop elements into it
+		// root item has invalid index, but we should still be able to drop elements into it
 		return Qt::ItemIsDropEnabled;
 	}
 }
@@ -78,9 +78,7 @@ QPersistentModelIndex AbstractModel::rootIndex() const
 
 AbstractModelItem *AbstractModel::parentAbstractItem(const QModelIndex &parent) const
 {
-	return parent.isValid()
-		? static_cast<AbstractModelItem*>(parent.internalPointer())
-		: mRootItem;
+	return parent.isValid() ? static_cast<AbstractModelItem *>(parent.internalPointer()) : mRootItem;
 }
 
 QModelIndex AbstractModel::parent(const QModelIndex &index) const
@@ -98,7 +96,7 @@ QModelIndex AbstractModel::parent(const QModelIndex &index) const
 	}
 }
 
-QModelIndex AbstractModel::index(const AbstractModelItem * const item) const
+QModelIndex AbstractModel::index(const AbstractModelItem *const item) const
 {
 	QList<int> rowCoords;
 
@@ -122,8 +120,8 @@ QString AbstractModel::findPropertyName(const Id &id, const int role) const
 	// This convention must be obeyed everywhere, otherwise roles will shift.
 	QStringList properties = mEditorManagerInterface.propertyNames(id.type());
 	return role - roles::customPropertiesBeginRole < properties.count()
-			? properties[role - roles::customPropertiesBeginRole]
-			: QString();
+	               ? properties[role - roles::customPropertiesBeginRole]
+	               : QString();
 }
 
 Qt::DropActions AbstractModel::supportedDropActions() const
@@ -154,7 +152,7 @@ QModelIndex AbstractModel::indexById(const Id &id) const
 
 Id AbstractModel::idByIndex(const QModelIndex &index) const
 {
-	auto *item = static_cast<AbstractModelItem*>(index.internalPointer());
+	auto *item = static_cast<AbstractModelItem *>(index.internalPointer());
 	return mModelItems.key(item);
 }
 
@@ -163,8 +161,8 @@ Id AbstractModel::rootId() const
 	return mRootItem->id();
 }
 
-bool AbstractModel::dropMimeData(const QMimeData *data, Qt::DropAction action, int row
-		, int column, const QModelIndex &parent)
+bool AbstractModel::dropMimeData(const QMimeData *data, Qt::DropAction action, int row, int column,
+	const QModelIndex &parent)
 {
 	Q_UNUSED(row)
 	Q_UNUSED(column)
@@ -199,7 +197,7 @@ void AbstractModel::reinit()
 	init();
 }
 
-void AbstractModel::cleanupTree(modelsImplementation::AbstractModelItem * item)
+void AbstractModel::cleanupTree(modelsImplementation::AbstractModelItem *item)
 {
 	for (AbstractModelItem *childItem : item->children()) {
 		cleanupTree(childItem);
@@ -213,7 +211,7 @@ void AbstractModel::removeModelItems(details::modelsImplementation::AbstractMode
 	for (AbstractModelItem *child : root->children()) {
 		removeModelItems(child);
 		int childRow = child->row();
-		beginRemoveRows(index(root),childRow,childRow);
+		beginRemoveRows(index(root), childRow, childRow);
 		child->parent()->removeChild(child);
 		mModelItems.remove(child->id());
 		removeModelItemFromApi(root, child);

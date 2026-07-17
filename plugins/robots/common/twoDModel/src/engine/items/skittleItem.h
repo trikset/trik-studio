@@ -22,14 +22,13 @@ class QSvgRenderer;
 namespace twoDModel {
 namespace items {
 
-class SkittleItem final: public graphicsUtils::AbstractItem, public SolidItem, public Serializer<SkittleItem>
+class SkittleItem final : public graphicsUtils::AbstractItem, public SolidItem, public Serializer<SkittleItem>
 {
 	Q_OBJECT
 	Q_DISABLE_COPY(SkittleItem)
 
 public:
-	explicit SkittleItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-			     QPointF position);
+	explicit SkittleItem(graphicsUtils::AbstractCoordinateSystem *metricSystem, QPointF position);
 
 	~SkittleItem() override;
 
@@ -42,8 +41,14 @@ public:
 	void drawExtractionForItem(QPainter *painter) override;
 	void setPenBrushForExtraction(QPainter *painter, const QStyleOptionGraphicsItem *option) override;
 
-	void drawFieldForResizeItem(QPainter* painter) override { Q_UNUSED(painter) }
-	void resizeItem(QGraphicsSceneMouseEvent *event) override { Q_UNUSED(event) }
+	void drawFieldForResizeItem(QPainter *painter) override
+	{
+		Q_UNUSED(painter)
+	}
+	void resizeItem(QGraphicsSceneMouseEvent *event) override
+	{
+		Q_UNUSED(event)
+	}
 	void savePos() override;
 
 	QDomElement serialize(QDomElement &element) const override;

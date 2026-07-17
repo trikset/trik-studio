@@ -24,10 +24,8 @@ class MarkerUpGenerator : public generatorBase::simple::BindingGenerator
 {
 	Q_OBJECT
 public:
-	MarkerUpGenerator(const qrRepo::RepoApi &repo
-			, generatorBase::GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent);
+	MarkerUpGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+		const qReal::Id &id, QObject *parent);
 };
 
 }

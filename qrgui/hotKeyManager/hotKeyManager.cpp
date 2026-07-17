@@ -29,7 +29,7 @@ HotKeyManager::HotKeyManager() = default;
 
 HotKeyManager::~HotKeyManager() = default;
 
-HotKeyManager& HotKeyManager::instance()
+HotKeyManager &HotKeyManager::instance()
 {
 	static HotKeyManager instance;
 	return instance;

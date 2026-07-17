@@ -17,8 +17,8 @@
 #include <qrgui/plugins/toolPluginInterface/usedInterfaces/projectManagementInterface.h>
 #include <qrgui/plugins/toolPluginInterface/toolPluginInterface.h>
 
-namespace qReal{
-namespace rulesChecker{
+namespace qReal {
+namespace rulesChecker {
 
 //! @class RulesChecker watches current diagram for errors and makes report
 class RulesChecker : public QObject
@@ -26,10 +26,9 @@ class RulesChecker : public QObject
 	Q_OBJECT
 
 public:
-	RulesChecker(qrRepo::GraphicalRepoApi const &graphicalRepoApi
-			, qReal::gui::MainWindowInterpretersInterface &interpretersInterface);
+	RulesChecker(qrRepo::GraphicalRepoApi const &graphicalRepoApi,
+		qReal::gui::MainWindowInterpretersInterface &interpretersInterface);
 	// default destructor is ok
-
 
 public slots:
 	void checkAllDiagrams();
@@ -38,13 +37,7 @@ public slots:
 	void exportToXml();
 
 private:
-	 enum ErrorsType {
-		linkToStartNode
-		, linkFromFinalNode
-		, noStartNode
-		, noEndNode
-		, incorrectLink
-	};
+	enum ErrorsType { linkToStartNode, linkFromFinalNode, noStartNode, noEndNode, incorrectLink };
 
 	//! starts DFS for all connected components
 	void checkDiagram();
@@ -98,4 +91,3 @@ private:
 
 }
 }
-

@@ -45,27 +45,27 @@ public:
 	kitBase::robotModel::RobotModelInterface *defaultRobotModel() override;
 
 	QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> blocksFactoryFor(
-			const kitBase::robotModel::RobotModelInterface *model) override;
+		const kitBase::robotModel::RobotModelInterface *model) override;
 
-	QList<qReal::ActionInfo> customActions() override;  // Transfers ownership of embedded QActions
+	QList<qReal::ActionInfo> customActions() override; // Transfers ownership of embedded QActions
 	QList<qReal::HotKeyActionInfo> hotKeyActions() override;
 	QString defaultSettingsFile() const override;
 
 	QList<kitBase::AdditionalPreferences *> settingsWidgets() override;
 	QWidget *quickPreferencesFor(const kitBase::robotModel::RobotModelInterface &model) override;
 	QIcon iconForFastSelector(const kitBase::robotModel::RobotModelInterface &robotModel) const override;
-	kitBase::DevicesConfigurationProvider * devicesConfigurationProvider() override;
+	kitBase::DevicesConfigurationProvider *devicesConfigurationProvider() override;
 
 private:
-	QWidget *produceBluetoothPortConfigurer();  // Transfers ownership
+	QWidget *produceBluetoothPortConfigurer(); // Transfers ownership
 
 	robotModel::real::UsbRealRobotModel mUsbRealRobotModel;
 	robotModel::real::BluetoothRealRobotModel mBluetoothRealRobotModel;
 	robotModel::twoD::TwoDRobotModel mTwoDRobotModel;
 
-	QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> mBlocksFactory;	// Doesn't have ownership
+	QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> mBlocksFactory; // Doesn't have ownership
 
-	NxtAdditionalPreferences *mAdditionalPreferences = nullptr;  // Transfers ownership
+	NxtAdditionalPreferences *mAdditionalPreferences = nullptr; // Transfers ownership
 	bool mOwnsAdditionalPreferences = true;
 
 	QScopedPointer<twoDModel::TwoDModelControlInterface> mTwoDModel;

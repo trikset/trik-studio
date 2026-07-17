@@ -139,7 +139,8 @@ public:
 	QString diagramPaletteGroupDescription(const QString &diagram, const QString &group) const;
 
 	/// Sets user-readable verbose string describing the logic of grouping entries in \a group.
-	void setDiagramPaletteGroupDescription(const QString &diagram, const QString &group, const QString &description);
+	void setDiagramPaletteGroupDescription(const QString &diagram, const QString &group,
+		const QString &description);
 
 	/// Returns true if entries in palette for \a diagram are expected to be sorted lexicographically.
 	/// If false then the order of declarations in metamodel will be used.

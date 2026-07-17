@@ -24,10 +24,8 @@ class WaitForColorIntensityBlockGenerator : public BindingGenerator
 {
 	Q_OBJECT
 public:
-	WaitForColorIntensityBlockGenerator(const qrRepo::RepoApi &repo
-			, GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent = nullptr);
+	WaitForColorIntensityBlockGenerator(const qrRepo::RepoApi &repo, GeneratorCustomizer &customizer,
+		const qReal::Id &id, QObject *parent = nullptr);
 };
 
 }

@@ -32,13 +32,8 @@ class ROBOTS_UTILS_EXPORT EllipseObject : public CanvasObject
 
 public:
 	explicit EllipseObject(QObject *parent = nullptr);
-	EllipseObject(QPoint center
-			, int semiDiameterX
-			, int semiDiameterY
-			, const QColor &color = Qt::black
-			, int thickness = 1
-			, bool filled = false
-			, QObject *parent = nullptr);
+	EllipseObject(QPoint center, int semiDiameterX, int semiDiameterY, const QColor &color = Qt::black,
+		int thickness = 1, bool filled = false, QObject *parent = nullptr);
 
 	/// Returns the coordinates of the central point in pixels.
 	QPoint center() const;

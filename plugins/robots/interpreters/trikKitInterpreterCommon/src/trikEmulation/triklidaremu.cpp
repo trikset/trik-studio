@@ -16,7 +16,8 @@
 
 using namespace trik;
 
-TrikLidarEmu::TrikLidarEmu(kitBase::robotModel::robotParts::VectorSensor *lidar) : mLidar(lidar)
+TrikLidarEmu::TrikLidarEmu(kitBase::robotModel::robotParts::VectorSensor *lidar)
+	: mLidar(lidar)
 {
 }
 

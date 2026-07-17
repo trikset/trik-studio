@@ -75,7 +75,7 @@ void Multigraph::clear()
 
 Node &Multigraph::produceNode()
 {
-	Node * const node = new Node(*this);
+	Node *const node = new Node(*this);
 	mNodes << node;
 	return *node;
 }
@@ -91,7 +91,7 @@ void Multigraph::addNode(Node *node)
 
 Edge &Multigraph::produceEdge(uint type)
 {
-	Edge * const edge = new Edge(*this, type);
+	Edge *const edge = new Edge(*this, type);
 	mEdges.insert(type, edge);
 	return *edge;
 }

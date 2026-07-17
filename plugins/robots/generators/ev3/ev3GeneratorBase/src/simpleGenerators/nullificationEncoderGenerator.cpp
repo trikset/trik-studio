@@ -22,13 +22,11 @@ using namespace ev3::simple;
 using namespace generatorBase::simple;
 using namespace qReal;
 
-NullificationEncoderGenerator::NullificationEncoderGenerator(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, const Id &id
-		, QObject *parent)
-	: BindingGenerator(repo, customizer, id, "engines/nullifyEncoder.t", QList<Binding *>()
-			<< Binding::createConverting("@@PORT@@", "Ports"
-					, static_cast<Ev3GeneratorFactory *>(customizer.factory())->outputPortNameConverter())
-			, parent)
+NullificationEncoderGenerator::NullificationEncoderGenerator(const qrRepo::RepoApi &repo,
+	generatorBase::GeneratorCustomizer &customizer, const Id &id, QObject *parent)
+	: BindingGenerator(repo, customizer, id, "engines/nullifyEncoder.t",
+		  QList<Binding *>() << Binding::createConverting("@@PORT@@", "Ports",
+			  static_cast<Ev3GeneratorFactory *>(customizer.factory())->outputPortNameConverter()),
+		  parent)
 {
 }

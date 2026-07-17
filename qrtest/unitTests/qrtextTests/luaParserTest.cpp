@@ -424,7 +424,7 @@ TEST_F(LuaParserTest, logicalOperators)
 	result = mParser->parse(mLexer->tokenize(stream), mLexer->userFriendlyTokenNames());
 	EXPECT_TRUE(mErrors.isEmpty());
 
-	QSharedPointer<ast::UnaryOperator>  unaryOp = result.dynamicCast<ast::UnaryOperator>();
+	QSharedPointer<ast::UnaryOperator> unaryOp = result.dynamicCast<ast::UnaryOperator>();
 	ASSERT_FALSE(unaryOp.isNull());
 	rightOperand = unaryOp->operand().dynamicCast<ast::False>();
 	ASSERT_FALSE(leftOperand.isNull());
@@ -455,21 +455,21 @@ TEST_F(LuaParserTest, twoDTableInitializer)
 
 	ASSERT_EQ(2, outerTable->initializers().size());
 
-	const QSharedPointer<ast::FieldInitialization> outerFieldInitializer
-			= outerTable->initializers()[0].dynamicCast<ast::FieldInitialization>();
+	const QSharedPointer<ast::FieldInitialization> outerFieldInitializer =
+		outerTable->initializers()[0].dynamicCast<ast::FieldInitialization>();
 
-	const QSharedPointer<ast::TableConstructor> innerTable
-			= outerFieldInitializer->value().dynamicCast<ast::TableConstructor>();
+	const QSharedPointer<ast::TableConstructor> innerTable =
+		outerFieldInitializer->value().dynamicCast<ast::TableConstructor>();
 
 	ASSERT_FALSE(innerTable.isNull());
 
 	ASSERT_EQ(1, innerTable->initializers().size());
 
-	const QSharedPointer<ast::FieldInitialization> innerFieldInitializer
-			= innerTable->initializers()[0].dynamicCast<ast::FieldInitialization>();
+	const QSharedPointer<ast::FieldInitialization> innerFieldInitializer =
+		innerTable->initializers()[0].dynamicCast<ast::FieldInitialization>();
 
-	const QSharedPointer<ast::IntegerNumber> value
-			= innerFieldInitializer->value().dynamicCast<ast::IntegerNumber>();
+	const QSharedPointer<ast::IntegerNumber> value =
+		innerFieldInitializer->value().dynamicCast<ast::IntegerNumber>();
 
 	ASSERT_FALSE(value.isNull());
 	EXPECT_EQ(QString("1"), value->stringRepresentation());
@@ -481,21 +481,21 @@ TEST_F(LuaParserTest, twoDTableIndexer)
 	const auto result = mParser->parse(mLexer->tokenize(stream), mLexer->userFriendlyTokenNames());
 	EXPECT_TRUE(mErrors.isEmpty());
 
-	const QSharedPointer<ast::IndexingExpression> outerIndexingExpression
-			= result.dynamicCast<ast::IndexingExpression>();
+	const QSharedPointer<ast::IndexingExpression> outerIndexingExpression =
+		result.dynamicCast<ast::IndexingExpression>();
 
 	ASSERT_FALSE(outerIndexingExpression.isNull());
 
-	const QSharedPointer<ast::IntegerNumber> outerIndexer
-			= outerIndexingExpression->indexer().dynamicCast<ast::IntegerNumber>();
+	const QSharedPointer<ast::IntegerNumber> outerIndexer =
+		outerIndexingExpression->indexer().dynamicCast<ast::IntegerNumber>();
 	ASSERT_EQ(QString("2"), outerIndexer->stringRepresentation());
 
-	const QSharedPointer<ast::IndexingExpression> innerIndexingExpression
-			= outerIndexingExpression->table().dynamicCast<ast::IndexingExpression>();
+	const QSharedPointer<ast::IndexingExpression> innerIndexingExpression =
+		outerIndexingExpression->table().dynamicCast<ast::IndexingExpression>();
 
 	ASSERT_FALSE(innerIndexingExpression.isNull());
 
-	const QSharedPointer<ast::IntegerNumber> innerIndexer
-			= innerIndexingExpression->indexer().dynamicCast<ast::IntegerNumber>();
+	const QSharedPointer<ast::IntegerNumber> innerIndexer =
+		innerIndexingExpression->indexer().dynamicCast<ast::IntegerNumber>();
 	ASSERT_EQ(QString("1"), innerIndexer->stringRepresentation());
 }

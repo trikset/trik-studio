@@ -21,22 +21,22 @@
 using namespace graphicsUtils;
 
 AbstractScene::AbstractScene(AbstractView *view, QObject *parent)
-		: QGraphicsScene(parent)
-		, mView(view)
-		, mGraphicsItem(nullptr)
-		, mX1(0)
-		, mX2(0)
-		, mY1(0)
-		, mY2(0)
-		, mSizeEmptyRectX(0)
-		, mSizeEmptyRectY(0)
-		, mPenWidthItems(0)
-		, mFirstPenWidth(0)
-		, mEmptyRect(nullptr)
+	: QGraphicsScene(parent)
+	, mView(view)
+	, mGraphicsItem(nullptr)
+	, mX1(0)
+	, mX2(0)
+	, mY1(0)
+	, mY2(0)
+	, mSizeEmptyRectX(0)
+	, mSizeEmptyRectY(0)
+	, mPenWidthItems(0)
+	, mFirstPenWidth(0)
+	, mEmptyRect(nullptr)
 {
 }
 
-graphicsUtils::AbstractView* AbstractScene::mainView()
+graphicsUtils::AbstractView *AbstractScene::mainView()
 {
 	return mView;
 }
@@ -57,7 +57,7 @@ QRect AbstractScene::realItemsBoundingRect() const
 	QList<QGraphicsItem *> list = items();
 
 	for (QGraphicsItem *graphicsItem : list) {
-		const auto &item = dynamic_cast<AbstractItem*>(graphicsItem);
+		const auto &item = dynamic_cast<AbstractItem *>(graphicsItem);
 		if (item) {
 			const QRectF itemRect = item->realBoundingRect();
 			maxX = qMax(static_cast<int>(itemRect.right()), maxX);
@@ -84,16 +84,18 @@ void AbstractScene::setX2andY2(QGraphicsSceneMouseEvent *event)
 void AbstractScene::reshapeItem(QGraphicsSceneMouseEvent *event)
 {
 	setX2andY2(event);
-	if (!mGraphicsItem) return;
+	if (!mGraphicsItem)
+		return;
 	auto oldPos = mGraphicsItem->pos();
 	reshapeItem(event, mGraphicsItem);
-	if (selectedItems().size() < 2) return;
+	if (selectedItems().size() < 2)
+		return;
 	auto delta = mGraphicsItem->pos() - oldPos;
 	if (mGraphicsItem->isSelected()) {
 		mGraphicsItem->setPos(oldPos);
 	}
 	for (auto &&selectedItem : selectedItems()) {
-		if (auto item = dynamic_cast<AbstractItem*>(selectedItem)) {
+		if (auto item = dynamic_cast<AbstractItem *>(selectedItem)) {
 			if (!item->parentItem()) {
 				item->moveBy(delta.x(), delta.y());
 			}
@@ -114,7 +116,7 @@ void AbstractScene::reshapeItem(QGraphicsSceneMouseEvent *event, graphicsUtils::
 void AbstractScene::setMoveFlag(QGraphicsSceneMouseEvent *event)
 {
 	QList<QGraphicsItem *> list = items(event->scenePos());
-	for (auto &&graphicsItem : list){
+	for (auto &&graphicsItem : list) {
 		const auto &item = dynamic_cast<graphicsUtils::AbstractItem *>(graphicsItem);
 		if (item && item->editable()) {
 			graphicsItem->setFlag(QGraphicsItem::ItemIsMovable, true);
@@ -192,20 +194,20 @@ void AbstractScene::forMoveResize(QGraphicsSceneMouseEvent *event)
 	update();
 }
 
-void AbstractScene::forReleaseResize(QGraphicsSceneMouseEvent * event )
+void AbstractScene::forReleaseResize(QGraphicsSceneMouseEvent *event)
 {
 	reshapeItem(event);
 	mGraphicsItem = nullptr;
 	update();
 }
 
-bool AbstractScene::compareItems(AbstractItem* first, AbstractItem* second)
+bool AbstractScene::compareItems(AbstractItem *first, AbstractItem *second)
 {
 	return first->zValue() < second->zValue();
 }
 
-bool AbstractScene::compareSharedPtrItems(const QSharedPointer<AbstractItem> &first
-						, const QSharedPointer<AbstractItem> &second)
+bool AbstractScene::compareSharedPtrItems(const QSharedPointer<AbstractItem> &first,
+	const QSharedPointer<AbstractItem> &second)
 {
 	return first->zValue() < second->zValue();
 }
@@ -298,7 +300,7 @@ QList<AbstractItem *> AbstractScene::abstractItems(QPointF scenePos) const
 {
 	QList<AbstractItem *> result;
 	for (auto &&item : items(scenePos)) {
-		if (auto * const abstractItem = dynamic_cast<AbstractItem *>(item)) {
+		if (auto *const abstractItem = dynamic_cast<AbstractItem *>(item)) {
 			result << abstractItem;
 		}
 	}
@@ -331,7 +333,7 @@ void AbstractScene::setBrushColorItems(const QString &text)
 	mBrushColorItems = text;
 }
 
-void AbstractScene::addAction(QAction * const action)
+void AbstractScene::addAction(QAction *const action)
 {
 	mActions << action;
 	mView->addAction(action);
@@ -346,7 +348,7 @@ void AbstractScene::addActions(const QList<QAction *> &actions)
 AbstractItem *AbstractScene::findItem(const QString &id) const
 {
 	for (auto &&item : items()) {
-		auto * const itemWithId = dynamic_cast<AbstractItem *>(item);
+		auto *const itemWithId = dynamic_cast<AbstractItem *>(item);
 		if (itemWithId && itemWithId->id() == id) {
 			return itemWithId;
 		}

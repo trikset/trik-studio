@@ -22,20 +22,21 @@ using namespace twoDModel::view;
 ActionsBox::ActionsBox(QObject *parent)
 	: QObject(parent)
 	, mSceneModeActions(this)
-	, mScrollHandModeAction(new QAction(AbstractItem::loadTextColorIcon(":/icons/2d_hand.png")
-			, tr("Hand dragging mode"), this))
-	, mMultiSelectionModeAction(new QAction(QIcon(":/icons/2d_multiselection.png"), tr("Multiselection mode"), this))
+	, mScrollHandModeAction(
+		  new QAction(AbstractItem::loadTextColorIcon(":/icons/2d_hand.png"), tr("Hand dragging mode"), this))
+	, mMultiSelectionModeAction(
+		  new QAction(QIcon(":/icons/2d_multiselection.png"), tr("Multiselection mode"), this))
 	, mSeparator1(new QAction(this))
 	, mSaveWorldModelAction(new QAction(QIcon(":/icons/2d_save.png"), tr("Save world model..."), this))
 	, mLoadWorldModelAction(new QAction(QIcon(":/icons/2d_open.png"), tr("Load world model..."), this))
 	, mLoadTemplatesAction(new QAction(QIcon(":/icons/2d_open.png"), tr("Load templates..."), this))
-	, mLoadWorldWithoutRobotAction(new QAction(QIcon(":/icons/2d_open.png")
-			, tr("Load world model without robot configuration..."), this))
+	, mLoadWorldWithoutRobotAction(new QAction(QIcon(":/icons/2d_open.png"),
+		  tr("Load world model without robot configuration..."), this))
 	, mSeparator2(new QAction(this))
-	, mDeleteAllAction(new QAction(AbstractItem::loadTextColorIcon(":/icons/2d_clear.png")
-			, tr("Clear items"), this))
-	, mClearFloorAction(new QAction(AbstractItem::loadTextColorIcon(":/icons/2d_clear_floor.svg")
-			, tr("Clear floor"), this))
+	, mDeleteAllAction(
+		  new QAction(AbstractItem::loadTextColorIcon(":/icons/2d_clear.png"), tr("Clear items"), this))
+	, mClearFloorAction(
+		  new QAction(AbstractItem::loadTextColorIcon(":/icons/2d_clear_floor.svg"), tr("Clear floor"), this))
 {
 	mLoadWorldModelAction->setShortcut(Qt::CTRL + Qt::Key_I);
 	mScrollHandModeAction->setCheckable(true);
@@ -90,18 +91,9 @@ QAction &ActionsBox::clearFloorAction() const
 
 QList<QAction *> ActionsBox::sceneContextMenuActions() const
 {
-	return {
-		&scrollHandModeAction()
-		, &multiSelectionModeAction()
-		, mSeparator1.data()
-		, &saveModelAction()
-		, &loadTemplatesAction()
-		, &loadModelAction()
-		, &loadModelWithoutRobotAction()
-		, mSeparator2.data()
-		, &deleteAllAction()
-		, &clearFloorAction()
-	};
+	return {&scrollHandModeAction(), &multiSelectionModeAction(), mSeparator1.data(), &saveModelAction(),
+		&loadTemplatesAction(), &loadModelAction(), &loadModelWithoutRobotAction(), mSeparator2.data(),
+		&deleteAllAction(), &clearFloorAction()};
 }
 
 void ActionsBox::setWorldModelActionsVisible(bool visible) const
@@ -110,8 +102,7 @@ void ActionsBox::setWorldModelActionsVisible(bool visible) const
 	loadModelAction().setVisible(visible);
 	loadModelWithoutRobotAction().setVisible(visible);
 	deleteAllAction().setVisible(visible);
-	auto enable =
-		qReal::SettingsManager::value("twoDModelAdvancedResictions").toBool();
+	auto enable = qReal::SettingsManager::value("twoDModelAdvancedResictions").toBool();
 	loadTemplatesAction().setVisible(visible && enable);
 	/// @todo: Do we need to hide clearFloorAction() here?
 }

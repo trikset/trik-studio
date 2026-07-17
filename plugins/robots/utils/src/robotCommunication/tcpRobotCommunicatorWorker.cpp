@@ -43,10 +43,10 @@ void TcpRobotCommunicatorWorker::init()
 	mControlConnection.reset(new TcpConnectionHandler(controlPort));
 	mTelemetryConnection.reset(new TcpConnectionHandler(telemetryPort));
 
-	QObject::connect(mControlConnection.data(), &TcpConnectionHandler::messageReceived
-			, this, &TcpRobotCommunicatorWorker::processControlMessage, Qt::DirectConnection);
-	QObject::connect(mTelemetryConnection.data(), &TcpConnectionHandler::messageReceived
-			, this, &TcpRobotCommunicatorWorker::processTelemetryMessage, Qt::DirectConnection);
+	QObject::connect(mControlConnection.data(), &TcpConnectionHandler::messageReceived, this,
+		&TcpRobotCommunicatorWorker::processControlMessage, Qt::DirectConnection);
+	QObject::connect(mTelemetryConnection.data(), &TcpConnectionHandler::messageReceived, this,
+		&TcpRobotCommunicatorWorker::processTelemetryMessage, Qt::DirectConnection);
 }
 
 void TcpRobotCommunicatorWorker::deinit()

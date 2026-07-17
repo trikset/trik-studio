@@ -18,20 +18,15 @@
 
 using namespace generatorBase::simple;
 
-RandomInitGenerator::RandomInitGenerator(const qrRepo::RepoApi &repo
-		, GeneratorCustomizer &customizer
-		, const qReal::Id &id
-		, QObject *parent)
-	: BindingGenerator(repo, customizer, id, "variables/randomInitialization.t"
-			, { Binding::createConverting("@@VARIABLE@@"
-					, "Variable"
-					, customizer.factory()->functionBlockConverter(id, "Variable"))
-				, Binding::createStaticConverting("@@FROM@@"
-					, repo.property(id, "LowerBound").toString()
-					, customizer.factory()->functionBlockConverter(id, "LowerBound"))
-				, Binding::createStaticConverting("@@TO@@"
-					, repo.property(id, "UpperBound").toString()
-					, customizer.factory()->functionBlockConverter(id, "UpperBound")) }
-			, parent)
+RandomInitGenerator::RandomInitGenerator(const qrRepo::RepoApi &repo, GeneratorCustomizer &customizer,
+	const qReal::Id &id, QObject *parent)
+	: BindingGenerator(repo, customizer, id, "variables/randomInitialization.t",
+		  {Binding::createConverting("@@VARIABLE@@", "Variable",
+			   customizer.factory()->functionBlockConverter(id, "Variable")),
+			  Binding::createStaticConverting("@@FROM@@", repo.property(id, "LowerBound").toString(),
+				  customizer.factory()->functionBlockConverter(id, "LowerBound")),
+			  Binding::createStaticConverting("@@TO@@", repo.property(id, "UpperBound").toString(),
+				  customizer.factory()->functionBlockConverter(id, "UpperBound"))},
+		  parent)
 {
 }

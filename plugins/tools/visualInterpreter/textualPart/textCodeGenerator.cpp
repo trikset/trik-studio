@@ -18,13 +18,12 @@ using namespace qReal;
 
 QString const TextCodeGenerator::delimeter = "_visint_";
 
-TextCodeGenerator::TextCodeGenerator(LogicalModelAssistInterface &logicalModelApi
-		, GraphicalModelAssistInterface &graphicalModelApi
-		, gui::MainWindowInterpretersInterface &interpretersInterface)
-		: mInterpretersInterface(interpretersInterface)
-		, mLogicalModelApi(logicalModelApi)
-		, mGraphicalModelApi(graphicalModelApi)
-		, mRule(Id::rootId())
+TextCodeGenerator::TextCodeGenerator(LogicalModelAssistInterface &logicalModelApi,
+	GraphicalModelAssistInterface &graphicalModelApi, gui::MainWindowInterpretersInterface &interpretersInterface)
+	: mInterpretersInterface(interpretersInterface)
+	, mLogicalModelApi(logicalModelApi)
+	, mGraphicalModelApi(graphicalModelApi)
+	, mRule(Id::rootId())
 {
 }
 
@@ -82,8 +81,8 @@ bool TextCodeGenerator::hasProperty(Id const &element, QString const &propertyNa
 	if (mLogicalModelApi.isLogicalId(element)) {
 		return mLogicalModelApi.logicalRepoApi().hasProperty(element, propertyName);
 	} else {
-		return mLogicalModelApi.logicalRepoApi().hasProperty(
-				mGraphicalModelApi.logicalId(element), propertyName);
+		return mLogicalModelApi.logicalRepoApi().hasProperty(mGraphicalModelApi.logicalId(element),
+			propertyName);
 	}
 }
 
@@ -127,8 +126,7 @@ void TextCodeGenerator::collectPropertiesUsageAndMethodsInvocation(QString const
 			QString const propertyName = parseIdentifier(code, index, true);
 
 			if (index + propertyName.length() + 1 < code.length()
-					&& code.at(index + propertyName.length() + 1) == '(')
-			{
+				&& code.at(index + propertyName.length() + 1) == '(') {
 				if (hasProperty(idByName(elemName), propertyName)) {
 					if (!mMethodsInvocation.contains(elemName)) {
 						mMethodsInvocation.insert(elemName, new QSet<QString>());
@@ -167,7 +165,8 @@ QString TextCodeGenerator::replaceMethodsInvocation(QString const &code) const
 	QString funcDefs = "";
 	for (QString const &elemName : mMethodsInvocation.keys()) {
 		for (QString const &propertyName : *mMethodsInvocation.value(elemName)) {
-			result.replace(elemName + "." + propertyName + "()", elemName + delimeter + propertyName + "()");
+			result.replace(elemName + "." + propertyName + "()",
+				elemName + delimeter + propertyName + "()");
 			funcDefs += createBehaviourFunction(elemName, propertyName);
 		}
 	}
@@ -185,7 +184,8 @@ QString TextCodeGenerator::substituteElementProperties(QString const &code) cons
 		if (hasElementName(elemName)) {
 			QString const propertyName = parseIdentifier(result, pos, true);
 			if (hasProperty(idByName(elemName), propertyName)) {
-				result.replace(elemName + "@" + propertyName, property(mMatch.value(idByName(elemName)), propertyName));
+				result.replace(elemName + "@" + propertyName,
+					property(mMatch.value(idByName(elemName)), propertyName));
 			}
 		}
 		pos = result.indexOf("@", pos + 1);
@@ -207,7 +207,7 @@ QString TextCodeGenerator::parseIdentifier(QString const &stream, int pos, bool 
 
 bool TextCodeGenerator::isCorrectIdentifierSymbol(QChar const c) const
 {
-	return ('0' <= c && c <= '9') || ('A' <= c && c <= 'Z') || ('a'<= c && c <= 'z') || c == '_';
+	return ('0' <= c && c <= '9') || ('A' <= c && c <= 'Z') || ('a' <= c && c <= 'z') || c == '_';
 }
 
 QString TextCodeGenerator::escape(QString const &string) const
@@ -215,7 +215,7 @@ QString TextCodeGenerator::escape(QString const &string) const
 	QString result = string;
 
 	QList<QString> escapedSymbols;
-	escapedSymbols << "\\" << "'" << "\"" ;
+	escapedSymbols << "\\" << "'" << "\"";
 	for (QString e : escapedSymbols) {
 		result.replace(e, "\\" + e);
 	}

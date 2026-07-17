@@ -31,7 +31,7 @@
 
 using namespace qReal;
 
-const int maxLogSize = 10 * 1024 * 1024;  // 10 MB
+const int maxLogSize = 10 * 1024 * 1024; // 10 MB
 
 static void clearConfig()
 {
@@ -42,16 +42,16 @@ static void clearConfig()
 static void loadTranslators(QLocale &locale)
 {
 	/// Load Qt's system translations before application translations
-	static const QStringList qtModules {"qtbase", "qtmultimedia", "qtserialport", "qtxmlpatterns", "qtscript" };
+	static const QStringList qtModules {"qtbase", "qtmultimedia", "qtserialport", "qtxmlpatterns", "qtscript"};
 	static const auto qtAppsTranslationsDir = PlatformInfo::invariantSettingsPath("pathToTranslations");
 
-	for (auto &&module: qtModules) {
+	for (auto &&module : qtModules) {
 		auto *t = new QTranslator(qApp);
 		if (t->load(locale, module, "_", qtAppsTranslationsDir)) {
 			QCoreApplication::installTranslator(t);
 		} else {
 			QLOG_ERROR() << QString(R"(Failed to load translation file for "%1" (%2) from %3)")
-							.arg(module, locale.bcp47Name(), qtAppsTranslationsDir);
+						.arg(module, locale.bcp47Name(), qtAppsTranslationsDir);
 			delete t;
 		}
 	}
@@ -76,11 +76,13 @@ static void setDefaultLocale(bool localizationDisabled)
 	}
 
 	auto const &languageName = SettingsManager::value("systemLocale").toString();
-	QLocale locale = languageName.isEmpty()? QLocale() : QLocale(languageName); // Empty string results to "C" locale
+	QLocale locale =
+		languageName.isEmpty() ? QLocale() : QLocale(languageName); // Empty string results to "C" locale
 	QLocale::setDefault(locale);
 	QLocale dfltLocale;
 	if (locale != dfltLocale) {
-		QLOG_ERROR() << "Requested locale was" << locale.bcp47Name() << ", but" << dfltLocale.bcp47Name() << "is set";
+		QLOG_ERROR() << "Requested locale was" << locale.bcp47Name() << ", but" << dfltLocale.bcp47Name()
+			     << "is set";
 	}
 	auto language = locale.language();
 	if (language != QLocale::Language::C && language != QLocale::Language::English) {
@@ -90,7 +92,7 @@ static void setDefaultLocale(bool localizationDisabled)
 
 static QString versionInfo()
 {
-	return  "TRIK Studio (" + QSysInfo::buildAbi() + ") " + TRIK_STUDIO_VERSION;
+	return "TRIK Studio (" + QSysInfo::buildAbi() + ") " + TRIK_STUDIO_VERSION;
 }
 
 int main(int argc, char *argv[])
@@ -105,8 +107,7 @@ int main(int argc, char *argv[])
 		return 0;
 	}
 
-	if (app->arguments().contains("--version"))
-	{
+	if (app->arguments().contains("--version")) {
 		QTextStream(stdout) << versionInfo() << endl;
 		return 0;
 	}
@@ -145,9 +146,11 @@ int main(int argc, char *argv[])
 	QLOG_INFO() << "------------------- APPLICATION STARTED --------------------";
 	QLOG_INFO() << "Version:" << versionInfo();
 	QLOG_INFO() << "Running on" << QSysInfo::prettyProductName() << QSysInfo::currentCpuArchitecture()
-				<< "/ Kernel: " << QSysInfo::kernelType() << QSysInfo::kernelVersion();
+		    << "/ Kernel: " << QSysInfo::kernelType() << QSysInfo::kernelVersion();
 	QLOG_INFO() << "Arguments:" << app->arguments();
-	for (auto &&i: dpiInfo) { QLOG_INFO() << i ; }
+	for (auto &&i : dpiInfo) {
+		QLOG_INFO() << i;
+	}
 
 	QApplication::setStyle(QStyleFactory::create("Fusion"));
 

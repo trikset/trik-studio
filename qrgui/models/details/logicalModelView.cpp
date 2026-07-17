@@ -20,13 +20,13 @@ using namespace qReal;
 using namespace models::details;
 using namespace modelsImplementation;
 
-LogicalModelView::LogicalModelView(GraphicalModel * const model)
+LogicalModelView::LogicalModelView(GraphicalModel *const model)
 	: AbstractView(model)
 {
 }
 
-void LogicalModelView::dataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight
-		, QVector<int> const &roles)
+void LogicalModelView::dataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight,
+	QVector<int> const &roles)
 {
 	Q_UNUSED(roles)
 	for (int row = topLeft.row(); row <= bottomRight.row(); ++row) {

@@ -53,10 +53,10 @@ TrikV6RealRobotModel::TrikV6RealRobotModel(const QString &kitId, const QString &
 	: TrikRobotModelV6(kitId, robotId)
 	, mRobotCommunicator(new utils::robotCommunication::TcpRobotCommunicator("TrikTcpServer"))
 {
-	connect(mRobotCommunicator.data(), &utils::robotCommunication::TcpRobotCommunicator::connected
-			, this, &TrikV6RealRobotModel::connected);
-	connect(mRobotCommunicator.data(), &utils::robotCommunication::TcpRobotCommunicator::disconnected
-			, this, &TrikV6RealRobotModel::disconnected);
+	connect(mRobotCommunicator.data(), &utils::robotCommunication::TcpRobotCommunicator::connected, this,
+		&TrikV6RealRobotModel::connected);
+	connect(mRobotCommunicator.data(), &utils::robotCommunication::TcpRobotCommunicator::disconnected, this,
+		&TrikV6RealRobotModel::disconnected);
 }
 
 QString TrikV6RealRobotModel::name() const
@@ -71,7 +71,7 @@ QString TrikV6RealRobotModel::friendlyName() const
 
 int TrikV6RealRobotModel::priority() const
 {
-	return 8;  // Right after qts generator
+	return 8; // Right after qts generator
 }
 
 void TrikV6RealRobotModel::updateSensorsValues() const
@@ -101,24 +101,23 @@ void TrikV6RealRobotModel::disconnectFromRobot()
 
 void TrikV6RealRobotModel::setErrorReporter(qReal::ErrorReporterInterface &errorReporter)
 {
-	utils::robotCommunication::NetworkCommunicationErrorReporter::connectErrorReporter(
-			*mRobotCommunicator
-			, errorReporter
-			);
+	utils::robotCommunication::NetworkCommunicationErrorReporter::connectErrorReporter(*mRobotCommunicator,
+		errorReporter);
 }
 
 robotParts::Device *TrikV6RealRobotModel::createDevice(const PortInfo &port, const DeviceInfo &deviceInfo)
 {
 	if (deviceInfo.isA(displayInfo())) {
 		return new parts::Display(displayInfo(), port, *mRobotCommunicator);
-	}  else if (deviceInfo.isA(speakerInfo())) {
+	} else if (deviceInfo.isA(speakerInfo())) {
 		return new parts::Speaker(speakerInfo(), port, *mRobotCommunicator);
 	} else if (deviceInfo.isA(gamepadButtonInfo())) {
 		return new parts::GamepadButton(gamepadButtonInfo(), port, *mRobotCommunicator);
 	} else if (deviceInfo.isA(gamepadPadPressSensorInfo())) {
 		return new parts::GamepadPadPressSensor(gamepadPadPressSensorInfo(), port, *mRobotCommunicator);
 	} else if (deviceInfo.isA(buttonInfo())) {
-		return new parts::Button(buttonInfo(), port, buttonCodes()[port.name() + "Button"], *mRobotCommunicator);
+		return new parts::Button(buttonInfo(), port, buttonCodes()[port.name() + "Button"],
+			*mRobotCommunicator);
 	} else if (deviceInfo.isA(powerMotorInfo())) {
 		return new parts::PowerMotor(powerMotorInfo(), port, *mRobotCommunicator);
 	} else if (deviceInfo.isA(powerMotorsAggregatorInfo())) {
@@ -152,7 +151,8 @@ robotParts::Device *TrikV6RealRobotModel::createDevice(const PortInfo &port, con
 	} else if (deviceInfo.isA(shellInfo())) {
 		return new parts::Shell(shellInfo(), port, *mRobotCommunicator);
 	} else if (deviceInfo.isA(gamepadConnectionIndicatorInfo())) {
-		return new parts::GamepadConnectionIndicator(gamepadConnectionIndicatorInfo(), port, *mRobotCommunicator);
+		return new parts::GamepadConnectionIndicator(gamepadConnectionIndicatorInfo(), port,
+			*mRobotCommunicator);
 	} else if (deviceInfo.isA(gamepadPadInfo())) {
 		return new parts::GamepadPad(gamepadPadInfo(), port, *mRobotCommunicator);
 	} else if (deviceInfo.isA(gamepadWheelInfo())) {

@@ -27,9 +27,8 @@ class TwoDMotor : public robotModel::parts::NxtMotor
 {
 	Q_OBJECT
 public:
-	TwoDMotor(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port
-			, twoDModel::engine::TwoDModelEngineInterface &engine);
+	TwoDMotor(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+		twoDModel::engine::TwoDModelEngineInterface &engine);
 
 	void on(int speed, uint64_t degrees, bool breakMode) override;
 	void stop(bool breakMode) override;

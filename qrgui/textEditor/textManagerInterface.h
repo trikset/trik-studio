@@ -48,11 +48,11 @@ public:
 	virtual bool isDefaultPath(const QString &path) const = 0;
 	virtual bool isModified(const QString &path) const = 0;
 	virtual bool isModifiedEver(const QString &path) const = 0;
-	virtual void showInTextEditor(const QFileInfo &fileInfo
-			, const QString &genName, const text::LanguageInfo &language) = 0;
+	virtual void showInTextEditor(const QFileInfo &fileInfo, const QString &genName,
+		const text::LanguageInfo &language) = 0;
 	virtual void showInTextEditor(const QFileInfo &fileInfo, const text::LanguageInfo &language) = 0;
 	virtual bool saveText(bool saveAs) = 0;
-	virtual QString generatorName(const QString &filepath) const  = 0;
+	virtual QString generatorName(const QString &filepath) const = 0;
 
 Q_SIGNALS:
 	void textChanged(qReal::text::QScintillaTextEdit *editor, bool changed);

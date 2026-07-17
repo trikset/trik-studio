@@ -26,7 +26,7 @@ ProgressBar::ProgressBar(QWidget *parent)
 void ProgressBar::reportOperation(const QFuture<void> &operation, const QString &description)
 {
 	Q_UNUSED(description)
-	auto * const watcher = new QFutureWatcher<void>(this);
+	auto *const watcher = new QFutureWatcher<void>(this);
 	connect(watcher, &QFutureWatcher<void>::started, this, &QProgressBar::reset);
 	connect(watcher, &QFutureWatcher<void>::progressRangeChanged, this, &QProgressBar::setRange);
 	connect(watcher, &QFutureWatcher<void>::progressValueChanged, this, &QProgressBar::setValue);

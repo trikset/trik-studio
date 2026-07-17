@@ -16,7 +16,7 @@
 
 #include "ev3RobotCommunicationThread.h"
 #include <QTimer>
-struct hid_device_ ;// <hidapi.h>
+struct hid_device_; // <hidapi.h>
 
 namespace ev3 {
 namespace communication {

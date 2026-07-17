@@ -23,7 +23,7 @@ class QKeyEvent;
 
 namespace qReal {
 
-/// Class for QReal Application 
+/// Class for QReal Application
 /// for interception all events of application for recording
 /// mouse click coordinates.
 class QRealApplication : public QApplication
@@ -31,7 +31,7 @@ class QRealApplication : public QApplication
 	Q_OBJECT
 
 public:
-	QRealApplication(int & argc, char ** argv);
+	QRealApplication(int &argc, char **argv);
 
 Q_SIGNALS:
 	/// This event may be subscribed to obtain all low-level user actions, timer events and everything about
@@ -43,10 +43,10 @@ protected:
 	bool notify(QObject *receiver, QEvent *event) override;
 
 private Q_SLOTS:
-	void logMouse(QWidget * const target, QMouseEvent * const event);
-	void logWheel(QWidget * const target, QWheelEvent * const event);
-	void logDrop(QWidget * const target, QDropEvent * const event);
-	void logKey(QKeyEvent * const event);
+	void logMouse(QWidget *const target, QMouseEvent *const event);
+	void logWheel(QWidget *const target, QWheelEvent *const event);
+	void logDrop(QWidget *const target, QDropEvent *const event);
+	void logKey(QKeyEvent *const event);
 
 	void onFocusChanged(QWidget *old, QWidget *now);
 };

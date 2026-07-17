@@ -28,14 +28,17 @@
 using namespace utils;
 
 GraphicType::ContainerProperties::ContainerProperties()
-		: isSortingContainer(false), sizeOfForestalling(4, 0)
-		, sizeOfChildrenForestalling(0), hasMovableChildren(true)
-		, minimizesToChildren(false), maximizesChildren(false)
+	: isSortingContainer(false)
+	, sizeOfForestalling(4, 0)
+	, sizeOfChildrenForestalling(0)
+	, hasMovableChildren(true)
+	, minimizesToChildren(false)
+	, maximizesChildren(false)
 {
 }
 
 GraphicType::GeneralizationProperties::GeneralizationProperties(const QString &name, const QString &overrides)
-		: name(name)
+	: name(name)
 {
 	overridePorts = overrides.contains("ports", Qt::CaseInsensitive);
 	overrideLabels = overrides.contains("labels", Qt::CaseInsensitive);
@@ -48,7 +51,7 @@ GraphicType::GeneralizationProperties::GeneralizationProperties(const QString &n
 }
 
 GraphicType::ResolvingHelper::ResolvingHelper(bool &resolvingFlag)
-		: mResolvingFlag(resolvingFlag)
+	: mResolvingFlag(resolvingFlag)
 {
 	mResolvingFlag = true;
 }
@@ -141,9 +144,8 @@ bool GraphicType::init(const QDomElement &element, const QString &context)
 
 		mGraphics = element.firstChildElement("graphics");
 		return initRoles() && initParents() && initProperties() && initDividability() && initContainers()
-				&& initGraphics() && initLabels() && initPossibleEdges() && initPortTypes()
-				&& initCreateChildrenFromMenu() && initContainerProperties()
-				&& initExplosions();
+		       && initGraphics() && initLabels() && initPossibleEdges() && initPortTypes()
+		       && initCreateChildrenFromMenu() && initContainerProperties() && initExplosions();
 	}
 
 	return false;
@@ -156,10 +158,8 @@ bool GraphicType::initParents()
 		return true;
 	}
 
-	for (QDomElement parentElement = parentsElement.firstChildElement("parent")
-			; !parentElement.isNull()
-			; parentElement = parentElement.nextSiblingElement("parent"))
-	{
+	for (QDomElement parentElement = parentsElement.firstChildElement("parent"); !parentElement.isNull();
+		parentElement = parentElement.nextSiblingElement("parent")) {
 		const QString parentName = parentElement.attribute("parentName");
 		if (parentName.isEmpty()) {
 			qWarning() << "ERROR: anonymous parent of node" << qualifiedName();
@@ -189,10 +189,8 @@ bool GraphicType::initProperties()
 	if (propertiesElement.isNull()) {
 		return true;
 	}
-	for (QDomElement propertyElement = propertiesElement.firstChildElement("property")
-			; !propertyElement.isNull()
-			; propertyElement = propertyElement.nextSiblingElement("property"))
-	{
+	for (QDomElement propertyElement = propertiesElement.firstChildElement("property"); !propertyElement.isNull();
+		propertyElement = propertyElement.nextSiblingElement("property")) {
 		auto *property = new Property();
 		if (!property->init(propertyElement)) {
 			delete property;
@@ -205,18 +203,16 @@ bool GraphicType::initProperties()
 	return true;
 }
 
-bool GraphicType::initFieldList(const QString &listName, const QString &listElementName
-	, QStringList &resultingList, const QString &fieldName, const bool isNeedToNormalizeAtt) const
+bool GraphicType::initFieldList(const QString &listName, const QString &listElementName, QStringList &resultingList,
+	const QString &fieldName, const bool isNeedToNormalizeAtt) const
 {
 	QDomElement containerElement = mLogic.firstChildElement(listName);
 	if (containerElement.isNull()) {
 		return true;
 	}
 
-	for (QDomElement childElement = containerElement.firstChildElement(listElementName)
-			; !childElement.isNull()
-			; childElement = childElement.nextSiblingElement(listElementName))
-	{
+	for (QDomElement childElement = containerElement.firstChildElement(listElementName); !childElement.isNull();
+		childElement = childElement.nextSiblingElement(listElementName)) {
 		QString typeName;
 		if (isNeedToNormalizeAtt) {
 			typeName = NameNormalizer::normalize(childElement.attribute(fieldName));
@@ -225,15 +221,16 @@ bool GraphicType::initFieldList(const QString &listName, const QString &listElem
 		}
 
 		if (typeName.isEmpty()) {
-			qDebug() << "Error: anonymous " << fieldName << " in the " << listName << " list, in " << qualifiedName();
+			qDebug() << "Error: anonymous " << fieldName << " in the " << listName << " list, in "
+				 << qualifiedName();
 			return false;
 		}
 
 		if (!resultingList.contains(typeName)) {
 			resultingList.append(typeName);
 		} else {
-			qDebug() << "ERROR: " << fieldName << " in the " << listName << " list in "
-					 << qualifiedName() << "duplicated";
+			qDebug() << "ERROR: " << fieldName << " in the " << listName << " list in " << qualifiedName()
+				 << "duplicated";
 			return false;
 		}
 	}
@@ -241,8 +238,8 @@ bool GraphicType::initFieldList(const QString &listName, const QString &listElem
 	return true;
 }
 
-bool GraphicType::initTypeList(const QString &listName, const QString &listElementName
-		, QStringList &resultingList) const
+bool GraphicType::initTypeList(const QString &listName, const QString &listElementName,
+	QStringList &resultingList) const
 {
 	return initFieldList(listName, listElementName, resultingList, "type", true);
 }
@@ -264,10 +261,8 @@ bool GraphicType::initContainerProperties()
 		return true;
 	}
 
-	for (QDomElement childElement = containerPropertiesElement.firstChildElement()
-			; !childElement.isNull()
-			; childElement = childElement.nextSiblingElement())
-	{
+	for (QDomElement childElement = containerPropertiesElement.firstChildElement(); !childElement.isNull();
+		childElement = childElement.nextSiblingElement()) {
 		if (childElement.tagName() == "sortContainer") {
 			mContainerProperties.isSortingContainer = true;
 		} else if (childElement.tagName() == "forestalling") {
@@ -291,7 +286,6 @@ bool GraphicType::initContainerProperties()
 		} else if (childElement.tagName() == "maximizeChildren") {
 			mContainerProperties.maximizesChildren = true;
 		}
-
 	}
 
 	return true;
@@ -316,25 +310,23 @@ bool GraphicType::initPossibleEdges()
 		return true;
 	}
 
-	for (QDomElement childElement = containerElement.firstChildElement(listElementName);
-			!childElement.isNull();
-			childElement = childElement.nextSiblingElement(listElementName))
-	{
+	for (QDomElement childElement = containerElement.firstChildElement(listElementName); !childElement.isNull();
+		childElement = childElement.nextSiblingElement(listElementName)) {
 		QString beginName = NameNormalizer::normalize(childElement.attribute("beginName"));
 		QString endName = NameNormalizer::normalize(childElement.attribute("endName"));
 		QString temp = childElement.attribute("directed");
 
 		if (beginName.isEmpty() || endName.isEmpty() || ((temp != "true") && (temp != "false"))) {
-			qWarning() << "Error: one of attributes is incorrect " <<
-				R"((perhaps, "beginName" or "endName" is empty or )" <<
-				R"("directed" isn't "true" or "false".'))" << qualifiedName();
+			qWarning() << "Error: one of attributes is incorrect "
+				   << R"((perhaps, "beginName" or "endName" is empty or )"
+				   << R"("directed" isn't "true" or "false".'))" << qualifiedName();
 			return false;
 		}
 
 		const bool directed = temp == "true";
 		const QString edgeName = NameNormalizer::normalize(qualifiedName());
-		QPair<QPair<QString, QString>, QPair<bool, QString> > possibleEdge(qMakePair(beginName, endName)
-				, qMakePair(directed, edgeName));
+		QPair<QPair<QString, QString>, QPair<bool, QString>> possibleEdge(qMakePair(beginName, endName),
+			qMakePair(directed, edgeName));
 
 		if (!mPossibleEdges.contains(possibleEdge)) {
 			mPossibleEdges.append(possibleEdge);
@@ -352,17 +344,15 @@ bool GraphicType::initExplosions()
 	if (explodesTo.isNull()) {
 		return true;
 	}
-	for (QDomElement targetElement = explodesTo.firstChildElement()
-			; !targetElement.isNull()
-			; targetElement = targetElement.nextSiblingElement())
-	{
+	for (QDomElement targetElement = explodesTo.firstChildElement(); !targetElement.isNull();
+		targetElement = targetElement.nextSiblingElement()) {
 		const QString targetName = targetElement.attribute("type");
 		if (targetName.isEmpty()) {
 			return false;
 		}
 		const bool isReusable = targetElement.attribute("makeReusable", "false").toLower().trimmed() == "true";
-		const bool immediateLinkage
-				= targetElement.attribute("requireImmediateLinkage", "false").toLower().trimmed() == "true";
+		const bool immediateLinkage =
+			targetElement.attribute("requireImmediateLinkage", "false").toLower().trimmed() == "true";
 		mExplosions[targetName] = qMakePair(isReusable, immediateLinkage);
 	}
 	return true;
@@ -371,10 +361,8 @@ bool GraphicType::initExplosions()
 bool GraphicType::initLabels()
 {
 	int count = 1;
-	for (QDomElement element = mGraphics.firstChildElement("labels").firstChildElement("label");
-		!element.isNull();
-		element = element.nextSiblingElement("label"))
-	{
+	for (QDomElement element = mGraphics.firstChildElement("labels").firstChildElement("label"); !element.isNull();
+		element = element.nextSiblingElement("label")) {
 		auto *label = new Label();
 		if (!initLabel(label, element, count)) {
 			delete label;
@@ -429,21 +417,23 @@ bool GraphicType::resolve()
 	for (const GeneralizationProperties &generalization : mParents) {
 		// Parents are searched in "native" context of a type, so if it was imported links must not be broken.
 		const QString qualifiedParentName = generalization.name.contains("::")
-				? generalization.name
-				: nativeContext() + "::" + generalization.name;
+		                                            ? generalization.name
+		                                            : nativeContext() + "::" + generalization.name;
 
 		Type *parent = mDiagram->findType(qualifiedParentName);
 		if (parent == nullptr) {
 			// Parent was not found in local context, trying to search in global context
 			parent = mDiagram->findType(generalization.name);
 			if (parent == nullptr) {
-				qDebug() << "ERROR: can't find parent" << generalization.name << "for" << qualifiedName();
+				qDebug() << "ERROR: can't find parent" << generalization.name << "for"
+					 << qualifiedName();
 				return false;
 			}
 		}
 
 		if (parent->isResolving()) {
-			qDebug() << "ERROR: circular inheritance between" << generalization.name << "and" << qualifiedName();
+			qDebug() << "ERROR: circular inheritance between" << generalization.name << "and"
+				 << qualifiedName();
 			return false;
 		}
 
@@ -459,7 +449,7 @@ bool GraphicType::resolve()
 			}
 		}
 
-		auto * const graphicParent = dynamic_cast<GraphicType*>(parent);
+		auto *const graphicParent = dynamic_cast<GraphicType *>(parent);
 		if (graphicParent != nullptr) {
 			if (!generalization.overrideLabels) {
 				copyLabels(graphicParent);
@@ -469,7 +459,7 @@ bool GraphicType::resolve()
 				copyPictures(graphicParent);
 			}
 
-			auto* const nodeParent = dynamic_cast<NodeType*>(parent);
+			auto *const nodeParent = dynamic_cast<NodeType *>(parent);
 			if (nodeParent != nullptr) {
 				if (!generalization.overridePorts) {
 					copyPorts(nodeParent);
@@ -477,7 +467,7 @@ bool GraphicType::resolve()
 			}
 
 			for (const auto &pEdge : graphicParent->mPossibleEdges) {
-				mPossibleEdges.append(qMakePair(pEdge.first,qMakePair(pEdge.second.first,name())));
+				mPossibleEdges.append(qMakePair(pEdge.first, qMakePair(pEdge.second.first, name())));
 			}
 		}
 	}
@@ -499,7 +489,7 @@ void GraphicType::generateName(OutFile &out) const
 	/// into appropriate place later.
 	for (const auto &part : mDiagram->paletteGroups()) {
 		for (const auto &part2 : part.second) {
-			if (part2 == normalizedName && mAbstract == "true" ) {
+			if (part2 == normalizedName && mAbstract == "true") {
 				qDebug() << "ERROR! Element" << qualifiedName() << "is abstract.";
 				return;
 			}
@@ -555,20 +545,20 @@ void GraphicType::generatePropertyData(OutFile &out) const
 		Property *property = mProperties[key];
 
 		// Validating property names.
-		if (property->name() == "fromPort" || property->name() == "toPort"
-				|| property->name() == "from" || property->name() == "to"
-				|| property->name() == "name")
-		{
-			qWarning() << "ERROR: predefined property" << property->name() << "should not appear in metamodel, ignored";
+		if (property->name() == "fromPort" || property->name() == "toPort" || property->name() == "from"
+			|| property->name() == "to" || property->name() == "name") {
+			qWarning() << "ERROR: predefined property" << property->name()
+				   << "should not appear in metamodel, ignored";
 			continue;
 		}
 
 		const QString name = key == property->name() ? property->name() : key;
 		const QString stringConstructor = property->type() == "string" ? "QObject::tr" : "QString::fromUtf8";
-		out() << QString("\t\t\taddProperty(\"%1\", \"%2\", %3(\"%4\"), QObject::tr(\"%5\"), "\
-				"QObject::tr(\"%6\"), %7);\n").arg(name, property->type(), stringConstructor
-						, property->defaultValue(), property->displayedName(), property->description()
-						, property->isReferenceProperty() ? "true" : "false");
+		out() << QString("\t\t\taddProperty(\"%1\", \"%2\", %3(\"%4\"), QObject::tr(\"%5\"), "
+				 "QObject::tr(\"%6\"), %7);\n")
+				 .arg(name, property->type(), stringConstructor, property->defaultValue(),
+					 property->displayedName(), property->description(),
+					 property->isReferenceProperty() ? "true" : "false");
 	}
 	out() << "\t\t}\n";
 }
@@ -584,7 +574,7 @@ QStringList GraphicType::containedTypes() const
 	return mContains;
 }
 
-const QMap<QString, QPair<bool, bool> > &GraphicType::explosions() const
+const QMap<QString, QPair<bool, bool>> &GraphicType::explosions() const
 {
 	return mExplosions;
 }

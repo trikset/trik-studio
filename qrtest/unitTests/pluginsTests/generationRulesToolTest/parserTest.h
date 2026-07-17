@@ -23,7 +23,7 @@
 
 namespace qrTest {
 
-class ParserTest: public testing::Test
+class ParserTest : public testing::Test
 {
 protected:
 	virtual void SetUp();

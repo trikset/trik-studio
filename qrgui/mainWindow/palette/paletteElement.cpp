@@ -17,12 +17,8 @@
 using namespace qReal;
 using namespace gui;
 
-PaletteElement::PaletteElement(const Id &id
-		, const QString &name
-		, const QString &description
-		, const QIcon &icon
-		, QSize preferredSize
-		, const Id &explosionTarget)
+PaletteElement::PaletteElement(const Id &id, const QString &name, const QString &description, const QIcon &icon,
+	QSize preferredSize, const Id &explosionTarget)
 	: mId(id)
 	, mName(name)
 	, mDescription(description)
@@ -33,13 +29,8 @@ PaletteElement::PaletteElement(const Id &id
 }
 
 PaletteElement::PaletteElement(const EditorManagerInterface &manager, const Id &element)
-	: PaletteElement(
-		element
-		, manager.friendlyName(element)
-		, manager.description(element)
-		, manager.icon(element)
-		, manager.iconSize(element)
-		, Id())
+	: PaletteElement(element, manager.friendlyName(element), manager.description(element), manager.icon(element),
+		  manager.iconSize(element), Id())
 {
 }
 
@@ -73,10 +64,8 @@ Id PaletteElement::explosionTarget() const
 	return mExplosionTarget;
 }
 
-bool PaletteElement::operator ==(const PaletteElement &other) const
+bool PaletteElement::operator==(const PaletteElement &other) const
 {
-	return mId == other.mId
-			&& mName == other.mName
-			&& mPreferredSize == other.mPreferredSize
-			&& mExplosionTarget == other.mExplosionTarget;
+	return mId == other.mId && mName == other.mName && mPreferredSize == other.mPreferredSize
+	       && mExplosionTarget == other.mExplosionTarget;
 }

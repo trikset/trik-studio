@@ -38,17 +38,16 @@ public:
 		/// Neither editing, nor debugging, a value just to store there initial docks dummy state.
 		Dummy = 0x000000
 		/// User edits code or diagram or just staring at the start tab or something like this.
-		, Editing = 0x100000
+		,
+		Editing = 0x100000
 		/// User debugs the program: interpretation going or 2D model world is constructed.
-		, Debugging = 0x200000
-	};  // Do not change the values of the elements - it will break backward compability.
+		,
+		Debugging = 0x200000
+	}; // Do not change the values of the elements - it will break backward compability.
 
-	UiManager(QAction &debugModeAction
-			, QAction &editModeAction
-			, qReal::gui::MainWindowDockInterface &mainWindow
-			, qReal::SystemEvents &systemEvents
-			, kitBase::EventsForKitPluginInterface &kitPluginEvents
-			, kitBase::robotModel::RobotModelManagerInterface &robotModelManager);
+	UiManager(QAction &debugModeAction, QAction &editModeAction, qReal::gui::MainWindowDockInterface &mainWindow,
+		qReal::SystemEvents &systemEvents, kitBase::EventsForKitPluginInterface &kitPluginEvents,
+		kitBase::robotModel::RobotModelManagerInterface &robotModelManager);
 
 	~UiManager() override;
 
@@ -60,7 +59,7 @@ public:
 
 	/// Appends the \a widget to the end of the custom toolbar. The widget becomes binded to the \robotModel.
 	/// It means that \a widget will be shown on the toolbar only when \a robotModel is selected.
-	void addWidgetToToolbar(kitBase::robotModel::RobotModelInterface &robotModel, QWidget * const widget);
+	void addWidgetToToolbar(kitBase::robotModel::RobotModelInterface &robotModel, QWidget *const widget);
 
 	/// Returns a pointer to widget where robot standard output is displayed.
 	qReal::ui::ConsoleDock &robotConsole();
@@ -96,11 +95,11 @@ private:
 	QAction &mDebugModeAction;
 	QAction &mEditModeAction;
 	qReal::gui::MainWindowDockInterface &mMainWindow;
-	QToolBar *mTabBar;  // Takes ownership
-	QToolBar *mCustomWidgetsBar;  // Takes ownership.
+	QToolBar *mTabBar; // Takes ownership
+	QToolBar *mCustomWidgetsBar; // Takes ownership.
 	qReal::TabInfo::TabType mCurrentTab = static_cast<qReal::TabInfo::TabType>(-1);
 	Mode mCurrentMode = Mode::Dummy;
-	qReal::ui::ConsoleDock *mRobotConsole;  // Transfers ownership to main window.
+	qReal::ui::ConsoleDock *mRobotConsole; // Transfers ownership to main window.
 	// Takes ownership on keys, doesn`t take on values.
 	// QAction manages underlying widgets visibility.
 	QMap<QAction *, kitBase::robotModel::RobotModelInterface *> mToolBarWidgets;

@@ -29,7 +29,8 @@ constexpr auto pixelMaximumValue = 50;
 
 PopupMetricWidget::~PopupMetricWidget() = default;
 
-PopupMetricWidget::PopupMetricWidget(QWidget *parent): StackMetricWidget(parent)
+PopupMetricWidget::PopupMetricWidget(QWidget *parent)
+	: StackMetricWidget(parent)
 {
 	auto createSpinBoxLambda = [this](qreal step, int decimals, twoDModel::model::SizeUnit unit) {
 		auto *spinBox = new QDoubleSpinBox(this);

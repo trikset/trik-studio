@@ -40,10 +40,9 @@ using namespace kitBase::robotModel;
 using namespace qReal;
 using namespace utils::robotCommunication;
 
-TrikPythonGeneratorPluginBase::TrikPythonGeneratorPluginBase(
-		trik::robotModel::TrikRobotModelBase * const robotModel
-		, const QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> &blocksFactory
-		, const QStringList &pathsToTemplates)
+TrikPythonGeneratorPluginBase::TrikPythonGeneratorPluginBase(trik::robotModel::TrikRobotModelBase *const robotModel,
+	const QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> &blocksFactory,
+	const QStringList &pathsToTemplates)
 	: TrikGeneratorPluginBase(robotModel, blocksFactory)
 	, mGenerateCodeAction(new QAction(this))
 	, mUploadProgramAction(new QAction(this))
@@ -76,29 +75,28 @@ void TrikPythonGeneratorPluginBase::init(const kitBase::KitPluginConfigurator &c
 	connect(mRunProgramProtocol.data(), &RunProgramProtocol::timeout, this, timeout);
 	connect(mStopRobotProtocol.data(), &StopRobotProtocol::timeout, this, timeout);
 
-	connect(mUploadProgramProtocol.data(), &UploadProgramProtocol::error
-			, this, &TrikPythonGeneratorPluginBase::onProtocolFinished);
-	connect(mRunProgramProtocol.data(), &RunProgramProtocol::error
-			, this, &TrikPythonGeneratorPluginBase::onProtocolFinished);
-	connect(mStopRobotProtocol.data(), &StopRobotProtocol::error
-			, this, &TrikPythonGeneratorPluginBase::onProtocolFinished);
+	connect(mUploadProgramProtocol.data(), &UploadProgramProtocol::error, this,
+		&TrikPythonGeneratorPluginBase::onProtocolFinished);
+	connect(mRunProgramProtocol.data(), &RunProgramProtocol::error, this,
+		&TrikPythonGeneratorPluginBase::onProtocolFinished);
+	connect(mStopRobotProtocol.data(), &StopRobotProtocol::error, this,
+		&TrikPythonGeneratorPluginBase::onProtocolFinished);
 
-	connect(mUploadProgramProtocol.data(), &UploadProgramProtocol::success
-			, this, &TrikPythonGeneratorPluginBase::onProtocolFinished);
-	connect(mRunProgramProtocol.data(), &RunProgramProtocol::success
-			, this, &TrikPythonGeneratorPluginBase::onProtocolFinished);
-	connect(mStopRobotProtocol.data(), &StopRobotProtocol::success
-			, this, &TrikPythonGeneratorPluginBase::onProtocolFinished);
+	connect(mUploadProgramProtocol.data(), &UploadProgramProtocol::success, this,
+		&TrikPythonGeneratorPluginBase::onProtocolFinished);
+	connect(mRunProgramProtocol.data(), &RunProgramProtocol::success, this,
+		&TrikPythonGeneratorPluginBase::onProtocolFinished);
+	connect(mStopRobotProtocol.data(), &StopRobotProtocol::success, this,
+		&TrikPythonGeneratorPluginBase::onProtocolFinished);
 
-	connect(mRunProgramProtocol.data(), &RunProgramProtocol::configVersionMismatch
-			, this, [errorReporter](const QString &expected, const QString &actual) {
-				Q_UNUSED(expected)
-				Q_UNUSED(actual)
-				errorReporter->addError(
-						QString(tr("Casing model mismatch, check TRIK Studio settings, \"Robots\" page. It seems that "
-								"TRIK casing version selected in TRIK Studio differs from version on robot.")));
-			}
-	);
+	connect(mRunProgramProtocol.data(), &RunProgramProtocol::configVersionMismatch, this,
+		[errorReporter](const QString &expected, const QString &actual) {
+		Q_UNUSED(expected)
+		Q_UNUSED(actual)
+		errorReporter->addError(
+			QString(tr("Casing model mismatch, check TRIK Studio settings, \"Robots\" page. It seems that "
+				   "TRIK casing version selected in TRIK Studio differs from version on robot.")));
+	});
 }
 
 QList<ActionInfo> TrikPythonGeneratorPluginBase::customActions()
@@ -107,29 +105,29 @@ QList<ActionInfo> TrikPythonGeneratorPluginBase::customActions()
 	mGenerateCodeAction->setText(tr("Generate python code"));
 	mGenerateCodeAction->setIcon(QIcon(":/trik/python/images/generatePythonCode.svg"));
 	ActionInfo generateCodeActionInfo(mGenerateCodeAction, "generators", "tools");
-	connect(mGenerateCodeAction, &QAction::triggered, this
-			, &TrikPythonGeneratorPluginBase::generateCode, Qt::UniqueConnection);
+	connect(mGenerateCodeAction, &QAction::triggered, this, &TrikPythonGeneratorPluginBase::generateCode,
+		Qt::UniqueConnection);
 
 	mUploadProgramAction->setObjectName("uploadPythonTrikProgram");
 	mUploadProgramAction->setText(tr("Upload program"));
 	mUploadProgramAction->setIcon(QIcon(":/trik/python/images/uploadProgram.svg"));
 	ActionInfo uploadProgramActionInfo(mUploadProgramAction, "generators", "tools");
-	connect(mUploadProgramAction, &QAction::triggered, this
-			, &TrikPythonGeneratorPluginBase::uploadProgram, Qt::UniqueConnection);
+	connect(mUploadProgramAction, &QAction::triggered, this, &TrikPythonGeneratorPluginBase::uploadProgram,
+		Qt::UniqueConnection);
 
 	mRunProgramAction->setObjectName("runPythonTrikProgram");
 	mRunProgramAction->setText(tr("Run program"));
 	mRunProgramAction->setIcon(QIcon(":/trik/python/images/run.png"));
 	ActionInfo runProgramActionInfo(mRunProgramAction, "interpreters", "tools");
-	connect(mRunProgramAction, &QAction::triggered, this
-			, &TrikPythonGeneratorPluginBase::runProgram, Qt::UniqueConnection);
+	connect(mRunProgramAction, &QAction::triggered, this, &TrikPythonGeneratorPluginBase::runProgram,
+		Qt::UniqueConnection);
 
 	mStopRobotAction->setObjectName("stopPythonTrikRobot");
 	mStopRobotAction->setText(tr("Stop robot"));
 	mStopRobotAction->setIcon(QIcon(":/trik/python/images/stop.png"));
 	ActionInfo stopRobotActionInfo(mStopRobotAction, "interpreters", "tools");
-	connect(mStopRobotAction, &QAction::triggered, this
-			, &TrikPythonGeneratorPluginBase::stopRobot, Qt::UniqueConnection);
+	connect(mStopRobotAction, &QAction::triggered, this, &TrikPythonGeneratorPluginBase::stopRobot,
+		Qt::UniqueConnection);
 
 	return {generateCodeActionInfo, uploadProgramActionInfo, runProgramActionInfo, stopRobotActionInfo};
 }
@@ -158,13 +156,8 @@ QIcon TrikPythonGeneratorPluginBase::iconForFastSelector(const RobotModelInterfa
 
 generatorBase::MasterGeneratorBase *TrikPythonGeneratorPluginBase::masterGenerator()
 {
-	return new TrikPythonMasterGenerator(*mRepo
-			, *mMainWindowInterface->errorReporter()
-			, *mParserErrorReporter
-			, *mRobotModelManager
-			, *mTextLanguage
-			, mMainWindowInterface->activeDiagram()
-			, mPathsToTemplates);
+	return new TrikPythonMasterGenerator(*mRepo, *mMainWindowInterface->errorReporter(), *mParserErrorReporter,
+		*mRobotModelManager, *mTextLanguage, mMainWindowInterface->activeDiagram(), mPathsToTemplates);
 }
 
 QString TrikPythonGeneratorPluginBase::defaultFilePath(const QString &projectName) const
@@ -185,7 +178,7 @@ QString TrikPythonGeneratorPluginBase::generatorName() const
 void TrikPythonGeneratorPluginBase::addShellDevice(robotModel::GeneratorModelExtensionInterface &robotModel) const
 {
 	const PortInfo shellPort("ShellPort", output);
-	auto * const shell = new EmptyShell(DeviceInfo::create<trik::robotModel::parts::TrikShell>(), shellPort);
+	auto *const shell = new EmptyShell(DeviceInfo::create<trik::robotModel::parts::TrikShell>(), shellPort);
 	connect(mCommunicator.data(), &TcpRobotCommunicator::printText, shell, &EmptyShell::print);
 	robotModel.addDevice(shellPort, shell);
 }
@@ -193,8 +186,7 @@ void TrikPythonGeneratorPluginBase::addShellDevice(robotModel::GeneratorModelExt
 void TrikPythonGeneratorPluginBase::uploadProgram()
 {
 	if (mUploadProgramProtocol) {
-		if (mMainWindowInterface->activeDiagram() != Id())
-		{
+		if (mMainWindowInterface->activeDiagram() != Id()) {
 			const QFileInfo fileInfo = generateCodeForProcessing();
 			if (fileInfo != QFileInfo() && !fileInfo.absoluteFilePath().isEmpty()) {
 				disableButtons();
@@ -204,7 +196,7 @@ void TrikPythonGeneratorPluginBase::uploadProgram()
 			QList<QFileInfo> files;
 			auto const &tabs = mMainWindowInterface->allTabs();
 			for (auto &&tab : tabs) {
-				if (auto * code = dynamic_cast<qReal::text::QScintillaTextEdit *>(tab)) {
+				if (auto *code = dynamic_cast<qReal::text::QScintillaTextEdit *>(tab)) {
 					auto const &ext = code->currentLanguage().extension;
 					if (ext == "js" || ext == "py") {
 						files << QFileInfo(mTextManager->path(code));
@@ -216,7 +208,8 @@ void TrikPythonGeneratorPluginBase::uploadProgram()
 				mUploadProgramProtocol->run(files);
 			} else {
 				mMainWindowInterface->errorReporter()->addError(
-						tr("There are no files to upload. You must open or generate at least one *.js or *.py file."));
+					tr("There are no files to upload. You must open or generate at least one *.js "
+				           "or *.py file."));
 			}
 		}
 	} else {
@@ -243,11 +236,9 @@ void TrikPythonGeneratorPluginBase::stopRobot()
 {
 	if (mStopRobotProtocol) {
 		disableButtons();
-		mStopRobotProtocol->run(
-				"script.system(\"killall python\"); \n"
-				"script.system(\"killall aplay\"); \n"
-				"script.system(\"killall vlc\");"
-				);
+		mStopRobotProtocol->run("script.system(\"killall python\"); \n"
+					"script.system(\"killall aplay\"); \n"
+					"script.system(\"killall vlc\");");
 	} else {
 		QLOG_ERROR() << "Stop robot protocol is not initialized";
 	}

@@ -23,12 +23,11 @@ bool StringType::init(const QDomElement &element, const QString &context)
 	if (NonGraphicType::init(element, context)) {
 		mRegularExpression = element.firstChildElement("regularExpression").text();
 		return true;
-	}
-	else
+	} else
 		return false;
 }
 
-Type* StringType::clone() const
+Type *StringType::clone() const
 {
 	auto *result = new StringType();
 	Type::copyFields(result);

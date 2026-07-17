@@ -39,12 +39,8 @@ class DraggableElement : public QWidget
 	Q_OBJECT
 
 public:
-	DraggableElement(MainWindow &mainWindow
-		, const PaletteElement &paletteElement
-		, bool iconsOnly
-		, const EditorManagerInterface &editorManager
-		, QWidget *parent = nullptr
-		);
+	DraggableElement(MainWindow &mainWindow, const PaletteElement &paletteElement, bool iconsOnly,
+		const EditorManagerInterface &editorManager, QWidget *parent = nullptr);
 
 	/// Icon of an element on palette.
 	QIcon icon() const;
@@ -89,7 +85,7 @@ private:
 
 	const PaletteElement mData;
 	QLabel *mLabel {};
-	const EditorManagerInterface &mEditorManagerProxy;  // Does not have ownership.
+	const EditorManagerInterface &mEditorManagerProxy; // Does not have ownership.
 	MainWindow &mMainWindow;
 	Id mDeletedElementId;
 	bool mIsRootDiagramNode {};

@@ -30,12 +30,12 @@ public:
 	/// @param api - repository with metamodel.
 	/// @param id - id of an edge in repository.
 	/// @param targetDirectory - directory to generate editor to.
-	EdgeType(const Diagram &diagram, const qrRepo::LogicalRepoApi &api, const qReal::Id &id
-			, const QString &targetDirectory);
+	EdgeType(const Diagram &diagram, const qrRepo::LogicalRepoApi &api, const qReal::Id &id,
+		const QString &targetDirectory);
 
 	~EdgeType() override;
 
-	Type* clone() const override;
+	Type *clone() const override;
 
 	bool isGraphicalType() const override;
 
@@ -51,8 +51,8 @@ private:
 	void initLabels();
 	void generateSdf() const;
 	void generateArrows(QString &edgeClass) const;
-	void generateArrowEnd(QString &edgeClass, const QString &arrowEnd,
-			const QString &customTag, const QString &brushTag) const;
+	void generateArrowEnd(QString &edgeClass, const QString &arrowEnd, const QString &customTag,
+		const QString &brushTag) const;
 
 	QString mBeginType;
 	QString mEndType;
@@ -62,7 +62,7 @@ private:
 	/// All labels of this edge.
 	/// @todo: refactor after #349 is closed
 	/// Has ownership.
-	QList<Label*> mLabels;
+	QList<Label *> mLabels;
 };
 
 }

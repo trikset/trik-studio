@@ -27,8 +27,8 @@ public:
 
 	/// Launches editor generator using given metamodel file name (in .qrs format) and produces .xml file ready for
 	/// QRXC and .pro file which directs build (and actually calls QRXC from build scripts).
-	static void launchEditorGenerator(const QString &fileName, const QString &pathToQRealSources
-			, const QString &pathToGeneratedCode);
+	static void launchEditorGenerator(const QString &fileName, const QString &pathToQRealSources,
+		const QString &pathToGeneratedCode);
 };
 
 }

@@ -19,28 +19,16 @@
 using namespace pioneer::lua;
 using namespace generatorBase::simple;
 
-PioneerGetLPSPosition::PioneerGetLPSPosition(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, const qReal::Id &id
-		, QObject *parent)
-	: BindingGenerator(repo, customizer, id, "quadcopterCommands/getLPSPosition.t"
-		, {
-			Binding::createConverting(
-					"@@X@@"
-					, "X"
-					, customizer.factory()->stringPropertyConverter(id, "X"))
-			, Binding::createConverting(
-					"@@Y@@"
-					, "Y"
-					, customizer.factory()->stringPropertyConverter(id, "Y"))
-			, Binding::createConverting(
-					"@@Z@@"
-					, "Z"
-					, customizer.factory()->stringPropertyConverter(id, "Z"))
-			}
-		, parent)
+PioneerGetLPSPosition::PioneerGetLPSPosition(const qrRepo::RepoApi &repo,
+	generatorBase::GeneratorCustomizer &customizer, const qReal::Id &id, QObject *parent)
+	: BindingGenerator(repo, customizer, id, "quadcopterCommands/getLPSPosition.t",
+		  {Binding::createConverting("@@X@@", "X", customizer.factory()->stringPropertyConverter(id, "X")),
+			  Binding::createConverting("@@Y@@", "Y",
+				  customizer.factory()->stringPropertyConverter(id, "Y")),
+			  Binding::createConverting("@@Z@@", "Z",
+				  customizer.factory()->stringPropertyConverter(id, "Z"))},
+		  parent)
 {
-	customizer.factory()->functionBlockConverter(id, "")->convert(
-			QString("%1 = 0;%2 = 0;%3 = 0;")
-					.arg(repo.stringProperty(id, "X"), repo.stringProperty(id, "Y"), repo.stringProperty(id, "Z")));
+	customizer.factory()->functionBlockConverter(id, "")->convert(QString("%1 = 0;%2 = 0;%3 = 0;")
+			.arg(repo.stringProperty(id, "X"), repo.stringProperty(id, "Y"), repo.stringProperty(id, "Z")));
 }

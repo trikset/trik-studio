@@ -19,8 +19,8 @@ using namespace kitBase;
 
 const qReal::Id robotsDiagram("RobotsMetamodel", "RobotsDiagram");
 
-PaletteUpdateManager::PaletteUpdateManager(qReal::gui::MainWindowInterpretersInterface &paletteProvider
-		, const BlocksFactoryManagerInterface &factoryManager, QObject *parent)
+PaletteUpdateManager::PaletteUpdateManager(qReal::gui::MainWindowInterpretersInterface &paletteProvider,
+	const BlocksFactoryManagerInterface &factoryManager, QObject *parent)
 	: QObject(parent)
 	, mPaletteProvider(paletteProvider)
 	, mFactoryManager(factoryManager)

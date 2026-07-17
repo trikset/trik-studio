@@ -16,16 +16,16 @@
 
 using namespace qReal::gui::editor::commands;
 
-SelectElementCommand::SelectElementCommand(const EditorViewScene *scene
-		, const Id &id, bool shouldSelect, bool forceValueChange)
+SelectElementCommand::SelectElementCommand(const EditorViewScene *scene, const Id &id, bool shouldSelect,
+	bool forceValueChange)
 	: ElementCommand(scene, id)
 	, mNewState(shouldSelect)
 	, mForceValueChange(forceValueChange)
 {
 }
 
-SelectElementCommand::SelectElementCommand(const EditorView *view
-		, const Id &id, bool shouldSelect, bool forceValueChange)
+SelectElementCommand::SelectElementCommand(const EditorView *view, const Id &id, bool shouldSelect,
+	bool forceValueChange)
 	: ElementCommand(&view->editorViewScene(), id)
 	, mNewState(shouldSelect)
 	, mForceValueChange(forceValueChange)

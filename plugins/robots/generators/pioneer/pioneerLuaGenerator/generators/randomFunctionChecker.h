@@ -41,12 +41,8 @@ class RandomFunctionChecker
 {
 public:
 	/// Constructor. Gets reference to metamodel, it is needed to query element properties.
-	RandomFunctionChecker(
-			const qrRepo::RepoApi &repo
-			, const qReal::EditorManagerInterface &metamodel
-			, qrtext::LanguageToolboxInterface &languageToolbox
-			, RandomGeneratorPart &randomGeneratorPart);
-
+	RandomFunctionChecker(const qrRepo::RepoApi &repo, const qReal::EditorManagerInterface &metamodel,
+		qrtext::LanguageToolboxInterface &languageToolbox, RandomGeneratorPart &randomGeneratorPart);
 
 	/// Checks that properties of a node use "random()" function, and if they do, notifies RandomGeneratorPart that
 	/// RND initialization is needed.

@@ -44,9 +44,8 @@ class ROBOTS_TRIK_KIT_INTERPRETER_COMMON_EXPORT Display : public robotModel::par
 	Q_PROPERTY(bool sadSmiles READ sadSmiles NOTIFY smileChanged)
 
 public:
-	Display(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port
-			, twoDModel::engine::TwoDModelEngineInterface &engine);
+	Display(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+		twoDModel::engine::TwoDModelEngineInterface &engine);
 
 	/// Returns the name of the current background color.
 	QString background() const;

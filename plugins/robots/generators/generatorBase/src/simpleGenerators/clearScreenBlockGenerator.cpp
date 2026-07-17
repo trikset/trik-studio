@@ -19,15 +19,11 @@
 using namespace generatorBase::simple;
 using namespace qReal;
 
-ClearScreenBlockGenerator::ClearScreenBlockGenerator(const qrRepo::RepoApi &repo
-		, GeneratorCustomizer &customizer
-		, const Id &id
-		, QObject *parent)
-	: BindingGenerator(repo, customizer, id, "drawing/clearScreen.t"
-			, {}
-			, parent)
+ClearScreenBlockGenerator::ClearScreenBlockGenerator(const qrRepo::RepoApi &repo, GeneratorCustomizer &customizer,
+	const Id &id, QObject *parent)
+	: BindingGenerator(repo, customizer, id, "drawing/clearScreen.t", {}, parent)
 {
 	// Calling virtual readTemplate() before base class constructor will cause segfault.
-	addBinding(Binding::createStatic("@@REDRAW@@", repo.property(id, "Redraw").toBool()
-			? readTemplate("drawing/redraw.t") : QString()));
+	addBinding(Binding::createStatic("@@REDRAW@@",
+		repo.property(id, "Redraw").toBool() ? readTemplate("drawing/redraw.t") : QString()));
 }

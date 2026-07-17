@@ -29,8 +29,7 @@ PaletteAPI::PaletteAPI(ScriptAPI &scriptAPI, MainWindow &mainWindow)
 {
 }
 
-QString PaletteAPI::dragPaletteElement(const QString &paletteElementId, int duration
-		, int xSceneCoord, int ySceneCoord)
+QString PaletteAPI::dragPaletteElement(const QString &paletteElementId, int duration, int xSceneCoord, int ySceneCoord)
 {
 	const DraggableElement *paletteElement = mScriptAPI.guiFacade().draggableElement(paletteElementId);
 	const QWidget *target = paletteElement->parentWidget();

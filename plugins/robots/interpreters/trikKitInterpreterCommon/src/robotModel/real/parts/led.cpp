@@ -19,8 +19,8 @@
 using namespace trik::robotModel::real::parts;
 using namespace kitBase::robotModel;
 
-Led::Led(const DeviceInfo &info, const PortInfo &port
-		, utils::robotCommunication::TcpRobotCommunicator &tcpRobotCommunicator)
+Led::Led(const DeviceInfo &info, const PortInfo &port,
+	utils::robotCommunication::TcpRobotCommunicator &tcpRobotCommunicator)
 	: robotModel::parts::TrikLed(info, port)
 	, mRobotCommunicator(tcpRobotCommunicator)
 {
@@ -29,9 +29,8 @@ Led::Led(const DeviceInfo &info, const PortInfo &port
 void Led::setColor(const QString &color)
 {
 	const QString pathToCommand = ":/trikQts/templates/led.t";
-	const QString directCommand = utils::InFile::readAll(pathToCommand)
-			.replace("@@COLOR@@", color) + "script.run();";
+	const QString directCommand =
+		utils::InFile::readAll(pathToCommand).replace("@@COLOR@@", color) + "script.run();";
 
 	mRobotCommunicator.runDirectCommand(directCommand);
 }
-

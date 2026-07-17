@@ -23,9 +23,8 @@ using namespace interpreterCore;
 
 QString Customizer::windowTitle() const
 {
-	return qReal::SettingsManager::value("MainWindowTitle"
-				  , QObject::tr("TRIK Studio") + " " + productVersion())
-		.toString();
+	return qReal::SettingsManager::value("MainWindowTitle", QObject::tr("TRIK Studio") + " " + productVersion())
+	        .toString();
 }
 
 QIcon Customizer::applicationIcon() const
@@ -58,12 +57,10 @@ QString Customizer::trikStudioVersion()
 	return TRIK_STUDIO_VERSION;
 }
 
-QList<QPair<QString, qReal::ActionVisibility> > Customizer::actionsVisibility() const
+QList<QPair<QString, qReal::ActionVisibility>> Customizer::actionsVisibility() const
 {
-	return {
-		{ "actionNew_Diagram", qReal::ActionVisibility::VisibleOnlyInMenu }
-		, { "actionFullscreen", qReal::ActionVisibility::Invisible }
-	};
+	return {{"actionNew_Diagram", qReal::ActionVisibility::VisibleOnlyInMenu},
+		{"actionFullscreen", qReal::ActionVisibility::Invisible}};
 }
 
 bool Customizer::showInterpeterButton() const

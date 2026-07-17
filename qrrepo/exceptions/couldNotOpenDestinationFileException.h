@@ -25,7 +25,8 @@ class QRREPO_EXPORT CouldNotOpenDestinationFileException : public QrRepoExceptio
 public:
 	explicit CouldNotOpenDestinationFileException(const QString &fileName)
 		: QrRepoException("Could not open file for saving: " + fileName)
-	{}
+	{
+	}
 };
 
 }

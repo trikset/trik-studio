@@ -37,8 +37,8 @@ static const quint32 unlockRegionCommand = 0x4;
 //static const quint32 lockRegionCommand   = 0x5;  // Set Lock Bit
 //static const quint32 unlockRegionCommand = 0x4;  // Clear Lock Bit
 
-NxtFlashTool::NxtFlashTool(qReal::ErrorReporterInterface &errorReporter
-		, utils::robotCommunication::RobotCommunicationThreadInterface &communicator)
+NxtFlashTool::NxtFlashTool(qReal::ErrorReporterInterface &errorReporter,
+	utils::robotCommunication::RobotCommunicationThreadInterface &communicator)
 	: mErrorReporter(errorReporter)
 	, mCommunicator(communicator)
 	, mIsFlashing(false)
@@ -53,16 +53,15 @@ NxtFlashTool::NxtFlashTool(qReal::ErrorReporterInterface &errorReporter
 	mCompileProcess.setProcessEnvironment(environment);
 
 	connect(&mCompileProcess, &QProcess::readyRead, this, &NxtFlashTool::readNxtCompileData);
-	connect(&mCompileProcess, static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished)
-			, this, &NxtFlashTool::nxtCompilationFinished);
+	connect(&mCompileProcess, static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished), this,
+		&NxtFlashTool::nxtCompilationFinished);
 
-	connect(&mCommunicator, &utils::robotCommunication::RobotCommunicationThreadInterface::errorOccured
-			, this, &NxtFlashTool::error);
-	connect(&mCommunicator, &utils::robotCommunication::RobotCommunicationThreadInterface::messageArrived
-			, this, &NxtFlashTool::information);
-	connect(&mCommunicator, &utils::robotCommunication::RobotCommunicationThreadInterface::connected
-			, this, [this](bool success, const QString &errorString)
-	{
+	connect(&mCommunicator, &utils::robotCommunication::RobotCommunicationThreadInterface::errorOccured, this,
+		&NxtFlashTool::error);
+	connect(&mCommunicator, &utils::robotCommunication::RobotCommunicationThreadInterface::messageArrived, this,
+		&NxtFlashTool::information);
+	connect(&mCommunicator, &utils::robotCommunication::RobotCommunicationThreadInterface::connected, this,
+		[this](bool success, const QString &errorString) {
 		if (!success) {
 			error(errorString);
 		}
@@ -86,7 +85,7 @@ bool NxtFlashTool::flashRobot()
 
 #ifdef Q_OS_LINUX
 	QProcess configureProcess;
-	configureProcess.start("sh", { path("configureForFlash.sh") });
+	configureProcess.start("sh", {path("configureForFlash.sh")});
 	configureProcess.waitForFinished(-1);
 #endif
 
@@ -107,13 +106,14 @@ bool NxtFlashTool::flashRobot()
 
 	// This lambda will be invoked in separete thread via QtConcurrent, progress will be reported.
 	std::function<void(QFutureInterface<void> &)> flashProcess = [=](QFutureInterface<void> &future) {
-		future.setProgressRange(0, 1150);  // preparation (50) + flashing 1024 + starting(76)
+		future.setProgressRange(0, 1150); // preparation (50) + flashing 1024 + starting(76)
 		future.setProgressValue(0);
 
-		QFile firmwareBinary(firmwareBinaryName.absoluteFilePath());  // Will be closed when out of scope in destructor.
+		QFile firmwareBinary(
+			firmwareBinaryName.absoluteFilePath()); // Will be closed when out of scope in destructor.
 		if (!firmwareBinary.open(QFile::ReadOnly)) {
 			QLOG_ERROR() << "Could not open" << firmwareBinaryName.absoluteFilePath()
-					<< "for reading:" << firmwareBinary.errorString();
+				     << "for reading:" << firmwareBinary.errorString();
 			error(tr("Could not open %1 for reading.").arg(firmwareBinaryName.absoluteFilePath()));
 			mIsFlashing = false;
 			return;
@@ -121,7 +121,7 @@ bool NxtFlashTool::flashRobot()
 
 		if (firmwareBinary.size() > 256 * 1024) {
 			QLOG_ERROR() << "Firmware binary file size is" << firmwareBinary.size()
-					<< "bytes which is too large for NXT";
+				     << "bytes which is too large for NXT";
 			error(tr("Firmware file is too large to fit into NXT brick memory."));
 			mIsFlashing = false;
 			return;
@@ -168,9 +168,9 @@ bool NxtFlashTool::runProgram(const QFileInfo &fileInfo)
 
 	mSource = fileInfo;
 	QByteArray responce;
-	if (!mCommunicator.send(fileNameTelegram(enums::telegramType::directCommandResponseRequired
-			, enums::commandCode::STARTPROGRAM, programNameOnBrick, 0), 5, responce))
-	{
+	if (!mCommunicator.send(fileNameTelegram(enums::telegramType::directCommandResponseRequired,
+					enums::commandCode::STARTPROGRAM, programNameOnBrick, 0),
+		    5, responce)) {
 		return false;
 	}
 
@@ -187,7 +187,7 @@ void NxtFlashTool::information(const QString &message)
 	if (QThread::currentThread() == qApp->thread()) {
 		// We are currently in GUI thread, simply calling method of error reporter.
 		mErrorReporter.addInformation(message);
-	} else if (auto * const object = dynamic_cast<QObject *>(&mErrorReporter)) {
+	} else if (auto *const object = dynamic_cast<QObject *>(&mErrorReporter)) {
 		// We are not in GUI thread, calling of error reporter asynchroniously.
 		QMetaObject::invokeMethod(object, "addInformation", Q_ARG(QString, message));
 	} else {
@@ -200,7 +200,7 @@ void NxtFlashTool::error(const QString &message)
 	if (QThread::currentThread() == qApp->thread()) {
 		// We are currently in GUI thread, simply calling method of error reporter.
 		mErrorReporter.addError(message);
-	} else if (auto * const object = dynamic_cast<QObject *>(&mErrorReporter)) {
+	} else if (auto *const object = dynamic_cast<QObject *>(&mErrorReporter)) {
 		// We are not in GUI thread, calling of error reporter asynchroniously.
 		QMetaObject::invokeMethod(object, "addError", Q_ARG(QString, message));
 	} else {
@@ -210,8 +210,9 @@ void NxtFlashTool::error(const QString &message)
 
 bool NxtFlashTool::askToRun(QWidget *parent)
 {
-	return utils::QRealMessageBox::question(parent, tr("The program has been uploaded")
-			, tr("Do you want to run it?")) == QMessageBox::Yes;
+	return utils::QRealMessageBox::question(parent, tr("The program has been uploaded"),
+		       tr("Do you want to run it?"))
+	       == QMessageBox::Yes;
 }
 
 bool NxtFlashTool::uploadProgram(const QFileInfo &fileInfo)
@@ -229,18 +230,14 @@ bool NxtFlashTool::uploadProgram(const QFileInfo &fileInfo)
 
 	auto osType = PlatformInfo::osType();
 	if (osType == "windows") {
-		auto line = path("compile.bat")
-			+ " " + fileInfo.completeBaseName()
-			+ " " + fileInfo.absolutePath()
-			+ " " + path("gnuarm");
-		mCompileProcess.start("cmd", { "/c", line});
-	}
-	else if (osType == "linux") {
-		auto line = "./compile.sh . " + fileInfo.absolutePath() +
-					" GNUARM_ROOT="+SettingsManager::value("pathToArmNoneEabi").toString();
+		auto line = path("compile.bat") + " " + fileInfo.completeBaseName() + " " + fileInfo.absolutePath()
+		            + " " + path("gnuarm");
+		mCompileProcess.start("cmd", {"/c", line});
+	} else if (osType == "linux") {
+		auto line = "./compile.sh . " + fileInfo.absolutePath()
+		            + " GNUARM_ROOT=" + SettingsManager::value("pathToArmNoneEabi").toString();
 		mCompileProcess.start("/bin/bash", {"-c", line});
-	}
-	else {
+	} else {
 		QLOG_INFO() << "Platform: " << osType << "not supported for upload program";
 		return false;
 	}
@@ -301,12 +298,13 @@ void NxtFlashTool::readNxtCompileData()
 				uploadToBrick(mSource);
 			} else if (mCompileState == compilationError) {
 				error(tr("Compilation error occured. Please check your function blocks syntax. "
-						"If you sure in their validness contact developers"));
+					 "If you sure in their validness contact developers"));
 			} else {
 				error(tr("Could not upload program. Make sure the robot is connected and ON"));
 				if (PlatformInfo::osType() == "linux") {
 					error(tr("If you are using GNU/Linux visit "
-							 "https://help.trikset.com/nxt/run-upload-programs to get instructions"));
+						 "https://help.trikset.com/nxt/run-upload-programs to get "
+					         "instructions"));
 				}
 			}
 		}
@@ -344,8 +342,8 @@ bool NxtFlashTool::flashFirmwareStream(QDataStream &firmware, QFutureInterface<v
 		const int bytesRead = firmware.readRawData(buffer.data(), chunkSize);
 		if (bytesRead < 0) {
 			const QString errorString = firmware.device()->errorString();
-			QLOG_ERROR() << "Error in reading bytes in firmware stream from" << i * 256 << "to" << ((i+1) * 256 - 1)
-					<< ":" << errorString;
+			QLOG_ERROR() << "Error in reading bytes in firmware stream from" << i * 256 << "to"
+				     << ((i + 1) * 256 - 1) << ":" << errorString;
 			error(tr("Error in reading from firmware file: %1").arg(errorString));
 			return false;
 		}
@@ -406,10 +404,10 @@ bool NxtFlashTool::prepareFlashing()
 	}
 
 	// We need a help of special flashin routine on the NXT brick side. Flashing it into NXT memory first...
-	QFile flashingRoutine(":/nxt/osek/flash.bin");  // Will be closed when out of scope in destructor.
+	QFile flashingRoutine(":/nxt/osek/flash.bin"); // Will be closed when out of scope in destructor.
 	if (!flashingRoutine.open(QFile::ReadOnly)) {
-		QLOG_ERROR() << "Could not open" << flashingRoutine.fileName() << "for reading, that's strange! Error:"
-				<< flashingRoutine.errorString();
+		QLOG_ERROR() << "Could not open" << flashingRoutine.fileName()
+			     << "for reading, that's strange! Error:" << flashingRoutine.errorString();
 		return false;
 	}
 
@@ -436,8 +434,9 @@ bool NxtFlashTool::jumpInSambaMode(quint32 address)
 
 QByteArray NxtFlashTool::sambaCommandTeleram(quint32 address, char type, quint32 data) const
 {
-	return (QString("  ") + type + QString("%1,%2#").arg(address, 8, 16, QLatin1Char('0'))
-			.arg(data, 8, 16, QLatin1Char('0')).toUpper()).toLatin1();
+	return (QString("  ") + type
+		+ QString("%1,%2#").arg(address, 8, 16, QLatin1Char('0')).arg(data, 8, 16, QLatin1Char('0')).toUpper())
+	        .toLatin1();
 }
 
 bool NxtFlashTool::write8InSambaMode(quint32 address, quint8 data)
@@ -584,8 +583,8 @@ bool NxtFlashTool::uploadToBrick(const QFileInfo &fileOnHost)
 	}
 
 	if (!createFileOnBrick(fileOnBrick, file.size(), handle)) {
-		error(tr("Could not upload program. Make sure the robot is connected, turned on and has "\
-				"enough free memory."));
+		error(tr("Could not upload program. Make sure the robot is connected, turned on and has "
+			 "enough free memory."));
 		Q_EMIT uploadingComplete(false);
 		return false;
 	}
@@ -597,8 +596,8 @@ bool NxtFlashTool::uploadToBrick(const QFileInfo &fileOnHost)
 	}
 
 	if (!closeFileOnBrick(handle)) {
-		error(tr("Could not close file on brick. Probably connection to NXT lost at "\
-				"the last stage of uploading"));
+		error(tr("Could not close file on brick. Probably connection to NXT lost at "
+			 "the last stage of uploading"));
 		Q_EMIT uploadingComplete(false);
 		return false;
 	}
@@ -628,8 +627,8 @@ bool NxtFlashTool::deleteFileFromBrick(const QString &fileOnBrick)
 		return false;
 	}
 
-	const QByteArray buffer = fileNameTelegram(enums::telegramType::systemCommandResponseRequired
-			, enums::systemCommandCode::deleteCommand, fileOnBrick, 0);
+	const QByteArray buffer = fileNameTelegram(enums::telegramType::systemCommandResponseRequired,
+		enums::systemCommandCode::deleteCommand, fileOnBrick, 0);
 
 	QByteArray responce;
 	return mCommunicator.send(buffer, 25, responce);
@@ -643,8 +642,7 @@ bool NxtFlashTool::createFileOnBrick(const QString &fileOnBrick, int fileSize, q
 
 	enums::systemCommandCode::SystemCommandCodeEnum fileMode = enums::systemCommandCode::openWrite;
 	if (fileOnBrick.endsWith(".rxe") || fileOnBrick.endsWith(".sys") || fileOnBrick.endsWith(".rtm")
-			|| fileOnBrick.endsWith(".rpg") || fileOnBrick.endsWith(".ric") || fileOnBrick.endsWith(".rbm"))
-	{
+		|| fileOnBrick.endsWith(".rpg") || fileOnBrick.endsWith(".ric") || fileOnBrick.endsWith(".rbm")) {
 		// Then we uploading executable or graphics file, should use linear strategy
 		fileMode = enums::systemCommandCode::openWriteLinear;
 	} else if (fileOnBrick.endsWith(".rdt")) {
@@ -652,8 +650,8 @@ bool NxtFlashTool::createFileOnBrick(const QString &fileOnBrick, int fileSize, q
 		fileMode = enums::systemCommandCode::openWriteData;
 	}
 
-	const QByteArray buffer = fileNameTelegram(enums::telegramType::systemCommandResponseRequired
-			, fileMode, fileOnBrick, fileSize);
+	const QByteArray buffer =
+		fileNameTelegram(enums::telegramType::systemCommandResponseRequired, fileMode, fileOnBrick, fileSize);
 	QByteArray responce;
 	if (!mCommunicator.send(buffer, 6, responce)) {
 		return false;
@@ -684,9 +682,9 @@ bool NxtFlashTool::downloadStreamToBrick(quint8 handle, QDataStream &inputStream
 		const int currentDataSize = qMin(maxMessageSize, fileSize - index);
 		index += currentDataSize;
 		QByteArray buffer(currentDataSize + 5, '\0');
-		buffer[0] = currentDataSize + 3;  // Bluetooth header
+		buffer[0] = currentDataSize + 3; // Bluetooth header
 		buffer[1] = '\0';
-		buffer[2] = enums::telegramType::systemCommandResponseRequired;  // NXT header
+		buffer[2] = enums::telegramType::systemCommandResponseRequired; // NXT header
 		buffer[3] = enums::systemCommandCode::write;
 		buffer[4] = handle;
 		for (int i = 0; i < currentDataSize; ++i) {
@@ -711,7 +709,7 @@ bool NxtFlashTool::closeFileOnBrick(quint8 handle)
 	QByteArray result(commandLength + 2, '\0');
 
 	int index = 0;
-	result[index++] = commandLength;  // Bluetooth header
+	result[index++] = commandLength; // Bluetooth header
 	result[index++] = '\0';
 
 	result[index++] = enums::telegramType::systemCommandResponseRequired;
@@ -725,8 +723,8 @@ bool NxtFlashTool::closeFileOnBrick(quint8 handle)
 	return (responce.length() >= 6) && static_cast<char>(responce[4]) == 0;
 }
 
-QByteArray NxtFlashTool::fileNameTelegram(quint8 commandType, quint8 command
-		, const QString &fileName, int fileSize) const
+QByteArray NxtFlashTool::fileNameTelegram(quint8 commandType, quint8 command, const QString &fileName,
+	int fileSize) const
 {
 	// 2 bytes NXT header +
 	// 19 bytes for filename (maximally 15 for base name + '.' + extension) + null-character +
@@ -735,7 +733,7 @@ QByteArray NxtFlashTool::fileNameTelegram(quint8 commandType, quint8 command
 	QByteArray result(commandLength + 2, '\0');
 
 	int index = 0;
-	result[index++] = commandLength;  // Bluetooth header
+	result[index++] = commandLength; // Bluetooth header
 	result[index++] = '\0';
 
 	result[index++] = commandType;
@@ -750,7 +748,7 @@ QByteArray NxtFlashTool::fileNameTelegram(quint8 commandType, quint8 command
 		++index;
 	}
 
-	result[index++] = '\0';  // Null-terminating character.
+	result[index++] = '\0'; // Null-terminating character.
 
 	// 4 bytes for size
 	if (fileSize > 0) {

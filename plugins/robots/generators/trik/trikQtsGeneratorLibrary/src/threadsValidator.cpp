@@ -18,9 +18,8 @@
 
 using namespace generatorBase;
 
-ThreadsValidator::ThreadsValidator(const qrRepo::RepoApi &repo
-		, GeneratorCustomizer &customizer
-		, qReal::ErrorReporterInterface &errorReporter)
+ThreadsValidator::ThreadsValidator(const qrRepo::RepoApi &repo, GeneratorCustomizer &customizer,
+	qReal::ErrorReporterInterface &errorReporter)
 	: RobotsDiagramVisitor(repo, customizer)
 	, mRepo(repo)
 	, mErrorReporter(errorReporter)
@@ -126,8 +125,7 @@ void ThreadsValidator::visitGeneral(const qReal::Id &id, const QList<LinkInfo> &
 			mSomethingChanged = true;
 			mBlockThreads[nextBlock] = mBlockThreads[id];
 		} else if (mBlockThreads[nextBlock] != mBlockThreads[id] && mBlockThreads[nextBlock] != "@@unknown@@"
-				&& nextBlock.element() != "Join")
-		{
+			   && nextBlock.element() != "Join") {
 			mSomethingChanged = true;
 			mBlockThreads[nextBlock] = "@@unknown@@";
 		}
@@ -138,8 +136,10 @@ void ThreadsValidator::visitJoin(const qReal::Id &id, QList<LinkInfo> &links)
 {
 	for (const qReal::Id &link : mRepo.incomingLinks(id)) {
 		if (mBlockThreads[mRepo.otherEntityFromLink(link, id)] == "@@unknown@@") {
-			error(QObject::tr("Trying to join a thread with an unknown id. Possible causes: "
-					"calling fork from a subprogram or trying to merge two threads without a join"), id);
+			error(QObject::tr(
+				      "Trying to join a thread with an unknown id. Possible causes: "
+				      "calling fork from a subprogram or trying to merge two threads without a join"),
+				id);
 			return;
 		}
 	}
@@ -152,7 +152,8 @@ void ThreadsValidator::visitJoin(const qReal::Id &id, QList<LinkInfo> &links)
 	mBlockThreads[id] = mRepo.stringProperty(links[0].linkId, "Guard");
 	if (mBlockThreads[id].isEmpty()) {
 		error(QObject::tr("Guard property of a link outgoing from a join must contain an id "
-				"of one of joined threads"), links[0].linkId);
+				  "of one of joined threads"),
+			links[0].linkId);
 		return;
 	}
 
@@ -186,9 +187,9 @@ void ThreadsValidator::visitJoin(const qReal::Id &id, QList<LinkInfo> &links)
 		bool mainThreadFound = false;
 		for (const qReal::Id &incomingLink : mRepo.incomingLinks(id)) {
 			const qReal::Id &comingFrom = mRepo.otherEntityFromLink(incomingLink, id);
-			const QString fromThreadId = (comingFrom.element() == "Fork"
-					? mRepo.stringProperty(incomingLink, "Guard")
-					: mBlockThreads[comingFrom]);
+			const QString fromThreadId =
+				(comingFrom.element() == "Fork" ? mRepo.stringProperty(incomingLink, "Guard")
+								: mBlockThreads[comingFrom]);
 			if (fromThreadId == mBlockThreads[id]) {
 				mainThreadFound = true;
 				break;
@@ -197,7 +198,8 @@ void ThreadsValidator::visitJoin(const qReal::Id &id, QList<LinkInfo> &links)
 
 		if (!mainThreadFound) {
 			error(QObject::tr("Guard property of a link outgoing from a join must contain an id "
-					"of one of joined threads"), id);
+					  "of one of joined threads"),
+				id);
 			return;
 		}
 	}
@@ -221,7 +223,8 @@ void ThreadsValidator::visitForkFirstStage(const qReal::Id &id, QList<LinkInfo> 
 {
 	if (mBlockThreads[id] == "@@unknown@@") {
 		error(QObject::tr("Trying to fork from a thread with an unknown id. Possible causes: "
-				"calling fork from a subprogram or trying to merge two threads without a join"), id);
+				  "calling fork from a subprogram or trying to merge two threads without a join"),
+			id);
 		return;
 	}
 
@@ -270,8 +273,11 @@ void ThreadsValidator::visitForkFirstStage(const qReal::Id &id, QList<LinkInfo> 
 	}
 
 	if (!outgoingThreads.contains(mBlockThreads[id])) {
-		error(QObject::tr("Fork block must have a link marked with an id of a thread from which the fork is called, "
-				"'%1' in this case").arg(mBlockThreads[id]), id);
+		error(QObject::tr("Fork block must have a link marked with an id of a thread from which the fork is "
+		                  "called, "
+				  "'%1' in this case")
+				.arg(mBlockThreads[id]),
+			id);
 	}
 }
 
@@ -281,7 +287,9 @@ void ThreadsValidator::visitForkSecondStage(const qReal::Id &id, QList<LinkInfo>
 		const QString threadId = mRepo.stringProperty(link.linkId, "Guard");
 		if (threadId != mBlockThreads[id]) {
 			if (mThreadCreatingBlocks.contains(threadId) && mThreadCreatingBlocks[threadId] != id) {
-				error(QObject::tr("Trying to create a thread with an already occupied id '%1'").arg(threadId), id);
+				error(QObject::tr("Trying to create a thread with an already occupied id '%1'")
+						.arg(threadId),
+					id);
 				return;
 			}
 
