@@ -29,6 +29,7 @@ public:
 	void setCurrentValue(qreal currentValuePx);
 Q_SIGNALS:
 	void valueChanged(qreal value);
+
 private:
 	qreal mCurrentValuePx {};
 };

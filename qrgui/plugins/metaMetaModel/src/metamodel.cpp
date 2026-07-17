@@ -68,10 +68,10 @@ ElementType &Metamodel::elementType(const Id &id) const
 
 ElementType &Metamodel::elementType(const QString &diagram, const QString &element) const
 {
-	if(!mElements.contains(diagram) || !mElements[diagram].contains(element)) {
+	if (!mElements.contains(diagram) || !mElements[diagram].contains(element)) {
 		throw qReal::Exception(QObject::tr("Unknown element %1").arg(element));
 	}
-	ElementType * const result = mElements[diagram][element];
+	ElementType *const result = mElements[diagram][element];
 	Q_ASSERT_X(result, Q_FUNC_INFO, "No such entity in metamodel!");
 	return *result;
 }
@@ -167,8 +167,8 @@ QString Metamodel::diagramPaletteGroupDescription(const QString &diagram, const 
 	return mPaletteGroupDescriptions[diagram][group];
 }
 
-void Metamodel::setDiagramPaletteGroupDescription(const QString &diagram, const QString &group
-		, const QString &description)
+void Metamodel::setDiagramPaletteGroupDescription(const QString &diagram, const QString &group,
+	const QString &description)
 {
 	mPaletteGroupDescriptions[diagram][group] = description;
 }
@@ -185,13 +185,13 @@ void Metamodel::setPaletteSorted(const QString &diagram, bool sorted)
 
 void Metamodel::addNode(qrgraph::Node *entity)
 {
-	auto * const type = dynamic_cast<ElementType *>(entity);
+	auto *const type = dynamic_cast<ElementType *>(entity);
 	Q_ASSERT_X(type, Q_FUNC_INFO, "Attempt to add non-metamodel enitity!");
 	Q_ASSERT_X(&type->metamodel() == this, Q_FUNC_INFO, "Attempt to add entity from other metamodel!");
 
 	const QString diagram = type->diagram();
 	const QString element = type->name();
-	if (auto && elem = mElements[diagram][element]) {
+	if (auto &&elem = mElements[diagram][element]) {
 		auto err = QString("Duplicate enitity %1 for %2 in metamodel").arg(element, diagram);
 		Q_ASSERT_X(!elem, Q_FUNC_INFO, err.toLocal8Bit().data());
 	}

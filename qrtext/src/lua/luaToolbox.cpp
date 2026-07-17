@@ -52,8 +52,7 @@ void LuaToolbox::interpret(const QString &code)
 	interpret<int>(qReal::Id(), "", code);
 }
 
-QSharedPointer<Node> const &LuaToolbox::parse(const qReal::Id &id, const QString &propertyName
-		, const QString &code)
+QSharedPointer<Node> const &LuaToolbox::parse(const qReal::Id &id, const QString &propertyName, const QString &code)
 {
 	mErrors.clear();
 
@@ -103,7 +102,7 @@ QList<Error> const &LuaToolbox::diagnosticMessages() const
 
 bool LuaToolbox::hasErrors() const
 {
-	for (auto &&error: mErrors) {
+	for (auto &&error : mErrors) {
 		if (error.severity() != Severity::warning) {
 			return true;
 		}
@@ -111,20 +110,17 @@ bool LuaToolbox::hasErrors() const
 	return false;
 }
 
-void LuaToolbox::addIntrinsicFunction(const QString &name
-		, core::types::TypeExpression * const returnType
-		, const QList<core::types::TypeExpression *> &parameterTypes
-		, const std::function<QVariant(const QList<QVariant> &)> &semantic)
+void LuaToolbox::addIntrinsicFunction(const QString &name, core::types::TypeExpression *const returnType,
+	const QList<core::types::TypeExpression *> &parameterTypes,
+	const std::function<QVariant(const QList<QVariant> &)> &semantic)
 {
 	QList<QSharedPointer<core::types::TypeExpression>> wrappedParameterTypes;
-	for (core::types::TypeExpression * const type : parameterTypes) {
+	for (core::types::TypeExpression *const type : parameterTypes) {
 		wrappedParameterTypes << QSharedPointer<core::types::TypeExpression>(type);
 	}
 
-	auto functionType = QSharedPointer<types::Function>(new types::Function(
-			QSharedPointer<core::types::TypeExpression>(returnType)
-			, wrappedParameterTypes
-			));
+	auto functionType = QSharedPointer<types::Function>(
+		new types::Function(QSharedPointer<core::types::TypeExpression>(returnType), wrappedParameterTypes));
 
 	mAnalyzer->addIntrinsicFunction(name, functionType);
 	mInterpreter->addIntrinsicFunction(name, semantic);
@@ -201,8 +197,8 @@ void LuaToolbox::clear()
 	mSpecialIdentifiers.clear();
 }
 
-bool LuaToolbox::isGeneralization(const QSharedPointer<qrtext::core::types::TypeExpression> &specific
-		, const QSharedPointer<qrtext::core::types::TypeExpression> &general) const
+bool LuaToolbox::isGeneralization(const QSharedPointer<qrtext::core::types::TypeExpression> &specific,
+	const QSharedPointer<qrtext::core::types::TypeExpression> &general) const
 {
 	return mAnalyzer->isGeneralization(specific, general);
 }
@@ -212,11 +208,10 @@ void LuaToolbox::reportErrors()
 	for (const qrtext::core::Error &error : qAsConst(mErrors)) {
 		if (error.severity() == Severity::internalError) {
 			QLOG_ERROR() << QString("Parser internal error at %1:%2 when parsing %3:%4: %5")
-					.arg(QString::number(error.connection().line())
-					, QString::number(error.connection().column())
-					, error.connection().id().toString()
-					, error.connection().propertyName()
-					, error.errorMessage());
+						.arg(QString::number(error.connection().line()),
+							QString::number(error.connection().column()),
+							error.connection().id().toString(),
+							error.connection().propertyName(), error.errorMessage());
 		}
 	}
 }

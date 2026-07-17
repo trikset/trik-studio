@@ -18,8 +18,7 @@
 
 using namespace qReal;
 
-SuggestToCreateDiagramWidget::SuggestToCreateDiagramWidget(const EditorManagerInterface &editorManager
-		, QWidget *parent)
+SuggestToCreateDiagramWidget::SuggestToCreateDiagramWidget(const EditorManagerInterface &editorManager, QWidget *parent)
 	: ListWidget(parent)
 	, mEditorManager(editorManager)
 {
@@ -42,7 +41,6 @@ void SuggestToCreateDiagramWidget::addItem(const Id &editor, const Id &diagram)
 		return;
 	}
 
-	ListWidget::addItem(diagramName
-			, "qrm:/" + editor.editor() + "/" + diagram.diagram() + "/" + diagramNodeName
-			, tr("editor: ") + editor.editor() + tr(", diagram: ") + diagram.diagram());
+	ListWidget::addItem(diagramName, "qrm:/" + editor.editor() + "/" + diagram.diagram() + "/" + diagramNodeName,
+		tr("editor: ") + editor.editor() + tr(", diagram: ") + diagram.diagram());
 }

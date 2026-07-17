@@ -24,10 +24,8 @@ class TrikFSharpControlFlowValidator : public generatorBase::PrimaryControlFlowV
 {
 	Q_OBJECT
 public:
-	TrikFSharpControlFlowValidator(const qrRepo::RepoApi &repo
-			, qReal::ErrorReporterInterface &errorReporter
-			, generatorBase::GeneratorCustomizer &customizer
-			, QObject *parent = nullptr);
+	TrikFSharpControlFlowValidator(const qrRepo::RepoApi &repo, qReal::ErrorReporterInterface &errorReporter,
+		generatorBase::GeneratorCustomizer &customizer, QObject *parent = nullptr);
 
 	PrimaryControlFlowValidator *clone() override;
 

@@ -17,7 +17,7 @@
 #include <QtWidgets/QGraphicsSceneMouseEvent>
 
 Curve::Curve(QPointF start, QPointF end, QPointF c1)
-		: Path(QPainterPath(start))
+	: Path(QPainterPath(start))
 {
 	setPen(QPen(Qt::gray));
 	setBrush(QBrush(QColor(), Qt::NoBrush));
@@ -70,7 +70,7 @@ QRectF Curve::boundingRect() const
 	return searchMaxMinCoord().adjusted(-drift, -drift, drift, drift);
 }
 
-void Curve::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
+void Curve::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 	Q_UNUSED(option);
 	Q_UNUSED(widget);
@@ -79,7 +79,7 @@ void Curve::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, 
 	painter->drawPath(*mCurvePath);
 }
 
-void Curve::drawExtractionForItem(QPainter* painter)
+void Curve::drawExtractionForItem(QPainter *painter)
 {
 	painter->drawPoint(x1(), y1());
 	painter->drawPoint(x2(), y2());
@@ -90,14 +90,14 @@ void Curve::drawExtractionForItem(QPainter* painter)
 	drawFieldForResizeItem(painter);
 }
 
-void Curve::drawFieldForResizeItem(QPainter* painter)
+void Curve::drawFieldForResizeItem(QPainter *painter)
 {
 	painter->drawEllipse(QPointF(x1(), y1()), resizeDrift, resizeDrift);
 	painter->drawEllipse(QPointF(x2(), y2()), resizeDrift, resizeDrift);
 	painter->drawEllipse(mC1, resizeDrift, resizeDrift);
 }
 
-void Curve::drawScalingRects(QPainter* painter)
+void Curve::drawScalingRects(QPainter *painter)
 {
 	Q_UNUSED(painter);
 }
@@ -112,14 +112,14 @@ void Curve::setCXandCY(qreal x, qreal y)
 void Curve::changeDragState(qreal x, qreal y)
 {
 	Item::changeDragState(x, y);
-	if (QRectF(QPointF(mC1.x() + scenePos().x(), mC1.y() + scenePos().y())
-			, QSizeF(0, 0)).adjusted(-resizeDrift, -resizeDrift, resizeDrift, resizeDrift).contains(QPointF(x, y)))
-	{
+	if (QRectF(QPointF(mC1.x() + scenePos().x(), mC1.y() + scenePos().y()), QSizeF(0, 0))
+			.adjusted(-resizeDrift, -resizeDrift, resizeDrift, resizeDrift)
+			.contains(QPointF(x, y))) {
 		setDragState(Ctrl);
 	}
 }
 
-void  Curve::calcResizeItem(QGraphicsSceneMouseEvent *event)
+void Curve::calcResizeItem(QGraphicsSceneMouseEvent *event)
 {
 	qreal x = mapFromScene(event->scenePos()).x();
 	qreal y = mapFromScene(event->scenePos()).y();
@@ -141,23 +141,23 @@ QPair<QDomElement, Item::DomElementTypes> Curve::generateItem(QDomDocument &docu
 	QDomElement curve = setPenBrushToDoc(document, "curve");
 
 	const qreal x1 = scenePos().x() + this->x1() - topLeftPicture.x();
-	const qreal y1 = scenePos().y() + this->y1()- topLeftPicture.y();
+	const qreal y1 = scenePos().y() + this->y1() - topLeftPicture.y();
 	const qreal x2 = scenePos().x() + this->x2() - topLeftPicture.x();
 	const qreal y2 = scenePos().y() + this->y2() - topLeftPicture.y();
 	const qreal x3 = scenePos().x() + mC1.x() - topLeftPicture.x();
 	const qreal y3 = scenePos().y() + mC1.y() - topLeftPicture.y();
 
-	QDomElement start  = document.createElement("start");
+	QDomElement start = document.createElement("start");
 	curve.appendChild(start);
 	start.setAttribute("starty", y1);
 	start.setAttribute("startx", x1);
 
-	QDomElement end  = document.createElement("end");
+	QDomElement end = document.createElement("end");
 	curve.appendChild(end);
 	end.setAttribute("endy", y2);
 	end.setAttribute("endx", x2);
 
-	QDomElement ctrl  = document.createElement("ctrl");
+	QDomElement ctrl = document.createElement("ctrl");
 	curve.appendChild(ctrl);
 	ctrl.setAttribute("y", y3);
 	ctrl.setAttribute("x", x3);

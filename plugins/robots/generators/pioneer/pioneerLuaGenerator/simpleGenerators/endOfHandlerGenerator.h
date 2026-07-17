@@ -24,10 +24,8 @@ class EndOfHandlerGenerator : public generatorBase::simple::BindingGenerator
 {
 	Q_OBJECT
 public:
-	EndOfHandlerGenerator(const qrRepo::RepoApi &repo
-			, generatorBase::GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent);
+	EndOfHandlerGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+		const qReal::Id &id, QObject *parent);
 };
 }
 }

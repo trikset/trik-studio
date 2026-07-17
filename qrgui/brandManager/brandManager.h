@@ -52,7 +52,7 @@ public:
 private:
 	BrandManager();
 
-	const Customizer *mCustomizer {};  // Doesn`t take ownership
+	const Customizer *mCustomizer {}; // Doesn`t take ownership
 	QScopedPointer<Fonts> mFonts;
 	QScopedPointer<Styles> mStyles;
 };

@@ -38,7 +38,7 @@ public:
 	const QFutureWatcher<void> &currentOperation() const;
 
 private:
-	const QFutureWatcher<void> *mCurrentWatcher;  // Takes ownership via QObject parentship.
+	const QFutureWatcher<void> *mCurrentWatcher; // Takes ownership via QObject parentship.
 };
 
 }

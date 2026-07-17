@@ -28,13 +28,10 @@ class GotoLabelManager;
 class PioneerLuaGeneratorCustomizer : public generatorBase::GeneratorCustomizer
 {
 public:
-	PioneerLuaGeneratorCustomizer(const qrRepo::RepoApi &repo
-			, qReal::ErrorReporterInterface &errorReporter
-			, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
-			, generatorBase::lua::LuaProcessor &luaProcessor
-			, const QString &generatorName
-			, GotoLabelManager &gotoLabelManager
-			, bool supportsSwitchUnstableToBreaks);
+	PioneerLuaGeneratorCustomizer(const qrRepo::RepoApi &repo, qReal::ErrorReporterInterface &errorReporter,
+		const kitBase::robotModel::RobotModelManagerInterface &robotModelManager,
+		generatorBase::lua::LuaProcessor &luaProcessor, const QString &generatorName,
+		GotoLabelManager &gotoLabelManager, bool supportsSwitchUnstableToBreaks);
 
 	generatorBase::GeneratorFactoryBase *factory() override;
 

@@ -25,10 +25,8 @@
 
 using namespace qReal::commands;
 
-PasteCommand::PasteCommand(const models::Models &models
-		, bool isGraphicalCopy
-		, QPointF mousePosition
-		, const Id &rootGraphicalId)
+PasteCommand::PasteCommand(const models::Models &models, bool isGraphicalCopy, QPointF mousePosition,
+	const Id &rootGraphicalId)
 	: CreateElementsCommand(models, {})
 	, mIsGraphicalCopy(isGraphicalCopy)
 	, mMousePosition(mousePosition)
@@ -68,15 +66,16 @@ bool PasteCommand::isEmpty() const
 	return mIsEmpty;
 }
 
-QHash<qReal::Id, qReal::Id> PasteCommand::prepareNodes(models::GraphicalModelAssistApi &graphicalApi
-		, QList<NodeInfo> &nodesData, QPointF offset)
+QHash<qReal::Id, qReal::Id> PasteCommand::prepareNodes(models::GraphicalModelAssistApi &graphicalApi,
+	QList<NodeInfo> &nodesData, QPointF offset)
 {
 	QList<NodeInfo> filteredNodes;
 	QHash<Id, Id> copiedIds;
 	// Stage I: First generating new ids. All ids must be generated before next stage because some elements need new
 	// ids of their parents.
 	for (NodeInfo &node : nodesData) {
-		if (!node.explosionTarget().isNull() && !mGraphicalApi.graphicalRepoApi().exist(node.explosionTarget())) {
+		if (!node.explosionTarget().isNull()
+			&& !mGraphicalApi.graphicalRepoApi().exist(node.explosionTarget())) {
 			// Ignoring elements referencing to non-existent explosion targets (for example copied from other instance).
 			continue;
 		}
@@ -94,7 +93,8 @@ QHash<qReal::Id, qReal::Id> PasteCommand::prepareNodes(models::GraphicalModelAss
 	// Stage II: Setting new elements positions and graphical parents. Parents may be copied together with child,
 	// then it will be child of new parent element, or not copied, then parent will be root diagram.
 	for (NodeInfo &node : filteredNodes) {
-		node.setPos(mIsGraphicalCopy ? newGraphicalPos(node, copiedIds, offset) : newPos(node, copiedIds, offset));
+		node.setPos(
+			mIsGraphicalCopy ? newGraphicalPos(node, copiedIds, offset) : newPos(node, copiedIds, offset));
 		node.setGraphicalParent(newGraphicalParent(node.getInfo(), copiedIds));
 	}
 
@@ -129,21 +129,19 @@ void PasteCommand::pullDataFromClipboard(QList<NodeInfo> &nodesData, QList<EdgeI
 
 QPointF PasteCommand::newPos(const NodeInfo &nodeData, const QHash<Id, Id> &copiedIds, QPointF offset) const
 {
-	return nodeData.position() + (copiedIds.contains(nodeData.parent()) ?
-			mGraphicalApi.position(copiedIds[nodeData.parent()]) : offset);
+	return nodeData.position()
+	       + (copiedIds.contains(nodeData.parent()) ? mGraphicalApi.position(copiedIds[nodeData.parent()])
+							: offset);
 }
 
-QPointF PasteCommand::newGraphicalPos(const NodeInfo &nodeData
-		, const QHash<Id, Id> &copiedIds, QPointF offset) const
+QPointF PasteCommand::newGraphicalPos(const NodeInfo &nodeData, const QHash<Id, Id> &copiedIds, QPointF offset) const
 {
 	return nodeData.position() + (copiedIds.contains(nodeData.parent()) ? QPointF() : offset);
 }
 
 qReal::Id PasteCommand::newGraphicalParent(const ElementInfo &data, const QHash<Id, Id> &copiedIds) const
 {
-	return copiedIds.contains(data.graphicalParent())
-			? copiedIds[data.graphicalParent()]
-			: mRootDiagramGraphicalId;
+	return copiedIds.contains(data.graphicalParent()) ? copiedIds[data.graphicalParent()] : mRootDiagramGraphicalId;
 }
 
 QPointF PasteCommand::vectorFromContainer(const NodeInfo &nodeData) const

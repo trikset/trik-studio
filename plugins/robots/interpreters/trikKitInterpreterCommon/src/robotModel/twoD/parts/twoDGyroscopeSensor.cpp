@@ -20,9 +20,8 @@ constexpr auto FULL_ANGLE = 360000;
 
 using namespace trik::robotModel::twoD::parts;
 
-GyroscopeSensor::GyroscopeSensor(const kitBase::robotModel::DeviceInfo &info
-		, const kitBase::robotModel::PortInfo &port
-		, twoDModel::engine::TwoDModelEngineInterface &engine)
+GyroscopeSensor::GyroscopeSensor(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+	twoDModel::engine::TwoDModelEngineInterface &engine)
 	: twoDModel::robotModel::parts::Gyroscope(info, port, engine)
 {
 }

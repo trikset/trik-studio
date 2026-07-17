@@ -34,17 +34,13 @@ void PointPort::generateCode(OutFile &out)
 		mType = "NonTyped";
 	}
 
-	out() << QString("qReal::PointPortInfo(QPointF(%1, %2), %3, %4, %5, %6, \"%7\")").arg(
-			QString::number(mX.value())
-			, QString::number(mY.value())
-			, mX.isScalable() ? "true" : "false"
-			, mY.isScalable() ? "true" : "false"
-			, QString::number(mInitWidth)
-			, QString::number(mInitHeight)
-			, mType);
+	out() << QString("qReal::PointPortInfo(QPointF(%1, %2), %3, %4, %5, %6, \"%7\")")
+			 .arg(QString::number(mX.value()), QString::number(mY.value()),
+				 mX.isScalable() ? "true" : "false", mY.isScalable() ? "true" : "false",
+				 QString::number(mInitWidth), QString::number(mInitHeight), mType);
 }
 
-Port* PointPort::clone() const
+Port *PointPort::clone() const
 {
 	auto *result = new PointPort();
 	result->mX = mX;

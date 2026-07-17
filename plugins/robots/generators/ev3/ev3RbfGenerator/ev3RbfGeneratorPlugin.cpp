@@ -31,8 +31,8 @@ using namespace ev3::rbf;
 using namespace qReal;
 
 Ev3RbfGeneratorPlugin::Ev3RbfGeneratorPlugin()
-	: Ev3GeneratorPluginBase("Ev3RbfUsbGeneratorRobotModel", tr("Autonomous mode (USB)"), 9
-			, "Ev3RbfBluetoothGeneratorRobotModel", tr("Autonomous mode (Bluetooth)"), 8)
+	: Ev3GeneratorPluginBase("Ev3RbfUsbGeneratorRobotModel", tr("Autonomous mode (USB)"), 9,
+		  "Ev3RbfBluetoothGeneratorRobotModel", tr("Autonomous mode (Bluetooth)"), 8)
 	, mGenerateCodeAction(new QAction(this))
 	, mUploadProgramAction(new QAction(this))
 	, mRunProgramAction(new QAction(this))
@@ -44,10 +44,7 @@ Ev3RbfGeneratorPlugin::Ev3RbfGeneratorPlugin()
 
 	mUploadProgramAction->setText(tr("Upload program"));
 	mUploadProgramAction->setIcon(QIcon(":/ev3/rbf/images/uploadProgram.svg"));
-	connect(mUploadProgramAction
-			, &QAction::triggered
-			, this
-			, [this](){
+	connect(mUploadProgramAction, &QAction::triggered, this, [this]() {
 		auto rp = static_cast<RunPolicy>(SettingsManager::value("ev3RunPolicy").toInt());
 		uploadAndRunProgram(rp);
 	});
@@ -55,28 +52,15 @@ Ev3RbfGeneratorPlugin::Ev3RbfGeneratorPlugin()
 	mRunProgramAction->setObjectName("runEv3RbfProgram");
 	mRunProgramAction->setText(tr("Run program"));
 	mRunProgramAction->setIcon(QIcon(":/ev3/rbf/images/run.png"));
-	connect(mRunProgramAction, &QAction::triggered
-			, this
-			, [this]{ uploadAndRunProgram(RunPolicy::AlwaysRun); }
-	);
+	connect(mRunProgramAction, &QAction::triggered, this, [this] { uploadAndRunProgram(RunPolicy::AlwaysRun); });
 
 	mStopRobotAction->setObjectName("stopEv3RbfRobot");
 	mStopRobotAction->setText(tr("Stop robot"));
 	mStopRobotAction->setIcon(QIcon(":/ev3/rbf/images/stop.png"));
 	connect(mStopRobotAction, &QAction::triggered, this, &Ev3RbfGeneratorPlugin::stopRobot, Qt::UniqueConnection);
 
-	text::Languages::registerLanguage(text::LanguageInfo{ "lms"
-			, tr("EV3 Source Code language")
-			, true
-			, 4
-			, 2
-			, "//"
-			, QString()
-			, "/*"
-			, "*/"
-			, nullptr
-			, {}
-	});
+	text::Languages::registerLanguage(text::LanguageInfo {"lms", tr("EV3 Source Code language"), true, 4, 2, "//",
+		QString(), "/*", "*/", nullptr, {}});
 }
 
 QList<ActionInfo> Ev3RbfGeneratorPlugin::customActions()
@@ -95,13 +79,13 @@ QList<HotKeyActionInfo> Ev3RbfGeneratorPlugin::hotKeyActions()
 	mRunProgramAction->setShortcut(QKeySequence(Qt::Key_F5));
 	mStopRobotAction->setShortcut(QKeySequence(Qt::SHIFT + Qt::Key_F5));
 
-	HotKeyActionInfo generateActionInfo("Generator.GenerateEv3Rbf"
-			, tr("Generate Ev3 Robot Byte Code File"), mGenerateCodeAction);
+	HotKeyActionInfo generateActionInfo("Generator.GenerateEv3Rbf", tr("Generate Ev3 Robot Byte Code File"),
+		mGenerateCodeAction);
 	HotKeyActionInfo uploadProgramInfo("Generator.UploadEv3", tr("Upload EV3 Program"), mUploadProgramAction);
 	HotKeyActionInfo runProgramInfo("Generator.RunEv3", tr("Run EV3 Program"), mRunProgramAction);
 	HotKeyActionInfo stopRobotInfo("Generator.StopEv3", tr("Stop EV3 Program"), mStopRobotAction);
 
-	return { generateActionInfo, uploadProgramInfo, runProgramInfo, stopRobotInfo };
+	return {generateActionInfo, uploadProgramInfo, runProgramInfo, stopRobotInfo};
 }
 
 QIcon Ev3RbfGeneratorPlugin::iconForFastSelector(const kitBase::robotModel::RobotModelInterface &robotModel) const
@@ -161,19 +145,18 @@ void Ev3RbfGeneratorPlugin::uploadAndRunProgram(RunPolicy runPolicy)
 	}
 
 	switch (runPolicy) {
-		case RunPolicy::Ask:
-			if (utils::QRealMessageBox::question(mMainWindowInterface->windowWidget()
-												, tr("The program has been uploaded")
-												, tr("Do you want to run it?")
-			) != QMessageBox::Yes) {
-				return;
-			}
-			Q_FALLTHROUGH();
-		case RunPolicy::AlwaysRun:
-			QMetaObject::invokeMethod(communicator.get(), [=](){ communicator->runProgram(fileOnRobot); });
-			Q_FALLTHROUGH();
-		case RunPolicy::NeverRun:
+	case RunPolicy::Ask:
+		if (utils::QRealMessageBox::question(mMainWindowInterface->windowWidget(),
+			    tr("The program has been uploaded"), tr("Do you want to run it?"))
+			!= QMessageBox::Yes) {
 			return;
+		}
+		Q_FALLTHROUGH();
+	case RunPolicy::AlwaysRun:
+		QMetaObject::invokeMethod(communicator.get(), [=]() { communicator->runProgram(fileOnRobot); });
+		Q_FALLTHROUGH();
+	case RunPolicy::NeverRun:
+		return;
 	}
 }
 
@@ -207,7 +190,7 @@ QString Ev3RbfGeneratorPlugin::getLmsasmExecutable() const
 		return {};
 	}
 
-	const auto &toolName = PlatformInfo::osType() == "windows" ? "lmsasm.exe": "lmsasm";
+	const auto &toolName = PlatformInfo::osType() == "windows" ? "lmsasm.exe" : "lmsasm";
 	const auto &toolPath = dir.filePath(toolName);
 
 	QFileInfo toolFile(toolPath);
@@ -238,15 +221,15 @@ bool Ev3RbfGeneratorPlugin::compile(const QFileInfo &lmsFile)
 #endif
 	connect(&lmsasm, &QProcess::readyRead, &loop, [&lmsasm]() { QLOG_INFO() << lmsasm.readAll(); });
 	connect(&lmsasm, &QProcess::errorOccurred, &loop, [&lmsasm, &loop](QProcess::ProcessError e) {
-		QLOG_ERROR() << "Failed to start process (status" << e << "):"
-					 << lmsasm.program() << lmsasm.arguments();
+		QLOG_ERROR() << "Failed to start process (status" << e << "):" << lmsasm.program()
+			     << lmsasm.arguments();
 		loop.quit();
 	});
-	connect(&lmsasm, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished)
-		, &loop, [&loop, &lmsasm](int e, QProcess::ExitStatus s) {
+	connect(&lmsasm, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), &loop,
+		[&loop, &lmsasm](int e, QProcess::ExitStatus s) {
 		if (e || s != QProcess::ExitStatus::NormalExit) {
-			QLOG_ERROR() << "Failed to execute process (errCode:" << e << ", exitStatus:" << s << "):"
-						 << lmsasm.program() << lmsasm.arguments();
+			QLOG_ERROR() << "Failed to execute process (errCode:" << e << ", exitStatus:" << s
+				     << "):" << lmsasm.program() << lmsasm.arguments();
 		}
 		loop.quit();
 	});
@@ -259,7 +242,8 @@ bool Ev3RbfGeneratorPlugin::compile(const QFileInfo &lmsFile)
 QString Ev3RbfGeneratorPlugin::upload(const QFileInfo &lmsFile)
 {
 	const QString folderName = SettingsManager::value("Ev3CommonFolderChecboxChecked", false).toBool()
-			? SettingsManager::value("Ev3CommonFolderName", "ts").toString() : lmsFile.baseName();
+	                                   ? SettingsManager::value("Ev3CommonFolderName", "ts").toString()
+	                                   : lmsFile.baseName();
 	const QString targetPath = "../prjs/" + folderName;
 	const QString rbfPath = lmsFile.absolutePath() + "/" + lmsFile.baseName() + ".rbf";
 	bool connected = false;
@@ -267,38 +251,30 @@ QString Ev3RbfGeneratorPlugin::upload(const QFileInfo &lmsFile)
 	if (!communicator) {
 		return {};
 	}
-	auto errorReporter = connect(
-			communicator.get(), &utils::robotCommunication::RobotCommunicationThreadInterface::errorOccured,
-			this, [this](const QString &message){
-				mMainWindowInterface->errorReporter()->addError(message);
-			});
-	auto blockingConnectionType = communicator->thread() == QThread::currentThread()
-			? Qt::DirectConnection : Qt::BlockingQueuedConnection;
-	QMetaObject::invokeMethod(communicator.get(), &communication::Ev3RobotCommunicationThread::connect
-			, blockingConnectionType
-			, &connected);
+	auto errorReporter = connect(communicator.get(),
+		&utils::robotCommunication::RobotCommunicationThreadInterface::errorOccured, this,
+		[this](const QString &message) { mMainWindowInterface->errorReporter()->addError(message); });
+	auto blockingConnectionType = communicator->thread() == QThread::currentThread() ? Qt::DirectConnection
+	                                                                                 : Qt::BlockingQueuedConnection;
+	QMetaObject::invokeMethod(communicator.get(), &communication::Ev3RobotCommunicationThread::connect,
+		blockingConnectionType, &connected);
 	if (!connected) {
 		const bool isUsb = mRobotModelManager->model().name().contains("usb", Qt::CaseInsensitive);
-		mMainWindowInterface->errorReporter()->addError(tr("Could not upload file to robot. "\
-				"Connect to a robot via %1.").arg(isUsb ? tr("USB") : tr("Bluetooth")));
+		mMainWindowInterface->errorReporter()->addError(tr("Could not upload file to robot. "
+								   "Connect to a robot via %1.")
+				.arg(isUsb ? tr("USB") : tr("Bluetooth")));
 		return {};
 	}
 
 	QString res;
-	QMetaObject::invokeMethod(communicator.get(), [=](){ return communicator->uploadFile(rbfPath, targetPath); }
-			, blockingConnectionType
-			, &res);
+	QMetaObject::invokeMethod(communicator.get(), [=]() { return communicator->uploadFile(rbfPath, targetPath); },
+		blockingConnectionType, &res);
 	disconnect(errorReporter);
 	return res;
 }
 
 generatorBase::MasterGeneratorBase *Ev3RbfGeneratorPlugin::masterGenerator()
 {
-	return new Ev3RbfMasterGenerator(*mRepo
-			, *mMainWindowInterface->errorReporter()
-			, *mParserErrorReporter
-			, *mRobotModelManager
-			, *mTextLanguage
-			, mMainWindowInterface->activeDiagram()
-			, generatorName());
+	return new Ev3RbfMasterGenerator(*mRepo, *mMainWindowInterface->errorReporter(), *mParserErrorReporter,
+		*mRobotModelManager, *mTextLanguage, mMainWindowInterface->activeDiagram(), generatorName());
 }

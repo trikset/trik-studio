@@ -64,7 +64,7 @@ Value ValuesFactory::specialSyntaxValue(const QString &paramName) const
 			reportError(QObject::tr("Using special syntax with an empty variable name"));
 		}
 		// If it's a variable, then it's a variable.
-		auto&& variable = variableValue(paramName, false)();
+		auto &&variable = variableValue(paramName, false)();
 		if (variable.isNull()) {
 			// If it's an object property, then it's an object property.
 			variable = objectState(paramName, false)();
@@ -72,7 +72,8 @@ Value ValuesFactory::specialSyntaxValue(const QString &paramName) const
 		// It's neither one thing nor the other.
 		if (variable.isNull()) {
 			reportError(QObject::tr("The name %1 is not a valid variable "
-						"name or property chain for an object").arg(paramName));
+						"name or property chain for an object")
+					.arg(paramName));
 		}
 		return variable;
 	};
@@ -133,8 +134,8 @@ Value ValuesFactory::objectState(const QString &path, bool errorOnNotFound) cons
 			++lastObjectPart;
 		}
 
-		return propertyChain(QVariant::fromValue<QObject *>(mObjects[objectId]),
-						parts.mid(lastObjectPart), objectId, errorOnNotFound);
+		return propertyChain(QVariant::fromValue<QObject *>(mObjects[objectId]), parts.mid(lastObjectPart),
+			objectId, errorOnNotFound);
 	};
 }
 
@@ -162,7 +163,6 @@ Value ValuesFactory::mul(const Value &left, const Value &right) const
 {
 	return [left, right]() { return left().toInt() * right().toInt(); };
 }
-
 
 Value ValuesFactory::difference(const Value &left, const Value &right) const
 {
@@ -193,7 +193,7 @@ Value ValuesFactory::boundingRect(const Value &items) const
 		int xMax = INT_MIN;
 		int yMax = INT_MIN;
 		iterate(items(), [this, &xMin, &yMin, &xMax, &yMax, &empty](const QVariant &item) {
-			bool hasBoundingRect{};
+			bool hasBoundingRect {};
 			const QRect boundingRect = propertyOf(item, "boundingRect", &hasBoundingRect).toRect();
 			if (hasBoundingRect) {
 				empty = false;
@@ -204,8 +204,8 @@ Value ValuesFactory::boundingRect(const Value &items) const
 				return;
 			}
 
-			bool hasX{};
-			bool hasY{};
+			bool hasX {};
+			bool hasY {};
 			const int x = propertyOf(item, "x", &hasX).toInt();
 			const int y = propertyOf(item, "y", &hasY).toInt();
 			if (hasX && hasY) {
@@ -221,8 +221,8 @@ Value ValuesFactory::boundingRect(const Value &items) const
 	};
 }
 
-QVariant ValuesFactory::propertyChain(const QVariant &value
-		, const QStringList &propertyChain, const QString &objectAlias, bool errorOnNotFound) const
+QVariant ValuesFactory::propertyChain(const QVariant &value, const QStringList &propertyChain,
+	const QString &objectAlias, bool errorOnNotFound) const
 {
 	QVariant currentValue = value;
 	QString currentObjectAlias = objectAlias;
@@ -237,11 +237,11 @@ QVariant ValuesFactory::propertyChain(const QVariant &value
 	return currentValue;
 }
 
-QVariant ValuesFactory::propertyOf(const QVariant &value, const QString &property,
-						const QString &objectAlias, bool errorOnNotFound) const
+QVariant ValuesFactory::propertyOf(const QVariant &value, const QString &property, const QString &objectAlias,
+	bool errorOnNotFound) const
 {
-	bool hasProperty{};
-	bool unknownType{};
+	bool hasProperty {};
+	bool unknownType {};
 	QVariant result = propertyOf(value, property, &hasProperty, &unknownType);
 
 	if (unknownType) {
@@ -261,8 +261,8 @@ QVariant ValuesFactory::propertyOf(const QVariant &value, const QString &propert
 	return result;
 }
 
-QVariant ValuesFactory::propertyOf(const QVariant &value, const QString &property
-		, bool *hasProperty, bool *unknownType) const
+QVariant ValuesFactory::propertyOf(const QVariant &value, const QString &property, bool *hasProperty,
+	bool *unknownType) const
 {
 	QVariant result;
 
@@ -310,7 +310,7 @@ QVariant ValuesFactory::propertyOf(const QObject *object, const QString &propert
 	return object->property(qPrintable(property));
 }
 
-QVariant ValuesFactory::propertyOf(const items::SolidItem* item, const QString &property, bool *ok) const
+QVariant ValuesFactory::propertyOf(const items::SolidItem *item, const QString &property, bool *ok) const
 {
 	ok && (*ok = true);
 	if (!item) {
@@ -394,7 +394,7 @@ QVariant ValuesFactory::propertyOf(const QVariantList &list, const QString &prop
 	return {};
 }
 
-void ValuesFactory::iterate(const QVariant &collection, const std::function<void (const QVariant &)> &visitor) const
+void ValuesFactory::iterate(const QVariant &collection, const std::function<void(const QVariant &)> &visitor) const
 {
 	if (collection.canConvert<utils::ObjectsSetBase *>()) {
 		// A good iteration, without copying. Object sets are good for large collections.

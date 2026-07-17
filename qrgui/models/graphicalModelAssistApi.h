@@ -39,21 +39,18 @@ class QRGUI_MODELS_EXPORT GraphicalModelAssistApi : public QObject, public Graph
 	Q_OBJECT
 
 public:
-	GraphicalModelAssistApi(
-			details::GraphicalModel &graphicalModel
-			, details::GraphicalPartModel &graphicalPartModel
-			, const EditorManagerInterface &editorManagerInterface
-			);
+	GraphicalModelAssistApi(details::GraphicalModel &graphicalModel,
+		details::GraphicalPartModel &graphicalPartModel, const EditorManagerInterface &editorManagerInterface);
 
-	void setModel(details::GraphicalModel * const graphicalModel);
+	void setModel(details::GraphicalModel *const graphicalModel);
 
 	const EditorManagerInterface &editorManagerInterface() const override;
 
 	const qrRepo::GraphicalRepoApi &graphicalRepoApi() const override;
 	qrRepo::GraphicalRepoApi &mutableGraphicalRepoApi() const override;
 	Id createElement(const Id &parent, const Id &type) override;
-	Id createElement(const Id &parent, const Id &id, bool isFromLogicalModel, const QString &name
-			, const QPointF &position, const Id &preferedLogicalId = Id()) override;
+	Id createElement(const Id &parent, const Id &id, bool isFromLogicalModel, const QString &name,
+		const QPointF &position, const Id &preferedLogicalId = Id()) override;
 	void createElements(QList<ElementInfo> &elements) override;
 
 	Id copyElement(const Id &source) override;
@@ -155,7 +152,7 @@ Q_SIGNALS:
 
 private:
 	GraphicalModelAssistApi(const GraphicalModelAssistApi &);
-	GraphicalModelAssistApi& operator =(const GraphicalModelAssistApi &);
+	GraphicalModelAssistApi &operator=(const GraphicalModelAssistApi &);
 
 	details::GraphicalModel &mGraphicalModel;
 	details::ModelsAssistApi mModelsAssistApi;

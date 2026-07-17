@@ -27,8 +27,8 @@ public:
 	QString description() const;
 	bool isReferenceProperty() const;
 	Property *clone();
-	bool operator == (const Property &other) const;
-	bool operator != (const Property &other) const;
+	bool operator==(const Property &other) const;
+	bool operator!=(const Property &other) const;
 	void dump() const;
 
 private:

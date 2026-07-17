@@ -30,7 +30,8 @@ void GetButtonCodeBlock::run()
 {
 	mButtons.clear();
 	for (const PortInfo &port : mRobotModel.availablePorts()) {
-		const robotParts::Button *button = RobotModelUtils::findDevice<robotParts::Button>(mRobotModel, port.name());
+		const robotParts::Button *button =
+			RobotModelUtils::findDevice<robotParts::Button>(mRobotModel, port.name());
 		if (button) {
 			mButtons << button;
 		}

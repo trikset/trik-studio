@@ -35,7 +35,7 @@ public:
 
 	/// Adds device to pending configuration. Actual configuring of a device on a robot is done in applyConfiguration().
 	/// @param device - device to be added to configuration. Transfers ownership.
-	virtual void configureDevice(robotParts::Device * const device) = 0;
+	virtual void configureDevice(robotParts::Device *const device) = 0;
 
 	/// Uploads current configuration to a robot.
 	/// Guaranteed to emit deviceConfigured() and allDevicesConfigured() if all devices respond

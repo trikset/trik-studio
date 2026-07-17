@@ -30,14 +30,9 @@ class RangeSensorItem : public SensorItem
 	Q_INTERFACES(QGraphicsItem)
 
 public:
-	RangeSensorItem(const model::WorldModel &worldModel
-	                , graphicsUtils::AbstractCoordinateSystem *metricSystem
-			, model::SensorsConfiguration &configuration
-			, const kitBase::robotModel::PortInfo &port
-			, QPair<qreal, int> physicalParams
-			, const QString &pathToImage
-			, QRect imageSize
-			);
+	RangeSensorItem(const model::WorldModel &worldModel, graphicsUtils::AbstractCoordinateSystem *metricSystem,
+		model::SensorsConfiguration &configuration, const kitBase::robotModel::PortInfo &port,
+		QPair<qreal, int> physicalParams, const QString &pathToImage, QRect imageSize);
 
 	void drawItem(QPainter *painter, const QStyleOptionGraphicsItem *style, QWidget *widget) override;
 	void drawExtractionForItem(QPainter *painter) override;

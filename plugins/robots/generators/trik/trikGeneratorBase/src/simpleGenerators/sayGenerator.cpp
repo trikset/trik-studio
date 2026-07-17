@@ -20,16 +20,14 @@
 using namespace trik::simple;
 using namespace generatorBase::simple;
 
-SayGenerator::SayGenerator(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, const qReal::Id &id
-		, QObject *parent)
-	: BindingGenerator(repo, customizer, id
-			, "say.t"
-			, { repo.property(id, "Evaluate").toBool()
-					? Binding::createConverting("@@TEXT@@", "Text"
-								, customizer.factory()->stringPropertyConverter(id, "Text"))
-					: Binding::createStatic("@@TEXT@@", utils::StringUtils::wrap(repo.property(id, "Text").toString()))
-			} , parent)
+SayGenerator::SayGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+	const qReal::Id &id, QObject *parent)
+	: BindingGenerator(repo, customizer, id, "say.t",
+		  {repo.property(id, "Evaluate").toBool()
+				  ? Binding::createConverting("@@TEXT@@", "Text",
+					    customizer.factory()->stringPropertyConverter(id, "Text"))
+				  : Binding::createStatic("@@TEXT@@",
+					    utils::StringUtils::wrap(repo.property(id, "Text").toString()))},
+		  parent)
 {
 }

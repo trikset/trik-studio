@@ -24,10 +24,8 @@ class InitialNodeGenerator : public BindingGenerator
 {
 	Q_OBJECT
 public:
-	InitialNodeGenerator(const qrRepo::RepoApi &repo
-			, GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent = nullptr);
+	InitialNodeGenerator(const qrRepo::RepoApi &repo, GeneratorCustomizer &customizer, const qReal::Id &id,
+		QObject *parent = nullptr);
 };
 
 }

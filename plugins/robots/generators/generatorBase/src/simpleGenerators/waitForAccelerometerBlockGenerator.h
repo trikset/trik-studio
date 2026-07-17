@@ -24,10 +24,8 @@ class WaitForAccelerometerBlockGenerator : public BindingGenerator
 {
 	Q_OBJECT
 public:
-	WaitForAccelerometerBlockGenerator(const qrRepo::RepoApi &repo
-			, GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent = nullptr);
+	WaitForAccelerometerBlockGenerator(const qrRepo::RepoApi &repo, GeneratorCustomizer &customizer,
+		const qReal::Id &id, QObject *parent = nullptr);
 };
 
 }

@@ -21,10 +21,8 @@ using namespace trik::simple;
 using namespace trik::converters;
 using namespace generatorBase::simple;
 
-MarkerUpGenerator::MarkerUpGenerator(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, const qReal::Id &id
-		, QObject *parent)
+MarkerUpGenerator::MarkerUpGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+	const qReal::Id &id, QObject *parent)
 	: BindingGenerator(repo, customizer, id, "markerUp.t", QList<Binding *>(), parent)
 {
 }

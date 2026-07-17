@@ -38,9 +38,8 @@ class TWO_D_MODEL_EXPORT Marker : public kitBase::robotModel::robotParts::Device
 	Q_PROPERTY(bool isDown READ isDown WRITE setDown NOTIFY isDownChanged)
 
 public:
-	Marker(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port
-			, engine::TwoDModelEngineInterface &engine);
+	Marker(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+		engine::TwoDModelEngineInterface &engine);
 
 	/// Moves the marker of the 2D model robot down to the floor.
 	/// The robot will draw its trace on the floor after that.

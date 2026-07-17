@@ -35,7 +35,7 @@ public:
 	* Constructs a BorderChecker.
 	* @param node Node that is actually dealt with.
 	*/
-	BorderChecker(const NodeElement* const node);
+	BorderChecker(const NodeElement *const node);
 
 	/*
 	 * TODO: Actually comments have some sort of lie.
@@ -67,7 +67,7 @@ public:
 
 private:
 	/// Node that is actually dealt with.
-	const NodeElement* const mNode;
+	const NodeElement *const mNode;
 
 	/**
 	* List of NodeElement border corner coordinates.

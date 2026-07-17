@@ -30,12 +30,12 @@ class QRUTILS_EXPORT SmartDock : public QDockWidget
 
 public:
 	/// Represents a state of this dock: it is docked into window or floats as QDialog.
-	enum class Mode
-	{
+	enum class Mode {
 		/// Inner widget is embedded into this instance, widget is docked to some panel.
 		Docked
 		/// Inner widget is embedded into separate QDialog, floats and acts like regular window.
-		, Floats
+		,
+		Floats
 	};
 
 	/// @param objectName A name that will be given to this dock like QObject instance and will
@@ -89,9 +89,9 @@ private:
 	void switchToDockedQuietly();
 	void switchToFloatingQuietly();
 
-	QMainWindow *mMainWindow;  // Doesn`t take ownerhsip
-	QWidget *mInnerWidget;  // Doesn`t take ownerhsip
-	QRealDialog *const mDialog;  // Takes ownership
+	QMainWindow *mMainWindow; // Doesn`t take ownerhsip
+	QWidget *mInnerWidget; // Doesn`t take ownerhsip
+	QRealDialog *const mDialog; // Takes ownership
 	Mode mCurrentMode;
 	bool mDragged = false;
 };

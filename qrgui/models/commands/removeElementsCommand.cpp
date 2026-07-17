@@ -61,8 +61,8 @@ RemoveElementsCommand *RemoveElementsCommand::withLogicalItemToDelete(const qRea
 	return this;
 }
 
-void RemoveElementsCommand::appendInfo(QList<ElementInfo> &nodes
-		, QList<ElementInfo> &edges, const ElementInfo &info) const
+void RemoveElementsCommand::appendInfo(QList<ElementInfo> &nodes, QList<ElementInfo> &edges,
+	const ElementInfo &info) const
 {
 	QList<ElementInfo> &target = info.isEdge() ? edges : nodes;
 	if (!target.contains(info)) {
@@ -76,16 +76,10 @@ void RemoveElementsCommand::appendLogicalDelete(const Id &id, QList<ElementInfo>
 	const IdList graphicalIds = mGraphicalApi.graphicalIdsByLogicalId(id);
 
 	if (graphicalIds.isEmpty()) {
-		appendInfo(nodes, edges, ElementInfo(
-				id
-				, id
-				, mLogicalApi.parent(id)
-				, Id()
-				, {{"name", mGraphicalApi.name(id) }}
-				, {{"position", mGraphicalApi.position(id)}}
-				, Id()
-				, !mLogicalApi.editorManagerInterface().isGraphicalElementNode(id)
-		));
+		appendInfo(nodes, edges,
+			ElementInfo(id, id, mLogicalApi.parent(id), Id(), {{"name", mGraphicalApi.name(id)}},
+				{{"position", mGraphicalApi.position(id)}}, Id(),
+				!mLogicalApi.editorManagerInterface().isGraphicalElementNode(id)));
 		return;
 	}
 
@@ -107,16 +101,10 @@ void RemoveElementsCommand::postprocessCollectedItems(QList<ElementInfo> &nodes,
 void RemoveElementsCommand::appendGraphicalDelete(const Id &id, QList<ElementInfo> &nodes, QList<ElementInfo> &edges)
 {
 	const Id logicalId = mGraphicalApi.logicalId(id);
-	appendInfo(nodes, edges, ElementInfo(
-			id
-			, logicalId
-			, mLogicalApi.parent(logicalId)
-			, mGraphicalApi.parent(id)
-			, {{"name", mGraphicalApi.name(id)}}
-			, {{"position", mGraphicalApi.position(id)}}
-			, Id()
-			, !mLogicalApi.editorManagerInterface().isGraphicalElementNode(id)
-	));
+	appendInfo(nodes, edges,
+		ElementInfo(id, logicalId, mLogicalApi.parent(logicalId), mGraphicalApi.parent(id),
+			{{"name", mGraphicalApi.name(id)}}, {{"position", mGraphicalApi.position(id)}}, Id(),
+			!mLogicalApi.editorManagerInterface().isGraphicalElementNode(id)));
 
 	const IdList children = mGraphicalApi.children(id);
 	for (const Id &child : children) {
@@ -145,8 +133,8 @@ bool RemoveElementsCommand::restoreState()
 	return true;
 }
 
-void RemoveElementsCommand::appendExplosionsCommands(const Id &logicalId
-		, QList<ElementInfo> &nodes, QList<ElementInfo> &edges)
+void RemoveElementsCommand::appendExplosionsCommands(const Id &logicalId, QList<ElementInfo> &nodes,
+	QList<ElementInfo> &edges)
 {
 	const IdList toDelete = mExploser.elementsWithHardDependencyFrom(logicalId);
 	for (const Id &logicalChild : toDelete) {

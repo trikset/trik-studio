@@ -28,7 +28,7 @@ void GridDrawer::drawGrid(QPainter *painter, const QRectF &rect, const qreal gri
 	for (auto i = firstVerticalLineIndex; i <= lastVerticalLineIndex; ++i) {
 		const auto currentVerticalLineX = i * gridSize;
 		painter->drawLine(QPointF(currentVerticalLineX, rect.top()),
-					QPointF(currentVerticalLineX, rect.bottom()));
+			QPointF(currentVerticalLineX, rect.bottom()));
 	}
 
 	const auto firstHorizontalLineIndex = static_cast<int>(std::floor(rect.top() / gridSize));

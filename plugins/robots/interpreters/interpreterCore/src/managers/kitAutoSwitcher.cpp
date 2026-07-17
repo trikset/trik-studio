@@ -21,21 +21,20 @@ using namespace interpreterCore;
 using namespace kitBase;
 using namespace robotModel;
 
-KitAutoSwitcher::KitAutoSwitcher(const qReal::ProjectManagementInterface &projectManager
-		, qReal::LogicalModelAssistInterface &logicalModel
-		, const BlocksFactoryManagerInterface &factoryManager
-		, const KitPluginManager &kitPluginManager
-		, RobotModelManager &robotModelManager
-		, QObject *parent)
+KitAutoSwitcher::KitAutoSwitcher(const qReal::ProjectManagementInterface &projectManager,
+	qReal::LogicalModelAssistInterface &logicalModel, const BlocksFactoryManagerInterface &factoryManager,
+	const KitPluginManager &kitPluginManager, RobotModelManager &robotModelManager, QObject *parent)
 	: QObject(parent)
 	, mLogicalModel(logicalModel)
 	, mFactoryManager(factoryManager)
 	, mKitPluginManager(kitPluginManager)
 	, mRobotModelManager(robotModelManager)
 {
-	connect(&projectManager, &qReal::ProjectManagementInterface::afterOpen, this, &KitAutoSwitcher::onProjectOpened);
+	connect(&projectManager, &qReal::ProjectManagementInterface::afterOpen, this,
+		&KitAutoSwitcher::onProjectOpened);
 	connect(&projectManager, &qReal::ProjectManagementInterface::afterOpen, this, [this, &robotModelManager]() {
-		mLogicalModel.mutableLogicalRepoApi().setMetaInformation("lastKitId", robotModelManager.model().kitId());
+		mLogicalModel.mutableLogicalRepoApi().setMetaInformation("lastKitId",
+			robotModelManager.model().kitId());
 	});
 	connect(&robotModelManager, &RobotModelManager::robotModelChanged, this, [this](RobotModelInterface &model) {
 		mLogicalModel.mutableLogicalRepoApi().setMetaInformation("lastKitId", model.kitId());
@@ -109,7 +108,7 @@ QMultiMap<qReal::Id, QString> KitAutoSwitcher::kitSpecificBlocks() const
 	QMap<QString, QSet<qReal::Id>> kitsToBlocksMap;
 	for (const QString &kitId : mKitPluginManager.kitIds()) {
 		QSet<qReal::Id> specificBlocks;
-		for (KitPluginInterface * const kit : mKitPluginManager.kitsById(kitId)) {
+		for (KitPluginInterface *const kit : mKitPluginManager.kitsById(kitId)) {
 			for (const RobotModelInterface *robotModel : kit->robotModels()) {
 				specificBlocks += mFactoryManager.enabledBlocks(*robotModel);
 			}
@@ -120,7 +119,7 @@ QMultiMap<qReal::Id, QString> KitAutoSwitcher::kitSpecificBlocks() const
 
 	QMultiMap<qReal::Id, QString> blocksToKitsMap;
 	for (const QString &kitId : kitsToBlocksMap.keys()) {
-		for (const qReal::Id &id: kitsToBlocksMap[kitId]) {
+		for (const qReal::Id &id : kitsToBlocksMap[kitId]) {
 			blocksToKitsMap.insertMulti(id, kitId);
 		}
 	}
@@ -130,9 +129,8 @@ QMultiMap<qReal::Id, QString> KitAutoSwitcher::kitSpecificBlocks() const
 
 bool interpreterCore::KitAutoSwitcher::switchTo(const QString &kitId)
 {
-	if (RobotModelInterface * const robotModel
-			= RobotModelUtils::selectedRobotModelFor(mKitPluginManager.kitsById(kitId)))
-	{
+	if (RobotModelInterface *const robotModel =
+			RobotModelUtils::selectedRobotModelFor(mKitPluginManager.kitsById(kitId))) {
 		mRobotModelManager.setModel(robotModel);
 		return true;
 	}

@@ -56,16 +56,15 @@ public:
 	virtual void interpret(const QString &code) = 0;
 
 	/// Parses given code string using given id and property name for connection, returns AST.
-	virtual const QSharedPointer<core::ast::Node> &parse(const qReal::Id &id
-			, const QString &propertyName
-			, const QString &code) = 0;
+	virtual const QSharedPointer<core::ast::Node> &parse(const qReal::Id &id, const QString &propertyName,
+		const QString &code) = 0;
 
 	/// Returns previously parsed AST for given node and property, or null if no such AST was parsed before.
 	virtual QSharedPointer<core::ast::Node> ast(const qReal::Id &id, const QString &propertyName) const = 0;
 
 	/// Returns type of given AST node.
 	virtual QSharedPointer<core::types::TypeExpression> type(
-			const QSharedPointer<core::ast::Node> &expression) const = 0;
+		const QSharedPointer<core::ast::Node> &expression) const = 0;
 
 	/// Returns list of errors that were reported during parsing or interpretation.
 	virtual QList<core::Error> const &diagnosticMessages() const = 0;
@@ -77,10 +76,9 @@ public:
 	/// @param returnType - function return type, as type expression. Takes ownership.
 	/// @param parameterTypes - a list of types of function parameters. Takes ownership.
 	/// @param semantic - a function that will be called by interpreter to actually get a result.
-	virtual void addIntrinsicFunction(const QString &name
-			, core::types::TypeExpression * const returnType
-			, const QList<core::types::TypeExpression *> &parameterTypes
-			, std::function<QVariant(const QList<QVariant> &)> const &semantic) = 0;
+	virtual void addIntrinsicFunction(const QString &name, core::types::TypeExpression *const returnType,
+		const QList<core::types::TypeExpression *> &parameterTypes,
+		std::function<QVariant(const QList<QVariant> &)> const &semantic) = 0;
 
 	/// Returns a mapping of variable identifiers to their types.
 	virtual QMap<QString, QSharedPointer<core::types::TypeExpression>> variableTypes() const = 0;
@@ -98,8 +96,8 @@ public:
 	virtual void setNeedGeneralization(bool needGeneralization) = 0;
 
 	/// Returns true if \a specific type is a subtype of \a general type, including case when they are equivalent.
-	virtual bool isGeneralization(const QSharedPointer<core::types::TypeExpression> &specific
-			, const QSharedPointer<core::types::TypeExpression> &general) const = 0;
+	virtual bool isGeneralization(const QSharedPointer<core::types::TypeExpression> &specific,
+		const QSharedPointer<core::types::TypeExpression> &general) const = 0;
 
 private:
 	/// Interprets given AST. Returns result of an expression. Must be implemented for concrete language.
@@ -107,4 +105,3 @@ private:
 };
 
 }
-

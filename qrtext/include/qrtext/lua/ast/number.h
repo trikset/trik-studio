@@ -33,13 +33,14 @@ public:
 	}
 
 	/// Returns string representation of a number.
-	const QString &stringRepresentation() const {
+	const QString &stringRepresentation() const
+	{
 		return mStringRepresentation;
 	}
 
 private:
-	void accept(core::AstVisitorInterface &visitor, const QSharedPointer<Node> &pointer
-			, const QSharedPointer<Node> &parent) override
+	void accept(core::AstVisitorInterface &visitor, const QSharedPointer<Node> &pointer,
+		const QSharedPointer<Node> &parent) override
 	{
 		static_cast<LuaAstVisitorInterface *>(&visitor)->visit(qSharedPointerCast<Number>(pointer), parent);
 	}

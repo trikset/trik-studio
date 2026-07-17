@@ -16,11 +16,8 @@
 
 using namespace trik::robotModel;
 
-TrikV6GeneratorRobotModel::TrikV6GeneratorRobotModel(const QString &kitId
-		, const QString &robotId
-		, const QString &name
-		, const QString &friendlyName
-		, int priority)
+TrikV6GeneratorRobotModel::TrikV6GeneratorRobotModel(const QString &kitId, const QString &robotId, const QString &name,
+	const QString &friendlyName, int priority)
 	: TrikRobotModelV6(kitId, robotId)
 	, mName(name)
 	, mFriendlyName(friendlyName)
@@ -58,8 +55,8 @@ int TrikV6GeneratorRobotModel::priority() const
 	return mPriority;
 }
 
-void TrikV6GeneratorRobotModel::addDevice(const kitBase::robotModel::PortInfo &port
-		, kitBase::robotModel::robotParts::Device *device)
+void TrikV6GeneratorRobotModel::addDevice(const kitBase::robotModel::PortInfo &port,
+	kitBase::robotModel::robotParts::Device *device)
 {
 	mPreConfiguredDevices[port] = device;
 	configureDevice(port, device->deviceInfo());
@@ -67,8 +64,7 @@ void TrikV6GeneratorRobotModel::addDevice(const kitBase::robotModel::PortInfo &p
 }
 
 kitBase::robotModel::robotParts::Device *TrikV6GeneratorRobotModel::createDevice(
-		const kitBase::robotModel::PortInfo &port
-		, const kitBase::robotModel::DeviceInfo &deviceInfo)
+	const kitBase::robotModel::PortInfo &port, const kitBase::robotModel::DeviceInfo &deviceInfo)
 {
 	if (mPreConfiguredDevices.contains(port) && mPreConfiguredDevices[port]->deviceInfo().isA(deviceInfo)) {
 		return mPreConfiguredDevices[port];

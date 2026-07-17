@@ -29,9 +29,8 @@ class ROBOTS_TRIK_KIT_INTERPRETER_COMMON_EXPORT Speaker : public robotModel::par
 	Q_OBJECT
 
 public:
-	Speaker(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port
-			, utils::robotCommunication::TcpRobotCommunicator &tcpRobotCommunicator);
+	Speaker(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+		utils::robotCommunication::TcpRobotCommunicator &tcpRobotCommunicator);
 
 	void play(const QString &filePath) override;
 

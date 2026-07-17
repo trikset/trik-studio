@@ -28,9 +28,9 @@ class ColorSensorImpl : public QObject
 	Q_OBJECT
 
 public:
-	ColorSensorImpl(const kitBase::robotModel::PortInfo &port
-			, utils::robotCommunication::RobotCommunicator &robotCommunicator
-			, enums::lowLevelSensorType::SensorTypeEnum lowLevelType);
+	ColorSensorImpl(const kitBase::robotModel::PortInfo &port,
+		utils::robotCommunication::RobotCommunicator &robotCommunicator,
+		enums::lowLevelSensorType::SensorTypeEnum lowLevelType);
 
 	void read();
 	void doConfiguration();

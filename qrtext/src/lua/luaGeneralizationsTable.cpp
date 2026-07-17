@@ -28,14 +28,14 @@ using namespace qrtext::lua::details;
 using namespace qrtext::core::types;
 using namespace qrtext::lua::types;
 
-bool LuaGeneralizationsTable::isGeneralization(const QSharedPointer<TypeExpression> &specific
-		, const QSharedPointer<TypeExpression> &general) const
+bool LuaGeneralizationsTable::isGeneralization(const QSharedPointer<TypeExpression> &specific,
+	const QSharedPointer<TypeExpression> &general) const
 {
 	return (specific->is<Integer>() && general->is<Float>()) || isStructurallyEquivalent(specific, general);
 }
 
-bool LuaGeneralizationsTable::isStructurallyEquivalent(const QSharedPointer<TypeExpression> &type1
-		, const QSharedPointer<TypeExpression> &type2) const
+bool LuaGeneralizationsTable::isStructurallyEquivalent(const QSharedPointer<TypeExpression> &type1,
+	const QSharedPointer<TypeExpression> &type2) const
 {
 	if (type1->is<Any>() && type2->is<Any>()) {
 		return true;
@@ -50,8 +50,8 @@ bool LuaGeneralizationsTable::isStructurallyEquivalent(const QSharedPointer<Type
 	} else if (type1->is<String>() && type2->is<String>()) {
 		return true;
 	} else if (type1->is<Table>() && type2->is<Table>()) {
-		return isGeneralization(type1.dynamicCast<Table>()->elementType()
-				, type2.dynamicCast<Table>()->elementType());
+		return isGeneralization(type1.dynamicCast<Table>()->elementType(),
+			type2.dynamicCast<Table>()->elementType());
 	} else if (type1->is<Function>() && type2->is<Function>()) {
 		/// @todo: Actually compare function types.
 		return true;

@@ -28,12 +28,10 @@ class PaletteTreeWidgets : public QSplitter
 {
 	Q_OBJECT
 public:
-	PaletteTreeWidgets(PaletteTree &parent, MainWindow *mainWindow
-			, EditorManagerInterface &editorManagerProxy);
+	PaletteTreeWidgets(PaletteTree &parent, MainWindow *mainWindow, EditorManagerInterface &editorManagerProxy);
 
-	PaletteTreeWidgets(PaletteTree &parent, MainWindow *mainWindow
-			, EditorManagerInterface &editorManagerProxy
-			, const Id &editor, const Id &diagram);
+	PaletteTreeWidgets(PaletteTree &parent, MainWindow *mainWindow, EditorManagerInterface &editorManagerProxy,
+		const Id &editor, const Id &diagram);
 
 	/// Returs an internal diagram id of editor whoose elements are provided by this instance.
 	Id diagram() const;
@@ -72,15 +70,14 @@ public:
 	void refreshUserPaletteHandler(bool force = false);
 
 	/// Sets user palette header and description.
-	void customizeExplosionTitles(const QString &userGroupTitle
-			, const QString &userGroupDescription);
+	void customizeExplosionTitles(const QString &userGroupTitle, const QString &userGroupDescription);
 
 	/// Filters contents of both trees showing only items whoose names matches the given regular expression.
 	void filter(const QRegExp &regexp);
 
 private:
 	void initWidgets();
-	void initWidget(PaletteTreeWidget * const tree);
+	void initWidget(PaletteTreeWidget *const tree);
 	void initEditorTree();
 	void initUserTree();
 

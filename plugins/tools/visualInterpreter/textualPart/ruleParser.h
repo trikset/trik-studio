@@ -26,9 +26,8 @@ class RuleParser : public QObject, public utils::ExpressionsParser
 {
 
 public:
-	RuleParser(LogicalModelAssistInterface &logicalModelApi
-			, GraphicalModelAssistInterface &graphicalModelApi
-			, ErrorReporterInterface* errorReporter);
+	RuleParser(LogicalModelAssistInterface &logicalModelApi, GraphicalModelAssistInterface &graphicalModelApi,
+		ErrorReporterInterface *errorReporter);
 
 	/// Parse and interpret textual part of rule and perform changes
 	/// on model elements by using match hash map

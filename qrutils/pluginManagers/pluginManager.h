@@ -29,7 +29,7 @@ public:
 	explicit PluginManager(const QString &pluginsDirPath);
 
 	/// Returns list of all found plugins if succeed and empty list otherwise.
-	template <class InterfaceType>
+	template<class InterfaceType>
 	QList<InterfaceType *> loadAllPlugins()
 	{
 		QList<QObject *> const loadedPlugins = mPluginManagerLoader.loadAllPlugins();
@@ -40,7 +40,7 @@ public:
 	/// and error message, if failed.
 	/// @param pluginName - name of plugin to load
 	/// @returns loaded plugin and error message
-	template <class InterfaceType>
+	template<class InterfaceType>
 	QPair<InterfaceType *, QString> pluginLoadedByName(const QString &pluginName)
 	{
 		QPair<QObject *, QString> resultOfLoading = mPluginManagerLoader.loadPluginByName(pluginName);
@@ -60,7 +60,7 @@ public:
 	QList<QString> namesOfPlugins() const;
 
 	/// Returns fileName by given object.
-	template <class InterfaceType>
+	template<class InterfaceType>
 	QString fileName(InterfaceType *plugin) const
 	{
 		return mPluginManagerLoader.fileName(reinterpret_cast<QObject *>(plugin));
@@ -68,7 +68,7 @@ public:
 
 	/// Returns plugin object instance by the name specified plugin metainformation.
 	/// The plugin must be loaded and initialized, otherwise nullptr will be returned.
-	template <class InterfaceType>
+	template<class InterfaceType>
 	InterfaceType *plugin(const QString &pluginName) const
 	{
 		return dynamic_cast<InterfaceType *>(mPluginManagerLoader.pluginByName(pluginName));
@@ -76,7 +76,7 @@ public:
 
 private:
 	/// Casts list of objects to list of interfaces.
-	template <class InterfaceType>
+	template<class InterfaceType>
 	QList<InterfaceType *> listOfInterfaces(QList<QObject *> const interfacesToWrap) const
 	{
 		QList<InterfaceType *> interfacesList;

@@ -24,12 +24,8 @@ class WhileLoopGenerator : public BindingGenerator
 {
 	Q_OBJECT
 public:
-	WhileLoopGenerator(const qrRepo::RepoApi &repo
-			, GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, bool doWhileForm
-			, bool needInverting
-			, QObject *parent = nullptr);
+	WhileLoopGenerator(const qrRepo::RepoApi &repo, GeneratorCustomizer &customizer, const qReal::Id &id,
+		bool doWhileForm, bool needInverting, QObject *parent = nullptr);
 };
 
 }

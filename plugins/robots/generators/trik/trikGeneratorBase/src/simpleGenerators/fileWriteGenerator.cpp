@@ -19,15 +19,12 @@
 using namespace trik::simple;
 using namespace generatorBase::simple;
 
-FileWriteGenerator::FileWriteGenerator(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, const qReal::Id &id
-		, QObject *parent)
-	: BindingGenerator(repo, customizer, id, "files/writeFile.t"
-			, { Binding::createDirect("@@FILE@@", "File")
-				, Binding::createConverting("@@TEXT@@", "Text"
-						, customizer.factory()->functionBlockConverter(id, "Text")) }
-			, parent)
+FileWriteGenerator::FileWriteGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+	const qReal::Id &id, QObject *parent)
+	: BindingGenerator(repo, customizer, id, "files/writeFile.t",
+		  {Binding::createDirect("@@FILE@@", "File"),
+			  Binding::createConverting("@@TEXT@@", "Text",
+				  customizer.factory()->functionBlockConverter(id, "Text"))},
+		  parent)
 {
-
 }

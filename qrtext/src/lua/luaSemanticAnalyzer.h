@@ -56,8 +56,8 @@ private:
 	void analyzeUnaryOperator(const QSharedPointer<core::ast::Node> &node);
 	void analyzeBinaryOperator(const QSharedPointer<core::ast::Node> &node);
 
-	void constrainAssignment(const QSharedPointer<core::ast::Node> &operation
-			, const QSharedPointer<core::ast::Node> &lhs, const QSharedPointer<core::ast::Node> &rhs);
+	void constrainAssignment(const QSharedPointer<core::ast::Node> &operation,
+		const QSharedPointer<core::ast::Node> &lhs, const QSharedPointer<core::ast::Node> &rhs);
 
 	void analyzeFunctionCall(const QSharedPointer<core::ast::Node> &node);
 
@@ -73,8 +73,8 @@ private:
 	bool checkForReadOnlyVariables(const QSharedPointer<core::ast::Node> &node);
 
 	/// Checks that intrinsic functions are used as functions and not as some identifiers.
-	void checkReservedIdentifiersUsage(const QSharedPointer<core::ast::Node> &node
-			, const QSharedPointer<core::ast::Node> &parent);
+	void checkReservedIdentifiersUsage(const QSharedPointer<core::ast::Node> &node,
+		const QSharedPointer<core::ast::Node> &parent);
 
 	QSharedPointer<core::types::TypeExpression> mBoolean;
 	QSharedPointer<core::types::TypeExpression> mFloat;

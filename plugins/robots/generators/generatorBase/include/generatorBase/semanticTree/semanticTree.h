@@ -37,8 +37,8 @@ class ROBOTS_GENERATOR_EXPORT SemanticTree : public QObject
 {
 	Q_OBJECT
 public:
-	SemanticTree(GeneratorCustomizer &customizer, const qReal::Id &initialBlock
-			, bool isMainTree, QObject *parent = nullptr);
+	SemanticTree(GeneratorCustomizer &customizer, const qReal::Id &initialBlock, bool isMainTree,
+		QObject *parent = nullptr);
 
 	/// Returns an id of the initial node in this semantic tree. Semantic trees are
 	/// equal if their root ids are equal.
@@ -83,7 +83,7 @@ public:
 private:
 	GeneratorCustomizer &mCustomizer;
 	const bool mIsMainTree;
-	RootNode *mRoot;  // Takes ownership
+	RootNode *mRoot; // Takes ownership
 };
 
 }

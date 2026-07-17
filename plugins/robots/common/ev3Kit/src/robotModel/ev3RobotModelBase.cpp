@@ -49,48 +49,33 @@ using namespace kitBase::robotModel;
 Ev3RobotModelBase::Ev3RobotModelBase(const QString &kitId, const QString &robotId)
 	: CommonRobotModel(kitId, robotId)
 {
-	QList<DeviceInfo> const inputPortConnections = {
-			touchSensorInfo()
-			, lightSensorInfo()
-			, rangeSensorInfo()
-			, colorRedSensorInfo()
-			, colorGreenSensorInfo()
-			, colorBlueSensorInfo()
-			, colorPassiveSensorInfo()
-			, colorFullSensorInfo()
-			, colorAmbientSensorInfo()
-			, colorReflectedSensorInfo()
-			, colorRawSensorInfo()
-			, gyroscopeSensorInfo()
-			, compassSensorInfo()
-			, ACIRSeekerSensorInfo()
-			, DCIRSeekerSensorInfo()
-			, NXTColorSensorV2ColorInfo()
-			, NXTColorSensorV2RGBInfo()
-			, NXTColorSensorV2PassiveInfo()
-			, NXTColorSensorV2RawInfo()
-	};
+	QList<DeviceInfo> const inputPortConnections = {touchSensorInfo(), lightSensorInfo(), rangeSensorInfo(),
+		colorRedSensorInfo(), colorGreenSensorInfo(), colorBlueSensorInfo(), colorPassiveSensorInfo(),
+		colorFullSensorInfo(), colorAmbientSensorInfo(), colorReflectedSensorInfo(), colorRawSensorInfo(),
+		gyroscopeSensorInfo(), compassSensorInfo(), ACIRSeekerSensorInfo(), DCIRSeekerSensorInfo(),
+		NXTColorSensorV2ColorInfo(), NXTColorSensorV2RGBInfo(), NXTColorSensorV2PassiveInfo(),
+		NXTColorSensorV2RawInfo()};
 
-	addAllowedConnection(PortInfo("DisplayPort", output), { displayInfo() });
-	addAllowedConnection(PortInfo("SpeakerPort", output), { speakerInfo() });
-	addAllowedConnection(PortInfo("LedPort", output), { ledInfo() });
+	addAllowedConnection(PortInfo("DisplayPort", output), {displayInfo()});
+	addAllowedConnection(PortInfo("SpeakerPort", output), {speakerInfo()});
+	addAllowedConnection(PortInfo("LedPort", output), {ledInfo()});
 
-	addAllowedConnection(PortInfo("Up", input, {}, "buttonUp"), { buttonInfo() });
-	addAllowedConnection(PortInfo("Enter", input, {}, "buttonEnter"), { buttonInfo() });
-	addAllowedConnection(PortInfo("Down", input, {}, "buttonDown"), { buttonInfo() });
-	addAllowedConnection(PortInfo("Right", input, {}, "buttonRight"), { buttonInfo() });
-	addAllowedConnection(PortInfo("Left", input, {}, "buttonLeft"), { buttonInfo() });
-	addAllowedConnection(PortInfo("Back", input, {}, "buttonBack"), { buttonInfo() });
+	addAllowedConnection(PortInfo("Up", input, {}, "buttonUp"), {buttonInfo()});
+	addAllowedConnection(PortInfo("Enter", input, {}, "buttonEnter"), {buttonInfo()});
+	addAllowedConnection(PortInfo("Down", input, {}, "buttonDown"), {buttonInfo()});
+	addAllowedConnection(PortInfo("Right", input, {}, "buttonRight"), {buttonInfo()});
+	addAllowedConnection(PortInfo("Left", input, {}, "buttonLeft"), {buttonInfo()});
+	addAllowedConnection(PortInfo("Back", input, {}, "buttonBack"), {buttonInfo()});
 
-	addAllowedConnection(PortInfo("A", output, { QString::fromUtf8("А") }), { motorInfo() });
-	addAllowedConnection(PortInfo("B", output, { QString::fromUtf8("В") }), { motorInfo() });
-	addAllowedConnection(PortInfo("C", output, { QString::fromUtf8("С") }), { motorInfo() });
-	addAllowedConnection(PortInfo("D", output), { motorInfo() });
+	addAllowedConnection(PortInfo("A", output, {QString::fromUtf8("А")}), {motorInfo()});
+	addAllowedConnection(PortInfo("B", output, {QString::fromUtf8("В")}), {motorInfo()});
+	addAllowedConnection(PortInfo("C", output, {QString::fromUtf8("С")}), {motorInfo()});
+	addAllowedConnection(PortInfo("D", output), {motorInfo()});
 
-	addAllowedConnection(PortInfo("A", input, { QString::fromUtf8("А") }, "encoderA"), { encoderInfo() });
-	addAllowedConnection(PortInfo("B", input, { QString::fromUtf8("В") }, "encoderB"), { encoderInfo() });
-	addAllowedConnection(PortInfo("C", input, { QString::fromUtf8("С") }, "encoderC"), { encoderInfo() });
-	addAllowedConnection(PortInfo("D", input, {}, "encoderD"), { encoderInfo() });
+	addAllowedConnection(PortInfo("A", input, {QString::fromUtf8("А")}, "encoderA"), {encoderInfo()});
+	addAllowedConnection(PortInfo("B", input, {QString::fromUtf8("В")}, "encoderB"), {encoderInfo()});
+	addAllowedConnection(PortInfo("C", input, {QString::fromUtf8("С")}, "encoderC"), {encoderInfo()});
+	addAllowedConnection(PortInfo("D", input, {}, "encoderD"), {encoderInfo()});
 
 	addAllowedConnection(PortInfo("1", input, {}, "sensor1"), inputPortConnections);
 	addAllowedConnection(PortInfo("2", input, {}, "sensor2"), inputPortConnections);
@@ -100,26 +85,21 @@ Ev3RobotModelBase::Ev3RobotModelBase(const QString &kitId, const QString &robotI
 
 QList<DeviceInfo> Ev3RobotModelBase::convertibleBases() const
 {
-	return { DeviceInfo::create<robotParts::TouchSensor>()
-			, DeviceInfo::create<robotParts::LightSensor>()
-			, DeviceInfo::create<robotParts::RangeSensor>()
-			, DeviceInfo::create<robotParts::ColorSensorFull>()
-			, DeviceInfo::create<robotParts::ColorSensorRed>()
-			, DeviceInfo::create<robotParts::ColorSensorBlue>()
-			, DeviceInfo::create<robotParts::ColorSensorGreen>()
-			, DeviceInfo::create<robotParts::ColorSensorPassive>()
-			, DeviceInfo::create<robotParts::ColorSensorAmbient>()
-			, DeviceInfo::create<robotParts::ColorSensorReflected>()
-			, DeviceInfo::create<robotParts::ColorSensorRaw>()
-			, DeviceInfo::create<robotParts::GyroscopeSensor>()
-			, DeviceInfo::create<ev3::robotModel::parts::Ev3Compass>()
-			, DeviceInfo::create<ev3::robotModel::parts::Ev3ACIRSeeker>()
-			, DeviceInfo::create<ev3::robotModel::parts::Ev3DCIRSeeker>()
-			, DeviceInfo::create<ev3::robotModel::parts::Ev3NXTColorSensorV2Color>()
-			, DeviceInfo::create<ev3::robotModel::parts::Ev3NXTColorSensorV2RGB>()
-			, DeviceInfo::create<ev3::robotModel::parts::Ev3NXTColorSensorV2Passive>()
-			, DeviceInfo::create<ev3::robotModel::parts::Ev3NXTColorSensorV2Raw>()
-	};
+	return {DeviceInfo::create<robotParts::TouchSensor>(), DeviceInfo::create<robotParts::LightSensor>(),
+		DeviceInfo::create<robotParts::RangeSensor>(), DeviceInfo::create<robotParts::ColorSensorFull>(),
+		DeviceInfo::create<robotParts::ColorSensorRed>(), DeviceInfo::create<robotParts::ColorSensorBlue>(),
+		DeviceInfo::create<robotParts::ColorSensorGreen>(),
+		DeviceInfo::create<robotParts::ColorSensorPassive>(),
+		DeviceInfo::create<robotParts::ColorSensorAmbient>(),
+		DeviceInfo::create<robotParts::ColorSensorReflected>(),
+		DeviceInfo::create<robotParts::ColorSensorRaw>(), DeviceInfo::create<robotParts::GyroscopeSensor>(),
+		DeviceInfo::create<ev3::robotModel::parts::Ev3Compass>(),
+		DeviceInfo::create<ev3::robotModel::parts::Ev3ACIRSeeker>(),
+		DeviceInfo::create<ev3::robotModel::parts::Ev3DCIRSeeker>(),
+		DeviceInfo::create<ev3::robotModel::parts::Ev3NXTColorSensorV2Color>(),
+		DeviceInfo::create<ev3::robotModel::parts::Ev3NXTColorSensorV2RGB>(),
+		DeviceInfo::create<ev3::robotModel::parts::Ev3NXTColorSensorV2Passive>(),
+		DeviceInfo::create<ev3::robotModel::parts::Ev3NXTColorSensorV2Raw>()};
 }
 
 DeviceInfo Ev3RobotModelBase::motorInfo() const

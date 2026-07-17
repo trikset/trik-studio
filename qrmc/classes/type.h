@@ -41,7 +41,7 @@ public:
 
 	/// Provides copy of this type.
 	/// Ownership passed to the caller.
-	virtual Type* clone() const = 0;
+	virtual Type *clone() const = 0;
 
 	/// Resolves inheritance by copying properties of a parent to this type.
 	virtual bool resolve() = 0;
@@ -81,7 +81,7 @@ public:
 	virtual const Diagram &diagram() const;
 
 	/// Returns all properties of this type. Does not transfer ownership.
-	virtual const QMap<QString, Property*> &properties() const;
+	virtual const QMap<QString, Property *> &properties() const;
 
 	/// Sets a name of this type.
 	virtual void setName(const QString &name);
@@ -123,7 +123,7 @@ protected:
 
 	/// Map of all properties of a type.
 	/// Has ownership.
-	QMap<QString, Property*> mProperties;
+	QMap<QString, Property *> mProperties;
 
 	/// Flag that becomes true if this type is resolved.
 	bool mResolvingFinished = false;

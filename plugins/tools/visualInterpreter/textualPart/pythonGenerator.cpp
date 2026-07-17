@@ -17,17 +17,16 @@
 
 using namespace qReal;
 
-PythonGenerator::PythonGenerator(LogicalModelAssistInterface &logicalModelApi
-		, GraphicalModelAssistInterface &graphicalModelApi
-		, gui::MainWindowInterpretersInterface &interpretersInterface)
-		: TextCodeGenerator(logicalModelApi, graphicalModelApi, interpretersInterface)
+PythonGenerator::PythonGenerator(LogicalModelAssistInterface &logicalModelApi,
+	GraphicalModelAssistInterface &graphicalModelApi, gui::MainWindowInterpretersInterface &interpretersInterface)
+	: TextCodeGenerator(logicalModelApi, graphicalModelApi, interpretersInterface)
 {
 }
 
 QString PythonGenerator::generateScript(bool const isApplicationCondition)
 {
-	QString const script = "#!/usr/bin/python\n# -*- coding: utf-8 -*-\n\n" 
-			+ TextCodeGenerator::generateScript(isApplicationCondition);
+	QString const script = "#!/usr/bin/python\n# -*- coding: utf-8 -*-\n\n"
+	                       + TextCodeGenerator::generateScript(isApplicationCondition);
 	return script;
 }
 
@@ -56,12 +55,14 @@ QString PythonGenerator::createProperInitAndOutput(QString const &code, bool con
 		for (QString const &elemName : mPropertiesUsage.keys()) {
 			for (QString const &propertyName : *mPropertiesUsage.value(elemName)) {
 				QString const variable = elemName + delimeter + propertyName;
-				QString const curPropertyValue = property(mMatch.value(idByName(elemName)), propertyName);
-	
+				QString const curPropertyValue =
+					property(mMatch.value(idByName(elemName)), propertyName);
+
 				bool isStringProp = isStringProperty(mMatch.value(idByName(elemName)), propertyName);
-				QString const propertyValue = isStringProp ? "'" + escape(curPropertyValue) + "'" : curPropertyValue;
+				QString const propertyValue =
+					isStringProp ? "'" + escape(curPropertyValue) + "'" : curPropertyValue;
 				QString const representationOfProperty = "'\\'' + str(" + variable + ") + '\\''";
-	
+
 				init += variable + "=" + propertyValue + "; ";
 				output += " + '" + variable + "=' + " + representationOfProperty + " + ';'";
 			}

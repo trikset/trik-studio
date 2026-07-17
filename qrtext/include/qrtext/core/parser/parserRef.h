@@ -30,14 +30,14 @@ public:
 	/// Constructor, which creates empty ParserRef.
 	ParserRef()
 		: mRef(QSharedPointer<QSharedPointer<ParserInterface<TokenType>>>(
-			new QSharedPointer<ParserInterface<TokenType>>()))
+			  new QSharedPointer<ParserInterface<TokenType>>()))
 	{
 	}
 
 	/// Constructor which creates ParserRef to given parser.
 	explicit ParserRef(ParserInterface<TokenType> *parser)
 		: mRef(QSharedPointer<QSharedPointer<ParserInterface<TokenType>>>(
-			new QSharedPointer<ParserInterface<TokenType>>(parser)))
+			  new QSharedPointer<ParserInterface<TokenType>>(parser)))
 	{
 	}
 
@@ -49,20 +49,20 @@ public:
 
 	/// "Assignment operator" that assigns parsers themselves, not "external" pointers.
 	/// Note that it has different semantics with copy constructor, so be cautious.
-	ParserRef &operator <<=(const ParserRef<TokenType> &other)
+	ParserRef &operator<<=(const ParserRef<TokenType> &other)
 	{
 		*mRef = *other.mRef;
 		return *this;
 	}
 
-	ParserRef &operator <<=(ParserRef<TokenType> &&other)
+	ParserRef &operator<<=(ParserRef<TokenType> &&other)
 	{
 		*mRef = std::move(*(other.mRef));
 		return *this;
 	}
 
 	/// Returns parser itself.
-	ParserInterface<TokenType> const *operator ->() const
+	ParserInterface<TokenType> const *operator->() const
 	{
 		return mRef->data();
 	}

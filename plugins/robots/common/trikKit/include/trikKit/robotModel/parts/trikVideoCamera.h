@@ -29,9 +29,10 @@ class TrikVideoCamera : public kitBase::robotModel::robotParts::VectorSensor
 	Q_CLASSINFO("direction", "input")
 
 public:
-	TrikVideoCamera(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port)
-	    : VectorSensor(info, port) {}
+	TrikVideoCamera(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port)
+		: VectorSensor(info, port)
+	{
+	}
 };
 
 }

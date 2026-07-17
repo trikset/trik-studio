@@ -19,13 +19,9 @@
 using namespace trik::simple;
 using namespace generatorBase::simple;
 
-StopCameraGenerator::StopCameraGenerator(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, const qReal::Id &id
-		, QObject *parent)
-	: BindingGenerator(repo, customizer, id
-			, "videosensors/stop" + repo.property(id, "Mode").toString() + "Sensor.t"
-			, {}
-			, parent)
+StopCameraGenerator::StopCameraGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+	const qReal::Id &id, QObject *parent)
+	: BindingGenerator(repo, customizer, id,
+		  "videosensors/stop" + repo.property(id, "Mode").toString() + "Sensor.t", {}, parent)
 {
 }

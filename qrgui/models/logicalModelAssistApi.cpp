@@ -20,8 +20,8 @@ using namespace qReal;
 using namespace models;
 using namespace models::details;
 
-LogicalModelAssistApi::LogicalModelAssistApi(LogicalModel &logicalModel
-		, const EditorManagerInterface &editorManagerInterface)
+LogicalModelAssistApi::LogicalModelAssistApi(LogicalModel &logicalModel,
+	const EditorManagerInterface &editorManagerInterface)
 	: mModelsAssistApi(logicalModel, editorManagerInterface)
 	, mLogicalModel(logicalModel)
 {
@@ -56,9 +56,8 @@ Id LogicalModelAssistApi::createElement(const Id &parent, const Id &type)
 	return newElementId;
 }
 
-Id LogicalModelAssistApi::createElement(const Id &parent, const Id &id
-		, bool isFromLogicalModel, const QString &name
-		, const QPointF &position, const Id &preferedLogicalId)
+Id LogicalModelAssistApi::createElement(const Id &parent, const Id &id, bool isFromLogicalModel, const QString &name,
+	const QPointF &position, const Id &preferedLogicalId)
 {
 	Q_UNUSED(preferedLogicalId)
 	return mModelsAssistApi.createElement(parent, id, id, isFromLogicalModel, name, position);
@@ -115,10 +114,9 @@ void LogicalModelAssistApi::setPropertyByRoleName(const Id &elem, const QVariant
 		int index = 0;
 		QDomDocument dynamicPropertiesXml;
 		dynamicPropertiesXml.setContent(dynamicProperties);
-		for (QDomElement element = dynamicPropertiesXml.firstChildElement("properties").firstChildElement("property")
-				; !element.isNull()
-				; element = element.nextSiblingElement("property"))
-		{
+		for (QDomElement element =
+				dynamicPropertiesXml.firstChildElement("properties").firstChildElement("property");
+			!element.isNull(); element = element.nextSiblingElement("property")) {
 			if (element.attribute("name") == roleName) {
 				break;
 			}
@@ -225,8 +223,8 @@ void LogicalModelAssistApi::removeReferencesFrom(const Id &id)
 	QStringList referenceProperties = mModelsAssistApi.editorManagerInterface().referenceProperties(id.type());
 
 	for (const QString &property : referenceProperties) {
-		QStringList propertyValue = mLogicalModel.api().property(id, property).toString().split(','
-				, QString::SkipEmptyParts);
+		QStringList propertyValue =
+			mLogicalModel.api().property(id, property).toString().split(',', QString::SkipEmptyParts);
 		for (const QString &value : propertyValue) {
 			Id idValue = Id::loadFromString(value);
 			mLogicalModel.api().removeBackReference(idValue, id);
@@ -239,8 +237,8 @@ void LogicalModelAssistApi::removeReference(const Id &id, const Id &reference)
 	QStringList referenceProperties = mModelsAssistApi.editorManagerInterface().referenceProperties(id.type());
 
 	for (const QString &propertyName : referenceProperties) {
-		QStringList stringData = mLogicalModel.api().property(id, propertyName).toString().split(','
-				, QString::SkipEmptyParts);
+		QStringList stringData =
+			mLogicalModel.api().property(id, propertyName).toString().split(',', QString::SkipEmptyParts);
 		stringData.removeAll(reference.toString());
 		mLogicalModel.mutableApi().setProperty(id, propertyName, stringData.join(','));
 	}

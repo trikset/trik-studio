@@ -16,9 +16,8 @@
 
 using namespace generatorBase;
 
-BlockStructurizatorNode::BlockStructurizatorNode(IntermediateStructurizatorNode *firstNode
-		, IntermediateStructurizatorNode *secondNode
-		, QObject *parent)
+BlockStructurizatorNode::BlockStructurizatorNode(IntermediateStructurizatorNode *firstNode,
+	IntermediateStructurizatorNode *secondNode, QObject *parent)
 	: IntermediateStructurizatorNode(parent)
 	, mFirstNode(firstNode)
 	, mSecondNode(secondNode)

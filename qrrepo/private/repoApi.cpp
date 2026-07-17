@@ -56,8 +56,8 @@ IdList RepoApi::findElementsByName(const QString &name, bool sensitivity, bool r
 	return mRepository->findElementsByName(name, sensitivity, regExpression);
 }
 
-qReal::IdList RepoApi::elementsByPropertyContent(const QString &propertyContent, bool sensitivity
-		, bool regExpression) const
+qReal::IdList RepoApi::elementsByPropertyContent(const QString &propertyContent, bool sensitivity,
+	bool regExpression) const
 {
 	return mRepository->elementsByPropertyContent(propertyContent, sensitivity, regExpression);
 }
@@ -143,7 +143,8 @@ void RepoApi::removeElement(const Id &id)
 	mRepository->remove(id);
 }
 
-void RepoApi::removeLinkEnds(const QString &endName, const Id &id) {
+void RepoApi::removeLinkEnds(const QString &endName, const Id &id)
+{
 	if (hasProperty(id, endName)) {
 		Id target = property(id, endName).value<Id>();
 		if (hasProperty(target, "links")) {
@@ -492,7 +493,7 @@ void RepoApi::removeFromList(const Id &target, const QString &listName, const Id
 
 	IdList list = mRepository->property(target, listName).value<IdList>();
 	IdList temporaryRemovedList = mRepository->temporaryRemovedLinksAt(target, direction);
-	if(listName == "links" && list.contains(data)) {
+	if (listName == "links" && list.contains(data)) {
 		temporaryRemovedList.append(data);
 	}
 
@@ -542,7 +543,7 @@ IdList RepoApi::elementsByType(const QString &type, bool sensitivity, bool regEx
 {
 	const Qt::CaseSensitivity caseSensitivity = sensitivity ? Qt::CaseSensitive : Qt::CaseInsensitive;
 
-	QRegExp regExp(type,caseSensitivity);
+	QRegExp regExp(type, caseSensitivity);
 
 	IdList result;
 
@@ -613,12 +614,8 @@ QVariant RepoApi::graphicalPartProperty(const qReal::Id &id, int partIndex, cons
 	return mRepository->graphicalPartProperty(id, partIndex, propertyName);
 }
 
-void RepoApi::setGraphicalPartProperty(
-		const qReal::Id &id
-		, int partIndex
-		, const QString &propertyName
-		, const QVariant &value
-		)
+void RepoApi::setGraphicalPartProperty(const qReal::Id &id, int partIndex, const QString &propertyName,
+	const QVariant &value)
 {
 	mRepository->setGraphicalPartProperty(id, partIndex, propertyName, value);
 }

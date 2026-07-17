@@ -21,23 +21,26 @@
 
 class RoleType;
 namespace utils {
-	class OutFile;
+class OutFile;
 }
 
 class EdgeType : public GraphicType
 {
 public:
 	explicit EdgeType(Diagram *diagram);
-	Type* clone() const override;
+	Type *clone() const override;
 	~EdgeType() override;
 	void generateCode(utils::OutFile &out) override;
-	virtual bool generateEnumValues(utils::OutFile &/*out*/, bool /*isNotFirst*/) { return false; }
-	bool copyPorts(NodeType* parent) override;
+	virtual bool generateEnumValues(utils::OutFile & /*out*/, bool /*isNotFirst*/)
+	{
+		return false;
+	}
+	bool copyPorts(NodeType *parent) override;
 	bool copyPictures(GraphicType *parent) override;
-	QList<RoleType*> getRoles();
+	QList<RoleType *> getRoles();
 
 private:
-	QList<RoleType*> mRoles;
+	QList<RoleType *> mRoles;
 
 	QString mBeginArrowType;
 	QString mEndArrowType;
@@ -47,7 +50,7 @@ private:
 	QString mLineType;
 	QString mShapeType;
 	QColor mLineColor;
-	int mLineWidth { -1 };
+	int mLineWidth {-1};
 	QString mIsDividable;
 	QStringList mFromPorts;
 	QStringList mToPorts;

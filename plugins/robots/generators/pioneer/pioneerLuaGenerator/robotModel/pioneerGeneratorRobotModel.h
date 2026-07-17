@@ -25,8 +25,8 @@ class PioneerGeneratorRobotModel : public kitBase::robotModel::CommonRobotModel
 	Q_OBJECT
 
 public:
-	PioneerGeneratorRobotModel(const QString &kitId, const QString &robotId
-			, const QString &name, const QString &friendlyName, int priority);
+	PioneerGeneratorRobotModel(const QString &kitId, const QString &robotId, const QString &name,
+		const QString &friendlyName, int priority);
 
 	QString name() const override;
 	QString friendlyName() const override;

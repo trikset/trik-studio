@@ -29,7 +29,7 @@ ExterminatusPlugin::~ExterminatusPlugin()
 
 QList<qReal::ActionInfo> ExterminatusPlugin::actions()
 {
-	return { qReal::ActionInfo(&mAction, "file", "tools") };
+	return {qReal::ActionInfo(&mAction, "file", "tools")};
 }
 
 void ExterminatusPlugin::init(qReal::PluginConfigurator const &configurator)

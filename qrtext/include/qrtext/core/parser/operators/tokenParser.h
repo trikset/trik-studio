@@ -30,12 +30,13 @@ class TokenParser : public ParserInterface<TokenType>
 public:
 	/// Constructor. Takes token to parse and lambda function to execute if token is parsed successfully.
 	explicit TokenParser(TokenType token, const SemanticAction &semanticAction)
-		: mToken(token), mSemanticAction(semanticAction)
+		: mToken(token)
+		, mSemanticAction(semanticAction)
 	{
 	}
 
-	QSharedPointer<ast::Node> parse(TokenStream<TokenType> &tokenStream
-			, ParserContext<TokenType> &parserContext) const override
+	QSharedPointer<ast::Node> parse(TokenStream<TokenType> &tokenStream,
+		ParserContext<TokenType> &parserContext) const override
 	{
 		Q_UNUSED(parserContext);
 
@@ -49,7 +50,7 @@ public:
 			node->connect(token);
 		} else {
 			parserContext.reportInternalError(
-					QObject::tr("Semantic action incorrectly discarded node in TokenParser"));
+				QObject::tr("Semantic action incorrectly discarded node in TokenParser"));
 
 			return wrap(new TemporaryDiscardableNode());
 		}

@@ -18,10 +18,8 @@
 using namespace generatorBase::simple;
 using namespace qReal;
 
-AbstractSimpleGenerator::AbstractSimpleGenerator(const qrRepo::RepoApi &repo
-		, GeneratorCustomizer &customizer
-		, const Id &id
-		, QObject *parent)
+AbstractSimpleGenerator::AbstractSimpleGenerator(const qrRepo::RepoApi &repo, GeneratorCustomizer &customizer,
+	const Id &id, QObject *parent)
 	: QObject(parent)
 	, TemplateParametrizedEntity(customizer.factory()->pathsToTemplates())
 	, mRepo(repo)

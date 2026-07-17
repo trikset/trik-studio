@@ -21,9 +21,8 @@ const unsigned rangeSensorResponseSize = 10;
 using namespace ev3::robotModel::real::parts;
 using namespace kitBase::robotModel;
 
-RangeSensor::RangeSensor(const kitBase::robotModel::DeviceInfo &info
-		, const kitBase::robotModel::PortInfo &port
-		, utils::robotCommunication::RobotCommunicator &robotCommunicator)
+RangeSensor::RangeSensor(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+	utils::robotCommunication::RobotCommunicator &robotCommunicator)
 	: robotParts::RangeSensor(info, port)
 	, mImplementation(robotCommunicator, port)
 	, mRobotCommunicator(robotCommunicator)

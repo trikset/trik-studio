@@ -20,9 +20,8 @@
 using namespace twoDModel::robotModel::parts;
 using namespace kitBase::robotModel;
 
-ColorSensorFull::ColorSensorFull(const kitBase::robotModel::DeviceInfo &info
-		, const kitBase::robotModel::PortInfo &port
-		, engine::TwoDModelEngineInterface &engine)
+ColorSensorFull::ColorSensorFull(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+	engine::TwoDModelEngineInterface &engine)
 	: kitBase::robotModel::robotParts::ColorSensorFull(info, port)
 	, mEngine(engine)
 {
@@ -33,6 +32,6 @@ void ColorSensorFull::read()
 	const auto color = mEngine.readColorSensor(port());
 	const auto hue = color.hue();
 	const auto saturation = color.saturation();
-	const auto value= color.value();
+	const auto value = color.value();
 	setLastData(static_cast<int>(twoDModel::model::ColorDetector::detect(hue, saturation, value)));
 }

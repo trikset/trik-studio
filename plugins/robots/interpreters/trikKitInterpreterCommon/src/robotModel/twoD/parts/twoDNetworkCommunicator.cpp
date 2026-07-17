@@ -19,17 +19,16 @@
 using namespace trik::robotModel::twoD::parts;
 using namespace kitBase::robotModel;
 
-TwoDNetworkCommunicator::TwoDNetworkCommunicator(const DeviceInfo &info
-		, const PortInfo &port
-		,trikNetwork::MailboxInterface *mailbox)
+TwoDNetworkCommunicator::TwoDNetworkCommunicator(const DeviceInfo &info, const PortInfo &port,
+	trikNetwork::MailboxInterface *mailbox)
 	: robotModel::parts::TrikNetworkCommunicator(info, port)
 	, mMailbox(mailbox)
-{}
-
+{
+}
 
 TwoDNetworkCommunicator::~TwoDNetworkCommunicator() = default;
 
-void TwoDNetworkCommunicator::send(const QString& message, int hullNumber)
+void TwoDNetworkCommunicator::send(const QString &message, int hullNumber)
 {
 	if (mMailbox) {
 		mMailbox->send(hullNumber, message);
@@ -73,5 +72,3 @@ void TwoDNetworkCommunicator::joinNetwork(const QString &ip, int port, int hullN
 		mMailbox->joinNetwork(ip, port, hullNumber);
 	}
 }
-
-

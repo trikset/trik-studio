@@ -52,14 +52,13 @@ TEST_F(LuaInterpreterTest, assignment)
 
 TEST_F(LuaInterpreterTest, intrinsicFunction)
 {
-	mAnalyzer->addIntrinsicFunction("f", QSharedPointer<types::Function>(new types::Function(
-			QSharedPointer<core::types::TypeExpression>(new types::Float()),
-			{QSharedPointer<core::types::TypeExpression>(new types::Integer())}
-			)));
+	mAnalyzer->addIntrinsicFunction("f",
+		QSharedPointer<types::Function>(
+			new types::Function(QSharedPointer<core::types::TypeExpression>(new types::Float()),
+				{QSharedPointer<core::types::TypeExpression>(new types::Integer())})));
 
-	mInterpreter->addIntrinsicFunction("f", [](QList<QVariant> params) {
-			return params[0].toInt() * params[0].toInt();
-			});
+	mInterpreter->addIntrinsicFunction("f",
+		[](QList<QVariant> params) { return params[0].toInt() * params[0].toInt(); });
 
 	int result = interpret<int>("f(5)");
 
@@ -396,7 +395,6 @@ TEST_F(LuaInterpreterTest, operatorsTest)
 	boolResult = interpret<bool>("not 'abcd'");
 	ASSERT_TRUE(mErrors.isEmpty());
 	EXPECT_FALSE(boolResult);
-
 
 	boolResult = interpret<bool>("not ''");
 	ASSERT_TRUE(mErrors.isEmpty());

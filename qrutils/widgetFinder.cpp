@@ -20,7 +20,7 @@ QWidget *WidgetFinder::widget(QWidget *parent, const QString &type, const QStrin
 {
 	const QList<QWidget *> widgetList = parent->findChildren<QWidget *>(name);
 
-	for (QWidget * const widget : widgetList) {
+	for (QWidget *const widget : widgetList) {
 		const char *typeName = type.toLocal8Bit().data();
 		if (widget->inherits(typeName) && widget->isVisible()) {
 			return widget;

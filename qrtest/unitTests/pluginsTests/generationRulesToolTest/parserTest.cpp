@@ -33,21 +33,20 @@ void ParserTest::TearDown()
 
 TEST_F(ParserTest, parserTestForForeachExample)
 {
-	const QString stream =
-		"'enum State {' newline \n"
-			"foreach (state in State) {\n"
-			"tab state->Name ',' \n"
-			"newline \n"
-		"} \n"
-			"foreach (state in StartState) {\n"
-			"tab state->Name ',' \n"
-			"newline \n"
-		"} \n"
-			"foreach (state in EndState) {\n"
-			"tab state->Name ',' \n"
-			"newline \n"
-		"} \n"
-		"'}' \n";
+	const QString stream = "'enum State {' newline \n"
+			       "foreach (state in State) {\n"
+			       "tab state->Name ',' \n"
+			       "newline \n"
+			       "} \n"
+			       "foreach (state in StartState) {\n"
+			       "tab state->Name ',' \n"
+			       "newline \n"
+			       "} \n"
+			       "foreach (state in EndState) {\n"
+			       "tab state->Name ',' \n"
+			       "newline \n"
+			       "} \n"
+			       "'}' \n";
 
 	const auto lexerResult = mLexer->tokenize(stream);
 	const auto parserResult = mParser->parse(lexerResult, mLexer->userFriendlyTokenNames());
@@ -58,10 +57,9 @@ TEST_F(ParserTest, parserTestForForeachExample)
 TEST_F(ParserTest, parserTestForIfStatement)
 {
 	QString stream = "if (this->Name != 'StartState') { \n"
-			"newline } \n"
-			"else { \n"
-			"this->Name newline } \n"
-			;
+			 "newline } \n"
+			 "else { \n"
+			 "this->Name newline } \n";
 
 	const auto lexerResult = mLexer->tokenize(stream);
 	const auto parserResult = mParser->parse(lexerResult, mLexer->userFriendlyTokenNames());

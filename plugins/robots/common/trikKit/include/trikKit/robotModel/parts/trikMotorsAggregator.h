@@ -27,8 +27,7 @@ class TrikMotorsAggregator : public kitBase::robotModel::robotParts::MotorsAggre
 	Q_CLASSINFO("friendlyName", tr("Trik Motors Aggregator"))
 
 public:
-	TrikMotorsAggregator(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port);
+	TrikMotorsAggregator(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port);
 };
 
 }

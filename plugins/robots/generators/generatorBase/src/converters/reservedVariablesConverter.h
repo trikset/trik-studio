@@ -29,12 +29,11 @@ namespace converters {
 class ReservedVariablesConverter : public TemplateParametrizedConverter
 {
 public:
-	ReservedVariablesConverter(const QStringList &pathsToTemplates
-			, qReal::ErrorReporterInterface &errorReporter
-			, const kitBase::robotModel::RobotModelInterface &robotModel
-			, const QMap<kitBase::robotModel::PortInfo, kitBase::robotModel::DeviceInfo> &devices
-			, const simple::Binding::ConverterInterface *inputPortConverter
-			, const parts::DeviceVariables &deviceVariables);
+	ReservedVariablesConverter(const QStringList &pathsToTemplates, qReal::ErrorReporterInterface &errorReporter,
+		const kitBase::robotModel::RobotModelInterface &robotModel,
+		const QMap<kitBase::robotModel::PortInfo, kitBase::robotModel::DeviceInfo> &devices,
+		const simple::Binding::ConverterInterface *inputPortConverter,
+		const parts::DeviceVariables &deviceVariables);
 
 	~ReservedVariablesConverter() override;
 
@@ -46,7 +45,7 @@ protected:
 	qReal::ErrorReporterInterface &mErrorReporter;
 	const kitBase::robotModel::RobotModelInterface &mRobotModel;
 	const QMap<kitBase::robotModel::PortInfo, kitBase::robotModel::DeviceInfo> mDevices;
-	const simple::Binding::ConverterInterface *mInputConverter;  // Takes ownership
+	const simple::Binding::ConverterInterface *mInputConverter; // Takes ownership
 	const parts::DeviceVariables &mDeviceVariables;
 };
 

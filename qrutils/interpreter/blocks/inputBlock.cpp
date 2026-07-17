@@ -58,7 +58,7 @@ bool InputBlock::initNextBlocks()
 		}
 
 		auto const &guard = stringProperty(linkId, "Guard").toLower();
-		if ( guard == "cancel" || guard == tr("cancel")) {
+		if (guard == "cancel" || guard == tr("cancel")) {
 			if (mCancelBlockId.isNull()) {
 				mCancelBlockId = targetBlockId;
 			} else {
@@ -83,7 +83,8 @@ bool InputBlock::initNextBlocks()
 	return true;
 }
 
-void InputBlock::onValueSelected(const QString &text) {
+void InputBlock::onValueSelected(const QString &text)
+{
 	auto value = text;
 	if (value.isEmpty()) {
 		const auto defaultValue = stringProperty("default");
@@ -100,7 +101,8 @@ void InputBlock::onValueSelected(const QString &text) {
 	}
 }
 
-void InputBlock::onRejected() {
+void InputBlock::onRejected()
+{
 	if (mCancelBlockId.isNull()) {
 		warning(tr("You must input some value!"));
 		Q_EMIT done(id());
@@ -109,7 +111,8 @@ void InputBlock::onRejected() {
 	}
 }
 
-bool InputBlock::checkLinksCount() {
+bool InputBlock::checkLinksCount()
+{
 	const IdList links = mGraphicalModelApi->graphicalRepoApi().outgoingLinks(id());
 	if (links.count() == 0) {
 		error(tr("No outgoing links, please connect this block to something or use Final Node to end program"));

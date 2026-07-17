@@ -20,14 +20,13 @@ using namespace robotModel;
 using namespace utils;
 using namespace robotCommunication;
 
-TouchSensor::TouchSensor(const kitBase::robotModel::DeviceInfo &info
-		, const kitBase::robotModel::PortInfo &port
-		, utils::robotCommunication::RobotCommunicator &robotCommunicator)
+TouchSensor::TouchSensor(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+	utils::robotCommunication::RobotCommunicator &robotCommunicator)
 	: kitBase::robotModel::robotParts::TouchSensor(info, port)
 	, mImplementation(robotCommunicator, port, enums::lowLevelSensorType::SWITCH, enums::sensorMode::RAWMODE)
 {
-	connect(&mImplementation, &NxtInputDevice::sensorSpecificProcessResponse
-			, this, &TouchSensor::sensorSpecificProcessResponse);
+	connect(&mImplementation, &NxtInputDevice::sensorSpecificProcessResponse, this,
+		&TouchSensor::sensorSpecificProcessResponse);
 	connect(&mImplementation, &NxtInputDevice::configured, this, &TouchSensor::configurationCompleted);
 }
 
@@ -59,7 +58,7 @@ void TouchSensor::read()
 
 	mImplementation.setState(NxtInputDevice::pending);
 	QByteArray command(5, 0);
-	command[0] = 0x03;  //command length
+	command[0] = 0x03; //command length
 	command[1] = 0x00;
 	command[2] = enums::telegramType::directCommandResponseRequired;
 	command[3] = enums::commandCode::GETINPUTVALUES;

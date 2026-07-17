@@ -33,8 +33,8 @@ public:
 	{
 	}
 
-	QSharedPointer<ast::Node> parse(TokenStream<TokenType> &tokenStream
-			, ParserContext<TokenType> &parserContext) const override
+	QSharedPointer<ast::Node> parse(TokenStream<TokenType> &tokenStream,
+		ParserContext<TokenType> &parserContext) const override
 	{
 		if (mParser->first().contains(tokenStream.next().token())) {
 			return mParser->parse(tokenStream, parserContext);

@@ -17,7 +17,7 @@
 #include "graphicType.h"
 
 namespace utils {
-	class OutFile;
+class OutFile;
 }
 
 class PatternType : public GraphicType

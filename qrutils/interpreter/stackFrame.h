@@ -34,7 +34,7 @@ public:
 	const QList<QPair<QString, QVariant>> &properties() const;
 
 private:
-	BlockInterface *mBlock;  // Doesn't have ownership
+	BlockInterface *mBlock; // Doesn't have ownership
 	/// Maps property name to property value.
 	QList<QPair<QString, QVariant>> mProperties;
 };

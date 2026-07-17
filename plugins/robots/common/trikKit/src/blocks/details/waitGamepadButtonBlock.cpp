@@ -43,8 +43,8 @@ void WaitGamepadButtonBlock::run()
 	}
 
 	using namespace std::placeholders;
-	connect(mButton, &robotModel::parts::TrikGamepadButton::newData,
-			this, std::bind(&WaitGamepadButtonBlock::responseSlot, this, std::bind(&QVariant::value<int>, _1)));
+	connect(mButton, &robotModel::parts::TrikGamepadButton::newData, this,
+		std::bind(&WaitGamepadButtonBlock::responseSlot, this, std::bind(&QVariant::value<int>, _1)));
 
 	mButton->read();
 	mActiveWaitingTimer->start();

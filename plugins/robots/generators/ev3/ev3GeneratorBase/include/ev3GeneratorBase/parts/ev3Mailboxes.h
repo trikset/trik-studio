@@ -21,7 +21,6 @@
 
 #include "ev3GeneratorBase/ev3GeneratorBaseDeclSpec.h"
 
-
 namespace ev3 {
 namespace parts {
 

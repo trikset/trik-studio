@@ -23,10 +23,8 @@ namespace converters {
 class FloatPropertyConverter : public CodeConverterBase
 {
 public:
-	FloatPropertyConverter(lua::LuaProcessor &luaTranslator
-			, const qReal::Id &id
-			, const QString &propertyName
-			, simple::Binding::ConverterInterface *reservedVariablesConverter);
+	FloatPropertyConverter(lua::LuaProcessor &luaTranslator, const qReal::Id &id, const QString &propertyName,
+		simple::Binding::ConverterInterface *reservedVariablesConverter);
 
 	QString convert(const QString &luaCode) const override;
 };

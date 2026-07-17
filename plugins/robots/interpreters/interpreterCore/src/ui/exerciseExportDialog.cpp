@@ -38,12 +38,13 @@ ExerciseExportDialog::ExerciseExportDialog(QWidget *parent)
 
 	mWorldReadOnlyCheckBox->setChecked(qReal::SettingsManager::value("worldReadOnlyDefault").toBool());
 	mSensorsReadOnlyCheckBox->setChecked(qReal::SettingsManager::value("sensorsReadOnlyDefault").toBool());
-	mRobotPositionReadOnlyCheckBox->setChecked(qReal::SettingsManager::value("robotPositionReadOnlyDefault").toBool());
+	mRobotPositionReadOnlyCheckBox->setChecked(
+		qReal::SettingsManager::value("robotPositionReadOnlyDefault").toBool());
 	mRobotSetupReadOnlyCheckBox->setChecked(qReal::SettingsManager::value("robotSetupReadOnlyDefault").toBool());
 	mSimulationSettingsReadOnlyCheckBox->setChecked(
-			qReal::SettingsManager::value("simulationSettingsReadOnlyDefault").toBool());
+		qReal::SettingsManager::value("simulationSettingsReadOnlyDefault").toBool());
 
-	auto * const mainLayout = new QVBoxLayout(this);
+	auto *const mainLayout = new QVBoxLayout(this);
 
 	mainLayout->addWidget(mWorldReadOnlyCheckBox.data());
 	mainLayout->addWidget(mSensorsReadOnlyCheckBox.data());
@@ -51,15 +52,15 @@ ExerciseExportDialog::ExerciseExportDialog(QWidget *parent)
 	mainLayout->addWidget(mRobotSetupReadOnlyCheckBox.data());
 	mainLayout->addWidget(mSimulationSettingsReadOnlyCheckBox.data());
 
-	auto * const buttonsLayout = new QHBoxLayout();
+	auto *const buttonsLayout = new QHBoxLayout();
 
 	mainLayout->addLayout(buttonsLayout);
 
-	auto * const okButton = new QPushButton(tr("Ok"), this);
+	auto *const okButton = new QPushButton(tr("Ok"), this);
 	okButton->setDefault(true);
 	connect(okButton, &QPushButton::clicked, this, &ExerciseExportDialog::accept);
 
-	auto * const cancelButton = new QPushButton(tr("Cancel"), this);
+	auto *const cancelButton = new QPushButton(tr("Cancel"), this);
 	connect(cancelButton, &QPushButton::clicked, this, &ExerciseExportDialog::reject);
 
 	buttonsLayout->addWidget(okButton);
@@ -71,7 +72,7 @@ ExerciseExportDialog::~ExerciseExportDialog() = default;
 ReadOnlyFlags ExerciseExportDialog::readOnlyFlags() const
 {
 	ReadOnlyFlags result;
-	const auto setFlag = [&result] (ReadOnly::ReadOnlyEnum flag, const QScopedPointer<QCheckBox> &box) {
+	const auto setFlag = [&result](ReadOnly::ReadOnlyEnum flag, const QScopedPointer<QCheckBox> &box) {
 		result |= box->isChecked() ? flag : ReadOnly::ReadOnlyEnum::None;
 	};
 

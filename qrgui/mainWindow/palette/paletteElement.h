@@ -29,12 +29,8 @@ class PaletteElement
 {
 public:
 	/// Stores given parameters in self
-	PaletteElement(const Id &id
-			, const QString &name
-			, const QString &description
-			, const QIcon &icon
-			, QSize preferredSize
-			, const Id &explosionTarget);
+	PaletteElement(const Id &id, const QString &name, const QString &description, const QIcon &icon,
+		QSize preferredSize, const Id &explosionTarget);
 
 	/// Stores editor manager-derived parameters of given elements
 	PaletteElement(const EditorManagerInterface &manager, const Id &element);
@@ -46,7 +42,7 @@ public:
 	QSize preferredSize() const;
 	Id explosionTarget() const;
 
-	bool operator ==(const PaletteElement &other) const;
+	bool operator==(const PaletteElement &other) const;
 
 private:
 	Id mId;
@@ -57,12 +53,11 @@ private:
 	Id mExplosionTarget;
 };
 
-
 /// Hash function for PaletteElement for using it in QHash and QSet.
 inline uint qHash(const PaletteElement &key)
 {
 	return qHash(key.id()) ^ qHash(key.name()) ^ ::qHash(key.preferredSize().width())
-			^ ::qHash(key.preferredSize().height()) ^ qHash(key.explosionTarget());
+	       ^ ::qHash(key.preferredSize().height()) ^ qHash(key.explosionTarget());
 }
 
 }

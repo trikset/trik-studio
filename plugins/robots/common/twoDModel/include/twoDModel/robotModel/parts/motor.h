@@ -36,10 +36,8 @@ class TWO_D_MODEL_EXPORT Motor : public kitBase::robotModel::robotParts::Motor
 	Q_OBJECT
 
 public:
-	Motor(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port
-			, engine::TwoDModelEngineInterface &engine
-			);
+	Motor(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+		engine::TwoDModelEngineInterface &engine);
 
 	void on(int speed) override;
 	void stop() override;

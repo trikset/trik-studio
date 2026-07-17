@@ -24,10 +24,8 @@ const int thickness = 2;
 /// Difference between painter's and pixmap's coordinates.
 const qreal frame = 10;
 
-GesturePainter::GesturePainter(const QString &gesture
-		, const QColor &backgroungColor
-		, const QColor &gestureColor
-		, qreal size)
+GesturePainter::GesturePainter(const QString &gesture, const QColor &backgroungColor, const QColor &gestureColor,
+	qreal size)
 	: mGesture(MouseMovementManager::stringToPath(gesture))
 	, mBackgroundColor(backgroungColor)
 	, mGestureColor(gestureColor)

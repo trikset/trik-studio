@@ -38,9 +38,8 @@ class Display : public robotModel::parts::Ev3Display, public utils::Canvas
 	Q_PROPERTY(QList<utils::TextObject *> labels READ labels)
 
 public:
-	Display(kitBase::robotModel::DeviceInfo const &info
-			, kitBase::robotModel::PortInfo const &port
-			, twoDModel::engine::TwoDModelEngineInterface &engine);
+	Display(kitBase::robotModel::DeviceInfo const &info, kitBase::robotModel::PortInfo const &port,
+		twoDModel::engine::TwoDModelEngineInterface &engine);
 
 	void clearScreen() override;
 	void redraw() override;

@@ -34,9 +34,8 @@ namespace converters {
 class PortNameConverter : public TemplateParametrizedConverter
 {
 public:
-	PortNameConverter(const QStringList &pathsToTemplates
-			, const QList<kitBase::robotModel::PortInfo> &ports
-			, qReal::ErrorReporterInterface &errorReporter);
+	PortNameConverter(const QStringList &pathsToTemplates, const QList<kitBase::robotModel::PortInfo> &ports,
+		qReal::ErrorReporterInterface &errorReporter);
 
 	QString convert(const QString &portNameOrAlias) const override;
 

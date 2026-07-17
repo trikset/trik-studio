@@ -50,8 +50,8 @@ public:
 	/// @param diagram Diagram part of an Id (palette tab name).
 	/// @param element Element part of an Id (element type name).
 	/// @param id Id part of an, mm, Id. Represents identity of a model element.
-	explicit Id(const QString &editor, QString  const &diagram = ""
-			, QString  const &element = "", QString  const &id = "");
+	explicit Id(const QString &editor, QString const &diagram = "", QString const &element = "",
+		QString const &id = "");
 
 	/// Convenience constructor, creates Id by given base Id adding new part as
 	/// a next section. For example, by given editor Id and diagram name
@@ -70,10 +70,10 @@ public:
 	Id(Id &&other) = default;
 
 	/// Default assignment operator
-	Id& operator=(const Id &other) = default;
+	Id &operator=(const Id &other) = default;
 
 	/// Default moving assignment operator
-	Id& operator=(Id &&other) = default;
+	Id &operator=(Id &&other) = default;
 
 	/// Returns true if this id is an empty one (same as == Id())
 	bool isNull() const;
@@ -126,10 +126,7 @@ private:
 /// Id equality operator. Ids are equal when all their parts are equal.
 inline bool operator==(const Id &i1, const Id &i2)
 {
-	return i1.mEditor == i2.mEditor
-			&& i1.mDiagram == i2.mDiagram
-			&& i1.mElement == i2.mElement
-			&& i1.mId == i2.mId;
+	return i1.mEditor == i2.mEditor && i1.mDiagram == i2.mDiagram && i1.mElement == i2.mElement && i1.mId == i2.mId;
 }
 
 /// Id inequality operator.
@@ -142,10 +139,10 @@ inline bool operator!=(const Id &i1, const Id &i2)
 inline bool operator<(const Id &i1, const Id &i2)
 {
 	// Faster implementation then just comapring toString().
-	return i1.mEditor != i2.mEditor ? i1.mEditor < i2.mEditor
-			: i1.mDiagram != i2.mDiagram ? i1.mDiagram < i2.mDiagram
-			: i1.mElement != i2.mElement ? i1.mElement < i2.mElement
-			: i1.mId < i2.mId;
+	return i1.mEditor != i2.mEditor     ? i1.mEditor < i2.mEditor
+	       : i1.mDiagram != i2.mDiagram ? i1.mDiagram < i2.mDiagram
+	       : i1.mElement != i2.mElement ? i1.mElement < i2.mElement
+	                                    : i1.mId < i2.mId;
 }
 
 /// Hash function for Id for using it in QHash.
@@ -179,5 +176,5 @@ Q_DECLARE_METATYPE(qReal::Id)
 
 Q_DECLARE_METATYPE(qReal::IdList)
 
-QRKERNEL_EXPORT QDataStream& operator<< (QDataStream &out, const qReal::Id &id);
-QRKERNEL_EXPORT QDataStream& operator>> (QDataStream &in, qReal::Id &id);
+QRKERNEL_EXPORT QDataStream &operator<<(QDataStream &out, const qReal::Id &id);
+QRKERNEL_EXPORT QDataStream &operator>>(QDataStream &in, qReal::Id &id);

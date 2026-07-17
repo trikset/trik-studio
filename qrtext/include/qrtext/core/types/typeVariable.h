@@ -46,21 +46,19 @@ public:
 	QSharedPointer<types::TypeExpression> finalType() const;
 
 	/// Constrains a variable with possible types of other variable, with respect of given generalizations table.
-	void constrain(const QSharedPointer<TypeVariable> &other
-			, const GeneralizationsTableInterface &generalizationsTable);
+	void constrain(const QSharedPointer<TypeVariable> &other,
+		const GeneralizationsTableInterface &generalizationsTable);
 
 	/// Constrains a variable with a list of possible types, with respect of given generalizations table. Follows the
 	/// same rules as other overload of constrain().
-	void constrain(const QList<QSharedPointer<TypeExpression>> &types
-			, const GeneralizationsTableInterface &generalizationsTable);
+	void constrain(const QList<QSharedPointer<TypeExpression>> &types,
+		const GeneralizationsTableInterface &generalizationsTable);
 
 	/// Constrains an assignment with respect of given generalizations table.
 	/// If a variable can not contain any of other variable's types, then it will be generalized to closest more general
 	/// type that can. For example, in "a<int> = 0.5<float>;" identifier "a" will be generalized to type "float".
-	void constrainAssignment(const QSharedPointer<TypeVariable> &other
-			, const GeneralizationsTableInterface &generalizationsTable
-			, bool *wasCoercion
-			, bool needGeneralize);
+	void constrainAssignment(const QSharedPointer<TypeVariable> &other,
+		const GeneralizationsTableInterface &generalizationsTable, bool *wasCoercion, bool needGeneralize);
 
 	QString toString() const override;
 

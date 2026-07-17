@@ -26,8 +26,7 @@ class StylusItem : public ColorFieldItem
 	Q_OBJECT
 
 public:
-	StylusItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-	           qreal x1, qreal y1);
+	StylusItem(graphicsUtils::AbstractCoordinateSystem *metricSystem, qreal x1, qreal y1);
 	~StylusItem() override;
 	AbstractItem *clone() const override;
 
@@ -40,10 +39,10 @@ public:
 	QRectF boundingRect() const override;
 	QPainterPath shape() const override;
 
-	void drawItem(QPainter* painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
-	void drawExtractionForItem(QPainter* painter) override;
-	void drawFieldForResizeItem(QPainter* painter) override;
-	void drawScalingRects(QPainter* painter);
+	void drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
+	void drawExtractionForItem(QPainter *painter) override;
+	void drawFieldForResizeItem(QPainter *painter) override;
+	void drawScalingRects(QPainter *painter);
 
 	void setPenStyle(const QString &text) override;
 	void setPenWidth(qreal width) override;

@@ -35,7 +35,7 @@ bool FilterObject::eventFilter(QObject *object, QEvent *event)
 
 void FilterObject::triggeredActionActivated()
 {
-	QAction* const action = static_cast<QAction* const>(sender());
+	QAction *const action = static_cast<QAction *const>(sender());
 	if (action) {
 		UXInfo::reportMenuElements(action->text());
 	}
@@ -44,7 +44,7 @@ void FilterObject::triggeredActionActivated()
 void FilterObject::toggledActionActivated(bool status)
 {
 	QString const statusText = status ? "checked" : "unchecked";
-	QAction* const action = static_cast<QAction* const>(sender());
+	QAction *const action = static_cast<QAction *const>(sender());
 	if (action) {
 		QString const statusForUStatistics = "status change on: " + statusText;
 		UXInfo::reportMenuElements(action->text(), statusForUStatistics);

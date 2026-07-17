@@ -28,8 +28,7 @@ class TrikInfraredSensor : public kitBase::robotModel::robotParts::RangeSensor
 	Q_CLASSINFO("simulated", "true")
 
 public:
-	TrikInfraredSensor(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port);
+	TrikInfraredSensor(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port);
 };
 
 }

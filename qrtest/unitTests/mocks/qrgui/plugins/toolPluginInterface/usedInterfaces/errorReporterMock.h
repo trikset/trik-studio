@@ -34,13 +34,16 @@ public Q_SLOTS:
 	}
 
 public:
-	explicit ErrorReporterMock(QObject *parent = nullptr): QObject(parent) {}
+	explicit ErrorReporterMock(QObject *parent = nullptr)
+		: QObject(parent)
+	{
+	}
 	MOCK_METHOD2(addInformation, void(const QString &message, const qReal::Id &position));
 	MOCK_METHOD2(addWarning, void(const QString &message, const qReal::Id &position));
 	MOCK_METHOD2(addErrorMock, void(const QString &message, const qReal::Id &position));
 	MOCK_METHOD2(addCritical, void(const QString &message, const qReal::Id &position));
 	MOCK_METHOD3(sendBubblingMessage, void(const QString &message, int duration, QWidget *parent));
-	MOCK_METHOD2(reportOperation, void(const QFuture<void> & operation, const QString &description));
+	MOCK_METHOD2(reportOperation, void(const QFuture<void> &operation, const QString &description));
 
 	MOCK_METHOD0(clear, void());
 	MOCK_METHOD0(clearErrors, void());

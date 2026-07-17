@@ -21,15 +21,14 @@ using namespace trik::simple;
 using namespace trik::converters;
 using namespace generatorBase::simple;
 
-MarkerDownGenerator::MarkerDownGenerator(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, const qReal::Id &id
-		, QObject *parent)
-	: BindingGenerator(repo, customizer, id
-			, "markerDown.t"
-			, { Binding::createConverting("@@COLOR@@", "Color"
-					, new BackgroundColorConverter(customizer.factory()->pathsToTemplates()))
-//					, customizer.factory()->stringPropertyConverter(id, "Color"))
-			}, parent)
+MarkerDownGenerator::MarkerDownGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+	const qReal::Id &id, QObject *parent)
+	: BindingGenerator(repo, customizer, id, "markerDown.t",
+		  {
+			  Binding::createConverting("@@COLOR@@", "Color",
+				  new BackgroundColorConverter(customizer.factory()->pathsToTemplates()))
+			  //					, customizer.factory()->stringPropertyConverter(id, "Color"))
+		  },
+		  parent)
 {
 }

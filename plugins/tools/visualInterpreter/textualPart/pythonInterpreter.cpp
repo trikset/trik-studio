@@ -18,15 +18,13 @@
 
 using namespace qReal;
 
-PythonInterpreter::PythonInterpreter(QObject *parent
-		, QString const &pythonPath
-		, QString const &tempScriptPath)
-		: TextCodeInterpreter(parent)
-		, mThread(new QThread())
-		, mInterpreterProcess(new QProcess(nullptr))
-		, mPythonPath(pythonPath)
-		, mTempScriptPath(tempScriptPath)
-		, mPythonCodeProcessed(false)
+PythonInterpreter::PythonInterpreter(QObject *parent, QString const &pythonPath, QString const &tempScriptPath)
+	: TextCodeInterpreter(parent)
+	, mThread(new QThread())
+	, mInterpreterProcess(new QProcess(nullptr))
+	, mPythonPath(pythonPath)
+	, mTempScriptPath(tempScriptPath)
+	, mPythonCodeProcessed(false)
 {
 	moveToThread(mThread);
 	connect(mInterpreterProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(readOutput()));
@@ -160,7 +158,7 @@ void PythonInterpreter::readOutput()
 	if (reducedOutput == "True\n" || reducedOutput == "True") {
 		mApplicationConditionResult = true;
 		continueStep();
-	} else if (reducedOutput == "False\n"  || reducedOutput == "False") {
+	} else if (reducedOutput == "False\n" || reducedOutput == "False") {
 		mApplicationConditionResult = false;
 		continueStep();
 	} else if (reducedOutput == "empty reaction") {
@@ -171,8 +169,7 @@ void PythonInterpreter::readOutput()
 			emit readyReadStdOutput(output, TextCodeInterpreter::python);
 		} else {
 			if (!reducedOutput.isEmpty() && reducedOutput.indexOf("Python") == -1
-					&& reducedOutput.indexOf("copyright") == -1)
-			{
+				&& reducedOutput.indexOf("copyright") == -1) {
 				mErrorOccured = true;
 				emit readyReadErrOutput(reducedOutput);
 			}

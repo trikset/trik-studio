@@ -24,7 +24,7 @@ class Diagram;
 class GraphicType;
 
 namespace utils {
-	class OutFile;
+class OutFile;
 }
 
 class XmlCompiler
@@ -49,8 +49,8 @@ private:
 	void generateIncludes(utils::OutFile &out);
 	void generateInitPlugin(utils::OutFile &out);
 	void generateInitMultigraph(utils::OutFile &out);
-	void generateLinks(utils::OutFile &out, const Type *from, const QStringList &to
-			, const QString &linkType, bool areNamesNormalized);
+	void generateLinks(utils::OutFile &out, const Type *from, const QStringList &to, const QString &linkType,
+		bool areNamesNormalized);
 	void generateNameMappings(utils::OutFile &out);
 	void generateNodesAndEdgesSets(utils::OutFile &out);
 	void generateExplosionsMappings(utils::OutFile &out, const GraphicType *graphicType);

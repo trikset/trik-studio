@@ -20,8 +20,8 @@ using namespace metaEditor;
 using namespace qReal;
 
 PreferencesCompilerPage::PreferencesCompilerPage(QWidget *parent)
-		: PreferencesPage(parent)
-		, mUi(new Ui::PreferencesCompilerPage)
+	: PreferencesPage(parent)
+	, mUi(new Ui::PreferencesCompilerPage)
 {
 	setWindowIcon(QIcon(":/icons/tools.png"));
 	mUi->setupUi(this);
@@ -62,8 +62,8 @@ void PreferencesCompilerPage::changeSystem()
 	}
 }
 
-void PreferencesCompilerPage::initCompilersSettings(QString const &pathToQmake,
-		QString const &pathToMake, QString const &pluginExtension, QString const &prefix)
+void PreferencesCompilerPage::initCompilersSettings(QString const &pathToQmake, QString const &pathToMake,
+	QString const &pluginExtension, QString const &prefix)
 {
 	mUi->pathToQmake->setText(pathToQmake);
 	mUi->pathToMake->setText(pathToMake);

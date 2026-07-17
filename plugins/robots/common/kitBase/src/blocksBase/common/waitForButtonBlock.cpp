@@ -38,9 +38,8 @@ void WaitForButtonBlock::run()
 		return;
 	}
 	using namespace std::placeholders;
-	connect(mButton, &robotModel::robotParts::Button::newData
-			, this, &WaitForButtonBlock::responseSlot
-			, Qt::UniqueConnection);
+	connect(mButton, &robotModel::robotParts::Button::newData, this, &WaitForButtonBlock::responseSlot,
+		Qt::UniqueConnection);
 
 	mButton->read();
 	mActiveWaitingTimer->start();

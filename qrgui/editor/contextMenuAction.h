@@ -23,7 +23,7 @@ namespace qReal {
 namespace gui {
 namespace editor {
 
-class ContextMenuAction: public QAction
+class ContextMenuAction : public QAction
 {
 	Q_OBJECT
 

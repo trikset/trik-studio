@@ -28,17 +28,20 @@ public:
 	/// @param function - an expression which calculates to a function to call.
 	/// @param arguments - a list of actual parameters.
 	FunctionCall(QSharedPointer<Expression> const &function, QList<QSharedPointer<Expression>> const &arguments)
-		: mFunction(function), mArguments(arguments)
+		: mFunction(function)
+		, mArguments(arguments)
 	{
 	}
 
 	/// Returns function to call.
-	QSharedPointer<Expression> const &function() const {
+	QSharedPointer<Expression> const &function() const
+	{
 		return mFunction;
 	}
 
 	/// Returns list of actual parameters.
-	QList<QSharedPointer<Expression>> const &arguments() const {
+	QList<QSharedPointer<Expression>> const &arguments() const
+	{
 		return mArguments;
 	}
 
@@ -48,10 +51,11 @@ public:
 	}
 
 private:
-	void accept(core::AstVisitorInterface &visitor, const QSharedPointer<Node> &pointer
-			, const QSharedPointer<Node> &parent) override
+	void accept(core::AstVisitorInterface &visitor, const QSharedPointer<Node> &pointer,
+		const QSharedPointer<Node> &parent) override
 	{
-		static_cast<LuaAstVisitorInterface *>(&visitor)->visit(qSharedPointerCast<FunctionCall>(pointer), parent);
+		static_cast<LuaAstVisitorInterface *>(&visitor)->visit(qSharedPointerCast<FunctionCall>(pointer),
+			parent);
 	}
 
 	QSharedPointer<Expression> mFunction;

@@ -38,9 +38,8 @@ class Display : public robotModel::parts::NxtDisplay, public utils::Canvas
 	Q_PROPERTY(QList<utils::TextObject *> labels READ labels)
 
 public:
-	Display(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port
-			, twoDModel::engine::TwoDModelEngineInterface &engine);
+	Display(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+		twoDModel::engine::TwoDModelEngineInterface &engine);
 
 	void clearScreen() override;
 	void redraw() override;

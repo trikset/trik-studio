@@ -104,13 +104,13 @@ private:
 	 * @param contents It will be used for place holder bounding calculating.
 	 * @return Bounding rectangle for childItem.
 	 */
-	QRectF childBoundingRect(const QGraphicsItem * const childItem, const QRectF &contents) const;
+	QRectF childBoundingRect(const QGraphicsItem *const childItem, const QRectF &contents) const;
 
 	/**
 	 * Expands contents according to child configuration.
 	 * @param contents It will be expanded according to child configuration.
 	 */
-	void expandByChildren(QRectF& contents) const;
+	void expandByChildren(QRectF &contents) const;
 
 	/**
 	 * Prints position of child NodeElement items.

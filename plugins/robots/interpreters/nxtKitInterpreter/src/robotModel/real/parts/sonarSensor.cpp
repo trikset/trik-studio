@@ -17,18 +17,16 @@
 using namespace nxt::robotModel::real::parts;
 using namespace kitBase::robotModel;
 
-SonarSensor::SonarSensor(const DeviceInfo &info, const PortInfo &port
-		, utils::robotCommunication::RobotCommunicator &robotCommunicator)
+SonarSensor::SonarSensor(const DeviceInfo &info, const PortInfo &port,
+	utils::robotCommunication::RobotCommunicator &robotCommunicator)
 
 	: kitBase::robotModel::robotParts::RangeSensor(info, port)
-	, mImplementation(robotCommunicator, port
-			, enums::lowLevelSensorType::LOWSPEED_9V, enums::sensorMode::RAWMODE)
+	, mImplementation(robotCommunicator, port, enums::lowLevelSensorType::LOWSPEED_9V, enums::sensorMode::RAWMODE)
 	, mI2C(robotCommunicator)
 {
-	connect(&mImplementation, &NxtInputDevice::sensorSpecificProcessResponse
-			, this, &SonarSensor::sensorSpecificProcessResponse);
-	connect(&mImplementation, &NxtInputDevice::configured
-			, this, &SonarSensor::configurationCompleted);
+	connect(&mImplementation, &NxtInputDevice::sensorSpecificProcessResponse, this,
+		&SonarSensor::sensorSpecificProcessResponse);
+	connect(&mImplementation, &NxtInputDevice::configured, this, &SonarSensor::configurationCompleted);
 }
 
 void SonarSensor::read()

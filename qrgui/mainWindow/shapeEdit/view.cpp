@@ -14,18 +14,19 @@
 
 #include "view.h"
 
-View::View(QWidget * parent) : QGraphicsView(parent)
+View::View(QWidget *parent)
+	: QGraphicsView(parent)
 {
 }
 
 void View::zoomIn()
 {
-	scale(1.5,1.5);
+	scale(1.5, 1.5);
 }
 
 void View::zoomOut()
 {
-	scale(0.66,0.66);
+	scale(0.66, 0.66);
 }
 
 void View::wheelEvent(QWheelEvent *event)

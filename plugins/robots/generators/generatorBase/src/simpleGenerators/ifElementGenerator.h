@@ -24,12 +24,8 @@ class IfElementGenerator : public BindingGenerator
 {
 	Q_OBJECT
 public:
-	IfElementGenerator(const qrRepo::RepoApi &repo
-		, GeneratorCustomizer &customizer
-		, const qReal::Id &id
-		, bool elseIsEmpty
-		, bool needInverting
-		, QObject *parent = nullptr);
+	IfElementGenerator(const qrRepo::RepoApi &repo, GeneratorCustomizer &customizer, const qReal::Id &id,
+		bool elseIsEmpty, bool needInverting, QObject *parent = nullptr);
 };
 
 }

@@ -17,8 +17,8 @@
 
 using namespace twoDModel::templates::details;
 
-static auto* sSystemLibraryNs = "ts:";
-static auto* sUserLibraryNs = "u:";
+static auto *sSystemLibraryNs = "ts:";
+static auto *sUserLibraryNs = "u:";
 
 void TemplatesManager::clearTemplates(bool system)
 {
@@ -44,10 +44,9 @@ void TemplatesManager::addTemplates(std::unordered_map<QString, XmlTemplate> &te
 	}
 }
 
-
-XmlTemplate* TemplatesManager::findTemplate(const QString &templateName)
+XmlTemplate *TemplatesManager::findTemplate(const QString &templateName)
 {
-	std::unordered_map<QString, XmlTemplate>* targetMap = nullptr;
+	std::unordered_map<QString, XmlTemplate> *targetMap = nullptr;
 
 	if (templateName.startsWith(sSystemLibraryNs)) {
 		targetMap = &mSystemTemplates;

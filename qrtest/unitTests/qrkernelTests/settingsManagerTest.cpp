@@ -16,22 +16,26 @@
 
 using namespace qrTest;
 
-void SettingsManagerTest::SetUp() {
+void SettingsManagerTest::SetUp()
+{
 	mSettingsManager = qReal::SettingsManager::instance();
 	mDebugColor = mSettingsManager->value("debugColor").toString();
 }
 
-void SettingsManagerTest::TearDown() {
+void SettingsManagerTest::TearDown()
+{
 	mSettingsManager->setValue("debugColor", mDebugColor);
 	mSettingsManager->saveData();
 }
 
-TEST_F(SettingsManagerTest, getSetTest) {
+TEST_F(SettingsManagerTest, getSetTest)
+{
 	mSettingsManager->setValue("debugColor", "test color");
 	EXPECT_EQ(mSettingsManager->value("debugColor").toString(), "test color");
 }
 
-TEST_F(SettingsManagerTest, saveDataTest) {
+TEST_F(SettingsManagerTest, saveDataTest)
+{
 	mSettingsManager->setValue("debugColor", "test color");
 
 	mSettingsManager->load();
@@ -46,7 +50,8 @@ TEST_F(SettingsManagerTest, saveDataTest) {
 	EXPECT_EQ(mSettingsManager->value("debugColor").toString(), "test color");
 }
 
-TEST_F(SettingsManagerTest, defaultValueTest) {
+TEST_F(SettingsManagerTest, defaultValueTest)
+{
 	QString const val = mSettingsManager->value("aabbccTestProperty", "default value").toString();
 	EXPECT_EQ(val, "default value");
 }

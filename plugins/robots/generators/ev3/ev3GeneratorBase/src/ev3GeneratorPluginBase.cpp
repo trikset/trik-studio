@@ -23,15 +23,15 @@
 
 using namespace ev3;
 
-Ev3GeneratorPluginBase::Ev3GeneratorPluginBase(const QString &usbRobotName, const QString &usbRobotFriendlyName
-		, int usbPriority, const QString &bluetoothRobotName
-		, const QString &bluetoothRobotFriendlyName, int bluetoothPriority)
-	: mUsbRobotModel(new robotModel::Ev3GeneratorRobotModel(kitId(), "ev3UsbGeneratorRobot"
-			, usbRobotName, usbRobotFriendlyName, usbPriority
-			, utils::Singleton<communication::UsbRobotCommunicationThread>::instance()))
-	, mBluetoothRobotModel(new robotModel::Ev3GeneratorRobotModel(kitId(), "ev3BluetoothGeneratorRobot"
-			, bluetoothRobotName, bluetoothRobotFriendlyName, bluetoothPriority
-			, utils::Singleton<communication::BluetoothRobotCommunicationThread>::instance()))
+Ev3GeneratorPluginBase::Ev3GeneratorPluginBase(const QString &usbRobotName, const QString &usbRobotFriendlyName,
+	int usbPriority, const QString &bluetoothRobotName, const QString &bluetoothRobotFriendlyName,
+	int bluetoothPriority)
+	: mUsbRobotModel(new robotModel::Ev3GeneratorRobotModel(kitId(), "ev3UsbGeneratorRobot", usbRobotName,
+		  usbRobotFriendlyName, usbPriority,
+		  utils::Singleton<communication::UsbRobotCommunicationThread>::instance()))
+	, mBluetoothRobotModel(new robotModel::Ev3GeneratorRobotModel(kitId(), "ev3BluetoothGeneratorRobot",
+		  bluetoothRobotName, bluetoothRobotFriendlyName, bluetoothPriority,
+		  utils::Singleton<communication::BluetoothRobotCommunicationThread>::instance()))
 	, mBlocksFactory(new blocks::Ev3BlocksFactory({}))
 {
 }
@@ -45,11 +45,11 @@ QString Ev3GeneratorPluginBase::kitId() const
 
 QList<kitBase::robotModel::RobotModelInterface *> Ev3GeneratorPluginBase::robotModels()
 {
-	return { mUsbRobotModel.data(), mBluetoothRobotModel.data() };
+	return {mUsbRobotModel.data(), mBluetoothRobotModel.data()};
 }
 
 QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> Ev3GeneratorPluginBase::blocksFactoryFor(
-		const kitBase::robotModel::RobotModelInterface *model)
+	const kitBase::robotModel::RobotModelInterface *model)
 {
 	if (robotModels().contains(const_cast<kitBase::robotModel::RobotModelInterface *>(model))) {
 		return mBlocksFactory;

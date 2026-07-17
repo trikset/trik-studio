@@ -27,7 +27,6 @@ const QSize displaySize(200, 300);
 const qreal beepWavesSize = 120;
 const int timeQuant = 10;
 
-
 /// Experimental constant that scales gyroscope output so that it is close to real robot gyroscope readings.
 const qreal gyroscopeConstant = 875000;
 
@@ -42,8 +41,8 @@ const qreal robotWheelDiameterInPx = 16;
 const qreal robotWheelDiameterInCm = 5.6;
 const qreal pixelsInCm = robotWheelDiameterInPx / robotWheelDiameterInCm;
 
-constexpr uint black   = 0xFF000000;
-constexpr uint white   = 0xFFFFFFFF;
+constexpr uint black = 0xFF000000;
+constexpr uint white = 0xFFFFFFFF;
 
 const qreal spoilColorDispersion = 2.0;
 const qreal spoilLightDispersion = 1.0;
@@ -63,5 +62,5 @@ const qreal maxLightSensorValue = 1023;
 const int touchSensorPressedSignal = 1;
 const int touchSensorNotPressedSignal = 0;
 constexpr qreal epsilon103 = 0.001;
-static constexpr const char* backgroundColorKey = "twoDModelBackgroundColor";
+static constexpr const char *backgroundColorKey = "twoDModelBackgroundColor";
 }

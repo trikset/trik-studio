@@ -19,10 +19,8 @@
 using namespace pioneer::lua;
 using namespace generatorBase::simple;
 
-GeoTakeoffGenerator::GeoTakeoffGenerator(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, const qReal::Id &id
-		, QObject *parent)
-		: BindingGenerator(repo, customizer, id, "quadcopterCommands/takeoff.t", {}, parent)
+GeoTakeoffGenerator::GeoTakeoffGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+	const qReal::Id &id, QObject *parent)
+	: BindingGenerator(repo, customizer, id, "quadcopterCommands/takeoff.t", {}, parent)
 {
 }

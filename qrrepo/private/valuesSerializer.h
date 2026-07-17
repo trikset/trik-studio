@@ -48,8 +48,8 @@ public:
 	/// @param tagName - name of a root of resulting XML subtree.
 	/// @param map - a map to serialize.
 	/// @param document - document to which will belong created subtree.
-	static QDomElement serializeNamedVariantsMap(
-			const QString &tagName, QMap<QString, QVariant> const &map, QDomDocument &document);
+	static QDomElement serializeNamedVariantsMap(const QString &tagName, QMap<QString, QVariant> const &map,
+		QDomDocument &document);
 
 	/// Deserializes IdList from XML subtree.
 	/// @param elem - XML subtree which contains a list being deserialized, so this parameter shall be a parent to

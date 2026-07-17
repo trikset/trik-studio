@@ -62,7 +62,7 @@ twoDModel::engine::TwoDModelDisplayWidget *NullTwoDRobotModel::displayWidget() c
 
 qreal NullTwoDRobotModel::mass() const
 {
-	return 0.3;  // 300 grams
+	return 0.3; // 300 grams
 }
 
 qreal NullTwoDRobotModel::friction() const

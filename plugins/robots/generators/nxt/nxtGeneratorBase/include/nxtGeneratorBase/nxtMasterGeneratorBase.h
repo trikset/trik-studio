@@ -25,13 +25,11 @@ class ROBOTS_NXT_GENERATOR_BASE_EXPORT NxtMasterGeneratorBase : public generator
 {
 	Q_OBJECT
 public:
-	NxtMasterGeneratorBase(const qrRepo::RepoApi &repo
-			, qReal::ErrorReporterInterface &errorReporter
-			, const utils::ParserErrorReporter &parserErrorReporter
-			, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
-			, qrtext::LanguageToolboxInterface &textLanguage
-			, const qReal::Id &diagramId
-			, const QString &generatorName);
+	NxtMasterGeneratorBase(const qrRepo::RepoApi &repo, qReal::ErrorReporterInterface &errorReporter,
+		const utils::ParserErrorReporter &parserErrorReporter,
+		const kitBase::robotModel::RobotModelManagerInterface &robotModelManager,
+		qrtext::LanguageToolboxInterface &textLanguage, const qReal::Id &diagramId,
+		const QString &generatorName);
 
 protected:
 	generatorBase::GeneratorCustomizer *createCustomizer() override;

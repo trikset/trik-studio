@@ -29,19 +29,26 @@ void WaitForColorBlock::responseSlot(const QVariant &reading)
 	const QString targetColor = stringProperty("Color");
 	QString color;
 	switch (reading.toInt()) {
-	case 1: color = "black";
+	case 1:
+		color = "black";
 		break;
-	case 2: color = "blue";
+	case 2:
+		color = "blue";
 		break;
-	case 3: color = "green";
+	case 3:
+		color = "green";
 		break;
-	case 4: color = "yellow";
+	case 4:
+		color = "yellow";
 		break;
-	case 5: color = "red";
+	case 5:
+		color = "red";
 		break;
-	case 6: color = "white";
+	case 6:
+		color = "white";
 		break;
-	case 7: color = "brown";
+	case 7:
+		color = "brown";
 		break;
 	default:
 		return;

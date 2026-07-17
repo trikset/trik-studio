@@ -29,11 +29,8 @@ using namespace qReal::gui::editor;
 const int zoomAnimationInterval = 20;
 const int zoomAnimationTimes = 4;
 
-EditorView::EditorView(const models::Models &models
-		, Controller &controller
-		, const qReal::gui::editor::SceneCustomizer &sceneCustomizer
-		, const Id &rootId
-		, QWidget *parent)
+EditorView::EditorView(const models::Models &models, Controller &controller,
+	const qReal::gui::editor::SceneCustomizer &sceneCustomizer, const Id &rootId, QWidget *parent)
 	: QGraphicsView(parent)
 	, mScene(models, controller, sceneCustomizer, rootId, this)
 	, mMVIface(this, &mScene)
@@ -46,8 +43,8 @@ EditorView::EditorView(const models::Models &models
 
 	connect(&mScene, SIGNAL(zoomIn()), this, SLOT(zoomIn()));
 	connect(&mScene, SIGNAL(zoomOut()), this, SLOT(zoomOut()));
-	connect(&mScene, &EditorViewScene::sceneRectChanged, this
-			, static_cast<void (EditorView::*)(const QRectF &)>(&EditorView::setSceneRect));
+	connect(&mScene, &EditorViewScene::sceneRectChanged, this,
+		static_cast<void (EditorView::*)(const QRectF &)>(&EditorView::setSceneRect));
 
 	setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
 	setResizeAnchor(QGraphicsView::AnchorUnderMouse);
@@ -188,7 +185,7 @@ void EditorView::mousePressEvent(QMouseEvent *event)
 
 	if (event->buttons() & Qt::LeftButton) {
 		if (!(event->buttons() & Qt::RightButton) && !mTouchManager.isGestureRunning()
-				&& !itemAt(event->pos())) {
+			&& !itemAt(event->pos())) {
 			setDragMode(RubberBandDrag);
 		}
 	}
@@ -220,34 +217,32 @@ void EditorView::keyReleaseEvent(QKeyEvent *event)
 
 bool EditorView::viewportEvent(QEvent *event)
 {
-	switch (event->type())
-	{
-		case QEvent::TouchBegin:
-		case QEvent::TouchUpdate:
-		case QEvent::TouchEnd:
-			// For some reason touch viewport events can`t be processed in manual event
-			// filters, so catching them here
-			return mTouchManager.processTouchEvent(static_cast<QTouchEvent *>(event));
-		default:
-			break;
+	switch (event->type()) {
+	case QEvent::TouchBegin:
+	case QEvent::TouchUpdate:
+	case QEvent::TouchEnd:
+		// For some reason touch viewport events can`t be processed in manual event
+		// filters, so catching them here
+		return mTouchManager.processTouchEvent(static_cast<QTouchEvent *>(event));
+	default:
+		break;
 	}
 	return QGraphicsView::viewportEvent(event);
 }
 
-void EditorView::ensureElementVisible(const Element * const element)
+void EditorView::ensureElementVisible(const Element *const element)
 {
 	if (element) {
 		const qreal widgetWidth = size().width();
 		const qreal widgetHeight = size().height();
 		const qreal elementWidth = element->boundingRect().width();
 		const qreal elementHeight = element->boundingRect().height();
-		ensureVisible(element, static_cast<int>((widgetWidth - elementWidth) / 2)
-				, static_cast<int>((widgetHeight - elementHeight) / 2));
+		ensureVisible(element, static_cast<int>((widgetWidth - elementWidth) / 2),
+			static_cast<int>((widgetHeight - elementHeight) / 2));
 	}
 }
 
-void EditorView::ensureElementVisible(const Element * const element
-		, int xMargin, int yMargin)
+void EditorView::ensureElementVisible(const Element *const element, int xMargin, int yMargin)
 {
 	if (element) {
 		ensureVisible(element, xMargin, yMargin);
@@ -281,7 +276,7 @@ bool EditorView::supportsCutting() const
 
 bool EditorView::supportsReplacingBy() const
 {
-	return  true;
+	return true;
 }
 
 bool EditorView::supportsSearching() const
@@ -289,8 +284,8 @@ bool EditorView::supportsSearching() const
 	return true;
 }
 
-void EditorView::configure(QAction &zoomIn, QAction &zoomOut, QAction &undo, QAction &redo
-		, QAction &copy, QAction &paste, QAction &cut, QAction &find, QAction &findAndReplace, QAction &replaceBy)
+void EditorView::configure(QAction &zoomIn, QAction &zoomOut, QAction &undo, QAction &redo, QAction &copy,
+	QAction &paste, QAction &cut, QAction &find, QAction &findAndReplace, QAction &replaceBy)
 {
 	mScene.configure(zoomIn, zoomOut, undo, redo, copy, paste, cut, find, findAndReplace, replaceBy);
 	mScene.setSearchPanel(*mSearchLinePanel);
@@ -318,8 +313,8 @@ void EditorView::zoom(const qreal zoomFactor)
 	const qreal oldScale = transform().m11();
 	const qreal maxScale = SettingsManager::value("maxZoom").toReal();
 	const qreal minScale = SettingsManager::value("minZoom").toReal();
-	if ((zoomFactor > 1 && mathUtils::Math::geq(oldScale, maxScale)) ||
-			(zoomFactor < 1 && mathUtils::Math::leq(oldScale, minScale))) {
+	if ((zoomFactor > 1 && mathUtils::Math::geq(oldScale, maxScale))
+		|| (zoomFactor < 1 && mathUtils::Math::leq(oldScale, minScale))) {
 		return;
 	}
 
@@ -369,7 +364,9 @@ void EditorView::setSceneFont()
 	} else {
 		/// @todo: use brand manager here
 		scene()->setFont(QFont(QFontDatabase::applicationFontFamilies(
-				QFontDatabase::addApplicationFont(QDir::currentPath() + "/times.ttf")).at(0), 9));
+					       QFontDatabase::addApplicationFont(QDir::currentPath() + "/times.ttf"))
+					       .at(0),
+			9));
 		scene()->update();
 	}
 }

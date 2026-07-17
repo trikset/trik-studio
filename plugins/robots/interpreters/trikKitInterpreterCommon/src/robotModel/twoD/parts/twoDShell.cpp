@@ -22,14 +22,14 @@
 
 using namespace trik::robotModel::twoD::parts;
 
-Shell::Shell(const kitBase::robotModel::DeviceInfo &info
-		, const kitBase::robotModel::PortInfo &port
-		, twoDModel::engine::TwoDModelEngineInterface &engine)
+Shell::Shell(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+	twoDModel::engine::TwoDModelEngineInterface &engine)
 	: robotModel::parts::TrikShell(info, port)
 	, mEngine(engine)
 	, mErrorReporter(nullptr)
 {
-	connect(this, &Shell::phraseTold, this, [=](const QString &text) { Q_EMIT propertyChanged("lastPhrase", text); });
+	connect(this, &Shell::phraseTold, this,
+		[=](const QString &text) { Q_EMIT propertyChanged("lastPhrase", text); });
 }
 
 void Shell::runCommand(const QString &command)
@@ -46,7 +46,8 @@ void Shell::say(const QString &text)
 {
 	mLastPhrase = text;
 	if (mErrorReporter) {
-		mErrorReporter->sendBubblingMessage(text, 8000, mEngine.guiFacade().twoDModelSceneViewport()->parentWidget());
+		mErrorReporter->sendBubblingMessage(text, 8000,
+			mEngine.guiFacade().twoDModelSceneViewport()->parentWidget());
 	}
 
 	Q_EMIT phraseTold(text);
@@ -69,7 +70,7 @@ void Shell::readFile(const QString &filePath)
 {
 	QFile out(filePath);
 	out.open(QIODevice::ReadOnly);
-	QString text{out.readAll()};
+	QString text {out.readAll()};
 	Q_EMIT fileContents(text);
 }
 

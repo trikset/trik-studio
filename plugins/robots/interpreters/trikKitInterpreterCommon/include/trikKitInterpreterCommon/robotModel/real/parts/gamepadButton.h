@@ -25,7 +25,7 @@ namespace real {
 namespace parts {
 
 /// Implementation of TRIK Android gamepad button for interpretation mode on real robot.
-class ROBOTS_TRIK_KIT_INTERPRETER_COMMON_EXPORT GamepadButton: public robotModel::parts::TrikGamepadButton
+class ROBOTS_TRIK_KIT_INTERPRETER_COMMON_EXPORT GamepadButton : public robotModel::parts::TrikGamepadButton
 {
 	Q_OBJECT
 
@@ -35,9 +35,8 @@ public:
 	/// @param port - port on which this device is configured.
 	/// @param tcpRobotCommunicator - communicator object that is used to send/receive data to/from telemetry
 	///        service on a robot.
-	GamepadButton(const kitBase::robotModel::DeviceInfo &info
-		, const kitBase::robotModel::PortInfo &port
-		, utils::robotCommunication::TcpRobotCommunicator &tcpRobotCommunicator);
+	GamepadButton(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+		utils::robotCommunication::TcpRobotCommunicator &tcpRobotCommunicator);
 
 	void read() override;
 
@@ -48,7 +47,7 @@ private Q_SLOTS:
 private:
 	/// Communicator object that is used to send/receive data to/from telemetry service on a robot.
 	utils::robotCommunication::TcpRobotCommunicator &mRobotCommunicator;
-	int mOldValue  {-1};
+	int mOldValue {-1};
 };
 
 }

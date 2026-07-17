@@ -70,13 +70,13 @@ private:
 		} else {
 			const int fontId = QFontDatabase::addApplicationFont(defaultSceneLabelsFont());
 			if (fontId != -1) {
-				mLabelsFont.fromString(QFontDatabase::applicationFontFamilies(fontId).at(0) + ",11,-1,5,50,0,0,0,0,0");
+				mLabelsFont.fromString(
+					QFontDatabase::applicationFontFamilies(fontId).at(0) + ",11,-1,5,50,0,0,0,0,0");
 			}
 		}
 	}
 
 	QFont mLabelsFont;
-
 };
 
 }

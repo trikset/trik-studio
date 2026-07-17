@@ -21,18 +21,17 @@
 #include <twoDModel/engine/model/constants.h>
 
 namespace {
-	const auto defaultCubeEdgePx = twoDModel::pixelsInCm * 4.0f;
-	constexpr qreal cubeMass = 0.1f;
-	constexpr qreal cubeFriction = 0.3f;
-	constexpr qreal cubeRestituion = 0.8f;
-	constexpr qreal cubeAngularDamping = 6.0f;
-	constexpr qreal cubeLinearDamping = 6.0f;
+const auto defaultCubeEdgePx = twoDModel::pixelsInCm * 4.0f;
+constexpr qreal cubeMass = 0.1f;
+constexpr qreal cubeFriction = 0.3f;
+constexpr qreal cubeRestituion = 0.8f;
+constexpr qreal cubeAngularDamping = 6.0f;
+constexpr qreal cubeLinearDamping = 6.0f;
 }
 
 using namespace twoDModel::items;
 
-CubeItem::CubeItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-		QPointF position)
+CubeItem::CubeItem(graphicsUtils::AbstractCoordinateSystem *metricSystem, QPointF position)
 	: mSvgRenderer(std::make_unique<QSvgRenderer>())
 	, mEdgeSizePx("edgeSize", defaultCubeEdgePx)
 
@@ -74,8 +73,7 @@ void CubeItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *optio
 {
 	Q_UNUSED(option)
 	Q_UNUSED(widget)
-	mSvgRenderer->render(painter,
-		graphicsUtils::RectangleImpl::calcRect(x1(), y1(), x2(), y2()));
+	mSvgRenderer->render(painter, graphicsUtils::RectangleImpl::calcRect(x1(), y1(), x2(), y2()));
 }
 
 void CubeItem::setPenBrushForExtraction(QPainter *painter, const QStyleOptionGraphicsItem *option)
@@ -141,8 +139,7 @@ void CubeItem::deserialize(const QDomElement &element)
 
 	auto *coordSystem = coordinateSystem();
 	if (element.hasAttribute("edgeSize")) {
-		setEdgeSize(coordSystem->toPx(
-				    element.attribute("edgeSize").toDouble()));
+		setEdgeSize(coordSystem->toPx(element.attribute("edgeSize").toDouble()));
 	}
 
 	Serializer<CubeItem>::deserialize(element);

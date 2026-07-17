@@ -27,9 +27,8 @@ class Speaker : public robotModel::parts::Ev3Speaker
 	Q_OBJECT
 
 public:
-	Speaker(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port
-			, utils::robotCommunication::RobotCommunicator &robotCommunicator);
+	Speaker(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+		utils::robotCommunication::RobotCommunicator &robotCommunicator);
 
 	/// @param volume.Volume to play the tone (0-100).
 	/// @param frequency.Frequency of the tone in hertz.

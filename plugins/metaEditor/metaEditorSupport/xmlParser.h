@@ -36,8 +36,8 @@ public:
 private:
 	QStringList getIncludeList(QString const &fileName);
 	qReal::Id getPackageId();
-	void initMetamodel(QDomDocument const &document, QString const &directoryName
-			, QString const &baseName, QString const &pathToRoot, qReal::Id const &id);
+	void initMetamodel(QDomDocument const &document, QString const &directoryName, QString const &baseName,
+		QString const &pathToRoot, qReal::Id const &id);
 	void createDiagramAttributes(QDomElement const &diagram, qReal::Id const &diagramId);
 	void createNonGraphicElements(QDomElement const &type, qReal::Id const &diagramId);
 	void createGraphicElements(QDomElement const &type, qReal::Id const &diagramId);
@@ -46,7 +46,7 @@ private:
 	void initEdge(QDomElement const &edge, qReal::Id const &diagramId);
 	void initImport(QDomElement const &import, qReal::Id const &diagramId);
 	void setStandartConfigurations(qReal::Id const &id, qReal::Id const &parent, QString const &name,
-			QString const &displayedName);
+		QString const &displayedName);
 	void setEnumAttributes(QDomElement const &enumElement, qReal::Id const &enumId);
 	void setNodeAttributes(QDomElement const &node, qReal::Id const &nodeId);
 	void setEdgeAttributes(QDomElement const &edge, qReal::Id const &edgeId);
@@ -65,8 +65,8 @@ private:
 	void setFields(QDomElement const &element, qReal::Id const &elementId);
 	void setLineType(QDomElement const &tag, qReal::Id const &edgeId);
 	void initPossibleEdge(QDomElement const &possibleEdge, qReal::Id const &elementId);
-	void initDiagram(QDomElement const &diagram, qReal::Id const &parent,
-			QString const &name, QString const &displayedName);
+	void initDiagram(QDomElement const &diagram, qReal::Id const &parent, QString const &name,
+		QString const &displayedName);
 	void initProperty(QDomElement const &property, qReal::Id const &elementId);
 	void initConnection(QDomElement const &connection, qReal::Id const &elementId);
 	void initUsage(QDomElement const &usage, qReal::Id const &elementId);

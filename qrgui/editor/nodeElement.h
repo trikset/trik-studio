@@ -37,7 +37,6 @@
 #include "qrgui/editor/private/umlPortHandler.h"
 #include "qrgui/editor/private/portHandler.h"
 
-
 namespace qReal {
 
 class NodeElementType;
@@ -57,9 +56,7 @@ class QRGUI_EDITOR_EXPORT NodeElement : public Element
 	Q_OBJECT
 
 public:
-	explicit NodeElement(const NodeElementType &type
-			, const Id &id
-			, const models::Models &models);
+	explicit NodeElement(const NodeElementType &type, const Id &id, const models::Models &models);
 
 	~NodeElement() override;
 
@@ -150,7 +147,7 @@ public:
 	bool isExpanded() const;
 
 	bool isFolded() const;
-	QGraphicsRectItem* placeholder() const;
+	QGraphicsRectItem *placeholder() const;
 
 	QList<EdgeElement *> const edgeList() const;
 	QList<NodeElement *> const childNodes() const;
@@ -191,17 +188,7 @@ private Q_SLOTS:
 	void initRenderedDiagram();
 
 private:
-	enum DragState {
-		None
-		, TopLeft
-		, Top
-		, TopRight
-		, Left
-		, Right
-		, BottomLeft
-		, Bottom
-		, BottomRight
-	};
+	enum DragState { None, TopLeft, Top, TopRight, Left, Right, BottomLeft, Bottom, BottomRight };
 
 	/**
 	 * Resizes node trying to use newContents as new shape
@@ -232,7 +219,7 @@ private:
 	void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
 	void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
 	void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
-	void mouseDoubleClickEvent (QGraphicsSceneMouseEvent *event) override;
+	void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event) override;
 
 	void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
 	void hoverMoveEvent(QGraphicsSceneHoverEvent *event) override;

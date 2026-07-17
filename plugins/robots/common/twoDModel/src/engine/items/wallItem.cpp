@@ -26,13 +26,12 @@ using namespace qReal;
 using namespace graphicsUtils;
 
 namespace {
-	constexpr qreal wallFriction = 1.0f;
-	constexpr qreal wallRestituion = 0.8f;
-	constexpr qreal wallIntersectionEps = 1e-5;
+constexpr qreal wallFriction = 1.0f;
+constexpr qreal wallRestituion = 0.8f;
+constexpr qreal wallIntersectionEps = 1e-5;
 }
 
-WallItem::WallItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-		QPointF begin, QPointF end)
+WallItem::WallItem(graphicsUtils::AbstractCoordinateSystem *metricSystem, QPointF begin, QPointF end)
 	: mImage(":/icons/2d_wall.png")
 {
 	mFriction.setValue(wallFriction);
@@ -45,14 +44,12 @@ WallItem::WallItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 	setFlags(ItemIsSelectable | ItemIsMovable | ItemSendsScenePositionChanges);
 	setPrivateData();
 	setAcceptDrops(true);
-	connect(this, &AbstractItem::mouseInteractionStarted, this, [this](){
-			mEstimatedPos = pos();
-		});
+	connect(this, &AbstractItem::mouseInteractionStarted, this, [this]() { mEstimatedPos = pos(); });
 }
 
 WallItem *WallItem::clone() const
 {
-	auto * const cloned = new WallItem(coordinateSystem(), {x1(), y1()}, {x2(), y2()});
+	auto *const cloned = new WallItem(coordinateSystem(), {x1(), y1()}, {x2(), y2()});
 	AbstractItem::copyTo(cloned);
 	connect(this, &AbstractItem::positionChanged, cloned, &WallItem::recalculateBorders);
 	connect(this, &AbstractItem::x1Changed, cloned, &WallItem::recalculateBorders);
@@ -66,7 +63,7 @@ WallItem *WallItem::clone() const
 
 QAction *WallItem::wallTool()
 {
-	auto * const result = new QAction(QIcon(":/icons/2d_wall.png"), tr("Wall (W)"), nullptr);
+	auto *const result = new QAction(QIcon(":/icons/2d_wall.png"), tr("Wall (W)"), nullptr);
 	result->setShortcuts({QKeySequence(Qt::Key_W), QKeySequence(Qt::Key_2)});
 	result->setCheckable(true);
 	return result;
@@ -133,7 +130,7 @@ void WallItem::setPenBrushForExtraction(QPainter *painter, const QStyleOptionGra
 	QPen pen(getStrokePen());
 	if (!isSelected() && isHovered()) {
 		pen.setWidthF(2.25);
-		pen.setDashPattern({3,3});
+		pen.setDashPattern({3, 3});
 		pen.setCapStyle(Qt::FlatCap);
 	}
 	painter->setPen(pen);
@@ -157,11 +154,8 @@ QDomElement WallItem::serialize(QDomElement &parent) const
 	setPenBrushToElement(wallNode, "wall");
 	auto pos = scenePos();
 	const auto *coordSystem = coordinateSystem();
-	mLineImpl.serialize(wallNode,
-	                    coordSystem->toUnit(x1() + pos.x()),
-	                    coordSystem->toUnit(y1() + pos.y()),
-	                    coordSystem->toUnit(x2() + pos.x()),
-	                    coordSystem->toUnit(y2() + pos.y()));
+	mLineImpl.serialize(wallNode, coordSystem->toUnit(x1() + pos.x()), coordSystem->toUnit(y1() + pos.y()),
+		coordSystem->toUnit(x2() + pos.x()), coordSystem->toUnit(y2() + pos.y()));
 	SolidItem::serialize(wallNode);
 	return wallNode;
 }
@@ -220,8 +214,8 @@ void WallItem::reshapeRectWithShift()
 		const qreal corner1Y = dragState() == TopLeft ? y2() : y1();
 		const qreal corner2X = dragState() == TopLeft ? x1() : x2();
 		const qreal corner2Y = dragState() == TopLeft ? y1() : y2();
-		const QPair<qreal, qreal> res = mLineImpl.reshapeRectWithShiftForLine(corner1X, corner1Y, corner2X, corner2Y
-				, differenceX, differenceY, size);
+		const QPair<qreal, qreal> res = mLineImpl.reshapeRectWithShiftForLine(corner1X, corner1Y, corner2X,
+			corner2Y, differenceX, differenceY, size);
 		if (dragState() == TopLeft) {
 			setX1(res.first);
 			setY1(res.second);
@@ -285,12 +279,10 @@ QPolygonF WallItem::collidingPolygon() const
 	Q_ASSERT(adIntersection.length() == 2);
 
 	// it is rotated rect
-	if (abIntersection.first() == abIntersection.last()
-			|| bcIntersection.first() == bcIntersection.last()
-			|| dcIntersection.first() == dcIntersection.last()
-			|| adIntersection.first() == adIntersection.last()) {
-		return QPolygonF() << abIntersection.first() << bcIntersection.first()
-				<< dcIntersection.first() << adIntersection.first();
+	if (abIntersection.first() == abIntersection.last() || bcIntersection.first() == bcIntersection.last()
+		|| dcIntersection.first() == dcIntersection.last() || adIntersection.first() == adIntersection.last()) {
+		return QPolygonF() << abIntersection.first() << bcIntersection.first() << dcIntersection.first()
+		                   << adIntersection.first();
 	}
 
 	// else we have the same polygon as abcdBoundingRect

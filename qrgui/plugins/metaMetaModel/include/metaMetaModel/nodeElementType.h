@@ -88,7 +88,7 @@ public:
 	/// Returns true if this node has vertical layout.
 	/// Has sense only when isContainer() returns true.
 	/// @todo: Rewrite this shit with QGraphicsLayouts.
-	bool isSortingContainer() const ;
+	bool isSortingContainer() const;
 
 	/// Turns on or off vertical layout of chidren of this element.
 	/// Has sense only when isContainer() returns true.

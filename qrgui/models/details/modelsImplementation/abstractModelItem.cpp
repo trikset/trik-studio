@@ -22,7 +22,8 @@ using namespace models::details::modelsImplementation;
 AbstractModelItem::~AbstractModelItem() = default;
 
 AbstractModelItem::AbstractModelItem(const Id &id, AbstractModelItem *parent)
-	: mParent(parent), mId(id)
+	: mParent(parent)
+	, mId(id)
 {
 }
 
@@ -31,7 +32,7 @@ Id AbstractModelItem::id() const
 	return mId;
 }
 
-AbstractModelItem* AbstractModelItem::parent() const
+AbstractModelItem *AbstractModelItem::parent() const
 {
 	return mParent;
 }
@@ -49,8 +50,8 @@ AbstractModelItem::PointerList AbstractModelItem::children() const
 void AbstractModelItem::addChild(AbstractModelItem *child)
 {
 	if (mChildren.contains(child)) {
-		throw Exception("Model: Adding already existing child " + child->id().toString()
-				+ "  to object " + mId.toString());
+		throw Exception("Model: Adding already existing child " + child->id().toString() + "  to object "
+				+ mId.toString());
 	}
 
 	mChildren.append(child);
@@ -61,8 +62,8 @@ void AbstractModelItem::removeChild(AbstractModelItem *child)
 	if (mChildren.contains(child)) {
 		mChildren.removeAll(child);
 	} else {
-		throw Exception("Model: Removing nonexistent child " + child->id().toString()
-				+ "  from object " + mId.toString());
+		throw Exception("Model: Removing nonexistent child " + child->id().toString() + "  from object "
+				+ mId.toString());
 	}
 }
 

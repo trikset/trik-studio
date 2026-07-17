@@ -23,10 +23,8 @@ class DrawLineGenerator : public generatorBase::simple::BindingGenerator
 {
 	Q_OBJECT
 public:
-	DrawLineGenerator(const qrRepo::RepoApi &repo
-			, generatorBase::GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent);
+	DrawLineGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+		const qReal::Id &id, QObject *parent);
 };
 
 }

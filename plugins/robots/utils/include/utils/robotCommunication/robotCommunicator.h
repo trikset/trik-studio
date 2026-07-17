@@ -41,7 +41,8 @@ public:
 	QSharedPointer<RobotCommunicationThreadInterface> currentCommunicator() const;
 
 	/// Sets object that implements communication with robot. Does not take ownership.
-	void setRobotCommunicationThreadObject(const QSharedPointer<RobotCommunicationThreadInterface> &robotCommunication);
+	void setRobotCommunicationThreadObject(
+		const QSharedPointer<RobotCommunicationThreadInterface> &robotCommunication);
 
 Q_SIGNALS:
 	void errorOccured(const QString &message);

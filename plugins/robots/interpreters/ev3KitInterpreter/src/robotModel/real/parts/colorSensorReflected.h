@@ -28,9 +28,8 @@ class ColorSensorReflected : public kitBase::robotModel::robotParts::ColorSensor
 {
 	Q_OBJECT
 public:
-	ColorSensorReflected(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port
-			, utils::robotCommunication::RobotCommunicator &robotCommunicator);
+	ColorSensorReflected(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+		utils::robotCommunication::RobotCommunicator &robotCommunicator);
 
 	void read() override;
 

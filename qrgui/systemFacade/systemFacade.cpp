@@ -23,10 +23,10 @@ SystemFacade::SystemFacade()
 	, mModels(new models::Models(QString(), *mEditorManager))
 	, mEvents(new SystemEvents())
 {
-	QObject::connect(&mModels->logicalModelAssistApi(), &models::LogicalModelAssistApi::elementAdded
-			, &*mEvents, &SystemEvents::logicalElementAdded);
-	QObject::connect(&mModels->graphicalModelAssistApi(), &models::GraphicalModelAssistApi::elementAdded
-			, &*mEvents, &SystemEvents::graphicalElementAdded);
+	QObject::connect(&mModels->logicalModelAssistApi(), &models::LogicalModelAssistApi::elementAdded, &*mEvents,
+		&SystemEvents::logicalElementAdded);
+	QObject::connect(&mModels->graphicalModelAssistApi(), &models::GraphicalModelAssistApi::elementAdded, &*mEvents,
+		&SystemEvents::graphicalElementAdded);
 }
 
 SystemFacade::~SystemFacade()

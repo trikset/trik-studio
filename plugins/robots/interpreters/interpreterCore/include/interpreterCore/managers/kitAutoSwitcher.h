@@ -31,12 +31,10 @@ class KitAutoSwitcher : public QObject
 	Q_OBJECT
 
 public:
-	KitAutoSwitcher(const qReal::ProjectManagementInterface &projectManager
-			, qReal::LogicalModelAssistInterface &logicalModel
-			, const BlocksFactoryManagerInterface &factoryManager
-			, const KitPluginManager &kitPluginManager
-			, RobotModelManager &robotModelManager
-			, QObject *parent = nullptr);
+	KitAutoSwitcher(const qReal::ProjectManagementInterface &projectManager,
+		qReal::LogicalModelAssistInterface &logicalModel, const BlocksFactoryManagerInterface &factoryManager,
+		const KitPluginManager &kitPluginManager, RobotModelManager &robotModelManager,
+		QObject *parent = nullptr);
 
 private Q_SLOTS:
 	void onProjectOpened();

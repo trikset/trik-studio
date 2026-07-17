@@ -24,10 +24,8 @@ class PioneerGetLPSYaw : public generatorBase::simple::BindingGenerator
 {
 	Q_OBJECT
 public:
-	PioneerGetLPSYaw(const qrRepo::RepoApi &repo
-			, generatorBase::GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent);
+	PioneerGetLPSYaw(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+		const qReal::Id &id, QObject *parent);
 };
 
 }

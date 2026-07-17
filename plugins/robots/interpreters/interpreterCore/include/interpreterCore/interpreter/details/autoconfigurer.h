@@ -34,10 +34,9 @@ public:
 	/// @param graphicalModelApi - contains information about diagram.
 	/// @param blocksTable - contains "code-behind" objects for blocks.
 	/// @param errorReporter - error reporter to report errors to.
-	Autoconfigurer(const qReal::GraphicalModelAssistInterface &graphicalModelApi
-			, const qReal::LogicalModelAssistInterface &logicalModelApi
-			, BlocksTable &blocksTable
-			, qReal::ErrorReporterInterface &errorReporter);
+	Autoconfigurer(const qReal::GraphicalModelAssistInterface &graphicalModelApi,
+		const qReal::LogicalModelAssistInterface &logicalModelApi, BlocksTable &blocksTable,
+		qReal::ErrorReporterInterface &errorReporter);
 
 	/// Performs extended validation of devices correspondence to the user-defined configuration.
 	/// May display errors or automaticly modify sensors configuration.

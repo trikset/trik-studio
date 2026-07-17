@@ -26,12 +26,10 @@ class EllipseRegion : public RegionItem
 {
 	Q_OBJECT
 public:
-	explicit EllipseRegion(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-	                       QGraphicsItem *parent = nullptr);
+	explicit EllipseRegion(graphicsUtils::AbstractCoordinateSystem *metricSystem, QGraphicsItem *parent = nullptr);
 
 	explicit EllipseRegion(QSharedPointer<graphicsUtils::AbstractItem> ellipseItem,
-			graphicsUtils::AbstractCoordinateSystem *metricSystem,
-			QGraphicsItem *parent = nullptr);
+		graphicsUtils::AbstractCoordinateSystem *metricSystem, QGraphicsItem *parent = nullptr);
 	void drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
 	void resizeItem(QGraphicsSceneMouseEvent *event) override;
@@ -42,6 +40,7 @@ public:
 	QRectF calcNecessaryBoundingRect() const override;
 	void reshapeRectWithShift() override;
 	QPainterPath shapeWihoutResizeArea() const override;
+
 private:
 	QPointF mEstimatedPos;
 	QString regionType() const override;

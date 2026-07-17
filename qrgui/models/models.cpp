@@ -27,18 +27,17 @@ Models::Models(const QString &workingCopy, const EditorManagerInterface &editorM
 	mGraphicalModel.reset(new models::details::GraphicalModel(repoApi, editorManager));
 	mGraphicalPartModel.reset(new models::details::GraphicalPartModel(*repoApi, *mGraphicalModel));
 
-	auto * const graphicalAssistApi
-			= new GraphicalModelAssistApi(*mGraphicalModel, *mGraphicalPartModel, editorManager);
+	auto *const graphicalAssistApi =
+		new GraphicalModelAssistApi(*mGraphicalModel, *mGraphicalPartModel, editorManager);
 
 	mGraphicalModel->setAssistApi(graphicalAssistApi);
 	mGraphicalModel->reinit();
 
-	QObject::connect(&*mGraphicalModel, &models::details::GraphicalModel::rowsAboutToBeRemoved
-			, &*mGraphicalPartModel, &models::details::GraphicalPartModel::rowsAboutToBeRemovedInGraphicalModel);
+	QObject::connect(&*mGraphicalModel, &models::details::GraphicalModel::rowsAboutToBeRemoved,
+		&*mGraphicalPartModel, &models::details::GraphicalPartModel::rowsAboutToBeRemovedInGraphicalModel);
 
 	mLogicalModel.reset(new models::details::LogicalModel(repoApi, editorManager));
 	mExploser.reset(new Exploser(logicalModelAssistApi()));
-
 
 	mLogicalModel->connectToGraphicalModel(&*mGraphicalModel);
 	mGraphicalModel->connectToLogicalModel(&*mLogicalModel);
@@ -46,12 +45,12 @@ Models::Models(const QString &workingCopy, const EditorManagerInterface &editorM
 
 Models::~Models() = default;
 
-QAbstractItemModel* Models::graphicalModel() const
+QAbstractItemModel *Models::graphicalModel() const
 {
 	return &*mGraphicalModel;
 }
 
-QAbstractItemModel* Models::logicalModel() const
+QAbstractItemModel *Models::logicalModel() const
 {
 	return &*mLogicalModel;
 }

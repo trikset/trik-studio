@@ -32,7 +32,8 @@ protected:
 
 	QSharedPointer<qrtext::core::ast::Node> parseAndAnalyze(const QString &code);
 
-	void interpret(const QString &code) {
+	void interpret(const QString &code)
+	{
 		auto const ast = parseAndAnalyze(code);
 		if (mErrors.isEmpty()) {
 			mInterpreter->interpret(ast, *mAnalyzer);

@@ -24,10 +24,8 @@ class WaitForSonarBlockGenerator : public BindingGenerator
 {
 	Q_OBJECT
 public:
-	WaitForSonarBlockGenerator(const qrRepo::RepoApi &repo
-			, GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent = nullptr);
+	WaitForSonarBlockGenerator(const qrRepo::RepoApi &repo, GeneratorCustomizer &customizer, const qReal::Id &id,
+		QObject *parent = nullptr);
 };
 
 }

@@ -32,15 +32,12 @@ using namespace generatorBase;
 
 using namespace qReal;
 
-Ev3RbfMasterGenerator::Ev3RbfMasterGenerator(const qrRepo::RepoApi &repo
-		, qReal::ErrorReporterInterface &errorReporter
-		, const utils::ParserErrorReporter &parserErrorReporter
-		, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
-		, qrtext::LanguageToolboxInterface &textLanguage
-		, const qReal::Id &diagramId
-		, const QString &generatorName)
-	: Ev3MasterGeneratorBase(repo, errorReporter, parserErrorReporter
-			, robotModelManager, textLanguage, diagramId, generatorName)
+Ev3RbfMasterGenerator::Ev3RbfMasterGenerator(const qrRepo::RepoApi &repo, qReal::ErrorReporterInterface &errorReporter,
+	const utils::ParserErrorReporter &parserErrorReporter,
+	const kitBase::robotModel::RobotModelManagerInterface &robotModelManager,
+	qrtext::LanguageToolboxInterface &textLanguage, const qReal::Id &diagramId, const QString &generatorName)
+	: Ev3MasterGeneratorBase(repo, errorReporter, parserErrorReporter, robotModelManager, textLanguage, diagramId,
+		  generatorName)
 	, mLuaProcessorInstance(nullptr)
 {
 }
@@ -49,8 +46,8 @@ void Ev3RbfMasterGenerator::initialize()
 {
 	Ev3MasterGeneratorBase::initialize();
 	if (mLuaProcessorInstance) {
-		mLuaProcessorInstance->configure(mCustomizer->factory()->variables()
-				, dynamic_cast<Ev3RbfGeneratorFactory *>(mCustomizer->factory()));
+		mLuaProcessorInstance->configure(mCustomizer->factory()->variables(),
+			dynamic_cast<Ev3RbfGeneratorFactory *>(mCustomizer->factory()));
 	}
 }
 
@@ -69,17 +66,17 @@ QString Ev3RbfMasterGenerator::generate(const QString &indentString)
 	mTextLanguage.clear();
 	mCustomizer->factory()->setMainDiagramId(mDiagram);
 
-	for (generatorBase::parts::InitTerminateCodeGenerator *generator
-			: mCustomizer->factory()->initTerminateGenerators()) {
+	for (generatorBase::parts::InitTerminateCodeGenerator *generator :
+		mCustomizer->factory()->initTerminateGenerators()) {
 		generator->reinit();
 	}
 
 	QString mainCode;
-	const semantics::SemanticTree * const gotoMainControlFlow = mGotoControlFlowGenerator->generate();
+	const semantics::SemanticTree *const gotoMainControlFlow = mGotoControlFlowGenerator->generate();
 	if (gotoMainControlFlow) {
 		mainCode = gotoMainControlFlow->toString(1, indentString);
-		const generatorBase::parts::Subprograms::GenerationResult gotoSubprogramsResult = mCustomizer->factory()
-				->subprograms()->generate(mGotoControlFlowGenerator.get(), indentString);
+		const generatorBase::parts::Subprograms::GenerationResult gotoSubprogramsResult =
+			mCustomizer->factory()->subprograms()->generate(mGotoControlFlowGenerator.get(), indentString);
 		if (gotoSubprogramsResult != generatorBase::parts::Subprograms::GenerationResult::success) {
 			mainCode = QString();
 		}
@@ -95,19 +92,19 @@ QString Ev3RbfMasterGenerator::generate(const QString &indentString)
 	resultCode.replace("@@THREADS_FORWARDING@@", mCustomizer->factory()->threads().generateDeclarations());
 	resultCode.replace("@@THREADS@@", mCustomizer->factory()->threads().generateImplementations(indentString));
 	resultCode.replace("@@MAIN_CODE@@", mainCode);
-	resultCode.replace("@@CONSTANTS_INITIALIZATION@@", utils::StringUtils::addIndent(
-			mLuaProcessorInstance->constantsValuation(), 1, indentString));
-	resultCode.replace("@@ARRAYS_INITIALIZATION@@", utils::StringUtils::addIndent(
-			mLuaProcessorInstance->arraysInitialization(), 1, indentString));
-	resultCode.replace("@@INITHOOKS@@", utils::StringUtils::addIndent(
-			mCustomizer->factory()->initCode(), 1, indentString));
-	resultCode.replace("@@TERMINATEHOOKS@@", utils::StringUtils::addIndent(
-			mCustomizer->factory()->terminateCode(), 1, indentString));
-	resultCode.replace("@@USERISRHOOKS@@", utils::StringUtils::addIndent(
-			mCustomizer->factory()->isrHooksCode(), 1, indentString));
+	resultCode.replace("@@CONSTANTS_INITIALIZATION@@",
+		utils::StringUtils::addIndent(mLuaProcessorInstance->constantsValuation(), 1, indentString));
+	resultCode.replace("@@ARRAYS_INITIALIZATION@@",
+		utils::StringUtils::addIndent(mLuaProcessorInstance->arraysInitialization(), 1, indentString));
+	resultCode.replace("@@INITHOOKS@@",
+		utils::StringUtils::addIndent(mCustomizer->factory()->initCode(), 1, indentString));
+	resultCode.replace("@@TERMINATEHOOKS@@",
+		utils::StringUtils::addIndent(mCustomizer->factory()->terminateCode(), 1, indentString));
+	resultCode.replace("@@USERISRHOOKS@@",
+		utils::StringUtils::addIndent(mCustomizer->factory()->isrHooksCode(), 1, indentString));
 
-	const QString constantsString = utils::StringUtils::addIndent(
-			mCustomizer->factory()->variables()->generateConstantsString(), 1, "\t");
+	const QString constantsString =
+		utils::StringUtils::addIndent(mCustomizer->factory()->variables()->generateConstantsString(), 1, "\t");
 	QStringList variablesList = mCustomizer->factory()->variables()->generateVariableString().split('\n');
 	std::sort(variablesList.begin(), variablesList.end());
 	const QString variablesString = utils::StringUtils::addIndent(variablesList.join('\n'), 1, "\t");
@@ -145,13 +142,12 @@ bool Ev3RbfMasterGenerator::supportsGotoGeneration() const
 
 generatorBase::lua::LuaProcessor *Ev3RbfMasterGenerator::createLuaProcessor()
 {
-	mLuaProcessorInstance = new lua::Ev3LuaProcessor(mErrorReporter, mTextLanguage
-			, mParserErrorReporter, this);
+	mLuaProcessorInstance = new lua::Ev3LuaProcessor(mErrorReporter, mTextLanguage, mParserErrorReporter, this);
 	return mLuaProcessorInstance;
 }
 
 GeneratorCustomizer *Ev3RbfMasterGenerator::createCustomizer()
 {
-	return new Ev3RbfGeneratorCustomizer(mRepo, mErrorReporter
-			, mRobotModelManager, *createLuaProcessor(), mGeneratorName, supportsSwitchUnstableToBreaks());
+	return new Ev3RbfGeneratorCustomizer(mRepo, mErrorReporter, mRobotModelManager, *createLuaProcessor(),
+		mGeneratorName, supportsSwitchUnstableToBreaks());
 }

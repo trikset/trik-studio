@@ -38,7 +38,7 @@ QDomDocument xmlUtils::loadDocument(const QString &fileName, QString *errorMessa
 	return doc;
 }
 
-QString xmlUtils::getTagContent(const QDomElement& parentElement, bool withParent)
+QString xmlUtils::getTagContent(const QDomElement &parentElement, bool withParent)
 {
 	QString result;
 	QTextStream stream(&result);
@@ -48,7 +48,7 @@ QString xmlUtils::getTagContent(const QDomElement& parentElement, bool withParen
 		return result;
 	}
 	auto &&child = parentElement.firstChild();
-	while(!child.isNull()) {
+	while (!child.isNull()) {
 		child.save(stream, 4);
 		child = child.nextSibling();
 	}
@@ -95,9 +95,9 @@ QString xmlUtils::ensureXmlFieldsOrder(const QString &xmlInput)
 
 		case QXmlStreamReader::Characters:
 			if (reader.isCDATA()) {
-			    writer.writeCDATA(reader.text().toString());
+				writer.writeCDATA(reader.text().toString());
 			} else if (!reader.isWhitespace()) {
-			    writer.writeCharacters(reader.text().toString());
+				writer.writeCharacters(reader.text().toString());
 			}
 			break;
 
@@ -117,8 +117,8 @@ QString xmlUtils::ensureXmlFieldsOrder(const QString &xmlInput)
 	return result;
 }
 
-QDomDocument xmlUtils::loadDocumentWithConversion(const QString &loadFileName
-		, QString *errorMessage, int *errorLine, int *errorColumn)
+QDomDocument xmlUtils::loadDocumentWithConversion(const QString &loadFileName, QString *errorMessage, int *errorLine,
+	int *errorColumn)
 {
 	const QDomDocument save = utils::xmlUtils::loadDocument(loadFileName, errorMessage, errorLine, errorColumn);
 	if (errorMessage && !errorMessage->isEmpty()) {
@@ -129,7 +129,7 @@ QDomDocument xmlUtils::loadDocumentWithConversion(const QString &loadFileName
 
 	QDomElement oldRobot = root.firstChildElement("robots").firstChildElement("robot");
 	if (oldRobot.hasAttribute("position") || oldRobot.hasAttribute("direction")
-			|| !oldRobot.firstChildElement("startPosition").isNull()) {
+		|| !oldRobot.firstChildElement("startPosition").isNull()) {
 		QDomElement world = root.firstChildElement("world");
 		if (world.isNull()) {
 			world = root.ownerDocument().createElement("world");

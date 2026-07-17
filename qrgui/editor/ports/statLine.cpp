@@ -27,9 +27,10 @@ StatLine::StatLine(const LinePortInfo &info)
 	, mInitWidth(info.initWidth)
 	, mInitHeight(info.initHeight)
 	, mType(info.type)
-{}
+{
+}
 
-StatLine::operator QLineF () const
+StatLine::operator QLineF() const
 {
 	return mLine;
 }

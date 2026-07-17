@@ -26,14 +26,23 @@ class TrikMotorEmu : public trikControl::MotorInterface
 
 	// DeviceInterface interface
 public:
-	TrikMotorEmu(kitBase::robotModel::robotParts::Motor * motor);
+	TrikMotorEmu(kitBase::robotModel::robotParts::Motor *motor);
 
-	Status status() const override {return Status::ready;}
+	Status status() const override
+	{
+		return Status::ready;
+	}
 
 	// MotorInterface interface
 public:
-	int minControl() const override {return -100;}
-	int maxControl() const override {return 100;}
+	int minControl() const override
+	{
+		return -100;
+	}
+	int maxControl() const override
+	{
+		return 100;
+	}
 
 public Q_SLOTS:
 	void setPower(int power, bool constrain) override;
@@ -43,8 +52,7 @@ public Q_SLOTS:
 	void setPeriod(int uSec = 20000) override;
 
 private:
-	kitBase::robotModel::robotParts::Motor * mMotor;
-
+	kitBase::robotModel::robotParts::Motor *mMotor;
 };
 
 }

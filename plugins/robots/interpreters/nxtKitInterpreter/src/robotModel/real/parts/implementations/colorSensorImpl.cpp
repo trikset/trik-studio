@@ -19,14 +19,13 @@ using namespace kitBase::robotModel;
 
 const int maxColorValue = 1023;
 
-ColorSensorImpl::ColorSensorImpl(const PortInfo &port
-		, utils::robotCommunication::RobotCommunicator &robotCommunicator
-		, enums::lowLevelSensorType::SensorTypeEnum lowLevelType)
+ColorSensorImpl::ColorSensorImpl(const PortInfo &port, utils::robotCommunication::RobotCommunicator &robotCommunicator,
+	enums::lowLevelSensorType::SensorTypeEnum lowLevelType)
 	: mImplementation(robotCommunicator, port, lowLevelType, enums::sensorMode::RAWMODE)
 	, mLowLevelType(lowLevelType)
 {
-	connect(&mImplementation, &NxtInputDevice::sensorSpecificProcessResponse
-			, this, &ColorSensorImpl::sensorSpecificProcessResponse);
+	connect(&mImplementation, &NxtInputDevice::sensorSpecificProcessResponse, this,
+		&ColorSensorImpl::sensorSpecificProcessResponse);
 	connect(&mImplementation, &NxtInputDevice::configured, this, &ColorSensorImpl::configurationCompleted);
 }
 
@@ -47,7 +46,7 @@ void ColorSensorImpl::read()
 	mImplementation.setState(NxtInputDevice::pending);
 
 	QByteArray command(5, 0);
-	command[0] = 0x03;  //command length
+	command[0] = 0x03; //command length
 	command[1] = 0x00;
 	command[2] = enums::telegramType::directCommandResponseRequired;
 	command[3] = enums::commandCode::GETINPUTVALUES;
@@ -67,7 +66,7 @@ void ColorSensorImpl::sensorSpecificProcessResponse(const QByteArray &reading)
 	} else {
 		mImplementation.setState(NxtInputDevice::idle);
 		if (mLowLevelType == enums::lowLevelSensorType::COLORFULL) {
-			Q_EMIT newData(0xff & reading[14]);  // Scaled value, used in ColorFull mode.
+			Q_EMIT newData(0xff & reading[14]); // Scaled value, used in ColorFull mode.
 		} else {
 			Q_EMIT newData(((0xff & reading[10]) | ((0xff & reading[11]) << 8)) * 100 / maxColorValue);
 		}

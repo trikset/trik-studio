@@ -30,10 +30,8 @@ class ROBOTS_GENERATOR_EXPORT AbstractSimpleGenerator : public QObject, public T
 {
 	Q_OBJECT
 public:
-	AbstractSimpleGenerator(const qrRepo::RepoApi &repo
-			, GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent = nullptr);
+	AbstractSimpleGenerator(const qrRepo::RepoApi &repo, GeneratorCustomizer &customizer, const qReal::Id &id,
+		QObject *parent = nullptr);
 
 	~AbstractSimpleGenerator() override;
 

@@ -17,16 +17,16 @@
 using namespace qReal::gui::editor;
 
 EdgeArrangeCriteria::EdgeArrangeCriteria(int edgeType, qreal yOffset, qreal xOffset)
-		: mEdgeType(edgeType)
-		, mYOffset(yOffset)
-		, mXOffset(xOffset)
+	: mEdgeType(edgeType)
+	, mYOffset(yOffset)
+	, mXOffset(xOffset)
 {
 }
 
 bool EdgeArrangeCriteria::operator<(const EdgeArrangeCriteria &other) const
 {
-	QPair<int, QPair<qreal, qreal> > first = qMakePair(mEdgeType, qMakePair(mYOffset, mXOffset));
-	QPair<int, QPair<qreal, qreal> > second = qMakePair(other.mEdgeType, qMakePair(other.mYOffset, other.mXOffset));
+	QPair<int, QPair<qreal, qreal>> first = qMakePair(mEdgeType, qMakePair(mYOffset, mXOffset));
+	QPair<int, QPair<qreal, qreal>> second = qMakePair(other.mEdgeType, qMakePair(other.mYOffset, other.mXOffset));
 
 	return first < second;
 }

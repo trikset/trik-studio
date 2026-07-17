@@ -21,8 +21,8 @@
 
 using namespace qReal::rulesChecker;
 
-RulesChecker::RulesChecker(qrRepo::GraphicalRepoApi const &graphicalRepoApi
-		, qReal::gui::MainWindowInterpretersInterface &interpretersInterface)
+RulesChecker::RulesChecker(qrRepo::GraphicalRepoApi const &graphicalRepoApi,
+	qReal::gui::MainWindowInterpretersInterface &interpretersInterface)
 	: mGRepoApi(&graphicalRepoApi)
 	, mWindowInterface(&interpretersInterface)
 	, mNoErrorsOccured(true)
@@ -34,15 +34,15 @@ RulesChecker::RulesChecker(qrRepo::GraphicalRepoApi const &graphicalRepoApi
 
 void RulesChecker::exportToXml()
 {
-	QString fileName = QFileDialog::getSaveFileName(mWindowInterface->windowWidget()
-			, tr("Save File"), tr("export.xml"), tr("*.xml"));
+	QString fileName = QFileDialog::getSaveFileName(mWindowInterface->windowWidget(), tr("Save File"),
+		tr("export.xml"), tr("*.xml"));
 	if (!fileName.endsWith(".xml")) {
 		fileName += ".xml";
 	}
 
 	// TODO: get your own pointer to RepoControlInterface, don't cast mGRepoApi
-	qrRepo::RepoControlInterface const *repoControlApi
-			= static_cast<qrRepo::RepoControlInterface const *>(static_cast<qrRepo::RepoApi const *>(mGRepoApi));
+	qrRepo::RepoControlInterface const *repoControlApi =
+		static_cast<qrRepo::RepoControlInterface const *>(static_cast<qrRepo::RepoApi const *>(mGRepoApi));
 	if (repoControlApi) {
 		repoControlApi->exportToXml(fileName);
 	}
@@ -55,7 +55,7 @@ bool RulesChecker::makeDetour(Id const &currentNode, IdList &usedNodes)
 	}
 
 	if (!mDiagramElements.contains(currentNode)) {
-		return true;  // we already have made detour of forward nodes
+		return true; // we already have made detour of forward nodes
 	}
 
 	mDiagramElements.removeOne(currentNode);
@@ -173,7 +173,8 @@ void RulesChecker::checkCurrentDiagram()
 		checkDiagram();
 
 		if (mNoErrorsOccured) {
-			mWindowInterface->errorReporter()->addInformation(tr("Current diagram compiled without errors"));
+			mWindowInterface->errorReporter()->addInformation(
+				tr("Current diagram compiled without errors"));
 		}
 	}
 }
@@ -307,5 +308,4 @@ qReal::IdList RulesChecker::outgoingSequenceFlow(qReal::Id const &id) const
 		}
 	}
 	return result;
-
 }

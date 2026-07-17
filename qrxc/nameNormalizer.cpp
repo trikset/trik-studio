@@ -25,8 +25,7 @@ QString NameNormalizer::normalize(const QString &name)
 	result = result.simplified().replace(" ", "_");
 	result = result.replace("::", "_");
 	result = upperFirst(result);
-	while (result.endsWith("_"))
-	{
+	while (result.endsWith("_")) {
 		result.chop(1);
 	}
 	return result;
@@ -34,14 +33,12 @@ QString NameNormalizer::normalize(const QString &name)
 
 QString NameNormalizer::upperFirst(const QString &string)
 {
-	if (string.size() < 1)
-	{
+	if (string.size() < 1) {
 		return "";
 	}
 	QStringList tokens = string.split(" ");
 	QStringList upperedTokens;
-	for (auto &&token : tokens)
-	{
+	for (auto &&token : tokens) {
 		upperedTokens.append(token.at(0).toUpper() + token.mid(1));
 	}
 	return upperedTokens.join("_");

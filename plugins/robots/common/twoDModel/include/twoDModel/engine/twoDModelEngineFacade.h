@@ -51,14 +51,13 @@ public:
 
 	~TwoDModelEngineFacade() override;
 
-	void init(const kitBase::EventsForKitPluginInterface &eventsForKitPlugin
-			, const qReal::SystemEvents &systemEvents
-			, qReal::LogicalModelAssistInterface &logicalModel
-			, qReal::ControllerInterface &controller
-			, qReal::gui::MainWindowInterpretersInterface &interpretersInterface
-			, qReal::gui::MainWindowDockInterface &dockInterface
-			, const qReal::ProjectManagementInterface &projectManager
-			, kitBase::InterpreterControlInterface &interpreterControl) override;
+	void init(const kitBase::EventsForKitPluginInterface &eventsForKitPlugin,
+		const qReal::SystemEvents &systemEvents, qReal::LogicalModelAssistInterface &logicalModel,
+		qReal::ControllerInterface &controller,
+		qReal::gui::MainWindowInterpretersInterface &interpretersInterface,
+		qReal::gui::MainWindowDockInterface &dockInterface,
+		const qReal::ProjectManagementInterface &projectManager,
+		kitBase::InterpreterControlInterface &interpreterControl) override;
 
 	kitBase::DevicesConfigurationProvider &devicesConfigurationProvider() override;
 
@@ -76,9 +75,9 @@ private:
 	QScopedPointer<model::Model> mModel;
 	QPointer<view::TwoDModelWidget> mView {};
 	QScopedPointer<TwoDModelEngineInterface> mApi;
-	utils::SmartDock *mDock {};  // Transfers ownership to main window indirectly
+	utils::SmartDock *mDock {}; // Transfers ownership to main window indirectly
 
-	qReal::TabInfo::TabType mCurrentTabInfo { qReal::TabInfo::TabType::other }; // temp hack
+	qReal::TabInfo::TabType mCurrentTabInfo {qReal::TabInfo::TabType::other}; // temp hack
 };
 
 }

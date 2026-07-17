@@ -17,9 +17,10 @@
 using namespace trik;
 using namespace blocks::details;
 
-SendMessageBlock::SendMessageBlock(kitBase::robotModel::RobotModelInterface &robotModel):
-	kitBase::blocksBase::common::DeviceBlock<robotModel::parts::TrikNetworkCommunicator>(robotModel)
-{}
+SendMessageBlock::SendMessageBlock(kitBase::robotModel::RobotModelInterface &robotModel)
+	: kitBase::blocksBase::common::DeviceBlock<robotModel::parts::TrikNetworkCommunicator>(robotModel)
+{
+}
 
 void SendMessageBlock::doJob(robotModel::parts::TrikNetworkCommunicator &network)
 {

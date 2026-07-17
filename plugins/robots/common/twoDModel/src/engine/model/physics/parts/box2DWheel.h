@@ -31,11 +31,9 @@ class Box2DRobot;
 class Box2DWheel
 {
 public:
-	Box2DWheel(twoDModel::model::RobotModel * const robotModel,
-		   twoDModel::model::physics::Box2DPhysicsEngine *engine
-			, b2Vec2 positionBox2D
-			, b2Rot rotationBox2D
-			, Box2DRobot &mRobot);
+	Box2DWheel(twoDModel::model::RobotModel *const robotModel,
+		twoDModel::model::physics::Box2DPhysicsEngine *engine, b2Vec2 positionBox2D, b2Rot rotationBox2D,
+		Box2DRobot &mRobot);
 	~Box2DWheel();
 
 	b2Vec2 getLateralVelocity() const;
@@ -46,6 +44,7 @@ public:
 	b2BodyId getBodyId();
 
 	QPolygonF mDebuggingDrawPolygon;
+
 protected:
 	float prevSpeed = 0;
 

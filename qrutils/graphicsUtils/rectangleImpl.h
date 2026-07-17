@@ -20,8 +20,7 @@
 
 #include "qrutils/utilsDeclSpec.h"
 
-namespace graphicsUtils
-{
+namespace graphicsUtils {
 
 class QRUTILS_EXPORT RectangleImpl
 {
@@ -31,8 +30,8 @@ public:
 	static void drawRectItem(QPainter *painter, qreal x1, qreal y1, qreal x2, qreal y2);
 	static void drawEllipseItem(QPainter *painter, qreal x1, qreal y1, qreal x2, qreal y2);
 	static void drawImageItem(QPainter *painter, qreal x1, qreal y1, qreal x2, qreal y2, const QImage &image);
-	static void drawImageItemWithMirrored(QPainter *painter
-			, qreal x1, qreal y1, qreal x2, qreal y2, const QImage &myImage);
+	static void drawImageItemWithMirrored(QPainter *painter, qreal x1, qreal y1, qreal x2, qreal y2,
+		const QImage &myImage);
 	static QPointF deserializePoint(const QString &string);
 
 	static QRectF calcRect(qreal x1, qreal y1, qreal x2, qreal y2);

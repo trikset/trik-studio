@@ -153,8 +153,8 @@ int Version::stageNumber() const
 
 QString Version::toString() const
 {
-	return QString("%1.%2.%3").arg(QString::number(mMajor)
-			, QString::number(mMinor), QString::number(mBuild)) + suffixString();
+	return QString("%1.%2.%3").arg(QString::number(mMajor), QString::number(mMinor), QString::number(mBuild))
+	       + suffixString();
 }
 
 QString Version::suffixString() const

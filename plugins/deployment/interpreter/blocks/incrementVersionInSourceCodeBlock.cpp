@@ -25,10 +25,7 @@ IncrementVersionInSourceCodeBlock::IncrementVersionInSourceCodeBlock(ShellWidget
 
 QStringList IncrementVersionInSourceCodeBlock::arguments()
 {
-	return {
-		QCoreApplication::applicationDirPath() + "/deployment-scripts/version_increment/increment_trik_studio.sh"
-		, eval<QString>("Path")
-		, eval<QString>("OldVersion")
-		, eval<QString>("NewVersion")
-	};
+	return {QCoreApplication::applicationDirPath()
+			+ "/deployment-scripts/version_increment/increment_trik_studio.sh",
+		eval<QString>("Path"), eval<QString>("OldVersion"), eval<QString>("NewVersion")};
 }

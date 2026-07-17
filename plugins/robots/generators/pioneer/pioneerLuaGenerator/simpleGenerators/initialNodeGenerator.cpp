@@ -20,10 +20,8 @@
 
 using namespace pioneer::lua;
 
-InitialNodeGenerator::InitialNodeGenerator(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, const qReal::Id &id
-		, QObject *parent)
+InitialNodeGenerator::InitialNodeGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+	const qReal::Id &id, QObject *parent)
 	: BindingGenerator(repo, customizer, id, "initialNode.t", {}, parent)
 {
 	QString label = customizer.factory()->labelGenerator(id, customizer)->generate();

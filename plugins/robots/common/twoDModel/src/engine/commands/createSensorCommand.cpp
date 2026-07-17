@@ -16,12 +16,9 @@
 
 using namespace twoDModel::commands;
 
-CreateSensorCommand::CreateSensorCommand(model::SensorsConfiguration &configurator
-		, const QString &robotModel
-		, const kitBase::robotModel::PortInfo &port
-		, const kitBase::robotModel::DeviceInfo &device
-		, QPointF position
-		, const qreal direction)
+CreateSensorCommand::CreateSensorCommand(model::SensorsConfiguration &configurator, const QString &robotModel,
+	const kitBase::robotModel::PortInfo &port, const kitBase::robotModel::DeviceInfo &device, QPointF position,
+	const qreal direction)
 	: mImpl(configurator, robotModel, port, device, position, direction)
 {
 }

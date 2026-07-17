@@ -71,8 +71,7 @@ bool EditorViewMViface::isDescendentOf(const QModelIndex &descendent, const QMod
 	return false;
 }
 
-QModelIndex EditorViewMViface::moveCursor(QAbstractItemView::CursorAction
-		, Qt::KeyboardModifiers)
+QModelIndex EditorViewMViface::moveCursor(QAbstractItemView::CursorAction, Qt::KeyboardModifiers)
 {
 	return {};
 }
@@ -92,7 +91,7 @@ bool EditorViewMViface::isIndexHidden(const QModelIndex &) const
 	return false;
 }
 
-void EditorViewMViface::setSelection(const QRect&, QItemSelectionModel::SelectionFlags )
+void EditorViewMViface::setSelection(const QRect &, QItemSelectionModel::SelectionFlags)
 {
 }
 
@@ -169,8 +168,10 @@ void EditorViewMViface::rowsInserted(const QModelIndex &parent, int start, int e
 
 		const ElementType &elementType = mLogicalAssistApi->editorManagerInterface().elementType(currentId);
 		Element *elem = elementType.type() == ElementType::Type::node
-				? static_cast<Element *>(new NodeElement(elementType.toNode(), currentId, mScene->models()))
-				: static_cast<Element *>(new EdgeElement(elementType.toEdge(), currentId, mScene->models()));
+		                        ? static_cast<Element *>(
+						  new NodeElement(elementType.toNode(), currentId, mScene->models()))
+		                        : static_cast<Element *>(
+						  new EdgeElement(elementType.toEdge(), currentId, mScene->models()));
 
 		elem->setController(&mScene->controller());
 
@@ -188,9 +189,7 @@ void EditorViewMViface::rowsInserted(const QModelIndex &parent, int start, int e
 }
 
 void EditorViewMViface::handleNodeElementsForRowsInserted(
-		const QList<QPair<NodeElement *, QPersistentModelIndex> > &nodes
-		, const QModelIndex &parent
-		)
+	const QList<QPair<NodeElement *, QPersistentModelIndex>> &nodes, const QModelIndex &parent)
 {
 	for (const QPair<NodeElement *, QPersistentModelIndex> &p : nodes) {
 		NodeElement *elem = p.first;
@@ -202,18 +201,20 @@ void EditorViewMViface::handleNodeElementsForRowsInserted(
 			QPointF ePos = model()->data(current, roles::positionRole).toPointF();
 			// setting position before parent definition 'itemChange' to work correctly
 			elem->setPos(ePos);
-			elem->setGeometry(mGraphicalAssistApi->configuration(elem->id()).boundingRect().translated(ePos.toPoint()));
+			elem->setGeometry(mGraphicalAssistApi->configuration(elem->id())
+					.boundingRect()
+					.translated(ePos.toPoint()));
 			handleAddingSequenceForRowsInserted(parent, elem, current);
 			handleElemDataForRowsInserted(elem, current);
 
-			if (currentId.element() == "Class" && mGraphicalAssistApi->children(currentId).empty())
-			{
+			if (currentId.element() == "Class" && mGraphicalAssistApi->children(currentId).empty()) {
 				needToProcessChildren = false;
 				for (int i = 0; i < 2; i++) {
 					QString curChildElementType = (i == 0) ? "MethodsContainer" : "FieldsContainer";
-					Id newUuid = Id("Kernel_metamodel", "Kernel", curChildElementType, QUuid::createUuid().toString());
-					mGraphicalAssistApi->createElement(currentId, newUuid
-							, false,  "(anonymous something)", QPointF(0, 0));
+					Id newUuid = Id("Kernel_metamodel", "Kernel", curChildElementType,
+						QUuid::createUuid().toString());
+					mGraphicalAssistApi->createElement(currentId, newUuid, false,
+						"(anonymous something)", QPointF(0, 0));
 				}
 			}
 		}
@@ -229,9 +230,7 @@ void EditorViewMViface::handleNodeElementsForRowsInserted(
 }
 
 void EditorViewMViface::handleEdgeElementsForRowsInserted(
-		const QList<QPair<EdgeElement *, QPersistentModelIndex>> &edges
-		, const QModelIndex &parent
-		)
+	const QList<QPair<EdgeElement *, QPersistentModelIndex>> &edges, const QModelIndex &parent)
 {
 	for (const QPair<EdgeElement *, QPersistentModelIndex> &p : edges) {
 		EdgeElement *elem = p.first;
@@ -249,13 +248,13 @@ void EditorViewMViface::handleEdgeElementsForRowsInserted(
 	}
 }
 
-void EditorViewMViface::handleAddingSequenceForRowsInserted(const QModelIndex &parent
-		, Element *elem, const QPersistentModelIndex &current)
+void EditorViewMViface::handleAddingSequenceForRowsInserted(const QModelIndex &parent, Element *elem,
+	const QPersistentModelIndex &current)
 {
 	if (item(parent)) {
 		elem->setParentItem(item(parent));
 		QModelIndex next = current.sibling(current.row() + 1, 0);
-		if(next.isValid() && item(next) != nullptr) {
+		if (next.isValid() && item(next) != nullptr) {
 			elem->stackBefore(item(next));
 		}
 	} else {
@@ -271,7 +270,7 @@ void EditorViewMViface::handleElemDataForRowsInserted(Element *elem, const QPers
 	mView->setFocus();
 }
 
-void EditorViewMViface::rowsAboutToBeRemoved(QModelIndex  const &parent, int start, int end)
+void EditorViewMViface::rowsAboutToBeRemoved(QModelIndex const &parent, int start, int end)
 {
 	for (int row = start; row <= end; ++row) {
 		QModelIndex curr = model()->index(row, 0, parent);
@@ -299,11 +298,11 @@ void EditorViewMViface::rowsAboutToBeRemoved(QModelIndex  const &parent, int sta
 	QAbstractItemView::rowsAboutToBeRemoved(parent, start, end);
 }
 
-void EditorViewMViface::rowsAboutToBeMoved(const QModelIndex &sourceParent, int sourceStart, int sourceEnd
-		, const QModelIndex &destinationParent, int destinationRow)
+void EditorViewMViface::rowsAboutToBeMoved(const QModelIndex &sourceParent, int sourceStart, int sourceEnd,
+	const QModelIndex &destinationParent, int destinationRow)
 {
 	Q_UNUSED(sourceEnd);
-	Q_ASSERT(sourceStart == sourceEnd);  // only one element is permitted to be moved
+	Q_ASSERT(sourceStart == sourceEnd); // only one element is permitted to be moved
 	QPersistentModelIndex movedElementIndex = sourceParent.child(sourceStart, 0);
 	QPersistentModelIndex newSiblingIndex = destinationParent.child(destinationRow, 0);
 
@@ -330,8 +329,8 @@ void EditorViewMViface::rowsAboutToBeMoved(const QModelIndex &sourceParent, int 
 	}
 }
 
-void EditorViewMViface::rowsMoved(const QModelIndex &sourceParent, int sourceStart, int sourceEnd
-		, const QModelIndex &destinationParent, int destinationRow)
+void EditorViewMViface::rowsMoved(const QModelIndex &sourceParent, int sourceStart, int sourceEnd,
+	const QModelIndex &destinationParent, int destinationRow)
 {
 	Q_UNUSED(sourceParent);
 	Q_UNUSED(sourceStart);
@@ -350,8 +349,8 @@ void EditorViewMViface::rowsMoved(const QModelIndex &sourceParent, int sourceSta
 	movedElement->updateData();
 }
 
-void EditorViewMViface::dataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight
-		, const QVector<int> &roles)
+void EditorViewMViface::dataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight,
+	const QVector<int> &roles)
 {
 	Q_UNUSED(roles)
 	for (int row = topLeft.row(); row <= bottomRight.row(); ++row) {
@@ -416,9 +415,8 @@ void EditorViewMViface::removeItem(const QPersistentModelIndex &index)
 	}
 }
 
-void EditorViewMViface::configure(models::GraphicalModelAssistApi &graphicalAssistApi
-		, models::LogicalModelAssistApi &logicalAssistApi
-		, models::Exploser &exploser)
+void EditorViewMViface::configure(models::GraphicalModelAssistApi &graphicalAssistApi,
+	models::LogicalModelAssistApi &logicalAssistApi, models::Exploser &exploser)
 {
 	mGraphicalAssistApi = &graphicalAssistApi;
 	mLogicalAssistApi = &logicalAssistApi;
@@ -426,10 +424,10 @@ void EditorViewMViface::configure(models::GraphicalModelAssistApi &graphicalAssi
 }
 
 /// @todo: set logical model in constructor
-void EditorViewMViface::setLogicalModel(QAbstractItemModel * const logicalModel)
+void EditorViewMViface::setLogicalModel(QAbstractItemModel *const logicalModel)
 {
-	connect(logicalModel, SIGNAL(dataChanged(QModelIndex, QModelIndex))
-			, this, SLOT(logicalDataChanged(QModelIndex, QModelIndex)), Qt::UniqueConnection);
+	connect(logicalModel, SIGNAL(dataChanged(QModelIndex, QModelIndex)), this,
+		SLOT(logicalDataChanged(QModelIndex, QModelIndex)), Qt::UniqueConnection);
 }
 
 void EditorViewMViface::logicalDataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight)

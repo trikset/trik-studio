@@ -40,15 +40,12 @@ class RegionItem : public view::TwoDSceneItem
 
 public:
 	/// A constructor for creating a region before deserialization.
-	explicit RegionItem(
-			graphicsUtils::AbstractCoordinateSystem *metricSystem,
-	                QGraphicsItem *parent = nullptr);
+	explicit RegionItem(graphicsUtils::AbstractCoordinateSystem *metricSystem, QGraphicsItem *parent = nullptr);
 
 	/// A constructor for creating a region from an existing graphicsUtils::AbstractItem
 	/// by copying the fields of that AbstractItem once.
-	explicit RegionItem(QSharedPointer<graphicsUtils::AbstractItem>& abstractItem,
-			graphicsUtils::AbstractCoordinateSystem *metricSystem,
-			QGraphicsItem *parent = nullptr);
+	explicit RegionItem(QSharedPointer<graphicsUtils::AbstractItem> &abstractItem,
+		graphicsUtils::AbstractCoordinateSystem *metricSystem, QGraphicsItem *parent = nullptr);
 
 	/// Returns true if the region is filled with hatching.
 	bool filled() const;
@@ -96,9 +93,15 @@ public:
 
 	/// The initial visibility of the region obtained during deserialization
 	///  (possibly explicitly set by the user in the region editing mode in the future)
-	bool visible() const { return mVisible; }
+	bool visible() const
+	{
+		return mVisible;
+	}
 
-	void setVisibleAttribute(bool visible) {mVisible = visible; }
+	void setVisibleAttribute(bool visible)
+	{
+		mVisible = visible;
+	}
 
 	/// Now that Region is a full-fledged graphical element that can be resized,
 	/// it is important to ensure that no extra regions are included in its shape when checking constraints.
@@ -111,13 +114,14 @@ public:
 	void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) override;
 Q_SIGNALS:
 	void changeVisibilityWithContextMenu();
+
 protected:
 	virtual QString regionType() const = 0;
 
 private:
 	QPointF deserializePoint(const QString &textX, const QString &textY);
 	bool mVisible {};
-	QGraphicsTextItem *mTextItem;  // Takes ownership
+	QGraphicsTextItem *mTextItem; // Takes ownership
 	QPointF mTextPosition {};
 	bool mFilled;
 	bool mDumpPositionInfo {true};

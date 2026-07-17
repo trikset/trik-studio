@@ -12,7 +12,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. */
 
-
 #include "styles.h"
 
 #include <QApplication>
@@ -22,30 +21,22 @@
 
 using namespace qReal;
 
-QPalette Styles::loadPalette(const QString& pathToPalette) const {
+QPalette Styles::loadPalette(const QString &pathToPalette) const
+{
 	QSettings settings(pathToPalette, QSettings::IniFormat);
 	QPalette palette;
 
-	static QMap<QString, QPalette::ColorRole> colorRoles = {
-		{"Window", QPalette::Window},
-		{"WindowText", QPalette::WindowText},
-		{"Base", QPalette::Base},
-		{"AlternateBase", QPalette::AlternateBase},
-		{"ToolTipBase", QPalette::ToolTipBase},
-		{"ToolTipText", QPalette::ToolTipText},
-		{"Text", QPalette::Text},
-		{"Dark", QPalette::Dark},
-		{"Shadow", QPalette::Shadow},
-		{"Button", QPalette::Button},
-		{"ButtonText", QPalette::ButtonText},
-		{"BrightText", QPalette::BrightText},
-		{"Link", QPalette::Link},
-		{"Highlight", QPalette::Highlight},
-		{"HighlightedText", QPalette::HighlightedText}
-	};
+	static QMap<QString, QPalette::ColorRole> colorRoles = {{"Window", QPalette::Window},
+		{"WindowText", QPalette::WindowText}, {"Base", QPalette::Base},
+		{"AlternateBase", QPalette::AlternateBase}, {"ToolTipBase", QPalette::ToolTipBase},
+		{"ToolTipText", QPalette::ToolTipText}, {"Text", QPalette::Text}, {"Dark", QPalette::Dark},
+		{"Shadow", QPalette::Shadow}, {"Button", QPalette::Button}, {"ButtonText", QPalette::ButtonText},
+		{"BrightText", QPalette::BrightText}, {"Link", QPalette::Link}, {"Highlight", QPalette::Highlight},
+		{"HighlightedText", QPalette::HighlightedText}};
 
 	for (const auto &group : {"PaletteActive", "PaletteDisabled"}) {
-		QPalette::ColorGroup colorGroup = (QString(group) == "PaletteDisabled") ? QPalette::Disabled : QPalette::Active;
+		QPalette::ColorGroup colorGroup =
+			(QString(group) == "PaletteDisabled") ? QPalette::Disabled : QPalette::Active;
 
 		for (auto it = colorRoles.begin(); it != colorRoles.end(); ++it) {
 			QStringList rgb = settings.value(QString(group) + "/" + it.key()).toStringList();

@@ -22,8 +22,7 @@ namespace trik {
 namespace blocks {
 namespace details {
 
-class WaitGamepadConnectBlock
-		: public kitBase::blocksBase::common::WaitForSensorBlock
+class WaitGamepadConnectBlock : public kitBase::blocksBase::common::WaitForSensorBlock
 {
 	Q_OBJECT
 public:

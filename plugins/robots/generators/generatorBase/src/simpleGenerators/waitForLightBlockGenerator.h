@@ -24,10 +24,8 @@ class WaitForLightBlockGenerator : public BindingGenerator
 {
 	Q_OBJECT
 public:
-	WaitForLightBlockGenerator(const qrRepo::RepoApi &repo
-			, GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent = nullptr);
+	WaitForLightBlockGenerator(const qrRepo::RepoApi &repo, GeneratorCustomizer &customizer, const qReal::Id &id,
+		QObject *parent = nullptr);
 };
 
 }

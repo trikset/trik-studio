@@ -38,8 +38,8 @@ class QRGUI_DIALOGS_EXPORT DynamicPropertiesDialog : public QDialog
 	Q_OBJECT
 
 public:
-	DynamicPropertiesDialog(const Id &id, models::LogicalModelAssistApi &logicalRepoApi
-			, models::Exploser &exploser, Controller &controller, QWidget *parent = nullptr);
+	DynamicPropertiesDialog(const Id &id, models::LogicalModelAssistApi &logicalRepoApi, models::Exploser &exploser,
+		Controller &controller, QWidget *parent = nullptr);
 	~DynamicPropertiesDialog() override;
 
 	/// Creates and returns SDF description using path to background and foreground images.

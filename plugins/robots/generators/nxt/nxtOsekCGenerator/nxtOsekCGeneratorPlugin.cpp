@@ -38,7 +38,7 @@ NxtOsekCGeneratorPlugin::NxtOsekCGeneratorPlugin()
 {
 	const QString key = "pathToArmNoneEabi";
 	const QString defaultPath = QDir(PlatformInfo::invariantSettingsPath("pathToNxtTools")).absolutePath()
-								+"/arm-gnu-toolchain-13.2.rel1-x86_64-arm-none-eabi";
+	                            + "/arm-gnu-toolchain-13.2.rel1-x86_64-arm-none-eabi";
 	if (qReal::SettingsManager::value(key).isNull()) {
 		qReal::SettingsManager::setValue(key, defaultPath);
 	}
@@ -73,8 +73,8 @@ bool NxtOsekCGeneratorPlugin::canGenerateTo(const QString &project)
 
 	// If c file has much later timestamp then it was edited by user - restrincting generation to this file.
 	const int timestampMaxDifference = 100;
-	return (cFile.lastModified().toMSecsSinceEpoch()
-			- makeFile.lastModified().toMSecsSinceEpoch() < timestampMaxDifference);
+	return (cFile.lastModified().toMSecsSinceEpoch() - makeFile.lastModified().toMSecsSinceEpoch()
+		< timestampMaxDifference);
 }
 
 void NxtOsekCGeneratorPlugin::onCurrentRobotModelChanged(kitBase::robotModel::RobotModelInterface &model)
@@ -110,7 +110,7 @@ QList<ActionInfo> NxtOsekCGeneratorPlugin::customActions()
 	const ActionInfo generateCodeActionInfo(mGenerateCodeAction, "generators", "tools");
 	const ActionInfo flashRobotActionInfo(mFlashRobotAction, "", "tools");
 	const ActionInfo uploadProgramActionInfo(mUploadProgramAction, "interpreters", "tools");
-	return { generateCodeActionInfo, flashRobotActionInfo, uploadProgramActionInfo };
+	return {generateCodeActionInfo, flashRobotActionInfo, uploadProgramActionInfo};
 }
 
 QList<HotKeyActionInfo> NxtOsekCGeneratorPlugin::hotKeyActions()
@@ -153,7 +153,8 @@ void NxtOsekCGeneratorPlugin::initHotKeyActions()
 	mUploadProgramAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_U));
 
 	HotKeyActionInfo generateActionInfo("Generator.GenerateNxt", tr("Generate NXT OSEK code"), mGenerateCodeAction);
-	HotKeyActionInfo uploadActionInfo("Generator.UploadNxt", tr("Upload program to NXT device"), mUploadProgramAction);
+	HotKeyActionInfo uploadActionInfo("Generator.UploadNxt", tr("Upload program to NXT device"),
+		mUploadProgramAction);
 
 	mHotKeyActionInfos << generateActionInfo << uploadActionInfo;
 }
@@ -164,8 +165,8 @@ void NxtOsekCGeneratorPlugin::onUploadingComplete(bool success)
 		return;
 	}
 
-	const NxtFlashTool::RunPolicy runPolicy = static_cast<NxtFlashTool::RunPolicy>(
-			SettingsManager::value("nxtFlashToolRunPolicy").toInt());
+	const NxtFlashTool::RunPolicy runPolicy =
+		static_cast<NxtFlashTool::RunPolicy>(SettingsManager::value("nxtFlashToolRunPolicy").toInt());
 
 	switch (runPolicy) {
 	case NxtFlashTool::Ask:
@@ -183,19 +184,14 @@ void NxtOsekCGeneratorPlugin::onUploadingComplete(bool success)
 
 generatorBase::MasterGeneratorBase *NxtOsekCGeneratorPlugin::masterGenerator()
 {
-	return new NxtOsekCMasterGenerator(*mRepo
-			, *mMainWindowInterface->errorReporter()
-			, *mParserErrorReporter
-			, *mRobotModelManager
-			, *mTextLanguage
-			, mMainWindowInterface->activeDiagram()
-			, generatorName());
+	return new NxtOsekCMasterGenerator(*mRepo, *mMainWindowInterface->errorReporter(), *mParserErrorReporter,
+		*mRobotModelManager, *mTextLanguage, mMainWindowInterface->activeDiagram(), generatorName());
 }
 
 void NxtOsekCGeneratorPlugin::regenerateExtraFiles(const QFileInfo &newFileInfo)
 {
 	// Static cast is possible and correct, but dynamic will be more flexible.
-	if (auto nxtGenerator = qobject_cast<NxtOsekCMasterGenerator*>(masterGenerator())) {
+	if (auto nxtGenerator = qobject_cast<NxtOsekCMasterGenerator *>(masterGenerator())) {
 		QScopedPointer<NxtOsekCMasterGenerator> generator(nxtGenerator);
 		generator->initialize();
 		generator->setProjectDir(newFileInfo);
@@ -206,8 +202,9 @@ void NxtOsekCGeneratorPlugin::regenerateExtraFiles(const QFileInfo &newFileInfo)
 void NxtOsekCGeneratorPlugin::flashRobot()
 {
 	if (!mNxtToolsPresent) {
-		mMainWindowInterface->errorReporter()->addError(tr("flash.sh not found."\
-				" Make sure it is present in QReal installation directory"));
+		mMainWindowInterface->errorReporter()->addError(
+			tr("flash.sh not found."
+			   " Make sure it is present in QReal installation directory"));
 	} else {
 		mFlashTool->flashRobot();
 	}
@@ -216,8 +213,7 @@ void NxtOsekCGeneratorPlugin::flashRobot()
 void NxtOsekCGeneratorPlugin::uploadProgram()
 {
 	if (!mNxtToolsPresent) {
-		mMainWindowInterface->errorReporter()->addError(
-				tr("NXT tools package is not installed"));
+		mMainWindowInterface->errorReporter()->addError(tr("NXT tools package is not installed"));
 	} else {
 		const QFileInfo fileInfo = generateCodeForProcessing();
 
@@ -232,24 +228,22 @@ void NxtOsekCGeneratorPlugin::checkNxtTools()
 	const QDir dir(PlatformInfo::invariantSettingsPath("pathToNxtTools"));
 	auto compilePath = dir.absolutePath() + "/compile.sh";
 
-	auto nxtToolsPresent = dir.exists()
-			&& QFileInfo::exists(dir.absolutePath() + "/gnuarm")
-			&& QFileInfo::exists(dir.absolutePath() + "/nexttool")
-			&& QFileInfo::exists(dir.absolutePath() + "/nxtOSEK")
-			&& QFileInfo::exists(compilePath) && QFileInfo(compilePath).isFile();
+	auto nxtToolsPresent = dir.exists() && QFileInfo::exists(dir.absolutePath() + "/gnuarm")
+	                       && QFileInfo::exists(dir.absolutePath() + "/nexttool")
+	                       && QFileInfo::exists(dir.absolutePath() + "/nxtOSEK") && QFileInfo::exists(compilePath)
+	                       && QFileInfo(compilePath).isFile();
 
 	if (!nxtToolsPresent) {
-		mNxtToolsPresent  = false;
-		QLOG_ERROR() << "Missing" << dir.absolutePath() << "or mandatory subdirectory" <<
-			dir.entryList(QDir::Filter::NoFilter, QDir::SortFlag::DirsFirst | QDir::SortFlag::Name);
+		mNxtToolsPresent = false;
+		QLOG_ERROR() << "Missing" << dir.absolutePath() << "or mandatory subdirectory"
+			     << dir.entryList(QDir::Filter::NoFilter, QDir::SortFlag::DirsFirst | QDir::SortFlag::Name);
 		return;
 	}
 
 	auto osType = PlatformInfo::osType();
 	if (osType == "linux") {
 		mNxtToolsPresent = true;
-	}
-	else if (osType == "windows") {
+	} else if (osType == "windows") {
 		auto compileBatPath = dir.absolutePath() + "/compile.bat";
 		mNxtToolsPresent = QFileInfo::exists(compileBatPath) && QFileInfo(compileBatPath).isFile();
 	}

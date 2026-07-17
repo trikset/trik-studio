@@ -66,9 +66,9 @@ Q_SIGNALS:
 	void gridSizeChanged(qreal size);
 
 private:
-	bool mRealisticPhysics { false };
-	bool mRealisticSensors { false };
-	bool mRealisticMotors { false };
+	bool mRealisticPhysics {false};
+	bool mRealisticSensors {false};
+	bool mRealisticMotors {false};
 	QSharedPointer<SizeUnit> mSizeUnitSystem;
 };
 

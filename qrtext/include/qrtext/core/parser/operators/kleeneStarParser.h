@@ -35,8 +35,8 @@ public:
 	{
 	}
 
-	QSharedPointer<ast::Node> parse(TokenStream<TokenType> &tokenStream
-			, ParserContext<TokenType> &parserContext) const override
+	QSharedPointer<ast::Node> parse(TokenStream<TokenType> &tokenStream,
+		ParserContext<TokenType> &parserContext) const override
 	{
 		auto temporaryList = QSharedPointer<TemporaryList>(new TemporaryList());
 		while (!tokenStream.isEnd() && mParser->first().contains(tokenStream.next().token())) {

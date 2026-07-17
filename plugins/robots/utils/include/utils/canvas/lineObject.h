@@ -30,11 +30,8 @@ class ROBOTS_UTILS_EXPORT LineObject : public CanvasObject
 
 public:
 	explicit LineObject(QObject *parent = nullptr);
-	LineObject(QPoint begin
-			, QPoint end
-			, const QColor &color = Qt::black
-			, int thickness = 1
-			, QObject *parent = nullptr);
+	LineObject(QPoint begin, QPoint end, const QColor &color = Qt::black, int thickness = 1,
+		QObject *parent = nullptr);
 
 	/// Returns the first end of the segment.
 	QPoint begin() const;

@@ -49,92 +49,91 @@ using namespace kitBase::robotModel;
 TrikRobotModelBase::TrikRobotModelBase(const QString &kitId, const QString &robotId)
 	: CommonRobotModel(kitId, robotId)
 {
-	QList<DeviceInfo> const analogPortConnections = {
-		lightSensorInfo()
-		, infraredSensorInfo()
-		, touchSensorInfo()
-	};
+	QList<DeviceInfo> const analogPortConnections = {lightSensorInfo(), infraredSensorInfo(), touchSensorInfo()};
 
-	addAllowedConnection(PortInfo("DisplayPort", output), { displayInfo() });
-	addAllowedConnection(PortInfo("SpeakerPort", output), { speakerInfo() });
+	addAllowedConnection(PortInfo("DisplayPort", output), {displayInfo()});
+	addAllowedConnection(PortInfo("SpeakerPort", output), {speakerInfo()});
 
-	addAllowedConnection(PortInfo("Left", input, {}, "buttonLeft"), { buttonInfo() });
-	addAllowedConnection(PortInfo("Right", input, {}, "buttonRight"), { buttonInfo() });
-	addAllowedConnection(PortInfo("Up", input, {}, "buttonUp"), { buttonInfo() });
-	addAllowedConnection(PortInfo("Down", input, {}, "buttonDown"), { buttonInfo() });
-	addAllowedConnection(PortInfo("Enter", input, {}, "buttonEnter"), { buttonInfo() });
-	addAllowedConnection(PortInfo("Esc", input, {}, "buttonEsc"), { buttonInfo() });
-	addAllowedConnection(PortInfo("Power", input, {}, "buttonPower"), { buttonInfo() });
+	addAllowedConnection(PortInfo("Left", input, {}, "buttonLeft"), {buttonInfo()});
+	addAllowedConnection(PortInfo("Right", input, {}, "buttonRight"), {buttonInfo()});
+	addAllowedConnection(PortInfo("Up", input, {}, "buttonUp"), {buttonInfo()});
+	addAllowedConnection(PortInfo("Down", input, {}, "buttonDown"), {buttonInfo()});
+	addAllowedConnection(PortInfo("Enter", input, {}, "buttonEnter"), {buttonInfo()});
+	addAllowedConnection(PortInfo("Esc", input, {}, "buttonEsc"), {buttonInfo()});
+	addAllowedConnection(PortInfo("Power", input, {}, "buttonPower"), {buttonInfo()});
 
-	addAllowedConnection(PortInfo("M1", output, { "М1" }), { powerMotorInfo() });
-	addAllowedConnection(PortInfo("M2", output, { "М2" }), { powerMotorInfo() });
-	addAllowedConnection(PortInfo("M3", output, { "М3" }), { powerMotorInfo() });
-	addAllowedConnection(PortInfo("M4", output, { "М4" }), { powerMotorInfo() });
-	addAllowedConnection(PortInfo("MAll", output, { "MAll" }), { powerMotorsAggregatorInfo() });
+	addAllowedConnection(PortInfo("M1", output, {"М1"}), {powerMotorInfo()});
+	addAllowedConnection(PortInfo("M2", output, {"М2"}), {powerMotorInfo()});
+	addAllowedConnection(PortInfo("M3", output, {"М3"}), {powerMotorInfo()});
+	addAllowedConnection(PortInfo("M4", output, {"М4"}), {powerMotorInfo()});
+	addAllowedConnection(PortInfo("MAll", output, {"MAll"}), {powerMotorsAggregatorInfo()});
 
-	addAllowedConnection(PortInfo("A1", input, { "А1" }, "sensorA1"), analogPortConnections);
-	addAllowedConnection(PortInfo("A2", input, { "А2" }, "sensorA2"), analogPortConnections);
-	addAllowedConnection(PortInfo("A3", input, { "А3" }, "sensorA3"), analogPortConnections);
-	addAllowedConnection(PortInfo("A4", input, { "А4" }, "sensorA4"), analogPortConnections);
-	addAllowedConnection(PortInfo("A5", input, { "А5" }, "sensorA5"), analogPortConnections);
-	addAllowedConnection(PortInfo("A6", input, { "А6" }, "sensorA6"), analogPortConnections);
+	addAllowedConnection(PortInfo("A1", input, {"А1"}, "sensorA1"), analogPortConnections);
+	addAllowedConnection(PortInfo("A2", input, {"А2"}, "sensorA2"), analogPortConnections);
+	addAllowedConnection(PortInfo("A3", input, {"А3"}, "sensorA3"), analogPortConnections);
+	addAllowedConnection(PortInfo("A4", input, {"А4"}, "sensorA4"), analogPortConnections);
+	addAllowedConnection(PortInfo("A5", input, {"А5"}, "sensorA5"), analogPortConnections);
+	addAllowedConnection(PortInfo("A6", input, {"А6"}, "sensorA6"), analogPortConnections);
 
-	addAllowedConnection(PortInfo("D1", input, {}, "sensorD1"), { sonarSensorInfo() });
-	addAllowedConnection(PortInfo("D2", input, {}, "sensorD2"), { sonarSensorInfo() });
+	addAllowedConnection(PortInfo("D1", input, {}, "sensorD1"), {sonarSensorInfo()});
+	addAllowedConnection(PortInfo("D2", input, {}, "sensorD2"), {sonarSensorInfo()});
 
-	addAllowedConnection(PortInfo("GyroscopePort", input, {}, "gyroscope", PortInfo::ReservedVariableType::vector)
-			, { gyroscopeInfo() });
+	addAllowedConnection(PortInfo("GyroscopePort", input, {}, "gyroscope", PortInfo::ReservedVariableType::vector),
+		{gyroscopeInfo()});
 
-	addAllowedConnection(PortInfo("AccelerometerPort", input, {}, "accelerometer"
-			, PortInfo::ReservedVariableType::vector), { accelerometerInfo() });
+	addAllowedConnection(
+		PortInfo("AccelerometerPort", input, {}, "accelerometer", PortInfo::ReservedVariableType::vector),
+		{accelerometerInfo()});
 
-	addAllowedConnection(PortInfo("LedPort", output), { ledInfo() });
+	addAllowedConnection(PortInfo("LedPort", output), {ledInfo()});
 
-	addAllowedConnection(PortInfo("LineSensorPort", tr("Video 2"), input, { "TrikLineSensorPort" }, "lineSensor"
-			, PortInfo::ReservedVariableType::vector), { lineSensorInfo() });
+	addAllowedConnection(PortInfo("LineSensorPort", tr("Video 2"), input, {"TrikLineSensorPort"}, "lineSensor",
+				     PortInfo::ReservedVariableType::vector),
+		{lineSensorInfo()});
 
-	addAllowedConnection(video2Port(), { videoCameraInfo() });
-	addAllowedConnection(lidarPort(), { lidarSensorInfo() });
+	addAllowedConnection(video2Port(), {videoCameraInfo()});
+	addAllowedConnection(lidarPort(), {lidarSensorInfo()});
 
-	addAllowedConnection(PortInfo("ObjectSensorXPort", input, {}, "objectSensorX"), { objectSensorInfo() });
-	addAllowedConnection(PortInfo("ObjectSensorYPort", input, {}, "objectSensorY"), { objectSensorInfo() });
-	addAllowedConnection(PortInfo("ObjectSensorSizePort", input, {}, "objectSensorSize"), { objectSensorInfo() });
+	addAllowedConnection(PortInfo("ObjectSensorXPort", input, {}, "objectSensorX"), {objectSensorInfo()});
+	addAllowedConnection(PortInfo("ObjectSensorYPort", input, {}, "objectSensorY"), {objectSensorInfo()});
+	addAllowedConnection(PortInfo("ObjectSensorSizePort", input, {}, "objectSensorSize"), {objectSensorInfo()});
 
-	addAllowedConnection(PortInfo("ColorSensorPort", input, {}, "colorSensor"
-			, PortInfo::ReservedVariableType::vector), { colorSensorInfo() });
+	addAllowedConnection(
+		PortInfo("ColorSensorPort", input, {}, "colorSensor", PortInfo::ReservedVariableType::vector),
+		{colorSensorInfo()});
 
-	addAllowedConnection(PortInfo("ShellPort", output), { shellInfo() });
+	addAllowedConnection(PortInfo("ShellPort", output), {shellInfo()});
 
-	addAllowedConnection(PortInfo("GamepadPad1PosPort", input, {}, "gamepadPad1"
-			, PortInfo::ReservedVariableType::vector), { gamepadPadInfo() });
-	addAllowedConnection(PortInfo("GamepadPad2PosPort", input, {}, "gamepadPad2"
-			, PortInfo::ReservedVariableType::vector), { gamepadPadInfo() });
+	addAllowedConnection(
+		PortInfo("GamepadPad1PosPort", input, {}, "gamepadPad1", PortInfo::ReservedVariableType::vector),
+		{gamepadPadInfo()});
+	addAllowedConnection(
+		PortInfo("GamepadPad2PosPort", input, {}, "gamepadPad2", PortInfo::ReservedVariableType::vector),
+		{gamepadPadInfo()});
 
-	addAllowedConnection(PortInfo("GamepadPad1PressedPort", input, {}, "gamepadPad1Pressed")
-			, { gamepadPadPressSensorInfo() });
-	addAllowedConnection(PortInfo("GamepadPad2PressedPort", input, {}, "gamepadPad2Pressed")
-			, { gamepadPadPressSensorInfo() });
+	addAllowedConnection(PortInfo("GamepadPad1PressedPort", input, {}, "gamepadPad1Pressed"),
+		{gamepadPadPressSensorInfo()});
+	addAllowedConnection(PortInfo("GamepadPad2PressedPort", input, {}, "gamepadPad2Pressed"),
+		{gamepadPadPressSensorInfo()});
 
-	addAllowedConnection(PortInfo("GamepadWheelPort", input, {}, "gamepadWheel"), { gamepadWheelInfo() });
+	addAllowedConnection(PortInfo("GamepadWheelPort", input, {}, "gamepadWheel"), {gamepadWheelInfo()});
 
-	addAllowedConnection(PortInfo("GamepadButton1Port", input, {}, "gamepadButton1"), { gamepadButtonInfo() });
-	addAllowedConnection(PortInfo("GamepadButton2Port", input, {}, "gamepadButton2"), { gamepadButtonInfo() });
-	addAllowedConnection(PortInfo("GamepadButton3Port", input, {}, "gamepadButton3"), { gamepadButtonInfo() });
-	addAllowedConnection(PortInfo("GamepadButton4Port", input, {}, "gamepadButton4"), { gamepadButtonInfo() });
-	addAllowedConnection(PortInfo("GamepadButton5Port", input, {}, "gamepadButton5"), { gamepadButtonInfo() });
+	addAllowedConnection(PortInfo("GamepadButton1Port", input, {}, "gamepadButton1"), {gamepadButtonInfo()});
+	addAllowedConnection(PortInfo("GamepadButton2Port", input, {}, "gamepadButton2"), {gamepadButtonInfo()});
+	addAllowedConnection(PortInfo("GamepadButton3Port", input, {}, "gamepadButton3"), {gamepadButtonInfo()});
+	addAllowedConnection(PortInfo("GamepadButton4Port", input, {}, "gamepadButton4"), {gamepadButtonInfo()});
+	addAllowedConnection(PortInfo("GamepadButton5Port", input, {}, "gamepadButton5"), {gamepadButtonInfo()});
 
-	addAllowedConnection(PortInfo("GamepadConnectionIndicatorPort", input, {}, "gamepadConnected")
-			, { gamepadConnectionIndicatorInfo() });
+	addAllowedConnection(PortInfo("GamepadConnectionIndicatorPort", input, {}, "gamepadConnected"),
+		{gamepadConnectionIndicatorInfo()});
 
-	addAllowedConnection(PortInfo("CommunicatorPort", output), { networkInfo() });
+	addAllowedConnection(PortInfo("CommunicatorPort", output), {networkInfo()});
 }
 
 QList<PortInfo> TrikRobotModelBase::configurablePorts() const
 {
-	QList<PortInfo> const digitalPorts = {
-			  PortInfo("D1", input, {}, "sensorD1")
-			, PortInfo("D2", input, {}, "sensorD2")
-			};
+	QList<PortInfo> const digitalPorts = {PortInfo("D1", input, {}, "sensorD1"),
+		PortInfo("D2", input, {}, "sensorD2")};
 
 	QList<PortInfo> const additionalPorts = {video2Port(), lidarPort()};
 	return CommonRobotModel::configurablePorts() + digitalPorts + additionalPorts;
@@ -142,15 +141,10 @@ QList<PortInfo> TrikRobotModelBase::configurablePorts() const
 
 QList<DeviceInfo> TrikRobotModelBase::convertibleBases() const
 {
-	return { DeviceInfo::create<parts::TrikTouchSensor>()
-		, DeviceInfo::create<parts::TrikLightSensor>()
-		, DeviceInfo::create<parts::TrikInfraredSensor>()
-		, DeviceInfo::create<parts::TrikSonarSensor>()
-		, DeviceInfo::create<parts::TrikMotionSensor>()
-		, DeviceInfo::create<parts::TrikLineSensor>()
-		, DeviceInfo::create<parts::TrikVideoCamera>()
-		, DeviceInfo::create<robotParts::LidarSensor>()
-	};
+	return {DeviceInfo::create<parts::TrikTouchSensor>(), DeviceInfo::create<parts::TrikLightSensor>(),
+		DeviceInfo::create<parts::TrikInfraredSensor>(), DeviceInfo::create<parts::TrikSonarSensor>(),
+		DeviceInfo::create<parts::TrikMotionSensor>(), DeviceInfo::create<parts::TrikLineSensor>(),
+		DeviceInfo::create<parts::TrikVideoCamera>(), DeviceInfo::create<robotParts::LidarSensor>()};
 }
 
 DeviceInfo TrikRobotModelBase::displayInfo() const
@@ -278,7 +272,8 @@ DeviceInfo TrikRobotModelBase::gamepadConnectionIndicatorInfo() const
 	return DeviceInfo::create<parts::TrikGamepadConnectionIndicator>();
 }
 
-DeviceInfo TrikRobotModelBase::videoCameraInfo() const {
+DeviceInfo TrikRobotModelBase::videoCameraInfo() const
+{
 	return DeviceInfo::create<parts::TrikVideoCamera>();
 }
 
@@ -286,7 +281,6 @@ DeviceInfo TrikRobotModelBase::networkInfo() const
 {
 	return DeviceInfo::create<robotParts::Communicator>();
 }
-
 
 QHash<QString, int> TrikRobotModelBase::buttonCodes() const
 {
@@ -301,10 +295,12 @@ QHash<QString, int> TrikRobotModelBase::buttonCodes() const
 	return result;
 }
 
-PortInfo TrikRobotModelBase::video2Port() const {
+PortInfo TrikRobotModelBase::video2Port() const
+{
 	return PortInfo("Video2Port", tr("Video 2"), input);
 }
 
-PortInfo TrikRobotModelBase::lidarPort() const {
+PortInfo TrikRobotModelBase::lidarPort() const
+{
 	return PortInfo("LidarPort", tr("Lidar"), input, {}, "lidar", PortInfo::ReservedVariableType::vector);
 }

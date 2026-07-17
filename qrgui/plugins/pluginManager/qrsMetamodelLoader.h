@@ -53,14 +53,14 @@ Q_SIGNALS:
 	void errorOccured(const QString &message, const qReal::Id &id);
 
 private:
-	QString stringProperty(const qrRepo::RepoApi &repo, const Id &id
-			, const QString &propertyName, const QString &defaultValue = QString());
+	QString stringProperty(const qrRepo::RepoApi &repo, const Id &id, const QString &propertyName,
+		const QString &defaultValue = QString());
 	int parseInt(const QString &string, const Id &id);
 	int intProperty(const qrRepo::RepoApi &repo, const Id &id, const QString &propertyName, int defaultValue = 0);
-	QVector<int> intVectorProperty(const qrRepo::RepoApi &repo, const Id &id
-			, const QString &propertyName, const QVector<int> &defaultValue = QVector<int>());
-	bool boolProperty(const qrRepo::RepoApi &repo, const Id &id
-			, const QString &propertyName, bool defaultValue = false);
+	QVector<int> intVectorProperty(const qrRepo::RepoApi &repo, const Id &id, const QString &propertyName,
+		const QVector<int> &defaultValue = QVector<int>());
+	bool boolProperty(const qrRepo::RepoApi &repo, const Id &id, const QString &propertyName,
+		bool defaultValue = false);
 
 	Qt::PenStyle parsePenStyle(const QString &penStyle, const Id &id);
 	LinkShape parseLinkShape(const QString &linkShape, const Id &id);
@@ -88,13 +88,14 @@ private:
 	QList<QPair<QString, QString>> parseEnumValues(const qrRepo::RepoApi &repo, const Id &id);
 	void parseGroupNodes(const qrRepo::RepoApi &repo, QDomElement &parent, const Id &id);
 	void parseLinksOnDiagram(const qrRepo::RepoApi &repo, Metamodel &metamodel, const Id &diagram);
-	void parseGeneralization(const qrRepo::RepoApi &repo, Metamodel &metamodel, const Id &id, const QString &diagram
-			, ElementType *&fromElement, ElementType *&toElement, QString &overridingProperties);
+	void parseGeneralization(const qrRepo::RepoApi &repo, Metamodel &metamodel, const Id &id,
+		const QString &diagram, ElementType *&fromElement, ElementType *&toElement,
+		QString &overridingProperties);
 	void parseContainer(const qrRepo::RepoApi &repo, Metamodel &metamodel, const Id &id, const QString &diagram);
 	void parseExplosion(const qrRepo::RepoApi &repo, Metamodel &metamodel, const Id &id, const QString &diagram);
 
-	void resolveInheritance(QSet<ElementType *> &elements
-			, const QHash<QPair<ElementType *, ElementType *>, QString> &overridingProperties);
+	void resolveInheritance(QSet<ElementType *> &elements,
+		const QHash<QPair<ElementType *, ElementType *>, QString> &overridingProperties);
 	void inherit(ElementType &child, const ElementType &parent, const QString &propreties);
 };
 

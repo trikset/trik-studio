@@ -29,8 +29,9 @@ class ReplaceByCommand : public qReal::commands::AbstractCommand
 {
 	Q_OBJECT
 public:
-	ReplaceByCommand(const models::Models &models, gui::editor::EditorViewScene &scene
-			, NodeElement *elementToRemove, const ElementInfo &elementToCreate);
+	ReplaceByCommand(const models::Models &models, gui::editor::EditorViewScene &scene,
+		NodeElement *elementToRemove, const ElementInfo &elementToCreate);
+
 protected:
 	bool execute() override;
 	bool restoreState() override;
@@ -42,6 +43,7 @@ protected:
 
 	ElementInfo mOldInfo;
 	ElementInfo mNewInfo;
+
 private:
 	void reconnect(ElementInfo &oldInfo, ElementInfo &newInfo);
 };

@@ -29,25 +29,29 @@ public:
 	/// @param object - expression which calculates to object of a method.
 	/// @param methodName - name of a method to call.
 	/// @param arguments - a list of actual parameters.
-	MethodCall(QSharedPointer<Expression> const &object
-			, QSharedPointer<Identifier> const &methodName
-			, QList<QSharedPointer<Expression>> const &arguments)
-		: mObject(object), mMethodName(methodName), mArguments(arguments)
+	MethodCall(QSharedPointer<Expression> const &object, QSharedPointer<Identifier> const &methodName,
+		QList<QSharedPointer<Expression>> const &arguments)
+		: mObject(object)
+		, mMethodName(methodName)
+		, mArguments(arguments)
 	{
 	}
 
 	/// Returns object.
-	QSharedPointer<Expression> const &object() const {
+	QSharedPointer<Expression> const &object() const
+	{
 		return mObject;
 	}
 
 	/// Returns method identifier.
-	QSharedPointer<Identifier> const &methodName() const {
+	QSharedPointer<Identifier> const &methodName() const
+	{
 		return mMethodName;
 	}
 
 	/// Returns a list of actual parameters.
-	QList<QSharedPointer<Expression>> const &arguments() const {
+	QList<QSharedPointer<Expression>> const &arguments() const
+	{
 		return mArguments;
 	}
 
@@ -57,8 +61,8 @@ public:
 	}
 
 private:
-	void accept(core::AstVisitorInterface &visitor, const QSharedPointer<Node> &pointer
-			, const QSharedPointer<Node> &parent) override
+	void accept(core::AstVisitorInterface &visitor, const QSharedPointer<Node> &pointer,
+		const QSharedPointer<Node> &parent) override
 	{
 		static_cast<LuaAstVisitorInterface *>(&visitor)->visit(qSharedPointerCast<MethodCall>(pointer), parent);
 	}

@@ -38,6 +38,7 @@ public:
 	void removeDefaultInitialLogTarget();
 	Logger();
 	~Logger();
+
 private:
 	QString mDefaultInitialLoggerType;
 };

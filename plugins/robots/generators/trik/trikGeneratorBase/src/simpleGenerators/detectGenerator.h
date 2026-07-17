@@ -24,10 +24,8 @@ class DetectGenerator : public generatorBase::simple::BindingGenerator
 {
 	Q_OBJECT
 public:
-	DetectGenerator(const qrRepo::RepoApi &repo
-			, generatorBase::GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent);
+	DetectGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+		const qReal::Id &id, QObject *parent);
 };
 
 }

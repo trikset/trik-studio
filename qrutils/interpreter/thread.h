@@ -47,12 +47,9 @@ public:
 	/// @param initialNodeType - the type of the element to start on diagram when stepping into it.
 	/// @param blocksTable - interpreter-wide table of blocks (map from ids to "code-behind" objects).
 	/// @param initialNode - node that shall be executed first in this thread.
-	Thread(const qReal::GraphicalModelAssistInterface *graphicalModelApi
-			, qReal::gui::MainWindowInterpretersInterface &interpretersInterface
-			, const Id &initialNodeType
-			, BlocksTableInterface &blocksTable
-			, const Id &initialNode
-			, const QString &threadId);
+	Thread(const qReal::GraphicalModelAssistInterface *graphicalModelApi,
+		qReal::gui::MainWindowInterpretersInterface &interpretersInterface, const Id &initialNodeType,
+		BlocksTableInterface &blocksTable, const Id &initialNode, const QString &threadId);
 
 	/// Creates new instance of thread starting from initial node of specified diagram.
 	/// @param graphicalModelApi - graphical model, contains diagram.
@@ -60,12 +57,9 @@ public:
 	/// @param initialNodeType - the type of the element to start on diagram when stepping into it.
 	/// @param diagramToInterpret - diagram, whose initial node shall be executed in a new thread.
 	/// @param blocksTable - interpreter-wide table of blocks (map from ids to "code-behind" objects).
-	Thread(const qReal::GraphicalModelAssistInterface *graphicalModelApi
-			, qReal::gui::MainWindowInterpretersInterface &interpretersInterface
-			, const Id &initialNodeType
-			, const Id &diagramToInterpret
-			, BlocksTableInterface &blocksTable
-			, const QString &threadId);
+	Thread(const qReal::GraphicalModelAssistInterface *graphicalModelApi,
+		qReal::gui::MainWindowInterpretersInterface &interpretersInterface, const Id &initialNodeType,
+		const Id &diagramToInterpret, BlocksTableInterface &blocksTable, const QString &threadId);
 
 	~Thread() override;
 
@@ -114,21 +108,21 @@ private:
 	qReal::Id findStartingElement(const qReal::Id &diagram) const;
 	void error(const QString &message, const qReal::Id &source = qReal::Id());
 
-	void turnOn(BlockInterface * const block);
-	void turnOff(BlockInterface * const block);
-	void connectBlock(BlockInterface * const block);
+	void turnOn(BlockInterface *const block);
+	void turnOff(BlockInterface *const block);
+	void connectBlock(BlockInterface *const block);
 
-	const qReal::GraphicalModelAssistInterface *mGraphicalModelApi;  // Doesn't have ownership
+	const qReal::GraphicalModelAssistInterface *mGraphicalModelApi; // Doesn't have ownership
 	const qReal::LogicalModelAssistInterface *mLogicalModelApi {};
 	qReal::gui::MainWindowInterpretersInterface &mInterpretersInterface;
 	const Id mInitialNodeType;
 	BlocksTableInterface &mBlocksTable;
-	BlockInterface *mCurrentBlock;  // Doesn't have ownership
+	BlockInterface *mCurrentBlock; // Doesn't have ownership
 	QStack<StackFrame> mStack;
 	const qReal::Id mInitialDiagram;
 	int mBlocksSincePreviousEventsProcessing;
-	QTimer *mProcessEventsTimer;  // Has ownership
-	QSignalMapper *mProcessEventsMapper;  // Has ownership
+	QTimer *mProcessEventsTimer; // Has ownership
+	QSignalMapper *mProcessEventsMapper; // Has ownership
 	QString mId;
 	QQueue<QString> mMessages;
 };

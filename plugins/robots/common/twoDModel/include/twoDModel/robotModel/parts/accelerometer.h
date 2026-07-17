@@ -34,9 +34,8 @@ class TWO_D_MODEL_EXPORT Accelerometer : public kitBase::robotModel::robotParts:
 	Q_OBJECT
 
 public:
-	Accelerometer(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port
-			, engine::TwoDModelEngineInterface &engine);
+	Accelerometer(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+		engine::TwoDModelEngineInterface &engine);
 
 	void read() override;
 

@@ -19,15 +19,12 @@
 using namespace trik::simple;
 using namespace generatorBase::simple;
 
-InitCameraGenerator::InitCameraGenerator(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, const qReal::Id &id
-		, QObject *parent)
-	: BindingGenerator(repo, customizer, id
-			, "videosensors/init" + repo.property(id, "Mode").toString() + "Sensor.t"
-			, { Binding::createConverting("@@DRAW@@"
-						, "DrawStream", customizer.factory()->boolPropertyConverter(id, "DrawStream", false))
-			}
-			, parent)
+InitCameraGenerator::InitCameraGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+	const qReal::Id &id, QObject *parent)
+	: BindingGenerator(repo, customizer, id,
+		  "videosensors/init" + repo.property(id, "Mode").toString() + "Sensor.t",
+		  {Binding::createConverting("@@DRAW@@", "DrawStream",
+			  customizer.factory()->boolPropertyConverter(id, "DrawStream", false))},
+		  parent)
 {
 }

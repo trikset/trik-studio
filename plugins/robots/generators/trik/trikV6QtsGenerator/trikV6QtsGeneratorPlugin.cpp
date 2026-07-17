@@ -22,14 +22,11 @@ using namespace trik::qts;
 using namespace kitBase::robotModel;
 
 TrikV6QtsGeneratorPlugin::TrikV6QtsGeneratorPlugin()
-	: TrikQtsGeneratorPluginBase(new robotModel::TrikV6GeneratorRobotModel(
-					"trikKit"
-					, "trikKitRobot"
-					, "TrikQtsGeneratorRobotModel"
-					, tr("Generation (Java Script)")
-					, 9 /* After 2D model */)
-			, QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface>(new blocks::TrikV6BlocksFactory())
-			, {":/trikV6Qts/templates", ":/trikQts/templates"})
+	: TrikQtsGeneratorPluginBase(new robotModel::TrikV6GeneratorRobotModel("trikKit", "trikKitRobot",
+					     "TrikQtsGeneratorRobotModel", tr("Generation (Java Script)"),
+					     9 /* After 2D model */),
+		  QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface>(new blocks::TrikV6BlocksFactory()),
+		  {":/trikV6Qts/templates", ":/trikQts/templates"})
 	, mModel(static_cast<robotModel::TrikV6GeneratorRobotModel *>(robotModels().first()))
 {
 }

@@ -134,10 +134,10 @@ TEST_F(LuaSemanticAnalyzerTest, functionReturnType)
 {
 	auto tree = parse("a = f(1)");
 
-	mAnalyzer->addIntrinsicFunction("f", QSharedPointer<types::Function>(new types::Function(
-			QSharedPointer<core::types::TypeExpression>(new types::Float()),
-			{QSharedPointer<core::types::TypeExpression>(new types::Integer())}
-			)));
+	mAnalyzer->addIntrinsicFunction("f",
+		QSharedPointer<types::Function>(
+			new types::Function(QSharedPointer<core::types::TypeExpression>(new types::Float()),
+				{QSharedPointer<core::types::TypeExpression>(new types::Integer())})));
 
 	mAnalyzer->analyze(tree);
 
@@ -156,11 +156,11 @@ TEST_F(LuaSemanticAnalyzerTest, functionParameters)
 {
 	auto tree = parse("b = 1; c = 'c'; a = f(b, c)");
 
-	mAnalyzer->addIntrinsicFunction("f", QSharedPointer<types::Function>(new types::Function(
-			QSharedPointer<core::types::TypeExpression>(new types::Float()),
-			{QSharedPointer<core::types::TypeExpression>(new types::Integer())
-					, QSharedPointer<core::types::TypeExpression>(new types::String())}
-			)));
+	mAnalyzer->addIntrinsicFunction("f",
+		QSharedPointer<types::Function>(
+			new types::Function(QSharedPointer<core::types::TypeExpression>(new types::Float()),
+				{QSharedPointer<core::types::TypeExpression>(new types::Integer()),
+					QSharedPointer<core::types::TypeExpression>(new types::String())})));
 
 	mAnalyzer->analyze(tree);
 
@@ -181,11 +181,11 @@ TEST_F(LuaSemanticAnalyzerTest, invalidFunctionParameters)
 {
 	auto tree = parse("a = f(0.5, 'a')");
 
-	mAnalyzer->addIntrinsicFunction("f", QSharedPointer<types::Function>(new types::Function(
-			QSharedPointer<core::types::TypeExpression>(new types::Float()),
-			{QSharedPointer<core::types::TypeExpression>(new types::Integer())
-					, QSharedPointer<core::types::TypeExpression>(new types::String())}
-			)));
+	mAnalyzer->addIntrinsicFunction("f",
+		QSharedPointer<types::Function>(
+			new types::Function(QSharedPointer<core::types::TypeExpression>(new types::Float()),
+				{QSharedPointer<core::types::TypeExpression>(new types::Integer()),
+					QSharedPointer<core::types::TypeExpression>(new types::String())})));
 
 	mAnalyzer->analyze(tree);
 
@@ -196,11 +196,11 @@ TEST_F(LuaSemanticAnalyzerTest, invalidCoercion)
 {
 	auto tree = parse("a = f(b, c); b = 0.5");
 
-	mAnalyzer->addIntrinsicFunction("f", QSharedPointer<types::Function>(new types::Function(
-			QSharedPointer<core::types::TypeExpression>(new types::Float()),
-			{QSharedPointer<core::types::TypeExpression>(new types::Integer())
-					, QSharedPointer<core::types::TypeExpression>(new types::String())}
-			)));
+	mAnalyzer->addIntrinsicFunction("f",
+		QSharedPointer<types::Function>(
+			new types::Function(QSharedPointer<core::types::TypeExpression>(new types::Float()),
+				{QSharedPointer<core::types::TypeExpression>(new types::Integer()),
+					QSharedPointer<core::types::TypeExpression>(new types::String())})));
 
 	mAnalyzer->analyze(tree);
 

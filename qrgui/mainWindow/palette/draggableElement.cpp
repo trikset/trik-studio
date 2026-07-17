@@ -47,12 +47,8 @@ using namespace gui;
 
 const int gestureTipSize = 30;
 
-DraggableElement::DraggableElement(MainWindow &mainWindow
-		, const PaletteElement &data
-		, bool iconsOnly
-		, const EditorManagerInterface &editorManagerProxy
-		, QWidget *parent
-		)
+DraggableElement::DraggableElement(MainWindow &mainWindow, const PaletteElement &data, bool iconsOnly,
+	const EditorManagerInterface &editorManagerProxy, QWidget *parent)
 	: QWidget(parent)
 	, mData(data)
 	, mEditorManagerProxy(editorManagerProxy)
@@ -87,9 +83,9 @@ DraggableElement::DraggableElement(MainWindow &mainWindow
 			QBuffer buffer(&byteArray);
 			gesture.save(&buffer, "PNG");
 			const QString gestureDescription = tr("Mouse gesture");
-			description += QString("<br><table><tr><td valign='middle'>%1:&nbsp;&nbsp;&nbsp;</td>"\
-					"<td><img src=\"data:image/png;base64,%2\"/></td></tr></table>")
-							.arg(gestureDescription, QString(byteArray.toBase64()));
+			description += QString("<br><table><tr><td valign='middle'>%1:&nbsp;&nbsp;&nbsp;</td>"
+					       "<td><img src=\"data:image/png;base64,%2\"/></td></tr></table>")
+			                       .arg(gestureDescription, QString(byteArray.toBase64()));
 		}
 
 		setToolTip(QString("<body>%1</body>").arg(description));
@@ -132,7 +128,7 @@ QSize DraggableElement::iconsPreferredSize() const
 
 void DraggableElement::setIconSize(int size)
 {
-	mLabel->setPixmap(mData.icon().pixmap(size , size));
+	mLabel->setPixmap(mData.icon().pixmap(size, size));
 }
 
 QMimeData *DraggableElement::mimeData(const Id &elementId) const
@@ -145,22 +141,19 @@ void DraggableElement::changePropertiesPaletteActionTriggered()
 {
 	auto *action = static_cast<QAction *>(sender());
 	Id id = action->data().value<Id>();
-	auto *propDialog = new PropertiesDialog(mEditorManagerProxy
-			, mMainWindow.models().mutableLogicalRepoApi(), id, &mMainWindow);
+	auto *propDialog = new PropertiesDialog(mEditorManagerProxy, mMainWindow.models().mutableLogicalRepoApi(), id,
+		&mMainWindow);
 	propDialog->setModal(true);
 	propDialog->show();
 }
 
 void DraggableElement::changeDynamicPropertiesPaletteActionTriggered()
 {
-	const auto * const action = static_cast<const QAction *>(sender());
+	const auto *const action = static_cast<const QAction *>(sender());
 	const Id id = action->data().value<Id>();
-	auto * const dynamicPropertiesDialog = new DynamicPropertiesDialog(id
-			, mMainWindow.models().logicalModelAssistApi()
-			, mMainWindow.models().exploser()
-			, *mMainWindow.controller()
-			, &mMainWindow
-	);
+	auto *const dynamicPropertiesDialog =
+		new DynamicPropertiesDialog(id, mMainWindow.models().logicalModelAssistApi(),
+			mMainWindow.models().exploser(), *mMainWindow.controller(), &mMainWindow);
 
 	dynamicPropertiesDialog->setModal(true);
 	dynamicPropertiesDialog->show();
@@ -168,7 +161,7 @@ void DraggableElement::changeDynamicPropertiesPaletteActionTriggered()
 
 void DraggableElement::changeAppearancePaletteActionTriggered()
 {
-	const QAction * const action = static_cast<QAction *>(sender());
+	const QAction *const action = static_cast<QAction *>(sender());
 	const Id id = action->data().value<Id>();
 	const QString propertyValue = mEditorManagerProxy.shape(id);
 	mMainWindow.openShapeEditor(id, propertyValue, &mEditorManagerProxy, false);
@@ -178,15 +171,10 @@ void DraggableElement::deleteElementPaletteActionTriggered()
 {
 	auto *action = static_cast<QAction *>(sender());
 	mDeletedElementId = action->data().value<Id>();
-	QMessageBox messageBox(
-			tr("Deleting an element: ") + mEditorManagerProxy.friendlyName(mDeletedElementId)
-			, tr("Do you really want to delete this item and all its graphical"
-					"representation from the scene and from the palette?")
-			, QMessageBox::Warning
-			, QMessageBox::Ok
-			, QMessageBox::Cancel
-			, QMessageBox::NoButton
-			);
+	QMessageBox messageBox(tr("Deleting an element: ") + mEditorManagerProxy.friendlyName(mDeletedElementId),
+		tr("Do you really want to delete this item and all its graphical"
+		   "representation from the scene and from the palette?"),
+		QMessageBox::Warning, QMessageBox::Ok, QMessageBox::Cancel, QMessageBox::NoButton);
 
 	messageBox.button(QMessageBox::Ok)->setText(tr("Yes"));
 	messageBox.button(QMessageBox::Cancel)->setText(tr("No"));
@@ -218,15 +206,10 @@ void DraggableElement::checkElementForRootDiagramNode()
 {
 	if (mEditorManagerProxy.isDiagramNode(mDeletedElementId)) {
 		mIsRootDiagramNode = true;
-		QMessageBox messageBox(
-				tr("Warning")
-				, tr("The deleted element ") + mEditorManagerProxy.friendlyName(mDeletedElementId)
-						+ tr(" is the element of root digram. Continue to delete?")
-				, QMessageBox::Warning
-				, QMessageBox::Ok
-				, QMessageBox::Cancel
-				, QMessageBox::NoButton
-				);
+		QMessageBox messageBox(tr("Warning"),
+			tr("The deleted element ") + mEditorManagerProxy.friendlyName(mDeletedElementId)
+				+ tr(" is the element of root digram. Continue to delete?"),
+			QMessageBox::Warning, QMessageBox::Ok, QMessageBox::Cancel, QMessageBox::NoButton);
 
 		messageBox.button(QMessageBox::Ok)->setText(tr("Yes"));
 		messageBox.button(QMessageBox::Cancel)->setText(tr("No"));
@@ -251,20 +234,12 @@ void DraggableElement::checkElementForChildren()
 			childrenNames.replace(childrenNames.length() - 1, 1, ".");
 		}
 
-		QMessageBox messageBox(
-				tr("Warning")
-				, tr("The deleted element ")
-						+ mEditorManagerProxy.friendlyName(mDeletedElementId)
-						+ tr(" has inheritors:")
-						+ childrenNames
-						+ "\n"
-						+ tr("If you delete it, its properties will be removed from"
-								"the elements-inheritors. Continue to delete?")
-				, QMessageBox::Warning
-				, QMessageBox::Ok
-				, QMessageBox::Cancel
-				, QMessageBox::NoButton
-				);
+		QMessageBox messageBox(tr("Warning"),
+			tr("The deleted element ") + mEditorManagerProxy.friendlyName(mDeletedElementId)
+				+ tr(" has inheritors:") + childrenNames + "\n"
+				+ tr("If you delete it, its properties will be removed from"
+				     "the elements-inheritors. Continue to delete?"),
+			QMessageBox::Warning, QMessageBox::Ok, QMessageBox::Cancel, QMessageBox::NoButton);
 
 		messageBox.button(QMessageBox::Ok)->setText(tr("Yes"));
 		messageBox.button(QMessageBox::Cancel)->setText(tr("No"));
@@ -294,18 +269,18 @@ bool DraggableElement::event(QEvent *event)
 
 	const QPoint pos(touchEvent->touchPoints()[0].pos().toPoint());
 
-	switch(event->type()) {
+	switch (event->type()) {
 	case QEvent::TouchBegin: {
 		QCursor::setPos(mapToGlobal(pos));
-		auto* mouseEvent = new QMouseEvent(QEvent::MouseButtonPress, pos
-				, Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+		auto *mouseEvent =
+			new QMouseEvent(QEvent::MouseButtonPress, pos, Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
 		QApplication::postEvent(touchEvent->target(), mouseEvent);
 		hackTouchDrag();
 		break;
 	}
 	case QEvent::TouchEnd: {
-		auto* mouseEvent = new QMouseEvent(QEvent::MouseButtonRelease, pos
-				, Qt::LeftButton, Qt::NoButton, Qt::NoModifier);
+		auto *mouseEvent =
+			new QMouseEvent(QEvent::MouseButtonRelease, pos, Qt::LeftButton, Qt::NoButton, Qt::NoModifier);
 		QApplication::postEvent(touchEvent->target(), mouseEvent);
 		HackTouchDragThread::simulateSystemRelease();
 		break;
@@ -323,7 +298,7 @@ bool DraggableElement::event(QEvent *event)
 
 void DraggableElement::mousePressEvent(QMouseEvent *event)
 {
-	Q_ASSERT(id().idSize() == 3);  // it should be element type
+	Q_ASSERT(id().idSize() == 3); // it should be element type
 
 	// new element's ID is being generated here
 	// may this epic event should take place in some more appropriate place
@@ -333,20 +308,19 @@ void DraggableElement::mousePressEvent(QMouseEvent *event)
 	if (event->button() == Qt::RightButton) {
 		if (mEditorManagerProxy.isInterpretationMode()) {
 			auto *menu = new QMenu();
-			QAction * const changePropertiesPaletteAction = menu->addAction(tr("Change Properties"));
-			connect(changePropertiesPaletteAction, &QAction::triggered
-					, this, &DraggableElement::changePropertiesPaletteActionTriggered);
+			QAction *const changePropertiesPaletteAction = menu->addAction(tr("Change Properties"));
+			connect(changePropertiesPaletteAction, &QAction::triggered, this,
+				&DraggableElement::changePropertiesPaletteActionTriggered);
 			changePropertiesPaletteAction->setData(elementId.toVariant());
 
-			QAction * const changeAppearancePaletteAction = menu->addAction(tr("Change Appearance"));
-			connect(changeAppearancePaletteAction, &QAction::triggered
-					, this,  &DraggableElement::changeAppearancePaletteActionTriggered);
+			QAction *const changeAppearancePaletteAction = menu->addAction(tr("Change Appearance"));
+			connect(changeAppearancePaletteAction, &QAction::triggered, this,
+				&DraggableElement::changeAppearancePaletteActionTriggered);
 			changeAppearancePaletteAction->setData(elementId.toVariant());
 
-			QAction * const deleteElementPaletteAction = menu->addAction(tr("Delete Element"));
-			connect(deleteElementPaletteAction, &QAction::triggered
-					, this, &DraggableElement::deleteElementPaletteActionTriggered
-					, Qt::QueuedConnection);
+			QAction *const deleteElementPaletteAction = menu->addAction(tr("Delete Element"));
+			connect(deleteElementPaletteAction, &QAction::triggered, this,
+				&DraggableElement::deleteElementPaletteActionTriggered, Qt::QueuedConnection);
 			deleteElementPaletteAction->setData(elementId.toVariant());
 
 			auto additionalMenuActions = mMainWindow.optionalMenuActionsForInterpretedPlugins();
@@ -360,24 +334,24 @@ void DraggableElement::mousePressEvent(QMouseEvent *event)
 
 			menu->exec(QCursor::pos());
 		} else if (!mData.explosionTarget().isNull()) {
-			auto * const menu = new QMenu();
+			auto *const menu = new QMenu();
 			if (mMainWindow.toolManager().customizer()->allowSubprogramPropertiesChanging()) {
-				QAction * const changePropertiesAction = menu->addAction(tr("Change Properties"));
-				connect(changePropertiesAction, &QAction::triggered, this
-						, &DraggableElement::changeDynamicPropertiesPaletteActionTriggered);
+				QAction *const changePropertiesAction = menu->addAction(tr("Change Properties"));
+				connect(changePropertiesAction, &QAction::triggered, this,
+					&DraggableElement::changeDynamicPropertiesPaletteActionTriggered);
 				changePropertiesAction->setData(explosionTarget().toVariant());
 
-				QAction * const deleteElementAction = menu->addAction(tr("Delete"));
-				auto removeElement = [&](){
-					auto localRemoveElementsCommand = new commands::RemoveElementsCommand(mMainWindow.models());
-					mMainWindow.controller()->executeGlobal(localRemoveElementsCommand->withLogicalItemToDelete(
+				QAction *const deleteElementAction = menu->addAction(tr("Delete"));
+				auto removeElement = [&]() {
+					auto localRemoveElementsCommand =
+						new commands::RemoveElementsCommand(mMainWindow.models());
+					mMainWindow.controller()->executeGlobal(
+						localRemoveElementsCommand->withLogicalItemToDelete(
 							mData.explosionTarget()));
 				};
 
-				connect(deleteElementAction, &QAction::triggered
-						, this
-						, removeElement
-						, Qt::QueuedConnection);
+				connect(deleteElementAction, &QAction::triggered, this, removeElement,
+					Qt::QueuedConnection);
 			}
 
 			menu->exec(QCursor::pos());
@@ -400,10 +374,12 @@ void DraggableElement::mousePressEvent(QMouseEvent *event)
 }
 
 #ifdef Q_OS_WINDOWS
-#include <windows.h>
-#include <winuser.h>
+#	include <windows.h>
+#	include <winuser.h>
 #else
-static void mouse_event(int, int, int, int, int) { /* empty */ }
+static void mouse_event(int, int, int, int, int)
+{ /* empty */
+}
 constexpr auto MOUSEEVENTF_LEFTDOWN = 0;
 constexpr auto MOUSEEVENTF_LEFTUP = 0;
 constexpr auto MOUSEEVENTF_MOVE = 0;
@@ -441,4 +417,3 @@ void HackTouchDragThread::run()
 		QThread::msleep(3);
 	}
 }
-

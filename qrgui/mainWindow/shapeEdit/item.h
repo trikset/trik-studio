@@ -28,27 +28,21 @@ class Item : public graphicsUtils::AbstractItem
 {
 	Q_OBJECT
 public:
-	enum DomElementTypes {
-		noneType
-		, pictureType
-		, labelType
-		, portType
-	};
+	enum DomElementTypes { noneType, pictureType, labelType, portType };
 
 	enum ScalingPointState {
-		noneScale
-		, topLeftX
-		, topRightX
-		, bottomLeftX
-		, bottomRightX
-		, topLeftY
-		, topRightY
-		, bottomLeftY
-		, bottomRightY
+		noneScale,
+		topLeftX,
+		topRightX,
+		bottomLeftX,
+		bottomRightX,
+		topLeftY,
+		topRightY,
+		bottomLeftY,
+		bottomRightY
 	};
 
-	struct VisibilityCondition
-	{
+	struct VisibilityCondition {
 		QString property;
 		QString sign;
 		QString value;
@@ -57,20 +51,21 @@ public:
 		bool operator!=(const VisibilityCondition &other) const;
 	};
 
-	Item(graphicsUtils::AbstractItem* parent = nullptr);
+	Item(graphicsUtils::AbstractItem *parent = nullptr);
 	virtual void setItemZValue(int zValue);
 	int itemZValue();
 	static int sign(int x);
 	static qreal length(QPointF point1, QPointF point2);
 	QRectF calcNecessaryBoundingRect() const override;
-	void drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr) override = 0;
-	void drawExtractionForItem(QPainter* painter) override;
-	virtual void drawScalingRects(QPainter* painter);
+	void drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option,
+		QWidget *widget = nullptr) override = 0;
+	void drawExtractionForItem(QPainter *painter) override;
+	virtual void drawScalingRects(QPainter *painter);
 
 	static void swap(qreal &x, qreal &y);
 	void setNoneDragState();
 
-	void setListScalePoint(const QList<QPair<ScalingPointState, QColor> > &list);
+	void setListScalePoint(const QList<QPair<ScalingPointState, QColor>> &list);
 
 	void initListScalePoint();
 	void calcForChangeScalingState(QPointF pos, QPointF point1, QPointF point2, int correction);
@@ -82,18 +77,18 @@ public:
 	//for save to xml
 	QString setScaleForDoc(int i, QRect rect);
 	QString setSingleScaleForDoc(int i, int x, int y);
-	void setXandY(QDomElement& dom, const QRectF &rect) override;
+	void setXandY(QDomElement &dom, const QRectF &rect) override;
 
 	QPair<QDomElement, Item::DomElementTypes> generateDom(QDomDocument &document, QPoint topLeftPicture);
-	virtual QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document
-			, const QPoint &topLeftPicture) = 0;
+	virtual QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document,
+		const QPoint &topLeftPicture) = 0;
 
 	void setVisibilityCondition(const VisibilityCondition &condition);
 	void setVisibilityCondition(const QString &property, const QString &sign, const QString &value);
 	VisibilityCondition visibilityCondition() const;
 
 protected:
-	QList<QPair<ScalingPointState, QColor> > mListScalePoint;
+	QList<QPair<ScalingPointState, QColor>> mListScalePoint;
 	bool mNeedScalingRect {false};
 	DomElementTypes mDomElementType {noneType};
 	ScalingPointState mScalingState {noneScale};

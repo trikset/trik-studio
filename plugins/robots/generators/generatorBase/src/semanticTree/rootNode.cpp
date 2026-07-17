@@ -19,7 +19,7 @@
 using namespace generatorBase::semantics;
 using namespace qReal;
 
-RootNode::RootNode(SemanticNode * const initialBlock, QObject *parent)
+RootNode::RootNode(SemanticNode *const initialBlock, QObject *parent)
 	: SemanticNode(Id(), parent)
 	, mZone(new ZoneNode(this))
 	, mInitialBlock(initialBlock->id())

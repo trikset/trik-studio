@@ -19,16 +19,13 @@
 using namespace trik::simple;
 using namespace generatorBase::simple;
 
-WaitForMessageGenerator::WaitForMessageGenerator(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, const qReal::Id &id
-		, QObject *parent)
-	: BindingGenerator(repo, customizer, id
-			, "messages/waitForMessage.t"
-			, { Binding::createConverting("@@WAIT@@", "Synchronized"
-					, customizer.factory()->boolPropertyConverter(id, "Synchronized", false))
-				, Binding::createConverting("@@VARIABLE@@", "Variable"
-					, customizer.factory()->functionBlockConverter(id, "Variable"))}
-			, parent)
+WaitForMessageGenerator::WaitForMessageGenerator(const qrRepo::RepoApi &repo,
+	generatorBase::GeneratorCustomizer &customizer, const qReal::Id &id, QObject *parent)
+	: BindingGenerator(repo, customizer, id, "messages/waitForMessage.t",
+		  {Binding::createConverting("@@WAIT@@", "Synchronized",
+			   customizer.factory()->boolPropertyConverter(id, "Synchronized", false)),
+			  Binding::createConverting("@@VARIABLE@@", "Variable",
+				  customizer.factory()->functionBlockConverter(id, "Variable"))},
+		  parent)
 {
 }

@@ -47,14 +47,13 @@ public:
 
 	/// Performs 2D model`s initialization with the given system components.
 	/// @todo: Separate twoD model engine from the enviroment (get rid of parameters)
-	virtual void init(const kitBase::EventsForKitPluginInterface &eventsForKitPlugin
-			, const qReal::SystemEvents &systemEvents
-			, qReal::LogicalModelAssistInterface &logicalModel
-			, qReal::ControllerInterface &controller
-			, qReal::gui::MainWindowInterpretersInterface &interpretersInterface
-			, qReal::gui::MainWindowDockInterface &dockInterface
-			, const qReal::ProjectManagementInterface &projectManager
-			, kitBase::InterpreterControlInterface &interpreterControl) = 0;
+	virtual void init(const kitBase::EventsForKitPluginInterface &eventsForKitPlugin,
+		const qReal::SystemEvents &systemEvents, qReal::LogicalModelAssistInterface &logicalModel,
+		qReal::ControllerInterface &controller,
+		qReal::gui::MainWindowInterpretersInterface &interpretersInterface,
+		qReal::gui::MainWindowDockInterface &dockInterface,
+		const qReal::ProjectManagementInterface &projectManager,
+		kitBase::InterpreterControlInterface &interpreterControl) = 0;
 
 public Q_SLOTS:
 	/// Starts interpretation process in 2D model.

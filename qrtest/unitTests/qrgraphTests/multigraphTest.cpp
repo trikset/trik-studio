@@ -138,18 +138,17 @@ void MultigraphTest::checkCase2(Multigraph &graph)
 	checkVertex(graph, nodeA, {&nodeB}, {&nodeB, &nodeC}, {}, {});
 	checkVertex(graph, nodeB, {&nodeC, &nodeC}, {}, {&nodeA}, {&nodeA});
 	checkVertex(graph, nodeC, {&nodeC}, {&nodeC}, {&nodeB, &nodeB, &nodeC}, {&nodeA, &nodeC});
-	checkVertex(graph, nodeD, {&nodeD, &nodeD}, {&nodeD, &nodeD, &nodeD}, {&nodeD, &nodeD}, {&nodeD, &nodeD, &nodeD});
+	checkVertex(graph, nodeD, {&nodeD, &nodeD}, {&nodeD, &nodeD, &nodeD}, {&nodeD, &nodeD},
+		{&nodeD, &nodeD, &nodeD});
 	checkVertex(graph, nodeE, {&nodeF}, {&nodeE, &nodeF, &nodeG, &nodeG}, {}, {&nodeE});
 	checkVertex(graph, nodeF, {&nodeF}, {}, {&nodeE, &nodeF}, {&nodeE});
 	checkVertex(graph, nodeG, {&nodeG}, {&nodeG}, {&nodeG}, {&nodeE, &nodeE, &nodeG});
 	checkVertex(graph, nodeH, {}, {}, {}, {});
 }
 
-void MultigraphTest::checkVertex(Multigraph &graph, const Node &node
-		, QList<const Node *> outgoingNodesType0
-		, QList<const Node *> outgoingNodesType1
-		, QList<const Node *> incomingNodesType0
-		, QList<const Node *> incomingNodesType1)
+void MultigraphTest::checkVertex(Multigraph &graph, const Node &node, QList<const Node *> outgoingNodesType0,
+	QList<const Node *> outgoingNodesType1, QList<const Node *> incomingNodesType0,
+	QList<const Node *> incomingNodesType1)
 {
 	ASSERT_EQ(&graph, &node.graph());
 

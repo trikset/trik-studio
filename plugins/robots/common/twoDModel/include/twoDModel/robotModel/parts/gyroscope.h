@@ -34,9 +34,8 @@ class TWO_D_MODEL_EXPORT Gyroscope : public kitBase::robotModel::robotParts::Gyr
 	Q_OBJECT
 
 public:
-	Gyroscope(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port
-			, engine::TwoDModelEngineInterface &engine);
+	Gyroscope(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+		engine::TwoDModelEngineInterface &engine);
 
 	void read() override;
 

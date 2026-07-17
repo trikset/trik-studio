@@ -19,9 +19,8 @@
 using namespace twoDModel::robotModel::parts;
 using namespace kitBase::robotModel;
 
-ColorSensorReflected::ColorSensorReflected(const kitBase::robotModel::DeviceInfo &info
-		, const kitBase::robotModel::PortInfo &port
-		, engine::TwoDModelEngineInterface &engine)
+ColorSensorReflected::ColorSensorReflected(const kitBase::robotModel::DeviceInfo &info,
+	const kitBase::robotModel::PortInfo &port, engine::TwoDModelEngineInterface &engine)
 	: kitBase::robotModel::robotParts::ColorSensorReflected(info, port)
 	, mEngine(engine)
 {

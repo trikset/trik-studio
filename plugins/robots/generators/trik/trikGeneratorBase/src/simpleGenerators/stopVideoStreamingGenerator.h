@@ -24,10 +24,8 @@ class StopVideoStreamingGenerator : public generatorBase::simple::BindingGenerat
 {
 	Q_OBJECT
 public:
-	StopVideoStreamingGenerator(const qrRepo::RepoApi &repo
-			, generatorBase::GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent);
+	StopVideoStreamingGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+		const qReal::Id &id, QObject *parent);
 };
 
 }

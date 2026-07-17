@@ -17,13 +17,13 @@
 using namespace nxt::robotModel::real::parts;
 using namespace kitBase::robotModel;
 
-GyroscopeSensor::GyroscopeSensor(const DeviceInfo &info, const PortInfo &port
-		, utils::robotCommunication::RobotCommunicator &robotCommunicator)
+GyroscopeSensor::GyroscopeSensor(const DeviceInfo &info, const PortInfo &port,
+	utils::robotCommunication::RobotCommunicator &robotCommunicator)
 	: kitBase::robotModel::robotParts::GyroscopeSensor(info, port)
 	, mImplementation(robotCommunicator, port, enums::lowLevelSensorType::ANGLE, enums::sensorMode::RAWMODE)
 {
-	connect(&mImplementation, &NxtInputDevice::sensorSpecificProcessResponse
-			, this, &GyroscopeSensor::sensorSpecificProcessResponse);
+	connect(&mImplementation, &NxtInputDevice::sensorSpecificProcessResponse, this,
+		&GyroscopeSensor::sensorSpecificProcessResponse);
 	connect(&mImplementation, &NxtInputDevice::configured, this, &GyroscopeSensor::configurationCompleted);
 }
 
@@ -41,7 +41,7 @@ void GyroscopeSensor::read()
 	mImplementation.setState(NxtInputDevice::pending);
 
 	QByteArray command(5, 0);
-	command[0] = 0x03;  //command length
+	command[0] = 0x03; //command length
 	command[1] = 0x00;
 	command[2] = enums::telegramType::directCommandResponseRequired;
 	command[3] = enums::commandCode::GETINPUTVALUES;

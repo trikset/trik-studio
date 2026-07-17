@@ -19,7 +19,8 @@ using namespace twoDModel::model;
 
 namespace {
 /// Translation of a string representation into a unit
-SizeUnit::Unit stringToUnit(const QString &unit) {
+SizeUnit::Unit stringToUnit(const QString &unit)
+{
 	if (unit.isEmpty()) {
 		return SizeUnit::Unit::Pixels;
 	}
@@ -36,7 +37,8 @@ SizeUnit::Unit stringToUnit(const QString &unit) {
 }
 
 /// Translation of a unit into a string representation
-QString unitToString(SizeUnit::Unit unit) {
+QString unitToString(SizeUnit::Unit unit)
+{
 	if (unit == SizeUnit::Unit::Centimeters) {
 		return "cm";
 	}
@@ -60,7 +62,8 @@ qreal SizeUnit::pixelsInCm() const
 	return mPixelsInCm;
 }
 
-SizeUnit::SizeUnit(twoDModel::model::SizeUnit::Unit unit): mSizeUnit(unit)
+SizeUnit::SizeUnit(twoDModel::model::SizeUnit::Unit unit)
+	: mSizeUnit(unit)
 {
 }
 
@@ -129,12 +132,8 @@ QString SizeUnit::toStr() const
 
 std::map<QString, SizeUnit::Unit> SizeUnit::currentValues()
 {
-	return {
-		{QObject::tr("Pixels"), Unit::Pixels }
-		, {QObject::tr("Centimeters"), Unit::Centimeters}
-		, {QObject::tr("Meters"), Unit::Meters}
-		, {QObject::tr("Millimeters"), Unit::Millimeters}
-	};
+	return {{QObject::tr("Pixels"), Unit::Pixels}, {QObject::tr("Centimeters"), Unit::Centimeters},
+		{QObject::tr("Meters"), Unit::Meters}, {QObject::tr("Millimeters"), Unit::Millimeters}};
 }
 
 SizeUnit::Unit SizeUnit::defaultUnit()

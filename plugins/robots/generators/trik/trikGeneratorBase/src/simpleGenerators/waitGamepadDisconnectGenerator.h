@@ -24,10 +24,8 @@ class WaitGamepadDisconnectGenerator : public generatorBase::simple::BindingGene
 {
 	Q_OBJECT
 public:
-	WaitGamepadDisconnectGenerator(const qrRepo::RepoApi &repo
-			, generatorBase::GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent = nullptr);
+	WaitGamepadDisconnectGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+		const qReal::Id &id, QObject *parent = nullptr);
 };
 
 }

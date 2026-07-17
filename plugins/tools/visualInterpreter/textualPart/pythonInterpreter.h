@@ -31,8 +31,8 @@ class PythonInterpreter : public TextCodeInterpreter
 	Q_OBJECT
 
 public:
-	explicit PythonInterpreter(QObject *parent, QString const &pythonPath = "python"
-			, QString const &tempScriptPath = QDir().currentPath() + "/temp.py");
+	explicit PythonInterpreter(QObject *parent, QString const &pythonPath = "python",
+		QString const &tempScriptPath = QDir().currentPath() + "/temp.py");
 	~PythonInterpreter();
 
 	/// Interpret python script

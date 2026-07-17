@@ -17,11 +17,12 @@
 
 #include <QtWidgets/QPushButton>
 
-VisibilityConditionsDialog::VisibilityConditionsDialog(QMap<QString, PropertyInfo> const &properties
-		, QList<QSharedPointer<Item>> const &items, QWidget *parent)
+VisibilityConditionsDialog::VisibilityConditionsDialog(QMap<QString, PropertyInfo> const &properties,
+	QList<QSharedPointer<Item>> const &items, QWidget *parent)
 	: QDialog(parent)
 	, ui(new Ui::VisibilityConditionsDialog)
-	, mProperties(properties), mItems(items)
+	, mProperties(properties)
+	, mItems(items)
 {
 	ui->setupUi(this);
 	this->setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
@@ -31,10 +32,10 @@ VisibilityConditionsDialog::VisibilityConditionsDialog(QMap<QString, PropertyInf
 
 	setWidgetValues();
 
-	connect(ui->propertyComboBox, QOverload<const QString&>::of(&QComboBox::activated)
-			, this, &VisibilityConditionsDialog::changeProperty);
+	connect(ui->propertyComboBox, QOverload<const QString &>::of(&QComboBox::activated), this,
+		&VisibilityConditionsDialog::changeProperty);
 	auto *btnOk = ui->buttonBox->button(QDialogButtonBox::Ok);
-	connect( btnOk, &QPushButton::clicked, this, &VisibilityConditionsDialog::okClicked);
+	connect(btnOk, &QPushButton::clicked, this, &VisibilityConditionsDialog::okClicked);
 }
 
 VisibilityConditionsDialog::~VisibilityConditionsDialog()
@@ -69,8 +70,8 @@ void VisibilityConditionsDialog::changeOperators(Type type)
 void VisibilityConditionsDialog::okClicked()
 {
 	for (auto &&item : mItems) {
-		item->setVisibilityCondition(ui->propertyComboBox->currentText()
-				, ui->operatorComboBox->currentText(), ui->valueWidget->value());
+		item->setVisibilityCondition(ui->propertyComboBox->currentText(), ui->operatorComboBox->currentText(),
+			ui->valueWidget->value());
 	}
 }
 

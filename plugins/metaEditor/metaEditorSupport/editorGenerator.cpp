@@ -29,12 +29,12 @@ using namespace metaEditor;
 using namespace utils;
 
 EditorGenerator::EditorGenerator(const qrRepo::LogicalRepoApi &api, ErrorReporterInterface &errorReporter)
-		: mApi(api)
-		, mErrorReporter(errorReporter)
+	: mApi(api)
+	, mErrorReporter(errorReporter)
 {
 }
 
-QHash<Id, QPair<QString,QString>> EditorGenerator::getMetamodelList()
+QHash<Id, QPair<QString, QString>> EditorGenerator::getMetamodelList()
 {
 	const IdList metamodels = mApi.children(Id::rootId());
 	QHash<Id, QPair<QString, QString>> metamodelList;
@@ -50,7 +50,8 @@ QHash<Id, QPair<QString,QString>> EditorGenerator::getMetamodelList()
 				metamodelList.insert(key, savingData);
 			} else {
 				mErrorReporter.addError(
-						QObject::tr("no directory to generated code or path to QReal Source Files"), key);
+					QObject::tr("no directory to generated code or path to QReal Source Files"),
+					key);
 			}
 		}
 	}
@@ -58,8 +59,8 @@ QHash<Id, QPair<QString,QString>> EditorGenerator::getMetamodelList()
 	return metamodelList;
 }
 
-QPair<QString, QString> EditorGenerator::generateEditor(const Id &metamodelId
-		, const QString &pathToFile, const QString &pathToQRealSource)
+QPair<QString, QString> EditorGenerator::generateEditor(const Id &metamodelId, const QString &pathToFile,
+	const QString &pathToQRealSource)
 {
 	mErrorReporter.clear();
 	mErrorReporter.clearErrors();
@@ -103,9 +104,9 @@ QPair<QString, QString> EditorGenerator::generateEditor(const Id &metamodelId
 	if (includeProList != "") {
 		outpro() << QString("QREAL_XML_DEPENDS = %1\n").arg(includeProList);
 	}
-	outpro() << QString ("QREAL_EDITOR_PATH = %1\n").arg(editorPath);
+	outpro() << QString("QREAL_EDITOR_PATH = %1\n").arg(editorPath);
 	QString const relativeQRealSourcesPath = calculateRelativeQRealSourcesPath(pathToFile, pathToQRealSource);
-	outpro() << QString ("ROOT = %1\n").arg(relativeQRealSourcesPath);
+	outpro() << QString("ROOT = %1\n").arg(relativeQRealSourcesPath);
 	outpro() << "\n";
 	outpro() << QString("include (%1)").arg(relativeQRealSourcesPath + "/plugins/editorsSdk/editorsCommon.pri");
 	outpro() << "\n\n";
@@ -207,11 +208,13 @@ void EditorGenerator::createDiagrams(QDomElement &parent, const Id &id)
 		if (objectType == "MetaEditorDiagramNode") {
 			QDomElement diagram = mDocument.createElement("diagram");
 			ensureCorrectness(typeElement, diagram, "name", mApi.name(typeElement));
-			ensureCorrectness(typeElement, diagram, "displayedName", mApi.stringProperty(typeElement, "displayedName"));
+			ensureCorrectness(typeElement, diagram, "displayedName",
+				mApi.stringProperty(typeElement, "displayedName"));
 
 			QString const rootNode = mApi.stringProperty(typeElement, "nodeName");
 			checkRootNodeValid(typeElement, rootNode);
-			ensureCorrectness(typeElement, diagram, "nodeName", mApi.stringProperty(typeElement, "nodeName"));
+			ensureCorrectness(typeElement, diagram, "nodeName",
+				mApi.stringProperty(typeElement, "nodeName"));
 			parent.appendChild(diagram);
 			serializeObjects(diagram, typeElement);
 			mElements.clear();
@@ -425,14 +428,14 @@ void EditorGenerator::setGeneralization(QDomElement &parent, const Id &id)
 	for (const Id &inLink : inLinks) {
 		if (inLink.element() == "Inheritance") {
 			const Id parentId = mApi.from(inLink);
-			if ((parentId.element() == "MetaEntityImport")
-					|| (parentId.element() == "MetaEntityNode")
-					|| (parentId.element() == "MetaEntityEdge"))
-			{
+			if ((parentId.element() == "MetaEntityImport") || (parentId.element() == "MetaEntityNode")
+				|| (parentId.element() == "MetaEntityEdge")) {
 				QDomElement generalization = mDocument.createElement("parent");
-				ensureCorrectness(parentId, generalization, "parentName", mApi.stringProperty(parentId, "name"));
-				generalization.setAttribute("overrides", generalizations.attribute("overrides"
-						, mApi.stringProperty(inLink, "overrides")));
+				ensureCorrectness(parentId, generalization, "parentName",
+					mApi.stringProperty(parentId, "name"));
+				generalization.setAttribute("overrides",
+					generalizations.attribute("overrides",
+						mApi.stringProperty(inLink, "overrides")));
 				generalizations.appendChild(generalization);
 			}
 		}
@@ -452,12 +455,15 @@ void EditorGenerator::setProperties(QDomElement &parent, const Id &id)
 			QString const objectType = idChild.element();
 			if (objectType == "MetaEntity_Attribute") {
 				QDomElement property = mDocument.createElement("property");
-				ensureCorrectness(idChild, property, "type", mApi.stringProperty(idChild, "attributeType"));
+				ensureCorrectness(idChild, property, "type",
+					mApi.stringProperty(idChild, "attributeType"));
 				ensureCorrectness(idChild, property, "name", mApi.name(idChild));
-				ensureCorrectness(idChild, property, "displayedName", mApi.stringProperty(idChild, "displayedName"));
+				ensureCorrectness(idChild, property, "displayedName",
+					mApi.stringProperty(idChild, "displayedName"));
 				if (mApi.stringProperty(idChild, "defaultValue") != "") {
 					QDomElement defaultTag = mDocument.createElement("default");
-					QDomText value = mDocument.createTextNode(mApi.stringProperty(idChild, "defaultValue"));
+					QDomText value =
+						mDocument.createTextNode(mApi.stringProperty(idChild, "defaultValue"));
 					defaultTag.appendChild(value);
 					property.appendChild(defaultTag);
 				}
@@ -487,11 +493,12 @@ void EditorGenerator::setPorts(QDomElement &parent, const Id &id, QString const 
 
 void EditorGenerator::setValues(QDomElement &parent, const Id &id)
 {
-	for(const Id idChild : mApi.children(id)) {
+	for (const Id idChild : mApi.children(id)) {
 		if (idChild != Id::rootId()) {
 			QDomElement valueTag = mDocument.createElement("value");
 			ensureCorrectness(idChild, valueTag, "name", mApi.stringProperty(idChild, "valueName"));
-			ensureCorrectness(idChild, valueTag, "displayedName", mApi.stringProperty(idChild, "displayedName"));
+			ensureCorrectness(idChild, valueTag, "displayedName",
+				mApi.stringProperty(idChild, "displayedName"));
 			parent.appendChild(valueTag);
 		}
 	}
@@ -504,8 +511,10 @@ void EditorGenerator::setGroupNodes(QDomElement &parent, const Id &id)
 			QDomElement groupNodeTag = mDocument.createElement("groupNode");
 			ensureCorrectness(idChild, groupNodeTag, "name", mApi.name(idChild));
 			ensureCorrectness(idChild, groupNodeTag, "parent", mApi.stringProperty(idChild, "parent"));
-			ensureCorrectness(idChild, groupNodeTag, "xPosition", mApi.property(idChild, "xPosition").toString());
-			ensureCorrectness(idChild, groupNodeTag, "yPosition", mApi.property(idChild, "yPosition").toString());
+			ensureCorrectness(idChild, groupNodeTag, "xPosition",
+				mApi.property(idChild, "xPosition").toString());
+			ensureCorrectness(idChild, groupNodeTag, "yPosition",
+				mApi.property(idChild, "yPosition").toString());
 
 			const Id typeElement = Id::loadFromString(mApi.property(idChild, "type").toString());
 			ensureCorrectness(idChild, groupNodeTag, "type", mApi.name(typeElement));
@@ -525,8 +534,8 @@ void EditorGenerator::setConnections(QDomElement &parent, const Id &id)
 	newSetConnections(parent, id, "connections", "connection", "MetaEntityConnection");
 }
 
-void EditorGenerator::newSetConnections(QDomElement &parent, const Id &id,
-		QString const &commonTagName, QString const &internalTagName, QString const &typeName)
+void EditorGenerator::newSetConnections(QDomElement &parent, const Id &id, QString const &commonTagName,
+	QString const &internalTagName, QString const &typeName)
 {
 	IdList const childElems = mApi.children(id);
 
@@ -536,7 +545,7 @@ void EditorGenerator::newSetConnections(QDomElement &parent, const Id &id,
 		QString const objectType = idChild.editor();
 		if (objectType == typeName) {
 			QDomElement connection = mDocument.createElement(internalTagName);
-			ensureCorrectness(idChild, connection,"type", mApi.stringProperty(idChild, "type"));
+			ensureCorrectness(idChild, connection, "type", mApi.stringProperty(idChild, "type"));
 			connectionsTag.appendChild(connection);
 		}
 	}
@@ -568,7 +577,8 @@ void EditorGenerator::setPossibleEdges(QDomElement &parent, const Id &id)
 		if (objectType == "MetaEntityPossibleEdge") {
 			QDomElement possibleEdge = mDocument.createElement("possibleEdge");
 			possibleEdges.appendChild(possibleEdge);
-			ensureCorrectness(idChild, possibleEdge, "beginName", mApi.stringProperty(idChild, "beginName"));
+			ensureCorrectness(idChild, possibleEdge, "beginName",
+				mApi.stringProperty(idChild, "beginName"));
 			ensureCorrectness(idChild, possibleEdge, "endName", mApi.stringProperty(idChild, "endName"));
 			ensureCorrectness(idChild, possibleEdge, "directed", mApi.stringProperty(idChild, "directed"));
 		}
@@ -584,8 +594,8 @@ void EditorGenerator::setCreateChildrenFromMenu(QDomElement &parent, const Id &i
 	setStatusElement(parent, id, "createChildrenFromMenu", "createChildrenFromMenu");
 }
 
-void EditorGenerator::setStatusElement(
-		QDomElement &parent, const Id &id, QString const &tagName, QString const &propertyName)
+void EditorGenerator::setStatusElement(QDomElement &parent, const Id &id, QString const &tagName,
+	QString const &propertyName)
 {
 	if (mApi.stringProperty(id, propertyName) == "true") {
 		QDomElement statusElement = mDocument.createElement(tagName);
@@ -609,8 +619,8 @@ void EditorGenerator::setContainer(QDomElement &parent, const Id &id)
 				container.appendChild(contains);
 			} else if (typeName == "MetaEntityImport") {
 				QDomElement contains = mDocument.createElement("contains");
-				ensureCorrectness(elementId, contains, "type", mApi.stringProperty(elementId, "importedFrom")
-						+ "::" + mApi.name(elementId));
+				ensureCorrectness(elementId, contains, "type",
+					mApi.stringProperty(elementId, "importedFrom") + "::" + mApi.name(elementId));
 				container.appendChild(contains);
 			}
 		}
@@ -656,8 +666,8 @@ void EditorGenerator::setExplosion(QDomElement &parent, const Id &id)
 				explodesTo.appendChild(target);
 			} else if (typeName == "MetaEntityImport") {
 				QDomElement target = mDocument.createElement("target");
-				ensureCorrectness(elementId, target, "type"
-						, mApi.stringProperty(elementId, "importedFrom") + "::" + mApi.name(elementId));
+				ensureCorrectness(elementId, target, "type",
+					mApi.stringProperty(elementId, "importedFrom") + "::" + mApi.name(elementId));
 				setExplosionProperties(target, inLink);
 				explodesTo.appendChild(target);
 			}
@@ -695,13 +705,12 @@ void EditorGenerator::setBoolValuesForContainer(QString const &propertyName, QDo
 	}
 }
 
-void EditorGenerator::ensureCorrectness(
-		const Id &id, QDomElement element, QString const &tagName, QString const &value)
+void EditorGenerator::ensureCorrectness(const Id &id, QDomElement element, QString const &tagName, QString const &value)
 {
 	if (value.isEmpty() && (tagName == "displayedName")) {
 		return;
 	} else if (value.isEmpty()) {
-		mErrorReporter.addWarning(QString (QObject::tr("not filled %1\n")).arg(tagName), id);
+		mErrorReporter.addWarning(QString(QObject::tr("not filled %1\n")).arg(tagName), id);
 		element.setAttribute(tagName, "");
 	} else if (tagName == "name") {
 		QRegExp patten;
@@ -716,7 +725,8 @@ void EditorGenerator::ensureCorrectness(
 		if ((value == "NonTyped") || findPort(value)) {
 			element.setAttribute(tagName, value);
 		} else {
-			mErrorReporter.addError(QObject::tr("wrong %1 for possible edge: must be port type\n").arg(tagName), id);
+			mErrorReporter.addError(
+				QObject::tr("wrong %1 for possible edge: must be port type\n").arg(tagName), id);
 		}
 	} else {
 		element.setAttribute(tagName, value);
@@ -738,11 +748,12 @@ void EditorGenerator::checkRootNodeValid(const Id &diagram, QString const rootNo
 {
 	for (const Id &child : mApi.children(diagram)) {
 		if ((child.element() == "MetaEntityNode" || child.element() == "MetaEntityGroup")
-				&& mApi.name(child) == rootNode) {
+			&& mApi.name(child) == rootNode) {
 			return;
 		}
 	}
 
-	mErrorReporter.addError(QObject::tr("Root node for diagram %1 (which is %2) shall exist")
-			.arg(mApi.name(diagram)).arg(rootNode), diagram);
+	mErrorReporter.addError(
+		QObject::tr("Root node for diagram %1 (which is %2) shall exist").arg(mApi.name(diagram)).arg(rootNode),
+		diagram);
 }

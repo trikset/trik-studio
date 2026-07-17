@@ -20,7 +20,7 @@
 #include <qrutils/scalableItem.h>
 
 namespace utils {
-	class OutFile;
+class OutFile;
 }
 
 class Port : public utils::ScalableItem

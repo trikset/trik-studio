@@ -20,14 +20,14 @@
 
 using namespace twoDModel::robotModel::parts;
 
-Marker::Marker(const kitBase::robotModel::DeviceInfo &info
-		, const kitBase::robotModel::PortInfo &port
-		, engine::TwoDModelEngineInterface &engine)
+Marker::Marker(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+	engine::TwoDModelEngineInterface &engine)
 	: Device(info, port)
 	, mEngine(engine)
 {
 	connect(this, &Marker::isDownChanged, this, [=](bool isDown) { Q_EMIT propertyChanged("isDown", isDown); });
-	connect(this, &Marker::colorChanged, this, [=](const QColor &color) { Q_EMIT propertyChanged("color", color); });
+	connect(this, &Marker::colorChanged, this,
+		[=](const QColor &color) { Q_EMIT propertyChanged("color", color); });
 }
 
 void Marker::down(const QColor &color)

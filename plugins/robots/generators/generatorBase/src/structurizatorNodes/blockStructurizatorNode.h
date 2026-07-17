@@ -23,9 +23,8 @@ class BlockStructurizatorNode : public IntermediateStructurizatorNode
 	Q_OBJECT
 
 public:
-	explicit BlockStructurizatorNode(IntermediateStructurizatorNode *firstNode
-			, IntermediateStructurizatorNode *secondNode
-			, QObject *parent);
+	explicit BlockStructurizatorNode(IntermediateStructurizatorNode *firstNode,
+		IntermediateStructurizatorNode *secondNode, QObject *parent);
 
 	IntermediateStructurizatorNode *firstNode() const;
 	IntermediateStructurizatorNode *secondNode() const;
@@ -33,6 +32,7 @@ public:
 	bool analyzeBreak() override;
 	Type type() const override;
 	qReal::Id firstId() const override;
+
 private:
 	IntermediateStructurizatorNode *mFirstNode;
 	IntermediateStructurizatorNode *mSecondNode;

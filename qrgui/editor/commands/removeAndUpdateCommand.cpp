@@ -25,8 +25,7 @@
 using namespace qReal::commands;
 using namespace qReal::gui::editor::commands;
 
-RemoveAndUpdateCommand::RemoveAndUpdateCommand(EditorViewScene &scene
-		, const models::Models &models)
+RemoveAndUpdateCommand::RemoveAndUpdateCommand(EditorViewScene &scene, const models::Models &models)
 	: RemoveElementsCommand(models)
 	, mScene(scene)
 {
@@ -60,13 +59,13 @@ QHash<qReal::Id, QList<qReal::Id>> RemoveAndUpdateCommand::buildAdjacency(const 
 // Each BFS traversal starting from an unvisited node produces one connected
 // component.
 QList<QList<qReal::Id>> RemoveAndUpdateCommand::findComponents(const QSet<Id> &nodesSet,
-									const QHash<Id, QList<Id>> &adjacency)
+	const QHash<Id, QList<Id>> &adjacency)
 {
 	QList<QList<Id>> components;
 	QSet<Id> visited;
 	visited.reserve(nodesSet.size());
 
-	for (auto &&start: nodesSet) {
+	for (auto &&start : nodesSet) {
 		if (visited.contains(start)) {
 			continue;
 		}
@@ -107,7 +106,7 @@ void RemoveAndUpdateCommand::postprocessCollectedItems(QList<ElementInfo> &nodes
 	auto &&adjacency = buildAdjacency(nodesSet);
 	auto &&components = findComponents(nodesSet, adjacency);
 
-	for (auto &&component: components) {
+	for (auto &&component : components) {
 		processComponent(component, nodesSet, nodes, edges);
 	}
 }
@@ -118,7 +117,7 @@ void RemoveAndUpdateCommand::postprocessCollectedItems(QList<ElementInfo> &nodes
 // Before: A ->(1) [ component ] ->(2) B
 // After: A ->(1)-> B
 void RemoveAndUpdateCommand::reconnectComponent(const Id &incomingEdge, const Id &outgoingEdge,
-						QList<ElementInfo> &nodes, QList<ElementInfo> &edges)
+	QList<ElementInfo> &nodes, QList<ElementInfo> &edges)
 {
 	auto &&repo = mGraphicalApi.graphicalRepoApi();
 	auto &&from = repo.from(incomingEdge);
@@ -197,7 +196,7 @@ void RemoveAndUpdateCommand::reconnectComponent(const Id &incomingEdge, const Id
 ///
 /// Since the component has multiple entry/exit points, it is skipped.
 void RemoveAndUpdateCommand::processComponent(const QList<Id> &component, const QSet<Id> &nodesSet,
-							QList<ElementInfo> &nodes, QList<ElementInfo> &edges)
+	QList<ElementInfo> &nodes, QList<ElementInfo> &edges)
 {
 	auto &&repo = mGraphicalApi.graphicalRepoApi();
 
@@ -206,7 +205,7 @@ void RemoveAndUpdateCommand::processComponent(const QList<Id> &component, const 
 
 	for (auto &&node : component) {
 		auto &&links = repo.links(node);
-		for (auto &&link: links) {
+		for (auto &&link : links) {
 			auto &&from = repo.from(link);
 			auto &&to = repo.to(link);
 			// This node cannot be located in another component.
@@ -243,8 +242,7 @@ void RemoveAndUpdateCommand::processComponent(const QList<Id> &component, const 
 	reconnectComponent(incomingEdge, outgoingEdge, nodes, edges);
 }
 
-void RemoveAndUpdateCommand::appendGraphicalDelete(const Id &id
-		, QList<ElementInfo> &nodes, QList<ElementInfo> &edges)
+void RemoveAndUpdateCommand::appendGraphicalDelete(const Id &id, QList<ElementInfo> &nodes, QList<ElementInfo> &edges)
 {
 	RemoveElementsCommand::appendGraphicalDelete(id, nodes, edges);
 

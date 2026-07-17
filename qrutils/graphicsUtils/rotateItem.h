@@ -43,7 +43,6 @@ protected:
 	QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
 	bool theOnlySelectedRotateItem(bool thisSelected) const;
 
-
 private:
 	Rotater mRotater;
 };

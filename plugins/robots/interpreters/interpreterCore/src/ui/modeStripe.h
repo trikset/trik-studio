@@ -28,7 +28,7 @@ public:
 	ModeStripe(QAction &modeAction, const QString &text, QWidget *parent = nullptr);
 
 private:
-	void mousePressEvent(QMouseEvent * event) override;
+	void mousePressEvent(QMouseEvent *event) override;
 
 	QAction &mAction;
 };

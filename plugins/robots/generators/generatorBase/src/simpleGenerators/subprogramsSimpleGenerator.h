@@ -24,10 +24,8 @@ class SubprogramsSimpleGenerator : public BindingGenerator
 {
 	Q_OBJECT
 public:
-	SubprogramsSimpleGenerator(const qrRepo::RepoApi &repo
-			, GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent = nullptr);
+	SubprogramsSimpleGenerator(const qrRepo::RepoApi &repo, GeneratorCustomizer &customizer, const qReal::Id &id,
+		QObject *parent = nullptr);
 };
 
 }

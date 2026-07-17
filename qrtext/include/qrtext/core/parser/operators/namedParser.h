@@ -31,12 +31,13 @@ public:
 	/// @param parser - internal parser, to do actual work.
 	/// @param name - name of a production, for debugging purposes.
 	NamedParser(const ParserRef<TokenType> &parser, const QString &name)
-		: mParser(parser), mName(name)
+		: mParser(parser)
+		, mName(name)
 	{
 	}
 
-	QSharedPointer<ast::Node> parse(TokenStream<TokenType> &tokenStream
-			, ParserContext<TokenType> &parserContext) const override
+	QSharedPointer<ast::Node> parse(TokenStream<TokenType> &tokenStream,
+		ParserContext<TokenType> &parserContext) const override
 	{
 		return mParser->parse(tokenStream, parserContext);
 	}

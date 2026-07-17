@@ -20,6 +20,7 @@ class EmbeddedLinkers
 {
 public:
 	EmbeddedLinkers();
+
 private:
-	QList<qReal::gui::editor::EmbeddedLinker*> linkers;
+	QList<qReal::gui::editor::EmbeddedLinker *> linkers;
 };

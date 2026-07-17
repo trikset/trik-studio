@@ -24,10 +24,8 @@ class TrikPascalABCControlFlowValidator : public generatorBase::PrimaryControlFl
 {
 	Q_OBJECT
 public:
-	TrikPascalABCControlFlowValidator(const qrRepo::RepoApi &repo
-			, qReal::ErrorReporterInterface &errorReporter
-			, generatorBase::GeneratorCustomizer &customizer
-			, QObject *parent = nullptr);
+	TrikPascalABCControlFlowValidator(const qrRepo::RepoApi &repo, qReal::ErrorReporterInterface &errorReporter,
+		generatorBase::GeneratorCustomizer &customizer, QObject *parent = nullptr);
 
 	PrimaryControlFlowValidator *clone() override;
 

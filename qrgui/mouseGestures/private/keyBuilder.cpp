@@ -51,7 +51,7 @@ Key KeyBuilder::getKey(const PathVector &mousePath, int heightSize, int widthSiz
 		SquarePos last;
 
 		for (const QPointF &point : path) {
-			if ((lower - upper) * maxRelation  < right - left) {
+			if ((lower - upper) * maxRelation < right - left) {
 				last.first = (point.x() - left) * widthSize / (right - left);
 				last.second = 0;
 			} else if ((right - left) * maxRelation < lower - upper) {

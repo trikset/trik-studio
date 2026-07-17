@@ -27,10 +27,12 @@ using namespace twoDModel::templates;
 TemplatesParserApi::~TemplatesParserApi() = default;
 
 TemplatesParserApi::TemplatesParserApi(qReal::ErrorReporterInterface &errorReporter)
-	: mManager(new details::TemplatesManager),
-	  mParser(new details::TemplatesParser),
-	  mProcessor(new details::TemplatesProcessor(mManager.get())),
-	  mErrorReporter(errorReporter){}
+	: mManager(new details::TemplatesManager)
+	, mParser(new details::TemplatesParser)
+	, mProcessor(new details::TemplatesProcessor(mManager.get()))
+	, mErrorReporter(errorReporter)
+{
+}
 
 void TemplatesParserApi::parseSystemTemplates()
 {
@@ -87,7 +89,7 @@ bool TemplatesParserApi::proccessTemplates(const QDomElement &constraintsXml)
 			// OUTPUT --- only constraints
 			QTextStream stream(&file);
 			stream << utils::xmlUtils::ensureXmlFieldsOrder(
-					  utils::xmlUtils::getTagContent(constraintsXml, true));
+				utils::xmlUtils::getTagContent(constraintsXml, true));
 		}
 	}
 
@@ -97,7 +99,7 @@ bool TemplatesParserApi::proccessTemplates(const QDomElement &constraintsXml)
 
 void TemplatesParserApi::reportTemplateSubstitutionErrors()
 {
-	for(auto &&error : mProcessor->errors()) {
+	for (auto &&error : mProcessor->errors()) {
 		const QString fullMessage = QObject::tr("Error while template substitution: %1").arg(error);
 		QLOG_ERROR() << fullMessage;
 		mErrorReporter.addError(fullMessage);

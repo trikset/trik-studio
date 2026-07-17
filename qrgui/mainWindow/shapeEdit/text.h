@@ -32,16 +32,16 @@ public:
 	virtual void setIsDynamicText(bool isDynamic);
 	QRectF boundingRect() const override;
 	QRectF realBoundingRect() const override;
-	void drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr) override;
-	void drawExtractionForItem(QPainter* painter) override;
-	void drawFieldForResizeItem(QPainter* painter) override;
-	void drawScalingRects(QPainter* painter) override;
+	void drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
+	void drawExtractionForItem(QPainter *painter) override;
+	void drawFieldForResizeItem(QPainter *painter) override;
+	void drawScalingRects(QPainter *painter) override;
 	void changeScalingPointState(qreal x, qreal y) override;
-	QGraphicsTextItem const& getText();
+	QGraphicsTextItem const &getText();
 	void setItemZValue(int zValue) override;
 
-	QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document
-			, const QPoint &topLeftPicture) override;
+	QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document,
+		const QPoint &topLeftPicture) override;
 
 protected:
 	int mX1 {};
@@ -50,5 +50,5 @@ protected:
 	QGraphicsTextItem mText;
 	bool mIsDynamicText;
 	QRectF mRect;
-	void drawForDynamicText(QPainter* painter);
+	void drawForDynamicText(QPainter *painter);
 };

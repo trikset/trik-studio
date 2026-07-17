@@ -36,22 +36,22 @@ void Ev3ReadRGBBlock::run()
 
 	auto const sensor = RobotModelUtils::findDevice<robotParts::VectorSensor>(mRobotModel, port);
 	if (sensor) {
-		mConnections << connect(sensor, &robotParts::VectorSensor::newData, [this](const QVariant &data){
-				disconnectSensor();
-				auto color = data.value<QVector<int>>();
-				if (color.length() != 3) {
-					error(tr("Sensor reading should consist of three components"));
-				} else {
-					evalCode(stringProperty("RVariable") + " = " + QString::number(color[0]));
-					evalCode(stringProperty("GVariable") + " = " + QString::number(color[1]));
-					evalCode(stringProperty("BVariable") + " = " + QString::number(color[2]));
-					Q_EMIT done(mNextBlockId);
-				}
-			});
-		mConnections << connect(sensor, &robotParts::VectorSensor::failure, [this](){
-				disconnectSensor();
-				error(tr("Sensor reading failed"));
-			});
+		mConnections << connect(sensor, &robotParts::VectorSensor::newData, [this](const QVariant &data) {
+			disconnectSensor();
+			auto color = data.value<QVector<int>>();
+			if (color.length() != 3) {
+				error(tr("Sensor reading should consist of three components"));
+			} else {
+				evalCode(stringProperty("RVariable") + " = " + QString::number(color[0]));
+				evalCode(stringProperty("GVariable") + " = " + QString::number(color[1]));
+				evalCode(stringProperty("BVariable") + " = " + QString::number(color[2]));
+				Q_EMIT done(mNextBlockId);
+			}
+		});
+		mConnections << connect(sensor, &robotParts::VectorSensor::failure, [this]() {
+			disconnectSensor();
+			error(tr("Sensor reading failed"));
+		});
 
 		sensor->read();
 	} else {
@@ -61,7 +61,7 @@ void Ev3ReadRGBBlock::run()
 
 void Ev3ReadRGBBlock::disconnectSensor()
 {
-	for (auto &&c: mConnections) {
+	for (auto &&c : mConnections) {
 		disconnect(c);
 	}
 	mConnections.clear();

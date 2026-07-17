@@ -19,30 +19,30 @@
 #include <QList>
 
 namespace qrmc {
-	class MetaCompiler;
+class MetaCompiler;
 
-	class NodeType : public GraphicType
-	{
-	public:
-		NodeType(const Diagram &diagram, const qrRepo::LogicalRepoApi &api, const qReal::Id &id
-				, const QString &targetDirectory);
-		Type* clone() const override;
-		~NodeType() override;
+class NodeType : public GraphicType
+{
+public:
+	NodeType(const Diagram &diagram, const qrRepo::LogicalRepoApi &api, const qReal::Id &id,
+		const QString &targetDirectory);
+	Type *clone() const override;
+	~NodeType() override;
 
-		bool init(const QString &context) override;
+	bool init(const QString &context) override;
 
-		void print() override;
+	void print() override;
 
-		QString generateIsNodeOrEdge(const QString &lineTemplate) const override;
-		QString generateNodeClass(const QString &classTemplate) override;
-		QString generateEdgeClass(const QString &classTemplate) const override;
-		QString generateResourceLine(const QString &resourceTemplate) const override;
+	QString generateIsNodeOrEdge(const QString &lineTemplate) const override;
+	QString generateNodeClass(const QString &classTemplate) override;
+	QString generateEdgeClass(const QString &classTemplate) const override;
+	QString generateResourceLine(const QString &resourceTemplate) const override;
 
-	private:
-		void generateContainerStuff(QString &classTemplate) const;
-		void generateContextMenuItems(QString &classTemplate, MetaCompiler *compiler) const;
-		QString loadBoolProperty(const qReal::Id &id, const QString &property) const;
-		QString loadIntProperty(const qReal::Id &id, const QString &property) const;
-		QString loadIntVectorProperty(const qReal::Id &id, const QString &property) const;
-	};
+private:
+	void generateContainerStuff(QString &classTemplate) const;
+	void generateContextMenuItems(QString &classTemplate, MetaCompiler *compiler) const;
+	QString loadBoolProperty(const qReal::Id &id, const QString &property) const;
+	QString loadIntProperty(const qReal::Id &id, const QString &property) const;
+	QString loadIntVectorProperty(const qReal::Id &id, const QString &property) const;
+};
 }

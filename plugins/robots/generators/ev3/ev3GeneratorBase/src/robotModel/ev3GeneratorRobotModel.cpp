@@ -18,12 +18,9 @@
 
 using namespace ev3::robotModel;
 
-Ev3GeneratorRobotModel::Ev3GeneratorRobotModel(const QString &kitId
-		, const QString &robotId
-		, const QString &name
-		, const QString &friendlyName
-		, int priority
-		, const QSharedPointer<communication::Ev3RobotCommunicationThread> &communicator)
+Ev3GeneratorRobotModel::Ev3GeneratorRobotModel(const QString &kitId, const QString &robotId, const QString &name,
+	const QString &friendlyName, int priority,
+	const QSharedPointer<communication::Ev3RobotCommunicationThread> &communicator)
 	: Ev3RobotModelBase(kitId, robotId)
 	, mName(name)
 	, mFriendlyName(friendlyName)

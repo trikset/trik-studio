@@ -30,7 +30,6 @@
 #include "interpreterCore/interpreter/details/blocksTable.h"
 #include "interpreterCore/interpreter/details/autoconfigurer.h"
 
-
 namespace interpreterCore {
 namespace interpreter {
 
@@ -53,14 +52,13 @@ public:
 	/// @param parser - parser that is used to analyze and evaluate textual expressions inside properties of blocks.
 	/// @param connectToRobotAction - reference to action that connects to robot, interpreter manages its state
 	///        depending on success or failure of its own connection attempts.
-	BlockInterpreter(const qReal::GraphicalModelAssistInterface &graphicalModelApi
-			, qReal::LogicalModelAssistInterface &logicalModelApi
-			, qReal::gui::MainWindowInterpretersInterface &interpretersInterface
-			, const qReal::ProjectManagementInterface &projectManager
-			, BlocksFactoryManagerInterface &blocksFactoryManager
-			, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
-			, qrtext::LanguageToolboxInterface &languageToolbox
-			);
+	BlockInterpreter(const qReal::GraphicalModelAssistInterface &graphicalModelApi,
+		qReal::LogicalModelAssistInterface &logicalModelApi,
+		qReal::gui::MainWindowInterpretersInterface &interpretersInterface,
+		const qReal::ProjectManagementInterface &projectManager,
+		BlocksFactoryManagerInterface &blocksFactoryManager,
+		const kitBase::robotModel::RobotModelManagerInterface &robotModelManager,
+		qrtext::LanguageToolboxInterface &languageToolbox);
 
 	~BlockInterpreter() override;
 
@@ -83,11 +81,7 @@ private Q_SLOTS:
 	void devicesConfiguredSlot();
 
 private:
-	enum InterpreterState {
-		interpreting
-		, waitingForDevicesConfiguredToLaunch
-		, idle
-	};
+	enum InterpreterState { interpreting, waitingForDevicesConfiguredToLaunch, idle };
 
 	void addThread(const QSharedPointer<qReal::interpretation::Thread> &thread, const QString &threadId);
 

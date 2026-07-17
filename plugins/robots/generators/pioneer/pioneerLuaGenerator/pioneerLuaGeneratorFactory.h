@@ -30,42 +30,40 @@ class PioneerLuaGeneratorFactory : public generatorBase::GeneratorFactoryBase
 {
 	Q_OBJECT
 public:
-	PioneerLuaGeneratorFactory(const qrRepo::RepoApi &repo
-			, qReal::ErrorReporterInterface &errorReporter
-			, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
-			, generatorBase::lua::LuaProcessor &luaProcessor
-			, const QString &generatorName
-			, GotoLabelManager &gotoLabelManager);
+	PioneerLuaGeneratorFactory(const qrRepo::RepoApi &repo, qReal::ErrorReporterInterface &errorReporter,
+		const kitBase::robotModel::RobotModelManagerInterface &robotModelManager,
+		generatorBase::lua::LuaProcessor &luaProcessor, const QString &generatorName,
+		GotoLabelManager &gotoLabelManager);
 
 	~PioneerLuaGeneratorFactory() override;
 
-	generatorBase::simple::AbstractSimpleGenerator *simpleGenerator(const qReal::Id &id
-			, generatorBase::GeneratorCustomizer &customizer) override;
+	generatorBase::simple::AbstractSimpleGenerator *simpleGenerator(const qReal::Id &id,
+		generatorBase::GeneratorCustomizer &customizer) override;
 
 	QStringList pathsToTemplates() const override;
 
 	void initialize() override;
 
 	/// Returns generator part that analyzes LED usage and initializes it if it is needed.
-	LedPart& ledPart();
+	LedPart &ledPart();
 
 	/// Returns generator part that analyzes Tof usage and initializes it if it is needed.
-	TofPart& tofPart();
+	TofPart &tofPart();
 
 	/// Returns generator part that analyzes magnet usage and initializes it if it is needed.
-	MagnetPart& magnetPart();
+	MagnetPart &magnetPart();
 
 	/// Returns generator part that analyzes RNG usage in a program and initializes it if it is needed.
-	RandomGeneratorPart& randomGeneratorPart();
+	RandomGeneratorPart &randomGeneratorPart();
 
 private:
 	/// Returns goto label generator that can generate human-readable labels based no block types.
-	generatorBase::simple::AbstractSimpleGenerator *labelGenerator(const qReal::Id &id
-			, generatorBase::GeneratorCustomizer &customizer) override;
+	generatorBase::simple::AbstractSimpleGenerator *labelGenerator(const qReal::Id &id,
+		generatorBase::GeneratorCustomizer &customizer) override;
 
 	/// Returns goto generator that uses labels provided by goto label generator.
-	generatorBase::simple::AbstractSimpleGenerator *gotoSimpleGenerator(const qReal::Id &id
-			, generatorBase::GeneratorCustomizer &customizer) override;
+	generatorBase::simple::AbstractSimpleGenerator *gotoSimpleGenerator(const qReal::Id &id,
+		generatorBase::GeneratorCustomizer &customizer) override;
 
 	/// Adds random number generator initialization part to a list of init-terminate generators of factory base.
 	QList<generatorBase::parts::InitTerminateCodeGenerator *> initTerminateGenerators() override;

@@ -27,7 +27,7 @@ using namespace graphicsUtils;
 
 HintReporter::HintReporter(QWidget *parent, const QString &message, int lifeTime)
 	: QLabel(parent)
-	, mDuration(lifeTime / 2)  // lifeTime = showing + fading out
+	, mDuration(lifeTime / 2) // lifeTime = showing + fading out
 {
 	setWindowFlags(Qt::FramelessWindowHint | Qt::Tool);
 	setWindowFlags(Qt::WindowStaysOnTopHint);

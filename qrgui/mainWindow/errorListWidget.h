@@ -21,7 +21,7 @@
 #include "qrgui/mainWindow/error.h"
 
 namespace qReal {
-	class MainWindow;
+class MainWindow;
 }
 
 class ErrorListWidget : public QListWidget
@@ -32,13 +32,13 @@ public:
 	static const int positionRole = Qt::UserRole + 1;
 
 	explicit ErrorListWidget(QWidget *parent = nullptr);
-	void init(qReal::MainWindow* mainWindow);
+	void init(qReal::MainWindow *mainWindow);
 
 Q_SIGNALS:
 	void clearRequested();
 
 private Q_SLOTS:
-	void highlightElement(QListWidgetItem * const item);
+	void highlightElement(QListWidgetItem *const item);
 	void copyCurrentItem();
 	void showContextMenu(QPoint pos);
 
@@ -46,7 +46,6 @@ private:
 
 	void initContextMenu();
 
-	qReal::MainWindow* mMainWindow {};
+	qReal::MainWindow *mMainWindow {};
 	QMenu *mContextMenu {};
 };
-

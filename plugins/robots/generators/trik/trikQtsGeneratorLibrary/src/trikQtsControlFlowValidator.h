@@ -24,10 +24,8 @@ class TrikQtsControlFlowValidator : public generatorBase::PrimaryControlFlowVali
 {
 	Q_OBJECT
 public:
-	TrikQtsControlFlowValidator(const qrRepo::RepoApi &repo
-			, qReal::ErrorReporterInterface &errorReporter
-			, generatorBase::GeneratorCustomizer &customizer
-			, QObject *parent = nullptr);
+	TrikQtsControlFlowValidator(const qrRepo::RepoApi &repo, qReal::ErrorReporterInterface &errorReporter,
+		generatorBase::GeneratorCustomizer &customizer, QObject *parent = nullptr);
 
 	bool validate(const qReal::Id &diagramId, const QString &threadId) override;
 

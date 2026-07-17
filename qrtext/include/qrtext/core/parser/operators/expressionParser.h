@@ -31,9 +31,8 @@ class ExpressionParser : public ParserInterface<TokenType>
 public:
 	/// Constructor for general case, takes precedence table, parser for primary expression and parser for binary
 	/// operator.
-	ExpressionParser(QSharedPointer<PrecedenceTable<TokenType>> const &precedenceTable
-			, const ParserRef<TokenType> &primary
-			, const ParserRef<TokenType> &binOp)
+	ExpressionParser(QSharedPointer<PrecedenceTable<TokenType>> const &precedenceTable,
+		const ParserRef<TokenType> &primary, const ParserRef<TokenType> &binOp)
 		: mPrecedenceTable(precedenceTable)
 		, mStartPrecedence(0)
 		, mPrimary(primary)
@@ -43,10 +42,8 @@ public:
 
 	/// Constructor for using with unary operators, takes precedence table, unary operator, which precedence will be
 	/// used as starting, parser for primary expression and parser for binary operator.
-	ExpressionParser(QSharedPointer<PrecedenceTable<TokenType>> const &precedenceTable
-			, TokenType startingUnaryOperator
-			, ParserRef<TokenType> primary
-			, ParserRef<TokenType> binOp)
+	ExpressionParser(QSharedPointer<PrecedenceTable<TokenType>> const &precedenceTable,
+		TokenType startingUnaryOperator, ParserRef<TokenType> primary, ParserRef<TokenType> binOp)
 		: mPrecedenceTable(precedenceTable)
 		, mStartPrecedence(mPrecedenceTable->precedence(startingUnaryOperator, Arity::unary))
 		, mPrimary(primary)
@@ -54,8 +51,8 @@ public:
 	{
 	}
 
-	QSharedPointer<ast::Node> parse(TokenStream<TokenType> &tokenStream
-			, ParserContext<TokenType> &parserContext) const override
+	QSharedPointer<ast::Node> parse(TokenStream<TokenType> &tokenStream,
+		ParserContext<TokenType> &parserContext) const override
 	{
 		return parse(tokenStream, parserContext, mStartPrecedence);
 	}
@@ -66,8 +63,8 @@ public:
 	}
 
 private:
-	QSharedPointer<ast::Node> parse(TokenStream<TokenType> &tokenStream, ParserContext<TokenType> &parserContext
-			, int currentPrecedence) const
+	QSharedPointer<ast::Node> parse(TokenStream<TokenType> &tokenStream, ParserContext<TokenType> &parserContext,
+		int currentPrecedence) const
 	{
 		QSharedPointer<ast::Node> resultAst = mPrimary->parse(tokenStream, parserContext);
 
@@ -76,12 +73,12 @@ private:
 		}
 
 		while (mPrecedenceTable->binaryOperators().contains(tokenStream.next().token())
-				&& mPrecedenceTable->precedence(tokenStream.next().token(), Arity::binary) >= currentPrecedence)
-		{
-			const int newPrecedence = mPrecedenceTable->associativity(tokenStream.next().token()) == Associativity::left
+			&& mPrecedenceTable->precedence(tokenStream.next().token(), Arity::binary)
+				   >= currentPrecedence) {
+			const int newPrecedence =
+				mPrecedenceTable->associativity(tokenStream.next().token()) == Associativity::left
 					? 1 + mPrecedenceTable->precedence(tokenStream.next().token(), Arity::binary)
-					: mPrecedenceTable->precedence(tokenStream.next().token(), Arity::binary)
-					;
+					: mPrecedenceTable->precedence(tokenStream.next().token(), Arity::binary);
 
 			const QSharedPointer<ast::Node> binOpResult = mBinOp->parse(tokenStream, parserContext);
 			if (binOpResult->is<TemporaryErrorNode>()) {
@@ -91,11 +88,13 @@ private:
 
 			auto op = as<ast::BinaryOperator>(binOpResult);
 			if (!op) {
-				parserContext.reportInternalError(QObject::tr("Binary operator in expression is of the wrong type"));
+				parserContext.reportInternalError(
+					QObject::tr("Binary operator in expression is of the wrong type"));
 				return wrap(new TemporaryErrorNode());
 			}
 
-			const QSharedPointer<ast::Node> rightOperandResult = parse(tokenStream, parserContext, newPrecedence);
+			const QSharedPointer<ast::Node> rightOperandResult =
+				parse(tokenStream, parserContext, newPrecedence);
 			if (rightOperandResult->is<TemporaryErrorNode>()) {
 				return rightOperandResult;
 			} else if (rightOperandResult->is<TemporaryDiscardableNode>()) {

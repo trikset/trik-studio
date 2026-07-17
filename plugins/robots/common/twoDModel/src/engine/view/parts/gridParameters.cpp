@@ -21,9 +21,9 @@
 using namespace twoDModel::view;
 
 namespace {
-	constexpr auto minLE = 10;
-	constexpr auto maxLE = 150;
-	constexpr auto scale = 10000.0f;
+constexpr auto minLE = 10;
+constexpr auto maxLE = 150;
+constexpr auto scale = 10000.0f;
 }
 
 GridParameters::GridParameters(QWidget *parent)

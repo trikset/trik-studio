@@ -27,11 +27,7 @@ ElementInfo::ElementInfo(bool isEdge)
 {
 }
 
-ElementInfo::ElementInfo(const Id &id
-		, const Id &logicalId
-		, const QString &name
-		, const Id &explosionTarget
-		, bool isEdge)
+ElementInfo::ElementInfo(const Id &id, const Id &logicalId, const QString &name, const Id &explosionTarget, bool isEdge)
 	: mId(id)
 	, mLogicalId(logicalId)
 	, mLogicalProperties({{"name", name}})
@@ -40,14 +36,9 @@ ElementInfo::ElementInfo(const Id &id
 {
 }
 
-ElementInfo::ElementInfo(const Id &id
-		, const Id &logicalId
-		, const Id &logicalParent
-		, const Id &graphicalParent
-		, const QMap<QString, QVariant> &logicalProperties
-		, const QMap<QString, QVariant> &graphicalProperties
-		, const Id &explosionTarget
-		, bool isEdge)
+ElementInfo::ElementInfo(const Id &id, const Id &logicalId, const Id &logicalParent, const Id &graphicalParent,
+	const QMap<QString, QVariant> &logicalProperties, const QMap<QString, QVariant> &graphicalProperties,
+	const Id &explosionTarget, bool isEdge)
 	: mId(id)
 	, mLogicalId(logicalId)
 	, mLogicalParent(logicalParent)
@@ -61,26 +52,22 @@ ElementInfo::ElementInfo(const Id &id
 
 QDataStream &ElementInfo::serialize(QDataStream &out) const
 {
-	return out << mId << mLogicalId << mLogicalParent << mGraphicalParent
-			<< mLogicalProperties << mGraphicalProperties << mExplosionTarget << mIsEdge;
+	return out << mId << mLogicalId << mLogicalParent << mGraphicalParent << mLogicalProperties
+	           << mGraphicalProperties << mExplosionTarget << mIsEdge;
 }
 
 QDataStream &ElementInfo::deserialize(QDataStream &in)
 {
-	return in >> mId >> mLogicalId >> mLogicalParent >> mGraphicalParent
-			>> mLogicalProperties >> mGraphicalProperties >> mExplosionTarget >> mIsEdge;
+	return in >> mId >> mLogicalId >> mLogicalParent >> mGraphicalParent >> mLogicalProperties
+	       >> mGraphicalProperties >> mExplosionTarget >> mIsEdge;
 }
 
 bool ElementInfo::equals(const ElementInfo &other) const
 {
-	return mId == other.mId
-			&& mLogicalId == other.mLogicalId
-			&& mLogicalParent == other.mLogicalParent
-			&& mGraphicalParent == other.mGraphicalParent
-			&& mLogicalProperties == other.mLogicalProperties
-			&& mGraphicalProperties == other.mGraphicalProperties
-			&& mExplosionTarget == other.mExplosionTarget
-			&& mIsEdge == other.mIsEdge;
+	return mId == other.mId && mLogicalId == other.mLogicalId && mLogicalParent == other.mLogicalParent
+	       && mGraphicalParent == other.mGraphicalParent && mLogicalProperties == other.mLogicalProperties
+	       && mGraphicalProperties == other.mGraphicalProperties && mExplosionTarget == other.mExplosionTarget
+	       && mIsEdge == other.mIsEdge;
 }
 
 QMimeData *ElementInfo::mimeData() const
@@ -88,7 +75,7 @@ QMimeData *ElementInfo::mimeData() const
 	QByteArray data;
 	QDataStream stream(&data, QIODevice::WriteOnly);
 	stream << *this;
-	auto * const mimeData = new QMimeData;
+	auto *const mimeData = new QMimeData;
 	mimeData->setData(DEFAULT_MIME_TYPE, data);
 	return mimeData;
 }
@@ -226,12 +213,12 @@ void ElementInfo::setAllGraphicalProperties(const QMap<QString, QVariant> &graph
 	mGraphicalProperties = graphicalProperties;
 }
 
-QDataStream &qReal::operator<< (QDataStream &out, const ElementInfo &data)
+QDataStream &qReal::operator<<(QDataStream &out, const ElementInfo &data)
 {
 	return data.serialize(out);
 }
 
-QDataStream &qReal::operator>> (QDataStream &in, ElementInfo &data)
+QDataStream &qReal::operator>>(QDataStream &in, ElementInfo &data)
 {
 	return data.deserialize(in);
 }

@@ -17,8 +17,7 @@
 using namespace kitBase::robotModel;
 using namespace robotParts;
 
-TouchSensor::TouchSensor(const kitBase::robotModel::DeviceInfo &info
-		, const kitBase::robotModel::PortInfo &port)
+TouchSensor::TouchSensor(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port)
 	: ScalarSensor(info, port)
 {
 }

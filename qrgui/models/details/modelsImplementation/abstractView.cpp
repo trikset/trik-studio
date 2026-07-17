@@ -21,15 +21,15 @@
 using namespace qReal;
 using namespace models::details::modelsImplementation;
 
-AbstractView::AbstractView(AbstractModel * const model)
+AbstractView::AbstractView(AbstractModel *const model)
 	: mModel(model)
 {
 }
 
 AbstractView::~AbstractView() = default;
 
-void AbstractView::rowsAboutToBeMoved(const QModelIndex &sourceParent
-		, int sourceStart, int sourceEnd, const QModelIndex &destinationParent, int destinationRow)
+void AbstractView::rowsAboutToBeMoved(const QModelIndex &sourceParent, int sourceStart, int sourceEnd,
+	const QModelIndex &destinationParent, int destinationRow)
 {
 	Q_UNUSED(sourceParent)
 	Q_UNUSED(sourceStart)
@@ -38,8 +38,8 @@ void AbstractView::rowsAboutToBeMoved(const QModelIndex &sourceParent
 	Q_UNUSED(destinationRow)
 }
 
-void AbstractView::rowsMoved(const QModelIndex &sourceParent, int sourceStart
-		, int sourceEnd, const QModelIndex &destinationParent, int destinationRow)
+void AbstractView::rowsMoved(const QModelIndex &sourceParent, int sourceStart, int sourceEnd,
+	const QModelIndex &destinationParent, int destinationRow)
 {
 	Q_UNUSED(sourceParent)
 	Q_UNUSED(sourceStart)
@@ -48,8 +48,7 @@ void AbstractView::rowsMoved(const QModelIndex &sourceParent, int sourceStart
 	Q_UNUSED(destinationRow)
 }
 
-void AbstractView::dataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight
-		, QVector<int> const &roles)
+void AbstractView::dataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight, QVector<int> const &roles)
 {
 	Q_UNUSED(topLeft)
 	Q_UNUSED(bottomRight)
@@ -118,13 +117,13 @@ bool AbstractView::isIndexHidden(const QModelIndex &index) const
 	return false;
 }
 
-void AbstractView::setSelection(const QRect& rect, QItemSelectionModel::SelectionFlags command)
+void AbstractView::setSelection(const QRect &rect, QItemSelectionModel::SelectionFlags command)
 {
 	Q_UNUSED(rect)
 	Q_UNUSED(command)
 }
 
-QRegion AbstractView::visualRegionForSelection(const QItemSelection &selection ) const
+QRegion AbstractView::visualRegionForSelection(const QItemSelection &selection) const
 {
 	Q_UNUSED(selection)
 	return {};

@@ -24,11 +24,8 @@ class TrikEnginesGenerator : public generatorBase::simple::BindingGenerator
 {
 	Q_OBJECT
 public:
-	TrikEnginesGenerator(const qrRepo::RepoApi &repo
-			, generatorBase::GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, const QString &engineType
-			, QObject *parent);
+	TrikEnginesGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+		const qReal::Id &id, const QString &engineType, QObject *parent);
 };
 
 }

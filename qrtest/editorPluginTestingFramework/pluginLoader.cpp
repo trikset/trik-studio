@@ -26,7 +26,7 @@ PluginLoader::~PluginLoader()
 {
 }
 
-qReal::Metamodel* PluginLoader::loadPlugin(const QFileInfo &file)
+qReal::Metamodel *PluginLoader::loadPlugin(const QFileInfo &file)
 {
 	qDebug() << "Loading plugin...";
 
@@ -37,7 +37,7 @@ qReal::Metamodel* PluginLoader::loadPlugin(const QFileInfo &file)
 
 	if (plugin) {
 		qDebug() << "Plugin loaded successfully";
-		qReal::Metamodel * const pluginInterface = qobject_cast<qReal::Metamodel *>(plugin);
+		qReal::Metamodel *const pluginInterface = qobject_cast<qReal::Metamodel *>(plugin);
 		qDebug() << stringSeparator;
 		return pluginInterface;
 	}

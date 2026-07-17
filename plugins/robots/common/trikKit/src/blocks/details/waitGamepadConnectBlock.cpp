@@ -25,7 +25,7 @@ WaitGamepadConnectBlock::WaitGamepadConnectBlock(kitBase::robotModel::RobotModel
 
 void WaitGamepadConnectBlock::responseSlot(const QVariant &reading)
 {
-	if (reading  == 1) {
+	if (reading == 1) {
 		stop();
 	}
 }

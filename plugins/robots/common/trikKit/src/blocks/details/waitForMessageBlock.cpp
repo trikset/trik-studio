@@ -23,8 +23,8 @@ using namespace trik;
 using namespace blocks::details;
 using namespace kitBase::robotModel;
 
-WaitForMessageBlock::WaitForMessageBlock(kitBase::robotModel::RobotModelInterface &robotModel):
-	WaitBlock(robotModel)
+WaitForMessageBlock::WaitForMessageBlock(kitBase::robotModel::RobotModelInterface &robotModel)
+	: WaitBlock(robotModel)
 {
 	mActiveWaitingTimer->setSingleShot(true);
 	mActiveWaitingTimer->setInterval(100);
@@ -40,7 +40,8 @@ void WaitForMessageBlock::handle()
 
 void WaitForMessageBlock::run()
 {
-	mNetwork = RobotModelUtils::findDevice<robotModel::parts::TrikNetworkCommunicator>(mRobotModel, "CommunicatorPort");
+	mNetwork = RobotModelUtils::findDevice<robotModel::parts::TrikNetworkCommunicator>(mRobotModel,
+		"CommunicatorPort");
 
 	if (!mNetwork) {
 		error(tr("Device not found for port name CommunicatorPort"));

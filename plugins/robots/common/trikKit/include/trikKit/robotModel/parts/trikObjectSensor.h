@@ -28,8 +28,7 @@ class TrikObjectSensor : public kitBase::robotModel::robotParts::VectorSensor
 	Q_CLASSINFO("friendlyName", tr("Object Sensor"))
 
 public:
-	TrikObjectSensor(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port);
+	TrikObjectSensor(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port);
 
 	/// Turns camera on and prepares a sensor.
 	virtual void init() = 0;

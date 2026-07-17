@@ -29,10 +29,10 @@ public:
 	/// @param shouldSelect A selection state to be setted to our element
 	/// @param forceValueChange Should selection state be setted to opposite
 	///        one before or no
-	SelectElementCommand(const EditorViewScene *scene, const Id &id
-			, bool shouldSelect = true, bool forceValueChange = false);
-	SelectElementCommand(const EditorView *view, const Id &id
-			, bool shouldSelect = true, bool forceValueChange = false);
+	SelectElementCommand(const EditorViewScene *scene, const Id &id, bool shouldSelect = true,
+		bool forceValueChange = false);
+	SelectElementCommand(const EditorView *view, const Id &id, bool shouldSelect = true,
+		bool forceValueChange = false);
 	~SelectElementCommand() override;
 
 protected:

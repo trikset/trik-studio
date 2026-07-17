@@ -29,8 +29,7 @@ class ROBOTS_KIT_BASE_EXPORT Shell : public Device
 	Q_CLASSINFO("direction", "output")
 
 public:
-	Shell(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port);
+	Shell(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port);
 
 	/// Prints the given text into virtual or real robot console.
 	virtual void print(const QString &text) = 0;

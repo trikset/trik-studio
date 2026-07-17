@@ -17,16 +17,17 @@
 namespace qReal {
 
 /// Represents variants of shapes of edge elements on scene.
-enum class LinkShape
-{
+enum class LinkShape {
 	/// Link has piecewise-linear shape with breaks under arbitrary angle.
 	broken = 0
 
 	/// Link has piecewise-linear shape with breaks under right angle.
-	, square
+	,
+	square
 
 	/// Link has cubic bezier curve shape with two control points.
-	, curve
+	,
+	curve
 };
 
 }

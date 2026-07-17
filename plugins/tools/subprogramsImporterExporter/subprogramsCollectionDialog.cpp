@@ -18,8 +18,8 @@
 #include <QtWidgets/QListWidgetItem>
 #include <QtWidgets/QListWidget>
 
-SubprogramsCollectionDialog::SubprogramsCollectionDialog(QMap<QString, bool> &values, QWidget *parent) :
-	QDialog(parent)
+SubprogramsCollectionDialog::SubprogramsCollectionDialog(QMap<QString, bool> &values, QWidget *parent)
+	: QDialog(parent)
 	, mUi(new Ui::subprogramsCollectionDialog)
 	, mSelectMode(true)
 	, mValues(values)
@@ -32,7 +32,7 @@ SubprogramsCollectionDialog::SubprogramsCollectionDialog(QMap<QString, bool> &va
 
 	connect(mUi->listWidget, &QListWidget::itemChanged, this, &SubprogramsCollectionDialog::highlightItem);
 	connect(mUi->selectAllButton, &QPushButton::clicked, this, [this]() {
-		for (int i=0; i < mUi->listWidget->count(); ++i) {
+		for (int i = 0; i < mUi->listWidget->count(); ++i) {
 			mUi->listWidget->item(i)->setCheckState(mSelectMode ? Qt::Checked : Qt::Unchecked);
 		}
 
@@ -74,8 +74,8 @@ void SubprogramsCollectionDialog::updateValues()
 
 void SubprogramsCollectionDialog::accept()
 {
-	for (int i=0; i < mUi->listWidget->count(); ++i) {
-		QListWidgetItem const * const item = mUi->listWidget->item(i);
+	for (int i = 0; i < mUi->listWidget->count(); ++i) {
+		QListWidgetItem const *const item = mUi->listWidget->item(i);
 		mValues[item->text()] = item->checkState() == Qt::Checked;
 	}
 
@@ -84,7 +84,7 @@ void SubprogramsCollectionDialog::accept()
 
 void SubprogramsCollectionDialog::highlightItem(QListWidgetItem *item)
 {
-	if(item->checkState() == Qt::Checked) {
+	if (item->checkState() == Qt::Checked) {
 		item->setBackgroundColor(QColor(0xAD, 0xFF, 0x2F));
 	} else {
 		item->setBackgroundColor(QColorConstants::White);

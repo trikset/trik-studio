@@ -24,12 +24,15 @@ class PhysicsEngineFactoryMock : public twoDModel::model::physics::PhysicsEngine
 	Q_OBJECT
 
 public:
-	CreateEngineCallback create(bool isRealistic) const override {
+	CreateEngineCallback create(bool isRealistic) const override
+	{
 		Q_UNUSED(isRealistic)
-		return std::bind([](const twoDModel::model::WorldModel &worldModel,
-		                 const QList<twoDModel::model::RobotModel *> &robots){
+		return std::bind(
+			[](const twoDModel::model::WorldModel &worldModel,
+				const QList<twoDModel::model::RobotModel *> &robots) {
 			return new PhysicsEngineMock(worldModel, robots);
-		}, std::placeholders::_1, std::placeholders::_2);
+		},
+			std::placeholders::_1, std::placeholders::_2);
 	}
 };
 }

@@ -22,15 +22,11 @@ using namespace trik::pascalABC;
 using namespace kitBase::robotModel;
 
 TrikV6PascalABCGeneratorPlugin::TrikV6PascalABCGeneratorPlugin()
-	: TrikPascalABCGeneratorPluginBase(
-				new robotModel::TrikV6GeneratorRobotModel(
-						"trikKit"
-						, "trikKitRobot"
-						, "TrikV6PascalABCGeneratorRobotModel"
-						, tr("Generation (PascalABC)")
-						, 8 /* After Javascript generator */)
-				, QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface>(new blocks::TrikV6BlocksFactory())
-				, {":/trikPascalABC/templates"})
+	: TrikPascalABCGeneratorPluginBase(new robotModel::TrikV6GeneratorRobotModel("trikKit", "trikKitRobot",
+						   "TrikV6PascalABCGeneratorRobotModel", tr("Generation (PascalABC)"),
+						   8 /* After Javascript generator */),
+		  QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface>(new blocks::TrikV6BlocksFactory()),
+		  {":/trikPascalABC/templates"})
 {
 }
 

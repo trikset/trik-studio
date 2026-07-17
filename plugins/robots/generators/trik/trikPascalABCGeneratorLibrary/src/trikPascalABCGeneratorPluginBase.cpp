@@ -35,21 +35,21 @@ using namespace utils::robotCommunication;
 #ifdef Q_OS_WIN
 
 const QString moveCommand = "synchronize remote . /home/root/trik";
-const QStringList commands = { moveCommand };
+const QStringList commands = {moveCommand};
 
 #else
 
 const QString copyCommand = "scp -r -v -oConnectTimeout=%SSH_TIMEOUT%s -oStrictHostKeyChecking=no "
-		"-oUserKnownHostsFile=/dev/null %PATH%/* root@%IP%:/home/root/trik";
+			    "-oUserKnownHostsFile=/dev/null %PATH%/* root@%IP%:/home/root/trik";
 
-const QStringList commands = { copyCommand };
+const QStringList commands = {copyCommand};
 
 #endif
 
 TrikPascalABCGeneratorPluginBase::TrikPascalABCGeneratorPluginBase(
-		kitBase::robotModel::RobotModelInterface * const robotModel
-		, const QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> &blocksFactory
-		, const QStringList &pathsToTemplates)
+	kitBase::robotModel::RobotModelInterface *const robotModel,
+	const QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> &blocksFactory,
+	const QStringList &pathsToTemplates)
 	: TrikGeneratorPluginBase(robotModel, blocksFactory)
 	, mGenerateCodeAction(new QAction(this))
 	, mUploadProgramAction(new QAction(this))
@@ -57,16 +57,14 @@ TrikPascalABCGeneratorPluginBase::TrikPascalABCGeneratorPluginBase(
 	, mStopRobotAction(new QAction(this))
 	, mAdditionalPreferences(new TrikPascalABCAdditionalPreferences(robotModel->name()))
 	, mPathsToTemplates(pathsToTemplates)
-	, mRuntimeUploaderTool(
-			tr("Upload Pascal Runtime")
-			, ":/trik/pascalABC/images/flashRobot.svg"
-			/// @todo: hmmm
-			, "trikV62Kit"
-			, ::commands
-			, QObject::tr("Attention! Started to download Pascal runtime."
-					" Please do not turn off the robot.")
-			, [](){ return qReal::SettingsManager::value("TrikTcpServer").toString(); }
-			)
+	, mRuntimeUploaderTool(tr("Upload Pascal Runtime"),
+		  ":/trik/pascalABC/images/flashRobot.svg"
+		  /// @todo: hmmm
+		  ,
+		  "trikV62Kit", ::commands,
+		  QObject::tr("Attention! Started to download Pascal runtime."
+			      " Please do not turn off the robot."),
+		  []() { return qReal::SettingsManager::value("TrikTcpServer").toString(); })
 {
 }
 
@@ -103,12 +101,8 @@ QList<ActionInfo> TrikPascalABCGeneratorPluginBase::customActions()
 	ActionInfo stopRobotActionInfo(mStopRobotAction, "interpreters", "tools");
 	connect(mStopRobotAction, SIGNAL(triggered()), this, SLOT(stopRobot()), Qt::UniqueConnection);
 
-	return {generateCodeActionInfo
-			, uploadProgramActionInfo
-			, runProgramActionInfo
-			, stopRobotActionInfo
-			, mRuntimeUploaderTool.action()
-	};
+	return {generateCodeActionInfo, uploadProgramActionInfo, runProgramActionInfo, stopRobotActionInfo,
+		mRuntimeUploaderTool.action()};
 }
 
 QList<qReal::HotKeyActionInfo> TrikPascalABCGeneratorPluginBase::hotKeyActions()
@@ -143,30 +137,24 @@ void TrikPascalABCGeneratorPluginBase::init(const kitBase::KitPluginConfigurator
 	TrikGeneratorPluginBase::init(configurator);
 
 	ErrorReporterInterface &errorReporter =
-			*configurator.qRealConfigurator().mainWindowInterpretersInterface().errorReporter();
+		*configurator.qRealConfigurator().mainWindowInterpretersInterface().errorReporter();
 
-	mRuntimeUploaderTool.init(configurator.qRealConfigurator().mainWindowInterpretersInterface()
-		, qReal::PlatformInfo::invariantSettingsPath("pathToPascalRuntime"));
+	mRuntimeUploaderTool.init(configurator.qRealConfigurator().mainWindowInterpretersInterface(),
+		qReal::PlatformInfo::invariantSettingsPath("pathToPascalRuntime"));
 
 	mCommunicator.reset(new TcpRobotCommunicator("TrikTcpServer"));
 	NetworkCommunicationErrorReporter::connectErrorReporter(*mCommunicator, errorReporter);
 
 	mStopRobotProtocol.reset(new StopRobotProtocol(*mCommunicator));
 
-	connect(mStopRobotProtocol.data(), &StopRobotProtocol::timeout, this, [&errorReporter]() {
-		errorReporter.addError(tr("Stop robot operation timed out"));
-	});
+	connect(mStopRobotProtocol.data(), &StopRobotProtocol::timeout, this,
+		[&errorReporter]() { errorReporter.addError(tr("Stop robot operation timed out")); });
 }
 
 generatorBase::MasterGeneratorBase *TrikPascalABCGeneratorPluginBase::masterGenerator()
 {
-	return new TrikPascalABCMasterGenerator(*mRepo
-			, *mMainWindowInterface->errorReporter()
-			, *mParserErrorReporter
-			, *mRobotModelManager
-			, *mTextLanguage
-			, mMainWindowInterface->activeDiagram()
-			, mPathsToTemplates);
+	return new TrikPascalABCMasterGenerator(*mRepo, *mMainWindowInterface->errorReporter(), *mParserErrorReporter,
+		*mRobotModelManager, *mTextLanguage, mMainWindowInterface->activeDiagram(), mPathsToTemplates);
 }
 
 QString TrikPascalABCGeneratorPluginBase::defaultFilePath(const QString &projectName) const
@@ -193,15 +181,12 @@ QString TrikPascalABCGeneratorPluginBase::uploadProgram()
 
 	if (pascalCompiler.isEmpty()) {
 		mMainWindowInterface->errorReporter()->addError(
-			tr("Please provide path to the PascalABC.NET Compiler in Settings dialog.")
-		);
+			tr("Please provide path to the PascalABC.NET Compiler in Settings dialog."));
 
 		return "";
 	}
 
-	mMainWindowInterface->errorReporter()->addInformation(
-		tr("Compiling...")
-	);
+	mMainWindowInterface->errorReporter()->addInformation(tr("Compiling..."));
 
 	compileProcess.setWorkingDirectory(fileInfo.absoluteDir().path());
 
@@ -226,7 +211,8 @@ QString TrikPascalABCGeneratorPluginBase::uploadProgram()
 	///        is needed.
 	if (compileProcess.exitCode() != 0) {
 		mMainWindowInterface->errorReporter()->addError(tr("PascalABC compiler finished with error."));
-		QStringList errors = QString(compileProcess.readAllStandardError()).split("\n", QString::SkipEmptyParts);
+		QStringList errors =
+			QString(compileProcess.readAllStandardError()).split("\n", QString::SkipEmptyParts);
 		errors << QString(compileProcess.readAllStandardOutput()).split("\n", QString::SkipEmptyParts);
 		for (const auto &error : errors) {
 			mMainWindowInterface->errorReporter()->addInformation(error);
@@ -239,14 +225,12 @@ QString TrikPascalABCGeneratorPluginBase::uploadProgram()
 	QEventLoop eventLoop;
 	QTimer::singleShot(2000, &eventLoop, &QEventLoop::quit);
 	eventLoop.exec();
-	mMainWindowInterface->errorReporter()->addInformation(
-		tr("Compile completed"));
+	mMainWindowInterface->errorReporter()->addInformation(tr("Compile completed"));
 
 #ifdef Q_OS_WIN
 	if (qReal::SettingsManager::value("WinScpPath").toString().isEmpty()) {
 		mMainWindowInterface->errorReporter()->addError(
-			tr("Please provide path to the WinSCP in Settings dialog.")
-		);
+			tr("Please provide path to the WinSCP in Settings dialog."));
 
 		return "";
 	}
@@ -262,32 +246,28 @@ QString TrikPascalABCGeneratorPluginBase::uploadProgram()
 	const QString scriptPath = scriptFile.canonicalFilePath();
 
 #ifdef Q_OS_WIN
-	const QString moveBinary = QString(
-			"\"%1\" /command  \"open scp://root@%2\" \"put %3 /home/root/trik/\"")
-			.arg(qReal::SettingsManager::value("WinScpPath").toString())
-			.arg(qReal::SettingsManager::value("TrikTcpServer").toString())
-			.arg(binaryFile.canonicalFilePath().replace("/", "\\"));
+	const QString moveBinary = QString("\"%1\" /command  \"open scp://root@%2\" \"put %3 /home/root/trik/\"")
+	                                   .arg(qReal::SettingsManager::value("WinScpPath").toString())
+	                                   .arg(qReal::SettingsManager::value("TrikTcpServer").toString())
+	                                   .arg(binaryFile.canonicalFilePath().replace("/", "\\"));
 #else
 	//todo chmod and moveScript for windows
 	const QString chmod = QString("chmod +x %1").arg(scriptPath);
 	const QString moveScript = QString("scp %2 root@%1:/home/root/trik/scripts")
-			.arg(qReal::SettingsManager::value("TrikTcpServer").toString())
-			.arg(scriptPath);
+	                                   .arg(qReal::SettingsManager::value("TrikTcpServer").toString())
+	                                   .arg(scriptPath);
 	QProcess chmodProcess;
 	chmodProcess.start(chmod);
 	chmodProcess.waitForFinished();
 	QProcess moveScriptProcess;
 	moveScriptProcess.start(moveScript);
 	moveScriptProcess.waitForFinished(3000);
-	const QString moveBinary = QString(
-				"scp %2 root@%1:/home/root/trik")
-				.arg(qReal::SettingsManager::value("TrikTcpServer").toString())
-				.arg(binaryFile.canonicalFilePath());
+	const QString moveBinary = QString("scp %2 root@%1:/home/root/trik")
+	                                   .arg(qReal::SettingsManager::value("TrikTcpServer").toString())
+	                                   .arg(binaryFile.canonicalFilePath());
 #endif
 
-	mMainWindowInterface->errorReporter()->addInformation(
-		tr("Uploading... Please wait for about 20 seconds.")
-	);
+	mMainWindowInterface->errorReporter()->addInformation(tr("Uploading... Please wait for about 20 seconds."));
 
 	QProcess deployProcess;
 
@@ -295,24 +275,19 @@ QString TrikPascalABCGeneratorPluginBase::uploadProgram()
 	deployProcess.start(moveBinary);
 
 	if (deployProcess.state() == QProcess::NotRunning) {
-		mMainWindowInterface->errorReporter()->addError(
-					tr("Cant't start download process"));
+		mMainWindowInterface->errorReporter()->addError(tr("Cant't start download process"));
 		return "";
 	}
 
 	mMainWindowInterface->errorReporter()->addInformation(
-		tr("After downloading the program, enter 'exit' or close the window")
-	);
+		tr("After downloading the program, enter 'exit' or close the window"));
 
-	if (deployProcess.exitCode() != 0 or !deployProcess.waitForFinished(10000))
-	{
-		mMainWindowInterface->errorReporter()->addError(
-					tr("Failed to download program. Check connection"));
+	if (deployProcess.exitCode() != 0 or !deployProcess.waitForFinished(10000)) {
+		mMainWindowInterface->errorReporter()->addError(tr("Failed to download program. Check connection"));
 		return "";
 	}
 
-	mMainWindowInterface->errorReporter()->addInformation(
-				tr("Download completed"));
+	mMainWindowInterface->errorReporter()->addInformation(tr("Download completed"));
 
 	return binaryFile.fileName();
 }
@@ -325,17 +300,14 @@ void TrikPascalABCGeneratorPluginBase::runProgram()
 	}
 
 	mMainWindowInterface->errorReporter()->addWarning(
-		tr("Running... Attention, program execution will start after about ten seconds")
-	);
+		tr("Running... Attention, program execution will start after about ten seconds"));
 
 	mCommunicator->runDirectCommand("script.system(\"mono /home/root/trik/" + binary + "\"); ");
 }
 
 void TrikPascalABCGeneratorPluginBase::stopRobot()
 {
-	mStopRobotProtocol->run(
-			"script.system(\"killall mono\"); "
-			"script.system(\"killall aplay\"); \n"
-			"script.system(\"killall vlc\");"
-		);
+	mStopRobotProtocol->run("script.system(\"killall mono\"); "
+				"script.system(\"killall aplay\"); \n"
+				"script.system(\"killall vlc\");");
 }

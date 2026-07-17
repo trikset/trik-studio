@@ -19,14 +19,11 @@
 using namespace trik::simple;
 using namespace generatorBase::simple;
 
-InitVideoStreamingGenerator::InitVideoStreamingGenerator(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, const qReal::Id &id
-		, QObject *parent)
-	: BindingGenerator(repo, customizer, id
-			, "videosensors/initVideoStreaming.t"
-			, { Binding::createDirect("@@QUALITY@@", "Quality")
-			, Binding::createDirect("@@GRAYSCALED@@", "Grayscaled")}
-			, parent)
+InitVideoStreamingGenerator::InitVideoStreamingGenerator(const qrRepo::RepoApi &repo,
+	generatorBase::GeneratorCustomizer &customizer, const qReal::Id &id, QObject *parent)
+	: BindingGenerator(repo, customizer, id, "videosensors/initVideoStreaming.t",
+		  {Binding::createDirect("@@QUALITY@@", "Quality"),
+			  Binding::createDirect("@@GRAYSCALED@@", "Grayscaled")},
+		  parent)
 {
 }

@@ -37,20 +37,11 @@ public:
 
 	explicit ElementInfo(bool isEdge);
 
-	ElementInfo(const Id &id
-			, const Id &logicalId
-			, const QString &name
-			, const Id &explosionTarget
-			, bool isEdge);
+	ElementInfo(const Id &id, const Id &logicalId, const QString &name, const Id &explosionTarget, bool isEdge);
 
-	ElementInfo(const Id &id
-			, const Id &logicalId
-			, const Id &logicalParent
-			, const Id &graphicalParent
-			, const QMap<QString, QVariant> &logicalProperties
-			, const QMap<QString, QVariant> &graphicalProperties
-			, const Id &explosionTarget
-			, bool isEdge);
+	ElementInfo(const Id &id, const Id &logicalId, const Id &logicalParent, const Id &graphicalParent,
+		const QMap<QString, QVariant> &logicalProperties, const QMap<QString, QVariant> &graphicalProperties,
+		const Id &explosionTarget, bool isEdge);
 
 	/// Saves element data into the given byte stream, it can be then read with deserialize().
 	/// @returns a reference to \a out for convenient usage.
@@ -169,8 +160,8 @@ private:
 	bool mIsEdge = false;
 };
 
-QRGUI_MODELS_EXPORT QDataStream &operator<< (QDataStream &out, const qReal::ElementInfo &data);
-QRGUI_MODELS_EXPORT QDataStream &operator>> (QDataStream &in, qReal::ElementInfo &data);
-QRGUI_MODELS_EXPORT bool operator== (const qReal::ElementInfo &first, const qReal::ElementInfo &second);
+QRGUI_MODELS_EXPORT QDataStream &operator<<(QDataStream &out, const qReal::ElementInfo &data);
+QRGUI_MODELS_EXPORT QDataStream &operator>>(QDataStream &in, qReal::ElementInfo &data);
+QRGUI_MODELS_EXPORT bool operator==(const qReal::ElementInfo &first, const qReal::ElementInfo &second);
 
 }

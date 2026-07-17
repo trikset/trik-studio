@@ -19,9 +19,7 @@
 using namespace twoDModel::robotModel::parts;
 using namespace kitBase::robotModel;
 
-Gyroscope::Gyroscope(const DeviceInfo &info
-		, const PortInfo &port
-		, engine::TwoDModelEngineInterface &engine)
+Gyroscope::Gyroscope(const DeviceInfo &info, const PortInfo &port, engine::TwoDModelEngineInterface &engine)
 	: robotParts::GyroscopeSensor(info, port)
 	, mEngine(engine)
 {

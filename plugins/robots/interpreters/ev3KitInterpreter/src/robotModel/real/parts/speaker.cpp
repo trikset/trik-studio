@@ -21,17 +21,17 @@ using namespace ev3::robotModel::real::parts;
 using namespace ev3::communication;
 using namespace kitBase::robotModel;
 
-Speaker::Speaker(const DeviceInfo &info, const PortInfo &port
-		, utils::robotCommunication::RobotCommunicator &robotCommunicator)
-		: robotModel::parts::Ev3Speaker(info, port)
-		, mRobotCommunicator(robotCommunicator)
+Speaker::Speaker(const DeviceInfo &info, const PortInfo &port,
+	utils::robotCommunication::RobotCommunicator &robotCommunicator)
+	: robotModel::parts::Ev3Speaker(info, port)
+	, mRobotCommunicator(robotCommunicator)
 {
 }
 
 void Speaker::playTone(int volume, int frequency, int duration)
 {
-	QByteArray command = Ev3DirectCommand::formCommand(17, 0, 0, 0
-			, enums::commandType::CommandTypeEnum::DIRECT_COMMAND_REPLY);
+	QByteArray command =
+		Ev3DirectCommand::formCommand(17, 0, 0, 0, enums::commandType::CommandTypeEnum::DIRECT_COMMAND_REPLY);
 	int index = 7;
 	Ev3DirectCommand::addOpcode(enums::opcode::OpcodeEnum::SOUND_TONE, command, index);
 	Ev3DirectCommand::addByteParameter(volume, command, index);

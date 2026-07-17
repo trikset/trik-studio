@@ -18,26 +18,22 @@
 using namespace trik::simple;
 using namespace generatorBase::simple;
 
-DrawEllipseGenerator::DrawEllipseGenerator(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, const qReal::Id &id
-		, QObject *parent)
-	: BindingGenerator(repo, customizer, id, "drawing/drawEllipse.t"
-			, {
-					Binding::createConverting("@@XCoordinateEllipse@@", "XCoordinateEllipse"
-							, customizer.factory()->intPropertyConverter(id, "XCoordinateEllipse"))
-					, Binding::createConverting("@@YCoordinateEllipse@@", "YCoordinateEllipse"
-							, customizer.factory()->intPropertyConverter(id, "YCoordinateEllipse"))
-					, Binding::createConverting("@@WidthEllipse@@", "WidthEllipse"
-							, customizer.factory()->intPropertyConverter(id, "WidthEllipse"))
-					, Binding::createConverting("@@HeightEllipse@@", "HeightEllipse"
-							, customizer.factory()->intPropertyConverter(id, "HeightEllipse"))
-					, Binding::createConverting("@@FilledEllipse@@", "Filled"
-						, customizer.factory()->boolPropertyConverter(id, "Filled", false))
-			}
-			, parent)
+DrawEllipseGenerator::DrawEllipseGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+	const qReal::Id &id, QObject *parent)
+	: BindingGenerator(repo, customizer, id, "drawing/drawEllipse.t",
+		  {Binding::createConverting("@@XCoordinateEllipse@@", "XCoordinateEllipse",
+			   customizer.factory()->intPropertyConverter(id, "XCoordinateEllipse")),
+			  Binding::createConverting("@@YCoordinateEllipse@@", "YCoordinateEllipse",
+				  customizer.factory()->intPropertyConverter(id, "YCoordinateEllipse")),
+			  Binding::createConverting("@@WidthEllipse@@", "WidthEllipse",
+				  customizer.factory()->intPropertyConverter(id, "WidthEllipse")),
+			  Binding::createConverting("@@HeightEllipse@@", "HeightEllipse",
+				  customizer.factory()->intPropertyConverter(id, "HeightEllipse")),
+			  Binding::createConverting("@@FilledEllipse@@", "Filled",
+				  customizer.factory()->boolPropertyConverter(id, "Filled", false))},
+		  parent)
 {
 	// Calling virtual readTemplate() before base class constructor will cause segfault.
-	addBinding(Binding::createStatic("@@REDRAW@@", repo.property(id, "Redraw").toBool()
-			? readTemplate("drawing/redraw.t") : QString()));
+	addBinding(Binding::createStatic("@@REDRAW@@",
+		repo.property(id, "Redraw").toBool() ? readTemplate("drawing/redraw.t") : QString()));
 }

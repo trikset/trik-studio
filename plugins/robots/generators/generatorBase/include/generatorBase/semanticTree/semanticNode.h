@@ -54,7 +54,8 @@ protected:
 
 	virtual QLinkedList<SemanticNode *> children() const = 0;
 
-	virtual QString toStringImpl(GeneratorCustomizer &customizer, int indent, const QString &indentString) const = 0;
+	virtual QString toStringImpl(GeneratorCustomizer &customizer, int indent,
+		const QString &indentString) const = 0;
 
 	qReal::Id mId;
 	SemanticNode *mParentNode;

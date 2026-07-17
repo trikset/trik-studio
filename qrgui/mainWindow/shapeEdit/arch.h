@@ -23,7 +23,7 @@ class Arch : public Item
 {
 	Q_OBJECT
 public:
-	Arch(QRectF rect, int startAngle, int spanAngle, Item* parent);
+	Arch(QRectF rect, int startAngle, int spanAngle, Item *parent);
 	int startAngle() const;
 	int spanAngle() const;
 	void setStartAngle(int start);
@@ -31,13 +31,13 @@ public:
 
 	QRectF boundingRect() const override;
 	QRectF sceneBoundingRectCoord(QPoint topLeftPicture) override;
-	void drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr) override;
-	void drawExtractionForItem(QPainter* painter) override;
-	void drawScalingRects(QPainter* painter) override;
+	void drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
+	void drawExtractionForItem(QPainter *painter) override;
+	void drawScalingRects(QPainter *painter) override;
 	void resizeItem(QGraphicsSceneMouseEvent *event) override;
 
-	QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document
-			, const QPoint &topLeftPicture) override;
+	QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document,
+		const QPoint &topLeftPicture) override;
 
 private:
 	int mStartAngle;

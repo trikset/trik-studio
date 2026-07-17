@@ -17,8 +17,8 @@
 using namespace qReal::ui;
 
 const QString customStyle =
-		"QComboBox { background: %1; border: 0px; border-radius: 2px; selection-background-color: transparent; }"\
-		"QComboBox::drop-down { width: 0px; border: 0px; }";
+	"QComboBox { background: %1; border: 0px; border-radius: 2px; selection-background-color: transparent; }"
+	"QComboBox::drop-down { width: 0px; border: 0px; }";
 
 ColorListEditor::ColorListEditor(QWidget *widget, bool minimalistic)
 	: QComboBox(widget)
@@ -26,15 +26,12 @@ ColorListEditor::ColorListEditor(QWidget *widget, bool minimalistic)
 {
 	if (minimalistic) {
 		setMinimumWidth(30);
-		connect(this, static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged)
-				, this, [=]() {
-			setStyleSheet(customStyle.arg(color().name()));
-		});
+		connect(this, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+			[=]() { setStyleSheet(customStyle.arg(color().name())); });
 	}
 
-	connect(this, static_cast<void(QComboBox::*)(int)>(&QComboBox::activated), this, [=]() {
-		Q_EMIT colorChanged(color());
-	});
+	connect(this, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), this,
+		[=]() { Q_EMIT colorChanged(color()); });
 }
 
 void ColorListEditor::setColorList(const QStringList &colorList, const QStringList &translatedColorList)

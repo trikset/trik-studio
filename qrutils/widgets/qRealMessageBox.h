@@ -26,11 +26,9 @@ class QRUTILS_EXPORT QRealMessageBox : public QObject
 	Q_OBJECT
 
 public:
-	static QMessageBox::StandardButton question(
-		QWidget *parent
-		, const QString &title
-		, const QString &text
-		, QMessageBox::StandardButtons buttons = QMessageBox::StandardButtons(QMessageBox::Yes | QMessageBox::No));
+	static QMessageBox::StandardButton question(QWidget *parent, const QString &title, const QString &text,
+		QMessageBox::StandardButtons buttons = QMessageBox::StandardButtons(
+			QMessageBox::Yes | QMessageBox::No));
 };
 
 }

@@ -24,8 +24,8 @@ using namespace twoDModel::items;
 using namespace qReal;
 using namespace graphicsUtils;
 
-LineItem::LineItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-			const QPointF begin, const QPointF end, int cornerRadius)
+LineItem::LineItem(graphicsUtils::AbstractCoordinateSystem *metricSystem, const QPointF begin, const QPointF end,
+	int cornerRadius)
 	: ColorFieldItem(metricSystem)
 	, mCornerRadius(cornerRadius)
 {
@@ -34,7 +34,7 @@ LineItem::LineItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 	setX2(end.x());
 	setY2(end.y());
 	setPrivateData();
-	connect(this, &AbstractItem::mouseInteractionStarted, this, [this]() {mEstimatedPos = pos(); });
+	connect(this, &AbstractItem::mouseInteractionStarted, this, [this]() { mEstimatedPos = pos(); });
 }
 
 AbstractItem *LineItem::clone() const
@@ -46,7 +46,7 @@ AbstractItem *LineItem::clone() const
 
 QAction *LineItem::lineTool()
 {
-	auto * const result = new QAction(QIcon(":/icons/2d_ruler.png"), tr("Line (L)"), nullptr);
+	auto *const result = new QAction(QIcon(":/icons/2d_ruler.png"), tr("Line (L)"), nullptr);
 	result->setShortcuts({QKeySequence(Qt::Key_L), QKeySequence(Qt::Key_5)});
 	result->setCheckable(true);
 	return result;
@@ -71,14 +71,14 @@ QRectF LineItem::calcNecessaryBoundingRect() const
 	return {qMin(x1(), x2()), qMin(y1(), y2()), qAbs(x2() - x1()), qAbs(y2() - y1())};
 }
 
-void LineItem::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
+void LineItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 	Q_UNUSED(option);
 	Q_UNUSED(widget);
 	mLineImpl.drawItem(painter, x1(), y1(), x2(), y2());
 }
 
-void LineItem::drawExtractionForItem(QPainter* painter)
+void LineItem::drawExtractionForItem(QPainter *painter)
 {
 	mLineImpl.drawPointExtractionForItem(painter, x1(), y1(), x2(), y2());
 	setPenBrushDriftRect(painter);
@@ -119,8 +119,8 @@ void LineItem::reshapeRectWithShift()
 		const qreal corner1Y = dragState() == TopLeft ? y2() : y1();
 		const qreal corner2X = dragState() == TopLeft ? x1() : x2();
 		const qreal corner2Y = dragState() == TopLeft ? y1() : y2();
-		const QPair<qreal, qreal> res = mLineImpl.reshapeRectWithShiftForLine(corner1X, corner1Y, corner2X, corner2Y
-				, differenceX, differenceY, size);
+		const QPair<qreal, qreal> res = mLineImpl.reshapeRectWithShiftForLine(corner1X, corner1Y, corner2X,
+			corner2Y, differenceX, differenceY, size);
 		if (dragState() == TopLeft) {
 			setX1(res.first);
 			setY1(res.second);
@@ -145,11 +145,10 @@ QDomElement LineItem::serializeWithIndent(QDomElement &parent, const QPointF top
 	QDomElement lineNode = ColorFieldItem::serialize(parent);
 	setPenBrushToElement(lineNode, mSerializeName);
 	auto *coordSystem = coordinateSystem();
-	mLineImpl.serialize(lineNode
-	                , coordSystem->toUnit(x1() + scenePos().x() - topLeftPicture.x())
-	                , coordSystem->toUnit(y1() + scenePos().y() - topLeftPicture.y())
-	                , coordSystem->toUnit(x2() + scenePos().x() - topLeftPicture.x())
-	                , coordSystem->toUnit(y2() + scenePos().y() - topLeftPicture.y()));
+	mLineImpl.serialize(lineNode, coordSystem->toUnit(x1() + scenePos().x() - topLeftPicture.x()),
+		coordSystem->toUnit(y1() + scenePos().y() - topLeftPicture.y()),
+		coordSystem->toUnit(x2() + scenePos().x() - topLeftPicture.x()),
+		coordSystem->toUnit(y2() + scenePos().y() - topLeftPicture.y()));
 	return lineNode;
 }
 

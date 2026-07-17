@@ -21,11 +21,8 @@
 
 using namespace twoDModel::constraints::details;
 
-ConstraintsParser::ConstraintsParser(Events &events
-		, Variables &variables
-		, const Objects &objects
-		, const utils::TimelineInterface &timeline
-		, StatusReporter &status)
+ConstraintsParser::ConstraintsParser(Events &events, Variables &variables, const Objects &objects,
+	const utils::TimelineInterface &timeline, StatusReporter &status)
 	: mEvents(events)
 	, mVariables(variables)
 	, mObjects(objects)
@@ -57,7 +54,8 @@ bool ConstraintsParser::parse(const QString &constraintsXml)
 	int errorLine = 0;
 	int errorColumn = 0;
 	if (!document.setContent(constraintsXml, &errorMessage, &errorLine, &errorColumn)) {
-		mErrors << QString("%1:%2: %3").arg(QString::number(errorLine), QString::number(errorColumn), errorMessage);
+		mErrors << QString("%1:%2: %3")
+				   .arg(QString::number(errorLine), QString::number(errorColumn), errorMessage);
 		return false;
 	}
 
@@ -83,10 +81,8 @@ bool ConstraintsParser::parse(const QDomElement &constraintsXml)
 bool ConstraintsParser::parseConstraints(const QDomElement &constraints)
 {
 	int timelimitTagsCount = 0;
-	for (QDomElement constraint = constraints.firstChildElement()
-			; !constraint.isNull()
-			; constraint = constraint.nextSiblingElement())
-	{
+	for (QDomElement constraint = constraints.firstChildElement(); !constraint.isNull();
+		constraint = constraint.nextSiblingElement()) {
 		auto *parsed = parseConstraint(constraint);
 		if (!addToEvents(parsed)) {
 			delete parsed;
@@ -169,11 +165,10 @@ Event *ConstraintsParser::parseEventTag(const QDomElement &element)
 
 	const Trigger trigger = parseTriggersAlternative(triggerTag);
 
-	auto * const result = new Event(id(element), mConditions.constant(true), trigger, dropsOnFire, setUpInitially);
+	auto *const result = new Event(id(element), mConditions.constant(true), trigger, dropsOnFire, setUpInitially);
 
-	const Condition condition = conditionName == "condition"
-			? parseConditionTag(conditionTag, *result)
-			: parseConditionsTag(conditionTag, *result);
+	const Condition condition = conditionName == "condition" ? parseConditionTag(conditionTag, *result)
+	                                                         : parseConditionsTag(conditionTag, *result);
 
 	result->setCondition(condition);
 
@@ -199,14 +194,14 @@ Event *ConstraintsParser::parseConstraintTag(const QDomElement &element)
 	const QString checkOneAttribute = element.attribute("checkOnce", "false").toLower();
 	const bool checkOnce = checkOneAttribute == "true";
 
-	auto * const result = new Event(id(element), mConditions.constant(true), trigger, true, true);
+	auto *const result = new Event(id(element), mConditions.constant(true), trigger, true, true);
 
 	Condition condition = parseConditionsAlternative(element.firstChildElement(), *result);
 
 	if (checkOnce) {
 		const Value timestamp = mValues.timestamp(mTimeline);
 		const Condition timeout = mConditions.timerCondition(0, true, timestamp, *result);
-		condition = mConditions.combined({ timeout, condition }, Glue::And);
+		condition = mConditions.combined({timeout, condition}, Glue::And);
 	}
 
 	result->setCondition(mConditions.negation(condition));
@@ -227,11 +222,8 @@ Event *ConstraintsParser::parseTimeLimitTag(const QDomElement &element)
 
 	const QString timeLimitMessage = QObject::tr("Program worked for too long time");
 	const Value timestamp = mValues.timestamp(mTimeline);
-	auto * const event = new Event(id(element)
-			, mConditions.constant(true)
-			, mTriggers.fail(timeLimitMessage)
-			, true
-			, true);
+	auto *const event =
+		new Event(id(element), mConditions.constant(true), mTriggers.fail(timeLimitMessage), true, true);
 
 	const Condition condition = mConditions.timerCondition(value, true, timestamp, *event);
 	event->setCondition(condition);
@@ -248,11 +240,9 @@ Event *ConstraintsParser::parseInitializationTag(const QDomElement &element)
 Condition ConstraintsParser::parseConditionsAlternative(const QDomElement &element, Event &event)
 {
 	const QString name = element.tagName().toLower();
-	return name == "conditions"
-			? parseConditionsTag(element, event)
-			: name == "condition"
-					? parseConditionTag(element, event)
-					: parseConditionContents(element, event);
+	return name == "conditions"  ? parseConditionsTag(element, event)
+	       : name == "condition" ? parseConditionTag(element, event)
+	                             : parseConditionContents(element, event);
 }
 
 Condition ConstraintsParser::parseConditionsTag(const QDomElement &element, Event &event)
@@ -274,10 +264,8 @@ Condition ConstraintsParser::parseConditionsTag(const QDomElement &element, Even
 	}
 
 	QList<Condition> conditions;
-	for (QDomElement condition = element.firstChildElement()
-			; !condition.isNull()
-			; condition = condition.nextSiblingElement())
-	{
+	for (QDomElement condition = element.firstChildElement(); !condition.isNull();
+		condition = condition.nextSiblingElement()) {
 		conditions << parseConditionsAlternative(condition, event);
 	}
 
@@ -305,10 +293,8 @@ Condition ConstraintsParser::parseConditionContents(const QDomElement &element, 
 		return mConditions.constant(true);
 	}
 
-	if (tag == "equals" || tag.startsWith("notequal")
-			|| tag == "greater" || tag == "less"
-			|| tag == "notgreater" || tag == "notless")
-	{
+	if (tag == "equals" || tag.startsWith("notequal") || tag == "greater" || tag == "less" || tag == "notgreater"
+		|| tag == "notless") {
 		return parseComparisonTag(element);
 	}
 
@@ -345,10 +331,10 @@ std::vector<Value> ConstraintsParser::parseTagAttibutes(const QDomElement &eleme
 {
 	std::vector<Value> result;
 	QStringList filteredNames;
-	const auto& attrs = element.attributes();
+	const auto &attrs = element.attributes();
 
 	for (int i = 0; i < attrs.count(); ++i) {
-		const auto& name = attrs.item(i).toAttr().name();
+		const auto &name = attrs.item(i).toAttr().name();
 		if (name.startsWith("_")) {
 			filteredNames << name;
 		}
@@ -361,7 +347,7 @@ std::vector<Value> ConstraintsParser::parseTagAttibutes(const QDomElement &eleme
 	std::sort(filteredNames.begin(), filteredNames.end());
 
 	for (int i = 0; i < count; ++i) {
-		const auto& attrValue = element.attribute(filteredNames[i]);
+		const auto &attrValue = element.attribute(filteredNames[i]);
 		result.push_back(parseSpecialValue(attrValue));
 	}
 
@@ -370,7 +356,7 @@ std::vector<Value> ConstraintsParser::parseTagAttibutes(const QDomElement &eleme
 
 Condition ConstraintsParser::parseComparisonTag(const QDomElement &element)
 {
-	const auto& attrs = parseTagAttibutes(element, 2);
+	const auto &attrs = parseTagAttibutes(element, 2);
 	const auto attrsExists = !attrs.empty();
 	if (!attrsExists && !assertChildrenExactly(element, 2)) {
 		return mConditions.constant(true);
@@ -379,7 +365,8 @@ Condition ConstraintsParser::parseComparisonTag(const QDomElement &element)
 	const QString operation = element.tagName().toLower();
 
 	const Value leftValue = attrsExists ? attrs.at(0) : parseValue(element.firstChildElement());
-	const Value rightValue = attrsExists ? attrs.at(1) : parseValue(element.firstChildElement().nextSiblingElement());
+	const Value rightValue =
+		attrsExists ? attrs.at(1) : parseValue(element.firstChildElement().nextSiblingElement());
 
 	if (operation == "equals") {
 		return mConditions.equals(leftValue, rightValue);
@@ -410,8 +397,8 @@ Condition ConstraintsParser::parseInsideTag(const QDomElement &element)
 		return mConditions.constant(true);
 	}
 
-	return mConditions.inside(element.attribute("objectId"), element.attribute("regionId")
-			, element.attribute("objectPoint", "center"));
+	return mConditions.inside(element.attribute("objectId"), element.attribute("regionId"),
+		element.attribute("objectPoint", "center"));
 }
 
 Condition ConstraintsParser::parseEventSettedDroppedTag(const QDomElement &element)
@@ -421,9 +408,7 @@ Condition ConstraintsParser::parseEventSettedDroppedTag(const QDomElement &eleme
 	}
 
 	const QString id = element.attribute("id");
-	return element.tagName().toLower() == "settedup"
-			? mConditions.settedUp(id)
-			: mConditions.dropped(id);
+	return element.tagName().toLower() == "settedup" ? mConditions.settedUp(id) : mConditions.dropped(id);
 }
 
 Condition ConstraintsParser::parseTimerTag(const QDomElement &element, Event &event)
@@ -447,10 +432,8 @@ Condition ConstraintsParser::parseUsingTag(const QDomElement &element, Event &ev
 	QList<Trigger> triggers;
 	Condition result;
 	bool resultFound = false;
-	for (QDomElement trigger = element.firstChildElement()
-			; !trigger.isNull()
-			; trigger = trigger.nextSiblingElement())
-	{
+	for (QDomElement trigger = element.firstChildElement(); !trigger.isNull();
+		trigger = trigger.nextSiblingElement()) {
 		if (trigger.tagName().toLower() == "return") {
 			if (resultFound) {
 				error(QObject::tr(R"(There must be only one tag "return" in "using" expression.)"));
@@ -475,11 +458,9 @@ Condition ConstraintsParser::parseUsingTag(const QDomElement &element, Event &ev
 Trigger ConstraintsParser::parseTriggersAlternative(const QDomElement &element)
 {
 	const QString name = element.tagName().toLower();
-	return name == "triggers"
-			? parseTriggersTag(element)
-			: name == "trigger"
-					? parseTriggerTag(element)
-					: parseTriggerContents(element);
+	return name == "triggers"  ? parseTriggersTag(element)
+	       : name == "trigger" ? parseTriggerTag(element)
+	                           : parseTriggerContents(element);
 }
 
 Trigger ConstraintsParser::parseTriggersTag(const QDomElement &element)
@@ -489,10 +470,8 @@ Trigger ConstraintsParser::parseTriggersTag(const QDomElement &element)
 	}
 
 	QList<Trigger> triggers;
-	for (QDomElement trigger = element.firstChildElement()
-			; !trigger.isNull()
-			; trigger = trigger.nextSiblingElement())
-	{
+	for (QDomElement trigger = element.firstChildElement(); !trigger.isNull();
+		trigger = trigger.nextSiblingElement()) {
 		triggers << parseTriggersAlternative(trigger);
 	}
 
@@ -555,7 +534,7 @@ Trigger ConstraintsParser::parseFailTag(const QDomElement &element)
 
 Value ConstraintsParser::autoParseValue(const QString &text)
 {
-	const auto& t = text.trimmed();
+	const auto &t = text.trimmed();
 
 	if (t.compare("true", Qt::CaseInsensitive) == 0) {
 		return mValues.boolValue(true);
@@ -583,11 +562,11 @@ Value ConstraintsParser::autoParseValue(const QString &text)
 Value ConstraintsParser::parseSpecialValue(const QString &text)
 {
 	static const QRegularExpression strictRegex(R"(^\$\{([^}]+)\}$|)");
-	const auto& trimmedText = text.trimmed();
-	const auto& match = strictRegex.match(trimmedText);
+	const auto &trimmedText = text.trimmed();
+	const auto &match = strictRegex.match(trimmedText);
 
 	if (match.hasMatch() && !match.captured(1).isEmpty()) {
-		const auto& paramName = match.captured(1);
+		const auto &paramName = match.captured(1);
 		return mValues.specialSyntaxValue(paramName);
 	}
 
@@ -601,9 +580,9 @@ QMap<QString, Value> ConstraintsParser::parseMessageText(const QString &text)
 	QMap<QString, Value> map;
 	QRegularExpressionMatchIterator it = paramRegex.globalMatch(text);
 	while (it.hasNext()) {
-	    const auto &match = it.next();
-	    const auto &paramName = match.captured(1);
-	    map.insert(paramName, mValues.specialSyntaxValue(paramName));
+		const auto &match = it.next();
+		const auto &paramName = match.captured(1);
+		map.insert(paramName, mValues.specialSyntaxValue(paramName));
 	}
 
 	return map;
@@ -616,8 +595,8 @@ Trigger ConstraintsParser::parseMessageTag(const QDomElement &element)
 	}
 
 	QMap<QString, Value> map;
-	for (QDomElement replace = element.firstChildElement("replace"); !replace.isNull()
-			; replace = replace.nextSiblingElement("replace")) {
+	for (QDomElement replace = element.firstChildElement("replace"); !replace.isNull();
+		replace = replace.nextSiblingElement("replace")) {
 		map.insert(replace.attribute("var"), parseValue(replace.firstChildElement()));
 	}
 
@@ -631,8 +610,8 @@ Trigger ConstraintsParser::parseLogTag(const QDomElement &element)
 	}
 
 	QMap<QString, Value> map;
-	for (QDomElement replace = element.firstChildElement("replace"); !replace.isNull()
-			; replace = replace.nextSiblingElement("replace")) {
+	for (QDomElement replace = element.firstChildElement("replace"); !replace.isNull();
+		replace = replace.nextSiblingElement("replace")) {
 		map.insert(replace.attribute("var"), parseValue(replace.firstChildElement()));
 	}
 
@@ -647,7 +626,7 @@ Trigger ConstraintsParser::parseSuccessTag(const QDomElement &element)
 
 Trigger ConstraintsParser::parseSetterTag(const QDomElement &element)
 {
-	const auto& attrs = parseTagAttibutes(element, 1);
+	const auto &attrs = parseTagAttibutes(element, 1);
 	const auto attrsExists = !attrs.empty();
 
 	if (!assertAttributeNonEmpty(element, "name") || (!attrsExists && !assertChildrenExactly(element, 1))) {
@@ -662,7 +641,7 @@ Trigger ConstraintsParser::parseSetterTag(const QDomElement &element)
 
 Value ConstraintsParser::parseUnaryValueTag(const QDomElement &element)
 {
-	const auto& attrs = parseTagAttibutes(element, 1);
+	const auto &attrs = parseTagAttibutes(element, 1);
 	const auto attrsExists = !attrs.empty();
 
 	if (!attrsExists && !assertChildrenExactly(element, 1)) {
@@ -690,7 +669,7 @@ Value ConstraintsParser::parseUnaryValueTag(const QDomElement &element)
 
 Value ConstraintsParser::parseBinaryValueTag(const QDomElement &element)
 {
-	const auto& attrs = parseTagAttibutes(element, 2);
+	const auto &attrs = parseTagAttibutes(element, 2);
 	const auto attrsExists = !attrs.empty();
 
 	if (!attrsExists && !assertChildrenExactly(element, 2)) {
@@ -700,7 +679,8 @@ Value ConstraintsParser::parseBinaryValueTag(const QDomElement &element)
 	const QString operation = element.tagName().toLower();
 
 	const Value leftValue = attrsExists ? attrs.at(0) : parseValue(element.firstChildElement());
-	const Value rightValue = attrsExists ? attrs.at(1) : parseValue(element.firstChildElement().nextSiblingElement());
+	const Value rightValue =
+		attrsExists ? attrs.at(1) : parseValue(element.firstChildElement().nextSiblingElement());
 
 	if (operation == "sum") {
 		return mValues.sum(leftValue, rightValue);
@@ -736,20 +716,16 @@ Trigger ConstraintsParser::parseEventSetDropTag(const QDomElement &element)
 	}
 
 	const QString id = element.attribute("id");
-	return element.tagName().toLower() == "setup"
-			? mTriggers.setUpEvent(id)
-			: mTriggers.dropEvent(id);
+	return element.tagName().toLower() == "setup" ? mTriggers.setUpEvent(id) : mTriggers.dropEvent(id);
 }
 
 Trigger ConstraintsParser::parseSetObjectStateTag(const QDomElement &element)
 {
-	const auto& attrs = parseTagAttibutes(element, 1);
+	const auto &attrs = parseTagAttibutes(element, 1);
 	const auto attrsExists = !attrs.empty();
 
-	if (!assertAttributeNonEmpty(element, "object")
-			|| !assertAttributeNonEmpty(element, "property")
-			|| (!attrsExists && !assertChildrenExactly(element, 1)))
-	{
+	if (!assertAttributeNonEmpty(element, "object") || !assertAttributeNonEmpty(element, "property")
+		|| (!attrsExists && !assertChildrenExactly(element, 1))) {
 		return mTriggers.doNothing();
 	}
 
@@ -869,7 +845,8 @@ Value ConstraintsParser::parseObjectStateTag(const QDomElement &element)
 QString ConstraintsParser::id(const QDomElement &element) const
 {
 	const QString attribute = element.attribute("id");
-	return attribute.isEmpty() ? QUuid::createUuid().toString() : attribute;;
+	return attribute.isEmpty() ? QUuid::createUuid().toString() : attribute;
+	;
 }
 
 int ConstraintsParser::intAttribute(const QDomElement &element, const QString &attributeName, int defaultValue)
@@ -914,7 +891,7 @@ bool ConstraintsParser::boolAttribute(const QDomElement &element, const QString 
 	return stringValue == "true";
 }
 
-bool ConstraintsParser::addToEvents(Event * const event)
+bool ConstraintsParser::addToEvents(Event *const event)
 {
 	if (!event) {
 		return false;
@@ -929,14 +906,14 @@ bool ConstraintsParser::addToEvents(Event * const event)
 	return true;
 }
 
-bool ConstraintsParser::assertAttributesExactly(const QDomElement &element, int actualCount,
-								int expectedCount, bool isError)
+bool ConstraintsParser::assertAttributesExactly(const QDomElement &element, int actualCount, int expectedCount,
+	bool isError)
 {
 	if (actualCount != expectedCount) {
-		const auto& message = QObject::tr(
-			"When using the extended form for the %1 tag,"
-			" the number of arguments starting with _ must be %2, %3 was provided")
-			.arg(element.tagName(), QString::number(expectedCount), QString::number(actualCount));
+		const auto &message =
+			QObject::tr("When using the extended form for the %1 tag,"
+				    " the number of arguments starting with _ must be %2, %3 was provided")
+				.arg(element.tagName(), QString::number(expectedCount), QString::number(actualCount));
 		return isError ? error(message) : warning(message);
 	}
 	return true;
@@ -946,8 +923,8 @@ bool ConstraintsParser::assertChildrenExactly(const QDomElement &element, int co
 {
 	/// @todo: Ignore comment nodes
 	if (element.childNodes().count() != count) {
-		const auto& message = QObject::tr("%1 tag must have exactly %2 child tag(s)")
-				.arg(element.tagName(), QString::number(count));
+		const auto &message = QObject::tr("%1 tag must have exactly %2 child tag(s)")
+		                              .arg(element.tagName(), QString::number(count));
 		return isError ? error(message) : warning(message);
 	}
 
@@ -958,8 +935,8 @@ bool ConstraintsParser::assertChildrenMoreThan(const QDomElement &element, int c
 {
 	/// @todo: Ignore comment nodes
 	if (element.childNodes().count() <= count) {
-		const auto& message = QObject::tr("%1 tag must have at least %2 child tag(s)")
-				.arg(element.tagName(), QString::number(count + 1));
+		const auto &message = QObject::tr("%1 tag must have at least %2 child tag(s)")
+		                              .arg(element.tagName(), QString::number(count + 1));
 		return isError ? error(message) : warning(message);
 	}
 
@@ -969,7 +946,8 @@ bool ConstraintsParser::assertChildrenMoreThan(const QDomElement &element, int c
 bool ConstraintsParser::assertHasAttribute(const QDomElement &element, const QString &attribute, bool isError)
 {
 	if (!element.hasAttribute(attribute)) {
-		const auto& message = QObject::tr(R"("%1" tag must have "%2" attribute.)").arg(element.tagName(), attribute);
+		const auto &message =
+			QObject::tr(R"("%1" tag must have "%2" attribute.)").arg(element.tagName(), attribute);
 		return isError ? error(message) : warning(message);
 	}
 
@@ -979,7 +957,8 @@ bool ConstraintsParser::assertHasAttribute(const QDomElement &element, const QSt
 bool ConstraintsParser::assertTagName(const QDomElement &element, const QString &nameInLowerCase, bool isError)
 {
 	if (element.tagName().toLower() != nameInLowerCase) {
-		const auto& message = QObject::tr(R"(Expected "%1" tag, got "%2".)").arg(nameInLowerCase, element.tagName());
+		const auto &message =
+			QObject::tr(R"(Expected "%1" tag, got "%2".)").arg(nameInLowerCase, element.tagName());
 		return isError ? error(message) : warning(message);
 	}
 
@@ -993,8 +972,8 @@ bool ConstraintsParser::assertAttributeNonEmpty(const QDomElement &element, cons
 	}
 
 	if (element.attribute(attribute).isEmpty()) {
-		const auto& message = QObject::tr(R"(Attribute "%1" of the tag "%2" must not be empty.)")
-						.arg(element.tagName(), attribute);
+		const auto &message = QObject::tr(R"(Attribute "%1" of the tag "%2" must not be empty.)")
+		                              .arg(element.tagName(), attribute);
 		return isError ? error(message) : warning(message);
 	}
 

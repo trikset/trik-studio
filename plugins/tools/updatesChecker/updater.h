@@ -52,7 +52,7 @@ private Q_SLOTS:
 private:
 	void executeUpdater(const QString &mode);
 
-	QProcess *mUpdaterProcess;  // Takes ownership
+	QProcess *mUpdaterProcess; // Takes ownership
 };
 
 }

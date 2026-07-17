@@ -25,7 +25,8 @@ class QRREPO_EXPORT CouldNotCreateOutFileException : public QrRepoException
 public:
 	explicit CouldNotCreateOutFileException(const QString &fileName)
 		: QrRepoException("Could not create decompressed file: " + fileName)
-	{}
+	{
+	}
 };
 
 }

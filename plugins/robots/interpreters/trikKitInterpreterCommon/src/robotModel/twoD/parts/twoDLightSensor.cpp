@@ -18,9 +18,8 @@
 
 using namespace trik::robotModel::twoD::parts;
 
-TwoDLightSensor::TwoDLightSensor(const kitBase::robotModel::DeviceInfo &info
-		, const kitBase::robotModel::PortInfo &port
-		, twoDModel::engine::TwoDModelEngineInterface &engine)
+TwoDLightSensor::TwoDLightSensor(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+	twoDModel::engine::TwoDModelEngineInterface &engine)
 	: LightSensor(info, port, engine)
 {
 }

@@ -43,7 +43,7 @@ void TrikFSharpAdditionalPreferences::restoreSettings()
 	mUi->fSharpLineEdit->setText(SettingsManager::value("FSharpPath").toString());
 }
 
-void TrikFSharpAdditionalPreferences::onRobotModelChanged(kitBase::robotModel::RobotModelInterface * const robotModel)
+void TrikFSharpAdditionalPreferences::onRobotModelChanged(kitBase::robotModel::RobotModelInterface *const robotModel)
 {
 	mUi->fSharpSettingsGroupBox->setVisible(robotModel->name() == mRobotName);
 }

@@ -31,14 +31,15 @@ class QRUTILS_EXPORT SearchLineEdit : public QFrame
 
 public:
 	/// A enumeration of possible search options
-	enum class SearchOptions
-	{
+	enum class SearchOptions {
 		/// Search is performed ignoring letters case
 		CaseInsensitive
 		/// Search is performed respectively to letters case
-		, CaseSensitive
+		,
+		CaseSensitive
 		/// The text in box is treated as regular expression
-		, RegularExpression
+		,
+		RegularExpression
 	};
 
 	explicit SearchLineEdit(QWidget *parent = nullptr, bool borderEnabled = true);
@@ -66,12 +67,12 @@ private:
 	void notifyTextChanged();
 	QRegExp regexpFromText(const QString &text, SearchOptions option) const;
 
-	QToolButton *mOptionsButton;  // Takes ownership
-	QToolButton *mClearButton;  // Takes ownership
-	QLineEdit *mLineEdit;  // Takes ownership
-	QAction *mCaseInsensitive;  // Takes ownership
-	QAction *mCaseSensitive;  // Takes ownership
-	QAction *mRegularExpression;  // Takes ownership
+	QToolButton *mOptionsButton; // Takes ownership
+	QToolButton *mClearButton; // Takes ownership
+	QLineEdit *mLineEdit; // Takes ownership
+	QAction *mCaseInsensitive; // Takes ownership
+	QAction *mCaseSensitive; // Takes ownership
+	QAction *mRegularExpression; // Takes ownership
 	SearchOptions mCurrentOption;
 };
 

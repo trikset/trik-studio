@@ -43,8 +43,8 @@ QVector2D Geometry::projection(QVector2D projected, QVector2D target)
 QVector2D Geometry::rotateVector(QVector2D vector, qreal angleInDegrees)
 {
 	const qreal angle = angleInDegrees * pi / 180;
-	return {static_cast<float>(vector.x() * qCos(angle) - vector.y() * sin(angle))
-			, static_cast<float>(vector.x() * sin(angle) + vector.y() * cos(angle))};
+	return {static_cast<float>(vector.x() * qCos(angle) - vector.y() * sin(angle)),
+		static_cast<float>(vector.x() * sin(angle) + vector.y() * cos(angle))};
 }
 
 QPointF Geometry::normalPoint(const QLineF &line, QPointF point)
@@ -61,7 +61,7 @@ QPointF Geometry::normalPoint(const QLineF &line, QPointF point)
 	}
 
 	const qreal x = (x1 * Math::sqr(y2 - y1) + x3 * Math::sqr(x2 - x1) + (x2 - x1) * (y2 - y1) * (y3 - y1))
-			/ (Math::sqr(y2 - y1) + Math::sqr(x2 - x1));
+	                / (Math::sqr(y2 - y1) + Math::sqr(x2 - x1));
 	const qreal y = ((y2 - y1) * (x - x1) / (x2 - x1)) + y1;
 
 	return {x, y};
@@ -119,8 +119,8 @@ qreal Geometry::percentageAt(const QPainterPath &path, QPointF point)
 		for (int i = -50; i <= 50; ++i) {
 			const qreal percentage = result + delta * i;
 			const QPointF pointAtPercentage = percentage >= 0 && percentage <= 1
-					? path.pointAtPercent(percentage)
-					: QPointF(10e5, 10e5);
+			                                          ? path.pointAtPercent(percentage)
+			                                          : QPointF(10e5, 10e5);
 			const qreal distanceAtPercentage = distance(pointAtPercentage, point);
 			if (distanceAtPercentage < minimalDistance) {
 				minimalDistance = distanceAtPercentage;
@@ -157,7 +157,7 @@ qreal Geometry::square(const QPolygonF &polygon)
 {
 	qreal result = 0;
 	for (int i = 0; i < polygon.size(); ++i) {
-		const QPointF p1 = i ? polygon[i-1] : polygon.back();
+		const QPointF p1 = i ? polygon[i - 1] : polygon.back();
 		const QPointF p2 = polygon[i];
 		result += (p1.x() - p2.x()) * (p1.y() + p2.y());
 	}
@@ -168,8 +168,8 @@ qreal Geometry::square(const QPolygonF &polygon)
 QLineF Geometry::veryLongLine(QPointF pointOnLine, QVector2D directionVector)
 {
 	const qreal halfLength = 10000;
-	return {pointOnLine + halfLength * directionVector.toPointF()
-			, pointOnLine - halfLength * directionVector.toPointF()};
+	return {pointOnLine + halfLength * directionVector.toPointF(),
+		pointOnLine - halfLength * directionVector.toPointF()};
 }
 
 QList<QPointF> Geometry::intersection(const QLineF &line, const QPainterPath &path, qreal eps)
@@ -192,15 +192,14 @@ QList<QPointF> Geometry::intersection(const QLineF &line, const QPainterPath &pa
 		// Need check about the same line, because the same lines are parallel
 		// But in Qt 5.12.5 intersect returns sometimes NoIntersection and sometimes BoundedIntersection
 		if ((eq(startPoint, line.p1(), eps) && eq(endPoint, line.p2(), eps))
-				|| (eq(startPoint, line.p2(), eps) && eq(endPoint, line.p1(), eps))) {
+			|| (eq(startPoint, line.p2(), eps) && eq(endPoint, line.p1(), eps))) {
 			continue;
 		}
 		QLineF currentLine(startPoint, endPoint);
 		QPointF intersectionPoint;
 		// TODO: consider curve cases
 		if (line.intersect(currentLine, &intersectionPoint) != QLineF::NoIntersection
-				&& belongs(intersectionPoint, currentLine, eps))
-		{
+			&& belongs(intersectionPoint, currentLine, eps)) {
 			result << intersectionPoint;
 		}
 	}
@@ -226,8 +225,7 @@ QPointF Geometry::closestPointTo(const QList<QPointF> &points, QPointF point)
 bool Geometry::belongs(QPointF point, const QLineF &segment, qreal eps)
 {
 	if (!Math::between(segment.x1(), segment.x2(), point.x(), eps)
-			|| !Math::between(segment.y1(), segment.y2(), point.y(), eps))
-	{
+		|| !Math::between(segment.y1(), segment.y2(), point.y(), eps)) {
 		return false;
 	}
 

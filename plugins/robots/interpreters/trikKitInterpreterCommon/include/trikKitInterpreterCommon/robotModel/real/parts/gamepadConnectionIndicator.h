@@ -26,7 +26,7 @@ namespace parts {
 
 /// Implementation of TRIK Android gamepad connection indicator for interpretation mode on real robot.
 class ROBOTS_TRIK_KIT_INTERPRETER_COMMON_EXPORT GamepadConnectionIndicator
-		: public robotModel::parts::TrikGamepadConnectionIndicator
+	: public robotModel::parts::TrikGamepadConnectionIndicator
 {
 	Q_OBJECT
 
@@ -36,9 +36,9 @@ public:
 	/// @param port - port on which this device is configured.
 	/// @param tcpRobotCommunicator - communicator object that is used to send/receive data to/from telemetry
 	///        service on a robot.
-	GamepadConnectionIndicator(const kitBase::robotModel::DeviceInfo &info
-		, const kitBase::robotModel::PortInfo &port
-		, utils::robotCommunication::TcpRobotCommunicator &tcpRobotCommunicator);
+	GamepadConnectionIndicator(const kitBase::robotModel::DeviceInfo &info,
+		const kitBase::robotModel::PortInfo &port,
+		utils::robotCommunication::TcpRobotCommunicator &tcpRobotCommunicator);
 
 	void read() override;
 

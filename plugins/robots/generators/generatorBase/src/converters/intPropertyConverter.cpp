@@ -21,11 +21,9 @@
 using namespace generatorBase::converters;
 using namespace qReal;
 
-IntPropertyConverter::IntPropertyConverter(const QStringList &pathsToTemplates
-		, lua::LuaProcessor &luaTranslator
-		, const qReal::Id &id
-		, const QString &propertyName
-		, simple::Binding::ConverterInterface *reservedVariablesConverter)
+IntPropertyConverter::IntPropertyConverter(const QStringList &pathsToTemplates, lua::LuaProcessor &luaTranslator,
+	const qReal::Id &id, const QString &propertyName,
+	simple::Binding::ConverterInterface *reservedVariablesConverter)
 	: CodeConverterBase(luaTranslator, id, propertyName, reservedVariablesConverter)
 	, TemplateParametrizedEntity(pathsToTemplates)
 {
@@ -33,6 +31,6 @@ IntPropertyConverter::IntPropertyConverter(const QStringList &pathsToTemplates
 
 QString IntPropertyConverter::convert(const QString &luaCode) const
 {
-	return mLuaTranslator.castTo(qrtext::core::wrap(new qrtext::lua::types::Integer)
-			, luaCode, mId, mPropertyName, mReservedVariablesConverter);
+	return mLuaTranslator.castTo(qrtext::core::wrap(new qrtext::lua::types::Integer), luaCode, mId, mPropertyName,
+		mReservedVariablesConverter);
 }

@@ -21,7 +21,9 @@ namespace utils {
 class SingletonImpl
 {
 public:
-	template <typename T> static QSharedPointer<T> instance(const std::function<T*()>& factory) {
+	template<typename T>
+	static QSharedPointer<T> instance(const std::function<T *()> &factory)
+	{
 		QMutexLocker lock(&staticMutex);
 		auto &instance = staticTypeToObject[&T::staticMetaObject];
 		if (auto result = instance.lock()) {
@@ -31,21 +33,21 @@ public:
 		staticTypeToObject[&T::staticMetaObject] = qSharedPointerCast<QObject, T>(result);
 		return result;
 	}
+
 private:
 	static QHash<const void *, QWeakPointer<QObject>> staticTypeToObject;
 	static QMutex staticMutex;
 };
 
-
 /// Instantiates and provides to all callers single instance of the some type.
 template<typename T>
-class Singleton: public QObject
+class Singleton : public QObject
 {
 public:
 	/// Creates single instance of some type (given in class template) if it does not exist and returns it.
 	static QSharedPointer<T> instance()
 	{
-		return SingletonImpl::instance<T>([]() -> T* {return new T();});
+		return SingletonImpl::instance<T>([]() -> T * { return new T(); });
 	}
 };
 

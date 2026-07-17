@@ -24,18 +24,14 @@ UploadToGoogleDriveBlock::UploadToGoogleDriveBlock(ShellWidget *shellWidget)
 {
 	connect(mProcess, &QProcess::readyReadStandardOutput, [=]() {
 		if (mUrlRegexp.exactMatch(mLastOutput)) {
-			evalCode(stringProperty(id(), "ResultingVariable") + " = \"" + mUrlRegexp.cap(1).trimmed() + "\"");
+			evalCode(stringProperty(id(), "ResultingVariable") + " = \"" + mUrlRegexp.cap(1).trimmed()
+				 + "\"");
 		}
 	});
 }
 
 QStringList UploadToGoogleDriveBlock::arguments()
 {
-	return {
-		QCoreApplication::applicationDirPath() + "/deployment-scripts/uploading/upload_to_google_drive.sh"
-		, eval<QString>("File")
-		, eval<QString>("FolderId")
-		, eval<QString>("Username")
-		, eval<QString>("Password")
-	};
+	return {QCoreApplication::applicationDirPath() + "/deployment-scripts/uploading/upload_to_google_drive.sh",
+		eval<QString>("File"), eval<QString>("FolderId"), eval<QString>("Username"), eval<QString>("Password")};
 }

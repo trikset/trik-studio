@@ -24,10 +24,11 @@ namespace ast {
 class QRTEXT_EXPORT Exponentiation : public BinaryOperator
 {
 private:
-	void accept(core::AstVisitorInterface &visitor, const QSharedPointer<Node> &pointer
-			, const QSharedPointer<Node> &parent) override
+	void accept(core::AstVisitorInterface &visitor, const QSharedPointer<Node> &pointer,
+		const QSharedPointer<Node> &parent) override
 	{
-		static_cast<LuaAstVisitorInterface *>(&visitor)->visit(qSharedPointerCast<Exponentiation>(pointer), parent);
+		static_cast<LuaAstVisitorInterface *>(&visitor)->visit(qSharedPointerCast<Exponentiation>(pointer),
+			parent);
 	}
 };
 

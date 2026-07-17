@@ -22,9 +22,8 @@ using namespace ev3::robotModel::real::parts;
 using namespace ev3::communication;
 using namespace kitBase::robotModel;
 
-ColorSensorAmbient::ColorSensorAmbient(const kitBase::robotModel::DeviceInfo &info
-		, const kitBase::robotModel::PortInfo &port
-		, utils::robotCommunication::RobotCommunicator &robotCommunicator)
+ColorSensorAmbient::ColorSensorAmbient(const kitBase::robotModel::DeviceInfo &info,
+	const kitBase::robotModel::PortInfo &port, utils::robotCommunication::RobotCommunicator &robotCommunicator)
 	: kitBase::robotModel::robotParts::ColorSensorAmbient(info, port)
 	, mImplementation(robotCommunicator, port)
 	, mRobotCommunicator(robotCommunicator)

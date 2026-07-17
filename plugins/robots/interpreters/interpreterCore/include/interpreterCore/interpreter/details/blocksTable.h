@@ -34,8 +34,8 @@ public:
 	/// Constructor.
 	/// @param blocksFactoryManager - a factory manager that is used to create new blocks when needed.
 	/// @param robotModelManager - has a reference to current robot model.
-	BlocksTable(BlocksFactoryManagerInterface &blocksFactoryManager
-			, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager);
+	BlocksTable(BlocksFactoryManagerInterface &blocksFactoryManager,
+		const kitBase::robotModel::RobotModelManagerInterface &robotModelManager);
 
 private:
 	qReal::interpretation::BlockInterface *produceBlock(const qReal::Id &element) override;

@@ -26,10 +26,10 @@ namespace details {
 class TemplatesParser
 {
 public:
-	TemplatesParser(const TemplatesParser&) = delete;
-	TemplatesParser& operator=(const TemplatesParser&) = delete;
-	TemplatesParser(TemplatesParser&&) noexcept = default;
-	TemplatesParser& operator=(TemplatesParser&&) noexcept = default;
+	TemplatesParser(const TemplatesParser &) = delete;
+	TemplatesParser &operator=(const TemplatesParser &) = delete;
+	TemplatesParser(TemplatesParser &&) noexcept = default;
+	TemplatesParser &operator=(TemplatesParser &&) noexcept = default;
 	virtual ~TemplatesParser() = default;
 	TemplatesParser() noexcept = default;
 
@@ -49,16 +49,17 @@ public:
 	std::unordered_map<QString, XmlTemplate> &currentTemplates();
 
 	QDomDocument parseTemplates(const QDomDocument &templatesDocument);
+
 protected:
 	using ParserErrorCode = XmlTemplate::TemplateParseErrorCode;
-	virtual void error(const QString& message, int line, ParserErrorCode code,
-						const QString &currentTemplate);
+	virtual void error(const QString &message, int line, ParserErrorCode code, const QString &currentTemplate);
+
 private:
 	/// Parsing a separate template and checking the uniqueness of its name.
 	/// If a user overrides a library template, an error should be thrown.
 	bool parseTemplate(const QDomElement &templateElement);
 
-	XmlTemplate* findTemplate(const QString& name);
+	XmlTemplate *findTemplate(const QString &name);
 	std::unordered_map<QString, XmlTemplate> mCurrentTemplates;
 	QStringList mErrors;
 };

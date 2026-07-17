@@ -31,13 +31,20 @@ class TrikEncoderAdapter : public trikControl::EncoderInterface
 	Q_OBJECT
 	// DeviceInterface interface
 public:
-	TrikEncoderAdapter(const kitBase::robotModel::PortInfo &port, twoDModel::engine::TwoDModelEngineInterface *engine);
+	TrikEncoderAdapter(const kitBase::robotModel::PortInfo &port,
+		twoDModel::engine::TwoDModelEngineInterface *engine);
 
-	Status status() const override {return Status::ready;}
+	Status status() const override
+	{
+		return Status::ready;
+	}
 	// EncoderInterface interface
 public Q_SLOTS:
 	int read() override;
-	int readRawData() override { return read(); }
+	int readRawData() override
+	{
+		return read();
+	}
 	void reset() override;
 
 private:

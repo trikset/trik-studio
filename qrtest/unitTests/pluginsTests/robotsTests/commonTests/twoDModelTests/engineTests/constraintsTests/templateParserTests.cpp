@@ -19,7 +19,8 @@
 using namespace qrTest::robotsTests::commonTwoDModelTests;
 using namespace twoDModel::templates::details;
 
-TEST_P(XmlTemplateErrorTest, EachErrorScenario) {
+TEST_P(XmlTemplateErrorTest, EachErrorScenario)
+{
 	const auto &testCase = GetParam();
 
 	TemplateParseErrorCode actualCode;
@@ -27,12 +28,10 @@ TEST_P(XmlTemplateErrorTest, EachErrorScenario) {
 
 	EXPECT_CALL(*mMockTemplate, addDeclarationError(::testing::_, ::testing::_, ::testing::_))
 		.Times(1)
-		.WillOnce(::testing::Invoke(
-			[&](const QString&, int line, TemplateParseErrorCode code) {
-				actualCode = code;
-				actualLine = line;
-		}
-	));
+		.WillOnce(::testing::Invoke([&](const QString &, int line, TemplateParseErrorCode code) {
+		actualCode = code;
+		actualLine = line;
+	}));
 
 	QDomDocument doc;
 	doc.setContent(testCase.testXml);
@@ -42,7 +41,8 @@ TEST_P(XmlTemplateErrorTest, EachErrorScenario) {
 	EXPECT_EQ(actualLine, testCase.expectedLine);
 }
 
-TEST_P(XmlTemplateParserErrorTest, ParserEachErrorScenario) {
+TEST_P(XmlTemplateParserErrorTest, ParserEachErrorScenario)
+{
 	const auto &testCase = GetParam();
 
 	TemplateParseErrorCode actualCode;
@@ -50,12 +50,11 @@ TEST_P(XmlTemplateParserErrorTest, ParserEachErrorScenario) {
 
 	EXPECT_CALL(*mMockTemplateParser, error(::testing::_, ::testing::_, ::testing::_, ::testing::_))
 		.Times(1)
-		.WillOnce(::testing::Invoke(
-			[&](const QString&, int line, TemplateParseErrorCode code, const QString&) {
-				actualCode = code;
-				actualLine = line;
-		}
-	));
+		.WillOnce(
+			::testing::Invoke([&](const QString &, int line, TemplateParseErrorCode code, const QString &) {
+		actualCode = code;
+		actualLine = line;
+	}));
 
 	QDomDocument doc;
 	doc.setContent(testCase.testXml);
@@ -65,7 +64,8 @@ TEST_P(XmlTemplateParserErrorTest, ParserEachErrorScenario) {
 	EXPECT_EQ(actualLine, testCase.expectedLine);
 }
 
-TEST_P(XmlTemplateSubstitutionErrorTest, SubstitutionEachErrorScenario) {
+TEST_P(XmlTemplateSubstitutionErrorTest, SubstitutionEachErrorScenario)
+{
 	const auto &testCase = GetParam();
 
 	TemplateSubstitutionErrorCode actualCode;
@@ -73,12 +73,10 @@ TEST_P(XmlTemplateSubstitutionErrorTest, SubstitutionEachErrorScenario) {
 
 	EXPECT_CALL(*mMockTemplate, mockAddSubstitutionError(::testing::_, ::testing::_, ::testing::_))
 		.Times(1)
-		.WillOnce(::testing::Invoke(
-			[&](const QString&, int line, TemplateSubstitutionErrorCode code) {
-				actualCode = code;
-				actualLine = line;
-		}
-	));
+		.WillOnce(::testing::Invoke([&](const QString &, int line, TemplateSubstitutionErrorCode code) {
+		actualCode = code;
+		actualLine = line;
+	}));
 
 	// template definition xml
 	QDomDocument templateDefinitions;
@@ -94,7 +92,8 @@ TEST_P(XmlTemplateSubstitutionErrorTest, SubstitutionEachErrorScenario) {
 	EXPECT_EQ(actualLine, testCase.expectedLine);
 }
 
-TEST_P(XmlTemplateParserSubstitutionErrorTest, SubstitutionPaserEachErrorScenario) {
+TEST_P(XmlTemplateParserSubstitutionErrorTest, SubstitutionPaserEachErrorScenario)
+{
 	const auto &testCase = GetParam();
 
 	TemplateSubstitutionErrorCode actualCode;
@@ -103,12 +102,11 @@ TEST_P(XmlTemplateParserSubstitutionErrorTest, SubstitutionPaserEachErrorScenari
 	EXPECT_CALL(*mMockTemplateProcessor, error(::testing::_, ::testing::_, ::testing::_, ::testing::_))
 		.Times(1)
 		.WillOnce(::testing::Invoke(
-			[&](const QString&, int line,
-				const  qrTest::XmlTemplateProcessorMock::ExpansionContext &, TemplateSubstitutionErrorCode code) {
-				actualCode = code;
-				actualLine = line;
-		}
-	));
+			[&](const QString &, int line, const qrTest::XmlTemplateProcessorMock::ExpansionContext &,
+				TemplateSubstitutionErrorCode code) {
+		actualCode = code;
+		actualLine = line;
+	}));
 
 	// template definition xml
 	QDomDocument templateDefinitions;
@@ -127,21 +125,17 @@ TEST_P(XmlTemplateParserSubstitutionErrorTest, SubstitutionPaserEachErrorScenari
 
 // clazy:excludeall=non-pod-global-static
 const std::vector<ErrorTestCase> testCases = {
-	{
-		TemplateParseErrorCode::ContentFormatNotSuppoted,
+	{TemplateParseErrorCode::ContentFormatNotSuppoted,
 		2, // Non expected content on line 3 relative first string of input document
-R"(<template name="test_template">
+		R"(<template name="test_template">
 	<content>
 		<something-non-cdata-tag/>
 	</content>
 </template>
 )",
-		"ContentFormatNotSuppoted"
-	},
-	{
-		TemplateParseErrorCode::UseSpecialSyntaxForUndeclaredParam,
-		2,
-R"(<template name="test_template">
+		"ContentFormatNotSuppoted"},
+	{TemplateParseErrorCode::UseSpecialSyntaxForUndeclaredParam, 2,
+		R"(<template name="test_template">
 	<content>
 <![CDATA[
 	<difference>
@@ -153,12 +147,10 @@ R"(<template name="test_template">
 	</content>
 </template>
 	)",
-		"UseSpecialSyntaxForUndeclaredParam"
-	},
-	{
-		TemplateParseErrorCode::ParamsTagContainOnlyParam,
+		"UseSpecialSyntaxForUndeclaredParam"},
+	{TemplateParseErrorCode::ParamsTagContainOnlyParam,
 		6, // <trigger> on line 6
-R"(<template name="test_template">
+		R"(<template name="test_template">
 <params>
 	<param name="id"/>
 	<param name="settedUpInit" default="true"/>
@@ -182,12 +174,10 @@ R"(<template name="test_template">
 	</content>
 </template>
 	)",
-		"ParamsTagContainOnlyParam"
-	},
-	{
-		TemplateParseErrorCode::MissingParamNameAttribute,
+		"ParamsTagContainOnlyParam"},
+	{TemplateParseErrorCode::MissingParamNameAttribute,
 		5, // missing name on line
-R"(<template name="test_template">
+		R"(<template name="test_template">
 	<params>
 		<param name="id"/>
 		<param name="settedUpInit" default="true"/>
@@ -207,12 +197,10 @@ R"(<template name="test_template">
 	</content>
 </template>
 	)",
-		"MissingParamNameAttribute"
-	},
-	{
-		TemplateParseErrorCode::MissingContentTag,
+		"MissingParamNameAttribute"},
+	{TemplateParseErrorCode::MissingContentTag,
 		3, // missing content tag for template on line 3
-R"(
+		R"(
 
 <template name="test_template">
 	<params>
@@ -220,15 +208,12 @@ R"(
 	</params>
 </template>
 	)",
-		"MissingContentTag"
-	},
+		"MissingContentTag"},
 };
 
 const std::vector<ErrorTestCase> parserTestCases = {
-	{
-		TemplateParseErrorCode::MissingTemplateNameAttribute,
-		3,
-R"(
+	{TemplateParseErrorCode::MissingTemplateNameAttribute, 3,
+		R"(
 <templates>
 <template name="">
 	<content>
@@ -237,12 +222,9 @@ R"(
 </template>
 </templates>
 )",
-		"MissingTemplateNameAttribute"
-	},
-	{
-		TemplateParseErrorCode::RedefinitionExistingTemplate,
-		14,
-R"(
+		"MissingTemplateNameAttribute"},
+	{TemplateParseErrorCode::RedefinitionExistingTemplate, 14,
+		R"(
 <templates>
 <template name="name">
 	<content>
@@ -268,12 +250,9 @@ R"(
 
 </templates>
 )",
-		"RedefenitionExistingTemplate"
-	},
-	{
-		TemplateParseErrorCode::TemplatesTagContaintsOnlyTemplate,
-		3,
-R"(
+		"RedefenitionExistingTemplate"},
+	{TemplateParseErrorCode::TemplatesTagContaintsOnlyTemplate, 3,
+		R"(
 <templates>
 <bober name="name">
 	<content>
@@ -299,15 +278,12 @@ R"(
 
 </templates>
 )",
-		"TemplatesTagContaintsOnlyTemplate"
-	},
+		"TemplatesTagContaintsOnlyTemplate"},
 };
 
 const std::vector<SubstitutionErrorTestCase> substitutionTestCases = {
-	{
-		TemplateSubstitutionErrorCode::UseUndeclaredParam,
-		3,
-R"(
+	{TemplateSubstitutionErrorCode::UseUndeclaredParam, 3,
+		R"(
 <template name="test_template">
 	<content>
 <![CDATA[
@@ -319,17 +295,14 @@ R"(
 	</content>
 </template>
 )",
-R"(
+		R"(
 <use template="u:test_template">
 	<with id="278"/> <!-- line 3 -->
 </use>
 )",
-		"UseUndeclaredParam"
-	},
-	{
-		TemplateSubstitutionErrorCode::UseTagContainsOnlyWithTag,
-		4,
-R"(
+		"UseUndeclaredParam"},
+	{TemplateSubstitutionErrorCode::UseTagContainsOnlyWithTag, 4,
+		R"(
 <template name="test_template">
 <params>
 	<param name="id"/>
@@ -344,18 +317,15 @@ R"(
 	</content>
 </template>
 )",
-R"(
+		R"(
 <use template="u:test_template">
 	<with id="278"/> <!-- valid use -->
 	<strange-tag/>
 </use>
 )",
-		"UseTagContainsOnlyWithTag"
-	},
-	{
-		TemplateSubstitutionErrorCode::MissingReqiuredParam,
-		2,
-R"(
+		"UseTagContainsOnlyWithTag"},
+	{TemplateSubstitutionErrorCode::MissingReqiuredParam, 2,
+		R"(
 <template name="test_template">
 <params>
 	<param name="requiredParamWithoutDefaultValue"/>
@@ -367,18 +337,15 @@ R"(
 	</content>
 </template>
 )",
-R"(
+		R"(
 <use template="u:test_template"/>
 )",
-		"MissingReqiuredParam"
-	},
+		"MissingReqiuredParam"},
 };
 
 const std::vector<SubstitutionErrorTestCase> substitutionParserTestCases = {
-	{
-		TemplateSubstitutionErrorCode::UseTagContainsTemplateAttr,
-		3,
-R"(
+	{TemplateSubstitutionErrorCode::UseTagContainsTemplateAttr, 3,
+		R"(
 <templates>
 <template name="test_template">
 	<content>
@@ -392,20 +359,17 @@ R"(
 </template>
 </templates>
 )",
-R"(
+		R"(
 <constraints>
 <use>  <!-- template name not specified, line 3 relative constraint xml -->
 	<with id="278"/>
 </use>
 </constraints>
 )",
-		"UseTagContainsTemplateAttr"
-	},
-	{
-		TemplateSubstitutionErrorCode::RecursiveTemplateExpansion,
-		7,
+		"UseTagContainsTemplateAttr"},
+	{TemplateSubstitutionErrorCode::RecursiveTemplateExpansion, 7,
 		// A use B, B use C, C use A
-R"(
+		R"(
 <templates>
 <template name="A">
 	<content>
@@ -435,17 +399,14 @@ R"(
 </template>
 </templates>
 )",
-R"(
+		R"(
 <constraints>
 <use template="u:A"/>  <!-- recursive expansion, line 7 relative initial of C template body -->
 </constraints>
 )",
-		"RecursiveTemplateExpansion"
-	},
-	{
-		TemplateSubstitutionErrorCode::UseUndeclaredTemplate,
-		6,
-R"(
+		"RecursiveTemplateExpansion"},
+	{TemplateSubstitutionErrorCode::UseUndeclaredTemplate, 6,
+		R"(
 <templates>
 <template name="C">
 	<content>
@@ -460,48 +421,24 @@ R"(
 </template>
 </templates>
 )",
-R"(
+		R"(
 <constraints>
 <use template="u:C"/>  <!-- use indeclared template "bober", line 6 relative initial of C template body -->
 </constraints>
 )",
-		"UseUndeclaredTemplate"
-	},
+		"UseUndeclaredTemplate"},
 };
 // clazy:enable
 
-INSTANTIATE_TEST_SUITE_P(
-	AllErrors,
-	XmlTemplateErrorTest,
-	::testing::ValuesIn(testCases),
-	[](const ::testing::TestParamInfo<ErrorTestCase>& info) {
-		return info.param.testName;
-	}
-);
+INSTANTIATE_TEST_SUITE_P(AllErrors, XmlTemplateErrorTest, ::testing::ValuesIn(testCases),
+	[](const ::testing::TestParamInfo<ErrorTestCase> &info) { return info.param.testName; });
 
-INSTANTIATE_TEST_SUITE_P(
-	AllErrors,
-	XmlTemplateParserErrorTest,
-	::testing::ValuesIn(parserTestCases),
-	[](const ::testing::TestParamInfo<ErrorTestCase>& info) {
-		return info.param.testName;
-	}
-);
+INSTANTIATE_TEST_SUITE_P(AllErrors, XmlTemplateParserErrorTest, ::testing::ValuesIn(parserTestCases),
+	[](const ::testing::TestParamInfo<ErrorTestCase> &info) { return info.param.testName; });
 
-INSTANTIATE_TEST_SUITE_P(
-	AllErrors,
-	XmlTemplateSubstitutionErrorTest,
-	::testing::ValuesIn(substitutionTestCases),
-	[](const ::testing::TestParamInfo<SubstitutionErrorTestCase>& info) {
-		return info.param.testName;
-	}
-);
+INSTANTIATE_TEST_SUITE_P(AllErrors, XmlTemplateSubstitutionErrorTest, ::testing::ValuesIn(substitutionTestCases),
+	[](const ::testing::TestParamInfo<SubstitutionErrorTestCase> &info) { return info.param.testName; });
 
-INSTANTIATE_TEST_SUITE_P(
-	AllErrors,
-	XmlTemplateParserSubstitutionErrorTest,
+INSTANTIATE_TEST_SUITE_P(AllErrors, XmlTemplateParserSubstitutionErrorTest,
 	::testing::ValuesIn(substitutionParserTestCases),
-	[](const ::testing::TestParamInfo<SubstitutionErrorTestCase>& info) {
-		return info.param.testName;
-	}
-);
+	[](const ::testing::TestParamInfo<SubstitutionErrorTestCase> &info) { return info.param.testName; });

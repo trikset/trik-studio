@@ -18,16 +18,13 @@
 
 using namespace generatorBase::simple;
 
-GetButtonCodeGenerator::GetButtonCodeGenerator(const qrRepo::RepoApi &repo
-		, GeneratorCustomizer &customizer
-		, const qReal::Id &id
-		, QObject *parent)
-	: BindingGenerator(repo, customizer, id, "wait/buttonCode.t"
-			, { Binding::createConverting("@@VARIABLE@@", "Variable"
-						, customizer.factory()->functionBlockConverter(id, "Variable"))
-				, Binding::createConverting("@@WAIT@@", "Wait"
-						, customizer.factory()->boolPropertyConverter(id, "Wait", false)) }
-			, parent)
+GetButtonCodeGenerator::GetButtonCodeGenerator(const qrRepo::RepoApi &repo, GeneratorCustomizer &customizer,
+	const qReal::Id &id, QObject *parent)
+	: BindingGenerator(repo, customizer, id, "wait/buttonCode.t",
+		  {Binding::createConverting("@@VARIABLE@@", "Variable",
+			   customizer.factory()->functionBlockConverter(id, "Variable")),
+			  Binding::createConverting("@@WAIT@@", "Wait",
+				  customizer.factory()->boolPropertyConverter(id, "Wait", false))},
+		  parent)
 {
 }
-

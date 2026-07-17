@@ -19,20 +19,19 @@ using namespace ev3::simple;
 using namespace generatorBase::simple;
 using namespace qReal;
 
-SendMailGenerator::SendMailGenerator(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, const Id &id
-		, QObject *parent)
+SendMailGenerator::SendMailGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+	const Id &id, QObject *parent)
 	: BindingGenerator(repo, customizer, id, "mailboxes/writeMail.t", QList<Binding *>(), parent)
 {
 	auto mGeneratorFactory = dynamic_cast<Ev3GeneratorFactory *>(parent);
 	Binding::ConverterInterface *nameNormalizer = customizer.factory()->nameNormalizerConverter();
-	const QString receiverName =mRepo.property(mId, "ReceiverName").toString();
+	const QString receiverName = mRepo.property(mId, "ReceiverName").toString();
 	const QString mailboxName = nameNormalizer->convert(mRepo.property(mId, "ReceiverMailBoxName").toString());
 	const QString type = mRepo.property(mId, "MsgType").toString();
 	if (!mGeneratorFactory->mailboxes().tryRegisterWriteMailbox(mailboxName, type)) {
 		mGeneratorFactory->reportError(
-					Ev3GeneratorFactory::tr("There is already mailbox with same name, but different msg type") , mId);
+			Ev3GeneratorFactory::tr("There is already mailbox with same name, but different msg type"),
+			mId);
 	}
 
 	addBinding(Binding::createStatic("@@RECEIVER_NAME@@", receiverName));

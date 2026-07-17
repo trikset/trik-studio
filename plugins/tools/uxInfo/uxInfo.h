@@ -41,7 +41,7 @@ public:
 	/// @param elementName name of the element associated with this error.
 	/// @param message error message.
 	static void reportErrors(QString const &type, QString const &editorName, QString const &elementName,
-			QString const &message);
+		QString const &message);
 
 	/// Add to ux files record about total time of current session.
 	/// @param totalTime total session time.
@@ -81,7 +81,7 @@ private:
 	bool writeData(QTextStream const &stream);
 	void reportCreationOfElements(QString const &editorName, QString const elementName);
 	void reportErrorsOfElements(QString const &type, QString const &editorName, QString const &elementName,
-			QString const &message);
+		QString const &message);
 	void reportTotalTimeOfExec(QString const &totalTime);
 	void reportMenuElementsUsing(QString const &elementName, QString const &status = "none");
 	void reportMouseClickPosition(QPoint const &pos);
@@ -92,7 +92,7 @@ private:
 	void closeUXFiles();
 	QString currentDateTime();
 
-	static UXInfo* object;
+	static UXInfo *object;
 	bool mStatus;
 	bool mNotEnoughDiskSpace;
 

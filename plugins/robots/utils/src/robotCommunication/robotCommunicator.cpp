@@ -38,19 +38,21 @@ RobotCommunicator::~RobotCommunicator()
 void RobotCommunicator::send(QObject *addressee, const QByteArray &buffer, const unsigned responseSize)
 {
 	auto blockingConnectionType = mRobotCommunicationThreadObject->thread() == QThread::currentThread()
-			? Qt::DirectConnection : Qt::BlockingQueuedConnection;
-	QMetaObject::invokeMethod(mRobotCommunicationThreadObject.get(), [&](){
-		mRobotCommunicationThreadObject->send(addressee, buffer, responseSize);},
-	blockingConnectionType);
+	                                      ? Qt::DirectConnection
+	                                      : Qt::BlockingQueuedConnection;
+	QMetaObject::invokeMethod(mRobotCommunicationThreadObject.get(), [&]() {
+		mRobotCommunicationThreadObject->send(addressee, buffer, responseSize);
+	}, blockingConnectionType);
 }
 
 void RobotCommunicator::send(const QByteArray &buffer, const unsigned responseSize, QByteArray &outputBuffer)
 {
 	auto blockingConnectionType = mRobotCommunicationThreadObject->thread() == QThread::currentThread()
-			? Qt::DirectConnection : Qt::BlockingQueuedConnection;
-	QMetaObject::invokeMethod(mRobotCommunicationThreadObject.get(), [&](){
-		mRobotCommunicationThreadObject->send(buffer, responseSize, outputBuffer);},
-	blockingConnectionType);
+	                                      ? Qt::DirectConnection
+	                                      : Qt::BlockingQueuedConnection;
+	QMetaObject::invokeMethod(mRobotCommunicationThreadObject.get(), [&]() {
+		mRobotCommunicationThreadObject->send(buffer, responseSize, outputBuffer);
+	}, blockingConnectionType);
 }
 
 void RobotCommunicator::connect()
@@ -69,7 +71,7 @@ QSharedPointer<RobotCommunicationThreadInterface> RobotCommunicator::currentComm
 }
 
 void RobotCommunicator::setRobotCommunicationThreadObject(
-		const QSharedPointer<RobotCommunicationThreadInterface> &robotCommunication)
+	const QSharedPointer<RobotCommunicationThreadInterface> &robotCommunication)
 {
 	if (mRobotCommunicationThreadObject) {
 		mRobotCommunicationThreadObject->allowLongJobs(false);
@@ -82,14 +84,14 @@ void RobotCommunicator::setRobotCommunicationThreadObject(
 	mRobotCommunicationThreadObject->allowLongJobs();
 	mRobotCommunicationThread.start();
 
-	QObject::connect(&*mRobotCommunicationThreadObject, &RobotCommunicationThreadInterface::connected
-			, this, &RobotCommunicator::connected);
-	QObject::connect(&*mRobotCommunicationThreadObject, &RobotCommunicationThreadInterface::disconnected
-			, this, &RobotCommunicator::disconnected);
-	QObject::connect(&*mRobotCommunicationThreadObject, &RobotCommunicationThreadInterface::response
-			, this, &RobotCommunicator::response);
-	QObject::connect(&*mRobotCommunicationThreadObject, &RobotCommunicationThreadInterface::errorOccured
-			, this, &RobotCommunicator::errorOccured);
-	QObject::connect(&*mRobotCommunicationThreadObject, &RobotCommunicationThreadInterface::messageArrived
-			, this, &RobotCommunicator::messageArrived);
+	QObject::connect(&*mRobotCommunicationThreadObject, &RobotCommunicationThreadInterface::connected, this,
+		&RobotCommunicator::connected);
+	QObject::connect(&*mRobotCommunicationThreadObject, &RobotCommunicationThreadInterface::disconnected, this,
+		&RobotCommunicator::disconnected);
+	QObject::connect(&*mRobotCommunicationThreadObject, &RobotCommunicationThreadInterface::response, this,
+		&RobotCommunicator::response);
+	QObject::connect(&*mRobotCommunicationThreadObject, &RobotCommunicationThreadInterface::errorOccured, this,
+		&RobotCommunicator::errorOccured);
+	QObject::connect(&*mRobotCommunicationThreadObject, &RobotCommunicationThreadInterface::messageArrived, this,
+		&RobotCommunicator::messageArrived);
 }

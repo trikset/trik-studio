@@ -76,8 +76,8 @@ public:
 	QVariant property(const qReal::Id &id, const QString &name) const;
 	QMap<QString, QVariant> properties(const qReal::Id &id) const;
 	void setProperties(const qReal::Id &id, QMap<QString, QVariant> const &properties);
-	bool hasProperty(const qReal::Id &id, const QString &name, bool sensitivity = false
-			, bool regExpression = false) const;
+	bool hasProperty(const qReal::Id &id, const QString &name, bool sensitivity = false,
+		bool regExpression = false) const;
 	void removeProperty(const qReal::Id &id, const QString &name);
 	QMapIterator<QString, QVariant> propertiesIterator(const qReal::Id &id) const;
 
@@ -136,12 +136,8 @@ public:
 	/// @param partIndex - index of a graphical part.
 	/// @param propertyName - name of a property which value we want to set.
 	/// @param value - new value of a property.
-	void setGraphicalPartProperty(
-			const qReal::Id &id
-			, int partIndex
-			, const QString &propertyName
-			, const QVariant &value
-			);
+	void setGraphicalPartProperty(const qReal::Id &id, int partIndex, const QString &propertyName,
+		const QVariant &value);
 
 	/// Returns a list of keys by that stored some meta-information.
 	QStringList metaInformationKeys() const;
@@ -165,8 +161,8 @@ private:
 	void addChildrenToRootObject();
 
 	qReal::IdList idsOfAllChildrenOf(const qReal::Id &id) const;
-	QList<Object*> allChildrenOf(const qReal::Id &id) const;
-	QList<Object*> allChildrenOfWithLogicalId(const qReal::Id &id) const;
+	QList<Object *> allChildrenOf(const qReal::Id &id) const;
+	QList<Object *> allChildrenOfWithLogicalId(const qReal::Id &id) const;
 
 	QHash<qReal::Id, Object *> mObjects;
 	QHash<QString, QVariant> mMetaInfo;

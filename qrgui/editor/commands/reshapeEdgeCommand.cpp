@@ -71,16 +71,12 @@ void ReshapeEdgeCommand::stopTracking()
 
 bool ReshapeEdgeCommand::somethingChanged() const
 {
-	return mOldConfiguration != mNewConfiguration
-			|| mOldPos != mNewPos
-			|| mOldSrc != mNewSrc
-			|| mOldDst != mNewDst
-			|| mOldFromPort != mNewFromPort
-			|| mOldToPort != mNewToPort;
+	return mOldConfiguration != mNewConfiguration || mOldPos != mNewPos || mOldSrc != mNewSrc || mOldDst != mNewDst
+	       || mOldFromPort != mNewFromPort || mOldToPort != mNewToPort;
 }
 
-void ReshapeEdgeCommand::saveConfiguration(QPolygonF &target, Id &src, Id &dst
-		, QPointF &pos, qreal &fromPort, qreal &toPort)
+void ReshapeEdgeCommand::saveConfiguration(QPolygonF &target, Id &src, Id &dst, QPointF &pos, qreal &fromPort,
+	qreal &toPort)
 {
 	if (mEdge) {
 		target = mEdge->line();
@@ -92,8 +88,8 @@ void ReshapeEdgeCommand::saveConfiguration(QPolygonF &target, Id &src, Id &dst
 	}
 }
 
-void ReshapeEdgeCommand::applyConfiguration(const QPolygonF &configuration
-		, const Id &src, const Id &dst, QPointF pos, qreal fromPort, qreal toPort)
+void ReshapeEdgeCommand::applyConfiguration(const QPolygonF &configuration, const Id &src, const Id &dst, QPointF pos,
+	qreal fromPort, qreal toPort)
 {
 	if (!mEdge) {
 		return;

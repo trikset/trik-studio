@@ -27,15 +27,12 @@ class XmlTemplateMock : public twoDModel::templates::details::XmlTemplate
 {
 public:
 	using XmlTemplate::XmlTemplate;
-	MOCK_METHOD(void, addDeclarationError,
-		    (const QString&, int, TemplateParseErrorCode), (override));
-	MOCK_METHOD(void, mockAddSubstitutionError,
-			(const QString&, int, TemplateSubstitutionErrorCode));
-	void addSubstitutionError(const QString& message, int line,
-				TemplateSubstitutionErrorCode code) override
+	MOCK_METHOD(void, addDeclarationError, (const QString &, int, TemplateParseErrorCode), (override));
+	MOCK_METHOD(void, mockAddSubstitutionError, (const QString &, int, TemplateSubstitutionErrorCode));
+	void addSubstitutionError(const QString &message, int line, TemplateSubstitutionErrorCode code) override
 	{
-	    XmlTemplate::addSubstitutionError(message, line, code);
-	    mockAddSubstitutionError(message, line, code);
+		XmlTemplate::addSubstitutionError(message, line, code);
+		mockAddSubstitutionError(message, line, code);
 	}
 };
 
@@ -43,8 +40,7 @@ class XmlTemplateParserMock : public twoDModel::templates::details::TemplatesPar
 {
 public:
 	using TemplatesParser::TemplatesParser;
-	MOCK_METHOD(void, error,
-		    (const QString&, int, ParserErrorCode, const QString&), (override));
+	MOCK_METHOD(void, error, (const QString &, int, ParserErrorCode, const QString &), (override));
 };
 
 class XmlTemplateProcessorMock : public twoDModel::templates::details::TemplatesProcessor
@@ -52,8 +48,7 @@ class XmlTemplateProcessorMock : public twoDModel::templates::details::Templates
 public:
 	using TemplatesProcessor::TemplatesProcessor;
 	using ExpansionContext = TemplatesProcessor::ExpansionContext;
-	MOCK_METHOD(void, error,
-		    (const QString&, int, const ExpansionContext &, SubstitutionErrorCode), (override));
+	MOCK_METHOD(void, error, (const QString &, int, const ExpansionContext &, SubstitutionErrorCode), (override));
 };
 }
 // clazy:enable

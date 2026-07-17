@@ -35,8 +35,8 @@ public:
 	/// @param column - column number.
 	/// @param id - id of a block where the code is located.
 	/// @param propertyName - name of a property in a block which uses this code.
-	Connection(int absolutePosition, int line, int column, const qReal::Id &id = qReal::Id()
-			, const QString &propertyName = "");
+	Connection(int absolutePosition, int line, int column, const qReal::Id &id = qReal::Id(),
+		const QString &propertyName = "");
 
 	/// Constructor for invalid connection object.
 	Connection();
@@ -65,20 +65,21 @@ private:
 	QString mPropertyName;
 };
 
-inline bool operator ==(const Connection &a, const Connection &b)
+inline bool operator==(const Connection &a, const Connection &b)
 {
 	return a.absolutePosition() == b.absolutePosition() && a.line() == b.line() && a.column() == b.column();
 }
 
-inline bool operator <(const Connection &a, const Connection &b)
+inline bool operator<(const Connection &a, const Connection &b)
 {
 	return a.absolutePosition() < b.absolutePosition();
 }
 
 /// Output operator for gtest.
-inline ::std::ostream& operator<<(::std::ostream& os, const Connection &connection)
+inline ::std::ostream &operator<<(::std::ostream &os, const Connection &connection)
 {
-	return os << "(" << connection.absolutePosition() <<", " << connection.line() << ", " << connection.column() << ")";
+	return os << "(" << connection.absolutePosition() << ", " << connection.line() << ", " << connection.column()
+	          << ")";
 }
 
 }

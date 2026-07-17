@@ -25,14 +25,13 @@ namespace real {
 namespace parts {
 
 class ROBOTS_TRIK_KIT_INTERPRETER_COMMON_EXPORT Accelerometer
-		: public kitBase::robotModel::robotParts::AccelerometerSensor
+	: public kitBase::robotModel::robotParts::AccelerometerSensor
 {
 	Q_OBJECT
 
 public:
-	Accelerometer(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port
-			, utils::robotCommunication::TcpRobotCommunicator &robotCommunicator);
+	Accelerometer(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+		utils::robotCommunication::TcpRobotCommunicator &robotCommunicator);
 
 	void read() override;
 

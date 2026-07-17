@@ -19,19 +19,12 @@
 using namespace pioneer::lua;
 using namespace generatorBase::simple;
 
-PioneerSetGPIO::PioneerSetGPIO(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, const qReal::Id &id
-		, QObject *parent)
-	: BindingGenerator(repo, customizer, id, repo.property(id, "State").toBool()
-				? "quadcopterCommands/gpioOn.t"
-				: "quadcopterCommands/gpioOff.t"
-		, {
-			Binding::createConverting(
-					"@@PIN_NAME@@"
-					, "PinName"
-					, customizer.factory()->stringPropertyConverter(id, "PinName"))
-			}
-		, parent)
+PioneerSetGPIO::PioneerSetGPIO(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+	const qReal::Id &id, QObject *parent)
+	: BindingGenerator(repo, customizer, id,
+		  repo.property(id, "State").toBool() ? "quadcopterCommands/gpioOn.t" : "quadcopterCommands/gpioOff.t",
+		  {Binding::createConverting("@@PIN_NAME@@", "PinName",
+			  customizer.factory()->stringPropertyConverter(id, "PinName"))},
+		  parent)
 {
 }

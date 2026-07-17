@@ -30,8 +30,7 @@ qReal::interpretation::Block *TrikV6BlocksFactory::produceBlock(const qReal::Id 
 		// AngularServo and EnginesForward are synonyms since angular and radial servos are controlled the same way.
 		return new details::TrikEnginesForwardBlock(mRobotModelManager->model());
 	} else if (elementMetatypeIs(element, "TrikV4ClearEncoder")
-			|| elementMetatypeIs(element, "TrikV6ClearEncoder"))
-	{
+		   || elementMetatypeIs(element, "TrikV6ClearEncoder")) {
 		return new ClearEncoderBlock(mRobotModelManager->model());
 	} else if (elementMetatypeIs(element, "TrikWaitForEncoder")) {
 		return new WaitForEncoderBlock(mRobotModelManager->model());
@@ -46,11 +45,7 @@ qReal::IdList TrikV6BlocksFactory::providedBlocks() const
 
 	result << TrikBlocksFactoryBase::providedBlocks();
 
-	result
-			<< id("TrikV6ClearEncoder")
-			<< id("TrikAngularServo")
-			<< id("TrikWaitForEncoder")
-	;
+	result << id("TrikV6ClearEncoder") << id("TrikAngularServo") << id("TrikWaitForEncoder");
 
 	return result;
 }

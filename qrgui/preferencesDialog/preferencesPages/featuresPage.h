@@ -17,7 +17,7 @@
 #include "qrgui/preferencesDialog/preferencesPage.h"
 
 namespace Ui {
-	class PreferencesFeaturesPage;
+class PreferencesFeaturesPage;
 }
 
 class PreferencesFeaturesPage : public qReal::gui::PreferencesPage

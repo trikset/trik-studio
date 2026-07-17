@@ -19,9 +19,8 @@
 using namespace generatorBase::converters;
 using namespace qReal;
 
-PortNameConverter::PortNameConverter(const QStringList &pathsToTemplates
-		, QList<kitBase::robotModel::PortInfo> const &ports
-		, qReal::ErrorReporterInterface &errorReporter)
+PortNameConverter::PortNameConverter(const QStringList &pathsToTemplates,
+	QList<kitBase::robotModel::PortInfo> const &ports, qReal::ErrorReporterInterface &errorReporter)
 	: TemplateParametrizedConverter(pathsToTemplates)
 	, mPorts(ports)
 	, mErrorReporter(errorReporter)
@@ -47,7 +46,8 @@ QString PortNameConverter::convert(const QString &portNameOrAlias) const
 	}
 
 	const QString portTemplate = QString("ports/%1.t").arg(portInfo.name());
-	const QString portTemplateExt = QString("ports/%1_%2.t").arg(portInfo.name()
-			, portInfo.direction() == kitBase::robotModel::input ? "in" : "out");
+	const QString portTemplateExt =
+		QString("ports/%1_%2.t")
+			.arg(portInfo.name(), portInfo.direction() == kitBase::robotModel::input ? "in" : "out");
 	return readTemplateIfExists(portTemplateExt, readTemplateIfExists(portTemplate, portInfo.name()));
 }

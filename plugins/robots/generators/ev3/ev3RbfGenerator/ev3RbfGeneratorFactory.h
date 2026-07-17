@@ -24,14 +24,12 @@ class Ev3RbfGeneratorFactory : public Ev3GeneratorFactory
 {
 	Q_OBJECT
 public:
-	Ev3RbfGeneratorFactory(const qrRepo::RepoApi &repo
-			, qReal::ErrorReporterInterface &errorReporter
-			, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
-			, generatorBase::lua::LuaProcessor &luaProcessor
-			, const QString &generatorName);
+	Ev3RbfGeneratorFactory(const qrRepo::RepoApi &repo, qReal::ErrorReporterInterface &errorReporter,
+		const kitBase::robotModel::RobotModelManagerInterface &robotModelManager,
+		generatorBase::lua::LuaProcessor &luaProcessor, const QString &generatorName);
 
-	generatorBase::simple::AbstractSimpleGenerator *labelGenerator(const qReal::Id &id
-			, generatorBase::GeneratorCustomizer &customizer) override;
+	generatorBase::simple::AbstractSimpleGenerator *labelGenerator(const qReal::Id &id,
+		generatorBase::GeneratorCustomizer &customizer) override;
 
 	/// Returns a list of lines of code prepended to some block`s generated code.
 	QStringList additionalCode(const qReal::Id &id) const;

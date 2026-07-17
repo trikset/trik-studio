@@ -27,13 +27,9 @@ class ROBOTS_GENERATOR_EXPORT GotoControlFlowGenerator : public ControlFlowGener
 {
 	Q_OBJECT
 public:
-	GotoControlFlowGenerator(const qrRepo::RepoApi &repo
-			, qReal::ErrorReporterInterface &errorReporter
-			, GeneratorCustomizer &customizer
-			, PrimaryControlFlowValidator &validator
-			, const qReal::Id &diagramId
-			, QObject *parent = nullptr
-			, bool isThisDiagramMain = true);
+	GotoControlFlowGenerator(const qrRepo::RepoApi &repo, qReal::ErrorReporterInterface &errorReporter,
+		GeneratorCustomizer &customizer, PrimaryControlFlowValidator &validator, const qReal::Id &diagramId,
+		QObject *parent = nullptr, bool isThisDiagramMain = true);
 
 	/// Implementation of clone operation for goto generator
 	ControlFlowGeneratorBase *cloneFor(const qReal::Id &diagramId, bool cloneForNewDiagram) override;
@@ -52,7 +48,7 @@ public:
 
 protected:
 	semantics::SimpleNode *produceGotoNode(const qReal::Id &id);
-	void produceNextNodeIfNeeded(const LinkInfo &info, semantics::NonZoneNode * const parent);
+	void produceNextNodeIfNeeded(const LinkInfo &info, semantics::NonZoneNode *const parent);
 	void performGeneration() override;
 };
 

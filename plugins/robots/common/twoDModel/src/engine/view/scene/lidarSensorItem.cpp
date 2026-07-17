@@ -17,14 +17,9 @@
 using namespace twoDModel::view;
 using namespace kitBase::robotModel;
 
-LidarSensorItem::LidarSensorItem(const model::WorldModel &worldModel
-		, graphicsUtils::AbstractCoordinateSystem *metricSystem
-		, model::SensorsConfiguration &configuration
-		, const PortInfo &port
-		, QPair<qreal, int> angleAndRange
-		, const QString &pathToImage
-		, QRect imageSize
-		)
+LidarSensorItem::LidarSensorItem(const model::WorldModel &worldModel,
+	graphicsUtils::AbstractCoordinateSystem *metricSystem, model::SensorsConfiguration &configuration,
+	const PortInfo &port, QPair<qreal, int> angleAndRange, const QString &pathToImage, QRect imageSize)
 	: RangeSensorItem(worldModel, metricSystem, configuration, port, angleAndRange, pathToImage, imageSize)
 {
 }
@@ -33,7 +28,7 @@ QPainterPath LidarSensorItem::scanningRegion() const
 {
 	auto angle = RangeSensorItem::scanningRegion();
 	QTransform rotator;
-	rotator.rotate(mAngle/2);
+	rotator.rotate(mAngle / 2);
 	return rotator.map(angle);
 }
 

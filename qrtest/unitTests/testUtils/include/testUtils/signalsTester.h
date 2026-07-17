@@ -32,10 +32,7 @@ class TEST_UTILS_EXPORT SignalsTester : public QObject
 	Q_OBJECT
 
 public:
-	enum OrderEnum {
-		inOrder = 0
-		, random
-	};
+	enum OrderEnum { inOrder = 0, random };
 
 	/// Constructor.
 	/// @param inOrder - if true, tester fails when signals were emitted in wrong order. Order in which expectSignal()
@@ -51,17 +48,17 @@ public:
 	/// @param signal - pointer to a signal (for example, &QTimer::timeout)
 	/// @param signalName - unique signal name (for example, "timeout"), used to identify a signal and show meaningful
 	///        error messages.
-	template <typename Func>
-	void expectSignal(typename QtPrivate::FunctionPointer<Func>::Object *sender
-			, Func signal, const QString &signalName)
+	template<typename Func>
+	void expectSignal(typename QtPrivate::FunctionPointer<Func>::Object *sender, Func signal,
+		const QString &signalName)
 	{
 		details::FakeSender *fakeSender = new details::FakeSender();
 		connect(sender, signal, fakeSender, &details::FakeSender::receive);
 		mSenders.append(fakeSender);
 
 		mMapper.setMapping(fakeSender, signalName);
-		connect(fakeSender, &details::FakeSender::send, &mMapper
-				, static_cast<void (QSignalMapper::*)()>(&QSignalMapper::map));
+		connect(fakeSender, &details::FakeSender::send, &mMapper,
+			static_cast<void (QSignalMapper::*)()>(&QSignalMapper::map));
 		mSignals.insert(signalName, 0);
 		mSignalsOrder.push_back(signalName);
 	}

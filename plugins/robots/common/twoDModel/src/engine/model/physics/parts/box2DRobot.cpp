@@ -25,8 +25,8 @@
 using namespace twoDModel::model::physics;
 using namespace parts;
 
-Box2DRobot::Box2DRobot(Box2DPhysicsEngine *engine, twoDModel::model::RobotModel * const robotModel
-		, b2Vec2 pos, float angle)
+Box2DRobot::Box2DRobot(Box2DPhysicsEngine *engine, twoDModel::model::RobotModel *const robotModel, b2Vec2 pos,
+	float angle)
 	: mModel(robotModel)
 	, mEngine(engine)
 	, mWorldId(engine->box2DWorldId())
@@ -47,8 +47,7 @@ Box2DRobot::Box2DRobot(Box2DPhysicsEngine *engine, twoDModel::model::RobotModel 
 	for (int i = 0; i < collidingPolygon.size(); ++i) {
 		mPolygon[i] = engine->positionToBox2D(collidingPolygon.at(i) - localCenter);
 	}
-	fixtureDef.density = static_cast<float>(engine->computeDensity(collidingPolygon,
-			mModel->parameters()->mass()));
+	fixtureDef.density = static_cast<float>(engine->computeDensity(collidingPolygon, mModel->parameters()->mass()));
 	b2Hull hull = b2ComputeHull(mPolygon.get(), collidingPolygon.size());
 	b2Polygon polygon = b2MakePolygon(&hull, 0.0f);
 	b2ShapeId polygonShapeId = b2CreatePolygonShape(mBodyId, &fixtureDef, &polygon);
@@ -66,35 +65,36 @@ Box2DRobot::Box2DRobot(Box2DPhysicsEngine *engine, twoDModel::model::RobotModel 
 	}
 }
 
-static void filterJointFactory(b2WorldId worldId,
-				b2BodyId firstBodyId,
-				b2BodyId secondBodyId) {
+static void filterJointFactory(b2WorldId worldId, b2BodyId firstBodyId, b2BodyId secondBodyId)
+{
 	b2FilterJointDef filterJoint = b2DefaultFilterJointDef();
 	filterJoint.base.bodyIdA = firstBodyId;
 	filterJoint.base.bodyIdB = secondBodyId;
 	b2CreateFilterJoint(worldId, &filterJoint);
 }
 
-void Box2DRobot::turnOffCollisionsBetweenWheelAndSensor(b2BodyId sensorId) {
-	for (auto&& wheel: mWheels) {
+void Box2DRobot::turnOffCollisionsBetweenWheelAndSensor(b2BodyId sensorId)
+{
+	for (auto &&wheel : mWheels) {
 		filterJointFactory(mWorldId, sensorId, wheel->getBodyId());
 	}
-	for (auto&& sensor: mSensors) {
+	for (auto &&sensor : mSensors) {
 		filterJointFactory(mWorldId, sensorId, sensor.second->getBodyId());
 	}
 }
 
-Box2DRobot::~Box2DRobot() {
+Box2DRobot::~Box2DRobot()
+{
 	b2DestroyBody(mBodyId);
 	mBodyId = b2_nullBodyId;
 }
 
 void Box2DRobot::stop()
 {
-	b2Body_SetLinearVelocity(mBodyId, b2Vec2{0, 0});
+	b2Body_SetLinearVelocity(mBodyId, b2Vec2 {0, 0});
 	b2Body_SetAngularVelocity(mBodyId, 0);
 
-	for (auto &&wheel: mWheels) {
+	for (auto &&wheel : mWheels) {
 		wheel->stop();
 	}
 }
@@ -116,7 +116,7 @@ bool Box2DRobot::isStopping() const
 
 void Box2DRobot::addSensor(const twoDModel::view::SensorItem *sensor)
 {
-	auto box2DSensorItem = std::make_unique<Box2DItem>(mEngine, sensor, b2Vec2{0, 0}, 0.0f);
+	auto box2DSensorItem = std::make_unique<Box2DItem>(mEngine, sensor, b2Vec2 {0, 0}, 0.0f);
 	turnOffCollisionsBetweenWheelAndSensor(box2DSensorItem->getBodyId());
 	mSensors.emplace(sensor, std::move(box2DSensorItem));
 	reinitSensor(sensor);
@@ -146,10 +146,9 @@ void Box2DRobot::moveToPoint(b2Vec2 destination)
 		b2Body_SetTransform(wheelBodyID, position + shift, wheelRotation);
 	}
 
-	for (auto &&sensor: mSensors) {
+	for (auto &&sensor : mSensors) {
 		b2BodyId sensorBody = sensor.second->getBodyId();
-		b2Body_SetTransform(sensorBody, b2Body_GetPosition(sensorBody) + shift,
-					 b2Body_GetRotation(sensorBody));
+		b2Body_SetTransform(sensorBody, b2Body_GetPosition(sensorBody) + shift, b2Body_GetRotation(sensorBody));
 	}
 }
 
@@ -164,7 +163,7 @@ void Box2DRobot::setRotation(float angle)
 	auto rotation = b2MakeRot(angle);
 	b2Body_SetTransform(mBodyId, b2Body_GetPosition(mBodyId), rotation);
 
-	for (auto&& wheel : mWheels) {
+	for (auto &&wheel : mWheels) {
 		b2BodyId wheelBodyId = wheel->getBodyId();
 
 		const auto totalJoints = b2Body_GetJointCount(wheelBodyId);
@@ -172,7 +171,7 @@ void Box2DRobot::setRotation(float angle)
 		const auto retrieved = b2Body_GetJoints(wheelBodyId, joints.data(), totalJoints);
 
 		std::for_each(joints.begin(), joints.begin() + retrieved,
-				[this, wheelBodyId, rotation](b2JointId jointId) {
+			[this, wheelBodyId, rotation](b2JointId jointId) {
 			const auto bodyB = b2Joint_GetBodyB(jointId);
 			const auto jointType = b2Joint_GetType(jointId);
 
@@ -203,14 +202,13 @@ void Box2DRobot::reinitSensor(const twoDModel::view::SensorItem *sensor)
 	std::vector<b2JointId> joints(jointCapacity);
 	auto jointCount = b2Body_GetJoints(bodyId, joints.data(), jointCapacity);
 
-	std::for_each(joints.begin(), joints.begin() + jointCount,
-		[this](b2JointId jointId) {
-			b2JointType jointType = b2Joint_GetType(jointId);
-			b2BodyId bodyA = b2Joint_GetBodyA(jointId);
+	std::for_each(joints.begin(), joints.begin() + jointCount, [this](b2JointId jointId) {
+		b2JointType jointType = b2Joint_GetType(jointId);
+		b2BodyId bodyA = b2Joint_GetBodyA(jointId);
 
-			if (B2_ID_EQUALS(mBodyId, bodyA) && jointType == b2_weldJoint) {
-				b2DestroyJoint(jointId);
-			}
+		if (B2_ID_EQUALS(mBodyId, bodyA) && jointType == b2_weldJoint) {
+			b2DestroyJoint(jointId);
+		}
 	});
 
 	QPolygonF collidingPolygon = sensor->collidingPolygon();
@@ -238,7 +236,9 @@ void Box2DRobot::reinitSensor(const twoDModel::view::SensorItem *sensor)
 
 void Box2DRobot::reinitSensors()
 {
-	for (auto &&sensor : mSensors) { reinitSensor(sensor.first); }
+	for (auto &&sensor : mSensors) {
+		reinitSensor(sensor.first);
+	}
 }
 
 void Box2DRobot::applyForceToCenter(b2Vec2 force, bool wake)
@@ -261,21 +261,23 @@ const QPolygonF &Box2DRobot::getDebuggingPolygon() const
 	return mDebuggingDrawPolygon;
 }
 
-const std::unordered_map<const twoDModel::view::SensorItem*, std::unique_ptr<Box2DItem>> &Box2DRobot::getSensors() const
+const std::unordered_map<const twoDModel::view::SensorItem *, std::unique_ptr<Box2DItem>> &
+Box2DRobot::getSensors() const
 {
 	return mSensors;
 }
 
-void Box2DRobot::connectWheels() {
-	QPointF leftUpCorner = QPointF(-mModel->parameters()->size().width() / 2,
-				       -mModel->parameters()->size().height() / 2);
+void Box2DRobot::connectWheels()
+{
+	QPointF leftUpCorner =
+		QPointF(-mModel->parameters()->size().width() / 2, -mModel->parameters()->size().height() / 2);
 	///@todo: adapt it for more than 2 wheels
 	QPointF posLeftWheelFromRobot = mModel->parameters()->wheelsPosition().first();
 	QPointF posRightWheelFromRobot = mModel->parameters()->wheelsPosition().last();
-	b2Vec2 posLeftWheel = b2Body_GetWorldPoint(
-				mBodyId, mEngine->positionToBox2D(posLeftWheelFromRobot + leftUpCorner));
-	b2Vec2 posRightWheel =  b2Body_GetWorldPoint(
-				mBodyId, mEngine->positionToBox2D(posRightWheelFromRobot + leftUpCorner));
+	b2Vec2 posLeftWheel =
+		b2Body_GetWorldPoint(mBodyId, mEngine->positionToBox2D(posLeftWheelFromRobot + leftUpCorner));
+	b2Vec2 posRightWheel =
+		b2Body_GetWorldPoint(mBodyId, mEngine->positionToBox2D(posRightWheelFromRobot + leftUpCorner));
 	auto angle = b2Body_GetRotation(mBodyId);
 	auto leftWheel = std::make_unique<Box2DWheel>(mModel, mEngine, posLeftWheel, angle, *this);
 	auto rightWheel = std::make_unique<Box2DWheel>(mModel, mEngine, posRightWheel, angle, *this);
@@ -285,7 +287,8 @@ void Box2DRobot::connectWheels() {
 	mWheels.emplace_back(std::move(rightWheel));
 }
 
-void Box2DRobot::connectWheel(Box2DWheel &wheel){
+void Box2DRobot::connectWheel(Box2DWheel &wheel)
+{
 	b2RevoluteJointDef revDef = b2DefaultRevoluteJointDef();
 	revDef.base.bodyIdA = wheel.getBodyId();
 	revDef.base.bodyIdB = mBodyId;
@@ -307,9 +310,7 @@ void Box2DRobot::connectSensor(const Box2DItem &sensor)
 	jointDef.base.bodyIdB = sensor.getBodyId();
 	jointDef.base.localFrameA.p = b2Body_GetLocalCenterOfMass(mBodyId);
 	jointDef.base.localFrameA.q = b2MakeRot(0.0f);
-	jointDef.base.localFrameB.p =
-			b2Body_GetLocalPoint(sensor.getBodyId(),
-					     b2Body_GetWorldCenterOfMass(mBodyId));
+	jointDef.base.localFrameB.p = b2Body_GetLocalPoint(sensor.getBodyId(), b2Body_GetWorldCenterOfMass(mBodyId));
 	jointDef.base.localFrameB.q = b2MakeRot(0.0f);
 	jointDef.linearDampingRatio = 1.0f;
 	jointDef.angularDampingRatio = 1.0f;

@@ -24,10 +24,8 @@ class GeoTakeoffGenerator : public generatorBase::simple::BindingGenerator
 {
 	Q_OBJECT
 public:
-	GeoTakeoffGenerator(const qrRepo::RepoApi &repo
-			, generatorBase::GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent);
+	GeoTakeoffGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+		const qReal::Id &id, QObject *parent);
 };
 }
 }

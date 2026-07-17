@@ -26,14 +26,9 @@ class LidarSensorItem : public RangeSensorItem
 	Q_INTERFACES(QGraphicsItem)
 
 public:
-	LidarSensorItem(const model::WorldModel &worldModel
-	                , graphicsUtils::AbstractCoordinateSystem *metricSystem
-			, model::SensorsConfiguration &configuration
-			, const kitBase::robotModel::PortInfo &port
-			, QPair<qreal, int> physicalParams
-			, const QString &pathToImage
-			, QRect imageSize
-			);
+	LidarSensorItem(const model::WorldModel &worldModel, graphicsUtils::AbstractCoordinateSystem *metricSystem,
+		model::SensorsConfiguration &configuration, const kitBase::robotModel::PortInfo &port,
+		QPair<qreal, int> physicalParams, const QString &pathToImage, QRect imageSize);
 
 protected:
 	QPainterPath scanningRegion() const override;

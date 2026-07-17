@@ -46,6 +46,7 @@ public Q_SLOTS:
 
 	/// Configures this ruller to work with the given graphics view.
 	void setScene(QGraphicsView *scene);
+
 private:
 	void paintEvent(QPaintEvent *event) override;
 
@@ -58,7 +59,7 @@ private:
 	QRectF textBoundingRect(const QString &text) const;
 	Qt::Orientation mOrientation;
 	QSharedPointer<twoDModel::model::SizeUnit> mSizeUnit;
-	QGraphicsView *mView {};  // Doesn`t take owership
+	QGraphicsView *mView {}; // Doesn`t take owership
 	QFont mFont;
 };
 

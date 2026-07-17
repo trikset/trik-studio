@@ -34,7 +34,7 @@ void ClearEncoderBlock::run()
 	// Emitting done() immediately will switch current block right during SensorVariablesUpdater
 	// doing his job. This may cause bad side effects.
 	// Without it, clearEncoder effects may be delayed
-	QTimer::singleShot(0, this,  &ClearEncoderBlock::doneNextBlock);
+	QTimer::singleShot(0, this, &ClearEncoderBlock::doneNextBlock);
 }
 
 void ClearEncoderBlock::doneNextBlock()
@@ -56,8 +56,8 @@ QList<robotParts::EncoderSensor *> ClearEncoderBlock::parsePorts()
 {
 	QList<robotParts::EncoderSensor *> result;
 	for (const auto &port : stringProperty("Ports").split(',', QString::SkipEmptyParts)) {
-		const auto encoder = RobotModelUtils::findDevice<robotParts::EncoderSensor>(
-				mRobotModel, port.trimmed());
+		const auto encoder =
+			RobotModelUtils::findDevice<robotParts::EncoderSensor>(mRobotModel, port.trimmed());
 
 		if (encoder) {
 			result << encoder;

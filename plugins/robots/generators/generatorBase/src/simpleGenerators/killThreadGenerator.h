@@ -24,10 +24,8 @@ class KillThreadGenerator : public BindingGenerator
 {
 	Q_OBJECT
 public:
-	KillThreadGenerator(const qrRepo::RepoApi &repo
-			, GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent);
+	KillThreadGenerator(const qrRepo::RepoApi &repo, GeneratorCustomizer &customizer, const qReal::Id &id,
+		QObject *parent);
 };
 
 }

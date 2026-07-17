@@ -19,13 +19,11 @@
 using namespace trik::simple;
 using namespace generatorBase::simple;
 
-ReadLidarGenerator::ReadLidarGenerator(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, const qReal::Id &id
-		, QObject *parent)
-	: BindingGenerator(repo, customizer, id, "function.t"
-		, { Binding::createStatic("@@BODY@@"
-				, repo.property(id, "variable").toString() + " = brick.lidar().read()") }
-		, parent)
+ReadLidarGenerator::ReadLidarGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+	const qReal::Id &id, QObject *parent)
+	: BindingGenerator(repo, customizer, id, "function.t",
+		  {Binding::createStatic("@@BODY@@",
+			  repo.property(id, "variable").toString() + " = brick.lidar().read()")},
+		  parent)
 {
 }

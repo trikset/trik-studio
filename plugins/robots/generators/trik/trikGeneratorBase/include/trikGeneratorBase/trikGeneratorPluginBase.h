@@ -32,16 +32,15 @@ class ROBOTS_TRIK_GENERATOR_BASE_EXPORT TrikGeneratorPluginBase : public generat
 	Q_OBJECT
 
 public:
-	TrikGeneratorPluginBase(kitBase::robotModel::RobotModelInterface * const robotModel
-			, const QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> &blocksFactory
-			);
+	TrikGeneratorPluginBase(kitBase::robotModel::RobotModelInterface *const robotModel,
+		const QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> &blocksFactory);
 
 	~TrikGeneratorPluginBase() override;
 
 	QList<kitBase::robotModel::RobotModelInterface *> robotModels() override;
 
 	QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> blocksFactoryFor(
-			const kitBase::robotModel::RobotModelInterface *model) override;
+		const kitBase::robotModel::RobotModelInterface *model) override;
 
 	QList<kitBase::AdditionalPreferences *> settingsWidgets() override;
 

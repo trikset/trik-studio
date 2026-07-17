@@ -16,11 +16,8 @@
 
 using namespace pioneer::lua;
 
-PioneerGeneratorRobotModel::PioneerGeneratorRobotModel(const QString &kitId
-		, const QString &robotId
-		, const QString &name
-		, const QString &friendlyName
-		, int priority)
+PioneerGeneratorRobotModel::PioneerGeneratorRobotModel(const QString &kitId, const QString &robotId,
+	const QString &name, const QString &friendlyName, int priority)
 	: kitBase::robotModel::CommonRobotModel(kitId, robotId)
 	, mName(name)
 	, mFriendlyName(friendlyName)

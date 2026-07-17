@@ -36,67 +36,49 @@ const QString restoreTrikGuiShPermissions = "call chmod a+x /etc/trik/trikGui.sh
 
 const QString restartTrikGui = "call /sbin/reboot";
 
-const QStringList commands = {
-		createTrikDirectory
-		, removePermissions
-		, killTrikGui
-		, moveCommand
-		, restorePermissions
-		, replaceSystemConfig
-		, replaceModelConfig
-		, replaceTrikGuiSh
-		, restoreTrikGuiShPermissions
-		, restartTrikGui
-};
+const QStringList commands = {createTrikDirectory, removePermissions, killTrikGui, moveCommand, restorePermissions,
+	replaceSystemConfig, replaceModelConfig, replaceTrikGuiSh, restoreTrikGuiShPermissions, restartTrikGui};
 
 #else
 
 const QString preCopyCommand = "ssh -v -oConnectTimeout=%SSH_TIMEOUT%s -oStrictHostKeyChecking=no "
-		"-oUserKnownHostsFile=/dev/null root@%IP% \""
-		"mkdir -p /home/root/trik; "
-		"chmod a-x trik/trik*; "
-		"killall -q trikGui"
-		"\"";
+			       "-oUserKnownHostsFile=/dev/null root@%IP% \""
+			       "mkdir -p /home/root/trik; "
+			       "chmod a-x trik/trik*; "
+			       "killall -q trikGui"
+			       "\"";
 
 const QString copyCommand = "scp -r -v -oConnectTimeout=%SSH_TIMEOUT%s -oStrictHostKeyChecking=no "
-		"-oUserKnownHostsFile=/dev/null %PATH%/* root@%IP%:/home/root/trik";
+			    "-oUserKnownHostsFile=/dev/null %PATH%/* root@%IP%:/home/root/trik";
 
-const QString postCopyCommand = "ssh -v -oConnectTimeout=%SSH_TIMEOUT%s -oStrictHostKeyChecking=no "
-		"-oUserKnownHostsFile=/dev/null root@%IP% \""
-		"chmod a+x trik/trik*; "
-		// To make trikRuntime work with old case we use old configs supplied with trikRuntime itself.
-		"mv trik/system-config-v6.xml trik/system-config.xml; "
-		"mv trik/model-config-v6.xml trik/model-config.xml; "
-		"mv /home/root/trik/trikGui.sh /etc/trik/trikGui.sh; "
-		"mv chmod a+x /etc/trik/trikGui.sh; "
-		"/sbin/reboot"
-		"\"";
+const QString postCopyCommand =
+	"ssh -v -oConnectTimeout=%SSH_TIMEOUT%s -oStrictHostKeyChecking=no "
+	"-oUserKnownHostsFile=/dev/null root@%IP% \""
+	"chmod a+x trik/trik*; "
+	// To make trikRuntime work with old case we use old configs supplied with trikRuntime itself.
+	"mv trik/system-config-v6.xml trik/system-config.xml; "
+	"mv trik/model-config-v6.xml trik/model-config.xml; "
+	"mv /home/root/trik/trikGui.sh /etc/trik/trikGui.sh; "
+	"mv chmod a+x /etc/trik/trikGui.sh; "
+	"/sbin/reboot"
+	"\"";
 
-const QStringList commands = {
-		preCopyCommand
-		, copyCommand
-		, postCopyCommand
-};
+const QStringList commands = {preCopyCommand, copyCommand, postCopyCommand};
 
 #endif
 
 TrikV6RuntimeUploaderPlugin::TrikV6RuntimeUploaderPlugin()
-	: mUploaderTool(
-			tr("Upload Runtime for TRIK 2014")
-			, ":/trik/images/flashRobot.svg"
-			, "trikKit"
-			, commands
-			, QObject::tr("Attention! Started to download the runtime. This can take a minute or two."
-					" Please do not turn off the robot.")
-			, [](){ return qReal::SettingsManager::value("TrikTcpServer").toString(); }
-			)
+	: mUploaderTool(tr("Upload Runtime for TRIK 2014"), ":/trik/images/flashRobot.svg", "trikKit", commands,
+		  QObject::tr("Attention! Started to download the runtime. This can take a minute or two."
+			      " Please do not turn off the robot."),
+		  []() { return qReal::SettingsManager::value("TrikTcpServer").toString(); })
 {
 }
 
 void TrikV6RuntimeUploaderPlugin::init(const qReal::PluginConfigurator &configurator)
 {
-	mUploaderTool.init(configurator.mainWindowInterpretersInterface()
-			, qReal::PlatformInfo::invariantSettingsPath("pathToTrikRuntime"));
+	mUploaderTool.init(configurator.mainWindowInterpretersInterface(),
+		qReal::PlatformInfo::invariantSettingsPath("pathToTrikRuntime"));
 }
 
 QList<qReal::ActionInfo> TrikV6RuntimeUploaderPlugin::actions()

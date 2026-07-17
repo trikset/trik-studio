@@ -35,10 +35,8 @@ IdList ValuesSerializer::deserializeIdList(const QDomElement &elem, const QStrin
 
 	QDomElement elements = list.at(0).toElement();
 
-	for (QDomElement element = elements.firstChildElement();
-			!element.isNull();
-			element = element.nextSiblingElement())
-	{
+	for (QDomElement element = elements.firstChildElement(); !element.isNull();
+		element = element.nextSiblingElement()) {
 		QString elementStr = element.attribute("id", "");
 		if (elementStr == "") {
 			QLOG_ERROR() << "Incorrect Child XML node";
@@ -127,7 +125,7 @@ QString ValuesSerializer::serializeQVariant(const QVariant &v)
 			return v.value<qReal::Id>().toString();
 		}
 		// something bad
-	[[fallthrough]];
+		[[fallthrough]];
 	default:
 		Q_ASSERT_X("Unsupported QVariant type." && 0, Q_FUNC_INFO, v.typeName());
 		return "";
@@ -161,15 +159,16 @@ QDomElement ValuesSerializer::serializeIdList(const QString &tagName, const IdLi
 	return result;
 }
 
-QDomElement ValuesSerializer::serializeNamedVariantsMap(const QString &tagName, QMap<QString, QVariant> const &map
-		, QDomDocument &document)
+QDomElement ValuesSerializer::serializeNamedVariantsMap(const QString &tagName, QMap<QString, QVariant> const &map,
+	QDomDocument &document)
 {
 	QDomElement result = document.createElement(tagName);
 
 	for (QMap<QString, QVariant>::const_iterator i = map.constBegin(); i != map.constEnd(); ++i) {
 		const QString typeName = i.value().typeName();
 		if (typeName == "qReal::IdList") {
-			QDomElement list = ValuesSerializer::serializeIdList(i.key(), i.value().value<IdList>(), document);
+			QDomElement list =
+				ValuesSerializer::serializeIdList(i.key(), i.value().value<IdList>(), document);
 			list.setAttribute("type", "qReal::IdList");
 			result.appendChild(list);
 		} else {
@@ -186,10 +185,8 @@ QDomElement ValuesSerializer::serializeNamedVariantsMap(const QString &tagName, 
 
 void ValuesSerializer::deserializeNamedVariantsMap(QMap<QString, QVariant> &map, const QDomElement &element)
 {
-	for (QDomElement property = element.firstChildElement();
-			!property.isNull();
-			property = property.nextSiblingElement())
-	{
+	for (QDomElement property = element.firstChildElement(); !property.isNull();
+		property = property.nextSiblingElement()) {
 		if (property.hasAttribute("type")) {
 			if (property.attribute("type") == "qReal::IdList") {
 				const QString key = property.tagName();

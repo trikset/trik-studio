@@ -22,7 +22,7 @@
 
 using namespace uxInfo;
 
-UXInfo* UXInfo::object = nullptr;
+UXInfo *UXInfo::object = nullptr;
 
 QString const uxDir = "uxInfo";
 QString const elementCreationFileName = "/elementOnSceneCreation.txt";
@@ -110,27 +110,21 @@ void UXInfo::reportCreationOfElements(const QString &editorName, const QString e
 		return;
 	}
 
-	mElementOnSceneCreationStream << mCreationNumber << " "
-			<< editorName << " "
-			<< elementName << " "
-			<< currentDateTime() << "\n";
+	mElementOnSceneCreationStream << mCreationNumber << " " << editorName << " " << elementName << " "
+				      << currentDateTime() << "\n";
 
 	mCreationNumber++;
 }
 
-void UXInfo::reportErrorsOfElements(const QString &type, const QString &editorName, const QString &elementName
-		, const QString &message)
+void UXInfo::reportErrorsOfElements(const QString &type, const QString &editorName, const QString &elementName,
+	const QString &message)
 {
 	if (!writeData(mErrorReporterStream)) {
 		return;
 	}
 
-	mErrorReporterStream << mErrorReporterNumber << " "
-			<< type << " "
-			<< editorName << " "
-			<< elementName << " "
-			<< message << " "
-			<< currentDateTime() << "\n";
+	mErrorReporterStream << mErrorReporterNumber << " " << type << " " << editorName << " " << elementName << " "
+			     << message << " " << currentDateTime() << "\n";
 
 	mErrorReporterNumber++;
 }
@@ -141,9 +135,7 @@ void UXInfo::reportTotalTimeOfExec(QString const &totalTime)
 		return;
 	}
 
-	mTotalTimeStream << "TotalSessionTime: "
-			<< totalTime << " secs Exit code:"
-			<< 0 << "\n";
+	mTotalTimeStream << "TotalSessionTime: " << totalTime << " secs Exit code:" << 0 << "\n";
 }
 
 void UXInfo::reportMenuElementsUsing(const QString &elementName, const QString &status)
@@ -153,10 +145,8 @@ void UXInfo::reportMenuElementsUsing(const QString &elementName, const QString &
 	}
 
 	QString const statusText = (status == "none") ? "" : status + " ";
-	mMenuElementUsingStream << mMenuElementUsingNumber << " "
-			<< elementName << " "
-			<< statusText
-			<< currentDateTime() << "\n";
+	mMenuElementUsingStream << mMenuElementUsingNumber << " " << elementName << " " << statusText
+				<< currentDateTime() << "\n";
 
 	mMenuElementUsingNumber++;
 }
@@ -167,10 +157,8 @@ void UXInfo::reportMouseClickPosition(const QPoint &pos)
 		return;
 	}
 
-	mMouseClickPositionStream << mMouseClickPositionNumber << " ("
-			<< QString::number(pos.x()) << ", "
-			<< QString::number(pos.y()) << ") "
-			<< currentDateTime() << "\n";
+	mMouseClickPositionStream << mMouseClickPositionNumber << " (" << QString::number(pos.x()) << ", "
+				  << QString::number(pos.y()) << ") " << currentDateTime() << "\n";
 
 	mMouseClickPositionNumber++;
 }
@@ -181,11 +169,8 @@ void UXInfo::reportSettingsChangesInfo(const QString &name, const QString &oldVa
 		return;
 	}
 
-	mSettingChangesStream << mSettingChangesNumber << " "
-			<< name << " "
-			<< oldValue << " "
-			<< newValue << " "
-			<< currentDateTime() << "\n";
+	mSettingChangesStream << mSettingChangesNumber << " " << name << " " << oldValue << " " << newValue << " "
+			      << currentDateTime() << "\n";
 
 	mSettingChangesNumber++;
 }
@@ -203,7 +188,7 @@ void UXInfo::reportTestStartedInfo()
 
 	QList<QTextStream *> streamList;
 	streamList << &mElementOnSceneCreationStream << &mErrorReporterStream << &mTotalTimeStream
-			<< &mMenuElementUsingStream << &mMouseClickPositionStream << &mSettingChangesStream;
+		   << &mMenuElementUsingStream << &mMouseClickPositionStream << &mSettingChangesStream;
 
 	QString const now = currentDateTime();
 	for (int i = 0; i < streamList.length(); ++i) {
@@ -219,7 +204,7 @@ void UXInfo::reportTestFinishedInfo()
 
 	QList<QTextStream *> streamList;
 	streamList << &mElementOnSceneCreationStream << &mErrorReporterStream << &mTotalTimeStream
-			<< &mMenuElementUsingStream << &mMouseClickPositionStream << &mSettingChangesStream;
+		   << &mMenuElementUsingStream << &mMouseClickPositionStream << &mSettingChangesStream;
 
 	QString const now = currentDateTime();
 	for (int i = 0; i < streamList.length(); ++i) {
@@ -304,7 +289,7 @@ void UXInfo::reportCreation(const QString &editorName, const QString elementName
 }
 
 void UXInfo::reportErrors(const QString &type, const QString &editorName, const QString &elementName,
-		const QString &message)
+	const QString &message)
 {
 	instance()->reportErrorsOfElements(type, editorName, elementName, message);
 }

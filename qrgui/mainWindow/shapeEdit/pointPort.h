@@ -25,23 +25,23 @@ class PointPort : public Item
 public:
 	PointPort(qreal x, qreal y, Item *parent = nullptr);
 	QRectF boundingRect() const override;
-	void drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr) override;
-	void drawExtractionForItem(QPainter* painter) override;
-	void drawFieldForResizeItem(QPainter* painter) override;
-	void drawScalingRects(QPainter* painter) override;
+	void drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
+	void drawExtractionForItem(QPainter *painter) override;
+	void drawFieldForResizeItem(QPainter *painter) override;
+	void drawScalingRects(QPainter *painter) override;
 	void changeDragState(qreal x, qreal y) override;
 	void changeScalingPointState(qreal x, qreal y) override;
 	void resizeItem(QGraphicsSceneMouseEvent *event) override;
 
-	QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document
-			, const QPoint &topLeftPicture) override;
+	QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document,
+		const QPoint &topLeftPicture) override;
 
 	void setType(const QString &type);
 	QString getType() const;
 
 private:
-	qreal mRadius { -1 };
-	qreal mUnrealRadius { -1 };
+	qreal mRadius {-1};
+	qreal mUnrealRadius {-1};
 	graphicsUtils::PointImpl mPointImpl;
 	QString mType;
 };

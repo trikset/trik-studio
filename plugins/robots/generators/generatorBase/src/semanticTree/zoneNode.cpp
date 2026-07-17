@@ -42,7 +42,7 @@ void ZoneNode::appendChild(SemanticNode *node)
 
 void ZoneNode::appendChildren(std::vector<SemanticNode *> const &nodes)
 {
-	for (SemanticNode * const node : nodes) {
+	for (SemanticNode *const node : nodes) {
 		appendChild(node);
 	}
 }
@@ -61,7 +61,7 @@ void ZoneNode::removeChild(SemanticNode *node)
 
 SemanticNode *ZoneNode::removeLast()
 {
-	SemanticNode * const result = mChildren.last();
+	SemanticNode *const result = mChildren.last();
 	mChildren.removeLast();
 	result->setParentNode(nullptr);
 	return result;
@@ -72,7 +72,7 @@ std::vector<SemanticNode *> ZoneNode::removeStartingFrom(SemanticNode *node)
 	std::vector<SemanticNode *> result;
 	bool foundNode = node == nullptr;
 
-	for (SemanticNode * const current : mChildren) {
+	for (SemanticNode *const current : mChildren) {
 		if (!foundNode) {
 			foundNode = current == node;
 		}
@@ -90,9 +90,10 @@ std::vector<SemanticNode *> ZoneNode::removeStartingFrom(SemanticNode *node)
 QString ZoneNode::toStringImpl(GeneratorCustomizer &customizer, int indent, const QString &indentString) const
 {
 	QString result;
-	for (const SemanticNode * const child : mChildren) {
-		result += utils::StringUtils::addIndent(child->toString(customizer, 0, indentString).trimmed()
-				, indent, indentString) + "\n";
+	for (const SemanticNode *const child : mChildren) {
+		result += utils::StringUtils::addIndent(child->toString(customizer, 0, indentString).trimmed(), indent,
+				  indentString)
+		          + "\n";
 	}
 
 	result.chop(1);

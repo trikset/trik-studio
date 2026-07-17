@@ -19,8 +19,9 @@
 using namespace utils;
 
 NonGraphicType::NonGraphicType()
-	: Type(true, nullptr)  // Неграфическим типам тоже неплохо бы знать, из какой они диаграммы
-{}
+	: Type(true, nullptr) // Неграфическим типам тоже неплохо бы знать, из какой они диаграммы
+{
+}
 
 bool NonGraphicType::resolve()
 {

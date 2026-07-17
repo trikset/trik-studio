@@ -18,15 +18,12 @@
 
 using namespace trik::python;
 
-TrikPythonMasterGenerator::TrikPythonMasterGenerator(const qrRepo::RepoApi &repo
-		, qReal::ErrorReporterInterface &errorReporter
-		, const utils::ParserErrorReporter &parserErrorReporter
-		, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
-		, qrtext::LanguageToolboxInterface &textLanguage
-		, const qReal::Id &diagramId
-		, const QStringList &pathsToTemplates)
-	: TrikMasterGeneratorBase(repo, errorReporter, parserErrorReporter, robotModelManager, textLanguage
-			, diagramId, pathsToTemplates)
+TrikPythonMasterGenerator::TrikPythonMasterGenerator(const qrRepo::RepoApi &repo,
+	qReal::ErrorReporterInterface &errorReporter, const utils::ParserErrorReporter &parserErrorReporter,
+	const kitBase::robotModel::RobotModelManagerInterface &robotModelManager,
+	qrtext::LanguageToolboxInterface &textLanguage, const qReal::Id &diagramId, const QStringList &pathsToTemplates)
+	: TrikMasterGeneratorBase(repo, errorReporter, parserErrorReporter, robotModelManager, textLanguage, diagramId,
+		  pathsToTemplates)
 {
 }
 

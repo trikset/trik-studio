@@ -24,8 +24,7 @@ ArcObject::ArcObject(QObject *parent)
 {
 }
 
-ArcObject::ArcObject(QRect rect, int startAngle, int spanAngle
-		, const QColor &color, int thickness, QObject *parent)
+ArcObject::ArcObject(QRect rect, int startAngle, int spanAngle, const QColor &color, int thickness, QObject *parent)
 	: CanvasObject(color, thickness, parent)
 	, mRect(rect)
 	, mStartAngle(startAngle)

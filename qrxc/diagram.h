@@ -32,7 +32,7 @@ public:
 	bool resolve();
 	Editor *editor() const;
 	Type *findType(const QString &name);
-	QMap<QString, Type*> types() const;
+	QMap<QString, Type *> types() const;
 	QString name() const;
 	QString nodeName() const;
 	QString displayedName() const;
@@ -47,7 +47,7 @@ private:
 		QString displayedName;
 	};
 
-	QMap<QString, Type*> mTypes;
+	QMap<QString, Type *> mTypes;
 	QString mDiagramName;
 	QString mDiagramNodeName;
 	QString mDiagramDisplayedName;

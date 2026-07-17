@@ -21,16 +21,15 @@
 using namespace ev3::rbf::simple;
 using namespace qReal;
 
-PrependedCodeGenerator::PrependedCodeGenerator(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, const Id &id
-		, QObject *parent)
-	: BindingGenerator(repo, customizer, id, "label.t"
-			, {
-				generatorBase::simple::Binding::createStaticConverting("@@ID@@", id.id()
-					, customizer.factory()->nameNormalizerConverter())
-				, generatorBase::simple::Binding::createStatic("@@ADDITIONAL_CODE@@"
-					, static_cast<Ev3RbfGeneratorFactory *>(customizer.factory())->additionalCode(id).join("\n"))
-			}, parent)
+PrependedCodeGenerator::PrependedCodeGenerator(const qrRepo::RepoApi &repo,
+	generatorBase::GeneratorCustomizer &customizer, const Id &id, QObject *parent)
+	: BindingGenerator(repo, customizer, id, "label.t",
+		  {generatorBase::simple::Binding::createStaticConverting("@@ID@@", id.id(),
+			   customizer.factory()->nameNormalizerConverter()),
+			  generatorBase::simple::Binding::createStatic("@@ADDITIONAL_CODE@@",
+				  static_cast<Ev3RbfGeneratorFactory *>(customizer.factory())
+					  ->additionalCode(id)
+					  .join("\n"))},
+		  parent)
 {
 }

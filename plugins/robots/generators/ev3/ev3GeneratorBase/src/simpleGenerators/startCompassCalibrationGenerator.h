@@ -20,14 +20,12 @@ namespace ev3 {
 namespace simple {
 
 /// Generator for 'Start Compass Calibration' block
-class StartCompassCalibrationGenerator: public generatorBase::simple::BindingGenerator
+class StartCompassCalibrationGenerator : public generatorBase::simple::BindingGenerator
 {
 	Q_OBJECT
 public:
-	StartCompassCalibrationGenerator(const qrRepo::RepoApi &repo
-			, generatorBase::GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent = nullptr);
+	StartCompassCalibrationGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+		const qReal::Id &id, QObject *parent = nullptr);
 };
 
 }

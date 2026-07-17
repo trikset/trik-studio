@@ -29,12 +29,13 @@ class AlternativeParser : public ParserInterface<TokenType>
 public:
 	/// Constructor. Takes parsers for two alternatives.
 	AlternativeParser(const ParserRef<TokenType> &parser1, const ParserRef<TokenType> &parser2)
-		: mParser1(parser1), mParser2(parser2)
+		: mParser1(parser1)
+		, mParser2(parser2)
 	{
 	}
 
-	QSharedPointer<ast::Node> parse(TokenStream<TokenType> &tokenStream
-			, ParserContext<TokenType> &parserContext) const override
+	QSharedPointer<ast::Node> parse(TokenStream<TokenType> &tokenStream,
+		ParserContext<TokenType> &parserContext) const override
 	{
 		if (tokenStream.isEnd()) {
 			parserContext.reportError(QObject::tr("Unexpected end of input"));
@@ -43,7 +44,8 @@ public:
 
 		if (!(mParser1->first().intersect(mParser2->first())).isEmpty()) {
 			parserContext.reportInternalError(
-					QObject::tr("Parser can not decide which alternative to use on ") + tokenStream.next().lexeme());
+				QObject::tr("Parser can not decide which alternative to use on ")
+				+ tokenStream.next().lexeme());
 		}
 
 		if (mParser1->first().contains(tokenStream.next().token())) {

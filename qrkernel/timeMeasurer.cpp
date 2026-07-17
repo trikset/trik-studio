@@ -19,7 +19,7 @@
 using namespace qReal;
 
 TimeMeasurer::TimeMeasurer(const QString &methodName)
-		: mMethodName{methodName}
+	: mMethodName {methodName}
 {
 	mTimer.start();
 }
@@ -27,7 +27,7 @@ TimeMeasurer::TimeMeasurer(const QString &methodName)
 TimeMeasurer::~TimeMeasurer()
 {
 	qDebug() << QString("TimeMeasurer %1: The operation lasted for %2 mseconds")
-			.arg(mMethodName, QString::number(mTimer.elapsed()));
+			    .arg(mMethodName, QString::number(mTimer.elapsed()));
 }
 
 void TimeMeasurer::doNothing() const

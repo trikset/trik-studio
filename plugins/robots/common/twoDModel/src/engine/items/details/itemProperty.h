@@ -22,19 +22,36 @@ class ItemProperty final
 {
 	Q_DISABLE_COPY_MOVE(ItemProperty)
 public:
-	explicit ItemProperty(QString name, const T& value)
-		: mName(std::move(name)), mValue(value), mWasChanged(false) {}
+	explicit ItemProperty(QString name, const T &value)
+		: mName(std::move(name))
+		, mValue(value)
+		, mWasChanged(false)
+	{
+	}
 
 	ItemProperty() = default;
-	operator T() const & { return mValue; } // NOLINT(google-explicit-constructor)
+	operator T() const &
+	{
+		return mValue;
+	} // NOLINT(google-explicit-constructor)
 
-	QString name() const { return mName; }
+	QString name() const
+	{
+		return mName;
+	}
 
-	bool wasChanged() const { return mWasChanged; }
+	bool wasChanged() const
+	{
+		return mWasChanged;
+	}
 
-	void setValue(const T& value) { mValue = value; }
+	void setValue(const T &value)
+	{
+		mValue = value;
+	}
 
-	void changeValue(const T& value) {
+	void changeValue(const T &value)
+	{
 		setValue(value);
 		mWasChanged = true;
 	}

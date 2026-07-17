@@ -21,7 +21,7 @@ const QMap<QString, QString> EV3_TYPE_ID = {{"int", "2"}, {"bool", "0"}, {"strin
 const QMap<QString, QString> EV3_TYPE_LENGTH = {{"int", "4"}, {"bool", "1"}, {"string", "255"}, {"float", "4"}};
 
 parts::Mailboxes::Mailboxes(const QStringList &pathsToTemplates)
-	:TemplateParametrizedEntity(pathsToTemplates)
+	: TemplateParametrizedEntity(pathsToTemplates)
 {
 }
 
@@ -41,8 +41,8 @@ QString parts::Mailboxes::generateOpening() const
 		iterator.next();
 		QString tmpTemplate = openTemplate;
 		res += tmpTemplate.replace("@@MAILBOX_NAME@@", iterator.key())
-				.replace("@@ID@@", mMailboxNameToId[iterator.key()])
-				.replace("@@TYPE@@", EV3_TYPE_ID[iterator.value()]);
+		               .replace("@@ID@@", mMailboxNameToId[iterator.key()])
+		               .replace("@@TYPE@@", EV3_TYPE_ID[iterator.value()]);
 		res += "\n";
 	}
 

@@ -29,7 +29,7 @@ class StatLine
 public:
 	explicit StatLine(const LinePortInfo &info);
 
-	operator QLineF () const;
+	operator QLineF() const;
 
 	void paint(QPainter *painter, const QRectF &contents) const;
 	QLineF transformForContents(const QRectF &contents) const;

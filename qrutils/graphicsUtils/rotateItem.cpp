@@ -53,7 +53,7 @@ bool RotateItem::theOnlySelectedRotateItem(bool thisSelected) const
 		return false;
 	}
 
-	for (QGraphicsItem * const selectedItem : scene()->selectedItems()) {
+	for (QGraphicsItem *const selectedItem : scene()->selectedItems()) {
 		if (dynamic_cast<RotateItem *>(selectedItem) && selectedItem != this) {
 			return false;
 		}

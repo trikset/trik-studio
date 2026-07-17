@@ -52,7 +52,7 @@ private:
 
 	/// Maps kit plugin name to corresponding plugin interface.
 	/// Doesn't have ownership, objects are owned by mLoaders.
-	QMap<QString, kitBase::KitPluginInterface *> mPluginInterfaces;  // Has ownership
+	QMap<QString, kitBase::KitPluginInterface *> mPluginInterfaces; // Has ownership
 
 	/// Common part of plugins loading
 	qReal::PluginManager mPluginManager;

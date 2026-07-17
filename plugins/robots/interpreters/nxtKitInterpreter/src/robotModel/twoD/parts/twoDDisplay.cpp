@@ -22,9 +22,7 @@ const int nxtDisplayWidth = 100;
 using namespace nxt::robotModel::twoD::parts;
 using namespace kitBase::robotModel;
 
-Display::Display(const DeviceInfo &info
-		, const PortInfo &port
-		, twoDModel::engine::TwoDModelEngineInterface &engine)
+Display::Display(const DeviceInfo &info, const PortInfo &port, twoDModel::engine::TwoDModelEngineInterface &engine)
 	: robotModel::parts::NxtDisplay(info, port)
 	, mEngine(engine)
 {
@@ -71,8 +69,8 @@ void Display::paint(QPainter *painter, const QRect &rect)
 	Q_UNUSED(rect)
 
 	painter->save();
-	painter->scale(static_cast<qreal>(mEngine.display()->displayWidth()) / nxtDisplayWidth
-			, static_cast<qreal>(mEngine.display()->displayHeight()) / nxtDisplayHeight);
+	painter->scale(static_cast<qreal>(mEngine.display()->displayWidth()) / nxtDisplayWidth,
+		static_cast<qreal>(mEngine.display()->displayHeight()) / nxtDisplayHeight);
 
 	QPen pen;
 	QFont font;

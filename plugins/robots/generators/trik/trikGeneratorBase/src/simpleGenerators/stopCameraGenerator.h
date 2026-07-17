@@ -24,10 +24,8 @@ class StopCameraGenerator : public generatorBase::simple::BindingGenerator
 {
 	Q_OBJECT
 public:
-	StopCameraGenerator(const qrRepo::RepoApi &repo
-			, generatorBase::GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent);
+	StopCameraGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+		const qReal::Id &id, QObject *parent);
 };
 
 }

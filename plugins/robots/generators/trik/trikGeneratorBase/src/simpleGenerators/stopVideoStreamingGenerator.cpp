@@ -18,13 +18,8 @@
 
 using namespace trik::simple;
 
-StopVideoStreamingGenerator::StopVideoStreamingGenerator(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, const qReal::Id &id
-		, QObject *parent)
-	: BindingGenerator(repo, customizer, id
-			, "videosensors/stopVideoStreaming.t"
-			, {}
-			, parent)
+StopVideoStreamingGenerator::StopVideoStreamingGenerator(const qrRepo::RepoApi &repo,
+	generatorBase::GeneratorCustomizer &customizer, const qReal::Id &id, QObject *parent)
+	: BindingGenerator(repo, customizer, id, "videosensors/stopVideoStreaming.t", {}, parent)
 {
 }

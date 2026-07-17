@@ -28,17 +28,14 @@ const int realHeight = 280;
 const int topMenuHeight = 45;
 const int textSize = 20;
 
-Display::Display(const DeviceInfo &info
-		, const PortInfo &port
-		, twoDModel::engine::TwoDModelEngineInterface &engine)
+Display::Display(const DeviceInfo &info, const PortInfo &port, twoDModel::engine::TwoDModelEngineInterface &engine)
 	: robotModel::parts::TrikDisplay(info, port)
 	, mEngine(engine)
 {
 	mEngine.display()->setPainter(this);
 
-	connect(this, &Display::backgroundChanged, this, [=](const QColor &color) {
-		Q_EMIT propertyChanged("background", color);
-	});
+	connect(this, &Display::backgroundChanged, this,
+		[=](const QColor &color) { Q_EMIT propertyChanged("background", color); });
 	connect(this, &Display::smileChanged, this, [=](bool smiles, bool happy) {
 		Q_EMIT propertyChanged("smiles", smiles && happy);
 		Q_EMIT propertyChanged("sadSmiles", smiles && !happy);
@@ -127,8 +124,8 @@ void Display::printText(int x, int y, const QString &text, int fontSize)
 		mLabelsMap[coords]->setText(text);
 		mLabelsMap[coords]->setFontSize(fontSize);
 	} else {
-		auto * const textObject = new utils::TextObject(x, y, text
-			, mCurrentPenColor, mCurrentPenWidth, fontSize);
+		auto *const textObject =
+			new utils::TextObject(x, y, text, mCurrentPenColor, mCurrentPenWidth, fontSize);
 		mObjects << textObject;
 		mLabelsMap[coords] = textObject;
 		mLabels << textObject;
@@ -172,15 +169,16 @@ void Display::paint(QPainter *painter, const QRect &outputRect)
 	painter->setPen(mBackground);
 	painter->setBrush(mBackground);
 	painter->drawRect(displayRect);
-	painter->drawImage(QRect(0, scaledTopMenuHeight
-			, displayRect.width(), displayRect.height() - scaledTopMenuHeight), mCurrentImage);
+	painter->drawImage(
+		QRect(0, scaledTopMenuHeight, displayRect.width(), displayRect.height() - scaledTopMenuHeight),
+		mCurrentImage);
 	if (mBackground != Qt::transparent) {
 		painter->setBrush(QBrush(Qt::darkRed, Qt::BDiagPattern));
 		painter->drawRect(0, 0, mEngine.display()->displayWidth(), scaledTopMenuHeight);
 	}
 	painter->restore();
 
-	painter->save();	
+	painter->save();
 	QFont font;
 	font.setPixelSize(textSize);
 	painter->setFont(font);

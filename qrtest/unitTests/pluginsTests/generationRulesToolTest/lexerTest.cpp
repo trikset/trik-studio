@@ -32,11 +32,11 @@ void LexerTest::TearDown()
 TEST_F(LexerTest, lexerTestForForeachExample)
 {
 	QString stream = "'enum State {'\n"
-			"foreach (state in State) {\n"
-			"state->name ',' \n"
-			"newline \n"
-			"} \n"
-			"'}' \n";
+			 "foreach (state in State) {\n"
+			 "state->name ',' \n"
+			 "newline \n"
+			 "} \n"
+			 "'}' \n";
 
 	const auto lexerResult = mLexer->tokenize(stream);
 
@@ -64,10 +64,9 @@ TEST_F(LexerTest, lexerTestForForeachExample)
 TEST_F(LexerTest, lexerTestForIfStatement)
 {
 	QString stream = "if (this->Name != 'StartState') { \n"
-			"newline } \n"
-			"else { \n"
-			"this->Name newline } \n"
-			;
+			 "newline } \n"
+			 "else { \n"
+			 "this->Name newline } \n";
 
 	const auto lexerResult = mLexer->tokenize(stream);
 

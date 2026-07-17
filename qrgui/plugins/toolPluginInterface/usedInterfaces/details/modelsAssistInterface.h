@@ -38,9 +38,8 @@ public:
 	virtual ~ModelsAssistInterface() = default;
 
 	virtual Id createElement(const Id &parent, const Id &type) = 0;
-	virtual Id createElement(const Id &parent, const Id &id
-		, bool isFromLogicalModel, const QString &name
-		, const QPointF &position, const Id &preferedLogicalId = Id()) = 0;
+	virtual Id createElement(const Id &parent, const Id &id, bool isFromLogicalModel, const QString &name,
+		const QPointF &position, const Id &preferedLogicalId = Id()) = 0;
 	virtual void createElements(QList<ElementInfo> &elements) = 0;
 
 	virtual Id parent(const Id &element) const = 0;

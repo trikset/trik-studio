@@ -153,22 +153,21 @@ public:
 	engine::TwoDModelEngineInterface *engine();
 
 	/// Returns scanning angle and max distance by given device type.
-	virtual QPair<qreal,int> rangeSensorAngleAndDistance (const kitBase::robotModel::DeviceInfo &deviceType) const;
+	virtual QPair<qreal, int> rangeSensorAngleAndDistance(const kitBase::robotModel::DeviceInfo &deviceType) const;
 
 Q_SIGNALS:
 	void settingsChanged();
+
 protected:
-	kitBase::robotModel::robotParts::Device *createDevice(
-			const kitBase::robotModel::PortInfo &port
-			, const kitBase::robotModel::DeviceInfo &deviceInfo
-			) override;
+	kitBase::robotModel::robotParts::Device *createDevice(const kitBase::robotModel::PortInfo &port,
+		const kitBase::robotModel::DeviceInfo &deviceInfo) override;
 
 	virtual kitBase::robotModel::DeviceInfo markerInfo() const;
 
-	engine::TwoDModelEngineInterface *mEngine { nullptr };  // Does not have ownership.
+	engine::TwoDModelEngineInterface *mEngine {nullptr}; // Does not have ownership.
 
 private:
-	const kitBase::robotModel::RobotModelInterface *mRealModel { nullptr };
+	const kitBase::robotModel::RobotModelInterface *mRealModel {nullptr};
 };
 
 }

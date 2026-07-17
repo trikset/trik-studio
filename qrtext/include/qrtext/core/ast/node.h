@@ -60,7 +60,7 @@ public:
 	template<typename NodeType>
 	bool is() const
 	{
-		return dynamic_cast<const NodeType * const>(this) != nullptr;
+		return dynamic_cast<const NodeType *const>(this) != nullptr;
 	}
 
 	/// Returns all children of a node as a list. Shall be redefined in all descendants who have children, as it is used
@@ -73,20 +73,19 @@ public:
 	/// Calls visit() method of the given visitor for all children and self.
 	/// @param pointer Shared pointer for 'this' instance.
 	/// @param parent  Shared pointer for parent node. Must be nullptr for AST root.
-	void acceptRecursively(AstVisitorInterface &visitor
-			, const QSharedPointer<Node> &pointer
-			, const QSharedPointer<Node> &parent);
+	void acceptRecursively(AstVisitorInterface &visitor, const QSharedPointer<Node> &pointer,
+		const QSharedPointer<Node> &parent);
 
 	/// Calls visit() method of the given visitor for self.
 	/// The descendants should override this method to call corresponding visit() method overload.
 	/// See 'visitor' design pattern (http://www.oodesign.com/visitor-pattern.html).
 	/// @param pointer Shared pointer for 'this' instance.
 	/// @param parent  Shared pointer for parent node. Must be nullptr for AST root.
-	virtual void accept(AstVisitorInterface &visitor
-			, const QSharedPointer<Node> &pointer
-			, const QSharedPointer<Node> &parent);
+	virtual void accept(AstVisitorInterface &visitor, const QSharedPointer<Node> &pointer,
+		const QSharedPointer<Node> &parent);
 
-	static int nodesCount() {
+	static int nodesCount()
+	{
 		return mNodesCount;
 	}
 

@@ -30,9 +30,8 @@ class ROBOTS_TRIK_KIT_INTERPRETER_COMMON_EXPORT LineSensor : public robotModel::
 	Q_OBJECT
 
 public:
-	LineSensor(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port
-			, utils::robotCommunication::TcpRobotCommunicator &tcpRobotCommunicator);
+	LineSensor(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+		utils::robotCommunication::TcpRobotCommunicator &tcpRobotCommunicator);
 
 	void init() override;
 	void detectLine() override;

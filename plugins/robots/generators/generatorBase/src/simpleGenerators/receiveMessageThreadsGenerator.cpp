@@ -18,16 +18,13 @@
 
 using namespace generatorBase::simple;
 
-ReceiveMessageThreadsGenerator::ReceiveMessageThreadsGenerator(const qrRepo::RepoApi &repo
-		, GeneratorCustomizer &customizer
-		, const qReal::Id &id
-		, QObject *parent)
-	: BindingGenerator(repo, customizer, id, "threads/receiveMessage.t"
-			, { Binding::createConverting("@@VARIABLE@@"
-					, "Variable"
-					, customizer.factory()->functionBlockConverter(id, "Variable"))
-				, Binding::createConverting("@@SYNCHRONIZED@@", "Synchronized"
-					, customizer.factory()->boolPropertyConverter(id, "Synchronized", false)) }
-			, parent)
+ReceiveMessageThreadsGenerator::ReceiveMessageThreadsGenerator(const qrRepo::RepoApi &repo,
+	GeneratorCustomizer &customizer, const qReal::Id &id, QObject *parent)
+	: BindingGenerator(repo, customizer, id, "threads/receiveMessage.t",
+		  {Binding::createConverting("@@VARIABLE@@", "Variable",
+			   customizer.factory()->functionBlockConverter(id, "Variable")),
+			  Binding::createConverting("@@SYNCHRONIZED@@", "Synchronized",
+				  customizer.factory()->boolPropertyConverter(id, "Synchronized", false))},
+		  parent)
 {
 }

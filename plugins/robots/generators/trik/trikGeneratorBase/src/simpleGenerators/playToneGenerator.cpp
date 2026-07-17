@@ -19,14 +19,9 @@
 using namespace trik::simple;
 using namespace generatorBase::simple;
 
-PlayToneGenerator::PlayToneGenerator(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, const qReal::Id &id
-		, QObject *parent)
-	: BindingGenerator(repo, customizer, id
-			, "playSound.t"
-			, QList<Binding *>()
-					<< Binding::createDirect("@@FILENAME@@", "FileName")
-			, parent)
+PlayToneGenerator::PlayToneGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+	const qReal::Id &id, QObject *parent)
+	: BindingGenerator(repo, customizer, id, "playSound.t",
+		  QList<Binding *>() << Binding::createDirect("@@FILENAME@@", "FileName"), parent)
 {
 }

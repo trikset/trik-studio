@@ -44,17 +44,14 @@ public:
 	/// @param logicalModelAssistInterface - logical model, also needed to save settings as property of current diagram.
 	/// @param mainWindowInterpretersInterface - needed to get current active diagram
 	/// @param projectManager - provides notification about changing of currently opened project.
-	DevicesConfigurationManager(qReal::GraphicalModelAssistInterface &graphicalModelAssistInterface
-			, qReal::LogicalModelAssistInterface &logicalModelAssistInterface
-			, qReal::gui::MainWindowInterpretersInterface &mainWindowInterpretersInterface
-			, qReal::ProjectManagementInterface &projectManager
-			);
+	DevicesConfigurationManager(qReal::GraphicalModelAssistInterface &graphicalModelAssistInterface,
+		qReal::LogicalModelAssistInterface &logicalModelAssistInterface,
+		qReal::gui::MainWindowInterpretersInterface &mainWindowInterpretersInterface,
+		qReal::ProjectManagementInterface &projectManager);
 
 private:
-	void onDeviceConfigurationChanged(const QString &robotId
-			, const kitBase::robotModel::PortInfo &port
-			, const kitBase::robotModel::DeviceInfo &sensor
-			, Reason reason) override;
+	void onDeviceConfigurationChanged(const QString &robotId, const kitBase::robotModel::PortInfo &port,
+		const kitBase::robotModel::DeviceInfo &sensor, Reason reason) override;
 
 	/// Reacts to opening or closing .qrs project.
 	void onOpenedProjectChanged();

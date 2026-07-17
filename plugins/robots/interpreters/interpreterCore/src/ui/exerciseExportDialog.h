@@ -30,9 +30,7 @@ class ExerciseExportDialog : public QDialog
 
 public:
 	/// Constructor.
-	explicit ExerciseExportDialog(
-			QWidget *parent = nullptr
-			);
+	explicit ExerciseExportDialog(QWidget *parent = nullptr);
 
 	~ExerciseExportDialog() override;
 

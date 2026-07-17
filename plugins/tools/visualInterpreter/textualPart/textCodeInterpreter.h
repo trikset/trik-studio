@@ -26,16 +26,9 @@ class TextCodeInterpreter : public QObject
 	Q_OBJECT
 
 public:
-	enum CodeType {
-		initialization,
-		applicationCondition,
-		reaction
-	};
+	enum CodeType { initialization, applicationCondition, reaction };
 
-	enum CodeLanguage {
-		python,
-		qtScript
-	};
+	enum CodeLanguage { python, qtScript };
 
 public:
 	explicit TextCodeInterpreter(QObject *parent);
@@ -45,8 +38,8 @@ public:
 
 signals:
 	/// Emitted after parsing std output and has all properties changes
-	void readyReadStdOutput(QHash<QPair<QString, QString>, QString> const &output
-			, TextCodeInterpreter::CodeLanguage language);
+	void readyReadStdOutput(QHash<QPair<QString, QString>, QString> const &output,
+		TextCodeInterpreter::CodeLanguage language);
 
 	/// Raw error output from python interpreter
 	void readyReadErrOutput(QString const &output);

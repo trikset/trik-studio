@@ -23,10 +23,8 @@
 using namespace qReal;
 using namespace gui;
 
-PropertiesDialog::PropertiesDialog(const EditorManagerInterface &interpreterEditorManager
-		, qrRepo::LogicalRepoApi &logicalRepoApi
-		, const Id &id
-		, QWidget *parent)
+PropertiesDialog::PropertiesDialog(const EditorManagerInterface &interpreterEditorManager,
+	qrRepo::LogicalRepoApi &logicalRepoApi, const Id &id, QWidget *parent)
 	: QDialog(parent)
 	, mUi(new Ui::PropertiesDialog)
 	, mInterpreterEditorManager(interpreterEditorManager)
@@ -79,8 +77,9 @@ void PropertiesDialog::disableParentProperties(const QStringList &propertiesDisp
 
 	for (int i = 0; i < size; i++) {
 		if (mInterpreterEditorManager.isParentProperty(mId, mPropertiesNames[i])) {
-			mUi->propertiesNamesList->findItems(propertiesDisplayedNames[i]
-					, Qt::MatchFixedString).first()->setFlags(Qt::NoItemFlags);
+			mUi->propertiesNamesList->findItems(propertiesDisplayedNames[i], Qt::MatchFixedString)
+				.first()
+				->setFlags(Qt::NoItemFlags);
 		}
 	}
 }
@@ -105,16 +104,12 @@ void PropertiesDialog::change(const QString &text)
 {
 	if (!text.isEmpty()) {
 		mEditPropertiesDialog.changeProperty(
-				mUi->propertiesNamesList->item(mUi->propertiesNamesList->currentRow())
-				, mPropertiesNames[mUi->propertiesNamesList->currentRow()]
-				, text
-				, new IdList());
+			mUi->propertiesNamesList->item(mUi->propertiesNamesList->currentRow()),
+			mPropertiesNames[mUi->propertiesNamesList->currentRow()], text, new IdList());
 	} else {
 		mEditPropertiesDialog.changeProperty(
-				mUi->propertiesNamesList->item(mUi->propertiesNamesList->currentRow())
-				, ""
-				, text
-				, mElementsOnDiagram);
+			mUi->propertiesNamesList->item(mUi->propertiesNamesList->currentRow()), "", text,
+			mElementsOnDiagram);
 	}
 
 	mElementsOnDiagram->clear();
@@ -122,7 +117,6 @@ void PropertiesDialog::change(const QString &text)
 	mEditPropertiesDialog.show();
 	connect(&mEditPropertiesDialog, SIGNAL(finished(int)), SLOT(updatePropertiesNamesList()));
 }
-
 
 bool PropertiesDialog::checkElementOnDiagram(const qrRepo::LogicalRepoApi &api, Id &id)
 {
@@ -146,13 +140,13 @@ void PropertiesDialog::findElementsOnDiagram(const qrRepo::LogicalRepoApi &api, 
 	}
 
 	IdList logicalElements = api.logicalElements(id);
-	for (const auto &logicalElement: logicalElements) {
+	for (const auto &logicalElement : logicalElements) {
 		if (!mElementsOnDiagram->contains(logicalElement)) {
 			mElementsOnDiagram->append(logicalElement);
 		}
 	}
 
-	for (auto &nodeChild: mInterpreterEditorManager.children(id)) {
+	for (auto &nodeChild : mInterpreterEditorManager.children(id)) {
 		findElementsOnDiagram(api, nodeChild);
 	}
 }
@@ -170,6 +164,7 @@ void PropertiesDialog::changeProperty()
 		return;
 	}
 
-	const QString &propDisplayedName = mUi->propertiesNamesList->item(mUi->propertiesNamesList->currentRow())->text();
+	const QString &propDisplayedName =
+		mUi->propertiesNamesList->item(mUi->propertiesNamesList->currentRow())->text();
 	change(propDisplayedName);
 }

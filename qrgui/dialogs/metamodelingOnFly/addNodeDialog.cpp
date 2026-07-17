@@ -22,9 +22,7 @@
 using namespace qReal;
 using namespace gui;
 
-AddNodeDialog::AddNodeDialog(const Id &diagram
-		, const EditorManagerInterface &editorManagerProxy
-		, QWidget *parent)
+AddNodeDialog::AddNodeDialog(const Id &diagram, const EditorManagerInterface &editorManagerProxy, QWidget *parent)
 	: QDialog(parent)
 	, mUi(new Ui::AddNodeDialog)
 	, mDiagram(diagram)
@@ -43,23 +41,24 @@ AddNodeDialog::~AddNodeDialog()
 void AddNodeDialog::okButtonClicked()
 {
 	if (mUi->nameEdit->text().isEmpty()) {
-		QMessageBox::critical(this, tr("Error"), tr("All required properties should be filled")
-				, QMessageBox::tr("Close"));
+		QMessageBox::critical(this, tr("Error"), tr("All required properties should be filled"),
+			QMessageBox::tr("Close"));
 	} else {
 		mNodeName = mUi->nameEdit->text();
-		const IdList nodesWithTheSameNameList = mEditorManagerProxy.elementsWithTheSameName(mDiagram
-				, mUi->nameEdit->text(), "MetaEntityNode");
+		const IdList nodesWithTheSameNameList =
+			mEditorManagerProxy.elementsWithTheSameName(mDiagram, mUi->nameEdit->text(), "MetaEntityNode");
 		if (!nodesWithTheSameNameList.isEmpty()) {
 			mNodeName = mUi->nameEdit->text() + "_" + nodesWithTheSameNameList.count();
-			mRestoreElementDialog = new RestoreElementDialog(this, mEditorManagerProxy, nodesWithTheSameNameList);
+			mRestoreElementDialog =
+				new RestoreElementDialog(this, mEditorManagerProxy, nodesWithTheSameNameList);
 			mRestoreElementDialog->setModal(true);
 			mRestoreElementDialog->show();
-			connect(mRestoreElementDialog, &qReal::RestoreElementDialog::createNewChosen
-					, this, &AddNodeDialog::addNode);
-			connect(mRestoreElementDialog, &qReal::RestoreElementDialog::restoreChosen
-					, this, &AddNodeDialog::done);
-			connect(mRestoreElementDialog, &qReal::RestoreElementDialog::jobDone
-					, this, &AddNodeDialog::jobDone);
+			connect(mRestoreElementDialog, &qReal::RestoreElementDialog::createNewChosen, this,
+				&AddNodeDialog::addNode);
+			connect(mRestoreElementDialog, &qReal::RestoreElementDialog::restoreChosen, this,
+				&AddNodeDialog::done);
+			connect(mRestoreElementDialog, &qReal::RestoreElementDialog::jobDone, this,
+				&AddNodeDialog::jobDone);
 		} else {
 			addNode();
 		}

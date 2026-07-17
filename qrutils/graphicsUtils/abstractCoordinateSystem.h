@@ -18,13 +18,15 @@
 
 namespace graphicsUtils {
 
-class QRUTILS_EXPORT AbstractCoordinateSystem: public QObject
+class QRUTILS_EXPORT AbstractCoordinateSystem : public QObject
 {
 	Q_OBJECT
 
 public:
 	AbstractCoordinateSystem(QObject *parent = nullptr)
-		: QObject(parent) {}
+		: QObject(parent)
+	{
+	}
 
 	virtual qreal toPx(const qreal size) const = 0;
 

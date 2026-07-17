@@ -21,10 +21,8 @@
 using namespace generatorBase;
 using namespace trik::qts;
 
-TrikQtsControlFlowValidator::TrikQtsControlFlowValidator(const qrRepo::RepoApi &repo
-		, qReal::ErrorReporterInterface &errorReporter
-		, GeneratorCustomizer &customizer
-		, QObject *parent)
+TrikQtsControlFlowValidator::TrikQtsControlFlowValidator(const qrRepo::RepoApi &repo,
+	qReal::ErrorReporterInterface &errorReporter, GeneratorCustomizer &customizer, QObject *parent)
 	: PrimaryControlFlowValidator(repo, errorReporter, customizer, parent)
 {
 }
@@ -41,9 +39,8 @@ bool TrikQtsControlFlowValidator::validate(const qReal::Id &diagramId, const QSt
 	ThreadsValidator threadsValidator(mRepo, mCustomizer, mErrorReporter);
 	trik::TrikBlocksValidator blocksValidator(mRepo, mCustomizer, mErrorReporter);
 
-	return threadsValidator.validate(mInitialNode, threadId)
-			&& blocksValidator.validate(mInitialNode)
-			&& PrimaryControlFlowValidator::validate(diagramId, threadId);
+	return threadsValidator.validate(mInitialNode, threadId) && blocksValidator.validate(mInitialNode)
+	       && PrimaryControlFlowValidator::validate(diagramId, threadId);
 }
 
 PrimaryControlFlowValidator *TrikQtsControlFlowValidator::clone()

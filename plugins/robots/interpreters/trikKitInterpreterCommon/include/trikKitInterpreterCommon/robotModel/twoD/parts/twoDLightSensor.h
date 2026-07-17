@@ -28,9 +28,8 @@ class ROBOTS_TRIK_KIT_INTERPRETER_COMMON_EXPORT TwoDLightSensor : public twoDMod
 	Q_OBJECT
 
 public:
-	TwoDLightSensor(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port
-			, twoDModel::engine::TwoDModelEngineInterface &engine);
+	TwoDLightSensor(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+		twoDModel::engine::TwoDModelEngineInterface &engine);
 
 	void read() override;
 };

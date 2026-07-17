@@ -22,15 +22,16 @@ class Image : public Item
 {
 	Q_OBJECT
 public:
-	Image(const QString &fileName, qreal x, qreal y, Item* parent = nullptr);
+	Image(const QString &fileName, qreal x, qreal y, Item *parent = nullptr);
 	QRectF boundingRect() const override;
-	void drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr) override;
+	void drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 	void setItemZValue(int zValue) override;
 
-	QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document
-			, const QPoint &topLeftPicture) override;
+	QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document,
+		const QPoint &topLeftPicture) override;
+
 private:
-	QGraphicsPixmapItem* mPixmapItem;
+	QGraphicsPixmapItem *mPixmapItem;
 	QImage mImage;
 	QString mFileName;
 };

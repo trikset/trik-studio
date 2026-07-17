@@ -27,7 +27,10 @@ class TrikLidarEmu : public trikControl::LidarInterface
 public:
 	explicit TrikLidarEmu(kitBase::robotModel::robotParts::VectorSensor *lidar);
 
-	Status status() const override {return Status::ready;}
+	Status status() const override
+	{
+		return Status::ready;
+	}
 
 	QVector<int> readRaw() const override;
 

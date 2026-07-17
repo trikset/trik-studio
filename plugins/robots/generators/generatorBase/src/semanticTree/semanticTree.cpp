@@ -21,8 +21,7 @@
 using namespace generatorBase::semantics;
 using namespace qReal;
 
-SemanticTree::SemanticTree(GeneratorCustomizer &customizer, const Id &initialBlock
-		, bool isMainTree, QObject *parent)
+SemanticTree::SemanticTree(GeneratorCustomizer &customizer, const Id &initialBlock, bool isMainTree, QObject *parent)
 	: QObject(parent)
 	, mCustomizer(customizer)
 	, mIsMainTree(isMainTree)

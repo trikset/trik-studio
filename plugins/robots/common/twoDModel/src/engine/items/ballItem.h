@@ -24,14 +24,13 @@ class QSvgRenderer;
 namespace twoDModel {
 namespace items {
 
-class BallItem final: public graphicsUtils::AbstractItem, public SolidItem, public Serializer<BallItem>
+class BallItem final : public graphicsUtils::AbstractItem, public SolidItem, public Serializer<BallItem>
 {
 	Q_OBJECT
 	Q_DISABLE_COPY(BallItem)
 
 public:
-	explicit BallItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-			  QPointF position);
+	explicit BallItem(graphicsUtils::AbstractCoordinateSystem *metricSystem, QPointF position);
 	~BallItem() override;
 
 	/// Creates and returns ball item for 2D model palette.
@@ -43,8 +42,14 @@ public:
 	void drawExtractionForItem(QPainter *painter) override;
 	void setPenBrushForExtraction(QPainter *painter, const QStyleOptionGraphicsItem *option) override;
 
-	void drawFieldForResizeItem(QPainter* painter) override { Q_UNUSED(painter) }
-	void resizeItem(QGraphicsSceneMouseEvent *event) override { Q_UNUSED(event) }
+	void drawFieldForResizeItem(QPainter *painter) override
+	{
+		Q_UNUSED(painter)
+	}
+	void resizeItem(QGraphicsSceneMouseEvent *event) override
+	{
+		Q_UNUSED(event)
+	}
 	void savePos() override;
 
 	QDomElement serialize(QDomElement &element) const override;
@@ -60,7 +65,7 @@ public:
 	bool isCircle() const override;
 	BodyType bodyType() const override;
 	QPolygonF collidingPolygon() const override;
-	QPainterPath shape () const override;
+	QPainterPath shape() const override;
 
 	QPainterPath path() const;
 

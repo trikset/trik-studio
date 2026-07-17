@@ -31,11 +31,9 @@ void SensorsConfigurationManagerTest::SetUp()
 	mQrguiFacade->setActiveTab(qReal::Id::loadFromString(
 		"qrm:/RobotsMetamodel/RobotsDiagram/RobotsDiagramNode/{f08fa823-e187-4755-87ba-e4269ae4e798}"));
 
-	mManager.reset(new DevicesConfigurationManager(mQrguiFacade->graphicalModelAssistInterface()
-			, mQrguiFacade->logicalModelAssistInterface()
-			, mQrguiFacade->mainWindowInterpretersInterface()
-			, mQrguiFacade->projectManagementInterface()
-			));
+	mManager.reset(new DevicesConfigurationManager(mQrguiFacade->graphicalModelAssistInterface(),
+		mQrguiFacade->logicalModelAssistInterface(), mQrguiFacade->mainWindowInterpretersInterface(),
+		mQrguiFacade->projectManagementInterface()));
 
 	mConfigurer1.reset(new DummySensorsConfigurer("testConfigurer1"));
 	mConfigurer2.reset(new DummySensorsConfigurer("testConfigurer2"));
