@@ -1,8 +1,13 @@
 #!/bin/bash
 set -xeuo pipefail
-which -a clang-format > /dev/null \
-	||  (echo -e "20.0.0\n$(clang-format${1+-$1} --version | grep -Eo '([0-9]+\.[0-9]+\.[0-9]+)')" | sort -CV ) \
-		|| { echo "use '${0} <clang-format-version-not-less-than-15>' to call exact proper version" ; exit 1 ; }
+
+VERSION=$(clang-format${1+-$1} --version \
+    | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')
+
+echo -e "20.0.0\n$VERSION" | sort -CV || {
+    echo "clang-format >= 20.0.0 required"
+    exit 1
+}
 
 IGNORED_DIRS=(
     "./plugins/robots/thirdparty"
