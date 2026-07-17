@@ -52,7 +52,10 @@ public:
 	explicit TrikBrick(const QSharedPointer<robotModel::twoD::TrikTwoDRobotModel> &model);
 	~TrikBrick() override;
 	void reset() override;
-	QString configVersion() const override {return {};}
+	QString configVersion() const override
+	{
+		return {};
+	}
 	void init();
 
 	void setCurrentDir(const QString &dir);
@@ -62,19 +65,29 @@ public:
 
 	QDir getCurrentDir() const;
 	QStringList motorPorts(trikControl::MotorInterface::Type type) const override;
-	QStringList pwmCapturePorts() const override {return {};}
+	QStringList pwmCapturePorts() const override
+	{
+		return {};
+	}
 	QStringList sensorPorts(trikControl::SensorInterface::Type type) const override;
 	QStringList encoderPorts() const override;
 
 public Q_SLOTS:
-	void configure(const QString &, const QString &) override {}
-	void playSound(const QString &) override {}
+	void configure(const QString &, const QString &) override
+	{
+	}
+	void playSound(const QString &) override
+	{
+	}
 	void playTone(int, int msDuration) override;
 	void say(const QString &msg) override;
 	void stop() override;
 	trikControl::MotorInterface *motor(const QString &port) override;
 	trikControl::MarkerInterface *marker() override;
-	trikControl::PwmCaptureInterface *pwmCapture(const QString &) override {return nullptr;}
+	trikControl::PwmCaptureInterface *pwmCapture(const QString &) override
+	{
+		return nullptr;
+	}
 	trikControl::SensorInterface *sensor(const QString &port) override;
 	trikControl::VectorSensorInterface *accelerometer() override;
 	trikControl::GyroSensorInterface *gyroscope() override;
@@ -82,21 +95,50 @@ public Q_SLOTS:
 	trikControl::ColorSensorInterface *colorSensor(const QString &port) override;
 	trikControl::ObjectSensorInterface *objectSensor(const QString &port) override;
 	trikControl::LidarInterface *lidar() override;
-	trikControl::SoundSensorInterface *soundSensor(const QString &) override {return nullptr;}
+	trikControl::SoundSensorInterface *soundSensor(const QString &) override
+	{
+		return nullptr;
+	}
 	trikControl::EncoderInterface *encoder(const QString &port) override;
-	trikControl::BatteryInterface *battery() override {return nullptr;}
-	trikControl::KeysInterface *keys() override {return &mKeys;}
+	trikControl::BatteryInterface *battery() override
+	{
+		return nullptr;
+	}
+	trikControl::KeysInterface *keys() override
+	{
+		return &mKeys;
+	}
 	trikControl::DisplayInterface *display() override;
 	trikControl::LedInterface *led() override;
-	trikControl::GamepadInterface *gamepad() override {return nullptr;}
-	trikControl::FifoInterface *fifo(const QString &) override {return nullptr;}
-	trikControl::I2cDeviceInterface *i2c(int, int, int) override {return nullptr;}
-	trikControl::I2cDeviceInterface *smBusI2c(int, int) override {return nullptr;}
-	trikControl::IrCameraInterface *irCamera() override {return nullptr;}
+	trikControl::GamepadInterface *gamepad() override
+	{
+		return nullptr;
+	}
+	trikControl::FifoInterface *fifo(const QString &) override
+	{
+		return nullptr;
+	}
+	trikControl::I2cDeviceInterface *i2c(int, int, int) override
+	{
+		return nullptr;
+	}
+	trikControl::I2cDeviceInterface *smBusI2c(int, int) override
+	{
+		return nullptr;
+	}
+	trikControl::IrCameraInterface *irCamera() override
+	{
+		return nullptr;
+	}
 
 	QVector<uint8_t> getStillImage() override;
-	trikControl::EventDeviceInterface *eventDevice(const QString &) override {return nullptr;}
-	void stopEventDevice(const QString &) override {}
+	trikControl::EventDeviceInterface *eventDevice(const QString &) override
+	{
+		return nullptr;
+	}
+	void stopEventDevice(const QString &) override
+	{
+	}
 
 	/// some ScriptExecution control replacements. @todo: factor out in the separate class
 	QStringList readAll(const QString &path);

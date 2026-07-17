@@ -39,8 +39,7 @@ public:
 	/// @param api - repository with metamodel.
 	/// @editor - editor to which this diagram belongs to.
 	/// @targetDirectory - directory to which the code shall be generated.
-	Diagram(const qReal::Id &id, const qrRepo::LogicalRepoApi &api, Editor &editor
-			, const QString &targetDirectory);
+	Diagram(const qReal::Id &id, const qrRepo::LogicalRepoApi &api, Editor &editor, const QString &targetDirectory);
 
 	~Diagram();
 
@@ -57,7 +56,7 @@ public:
 	Type *findType(const QString &name) const;
 
 	/// Returns all types in this diagram.
-	const QMap<QString, Type*> &types() const;
+	const QMap<QString, Type *> &types() const;
 
 	/// Returns internal name of the diagram.
 	QString name() const;
@@ -102,7 +101,7 @@ private:
 	const qrRepo::LogicalRepoApi &mApi;
 
 	/// Has ownership.
-	QMap<QString, Type*> mTypes;
+	QMap<QString, Type *> mTypes;
 
 	QString mDiagramName;
 	QString mDiagramNodeName; // TODO: replace with QStringList for multiple nodeNames
@@ -111,11 +110,11 @@ private:
 	QList<ImportSpecification> mImports;
 	const QString mTargetDirectory;
 
-	QString generateListMethod(const QString &lineTemplate
-			, const std::function<QString (const Type *const, const QString &)> &generator) const;
+	QString generateListMethod(const QString &lineTemplate,
+		const std::function<QString(const Type *const, const QString &)> &generator) const;
 
-	QString generateMapMethod(const QString& lineTemplate
-			, const std::function<QString (Type *const, const QString &)> &generator) const;
+	QString generateMapMethod(const QString &lineTemplate,
+		const std::function<QString(Type *const, const QString &)> &generator) const;
 };
 
 }

@@ -25,18 +25,18 @@ ReservedFunctionsConverter::ReservedFunctionsConverter(const QStringList &pathsT
 
 QString ReservedFunctionsConverter::convert(const QString &name, const QStringList &args) const
 {
-	const QStringList oneArgumentFloatFunctions = { "sin", "cos", "ln", "exp", "asin", "acos", "atan"
-			, "sgn", "sqrt", "abs", "ceil", "floor", "random", "print" };
+	const QStringList oneArgumentFloatFunctions = {"sin", "cos", "ln", "exp", "asin", "acos", "atan", "sgn", "sqrt",
+		"abs", "ceil", "floor", "random", "print"};
 	if (oneArgumentFloatFunctions.contains(name)) {
-		return readTemplate(QString("functions/%1.t").arg(name)).replace("@@ARGUMENT@@"
-				, !args.isEmpty()? args[0] : QString());
+		return readTemplate(QString("functions/%1.t").arg(name))
+		        .replace("@@ARGUMENT@@", !args.isEmpty() ? args[0] : QString());
 	}
 
-	const QStringList twoArgumentsFloatFunctions = { "min", "max", "atan2" };
+	const QStringList twoArgumentsFloatFunctions = {"min", "max", "atan2"};
 	if (twoArgumentsFloatFunctions.contains(name)) {
 		return readTemplate(QString("functions/%1.t").arg(name))
-				.replace("@@ARGUMENT1@@", !args.empty() ? args[0] : QString())
-				.replace("@@ARGUMENT2@@", args.count() >= 2 ? args[1] : QString());
+		        .replace("@@ARGUMENT1@@", !args.empty() ? args[0] : QString())
+		        .replace("@@ARGUMENT2@@", args.count() >= 2 ? args[1] : QString());
 	}
 
 	if (name == "time") {

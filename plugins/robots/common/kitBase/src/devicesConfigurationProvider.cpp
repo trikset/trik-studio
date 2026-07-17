@@ -29,7 +29,7 @@ DevicesConfigurationProvider::~DevicesConfigurationProvider()
 }
 
 void DevicesConfigurationProvider::connectDevicesConfigurationProvider(
-		DevicesConfigurationProvider * const otherProvider)
+	DevicesConfigurationProvider *const otherProvider)
 {
 	if (!otherProvider) {
 		return;
@@ -43,15 +43,16 @@ void DevicesConfigurationProvider::connectDevicesConfigurationProvider(
 	// Copying unknown devices configuration from connected provider.
 	for (const QString &robotModel : otherProvider->configuredModels()) {
 		for (const kitBase::robotModel::PortInfo &port : otherProvider->configuredPorts(robotModel)) {
-			if (!mCurrentConfiguration.contains(robotModel) || !mCurrentConfiguration[robotModel].contains(port)) {
-				mCurrentConfiguration[robotModel][port] = otherProvider->currentConfiguration(robotModel, port);
+			if (!mCurrentConfiguration.contains(robotModel)
+				|| !mCurrentConfiguration[robotModel].contains(port)) {
+				mCurrentConfiguration[robotModel][port] =
+					otherProvider->currentConfiguration(robotModel, port);
 			}
 		}
 	}
 }
 
-void DevicesConfigurationProvider::disconnectDevicesConfigurationProvider(
-		DevicesConfigurationProvider * const provider)
+void DevicesConfigurationProvider::disconnectDevicesConfigurationProvider(DevicesConfigurationProvider *const provider)
 {
 	if (!provider) {
 		return;
@@ -68,23 +69,23 @@ void DevicesConfigurationProvider::disconnectDevicesConfigurationProvider()
 	mConnectedProviders.clear();
 }
 
-void DevicesConfigurationProvider::deviceConfigurationChanged(const QString &robotId
-		, const PortInfo &port, const DeviceInfo &device, Reason reason)
+void DevicesConfigurationProvider::deviceConfigurationChanged(const QString &robotId, const PortInfo &port,
+	const DeviceInfo &device, Reason reason)
 {
 	if (mCurrentConfiguration[robotId][port] != device) {
 		mCurrentConfiguration[robotId][port] = device;
 		// Allow provider to react on configuration change.
 		onDeviceConfigurationChanged(robotId, port, device, reason);
 
-		for (DevicesConfigurationProvider * const provider : mConnectedProviders) {
+		for (DevicesConfigurationProvider *const provider : mConnectedProviders) {
 			// Broadcast change.
 			provider->deviceConfigurationChanged(robotId, port, device, reason);
 		}
 	}
 }
 
-void DevicesConfigurationProvider::onDeviceConfigurationChanged(const QString &robotId
-		, const PortInfo &port, const DeviceInfo &sensor, Reason reason)
+void DevicesConfigurationProvider::onDeviceConfigurationChanged(const QString &robotId, const PortInfo &port,
+	const DeviceInfo &sensor, Reason reason)
 {
 	Q_UNUSED(robotId)
 	Q_UNUSED(port)
@@ -115,8 +116,8 @@ QList<robotModel::PortInfo> DevicesConfigurationProvider::configuredPorts(const 
 	return mCurrentConfiguration[modelName].keys();
 }
 
-robotModel::DeviceInfo DevicesConfigurationProvider::currentConfiguration(const QString &modelName
-		, const robotModel::PortInfo &port) const
+robotModel::DeviceInfo DevicesConfigurationProvider::currentConfiguration(const QString &modelName,
+	const robotModel::PortInfo &port) const
 {
 	if (!mCurrentConfiguration.contains(modelName) || !mCurrentConfiguration[modelName].contains(port)) {
 		return {};

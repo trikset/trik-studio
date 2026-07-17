@@ -43,12 +43,9 @@ QStringList UpdateDownloadsCounterBlock::arguments()
 		return {};
 	}
 
-	QStringList result = {
-		QCoreApplication::applicationDirPath() + "/deployment-scripts/uploading/update_site_scripts.sh"
-		, stringProperty(id(), "Mode")
-		, eval<QString>("NewVersion")
-		, eval<QString>("SshKey")
-	};
+	QStringList result = {QCoreApplication::applicationDirPath()
+				      + "/deployment-scripts/uploading/update_site_scripts.sh",
+		stringProperty(id(), "Mode"), eval<QString>("NewVersion"), eval<QString>("SshKey")};
 
 	for (int i = 0; i < keys.count(); ++i) {
 		result << keys[i];

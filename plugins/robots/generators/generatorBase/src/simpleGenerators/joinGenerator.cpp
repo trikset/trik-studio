@@ -16,12 +16,8 @@
 
 using namespace generatorBase::simple;
 
-JoinGenerator::JoinGenerator(const qrRepo::RepoApi &repo
-		, GeneratorCustomizer &customizer
-		, const qReal::Id &id
-		, const QStringList &joinedThreads
-		, const QString &mainThreadId
-		, QObject *parent)
+JoinGenerator::JoinGenerator(const qrRepo::RepoApi &repo, GeneratorCustomizer &customizer, const qReal::Id &id,
+	const QStringList &joinedThreads, const QString &mainThreadId, QObject *parent)
 	: AbstractSimpleGenerator(repo, customizer, id, parent)
 	, mJoinedThreads(joinedThreads)
 	, mMainThreadId(mainThreadId)
@@ -44,4 +40,3 @@ QString JoinGenerator::generate()
 
 	return result;
 }
-

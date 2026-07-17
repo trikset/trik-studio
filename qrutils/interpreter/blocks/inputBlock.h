@@ -31,6 +31,7 @@ public:
 	~InputBlock() override;
 	void run() override;
 	void setFailedStatus() override;
+
 private:
 	bool initNextBlocks() override;
 	bool checkLinksCount();

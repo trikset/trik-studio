@@ -19,21 +19,13 @@
 using namespace pioneer::lua;
 using namespace generatorBase::simple;
 
-PioneerReadGPIO::PioneerReadGPIO(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, const qReal::Id &id
-		, QObject *parent)
-	: BindingGenerator(repo, customizer, id, "quadcopterCommands/gpioRead.t"
-		, {
-			Binding::createConverting(
-					"@@PIN_NAME@@"
-					, "PinName"
-					, customizer.factory()->stringPropertyConverter(id, "PinName"))
-			, Binding::createConverting(
-					"@@VARIABLE@@"
-					, "Variable"
-					, customizer.factory()->stringPropertyConverter(id, "Variable"))
-			}
-		, parent)
+PioneerReadGPIO::PioneerReadGPIO(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+	const qReal::Id &id, QObject *parent)
+	: BindingGenerator(repo, customizer, id, "quadcopterCommands/gpioRead.t",
+		  {Binding::createConverting("@@PIN_NAME@@", "PinName",
+			   customizer.factory()->stringPropertyConverter(id, "PinName")),
+			  Binding::createConverting("@@VARIABLE@@", "Variable",
+				  customizer.factory()->stringPropertyConverter(id, "Variable"))},
+		  parent)
 {
 }

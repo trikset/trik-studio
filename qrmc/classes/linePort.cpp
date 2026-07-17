@@ -60,8 +60,10 @@ Port *LinePort::clone() const
 QString LinePort::generate(const QString &lineTemplate, bool isScaled) const
 {
 	QString result = lineTemplate;
-	result.replace(startXTag, mStartX.toString(isScaled)).replace(startYTag, mStartY.toString(isScaled))
-		.replace(endXTag, mEndX.toString(isScaled)).replace(endYTag, mEndY.toString(isScaled));
+	result.replace(startXTag, mStartX.toString(isScaled))
+		.replace(startYTag, mStartY.toString(isScaled))
+		.replace(endXTag, mEndX.toString(isScaled))
+		.replace(endYTag, mEndY.toString(isScaled));
 
 	return result;
 }
@@ -78,9 +80,9 @@ QString LinePort::generateInit(const MetaCompiler &compiler) const
 	QString result = generate(linePortLine, false);
 
 	result.replace(startXScalabilityTag, mStartX.getScalability())
-			.replace(startYScalabilityTag, mStartY.getScalability())
-			.replace(endXScalabilityTag, mEndX.getScalability())
-			.replace(endYScalabilityTag, mEndY.getScalability());
+		.replace(startYScalabilityTag, mStartY.getScalability())
+		.replace(endXScalabilityTag, mEndX.getScalability())
+		.replace(endYScalabilityTag, mEndY.getScalability());
 
 	return result;
 }

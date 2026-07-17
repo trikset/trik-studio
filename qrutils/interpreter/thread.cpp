@@ -22,18 +22,14 @@
 #include <qrutils/interpreter/blocks/receiveThreadMessageBlock.h>
 #include <qrutils/interpreter/blocks/subprogramBlock.h>
 
-
 using namespace qReal;
 using namespace interpretation;
 
 const int blocksCountTillProcessingEvents = 100;
 
-Thread::Thread(const GraphicalModelAssistInterface *graphicalModelApi
-		, gui::MainWindowInterpretersInterface &interpretersInterface
-		, const Id &initialNodeType
-		, BlocksTableInterface &blocksTable
-		, const Id &initialNode
-		, const QString &threadId)
+Thread::Thread(const GraphicalModelAssistInterface *graphicalModelApi,
+	gui::MainWindowInterpretersInterface &interpretersInterface, const Id &initialNodeType,
+	BlocksTableInterface &blocksTable, const Id &initialNode, const QString &threadId)
 	: mGraphicalModelApi(graphicalModelApi)
 	, mInterpretersInterface(interpretersInterface)
 	, mInitialNodeType(initialNodeType)
@@ -47,12 +43,9 @@ Thread::Thread(const GraphicalModelAssistInterface *graphicalModelApi
 	initTimer();
 }
 
-Thread::Thread(const GraphicalModelAssistInterface *graphicalModelApi
-		, gui::MainWindowInterpretersInterface &interpretersInterface
-		, const Id &initialNodeType
-		, const Id &diagramToInterpret
-		, BlocksTableInterface &blocksTable
-		, const QString &threadId)
+Thread::Thread(const GraphicalModelAssistInterface *graphicalModelApi,
+	gui::MainWindowInterpretersInterface &interpretersInterface, const Id &initialNodeType,
+	const Id &diagramToInterpret, BlocksTableInterface &blocksTable, const QString &threadId)
 	: mGraphicalModelApi(graphicalModelApi)
 	, mInterpretersInterface(interpretersInterface)
 	, mInitialNodeType(initialNodeType)
@@ -80,11 +73,9 @@ void Thread::initTimer()
 {
 	mProcessEventsTimer->setSingleShot(true);
 	mProcessEventsTimer->setInterval(0);
-	connect(mProcessEventsTimer, SIGNAL(timeout())
-			, mProcessEventsMapper, SLOT(map()));
+	connect(mProcessEventsTimer, SIGNAL(timeout()), mProcessEventsMapper, SLOT(map()));
 
-	connect(mProcessEventsMapper, &QSignalMapper::mappedObject
-			, this, &Thread::interpretAfterEventsProcessing);
+	connect(mProcessEventsMapper, &QSignalMapper::mappedObject, this, &Thread::interpretAfterEventsProcessing);
 }
 
 void Thread::interpret()
@@ -111,7 +102,7 @@ void Thread::nextBlock(const Id &blockId)
 void Thread::stepInto(const Id &diagram)
 {
 	const Id initialNode = findStartingElement(diagram);
-	BlockInterface * const block = mBlocksTable.block(initialNode);
+	BlockInterface *const block = mBlocksTable.block(initialNode);
 
 	if (initialNode.isNull() || !block) {
 		error(tr("No entry point found, please add Initial Node to a diagram"), diagram);
@@ -167,7 +158,7 @@ Id Thread::findStartingElement(const Id &diagram) const
 	return {};
 }
 
-void Thread::turnOn(BlockInterface * const block)
+void Thread::turnOn(BlockInterface *const block)
 {
 	mCurrentBlock = block;
 	if (!mCurrentBlock) {
@@ -186,7 +177,7 @@ void Thread::turnOn(BlockInterface * const block)
 	connectBlock(mCurrentBlock);
 
 	// Check subprogram block
-	const blocks::SubprogramBlock * const subprogram = dynamic_cast<blocks::SubprogramBlock *>(mCurrentBlock);
+	const blocks::SubprogramBlock *const subprogram = dynamic_cast<blocks::SubprogramBlock *>(mCurrentBlock);
 	if (subprogram) {
 		QList<QPair<QString, QVariant>> properties;
 		const QList<blocks::SubprogramBlock::DynamicParameter> parameters = subprogram->dynamicParameters();
@@ -222,13 +213,13 @@ void Thread::turnOn(BlockInterface * const block)
 
 void Thread::interpretAfterEventsProcessing(QObject *blockObject)
 {
-	auto * const block = dynamic_cast<BlockInterface *>(blockObject);
+	auto *const block = dynamic_cast<BlockInterface *>(blockObject);
 	if (block) {
 		block->interpret(this);
 	}
 }
 
-void Thread::turnOff(BlockInterface * const block)
+void Thread::turnOff(BlockInterface *const block)
 {
 	// This is a signal not from a current block of this thread.
 	// Other thread shall process it, we will just ignore.
@@ -242,7 +233,7 @@ void Thread::turnOff(BlockInterface * const block)
 
 	// Restoring old properties...
 	const QList<QPair<QString, QVariant>> &oldProperties = mStack.top().properties();
-	auto * const topBlock = dynamic_cast<Block *>(mStack.top().block());
+	auto *const topBlock = dynamic_cast<Block *>(mStack.top().block());
 	for (const QPair<QString, QVariant> &property : oldProperties) {
 		const QString propertyName = property.first;
 		const QVariant propertyValue = property.second;
@@ -264,7 +255,7 @@ void Thread::turnOff(BlockInterface * const block)
 	mInterpretersInterface.dehighlight(block->id());
 }
 
-void Thread::connectBlock(BlockInterface * const block)
+void Thread::connectBlock(BlockInterface *const block)
 {
 	connect(block, &BlockInterface::done, this, &Thread::nextBlock, Qt::UniqueConnection);
 	connect(block, &BlockInterface::newThread, this, &Thread::newThread, Qt::UniqueConnection);

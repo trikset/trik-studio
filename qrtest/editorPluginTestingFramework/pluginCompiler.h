@@ -28,23 +28,15 @@ public:
 	PluginCompiler() = delete;
 
 	/// Enum with available metamodel compilers to use --- QRXC or QRMC.
-	enum class MetamodelCompiler
-	{
-		qrxc
-		, qrmc
-	};
+	enum class MetamodelCompiler { qrxc, qrmc };
 
 	/// Compiles code that is generated for QRXC and QRMC using qmake and common plugins build system.
 	/// Note that it will compile only the first metamodel in .qrs file.
 	/// @returns file with compiled plugin binary.
 	/// @throws qReal::Exception if somwthing went wrong.
-	static QFileInfo compilePlugin(const QString &fileWithMetamodel
-		, const QString &directoryToCompile
-		, const QString &pathToQmake
-		, const QString &pathToMake
-		, const QString &configurationParameter
-		, MetamodelCompiler metamodelCompiler
-		);
+	static QFileInfo compilePlugin(const QString &fileWithMetamodel, const QString &directoryToCompile,
+		const QString &pathToQmake, const QString &pathToMake, const QString &configurationParameter,
+		MetamodelCompiler metamodelCompiler);
 
 private:
 	/// Determines name of a generated plugin by looking on metamodel contents.

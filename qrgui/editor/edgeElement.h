@@ -44,17 +44,9 @@ class QRGUI_EDITOR_EXPORT EdgeElement : public Element
 public:
 	static const int stripeWidth = 25;
 
-	enum DragType {
-		wholeEdge = -2
-		, noPort = -1
-	};
+	enum DragType { wholeEdge = -2, noPort = -1 };
 
-	enum NodeSide {
-		left
-		, top
-		, right
-		, bottom
-	};
+	enum NodeSide { left, top, right, bottom };
 
 	EdgeElement(const EdgeElementType &type, const Id &id, const models::Models &models);
 	~EdgeElement() override;
@@ -96,7 +88,7 @@ public:
 	/// @return numeric criteria for sorting links on linear ports
 	EdgeArrangeCriteria arrangeCriteria(const NodeElement *node, const QLineF &portLine) const;
 
-	NodeElement* otherSide(const NodeElement *node) const;
+	NodeElement *otherSide(const NodeElement *node) const;
 	void removeLink(const NodeElement *from);
 
 	QPolygonF line() const;
@@ -117,7 +109,7 @@ public:
 	/// Resort edges connected to linear ports of adjacent nodes
 	void arrangeLinearPorts();
 
-	void connectToPort(Element * src = nullptr, Element * = nullptr) override;
+	void connectToPort(Element *src = nullptr, Element * = nullptr) override;
 
 	void setColorRect(bool bl) override;
 
@@ -163,7 +155,7 @@ public:
 	int defineSegment(QPointF scenePos) const;
 
 protected:
-	void paint(QPainter* p, const QStyleOptionGraphicsItem *opt, QWidget* w) override;
+	void paint(QPainter *p, const QStyleOptionGraphicsItem *opt, QWidget *w) override;
 
 	void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
 	void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
@@ -194,7 +186,7 @@ private:
 
 	/// Returns true, if the sides adjacent.
 	bool isNeighbor(qReal::gui::editor::EdgeElement::NodeSide startSide,
-						 qReal::gui::editor::EdgeElement::NodeSide endSide) const;
+		qReal::gui::editor::EdgeElement::NodeSide endSide) const;
 
 	/// Returns the next clockwise side.
 	NodeSide rotateRight(NodeSide side) const;
@@ -204,11 +196,11 @@ private:
 	QPen edgePen(QPainter *painter, const QColor &color, Qt::PenStyle style, int width) const;
 	void setEdgePainter(QPainter *painter, const QPen &pen, qreal opacity) const;
 
-	NodeElement *innermostChild(const QList<QGraphicsItem *> &items, NodeElement * const element) const;
+	NodeElement *innermostChild(const QList<QGraphicsItem *> &items, NodeElement *const element) const;
 	void updateLongestPart();
 
 	bool reverseActionIsPossible() const;
-	bool canConnect(const NodeElement * const node, bool from) const;
+	bool canConnect(const NodeElement *const node, bool from) const;
 	void reversingReconnectToPorts(NodeElement *newSrc, NodeElement *newDst);
 
 	const EdgeElementType &mType;
@@ -236,7 +228,7 @@ private:
 
 	bool mBreakPointPressed;
 
-	bool mModelUpdateIsCalled;  // flag for the infinite updateData()-s liquidating
+	bool mModelUpdateIsCalled; // flag for the infinite updateData()-s liquidating
 
 	bool mIsLoop; // if line is self-closing (mSrc == mDst && mDst)
 };

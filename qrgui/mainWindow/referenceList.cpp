@@ -17,8 +17,8 @@
 
 #include "mainWindow/mainWindow.h"
 
-ReferenceList::ReferenceList(qReal::MainWindow *mainWindow, const QPersistentModelIndex &index
-		, const QString &refType, const QStringList &currentValue, int role, QWidget *parent)
+ReferenceList::ReferenceList(qReal::MainWindow *mainWindow, const QPersistentModelIndex &index, const QString &refType,
+	const QStringList &currentValue, int role, QWidget *parent)
 	: QDialog(parent)
 	, mUi(new Ui::ReferenceList)
 	, mIndex(index)
@@ -63,7 +63,7 @@ void ReferenceList::addItem(const qReal::Id &element)
 void ReferenceList::highlightCurrentValue(const QStringList &currentValue)
 {
 	for (int i = 0; i < mUi->listWidget->count(); i++) {
-		QListWidgetItem* currItem = mUi->listWidget->item(i);
+		QListWidgetItem *currItem = mUi->listWidget->item(i);
 		if (currentValue.contains(currItem->data(Qt::UserRole).toString())) {
 			currItem->setSelected(true);
 		}
@@ -72,8 +72,8 @@ void ReferenceList::highlightCurrentValue(const QStringList &currentValue)
 
 void ReferenceList::initConnections()
 {
-	connect(mUi->listWidget, SIGNAL(itemClicked(QListWidgetItem*))
-			, this, SLOT(activateElement(QListWidgetItem*)));
+	connect(mUi->listWidget, SIGNAL(itemClicked(QListWidgetItem *)), this,
+		SLOT(activateElement(QListWidgetItem *)));
 	connect(this, SIGNAL(accepted()), this, SLOT(valueChanged()));
 	connect(this, SIGNAL(finished(int)), this, SLOT(restoreSelected()));
 }
@@ -93,7 +93,7 @@ void ReferenceList::valueChanged()
 QStringList ReferenceList::getNewValue() const
 {
 	QStringList newValue;
-	for(auto *item: mUi->listWidget->selectedItems()) {
+	for (auto *item : mUi->listWidget->selectedItems()) {
 		newValue << item->data(Qt::UserRole).toString();
 	}
 	return newValue;

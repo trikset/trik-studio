@@ -25,7 +25,8 @@ class QRREPO_EXPORT CouldNotOpenInputFileException : public QrRepoException
 public:
 	explicit CouldNotOpenInputFileException(const QString &fileName)
 		: QrRepoException("Could not open one of the files in uncompressed folder for saving: " + fileName)
-	{}
+	{
+	}
 };
 
 }

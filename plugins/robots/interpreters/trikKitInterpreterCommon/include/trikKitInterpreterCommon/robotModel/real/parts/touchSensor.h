@@ -29,9 +29,8 @@ class ROBOTS_TRIK_KIT_INTERPRETER_COMMON_EXPORT TouchSensor : public kitBase::ro
 	Q_OBJECT
 
 public:
-	TouchSensor(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port
-			, utils::robotCommunication::TcpRobotCommunicator &tcpRobotCommunicator);
+	TouchSensor(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+		utils::robotCommunication::TcpRobotCommunicator &tcpRobotCommunicator);
 
 	void read() override;
 

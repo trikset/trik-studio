@@ -52,21 +52,26 @@ private slots:
 private:
 	/// Compiles and loads to QReal new editor plugin
 	void loadNewEditor(
-			/// Directory where editor was generated (containing .pro file of that editor)
-			QString const &directoryName
-			/// Metamodel name as set in metamodel
-			, QPair<QString, QString> const &metamodelNames
-			/// qmake command
-			, QString const &commandFirst
-			/// make command
-			, QString const &commandSecond
-			/// Extension of the resulting binary file with editor plugin (.dll/.so)
-			, QString const &extension
-			/// Optional OS-dependent prefix for resulting binary file (lib for linux, for example)
-			, QString const &prefix
-			/// debug or release, passed to CONFIG variable of qmake
-			, QString const &buildConfiguration
-			);
+		/// Directory where editor was generated (containing .pro file of that editor)
+		QString const &directoryName
+		/// Metamodel name as set in metamodel
+		,
+		QPair<QString, QString> const &metamodelNames
+		/// qmake command
+		,
+		QString const &commandFirst
+		/// make command
+		,
+		QString const &commandSecond
+		/// Extension of the resulting binary file with editor plugin (.dll/.so)
+		,
+		QString const &extension
+		/// Optional OS-dependent prefix for resulting binary file (lib for linux, for example)
+		,
+		QString const &prefix
+		/// debug or release, passed to CONFIG variable of qmake
+		,
+		QString const &buildConfiguration);
 
 	/// Action that starts generation of .xml file with metamodel for qrxc
 	QAction mGenerateEditorForQrxcAction;
@@ -78,17 +83,17 @@ private:
 	QAction mParseEditorXmlAction;
 
 	/// Interface of MainWindow, used, for example, to reinit models when finished parsing
-	qReal::gui::MainWindowInterpretersInterface *mMainWindowInterface;  // Does not have ownership
+	qReal::gui::MainWindowInterpretersInterface *mMainWindowInterface; // Does not have ownership
 
 	/// API of logical part of a repository, mutable to allow parser build model
-	qrRepo::LogicalRepoApi *mLogicalRepoApi;  // Does not have ownership
+	qrRepo::LogicalRepoApi *mLogicalRepoApi; // Does not have ownership
 
 	/// Control API of a repository, used for requests such as current save file name
-	qrRepo::RepoControlInterface *mRepoControlApi;  // Does not have ownership
+	qrRepo::RepoControlInterface *mRepoControlApi; // Does not have ownership
 
 	/// Page with plugin settings. Created here, but then ownership is passed to
 	/// a caller of preferencesPage().
-	PreferencesCompilerPage *mCompilerSettingsPage;  // Does not have ownership
+	PreferencesCompilerPage *mCompilerSettingsPage; // Does not have ownership
 };
 
 }

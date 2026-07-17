@@ -41,12 +41,8 @@ public:
 	/// @param kitPluginManager - reference to kit plugin manager.
 	/// @param robotModelManager - contains information about currently selected robot model.
 	/// @param parent - parent of this window in terms of Qt widget system.
-	explicit RobotsSettingsPage(
-			KitPluginManager &kitPluginManager
-			, RobotModelManager &robotModelManager
-			, qReal::LogicalModelAssistInterface &logicalModel
-			, QWidget *parent = nullptr
-			);
+	explicit RobotsSettingsPage(KitPluginManager &kitPluginManager, RobotModelManager &robotModelManager,
+		qReal::LogicalModelAssistInterface &logicalModel, QWidget *parent = nullptr);
 
 	~RobotsSettingsPage() override;
 
@@ -71,18 +67,17 @@ private Q_SLOTS:
 private:
 	void initializeAdditionalWidgets();
 	void initializeKitRadioButtons();
-	QButtonGroup *initializeRobotModelsButtons(const QString &kitId, QRadioButton * const kitButton);
+	QButtonGroup *initializeRobotModelsButtons(const QString &kitId, QRadioButton *const kitButton);
 
 	void showAdditionalPreferences(const QString &kitId);
-	void showRadioButtonGroup(QWidget * const container
-			, QButtonGroup * const radioButtons
-			, QWidget * const emptyCaseWidget = nullptr);
+	void showRadioButtonGroup(QWidget *const container, QButtonGroup *const radioButtons,
+		QWidget *const emptyCaseWidget = nullptr);
 
 	void saveSelectedRobotModel();
-	void checkSelectedRobotModelButtonFor(QAbstractButton * const kitButton);
-	void changeRobotModel(QAbstractButton * const kitButton);
+	void checkSelectedRobotModelButtonFor(QAbstractButton *const kitButton);
+	void changeRobotModel(QAbstractButton *const kitButton);
 
-	Ui::PreferencesRobotSettingsPage *mUi;  // Has ownership.
+	Ui::PreferencesRobotSettingsPage *mUi; // Has ownership.
 	KitPluginManager &mKitPluginManager;
 	RobotModelManager &mRobotModelManager;
 

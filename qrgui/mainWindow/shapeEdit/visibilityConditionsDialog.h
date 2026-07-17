@@ -29,19 +29,20 @@ class VisibilityConditionsDialog : public QDialog
 
 public:
 	enum Type { Enum, Int, Bool, String };
-	struct PropertyInfo
-	{
+	struct PropertyInfo {
 		Type type;
 		QStringList values;
 
 		//PropertyInfo() = default;
 		PropertyInfo(Type t, const QStringList &v)
-			: type(t), values(v)
-		{}
+			: type(t)
+			, values(v)
+		{
+		}
 	};
 
-	explicit VisibilityConditionsDialog(QMap<QString, PropertyInfo> const &enumValues
-			, QList<QSharedPointer<Item>> const &items, QWidget *parent = nullptr);
+	explicit VisibilityConditionsDialog(QMap<QString, PropertyInfo> const &enumValues,
+		QList<QSharedPointer<Item>> const &items, QWidget *parent = nullptr);
 	~VisibilityConditionsDialog() override;
 
 private Q_SLOTS:

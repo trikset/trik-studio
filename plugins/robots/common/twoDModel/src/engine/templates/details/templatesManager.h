@@ -26,15 +26,16 @@ namespace details {
 class TemplatesManager
 {
 public:
-	TemplatesManager(const TemplatesManager&) = delete;
-	TemplatesManager& operator=(const TemplatesManager&) = delete;
-	TemplatesManager(TemplatesManager&&) noexcept = default;
-	TemplatesManager& operator=(TemplatesManager&&) noexcept = default;
+	TemplatesManager(const TemplatesManager &) = delete;
+	TemplatesManager &operator=(const TemplatesManager &) = delete;
+	TemplatesManager(TemplatesManager &&) noexcept = default;
+	TemplatesManager &operator=(TemplatesManager &&) noexcept = default;
 	TemplatesManager() noexcept = default;
 	void addTemplates(std::unordered_map<QString, XmlTemplate> &templates, bool isSystem);
 	void clearTemplates(bool system);
-	XmlTemplate* findTemplate(const QString &templateName);
+	XmlTemplate *findTemplate(const QString &templateName);
 	bool isPotentialTemplate(const QString &name) const;
+
 private:
 	std::unordered_map<QString, XmlTemplate> mSystemTemplates;
 	std::unordered_map<QString, XmlTemplate> mUserTemplates;

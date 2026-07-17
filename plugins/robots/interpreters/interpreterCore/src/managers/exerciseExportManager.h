@@ -28,8 +28,8 @@ namespace interpreterCore {
 class ExerciseExportManager
 {
 public:
-	explicit ExerciseExportManager(qReal::LogicalModelAssistInterface &logicalModel
-			, qrRepo::RepoControlInterface &repoControlApi, qReal::ProjectManagementInterface &projectManager);
+	explicit ExerciseExportManager(qReal::LogicalModelAssistInterface &logicalModel,
+		qrRepo::RepoControlInterface &repoControlApi, qReal::ProjectManagementInterface &projectManager);
 
 	~ExerciseExportManager();
 

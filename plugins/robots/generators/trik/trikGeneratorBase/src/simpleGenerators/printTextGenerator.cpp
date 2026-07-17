@@ -20,26 +20,24 @@
 using namespace trik::simple;
 using namespace generatorBase::simple;
 
-trik::simple::PrintTextGenerator::PrintTextGenerator(const qrRepo::RepoApi &repo
-													 , generatorBase::GeneratorCustomizer &customizer
-													 , const qReal::Id &id
-													 , QObject *parent)
-	: BindingGenerator(repo, customizer, id, "drawing/printText.t", {
-			Binding::createConverting("@@X@@", "XCoordinateText"
-					, customizer.factory()->intPropertyConverter(id, "XCoordinateText"))
-			, Binding::createConverting("@@Y@@", "YCoordinateText"
-					, customizer.factory()->intPropertyConverter(id, "YCoordinateText"))
-			, Binding::createConverting("@@FONTSIZE@@", "FontSize"
-					, customizer.factory()->intPropertyConverter(id, "FontSize"))
-			, (repo.property(id, "Evaluate").toBool()
-					? Binding::createConverting("@@TEXT@@", "PrintText"
-							, customizer.factory()->stringPropertyConverter(id, "PrintText"))
-					: Binding::createStaticConverting("@@TEXT@@"
-							, utils::StringUtils::wrap(repo.stringProperty(id, "PrintText"))
-							, customizer.factory()->stringPropertyConverter(id, "PrintText")))
-			}, parent)
+trik::simple::PrintTextGenerator::PrintTextGenerator(const qrRepo::RepoApi &repo,
+	generatorBase::GeneratorCustomizer &customizer, const qReal::Id &id, QObject *parent)
+	: BindingGenerator(repo, customizer, id, "drawing/printText.t",
+		  {Binding::createConverting("@@X@@", "XCoordinateText",
+			   customizer.factory()->intPropertyConverter(id, "XCoordinateText")),
+			  Binding::createConverting("@@Y@@", "YCoordinateText",
+				  customizer.factory()->intPropertyConverter(id, "YCoordinateText")),
+			  Binding::createConverting("@@FONTSIZE@@", "FontSize",
+				  customizer.factory()->intPropertyConverter(id, "FontSize")),
+			  (repo.property(id, "Evaluate").toBool()
+					  ? Binding::createConverting("@@TEXT@@", "PrintText",
+						    customizer.factory()->stringPropertyConverter(id, "PrintText"))
+					  : Binding::createStaticConverting("@@TEXT@@",
+						    utils::StringUtils::wrap(repo.stringProperty(id, "PrintText")),
+						    customizer.factory()->stringPropertyConverter(id, "PrintText")))},
+		  parent)
 {
 	// Calling virtual readTemplate() before base class constructor will cause segfault.
-	addBinding(Binding::createStatic("@@REDRAW@@", repo.property(id, "Redraw").toBool()
-			? readTemplate("drawing/redraw.t") : QString()));
+	addBinding(Binding::createStatic("@@REDRAW@@",
+		repo.property(id, "Redraw").toBool() ? readTemplate("drawing/redraw.t") : QString()));
 }

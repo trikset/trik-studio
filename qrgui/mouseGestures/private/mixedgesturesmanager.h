@@ -36,7 +36,7 @@ public:
 	}
 
 	qreal getDistance(const key_type &key1, const key_type &key2) override;
-	key_type  getKey(const PathVector &path) override;
+	key_type getKey(const PathVector &path) override;
 };
 
 class MixedClassifier
@@ -50,7 +50,7 @@ public:
 
 	qreal getDistance(const MixedClassifier &classifier);
 	MixedClassifier getPoint(const MixedClassifier &centre, qreal centreWeight);
-	MixedGesturesManager::key_type  key() const;
+	MixedGesturesManager::key_type key() const;
 
 private:
 	explicit MixedClassifier(MixedGesturesManager::key_type &&key);

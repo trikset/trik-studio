@@ -49,12 +49,11 @@
 using namespace pioneer::lua;
 using namespace generatorBase::simple;
 
-PioneerLuaGeneratorFactory::PioneerLuaGeneratorFactory(const qrRepo::RepoApi &repo
-		, qReal::ErrorReporterInterface &errorReporter
-		, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
-		, generatorBase::lua::LuaProcessor &luaProcessor
-		, const QString &generatorName
-		, GotoLabelManager &gotoLabelManager)
+PioneerLuaGeneratorFactory::PioneerLuaGeneratorFactory(const qrRepo::RepoApi &repo,
+	qReal::ErrorReporterInterface &errorReporter,
+	const kitBase::robotModel::RobotModelManagerInterface &robotModelManager,
+	generatorBase::lua::LuaProcessor &luaProcessor, const QString &generatorName,
+	GotoLabelManager &gotoLabelManager)
 	: GeneratorFactoryBase(repo, errorReporter, robotModelManager, luaProcessor)
 	, mGeneratorName(generatorName)
 	, mGotoLabelManager(gotoLabelManager)
@@ -63,8 +62,8 @@ PioneerLuaGeneratorFactory::PioneerLuaGeneratorFactory(const qrRepo::RepoApi &re
 
 PioneerLuaGeneratorFactory::~PioneerLuaGeneratorFactory() = default;
 
-generatorBase::simple::AbstractSimpleGenerator *PioneerLuaGeneratorFactory::simpleGenerator(const qReal::Id &id
-		, generatorBase::GeneratorCustomizer &customizer)
+generatorBase::simple::AbstractSimpleGenerator *PioneerLuaGeneratorFactory::simpleGenerator(const qReal::Id &id,
+	generatorBase::GeneratorCustomizer &customizer)
 {
 	const QString elementType = id.element();
 	if (elementType == "EndOfHandler") {
@@ -131,7 +130,7 @@ void PioneerLuaGeneratorFactory::initialize()
 	mRandomGeneratorPart.reset(new RandomGeneratorPart(pathsToTemplates()));
 }
 
-LedPart& PioneerLuaGeneratorFactory::ledPart()
+LedPart &PioneerLuaGeneratorFactory::ledPart()
 {
 	return *mLedPart;
 }
@@ -141,24 +140,24 @@ TofPart &PioneerLuaGeneratorFactory::tofPart()
 	return *mTofPart;
 }
 
-MagnetPart& PioneerLuaGeneratorFactory::magnetPart()
+MagnetPart &PioneerLuaGeneratorFactory::magnetPart()
 {
 	return *mMagnetPart;
 }
 
-RandomGeneratorPart& PioneerLuaGeneratorFactory::randomGeneratorPart()
+RandomGeneratorPart &PioneerLuaGeneratorFactory::randomGeneratorPart()
 {
 	return *mRandomGeneratorPart;
 }
 
-generatorBase::simple::AbstractSimpleGenerator *PioneerLuaGeneratorFactory::labelGenerator(const qReal::Id &id
-		, generatorBase::GeneratorCustomizer &customizer)
+generatorBase::simple::AbstractSimpleGenerator *PioneerLuaGeneratorFactory::labelGenerator(const qReal::Id &id,
+	generatorBase::GeneratorCustomizer &customizer)
 {
 	return new LabelGenerator(mRepo, customizer, id, this, mGotoLabelManager);
 }
 
-generatorBase::simple::AbstractSimpleGenerator *PioneerLuaGeneratorFactory::gotoSimpleGenerator(const qReal::Id &id
-		, generatorBase::GeneratorCustomizer &customizer)
+generatorBase::simple::AbstractSimpleGenerator *PioneerLuaGeneratorFactory::gotoSimpleGenerator(const qReal::Id &id,
+	generatorBase::GeneratorCustomizer &customizer)
 {
 	return new GotoGenerator(mRepo, customizer, id, this, mGotoLabelManager);
 }

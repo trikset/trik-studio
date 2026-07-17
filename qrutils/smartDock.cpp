@@ -28,7 +28,6 @@
 
 #include "closeButtonVisibilityFilter.h"
 
-
 using namespace utils;
 
 SmartDock::SmartDock(const QString &objectName, QWidget *innerWidget, QMainWindow *parent)
@@ -45,9 +44,10 @@ SmartDock::SmartDock(const QString &objectName, QWidget *innerWidget, QMainWindo
 
 bool SmartDock::isCentral() const
 {
-	return !isFloating() && isVisible()
-			// I know that const_cast is bad, but this is beacuse of bad qt design.
-			&& mMainWindow->dockWidgetArea(const_cast<SmartDock *>(this)) == Qt::TopDockWidgetArea;
+	return !isFloating()
+	       && isVisible()
+	       // I know that const_cast is bad, but this is beacuse of bad qt design.
+	       && mMainWindow->dockWidgetArea(const_cast<SmartDock *>(this)) == Qt::TopDockWidgetArea;
 }
 
 void SmartDock::hideCloseButton(QDockWidget *dock)
@@ -147,19 +147,19 @@ void SmartDock::checkFloating()
 
 void SmartDock::checkCentralWidget()
 {
-	const bool tabsVisible = isFloating() || !isVisible() || mMainWindow->dockWidgetArea(this) != Qt::TopDockWidgetArea;
-	for (QTabWidget * const centralWidget : mMainWindow->centralWidget()->findChildren<QTabWidget *>()) {
+	const bool tabsVisible =
+		isFloating() || !isVisible() || mMainWindow->dockWidgetArea(this) != Qt::TopDockWidgetArea;
+	for (QTabWidget *const centralWidget : mMainWindow->centralWidget()->findChildren<QTabWidget *>()) {
 		centralWidget->setVisible(tabsVisible);
-		qReal::EditorInterface *editor = tabsVisible
-				? dynamic_cast<qReal::EditorInterface *>(centralWidget)
-				: dynamic_cast<qReal::EditorInterface *>(mInnerWidget);
+		qReal::EditorInterface *editor = tabsVisible ? dynamic_cast<qReal::EditorInterface *>(centralWidget)
+		                                             : dynamic_cast<qReal::EditorInterface *>(mInnerWidget);
 		if (editor) {
 			editor->forceFocus();
 		}
 	}
 
-	mMainWindow->centralWidget()->setSizePolicy(QSizePolicy::Preferred
-			, tabsVisible ? QSizePolicy::Preferred : QSizePolicy::Maximum);
+	mMainWindow->centralWidget()->setSizePolicy(QSizePolicy::Preferred,
+		tabsVisible ? QSizePolicy::Preferred : QSizePolicy::Maximum);
 }
 
 bool SmartDock::isAnimating()
@@ -180,8 +180,8 @@ bool SmartDock::isAnimating()
 
 QMainWindow *SmartDock::findMainWindow() const
 {
-	for (QWidget * const topLevelWidget : QApplication::topLevelWidgets()) {
-		if (auto * const window = dynamic_cast<QMainWindow *>(topLevelWidget)) {
+	for (QWidget *const topLevelWidget : QApplication::topLevelWidgets()) {
+		if (auto *const window = dynamic_cast<QMainWindow *>(topLevelWidget)) {
 			return window;
 		}
 	}
@@ -239,7 +239,7 @@ void SmartDock::initDialog()
 	mDialog->setWindowTitle(mInnerWidget->windowTitle());
 	mDialog->setWindowIcon(mInnerWidget->windowIcon());
 	mDialog->setWindowFlags(mDialog->windowFlags() | Qt::WindowMinMaxButtonsHint);
-	auto * const layout = new QVBoxLayout;
+	auto *const layout = new QVBoxLayout;
 	layout->setMargin(0);
 	layout->setSpacing(0);
 	layout->setContentsMargins(0, 0, 0, 0);

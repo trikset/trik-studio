@@ -19,26 +19,13 @@
 using namespace pioneer::lua;
 using namespace generatorBase::simple;
 
-GoToPointGenerator::GoToPointGenerator(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, const qReal::Id &id
-		, QObject *parent)
-	: BindingGenerator(repo, customizer, id, "quadcopterCommands/goToLocalPoint.t"
-		, {
-			Binding::createConverting(
-					"@@X@@"
-					, "X"
-					, customizer.factory()->intPropertyConverter(id, "X"))
-			, Binding::createConverting(
-					"@@Y@@"
-					, "Y"
-					, customizer.factory()->intPropertyConverter(id, "Y"))
-			, Binding::createConverting(
-					"@@Z@@"
-					, "Z"
-					, customizer.factory()->intPropertyConverter(id, "Z"))
-			}
-		, parent)
+GoToPointGenerator::GoToPointGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+	const qReal::Id &id, QObject *parent)
+	: BindingGenerator(repo, customizer, id, "quadcopterCommands/goToLocalPoint.t",
+		  {Binding::createConverting("@@X@@", "X", customizer.factory()->intPropertyConverter(id, "X")),
+			  Binding::createConverting("@@Y@@", "Y", customizer.factory()->intPropertyConverter(id, "Y")),
+			  Binding::createConverting("@@Z@@", "Z", customizer.factory()->intPropertyConverter(id, "Z"))},
+		  parent)
 {
 	const QString timeValue = mRepo.property(mId, "Time").toString();
 	if (timeValue.isEmpty()) {
@@ -46,7 +33,8 @@ GoToPointGenerator::GoToPointGenerator(const qrRepo::RepoApi &repo
 		addBinding(Binding::createStatic("@@Time@@", QString()));
 	} else {
 		Binding::ConverterInterface *intConverter = customizer.factory()->intPropertyConverter(id, "Time");
-		addBinding(Binding::createStatic("@@VAR_ARG_SEPARATOR@@", readTemplate("luaPrinting/argumentsSeparator.t")));
+		addBinding(Binding::createStatic("@@VAR_ARG_SEPARATOR@@",
+			readTemplate("luaPrinting/argumentsSeparator.t")));
 		addBinding(Binding::createConverting("@@Time@@", "Time", intConverter));
 	}
 }

@@ -22,8 +22,8 @@
 
 using namespace twoDModel::view;
 
-const qreal gap = 5;  // The gap between the ruler borders and text on it.
-const int frequency = 50;  // The text on the ruler will not be met more often than once per this number of pixels.
+const qreal gap = 5; // The gap between the ruler borders and text on it.
+const int frequency = 50; // The text on the ruler will not be met more often than once per this number of pixels.
 
 Ruler::Ruler(QWidget *parent)
 	: QFrame(parent)
@@ -49,7 +49,7 @@ void Ruler::setOrientation(Qt::Orientation orientation)
 {
 	mOrientation = orientation;
 
-	const QString theLongestText = "-123.45";  // The longest text that ruler must place into itself.
+	const QString theLongestText = "-123.45"; // The longest text that ruler must place into itself.
 	const QSizeF theLargestSize = textBoundingRect(theLongestText).size();
 	if (orientation == Qt::Horizontal) {
 		setFixedHeight(static_cast<int>(theLargestSize.height() + 2 * gap));
@@ -122,9 +122,8 @@ qreal Ruler::irrelevantDimension(QSizeF size) const
 
 QPointF Ruler::makePoint(qreal relevantCoordinate, qreal irrelevantCoordinate) const
 {
-	return orientation() == Qt::Horizontal
-			? QPointF(relevantCoordinate, irrelevantCoordinate)
-			: QPointF(irrelevantCoordinate, relevantCoordinate);
+	return orientation() == Qt::Horizontal ? QPointF(relevantCoordinate, irrelevantCoordinate)
+	                                       : QPointF(irrelevantCoordinate, relevantCoordinate);
 }
 
 QPointF Ruler::drawingPoint(qreal relevantCoordinate, QSizeF textSize) const

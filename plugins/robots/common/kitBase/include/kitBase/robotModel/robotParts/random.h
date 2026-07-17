@@ -38,8 +38,7 @@ public:
 	/// Constructor.
 	/// @param info --- device info describing this device.
 	/// @param port --- port on which this device is configured.
-	Random(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port);
+	Random(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port);
 
 	/// Provides integer random number in a given interval. It also counts calls, to be able to check that user
 	/// actually used RNG.

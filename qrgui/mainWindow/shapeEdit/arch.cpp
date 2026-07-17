@@ -17,8 +17,8 @@
 #include <math.h>
 #include <QtWidgets/QGraphicsSceneMouseEvent>
 
-Arch::Arch(QRectF rect, int startAngle, int spanAngle, Item* parent = nullptr)
-	:Item(parent)
+Arch::Arch(QRectF rect, int startAngle, int spanAngle, Item *parent = nullptr)
+	: Item(parent)
 {
 	mNeedScalingRect = false;
 	setPen(QPen(Qt::gray));
@@ -70,14 +70,14 @@ QRectF Arch::boundingRect() const
 	return path.boundingRect();
 }
 
-void Arch::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
+void Arch::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 	Q_UNUSED(option);
 	Q_UNUSED(widget);
 	painter->drawArc(mRect, mStartAngle, mSpanAngle);
 }
 
-void Arch::drawExtractionForItem(QPainter* painter)
+void Arch::drawExtractionForItem(QPainter *painter)
 {
 	QRectF itemBoundingRect = boundingRect();
 	painter->drawPoint(itemBoundingRect.topLeft());
@@ -86,7 +86,7 @@ void Arch::drawExtractionForItem(QPainter* painter)
 	painter->drawPoint(itemBoundingRect.bottomRight());
 }
 
-void Arch::drawScalingRects(QPainter* painter)
+void Arch::drawScalingRects(QPainter *painter)
 {
 	Q_UNUSED(painter);
 }

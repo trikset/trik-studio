@@ -84,7 +84,8 @@ void RobotsGeneratorPluginBase::onCurrentDiagramChanged(const TabInfo &info)
 
 QFileInfo RobotsGeneratorPluginBase::generationTarget(const QString &pathFromRoot) const
 {
-	return QFileInfo(PlatformInfo::invariantSettingsPath("pathToGeneratorRoot") + "/" + defaultFilePath(pathFromRoot));
+	return QFileInfo(
+		PlatformInfo::invariantSettingsPath("pathToGeneratorRoot") + "/" + defaultFilePath(pathFromRoot));
 }
 
 QFileInfo RobotsGeneratorPluginBase::srcPath()
@@ -96,7 +97,7 @@ QFileInfo RobotsGeneratorPluginBase::srcPath()
 
 	do {
 		projectName = NameNormalizer::normalizeStrongly(defaultProjectName(), false)
-				+ (exampleNumber > 0 ? QString::number(exampleNumber) : "");
+		              + (exampleNumber > 0 ? QString::number(exampleNumber) : "");
 		++exampleNumber;
 	} while (!canGenerateTo(projectName));
 
@@ -107,8 +108,7 @@ QFileInfo RobotsGeneratorPluginBase::srcPath()
 		for (const QFileInfo &path : pathsList) {
 			if (mTextManager->isDefaultPath(path.absoluteFilePath())
 				&& !mTextManager->isModifiedEver(path.absoluteFilePath())
-				&& !mTextManager->generatorName(path.absoluteFilePath()).compare(generatorName()))
-			{
+				&& !mTextManager->generatorName(path.absoluteFilePath()).compare(generatorName())) {
 				fileInfo = path;
 				break;
 			}
@@ -140,23 +140,26 @@ void RobotsGeneratorPluginBase::init(const kitBase::KitPluginConfigurator &confi
 	mTextManager = &configurator.qRealConfigurator().textManager();
 
 	mMainWindowInterface = &configurator.qRealConfigurator().mainWindowInterpretersInterface();
-	mRepo = dynamic_cast<const qrRepo::RepoApi *>(&configurator.qRealConfigurator().logicalModelApi().logicalRepoApi());
+	mRepo = dynamic_cast<const qrRepo::RepoApi *>(
+		&configurator.qRealConfigurator().logicalModelApi().logicalRepoApi());
 	mProjectManager = &configurator.qRealConfigurator().projectManager();
 	mRobotModelManager = &configurator.robotModelManager();
 	mTextLanguage = &configurator.textLanguage();
 
-	mParserErrorReporter.reset(new ParserErrorReporter(*mTextLanguage, *mMainWindowInterface->errorReporter()
-			, configurator.qRealConfigurator().logicalModelApi().editorManagerInterface()));
+	mParserErrorReporter.reset(new ParserErrorReporter(*mTextLanguage, *mMainWindowInterface->errorReporter(),
+		configurator.qRealConfigurator().logicalModelApi().editorManagerInterface()));
 
-	connect(mSystemEvents, SIGNAL(codePathChanged(qReal::Id, QFileInfo, QFileInfo))
-			, this, SLOT(regenerateCode(qReal::Id, QFileInfo, QFileInfo)));
-	connect(mSystemEvents, SIGNAL(newCodeAppeared(qReal::Id, QFileInfo)), this, SLOT(addNewCode(qReal::Id, QFileInfo)));
+	connect(mSystemEvents, SIGNAL(codePathChanged(qReal::Id, QFileInfo, QFileInfo)), this,
+		SLOT(regenerateCode(qReal::Id, QFileInfo, QFileInfo)));
+	connect(mSystemEvents, SIGNAL(newCodeAppeared(qReal::Id, QFileInfo)), this,
+		SLOT(addNewCode(qReal::Id, QFileInfo)));
 	connect(mSystemEvents, SIGNAL(diagramClosed(qReal::Id)), this, SLOT(removeDiagram(qReal::Id)));
 	connect(mSystemEvents, SIGNAL(codeTabClosed(QFileInfo)), this, SLOT(removeCode(QFileInfo)));
 
-	connect(mRobotModelManager, &kitBase::robotModel::RobotModelManagerInterface::robotModelChanged
-			, this, &RobotsGeneratorPluginBase::onCurrentRobotModelChanged);
-	connect(mSystemEvents, &SystemEvents::activeTabChanged, this, &RobotsGeneratorPluginBase::onCurrentDiagramChanged);
+	connect(mRobotModelManager, &kitBase::robotModel::RobotModelManagerInterface::robotModelChanged, this,
+		&RobotsGeneratorPluginBase::onCurrentRobotModelChanged);
+	connect(mSystemEvents, &SystemEvents::activeTabChanged, this,
+		&RobotsGeneratorPluginBase::onCurrentDiagramChanged);
 }
 
 QString RobotsGeneratorPluginBase::friendlyKitName() const
@@ -170,7 +173,7 @@ QString RobotsGeneratorPluginBase::generateCode(bool openTab)
 	mMainWindowInterface->errorReporter()->clearErrors();
 	mMainWindowInterface->errorReporter()->clear();
 
-	QScopedPointer<MasterGeneratorBase> generator (masterGenerator());
+	QScopedPointer<MasterGeneratorBase> generator(masterGenerator());
 	const QFileInfo path = srcPath();
 
 	generator->initialize();
@@ -196,9 +199,8 @@ QString RobotsGeneratorPluginBase::generateCode(bool openTab)
 	return generatedSrcPath;
 }
 
-void RobotsGeneratorPluginBase::regenerateCode(const qReal::Id &diagram
-		, const QFileInfo &oldFileInfo
-		, const QFileInfo &newFileInfo)
+void RobotsGeneratorPluginBase::regenerateCode(const qReal::Id &diagram, const QFileInfo &oldFileInfo,
+	const QFileInfo &newFileInfo)
 {
 	if (!oldFileInfo.completeSuffix().compare(language().extension)) {
 		mCodePath.remove(diagram, oldFileInfo);

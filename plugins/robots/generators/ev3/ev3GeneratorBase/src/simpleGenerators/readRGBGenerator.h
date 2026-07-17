@@ -20,14 +20,12 @@ namespace ev3 {
 namespace simple {
 
 /// Generator for 'Read RGB into Variables' block
-class ReadRGBGenerator: public generatorBase::simple::BindingGenerator
+class ReadRGBGenerator : public generatorBase::simple::BindingGenerator
 {
 	Q_OBJECT
 public:
-	ReadRGBGenerator(const qrRepo::RepoApi &repo
-			, generatorBase::GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent = nullptr);
+	ReadRGBGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+		const qReal::Id &id, QObject *parent = nullptr);
 };
 
 }

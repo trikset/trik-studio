@@ -28,13 +28,13 @@ class PhysicsEngineMock : public twoDModel::model::physics::PhysicsEngineBase
 public:
 	// NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init)
 	PhysicsEngineMock(const twoDModel::model::WorldModel &worldModel,
-	                  const QList<twoDModel::model::RobotModel *> &robots)
-	        : PhysicsEngineBase(worldModel, robots) {};
+		const QList<twoDModel::model::RobotModel *> &robots)
+		: PhysicsEngineBase(worldModel, robots) {};
 	// clazy:excludeall=function-args-by-value,returning-void-expression
-	MOCK_METHOD(void, addRobot, (twoDModel::model::RobotModel * const), (override));
+	MOCK_METHOD(void, addRobot, (twoDModel::model::RobotModel *const), (override));
 	MOCK_METHOD(QVector2D, positionShift, (twoDModel::model::RobotModel &), (const, override));
 	MOCK_METHOD(qreal, rotation, (twoDModel::model::RobotModel &), (const, override));
-	MOCK_METHOD(void, removeRobot, (twoDModel::model::RobotModel * const), (override));
+	MOCK_METHOD(void, removeRobot, (twoDModel::model::RobotModel *const), (override));
 	MOCK_METHOD(void, recalculateParameters, (qreal), (override));
 	MOCK_METHOD(bool, isRobotStuck, (), (const, override));
 	// clazy:enable

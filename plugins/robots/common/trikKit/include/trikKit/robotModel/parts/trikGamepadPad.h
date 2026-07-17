@@ -32,8 +32,7 @@ public:
 	/// Constructor.
 	/// @param info - device info for that device.
 	/// @param port - port on which this device is configured.
-	TrikGamepadPad(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port);
+	TrikGamepadPad(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port);
 };
 
 }

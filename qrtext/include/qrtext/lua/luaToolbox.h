@@ -75,22 +75,21 @@ public:
 		return LanguageToolboxInterface::interpret<T>(code);
 	}
 
-	const QSharedPointer<core::ast::Node> &parse(const qReal::Id &id
-			, const QString &propertyName
-			, const QString &code) override;
+	const QSharedPointer<core::ast::Node> &parse(const qReal::Id &id, const QString &propertyName,
+		const QString &code) override;
 
 	QSharedPointer<core::ast::Node> ast(const qReal::Id &id, const QString &propertyName) const override;
 
-	QSharedPointer<core::types::TypeExpression> type(const QSharedPointer<core::ast::Node> &expression) const override;
+	QSharedPointer<core::types::TypeExpression> type(
+		const QSharedPointer<core::ast::Node> &expression) const override;
 
 	QList<core::Error> const &diagnosticMessages() const override;
 
 	bool hasErrors() const override;
 
-	void addIntrinsicFunction(const QString &name
-			, core::types::TypeExpression * const returnType
-			, const QList<core::types::TypeExpression *> &parameterTypes
-			, std::function<QVariant(const QList<QVariant> &)> const &semantic) override;
+	void addIntrinsicFunction(const QString &name, core::types::TypeExpression *const returnType,
+		const QList<core::types::TypeExpression *> &parameterTypes,
+		std::function<QVariant(const QList<QVariant> &)> const &semantic) override;
 
 	QStringList identifiers() const override;
 
@@ -121,8 +120,8 @@ public:
 
 	void clear() override;
 
-	bool isGeneralization(const QSharedPointer<core::types::TypeExpression> &specific
-			, const QSharedPointer<core::types::TypeExpression> &general) const override;
+	bool isGeneralization(const QSharedPointer<core::types::TypeExpression> &specific,
+		const QSharedPointer<core::types::TypeExpression> &general) const override;
 
 protected:
 	/// Tells that the given identifier is a constant and reserved by the system (like 'pi').

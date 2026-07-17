@@ -70,7 +70,8 @@ void SensorViewer::initGraphicsOutput()
 	mScene->addItem(&mMarker);
 	mMarker.hide();
 
-	mPointsDataProcessor.reset(new PointsQueueProcessor(mScene->sceneRect().height() - 20, mScene->sceneRect().left()));
+	mPointsDataProcessor.reset(
+		new PointsQueueProcessor(mScene->sceneRect().height() - 20, mScene->sceneRect().left()));
 }
 
 void SensorViewer::startJob()
@@ -105,8 +106,8 @@ void SensorViewer::clear()
 
 void SensorViewer::exportHistory()
 {
-	QString fileName = QRealFileDialog::getSaveFileName("PlotterCsvSaver"
-			, this, tr("Save values history"), QString(), tr("Comma-Separated Values Files (*.csv)"));
+	QString fileName = QRealFileDialog::getSaveFileName("PlotterCsvSaver", this, tr("Save values history"),
+		QString(), tr("Comma-Separated Values Files (*.csv)"));
 	if (fileName.isEmpty()) {
 		return;
 	}
@@ -151,8 +152,7 @@ void SensorViewer::drawNextFrame()
 
 	const QPen regularPen = QPen(mPenBrush, 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
 	for (int i = 0; i < mPointsDataProcessor->pointsBase().size() - 1; i++) {
-		QLineF quantOfGraph(mPointsDataProcessor->pointsBase()[i]
-				, mPointsDataProcessor->pointsBase()[i + 1]);
+		QLineF quantOfGraph(mPointsDataProcessor->pointsBase()[i], mPointsDataProcessor->pointsBase()[i + 1]);
 		mScene->addLine(quantOfGraph, regularPen);
 	}
 }
@@ -205,8 +205,8 @@ void SensorViewer::drawBackground(QPainter *painter, const QRectF &rect)
 
 void SensorViewer::mouseMoveEvent(QMouseEvent *event)
 {
-	const QPointF pivot = mPointsDataProcessor->pointOfVerticalIntersection(mapToScene(event->pos().x()
-			, event->pos().y()));
+	const QPointF pivot =
+		mPointsDataProcessor->pointOfVerticalIntersection(mapToScene(event->pos().x(), event->pos().y()));
 	qreal valueUnderCursor = mPointsDataProcessor->pointToAbsoluteValue(pivot.y());
 
 	mMarker.setPos(pivot);

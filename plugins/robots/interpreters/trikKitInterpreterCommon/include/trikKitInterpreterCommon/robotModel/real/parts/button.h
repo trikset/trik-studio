@@ -29,10 +29,8 @@ class ROBOTS_TRIK_KIT_INTERPRETER_COMMON_EXPORT Button : public kitBase::robotMo
 	Q_OBJECT
 
 public:
-	Button(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port
-			, int code
-			, utils::robotCommunication::TcpRobotCommunicator &tcpRobotCommunicator);
+	Button(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port, int code,
+		utils::robotCommunication::TcpRobotCommunicator &tcpRobotCommunicator);
 
 	void read() override;
 
@@ -41,7 +39,7 @@ public Q_SLOTS:
 
 private:
 	utils::robotCommunication::TcpRobotCommunicator &mRobotCommunicator;
-	int mOldValue { -1 };
+	int mOldValue {-1};
 };
 
 }

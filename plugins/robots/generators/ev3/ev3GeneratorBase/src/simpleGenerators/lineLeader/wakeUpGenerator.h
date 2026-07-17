@@ -20,16 +20,13 @@ namespace ev3 {
 namespace simple {
 namespace lineLeader {
 
-
 /// Generator for 'Wake Up Line Leader' block
-class WakeUpGenerator: public generatorBase::simple::BindingGenerator
+class WakeUpGenerator : public generatorBase::simple::BindingGenerator
 {
 	Q_OBJECT
 public:
-	WakeUpGenerator(const qrRepo::RepoApi &repo
-			, generatorBase::GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent = nullptr);
+	WakeUpGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+		const qReal::Id &id, QObject *parent = nullptr);
 };
 
 }

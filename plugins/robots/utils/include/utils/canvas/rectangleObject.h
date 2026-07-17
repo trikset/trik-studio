@@ -30,11 +30,8 @@ class ROBOTS_UTILS_EXPORT RectangleObject : public CanvasObject
 
 public:
 	explicit RectangleObject(QObject *parent = nullptr);
-	RectangleObject(QRect shape
-			, const QColor &color = Qt::black
-			, int thickness = 1
-			, bool filled = false
-			, QObject *parent = nullptr);
+	RectangleObject(QRect shape, const QColor &color = Qt::black, int thickness = 1, bool filled = false,
+		QObject *parent = nullptr);
 
 	/// Returns the coordinates of this rectangle.
 	QRect shape() const;

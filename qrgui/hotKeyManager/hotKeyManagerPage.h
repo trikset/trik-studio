@@ -22,7 +22,7 @@
 #include "qrgui/hotKeyManager/hotKeyManagerDeclSpec.h"
 
 namespace Ui {
-	class hotKeyManagerPage;
+class hotKeyManagerPage;
 }
 
 class QRGUI_HOTKEY_MANAGER_EXPORT PreferencesHotKeyManagerPage : public qReal::gui::PreferencesPage

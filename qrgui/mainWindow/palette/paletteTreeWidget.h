@@ -36,15 +36,11 @@ public:
 	/// A reference to action invoked for each item in traversal.
 	typedef std::function<void(QTreeWidgetItem *)> Action;
 
-	PaletteTreeWidget(PaletteTree &parent, MainWindow &mainWindow
-			, const EditorManagerInterface &editorManagerProxy
-			, bool editable);
+	PaletteTreeWidget(PaletteTree &parent, MainWindow &mainWindow, const EditorManagerInterface &editorManagerProxy,
+		bool editable);
 
-	void addGroups(QList<QPair<QString, QList<PaletteElement>>> &groups
-			, QMap<QString, QString> const &descriptions
-			, bool hideIfEmpty
-			, const QString &diagramFriendlyName
-			, bool sort);
+	void addGroups(QList<QPair<QString, QList<PaletteElement>>> &groups, QMap<QString, QString> const &descriptions,
+		bool hideIfEmpty, const QString &diagramFriendlyName, bool sort);
 
 	/// Collapses all nodes of all current trees.
 	void collapse();
@@ -55,7 +51,7 @@ public:
 	static void sortByFriendlyName(IdList &ids);
 	static void sortByFriendlyName(QList<PaletteElement> &elements);
 
-	void editItem(QTreeWidgetItem * const item);
+	void editItem(QTreeWidgetItem *const item);
 
 	void setElementVisible(const Id &metatype, bool visible);
 
@@ -111,21 +107,21 @@ private:
 	static bool paletteElementLessThan(const PaletteElement &s1, const PaletteElement &s2);
 
 	/// Recursive implementation of traverse(Action).
-	void traverse(QTreeWidgetItem * const item, const Action &action) const;
+	void traverse(QTreeWidgetItem *const item, const Action &action) const;
 
 	/// Shows/hides palette group if all items in a group to which belongs given item are invisible or it has visible
 	/// elements.
-	void updateGroupVisibility(const QTreeWidgetItem * const item);
+	void updateGroupVisibility(const QTreeWidgetItem *const item);
 
 	/// Made static to be used inside idLessThan()
-	static const EditorManagerInterface *mEditorManager;  // Does not take ownership
+	static const EditorManagerInterface *mEditorManager; // Does not take ownership
 	MainWindow &mMainWindow;
 	PaletteTree &mPaletteTree;
 	bool mEditable;
 
 	QSet<PaletteElement> mElementsSet;
-	QHash<Id, DraggableElement *> mPaletteElements;  // Takes ownership.
-	QHash<Id, QTreeWidgetItem *> mPaletteItems;  // Takes ownership.
+	QHash<Id, DraggableElement *> mPaletteElements; // Takes ownership.
+	QHash<Id, QTreeWidgetItem *> mPaletteItems; // Takes ownership.
 	QHash<QTreeWidgetItem *, bool> mItemsVisible;
 	QList<DraggableElement *> mDraggableElements; // Takes ownership
 };

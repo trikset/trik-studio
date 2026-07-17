@@ -17,15 +17,14 @@
 using namespace trik::robotModel::real::parts;
 using namespace kitBase::robotModel;
 
-InfraredSensor::InfraredSensor(const DeviceInfo &info, const PortInfo &port
-		, utils::robotCommunication::TcpRobotCommunicator &tcpRobotCommunicator)
+InfraredSensor::InfraredSensor(const DeviceInfo &info, const PortInfo &port,
+	utils::robotCommunication::TcpRobotCommunicator &tcpRobotCommunicator)
 	: robotModel::parts::TrikInfraredSensor(info, port)
 	, mRobotCommunicator(tcpRobotCommunicator)
 {
-	connect(&mRobotCommunicator, &utils::robotCommunication::TcpRobotCommunicator::newScalarSensorData
-			, this, &InfraredSensor::onIncomingData);
+	connect(&mRobotCommunicator, &utils::robotCommunication::TcpRobotCommunicator::newScalarSensorData, this,
+		&InfraredSensor::onIncomingData);
 }
-
 
 void InfraredSensor::read()
 {
@@ -39,4 +38,3 @@ void InfraredSensor::onIncomingData(const QString &portName, int value)
 		Q_EMIT newData(mOldValue);
 	}
 }
-

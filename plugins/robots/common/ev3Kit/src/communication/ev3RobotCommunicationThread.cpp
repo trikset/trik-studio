@@ -20,24 +20,24 @@
 #include "ev3Kit/communication/ev3DirectCommand.h"
 #include "QsLog.h"
 
-static constexpr uchar EV3_SYSTEM_COMMAND_REPLY =             0x01;    //  System command, reply required
-static constexpr uchar EV3_SYSTEM_COMMAND_NO_REPLY =          0x81;    //  System command, reply not required
-static constexpr uchar EV3_BEGIN_DOWNLOAD =                   0x92;    //  Begin file down load
-static constexpr uchar EV3_CONTINUE_DOWNLOAD =                0x93;    //  Continue file down load
-static constexpr uchar EV3_DELETE_FILE =                      0x9C;    //  Remove file
-static constexpr uchar EV3_SYSTEM_REPLY =                     0x03;    //  System command reply
-static constexpr uchar EV3_SYSTEM_REPLY_ERROR =               0x05;    //  System command reply error
-static constexpr uchar EV3_DELETE_FILE_RESPONSE_SIZE =        8;
-static constexpr uchar EV3_BEGIN_DOWNLOAD_RESPONSE_SIZE =     8;
-static constexpr uchar EV3_CONTINUE_DOWNLOAD_RESPONSE_SIZE =  8;
-static constexpr uchar EV3_SYSTEM_COMMAND_REPLY_SUCCESS =  0x00;
-static constexpr uchar EV3_CONTINUE_DOWNLAD_STATUS_EOF =      0x08;
+static constexpr uchar EV3_SYSTEM_COMMAND_REPLY = 0x01; //  System command, reply required
+static constexpr uchar EV3_SYSTEM_COMMAND_NO_REPLY = 0x81; //  System command, reply not required
+static constexpr uchar EV3_BEGIN_DOWNLOAD = 0x92; //  Begin file down load
+static constexpr uchar EV3_CONTINUE_DOWNLOAD = 0x93; //  Continue file down load
+static constexpr uchar EV3_DELETE_FILE = 0x9C; //  Remove file
+static constexpr uchar EV3_SYSTEM_REPLY = 0x03; //  System command reply
+static constexpr uchar EV3_SYSTEM_REPLY_ERROR = 0x05; //  System command reply error
+static constexpr uchar EV3_DELETE_FILE_RESPONSE_SIZE = 8;
+static constexpr uchar EV3_BEGIN_DOWNLOAD_RESPONSE_SIZE = 8;
+static constexpr uchar EV3_CONTINUE_DOWNLOAD_RESPONSE_SIZE = 8;
+static constexpr uchar EV3_SYSTEM_COMMAND_REPLY_SUCCESS = 0x00;
+static constexpr uchar EV3_CONTINUE_DOWNLAD_STATUS_EOF = 0x08;
 
 using namespace ev3::communication;
 
 Ev3RobotCommunicationThread::~Ev3RobotCommunicationThread() = default;
 
-static inline QString char2hex (char c)
+static inline QString char2hex(char c)
 {
 	return QString("0x%1").arg(static_cast<uint8_t>(c), 2, 16, QLatin1Char('0'));
 }
@@ -51,7 +51,8 @@ QString Ev3RobotCommunicationThread::uploadFile(const QString &sourceFile, const
 	auto filenameLength = fileInfo.fileName().length();
 	if (filenameLength > EV3_MAX_ALLOWED_FILENAME_LENGTH) {
 		Q_EMIT errorOccured(tr("EV3 limits filename length to %1 characters, "
-				"but you have %2, please, rename your project.").arg(EV3_MAX_ALLOWED_FILENAME_LENGTH)
+				       "but you have %2, please, rename your project.")
+				.arg(EV3_MAX_ALLOWED_FILENAME_LENGTH)
 				.arg(filenameLength));
 		return {};
 	}
@@ -66,32 +67,31 @@ QString Ev3RobotCommunicationThread::uploadFile(const QString &sourceFile, const
 	file.close();
 	const int chunkSize = 960; // have no idea why 960...
 
+	// uncomment it if it will be needed
+	// remove previous file
+	//	const int cmdDeleteSize = 6 + devicePath.size();
+	//	QByteArray commandDelete(cmdDeleteSize, 0);
+	//	commandDelete[0] = cmdDeleteSize & 0xFF;
+	//	commandDelete[1] = (cmdDeleteSize >> 8) & 0xFF ;
+	//	commandDelete[2] = 0x02;
+	//	commandDelete[3] = 0x00;
+	//	commandDelete[4] = SYSTEM_COMMAND_REPLY;
+	//	commandDelete[5] = DELETE_FILE;
+	//	int index0 = 6;
+	//	for (int i = 0; i < devicePath.size(); ++i) {
+	//		commandDelete[index0++] = devicePath.at(i).toLatin1();
+	//	}
 
-// uncomment it if it will be needed
-// remove previous file
-//	const int cmdDeleteSize = 6 + devicePath.size();
-//	QByteArray commandDelete(cmdDeleteSize, 0);
-//	commandDelete[0] = cmdDeleteSize & 0xFF;
-//	commandDelete[1] = (cmdDeleteSize >> 8) & 0xFF ;
-//	commandDelete[2] = 0x02;
-//	commandDelete[3] = 0x00;
-//	commandDelete[4] = SYSTEM_COMMAND_REPLY;
-//	commandDelete[5] = DELETE_FILE;
-//	int index0 = 6;
-//	for (int i = 0; i < devicePath.size(); ++i) {
-//		commandDelete[index0++] = devicePath.at(i).toLatin1();
-//	}
+	//	commandDelete[index0] = 0x00;
 
-//	commandDelete[index0] = 0x00;
-
-//	send1(commandDelete);
-//	QByteArray commandDeleteResponse = receive(DELETE_FILE_RESPONSE_SIZE);
+	//	send1(commandDelete);
+	//	QByteArray commandDeleteResponse = receive(DELETE_FILE_RESPONSE_SIZE);
 
 	// start downloading
 	const int cmdBeginSize = 11 + devicePath.size();
 	QByteArray commandBegin(cmdBeginSize, 0);
 	commandBegin[0] = charOf(cmdBeginSize - 2);
-	commandBegin[1] = charOf((cmdBeginSize - 2) >> 8) ;
+	commandBegin[1] = charOf((cmdBeginSize - 2) >> 8);
 	commandBegin[2] = charOf(++mMessageCounter);
 	commandBegin[3] = charOf(mMessageCounter >> 8);
 	commandBegin[4] = charOf(EV3_SYSTEM_COMMAND_REPLY);
@@ -116,13 +116,13 @@ QString Ev3RobotCommunicationThread::uploadFile(const QString &sourceFile, const
 
 	if (commandBeginResponse.at(4) == EV3_SYSTEM_REPLY_ERROR) {
 		QLOG_ERROR() << "EV3USB"
-						<< "Reply to cmd" << char2hex(commandBeginResponse.at(5))
-						<< "msg#" << (static_cast<uint32_t>(commandBeginResponse.at(3)) << 8)
-										+ static_cast<uint32_t>(static_cast<uint8_t>(commandBeginResponse.at(2)))
-						<< "status" << char2hex(commandBeginResponse.at(6));
+			     << "Reply to cmd" << char2hex(commandBeginResponse.at(5)) << "msg#"
+			     << (static_cast<uint32_t>(commandBeginResponse.at(3)) << 8)
+					+ static_cast<uint32_t>(static_cast<uint8_t>(commandBeginResponse.at(2)))
+			     << "status" << char2hex(commandBeginResponse.at(6));
 		if (commandBeginResponse.size() > 7) {
 			QLOG_INFO() << "EV3USB" << "Reply additional:"
-						<< commandBeginResponse.right(commandBeginResponse.size()-7).toHex();
+				    << commandBeginResponse.right(commandBeginResponse.size() - 7).toHex();
 		}
 
 		return {};
@@ -146,21 +146,25 @@ QString Ev3RobotCommunicationThread::uploadFile(const QString &sourceFile, const
 		}
 
 		if (!send1(commandContinue)) {
-			QLOG_ERROR() << "EV3USB" << QString("Failed to send program data to robot bytes %1..%2")
-					.arg(sizeSent-sizeToSend).arg(sizeSent-1);
+			QLOG_ERROR() << "EV3USB"
+				     << QString("Failed to send program data to robot bytes %1..%2")
+						.arg(sizeSent - sizeToSend)
+						.arg(sizeSent - 1);
 			return {};
 		}
 
 		QByteArray commandContinueResponse = receive(EV3_CONTINUE_DOWNLOAD_RESPONSE_SIZE);
 		if (commandContinueResponse.at(4) == EV3_SYSTEM_REPLY_ERROR) {
 			QLOG_ERROR() << "EV3USB"
-							<< "Reply to cmd" << char2hex(commandContinueResponse.at(5))
-							<< "msg#" << (static_cast<uint32_t>(commandContinueResponse.at(3)) << 8)
-							   + static_cast<uint32_t>(static_cast<uint8_t>(commandContinueResponse.at(2)))
-							<< "status" << char2hex(commandContinueResponse.at(6));
+				     << "Reply to cmd" << char2hex(commandContinueResponse.at(5)) << "msg#"
+				     << (static_cast<uint32_t>(commandContinueResponse.at(3)) << 8)
+						+ static_cast<uint32_t>(
+							static_cast<uint8_t>(commandContinueResponse.at(2)))
+				     << "status" << char2hex(commandContinueResponse.at(6));
 			if (commandContinueResponse.size() > 7) {
-				QLOG_INFO() << "EV3USB" << "Reply additional:"
-							<< commandContinueResponse.right(commandContinueResponse.size()-7).toHex();
+				QLOG_INFO()
+					<< "EV3USB" << "Reply additional:"
+					<< commandContinueResponse.right(commandContinueResponse.size() - 7).toHex();
 			}
 			return {};
 		}
@@ -172,28 +176,30 @@ QString Ev3RobotCommunicationThread::uploadFile(const QString &sourceFile, const
 
 bool Ev3RobotCommunicationThread::runProgram(const QString &pathOnRobot)
 {
-	QByteArray command = Ev3DirectCommand::formCommand(21 + pathOnRobot.size(), ++mMessageCounter, 0x08, 0
-			, enums::commandType::CommandTypeEnum::DIRECT_COMMAND_NO_REPLY);
+	QByteArray command = Ev3DirectCommand::formCommand(21 + pathOnRobot.size(), ++mMessageCounter, 0x08, 0,
+		enums::commandType::CommandTypeEnum::DIRECT_COMMAND_NO_REPLY);
 	int index = 7;
-	command[index++] = charOf(0xC0);  // opFILE            Opcode file related
+	command[index++] = charOf(0xC0); // opFILE            Opcode file related
 	command[index++] = charOf(0x08);
-	command[index++] = charOf(0x82);  // LC0(LOAD_IMAGE)   Command encoded as single byte constant
-	command[index++] = charOf(0x01);  // LC2(USER_SLOT)    User slot (1 = program slot) encoded as single constant byte
+	command[index++] = charOf(0x82); // LC0(LOAD_IMAGE)   Command encoded as single byte constant
+	command[index++] =
+		charOf(0x01); // LC2(USER_SLOT)    User slot (1 = program slot) encoded as single constant byte
 	command[index++] = charOf(0x00);
-	command[index++] = charOf(0x84);  // LCS               Encoding: String to follow (zero terminated)
+	command[index++] = charOf(0x84); // LCS               Encoding: String to follow (zero terminated)
 
 	for (int i = 0; i < pathOnRobot.size(); ++i) {
 		command[index++] = pathOnRobot.at(i).toLatin1();
 	}
 
-	command[index++] = 0x00;  // Zero termination of string above
-	command[index++] = 0x60;  // GV0(0), Return Image Size at Global Var offset 0. Offset encoded as single byte
-	command[index++] = 0x64;  // GV0(4), Return Address of image at Global Var offset 4. Offset encoded as single byte
-	command[index++] = 0x03;  // opPROGRAM_START Opcode
+	command[index++] = 0x00; // Zero termination of string above
+	command[index++] = 0x60; // GV0(0), Return Image Size at Global Var offset 0. Offset encoded as single byte
+	command[index++] =
+		0x64; // GV0(4), Return Address of image at Global Var offset 4. Offset encoded as single byte
+	command[index++] = 0x03; // opPROGRAM_START Opcode
 	command[index++] = 0x01;
-	command[index++] = 0x60;  // GV0(0), Size of image at Global Var offset 0.
-	command[index++] = 0x64;  // GV0(4), Address of image at Global Var offset 4
-	command[index++] = 0x00;  // LC0(0), Debug mode (0 = normal) encoded as single byte constant
+	command[index++] = 0x60; // GV0(0), Size of image at Global Var offset 0.
+	command[index++] = 0x64; // GV0(4), Address of image at Global Var offset 4
+	command[index++] = 0x00; // LC0(0), Debug mode (0 = normal) encoded as single byte constant
 
 	auto res = send1(command);
 	if (!res) {
@@ -205,10 +211,10 @@ bool Ev3RobotCommunicationThread::runProgram(const QString &pathOnRobot)
 
 void Ev3RobotCommunicationThread::stopProgram()
 {
-	QByteArray command = Ev3DirectCommand::formCommand(9, ++mMessageCounter, 0, 0
-			, enums::commandType::CommandTypeEnum::DIRECT_COMMAND_NO_REPLY);
-	command[7] = 0x02;  // opPROGRAM_STOP Opcode
-	command[8] = 0x01;  // LC0(USER_SLOT), User slot = 1 (program slot)
+	QByteArray command = Ev3DirectCommand::formCommand(9, ++mMessageCounter, 0, 0,
+		enums::commandType::CommandTypeEnum::DIRECT_COMMAND_NO_REPLY);
+	command[7] = 0x02; // opPROGRAM_STOP Opcode
+	command[8] = 0x01; // LC0(USER_SLOT), User slot = 1 (program slot)
 	if (!send1(command)) {
 		QLOG_ERROR() << "EV3USB" << "Failed to stop program";
 	}

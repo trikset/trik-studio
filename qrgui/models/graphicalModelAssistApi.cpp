@@ -22,11 +22,8 @@ using namespace qReal;
 using namespace models;
 using namespace models::details;
 
-GraphicalModelAssistApi::GraphicalModelAssistApi(
-		GraphicalModel &graphicalModel
-		, GraphicalPartModel &graphicalPartModel
-		, const EditorManagerInterface &editorManagerInterface
-		)
+GraphicalModelAssistApi::GraphicalModelAssistApi(GraphicalModel &graphicalModel, GraphicalPartModel &graphicalPartModel,
+	const EditorManagerInterface &editorManagerInterface)
 	: mGraphicalModel(graphicalModel)
 	, mModelsAssistApi(graphicalModel, editorManagerInterface)
 	, mGraphicalPartModel(graphicalPartModel)
@@ -76,14 +73,14 @@ Id GraphicalModelAssistApi::createElement(const Id &parent, const Id &type)
 
 	const int isEdge = mModelsAssistApi.editorManagerInterface().isNodeOrEdge(newElementId.type());
 
-	ElementInfo newElement{newElementId, Id(), Id(), parent, {{"name", elementFriendlyName}}, {}, Id(), isEdge == -1};
+	ElementInfo newElement {newElementId, Id(), Id(), parent, {{"name", elementFriendlyName}}, {}, Id(),
+		isEdge == -1};
 	mGraphicalModel.addElementToModel(newElement);
 	return newElementId;
 }
 
-Id GraphicalModelAssistApi::createElement(const Id &parent, const Id &id
-		, bool isFromLogicalModel, const QString &name
-		, const QPointF &position, const Id &preferedLogicalId)
+Id GraphicalModelAssistApi::createElement(const Id &parent, const Id &id, bool isFromLogicalModel, const QString &name,
+	const QPointF &position, const Id &preferedLogicalId)
 {
 	return mModelsAssistApi.createElement(parent, id, preferedLogicalId, isFromLogicalModel, name, position);
 }
@@ -286,12 +283,7 @@ bool GraphicalModelAssistApi::hasLabel(const Id &graphicalId, int index)
 	return mGraphicalPartModel.findIndex(graphicalId, index).isValid();
 }
 
-void GraphicalModelAssistApi::createLabel(
-		const Id &graphicalId
-		, int index
-		, QPointF position
-		, QSizeF size
-		)
+void GraphicalModelAssistApi::createLabel(const Id &graphicalId, int index, QPointF position, QSizeF size)
 {
 	const QModelIndex modelIndex = mGraphicalPartModel.addGraphicalPart(graphicalId, index);
 	mGraphicalPartModel.setData(modelIndex, position, GraphicalPartModel::positionRole);

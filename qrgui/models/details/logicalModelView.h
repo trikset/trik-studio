@@ -29,11 +29,11 @@ class LogicalModelView : public modelsImplementation::AbstractView
 	Q_OBJECT
 
 public:
-	explicit LogicalModelView(GraphicalModel * const model);
+	explicit LogicalModelView(GraphicalModel *const model);
 
 protected Q_SLOTS:
-	void dataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight
-			, QVector<int> const &roles = QVector<int>()) override;
+	void dataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight,
+		QVector<int> const &roles = QVector<int>()) override;
 	void rowsAboutToBeRemoved(const QModelIndex &parent, int start, int end) override;
 };
 

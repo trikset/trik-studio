@@ -38,13 +38,11 @@ using namespace kitBase::robotModel;
 const int selectionDrift = 7;
 
 SensorItem::SensorItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-			model::SensorsConfiguration &configuration
-		, const PortInfo &port, const QString &pathToImage, QRect imageRect)
+	model::SensorsConfiguration &configuration, const PortInfo &port, const QString &pathToImage, QRect imageRect)
 	: mConfiguration(configuration)
 	, mPort(port)
 	, mImageRect(imageRect.isEmpty() ? this->calculateImageRect() : imageRect)
-	, mBoundingRect(mImageRect.adjusted(-selectionDrift, -selectionDrift
-			, selectionDrift, selectionDrift))
+	, mBoundingRect(mImageRect.adjusted(-selectionDrift, -selectionDrift, selectionDrift, selectionDrift))
 	, mImage(pathToImage.isEmpty() ? this->pathToImage() : pathToImage, true)
 	, mPortItem(new PortItem(port))
 {
@@ -68,9 +66,8 @@ void SensorItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *sty
 	Q_UNUSED(widget)
 
 	painter->save();
-	painter->setRenderHints(painter->renderHints()
-			| QPainter::SmoothPixmapTransform
-			| QPainter::HighQualityAntialiasing);
+	painter->setRenderHints(
+		painter->renderHints() | QPainter::SmoothPixmapTransform | QPainter::HighQualityAntialiasing);
 	mImage.draw(*painter, mImageRect.toRect());
 	painter->restore();
 }
@@ -95,7 +92,7 @@ QRectF SensorItem::boundingRect() const
 	return mBoundingRect;
 }
 
-void SensorItem::mousePressEvent(QGraphicsSceneMouseEvent * event)
+void SensorItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
 	AbstractItem::mousePressEvent(event);
 	mPortItem->hide();
@@ -119,8 +116,7 @@ QDomElement SensorItem::serialize(QDomElement &parent) const
 	auto *coordSystem = coordinateSystem();
 	result.setTagName("sensor");
 	result.setAttribute("position",
-	                    QString::number(coordSystem->toUnit(x()))
-	                    + ":" + QString::number(coordSystem->toUnit(y())));
+		QString::number(coordSystem->toUnit(x())) + ":" + QString::number(coordSystem->toUnit(y())));
 	result.setAttribute("direction", QString::number(rotation()));
 	return result;
 }
@@ -158,9 +154,8 @@ QString SensorItem::name() const
 	const DeviceInfo sensor = mConfiguration.type(mPort);
 	if (sensor.isA<robotParts::TouchSensor>()) {
 		return "touch";
-	} else if (sensor.isA<robotParts::ColorSensorFull>()
-			|| sensor.isA<robotParts::ColorSensorPassive>()
-			|| sensor.isA<robotParts::ColorSensorRaw>()) {
+	} else if (sensor.isA<robotParts::ColorSensorFull>() || sensor.isA<robotParts::ColorSensorPassive>()
+		   || sensor.isA<robotParts::ColorSensorRaw>()) {
 		return "color_empty";
 	} else if (sensor.isA<robotParts::ColorSensorRed>()) {
 		return "color_red";
@@ -172,9 +167,8 @@ QString SensorItem::name() const
 		return "range";
 	} else if (sensor.isA<robotParts::LidarSensor>()) {
 		return "range";
-	} else if (sensor.isA<robotParts::LightSensor>()
-		|| sensor.isA<robotParts::ColorSensorAmbient>()
-		|| sensor.isA<robotParts::ColorSensorReflected>()) {
+	} else if (sensor.isA<robotParts::LightSensor>() || sensor.isA<robotParts::ColorSensorAmbient>()
+		   || sensor.isA<robotParts::ColorSensorReflected>()) {
 		return "light";
 	} else {
 		Q_ASSERT(!"Unknown sensor type");
@@ -187,13 +181,11 @@ QRectF SensorItem::calculateImageRect() const
 	const DeviceInfo sensor = mConfiguration.type(mPort);
 	if (sensor.isA<robotParts::TouchSensor>()) {
 		return {-12, -5, 25, 10};
-	} else if (sensor.isA<robotParts::ColorSensor>()
-			|| sensor.isA<robotParts::ColorSensorRaw>()
-			|| sensor.isA<robotParts::LightSensor>()) {
+	} else if (sensor.isA<robotParts::ColorSensor>() || sensor.isA<robotParts::ColorSensorRaw>()
+		   || sensor.isA<robotParts::LightSensor>()) {
 		return {-6, -6, 12, 12};
 	}
-	if (sensor.isA<robotParts::RangeSensor>()
-			|| sensor.isA<robotParts::LidarSensor>()) {
+	if (sensor.isA<robotParts::RangeSensor>() || sensor.isA<robotParts::LidarSensor>()) {
 		return {-20, -10, 40, 20};
 	} else {
 		Q_ASSERT(!"Unknown sensor type");

@@ -32,13 +32,13 @@ void TrikEnginesBackwardBlock::run()
 		const QList<Motor *> ports = parsePorts<Motor>();
 		if (aggregator) {
 			QList<QPair<QString, int>> portsWithPowers;
-			for (Motor * const motor : ports) {
+			for (Motor *const motor : ports) {
 				portsWithPowers.append(qMakePair(motor->port().name(), result));
 			}
 
 			aggregator->on(portsWithPowers);
 		} else {
-			for (Motor * const motor : ports) {
+			for (Motor *const motor : ports) {
 				motor->on(result);
 			}
 		}

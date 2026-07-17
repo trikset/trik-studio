@@ -29,9 +29,8 @@ class EncoderSensor : public kitBase::robotModel::robotParts::EncoderSensor
 	Q_OBJECT
 
 public:
-	EncoderSensor(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port
-			, utils::robotCommunication::RobotCommunicator &robotCommunicator);
+	EncoderSensor(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+		utils::robotCommunication::RobotCommunicator &robotCommunicator);
 
 	void read() override;
 	void nullify() override;

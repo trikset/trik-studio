@@ -20,16 +20,13 @@ namespace ev3 {
 namespace simple {
 namespace lineLeader {
 
-
 /// Generator for 'Calibrate PID' block
-class CalibratePIDGenerator: public generatorBase::simple::BindingGenerator
+class CalibratePIDGenerator : public generatorBase::simple::BindingGenerator
 {
 	Q_OBJECT
 public:
-	CalibratePIDGenerator(const qrRepo::RepoApi &repo
-			, generatorBase::GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent = nullptr);
+	CalibratePIDGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+		const qReal::Id &id, QObject *parent = nullptr);
 };
 
 }

@@ -24,15 +24,14 @@ using namespace kitBase::robotModel;
 QMap<QString, DeviceInfo> DeviceInfo::mCreatedInfos = {{QString(), DeviceInfo()}};
 QReadWriteLock DeviceInfo::mRWLock;
 
-
 DeviceInfo::DeviceInfo()
 	: mDeviceType(nullptr)
 	, mDirection(input)
 {
 }
 
-DeviceInfo::DeviceInfo(const QMetaObject *deviceType, const QString &name
-		, const QString &friendlyName, bool simulated, Direction direction)
+DeviceInfo::DeviceInfo(const QMetaObject *deviceType, const QString &name, const QString &friendlyName, bool simulated,
+	Direction direction)
 	: mDeviceType(deviceType)
 	, mName(name)
 	, mFriendlyName(friendlyName)
@@ -62,9 +61,8 @@ QString DeviceInfo::name() const
 
 QString DeviceInfo::friendlyName() const
 {
-	return mDeviceType
-			? QCoreApplication::translate(mDeviceType->className(), mFriendlyName.toLatin1())
-			: QString();
+	return mDeviceType ? QCoreApplication::translate(mDeviceType->className(), mFriendlyName.toLatin1())
+	                   : QString();
 }
 
 bool DeviceInfo::simulated() const
@@ -103,7 +101,7 @@ DeviceInfo &DeviceInfo::fromString(const QString &string)
 	return *i;
 }
 
-QString DeviceInfo::property(const QMetaObject * const metaObject, const QString &name)
+QString DeviceInfo::property(const QMetaObject *const metaObject, const QString &name)
 {
 	if (!metaObject) {
 		return {};

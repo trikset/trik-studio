@@ -38,7 +38,7 @@ public:
 };
 
 /// Useful class that calls the given slot with no parameters
-template <typename Func>
+template<typename Func>
 class SlotListener0 : public AbstractListener
 {
 public:
@@ -68,7 +68,7 @@ private:
 class LambdaListener0 : public AbstractListener
 {
 public:
-	LambdaListener0(std::function<void()> const & lambda, QObject *owner = nullptr)
+	LambdaListener0(std::function<void()> const &lambda, QObject *owner = nullptr)
 		: mLambda(lambda)
 		, mOwner(owner)
 	{
@@ -91,7 +91,7 @@ private:
 };
 
 /// Useful class that calls the given slot with one parameter of the given type.
-template <typename Type, typename Func>
+template<typename Type, typename Func>
 class SlotListener1 : public AbstractListener
 {
 public:
@@ -117,7 +117,7 @@ private:
 };
 
 /// Useful class that calls the given lambda with one parameter of the given type.
-template <typename Type>
+template<typename Type>
 class LambdaListener1 : public AbstractListener
 {
 public:

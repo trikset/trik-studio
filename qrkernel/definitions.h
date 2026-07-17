@@ -26,7 +26,7 @@ const char ID_PATH_DIVIDER = '#';
 const QString DEFAULT_MIME_TYPE = "application/x-real-uml-data";
 
 #ifndef qUtf8Printable
-# define qUtf8Printable(string) QString(string).toUtf8().constData()
+#	define qUtf8Printable(string) QString(string).toUtf8().constData()
 #endif
 
 }

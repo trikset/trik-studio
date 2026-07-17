@@ -27,7 +27,10 @@ class TrikLedAdapter : public trikControl::LedInterface
 public:
 	TrikLedAdapter(trik::robotModel::parts::TrikLed *led);
 
-	Status status() const override { return Status::ready; }
+	Status status() const override
+	{
+		return Status::ready;
+	}
 
 public Q_SLOTS:
 	void red() override;
@@ -37,8 +40,6 @@ public Q_SLOTS:
 
 private:
 	trik::robotModel::parts::TrikLed *mLed;
-
 };
 
 }
-

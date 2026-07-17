@@ -71,7 +71,6 @@ private Q_SLOTS:
 	virtual void timerTimeout() = 0;
 
 	void doneNextBlock();
-
 };
 
 }

@@ -60,7 +60,7 @@ void WaitBlock::stop()
 	mActiveWaitingTimer->stop();
 	// Emitting done() immediately will switch current block right during SensorVariablesUpdater
 	// doing his job. This may cause bad side effects.
-	QTimer::singleShot(0, this,  SLOT(doneNextBlock()));
+	QTimer::singleShot(0, this, SLOT(doneNextBlock()));
 }
 
 void WaitBlock::doneNextBlock()

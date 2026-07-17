@@ -27,8 +27,7 @@ class TrikShell : public kitBase::robotModel::robotParts::Shell
 
 public:
 	/// Constructor, takes device type info and port on which this motor is configured.
-	TrikShell(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port);
+	TrikShell(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port);
 	~TrikShell() override;
 
 	/// Run current command in the trik

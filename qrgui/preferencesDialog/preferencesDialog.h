@@ -25,7 +25,7 @@
 #include "preferencesDialogDeclSpec.h"
 
 namespace Ui {
-	class PreferencesDialog;
+class PreferencesDialog;
 }
 
 namespace qReal {
@@ -41,7 +41,7 @@ public:
 
 	void init();
 
-	void registerPage(const QString &pageName, PreferencesPage * const page);
+	void registerPage(const QString &pageName, PreferencesPage *const page);
 	void switchCurrentPage(const QString &pageName);
 
 	/// Returns a list of registered preferences pages.

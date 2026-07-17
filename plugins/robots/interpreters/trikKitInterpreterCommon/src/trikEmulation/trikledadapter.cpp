@@ -14,7 +14,8 @@
 
 #include <trikKitInterpreterCommon/trikEmulation/trikledadapter.h>
 
-trik::TrikLedAdapter::TrikLedAdapter(trik::robotModel::parts::TrikLed *led) : mLed(led)
+trik::TrikLedAdapter::TrikLedAdapter(trik::robotModel::parts::TrikLed *led)
+	: mLed(led)
 {
 }
 

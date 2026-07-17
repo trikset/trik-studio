@@ -39,27 +39,29 @@ void CodeBlockManager::setActive(const QString &path, bool active)
 QPair<int, int> CodeBlockManager::intervalById(const QString &path, const Id &id) const
 {
 	return mActive.value(path, false) && mBlockToCode.contains(path)
-			? mBlockToCode[path].value(id, QPair<int, int>()) : QPair<int, int>();
+	               ? mBlockToCode[path].value(id, QPair<int, int>())
+	               : QPair<int, int>();
 }
 
 QList<Id> CodeBlockManager::idsByLineNumber(const QString &path, int lineNumber) const
 {
 	return mActive.value(path, false) && mCodeToBlock.contains(path)
-			? mCodeToBlock[path].value(lineNumber, QList<Id>()) : QList<Id>();
+	               ? mCodeToBlock[path].value(lineNumber, QList<Id>())
+	               : QList<Id>();
 }
 
 void CodeBlockManager::readDbgFile(const QString &path)
 {
 	QFile file(path + ".dbg");
 
-	if(!file.open(QIODevice::ReadOnly)) {
+	if (!file.open(QIODevice::ReadOnly)) {
 		return;
 	}
 
 	QTextStream in(&file);
 
-	mBlockToCode.insert(path, QMap<Id, QPair<int, int> >());
-	mCodeToBlock.insert(path, QMap<int, QList<Id> >());
+	mBlockToCode.insert(path, QMap<Id, QPair<int, int>>());
+	mCodeToBlock.insert(path, QMap<int, QList<Id>>());
 	mActive.insert(path, true);
 
 	while (!in.atEnd()) {

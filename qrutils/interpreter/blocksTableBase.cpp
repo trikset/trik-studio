@@ -32,7 +32,7 @@ BlockInterface *BlocksTableBase::block(const Id &element)
 		return mBlocks[element];
 	}
 
-	BlockInterface * const newBlock = produceBlock(element);
+	BlockInterface *const newBlock = produceBlock(element);
 	if (newBlock) {
 		mBlocks.insert(element, newBlock);
 	}
@@ -48,7 +48,7 @@ void BlocksTableBase::clear()
 
 void BlocksTableBase::setFailure()
 {
-	for (BlockInterface * const block : mBlocks.values()) {
+	for (BlockInterface *const block : mBlocks.values()) {
 		block->setFailedStatus();
 	}
 }

@@ -28,10 +28,8 @@ class Led : public robotModel::parts::Ev3Led
 	Q_OBJECT
 
 public:
-	Led(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port
-			, utils::robotCommunication::RobotCommunicator &robotCommunicator);
-
+	Led(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+		utils::robotCommunication::RobotCommunicator &robotCommunicator);
 
 	void setColor(ev3::robotModel::parts::Ev3LedColor color) override;
 

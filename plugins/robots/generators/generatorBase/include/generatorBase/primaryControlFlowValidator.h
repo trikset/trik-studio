@@ -35,10 +35,8 @@ class ROBOTS_GENERATOR_EXPORT PrimaryControlFlowValidator : public QObject, publ
 {
 	Q_OBJECT
 public:
-	PrimaryControlFlowValidator(const qrRepo::RepoApi &repo
-			, qReal::ErrorReporterInterface &errorReporter
-			, GeneratorCustomizer &customizer
-			, QObject *parent = nullptr);
+	PrimaryControlFlowValidator(const qrRepo::RepoApi &repo, qReal::ErrorReporterInterface &errorReporter,
+		GeneratorCustomizer &customizer, QObject *parent = nullptr);
 
 	/// Validates given diagram assuming that execution of the diagram starts in a thread with given id.
 	virtual bool validate(const qReal::Id &diagramId, const QString &threadId);
@@ -83,8 +81,8 @@ protected:
 	bool mErrorsOccured {};
 
 	qReal::Id mInitialNode;
-	QMap<qReal::Id, QPair<LinkInfo, LinkInfo> > mIfBranches;
-	QMap<qReal::Id, QPair<LinkInfo, LinkInfo> > mLoopBranches;
+	QMap<qReal::Id, QPair<LinkInfo, LinkInfo>> mIfBranches;
+	QMap<qReal::Id, QPair<LinkInfo, LinkInfo>> mLoopBranches;
 };
 
 }

@@ -40,7 +40,7 @@ QWidget *GuiFacade::widget(const QString &type, const QString &name) const
 DraggableElement *GuiFacade::draggableElement(const QString &widgetId) const
 {
 	QList<DraggableElement *> const paletteWidgets = mMainWindow.findChildren<DraggableElement *>();
-	for (DraggableElement * const paletteElement : paletteWidgets) {
+	for (DraggableElement *const paletteElement : paletteWidgets) {
 		if (paletteElement->id().toString() == widgetId) {
 			return paletteElement;
 		}
@@ -51,15 +51,14 @@ DraggableElement *GuiFacade::draggableElement(const QString &widgetId) const
 
 QRect GuiFacade::propertyRect(const QString &name) const
 {
-	const QTreeWidget * const editorTree = mMainWindow.
-			propertyEditor()->
-			findChild<QtTreePropertyBrowser *>()->
-			findChild<QTreeWidget *>();
+	const QTreeWidget *const editorTree =
+		mMainWindow.propertyEditor()->findChild<QtTreePropertyBrowser *>()->findChild<QTreeWidget *>();
 
 	/// Adding 10 to coords needed to navigate in second column with interactive widgets.
-	return QRect(editorTree->findChild<QWidget *>("qt_scrollarea_viewport")->mapTo(&mMainWindow
-			, editorTree->visualItemRect(propertyTreeWidgetItem(name)).center() + QPoint(10, 0))
-			, editorTree->visualItemRect(propertyTreeWidgetItem(name)).size());
+	return QRect(editorTree->findChild<QWidget *>("qt_scrollarea_viewport")
+			     ->mapTo(&mMainWindow,
+				     editorTree->visualItemRect(propertyTreeWidgetItem(name)).center() + QPoint(10, 0)),
+		editorTree->visualItemRect(propertyTreeWidgetItem(name)).size());
 }
 
 QObject *GuiFacade::pluginGuiFacade(const QString &pluginName) const
@@ -69,10 +68,8 @@ QObject *GuiFacade::pluginGuiFacade(const QString &pluginName) const
 
 QWidget *GuiFacade::property(const QString &name) const
 {
-	const QTreeWidget * const editorTree = mMainWindow.
-			propertyEditor()->
-			findChild<QtTreePropertyBrowser *>()->
-			findChild<QTreeWidget *>();
+	const QTreeWidget *const editorTree =
+		mMainWindow.propertyEditor()->findChild<QtTreePropertyBrowser *>()->findChild<QTreeWidget *>();
 	return editorTree->itemWidget(propertyTreeWidgetItem(name), 1);
 }
 
@@ -82,7 +79,7 @@ QWidget *GuiFacade::pluginActionToolButton(const QString &name) const
 	for (const ActionInfo &actionInfo : actionList) {
 		if (actionInfo.action()->objectName() == name) {
 			const QList<QWidget *> widgetList = actionInfo.action()->associatedWidgets();
-			for (QWidget * const widget : widgetList) {
+			for (QWidget *const widget : widgetList) {
 				const QString buttonClassName = "QToolButton";
 				if (buttonClassName == widget->metaObject()->className() && widget->isVisible()) {
 					return widget;
@@ -106,21 +103,17 @@ QWidget *GuiFacade::mainWindow() const
 
 QWidget *GuiFacade::propertyEditor() const
 {
-	const qReal::gui::editor::PropertyEditorView * const propertyEditor = mMainWindow.propertyEditor();
-	return propertyEditor->
-			findChild<QtTreePropertyBrowser *>()->
-			findChild<QTreeWidget *>()->viewport();
+	const qReal::gui::editor::PropertyEditorView *const propertyEditor = mMainWindow.propertyEditor();
+	return propertyEditor->findChild<QtTreePropertyBrowser *>()->findChild<QTreeWidget *>()->viewport();
 }
 
 QTreeWidgetItem *GuiFacade::propertyTreeWidgetItem(const QString &name) const
 {
-	const QTreeWidget * const editorTree = mMainWindow.
-			propertyEditor()->
-			findChild<QtTreePropertyBrowser *>()->
-			findChild<QTreeWidget *>();
+	const QTreeWidget *const editorTree =
+		mMainWindow.propertyEditor()->findChild<QtTreePropertyBrowser *>()->findChild<QTreeWidget *>();
 
 	for (int i = 0; i < editorTree->topLevelItemCount(); ++i) {
-		QTreeWidgetItem * const item = editorTree->topLevelItem(i);
+		QTreeWidgetItem *const item = editorTree->topLevelItem(i);
 		if (item->data(0, Qt::DisplayRole).toString() == name) {
 			return item;
 		}

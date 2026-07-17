@@ -20,10 +20,9 @@ QList<LanguageInfo> Languages::mUserDefinedLanguages;
 
 QList<LanguageInfo> Languages::knownLanguages()
 {
-	return mUserDefinedLanguages + QList<LanguageInfo>({
-		// Append here all languages declared in Languages class
-		c(), russianC(), python(), qtScript(), javaScript(), fSharp(), pascalABC(), lua()
-	});
+	return mUserDefinedLanguages
+	       + QList<LanguageInfo>({// Append here all languages declared in Languages class
+		       c(), russianC(), python(), qtScript(), javaScript(), fSharp(), pascalABC(), lua()});
 }
 
 void Languages::registerLanguage(const LanguageInfo &language)

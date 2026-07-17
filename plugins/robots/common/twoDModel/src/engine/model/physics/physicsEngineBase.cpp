@@ -24,21 +24,21 @@ using namespace twoDModel::model::physics;
 PhysicsEngineBase::PhysicsEngineBase(const WorldModel &worldModel, const QList<RobotModel *> &robots)
 	: mWorldModel(worldModel)
 {
-	for (RobotModel * const robot : robots) {
+	for (RobotModel *const robot : robots) {
 		addRobot(robot);
 	}
 }
 
 PhysicsEngineBase::~PhysicsEngineBase() = default;
 
-void PhysicsEngineBase::addRobot(twoDModel::model::RobotModel * const robot)
+void PhysicsEngineBase::addRobot(twoDModel::model::RobotModel *const robot)
 {
 	if (!mRobots.contains(robot)) {
 		mRobots.append(robot);
 	}
 }
 
-void PhysicsEngineBase::removeRobot(twoDModel::model::RobotModel * const robot)
+void PhysicsEngineBase::removeRobot(twoDModel::model::RobotModel *const robot)
 {
 	mRobots.removeAll(robot);
 }
@@ -60,18 +60,18 @@ void PhysicsEngineBase::onPixelsInCmChanged(qreal value)
 	Q_UNUSED(value)
 }
 
-void PhysicsEngineBase::itemAdded(QGraphicsItem * const item)
+void PhysicsEngineBase::itemAdded(QGraphicsItem *const item)
 {
 	Q_UNUSED(item)
 }
 
-void PhysicsEngineBase::itemRemoved(QGraphicsItem * const item)
+void PhysicsEngineBase::itemRemoved(QGraphicsItem *const item)
 {
 	Q_UNUSED(item)
 }
 
 qreal PhysicsEngineBase::wheelLinearSpeed(RobotModel &robot, const RobotModel::Wheel &wheel) const
 {
-	return wheel.spoiledSpeed * 2 * mathUtils::pi *
-					wheel.radius * robot.parameters()->onePercentAngularVelocity() / 360;
+	return wheel.spoiledSpeed * 2 * mathUtils::pi * wheel.radius * robot.parameters()->onePercentAngularVelocity()
+	       / 360;
 }

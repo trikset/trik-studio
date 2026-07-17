@@ -14,7 +14,8 @@
 
 #include "colorListEditor.h"
 
-ColorListEditor::ColorListEditor(QWidget *widget) : QComboBox(widget)
+ColorListEditor::ColorListEditor(QWidget *widget)
+	: QComboBox(widget)
 {
 	populateList();
 }

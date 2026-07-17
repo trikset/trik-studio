@@ -29,8 +29,7 @@ const QSizeF markerSize(12, 12);
 const QColor markerColor1 = QColor(0xff, 0xcc, 0x66);
 const QColor markerColor2 = QColor(0xff, 0x66, 0x66);
 
-CurveItem::CurveItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-			QPointF begin, QPointF end)
+CurveItem::CurveItem(graphicsUtils::AbstractCoordinateSystem *metricSystem, QPointF begin, QPointF end)
 	: ColorFieldItem(metricSystem)
 	, mMarker1(this)
 	, mMarker2(this)
@@ -61,7 +60,7 @@ AbstractItem *CurveItem::clone() const
 
 QAction *CurveItem::curveTool()
 {
-	auto * const result = new QAction(loadTextColorIcon(":/icons/2d_bezier.svg"), tr("Bezier Curve (Z)"), nullptr);
+	auto *const result = new QAction(loadTextColorIcon(":/icons/2d_bezier.svg"), tr("Bezier Curve (Z)"), nullptr);
 	result->setShortcuts({QKeySequence(Qt::Key_Z), QKeySequence(Qt::Key_6)});
 	result->setCheckable(true);
 	return result;
@@ -84,7 +83,7 @@ QRectF CurveItem::boundingRect() const
 	const qreal maxX = qMax(qMax(x1(), x2()), qMax(mMarker1.x(), mMarker2.x()));
 	const qreal maxY = qMax(qMax(y1(), y2()), qMax(mMarker1.y(), mMarker2.y()));
 	return QRectF(minX, minY, maxX - minX, maxY - minY)
-			.adjusted(-drift - penWidth, -drift - penWidth, drift + penWidth, drift + penWidth);
+	        .adjusted(-drift - penWidth, -drift - penWidth, drift + penWidth, drift + penWidth);
 }
 
 void CurveItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -280,7 +279,8 @@ void MarkerItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 void MarkerItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
 	Q_UNUSED(event)
-	if (flags() & ItemIsMovable) setPos(parentItem()->mapFromScene(event->scenePos()));
+	if (flags() & ItemIsMovable)
+		setPos(parentItem()->mapFromScene(event->scenePos()));
 }
 
 void MarkerItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)

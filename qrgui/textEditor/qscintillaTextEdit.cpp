@@ -47,7 +47,8 @@ LanguageInfo QScintillaTextEdit::currentLanguage() const
 	return mLanguage;
 }
 
-void QScintillaTextEdit::setCurrentFont(const QFont &font) {
+void QScintillaTextEdit::setCurrentFont(const QFont &font)
+{
 	mFont = font;
 	QFontMetrics metrics(mFont);
 	mAverageCharWidth = metrics.averageCharWidth();
@@ -73,7 +74,7 @@ void QScintillaTextEdit::setCurrentLanguage(const LanguageInfo &language)
 	if (mLanguage.lexer) {
 		mFont.setPointSize(mLanguage.lexer->defaultFont().pointSize());
 		mLanguage.lexer->setFont(mFont);
-		auto * const api = new QsciAPIs(mLanguage.lexer.get());
+		auto *const api = new QsciAPIs(mLanguage.lexer.get());
 		for (const QString &additionalToken : mLanguage.additionalAutocompletionTokens) {
 			api->add(additionalToken);
 		}
@@ -210,15 +211,15 @@ void QScintillaTextEdit::setDefaultSettings()
 	setUtf8(true);
 
 	// Ctrl + Space Autocomplete
-	auto * const ctrlSpace = new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_Space), this);
+	auto *const ctrlSpace = new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_Space), this);
 	connect(ctrlSpace, &QShortcut::activated, this, &QScintillaTextEdit::autoCompleteFromAll);
 
 	// Ctrl + / comment/uncomment
-	auto * const ctrlSlash = new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_Slash), this);
+	auto *const ctrlSlash = new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_Slash), this);
 	connect(ctrlSlash, &QShortcut::activated, this, &QScintillaTextEdit::commentUncommentLines);
 
 	// Ctrl + L Go to line and column
-	auto * const ctrlL = new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_L), this);
+	auto *const ctrlL = new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_L), this);
 	connect(ctrlL, &QShortcut::activated, this, &QScintillaTextEdit::goToLineColumn);
 }
 
@@ -264,9 +265,10 @@ void QScintillaTextEdit::commentUncommentLines()
 		// first case: selected full block with one or more lines
 		if (indexStart == 0 && lastSelectedLineEndPos == endSelectedPosition) {
 			QVector<QStringRef> selectedLines = selectedText.splitRef('\n');
-			int sizeOfSelectedText = selectedText.length()
-					+ selectedLines.length()
-							* (mLanguage.lineCommentStart.length() + mLanguage.lineCommentEnd.length());
+			int sizeOfSelectedText =
+				selectedText.length()
+				+ selectedLines.length()
+					  * (mLanguage.lineCommentStart.length() + mLanguage.lineCommentEnd.length());
 			QString textForReplace;
 			textForReplace.reserve(sizeOfSelectedText);
 			bool fullyCommented = true;
@@ -284,30 +286,34 @@ void QScintillaTextEdit::commentUncommentLines()
 				textForReplace.append(innerCode);
 				for (int i = 1; i < selectedLinesCount; ++i) {
 					textForReplace.append('\n');
-					textForReplace.append(lineRegExp.match(selectedLines[i]).capturedRef("innerCode"));
+					textForReplace.append(
+						lineRegExp.match(selectedLines[i]).capturedRef("innerCode"));
 				}
 			} else {
 				textForReplace.append(QString("%1%2%3").arg(mLanguage.lineCommentStart,
-							selectedLines.first().toString(), mLanguage.lineCommentEnd));
+					selectedLines.first().toString(), mLanguage.lineCommentEnd));
 				for (int i = 1; i < selectedLinesCount; ++i) {
-					textForReplace.append(QString("\n%1%2%3").arg(mLanguage.lineCommentStart,
-						selectedLines[i].toString(), mLanguage.lineCommentEnd));
+					textForReplace.append(QString("\n%1%2%3")
+							.arg(mLanguage.lineCommentStart, selectedLines[i].toString(),
+								mLanguage.lineCommentEnd));
 				}
 			}
 
 			replaceSelectedText(textForReplace);
-		// second case: selected block with one or more lines
+			// second case: selected block with one or more lines
 		} else {
-			const QRegularExpression multiLineRegExp(QString("^%1(?<innerCode>.*)%2$")
-					.arg(regExpForm(mLanguage.multilineCommentStart), regExpForm(mLanguage.multilineCommentEnd))
-					, QRegularExpression::MultilineOption | QRegularExpression::DotMatchesEverythingOption);
+			const QRegularExpression multiLineRegExp(
+				QString("^%1(?<innerCode>.*)%2$")
+					.arg(regExpForm(mLanguage.multilineCommentStart),
+						regExpForm(mLanguage.multilineCommentEnd)),
+				QRegularExpression::MultilineOption | QRegularExpression::DotMatchesEverythingOption);
 			QRegularExpressionMatch match = multiLineRegExp.match(selectedText);
 			if (match.hasMatch()) {
 				QString replaceTo = match.captured("innerCode");
 				replaceSelectedText(replaceTo);
 			} else {
-				QString replaceTo = QString("%1%2%3")
-						.arg(mLanguage.multilineCommentStart, selectedText, mLanguage.multilineCommentEnd);
+				QString replaceTo = QString("%1%2%3").arg(mLanguage.multilineCommentStart, selectedText,
+					mLanguage.multilineCommentEnd);
 				replaceSelectedText(replaceTo);
 			}
 		}
@@ -317,7 +323,8 @@ void QScintillaTextEdit::commentUncommentLines()
 		// third case: comment single line
 		int currentPosition = static_cast<int>(SendScintilla(SCI_GETCURRENTPOS));
 		int currentPositionLine = static_cast<int>(SendScintilla(SCI_LINEFROMPOSITION, currentPosition));
-		int currentPositionLineEnd = static_cast<int>(SendScintilla(SCI_GETLINEENDPOSITION, currentPositionLine));
+		int currentPositionLineEnd =
+			static_cast<int>(SendScintilla(SCI_GETLINEENDPOSITION, currentPositionLine));
 		int endLineIndex = -1;
 		int currentPositionIndex = -1;
 		lineIndexFromPosition(currentPositionLineEnd, &currentPositionLine, &endLineIndex);
@@ -326,19 +333,20 @@ void QScintillaTextEdit::commentUncommentLines()
 		const QString selectedText = this->selectedText();
 		const QRegularExpressionMatch match = lineRegExp.match(selectedText);
 		if (match.hasMatch()) {
-			QString replaceTo(QString(match.capturedRef("indent").toString()
-					+ match.capturedRef("innerCode").toString()));
+			QString replaceTo(QString(
+				match.capturedRef("indent").toString() + match.capturedRef("innerCode").toString()));
 			replaceSelectedText(replaceTo);
 		} else {
 			QString replaceTo;
-			replaceTo.append(QString("%1%2%3").arg(mLanguage.lineCommentStart, selectedText, mLanguage.lineCommentEnd));
+			replaceTo.append(QString("%1%2%3").arg(mLanguage.lineCommentStart, selectedText,
+				mLanguage.lineCommentEnd));
 			replaceSelectedText(replaceTo);
 		}
 
 		const int length = mLanguage.lineCommentStart.length();
 		const int shift = match.hasMatch() ? -length : length;
-		setSelection(currentPositionLine, currentPositionIndex + shift
-				, currentPositionLine, currentPositionIndex + shift);
+		setSelection(currentPositionLine, currentPositionIndex + shift, currentPositionLine,
+			currentPositionIndex + shift);
 	}
 }
 
@@ -366,7 +374,7 @@ void QScintillaTextEdit::initFindModeConnections()
 {
 	mSearchLinePanel = new ui::SearchLinePanel(this);
 
-	auto findlambda = [this](bool forward){
+	auto findlambda = [this](bool forward) {
 		if (mLastSearch.isEmpty()) {
 			return;
 		}
@@ -381,12 +389,13 @@ void QScintillaTextEdit::initFindModeConnections()
 			}
 		} else {
 			int currentPosition = static_cast<int>(SendScintilla(SCI_GETCURRENTPOS));
-			int currentPositionLine = static_cast<int>(SendScintilla(SCI_LINEFROMPOSITION, currentPosition));
+			int currentPositionLine =
+				static_cast<int>(SendScintilla(SCI_LINEFROMPOSITION, currentPosition));
 			int currentPositionIndex = -1;
 			lineIndexFromPosition(currentPosition, &currentPositionLine, &currentPositionIndex);
 			bool cs = mLastSearch.caseSensitivity() == Qt::CaseSensitive;
-			if (not findFirst(mLastSearch.pattern(), true, cs
-					, true, true, forward, currentPositionLine, currentPositionIndex)) {
+			if (not findFirst(mLastSearch.pattern(), true, cs, true, true, forward, currentPositionLine,
+				    currentPositionIndex)) {
 				mSearchLinePanel->reportError();
 			} else {
 				mLastSearchCalled = true;
@@ -394,7 +403,7 @@ void QScintillaTextEdit::initFindModeConnections()
 		}
 	};
 
-	connect(mSearchLinePanel, &ui::SearchLinePanel::nextPressed, this, [this, findlambda](){
+	connect(mSearchLinePanel, &ui::SearchLinePanel::nextPressed, this, [this, findlambda]() {
 		if (mSearchLinePanel->getMode() == ui::SearchLinePanel::OperationOptions::GoToLineAndColumn) {
 			QRegularExpression regExp("^(?<line>\\d+)(:(?<column>\\d+))*$");
 			QRegularExpressionMatch match = regExp.match(mSearchLinePanel->getTextForFind());
@@ -421,7 +430,7 @@ void QScintillaTextEdit::initFindModeConnections()
 		}
 	});
 
-	connect(mSearchLinePanel, &ui::SearchLinePanel::previousPressed, this, [this, findlambda](){
+	connect(mSearchLinePanel, &ui::SearchLinePanel::previousPressed, this, [this, findlambda]() {
 		if (mSearchForward || not mLastSearchCalled) {
 			mSearchForward = false;
 			findlambda(false);
@@ -430,12 +439,12 @@ void QScintillaTextEdit::initFindModeConnections()
 		}
 	});
 
-	connect(mSearchLinePanel, &ui::SearchLinePanel::findTextChanged, this, [this](const QRegExp &textToSearch){
+	connect(mSearchLinePanel, &ui::SearchLinePanel::findTextChanged, this, [this](const QRegExp &textToSearch) {
 		mLastSearchCalled = false;
 		mLastSearch = textToSearch;
 	});
 
-	connect(mSearchLinePanel, &ui::SearchLinePanel::replacePressed, this, [this](){
+	connect(mSearchLinePanel, &ui::SearchLinePanel::replacePressed, this, [this]() {
 		if (not selectedText().isEmpty()) {
 			this->replaceSelectedText(mSearchLinePanel->getTextForReplace());
 			this->findNext();

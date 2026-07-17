@@ -26,9 +26,8 @@ namespace trik {
 class ROBOTS_TRIK_GENERATOR_BASE_EXPORT TrikBlocksValidator : public generatorBase::RobotsDiagramVisitor
 {
 public:
-	TrikBlocksValidator(const qrRepo::RepoApi &repo
-			, generatorBase::GeneratorCustomizer &customizer
-			, qReal::ErrorReporterInterface &errorReporter);
+	TrikBlocksValidator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+		qReal::ErrorReporterInterface &errorReporter);
 
 	bool validate(const qReal::Id &startNode);
 

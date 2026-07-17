@@ -39,7 +39,8 @@ HttpCommunicator::HttpCommunicator(qReal::ErrorReporterInterface &errorReporter)
 	, mErrorReporter(errorReporter)
 	, mRequestTimeoutTimer(new QTimer)
 {
-	connect(mNetworkManager.data(), &QNetworkAccessManager::finished, this, &HttpCommunicator::onPostRequestFinished);
+	connect(mNetworkManager.data(), &QNetworkAccessManager::finished, this,
+		&HttpCommunicator::onPostRequestFinished);
 	connect(mRequestTimeoutTimer.data(), &QTimer::timeout, this, &HttpCommunicator::onTimeout);
 	mRequestTimeoutTimer->setInterval(timeout);
 	mRequestTimeoutTimer->setSingleShot(true);
@@ -47,17 +48,17 @@ HttpCommunicator::HttpCommunicator(qReal::ErrorReporterInterface &errorReporter)
 
 HttpCommunicator::~HttpCommunicator()
 {
-	disconnect(mNetworkManager.data(), &QNetworkAccessManager::finished
-			, this, &HttpCommunicator::onPostRequestFinished);
-	disconnect(mRequestTimeoutTimer.data(), &QTimer::timeout
-			, this, &HttpCommunicator::onTimeout);
+	disconnect(mNetworkManager.data(), &QNetworkAccessManager::finished, this,
+		&HttpCommunicator::onPostRequestFinished);
+	disconnect(mRequestTimeoutTimer.data(), &QTimer::timeout, this, &HttpCommunicator::onTimeout);
 }
 
 void HttpCommunicator::uploadProgram(const QFileInfo &program)
 {
 	const QString ip = SettingsManager::value(settings::pioneerBaseStationIP).toString();
 	if (ip.isEmpty()) {
-		mErrorReporter.addError(tr("Pioneer base station IP address is not set. It can be set in Settings window."));
+		mErrorReporter.addError(
+			tr("Pioneer base station IP address is not set. It can be set in Settings window."));
 		return;
 	}
 
@@ -89,7 +90,7 @@ void HttpCommunicator::uploadProgram(const QFileInfo &program)
 	QNetworkRequest request(url);
 	request.setHeader(QNetworkRequest::ContentTypeHeader, "text/plain");
 
-	mCurrentReply= mNetworkManager->post(request, programData);
+	mCurrentReply = mNetworkManager->post(request, programData);
 	mRequestTimeoutTimer->start();
 }
 
@@ -97,7 +98,8 @@ void HttpCommunicator::startProgram()
 {
 	const QString ip = SettingsManager::value(settings::pioneerBaseStationIP).toString();
 	if (ip.isEmpty()) {
-		mErrorReporter.addError(tr("Pioneer base station IP address is not set. It can be set in Settings window."));
+		mErrorReporter.addError(
+			tr("Pioneer base station IP address is not set. It can be set in Settings window."));
 		return;
 	}
 

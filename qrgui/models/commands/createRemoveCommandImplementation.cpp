@@ -21,8 +21,8 @@
 using namespace qReal;
 using namespace commands;
 
-CreateRemoveCommandImplementation::CreateRemoveCommandImplementation(const models::Models &models
-		, const QList<ElementInfo> &elements)
+CreateRemoveCommandImplementation::CreateRemoveCommandImplementation(const models::Models &models,
+	const QList<ElementInfo> &elements)
 	: mLogicalApi(models.logicalModelAssistApi())
 	, mGraphicalApi(models.graphicalModelAssistApi())
 	, mExploser(models.exploser())
@@ -42,7 +42,8 @@ void CreateRemoveCommandImplementation::create()
 		const Id logicalId = mGraphicalApi.logicalId(element.id());
 		if (mLogicalApi.logicalRepoApi().exist(logicalId) && element.id() != logicalId) {
 			for (const QString &property : element.logicalProperties()) {
-				mLogicalApi.setPropertyByRoleName(logicalId, element.logicalProperty(property), property);
+				mLogicalApi.setPropertyByRoleName(logicalId, element.logicalProperty(property),
+					property);
 			}
 
 			if (element.isEdge()) {

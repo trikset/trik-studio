@@ -20,8 +20,8 @@ using namespace kitBase;
 using namespace blocksBase::common;
 using namespace robotModel;
 
-WaitForSonarDistanceBlock::WaitForSonarDistanceBlock(kitBase::robotModel::RobotModelInterface &robotModel
-		, const kitBase::robotModel::DeviceInfo &device)
+WaitForSonarDistanceBlock::WaitForSonarDistanceBlock(kitBase::robotModel::RobotModelInterface &robotModel,
+	const kitBase::robotModel::DeviceInfo &device)
 	: WaitForSensorBlock(robotModel)
 	, mDevice(device)
 {

@@ -26,8 +26,8 @@ JoinBlock::JoinBlock()
 void JoinBlock::run()
 {
 	const Id link = mGraphicalModelApi->graphicalRepoApi().outgoingLinks(id())[0];
-	const QString survivingId = mLogicalModelApi->propertyByRoleName(mGraphicalModelApi->logicalId(link), "Guard")
-			.toString();
+	const QString survivingId =
+		mLogicalModelApi->propertyByRoleName(mGraphicalModelApi->logicalId(link), "Guard").toString();
 	if (survivingId.isEmpty()) {
 		error(tr("Link outgoing from join block must have surviving thread id in its 'Guard' property"));
 		return;

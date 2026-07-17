@@ -46,9 +46,10 @@ public:
 
 private slots:
 	void generateMetamodels() const;
-	
+
 	/// Generate, compile and load semantics editor for specified metamodel
-	void generateSemanticsMetamodel(QString const &editorMetamodelFilePath, QString const &qrealSourceFilesPath) const;
+	void generateSemanticsMetamodel(QString const &editorMetamodelFilePath,
+		QString const &qrealSourceFilesPath) const;
 
 	/// Generate, compile and load editor for specified metamodel with new 'id' attribute
 	void generateEditorMetamodel(QString const &editorMetamodelFilePath, QString const &qrealSourceFilesPath) const;
@@ -74,8 +75,8 @@ private:
 	void insertSematicsStateProperty(QDomDocument metamodel) const;
 
 	/// Add to specific elements semantics state property (different approach for nodes and edges)
-	void insertSemanticsStatePropertiesInSpecificElemType(QDomDocument metamodel
-			, QDomNodeList const &nodes, bool isNode) const;
+	void insertSemanticsStatePropertiesInSpecificElemType(QDomDocument metamodel, QDomNodeList const &nodes,
+		bool isNode) const;
 
 	/// Insert in graphic types of semantics metamodel specific elements
 	void insertSpecialSemanticsElements(QDomDocument metamodel, QString const &diagramName) const;

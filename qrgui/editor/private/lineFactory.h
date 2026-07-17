@@ -26,9 +26,8 @@ class LineFactory : public QObject
 {
 	Q_OBJECT
 public:
-	LineFactory(EdgeElement *edge
-		, const LogicalModelAssistInterface &logicalModel
-		, const GraphicalModelAssistInterface &graphicalModel);
+	LineFactory(EdgeElement *edge, const LogicalModelAssistInterface &logicalModel,
+		const GraphicalModelAssistInterface &graphicalModel);
 
 	/// Create LineHandler according to link type
 	LineHandler *createHandler(LinkShape type) const;

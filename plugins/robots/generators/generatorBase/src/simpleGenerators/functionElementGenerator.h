@@ -24,10 +24,8 @@ class FunctionElementGenerator : public BindingGenerator
 {
 	Q_OBJECT
 public:
-	FunctionElementGenerator(const qrRepo::RepoApi &repo
-		, GeneratorCustomizer &customizer
-		, const qReal::Id &id
-		, QObject *parent = nullptr);
+	FunctionElementGenerator(const qrRepo::RepoApi &repo, GeneratorCustomizer &customizer, const qReal::Id &id,
+		QObject *parent = nullptr);
 
 	QString generate() override;
 

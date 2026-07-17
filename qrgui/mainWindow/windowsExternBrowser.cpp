@@ -23,7 +23,7 @@ ExternBrowser::ExternBrowser()
 
 bool ExternBrowser::openPage(const QString &url)
 {
-	std::wstring wstr = url.toStdWString();// mb scheme()
-	const wchar_t * temp = wstr.c_str();
-	return intptr_t (ShellExecuteW(nullptr, nullptr, temp, nullptr, nullptr, SW_SHOWNORMAL)) > 32;  // zomg
+	std::wstring wstr = url.toStdWString(); // mb scheme()
+	const wchar_t *temp = wstr.c_str();
+	return intptr_t(ShellExecuteW(nullptr, nullptr, temp, nullptr, nullptr, SW_SHOWNORMAL)) > 32; // zomg
 }

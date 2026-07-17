@@ -38,11 +38,11 @@ UploadProgramProtocol::~UploadProgramProtocol() = default;
 
 void UploadProgramProtocol::run(const QList<QFileInfo> &programsToUpload)
 {
-	mProtocol->setAction(mWaitingForUploadingComplete
-			, [programsToUpload](TcpRobotCommunicatorInterface &communicator) {
-					for (auto &&programToUpload : programsToUpload) {
-						communicator.uploadProgram(programToUpload.canonicalFilePath());
-					}
+	mProtocol->setAction(mWaitingForUploadingComplete,
+		[programsToUpload](TcpRobotCommunicatorInterface &communicator) {
+		for (auto &&programToUpload : programsToUpload) {
+			communicator.uploadProgram(programToUpload.canonicalFilePath());
+		}
 	});
 
 	mProtocol->run();

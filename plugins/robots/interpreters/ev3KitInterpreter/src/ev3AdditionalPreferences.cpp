@@ -27,10 +27,10 @@ Ev3AdditionalPreferences::Ev3AdditionalPreferences(QWidget *parent)
 {
 	mUi->setupUi(this);
 	mUi->robotImagePicker->configure("ev3Robot2DImage", tr("2D robot image:"));
-	connect(mUi->manualComPortCheckbox, &QCheckBox::toggled
-			, this, &Ev3AdditionalPreferences::manualComPortCheckboxChecked);
-	connect(mUi->commonFolderChecbox, &QCheckBox::toggled
-			, this, [this](bool state){ mUi->commonFolderNameLineEdit->setEnabled(state); });
+	connect(mUi->manualComPortCheckbox, &QCheckBox::toggled, this,
+		&Ev3AdditionalPreferences::manualComPortCheckboxChecked);
+	connect(mUi->commonFolderChecbox, &QCheckBox::toggled, this,
+		[this](bool state) { mUi->commonFolderNameLineEdit->setEnabled(state); });
 }
 
 Ev3AdditionalPreferences::~Ev3AdditionalPreferences()
@@ -69,7 +69,8 @@ void Ev3AdditionalPreferences::restoreSettings()
 		mUi->directInputComPortLineEdit->hide();
 		mUi->noComPortsFoundLabel->hide();
 		mUi->manualComPortCheckbox->setChecked(false);
-		mUi->manualComPortCheckbox->setChecked(SettingsManager::value("Ev3ManualComPortCheckboxChecked").toBool());
+		mUi->manualComPortCheckbox->setChecked(
+			SettingsManager::value("Ev3ManualComPortCheckboxChecked").toBool());
 	}
 
 	mUi->commonFolderChecbox->setChecked(SettingsManager::value("Ev3CommonFolderChecboxChecked", false).toBool());
@@ -77,7 +78,7 @@ void Ev3AdditionalPreferences::restoreSettings()
 	mUi->commonFolderNameLineEdit->setText(SettingsManager::value("Ev3CommonFolderName", "ts").toString());
 }
 
-void Ev3AdditionalPreferences::onRobotModelChanged(kitBase::robotModel::RobotModelInterface * const robotModel)
+void Ev3AdditionalPreferences::onRobotModelChanged(kitBase::robotModel::RobotModelInterface *const robotModel)
 {
 	mUi->bluetoothSettingsGroupBox->setVisible(robotModel->name().toLower().contains("bluetooth"));
 }
@@ -103,7 +104,6 @@ void Ev3AdditionalPreferences::manualComPortCheckboxChecked(bool state)
 
 QString Ev3AdditionalPreferences::selectedPortName() const
 {
-	return mUi->comPortComboBox->isVisible()
-			? mUi->comPortComboBox->currentText()
-			: mUi->directInputComPortLineEdit->text();
+	return mUi->comPortComboBox->isVisible() ? mUi->comPortComboBox->currentText()
+	                                         : mUi->directInputComPortLineEdit->text();
 }

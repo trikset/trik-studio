@@ -113,10 +113,9 @@ TEST(ObjectTest, propertiesHasAndSetOperationsTest)
 	EXPECT_EQ(obj.property("property2").toString(), "val2");
 	EXPECT_EQ(obj.property("property3").toString(), "val3");
 
-//	::testing::FLAGS_gtest_death_test_style = "threadsafe";
-//	EXPECT_DEATH_IF_SUPPORTED(obj.setProperty("prop", QVariant());
-//			, ".*Empty QVariant set as a property.*");
-
+	//	::testing::FLAGS_gtest_death_test_style = "threadsafe";
+	//	EXPECT_DEATH_IF_SUPPORTED(obj.setProperty("prop", QVariant());
+	//			, ".*Empty QVariant set as a property.*");
 }
 
 TEST(ObjectTest, propertiesGetAndRemoveTest)

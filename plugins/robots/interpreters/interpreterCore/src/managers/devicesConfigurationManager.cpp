@@ -27,20 +27,19 @@ using namespace qReal;
 const QString diagramName = "RobotsDiagramNode";
 
 DevicesConfigurationManager::DevicesConfigurationManager(
-		qReal::GraphicalModelAssistInterface &graphicalModelAssistInterface
-		, qReal::LogicalModelAssistInterface &logicalModelAssistInterface
-		, qReal::gui::MainWindowInterpretersInterface &mainWindowInterpretersInterface
-		, qReal::ProjectManagementInterface &projectManager
-		)
+	qReal::GraphicalModelAssistInterface &graphicalModelAssistInterface,
+	qReal::LogicalModelAssistInterface &logicalModelAssistInterface,
+	qReal::gui::MainWindowInterpretersInterface &mainWindowInterpretersInterface,
+	qReal::ProjectManagementInterface &projectManager)
 	: DevicesConfigurationProvider("DevicesConfigurationManager")
 	, mGraphicalModelAssistInterface(graphicalModelAssistInterface)
 	, mLogicalModelAssistInterface(logicalModelAssistInterface)
 	, mMainWindowInterpretersInterface(mainWindowInterpretersInterface)
 {
-	connect(&projectManager, &qReal::ProjectManagementInterface::afterOpen
-			, this, &DevicesConfigurationManager::onOpenedProjectChanged);
-	connect(&projectManager, &qReal::ProjectManagementInterface::closed
-			, this, &DevicesConfigurationManager::onOpenedProjectChanged);
+	connect(&projectManager, &qReal::ProjectManagementInterface::afterOpen, this,
+		&DevicesConfigurationManager::onOpenedProjectChanged);
+	connect(&projectManager, &qReal::ProjectManagementInterface::closed, this,
+		&DevicesConfigurationManager::onOpenedProjectChanged);
 }
 
 void DevicesConfigurationManager::load(const QString &worldModel)
@@ -59,7 +58,8 @@ Id DevicesConfigurationManager::mainDiagramId() const
 	Id result;
 	const IdList diagrams = mGraphicalModelAssistInterface.children(Id::rootId());
 	for (const Id &logicalDiagramId : diagrams) {
-		if (logicalDiagramId.element() == diagramName && mLogicalModelAssistInterface.isLogicalId(logicalDiagramId)) {
+		if (logicalDiagramId.element() == diagramName
+			&& mLogicalModelAssistInterface.isLogicalId(logicalDiagramId)) {
 			if (!result.isNull()) {
 				// Then there are more than two robot diagrams in this save, ignoring all of them...
 				return {};
@@ -72,8 +72,8 @@ Id DevicesConfigurationManager::mainDiagramId() const
 	return result;
 }
 
-void DevicesConfigurationManager::onDeviceConfigurationChanged(const QString &robotId
-		, const PortInfo &port, const DeviceInfo &sensor, Reason reason)
+void DevicesConfigurationManager::onDeviceConfigurationChanged(const QString &robotId, const PortInfo &port,
+	const DeviceInfo &sensor, Reason reason)
 {
 	Q_UNUSED(robotId)
 	Q_UNUSED(port)
@@ -83,12 +83,14 @@ void DevicesConfigurationManager::onDeviceConfigurationChanged(const QString &ro
 
 void DevicesConfigurationManager::onOpenedProjectChanged()
 {
-	const Id logicalRootId = mGraphicalModelAssistInterface.logicalId(mMainWindowInterpretersInterface.activeDiagram());
+	const Id logicalRootId =
+		mGraphicalModelAssistInterface.logicalId(mMainWindowInterpretersInterface.activeDiagram());
 	if (logicalRootId.element() != diagramName) {
 		return;
 	}
 
-	const auto &worldModel = logicalRootId.isNull()
+	const auto &worldModel =
+		logicalRootId.isNull()
 			? QString()
 			: mLogicalModelAssistInterface.mutableLogicalRepoApi().metaInformation("worldModel").toString();
 	load(worldModel);

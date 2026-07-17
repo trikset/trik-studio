@@ -22,8 +22,8 @@ namespace generatorBase {
 namespace converters {
 
 /// A base class for all converters that use external templates
-class ROBOTS_GENERATOR_EXPORT TemplateParametrizedConverter : public simple::Binding::ConverterInterface
-		, public TemplateParametrizedEntity
+class ROBOTS_GENERATOR_EXPORT TemplateParametrizedConverter : public simple::Binding::ConverterInterface,
+							      public TemplateParametrizedEntity
 {
 public:
 	explicit TemplateParametrizedConverter(const QStringList &pathsToTemplates);

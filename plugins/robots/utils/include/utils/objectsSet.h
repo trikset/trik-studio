@@ -103,7 +103,7 @@ public:
 	}
 
 private:
-	const QList<T> &mList;  // Doesn`t take ownership.
+	const QList<T> &mList; // Doesn`t take ownership.
 };
 
 /// A wrapper arround the QVariantList for getting its properties and elements via Qt reflection.

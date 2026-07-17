@@ -24,30 +24,18 @@
 using namespace pioneer::lua;
 using namespace generatorBase::simple;
 
-PioneerLedGenerator::PioneerLedGenerator(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, const qReal::Id &id
-		, QObject *parent)
-	: BindingGenerator(repo, customizer, id, "led.t"
-		, {
-			Binding::createConverting(
-					"@@NUMBER@@"
-					, "Number"
-					, customizer.factory()->intPropertyConverter(id, "Number"))
-			, Binding::createConverting(
-					"@@RED@@"
-					, "Red"
-					, customizer.factory()->floatPropertyConverter(id, "Red"))
-			, Binding::createConverting(
-					"@@GREEN@@"
-					, "Green"
-					, customizer.factory()->floatPropertyConverter(id, "Green"))
-			, Binding::createConverting(
-					"@@BLUE@@"
-					, "Blue"
-					, customizer.factory()->floatPropertyConverter(id, "Blue"))
-			}
-		, parent)
+PioneerLedGenerator::PioneerLedGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+	const qReal::Id &id, QObject *parent)
+	: BindingGenerator(repo, customizer, id, "led.t",
+		  {Binding::createConverting("@@NUMBER@@", "Number",
+			   customizer.factory()->intPropertyConverter(id, "Number")),
+			  Binding::createConverting("@@RED@@", "Red",
+				  customizer.factory()->floatPropertyConverter(id, "Red")),
+			  Binding::createConverting("@@GREEN@@", "Green",
+				  customizer.factory()->floatPropertyConverter(id, "Green")),
+			  Binding::createConverting("@@BLUE@@", "Blue",
+				  customizer.factory()->floatPropertyConverter(id, "Blue"))},
+		  parent)
 {
 	auto factory = dynamic_cast<PioneerLuaGeneratorFactory *>(mCustomizer.factory());
 	if (factory) {

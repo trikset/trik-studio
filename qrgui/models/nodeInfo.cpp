@@ -22,27 +22,21 @@ using namespace qReal;
 
 NodeInfo::NodeInfo() = default;
 
-NodeInfo::NodeInfo(const Id &graphicalId
-		, const Id &logicalId
-		, LogicalModelAssistInterface &logicalModel
-		, GraphicalModelAssistInterface &graphicalModel)
-	: NodeInfo(graphicalId, logicalId, logicalModel.parent(logicalId), graphicalModel.parent(graphicalId)
-			,graphicalModel.properties(logicalId) , graphicalModel.properties(graphicalId)
-			, logicalModel.logicalRepoApi().outgoingExplosion(logicalId))
+NodeInfo::NodeInfo(const Id &graphicalId, const Id &logicalId, LogicalModelAssistInterface &logicalModel,
+	GraphicalModelAssistInterface &graphicalModel)
+	: NodeInfo(graphicalId, logicalId, logicalModel.parent(logicalId), graphicalModel.parent(graphicalId),
+		  graphicalModel.properties(logicalId), graphicalModel.properties(graphicalId),
+		  logicalModel.logicalRepoApi().outgoingExplosion(logicalId))
 {
 	setGraphicalProperty("links", IdListHelper::toVariant(IdList()));
 	setGraphicalProperty("position", graphicalModel.position(graphicalId));
 }
 
-NodeInfo::NodeInfo(const Id &id
-		, const Id &logicalId
-		, const Id &logicalParent
-		, const Id &graphicalParent
-		, const QMap<QString, QVariant> &logicalProperties
-		, const QMap<QString, QVariant> &graphicalProperties
-		, const Id &explosionTarget)
-	: mInfo(id, logicalId, graphicalParent, logicalParent
-			, logicalProperties, graphicalProperties, explosionTarget, false)
+NodeInfo::NodeInfo(const Id &id, const Id &logicalId, const Id &logicalParent, const Id &graphicalParent,
+	const QMap<QString, QVariant> &logicalProperties, const QMap<QString, QVariant> &graphicalProperties,
+	const Id &explosionTarget)
+	: mInfo(id, logicalId, graphicalParent, logicalParent, logicalProperties, graphicalProperties, explosionTarget,
+		  false)
 {
 }
 
@@ -55,7 +49,6 @@ QDataStream &NodeInfo::deserialize(QDataStream &in)
 {
 	return mInfo.deserialize(in);
 }
-
 
 QMimeData *NodeInfo::mimeData() const
 {
@@ -192,17 +185,17 @@ ElementInfo NodeInfo::getInfo() const
 	return mInfo;
 }
 
-QDataStream &operator<< (QDataStream &out, const NodeInfo &data)
+QDataStream &operator<<(QDataStream &out, const NodeInfo &data)
 {
 	return data.serialize(out);
 }
 
-QDataStream &operator>> (QDataStream &in, NodeInfo &data)
+QDataStream &operator>>(QDataStream &in, NodeInfo &data)
 {
 	return data.deserialize(in);
 }
 
-bool operator== (const NodeInfo &first, const NodeInfo &second)
+bool operator==(const NodeInfo &first, const NodeInfo &second)
 {
 	return first.getInfo().equals(second.getInfo());
 }

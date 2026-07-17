@@ -44,7 +44,7 @@ const Id metamodelContainmentLinkType = Id("MetaEditor", "MetaEditor", "Containe
 const Id metamodelExplosionLinkType = Id("MetaEditor", "MetaEditor", "Explosion");
 const Id metamodelPropertiesAsContainerType = Id("MetaEditor", "MetaEditor", "MetaEntityPropertiesAsContainer");
 
-bool QrsMetamodelSaver::save(const QList<QSharedPointer<Metamodel> > &metamodels, const QString &path)
+bool QrsMetamodelSaver::save(const QList<QSharedPointer<Metamodel>> &metamodels, const QString &path)
 {
 	qrRepo::RepoApi repo(QString(), false);
 	for (auto &&metamodel : metamodels) {
@@ -77,8 +77,8 @@ void QrsMetamodelSaver::saveMetamodel(qrRepo::RepoApi &repo, const Metamodel &me
 	}
 }
 
-void QrsMetamodelSaver::saveDiagram(qrRepo::RepoApi &repo, const Metamodel &metamodel
-		, const QString &diagramName, const Id &metamodelId, Id &resultingId)
+void QrsMetamodelSaver::saveDiagram(qrRepo::RepoApi &repo, const Metamodel &metamodel, const QString &diagramName,
+	const Id &metamodelId, Id &resultingId)
 {
 	const Id diagramId = metamodelDiagramType.sameTypeId();
 	resultingId = diagramId;
@@ -94,8 +94,8 @@ void QrsMetamodelSaver::saveDiagram(qrRepo::RepoApi &repo, const Metamodel &meta
 	saveLinksInMetamodel(repo, metamodel, diagramName, diagramId, elements);
 }
 
-void QrsMetamodelSaver::saveObjectsOnDiagram(qrRepo::RepoApi &repo, const Metamodel &metamodel
-		, const QString &diagramName, const Id &diagramId, QMap<const ElementType *, Id> &elements)
+void QrsMetamodelSaver::saveObjectsOnDiagram(qrRepo::RepoApi &repo, const Metamodel &metamodel,
+	const QString &diagramName, const Id &diagramId, QMap<const ElementType *, Id> &elements)
 {
 	for (const ElementType *type : metamodel.elements(diagramName)) {
 		Id id;
@@ -169,8 +169,8 @@ Id QrsMetamodelSaver::saveGroup(qrRepo::RepoApi &repo, const PatternType &patter
 	return {};
 }
 
-void QrsMetamodelSaver::saveEnum(qrRepo::RepoApi &repo, const Metamodel &metamodel
-		, const QString &enumName, const Id &diagram)
+void QrsMetamodelSaver::saveEnum(qrRepo::RepoApi &repo, const Metamodel &metamodel, const QString &enumName,
+	const Id &diagram)
 {
 	const Id enumId = metamodelEnumType.sameTypeId();
 	repo.addChild(diagram, enumId);
@@ -192,8 +192,8 @@ void QrsMetamodelSaver::saveProperties(qrRepo::RepoApi &repo, const ElementType 
 	}
 }
 
-void QrsMetamodelSaver::saveEnumValues(qrRepo::RepoApi &repo, const Metamodel &metamodel
-		, const QString &enumName, const Id &enumId)
+void QrsMetamodelSaver::saveEnumValues(qrRepo::RepoApi &repo, const Metamodel &metamodel, const QString &enumName,
+	const Id &enumId)
 {
 	for (const QPair<QString, QString> &value : metamodel.enumValues(enumName)) {
 		const Id valueId = metamodelEnumValueType.sameTypeId();
@@ -221,8 +221,8 @@ void QrsMetamodelSaver::saveAssociations(qrRepo::RepoApi &repo, const EdgeElemen
 	/// Drawind code should be migrated from qrxc to engine and then here we simply set generate types as-is.
 }
 
-void QrsMetamodelSaver::savePorts(qrRepo::RepoApi &repo, const EdgeElementType &edge
-		, const Id &id, const QString &direction)
+void QrsMetamodelSaver::savePorts(qrRepo::RepoApi &repo, const EdgeElementType &edge, const Id &id,
+	const QString &direction)
 {
 	/// @todo: Support it
 	Q_UNUSED(repo)
@@ -333,11 +333,11 @@ void QrsMetamodelSaver::saveContainerProperties(qrRepo::RepoApi &repo, const Nod
 	repo.setProperty(propertiesId, "maximizeChildren", node.maximizesChildren() ? "true" : "false");
 }
 
-void QrsMetamodelSaver::saveLinksInMetamodel(qrRepo::RepoApi &repo, const Metamodel &metamodel
-		, const QString &diagramName, const Id &diagram, const QMap<const ElementType *, Id> &elements)
+void QrsMetamodelSaver::saveLinksInMetamodel(qrRepo::RepoApi &repo, const Metamodel &metamodel,
+	const QString &diagramName, const Id &diagram, const QMap<const ElementType *, Id> &elements)
 {
-	for (const ElementType * const type : metamodel.elements(diagramName)) {
-		for (const qrgraph::Edge * const edge : type->outgoingEdges()) {
+	for (const ElementType *const type : metamodel.elements(diagramName)) {
+		for (const qrgraph::Edge *const edge : type->outgoingEdges()) {
 			Id from = elements[static_cast<const ElementType *>(edge->begin())];
 			Id to = elements[static_cast<const ElementType *>(edge->end())];
 			from = from.isNull() ? Id::rootId() : from;
@@ -365,7 +365,8 @@ void QrsMetamodelSaver::saveLinksInMetamodel(qrRepo::RepoApi &repo, const Metamo
 				repo.setFrom(linkId, from);
 				repo.setTo(linkId, to);
 				repo.setProperty(linkId, "makeReusable", explosion->isReusable());
-				repo.setProperty(linkId, "requireImmediateLinkage", explosion->requiresImmediateLinkage());
+				repo.setProperty(linkId, "requireImmediateLinkage",
+					explosion->requiresImmediateLinkage());
 				break;
 			}
 			default:

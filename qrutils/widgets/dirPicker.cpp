@@ -24,7 +24,6 @@
 
 using namespace qReal::ui;
 
-
 DirPicker::DirPicker(QWidget *parent)
 	: QWidget(parent)
 	, mLabel(new QLabel(this))
@@ -38,10 +37,8 @@ DirPicker::DirPicker(QWidget *parent)
 	connect(button, &QPushButton::clicked, this, &DirPicker::pick);
 }
 
-void DirPicker::configure(const QString &settingsKey,
-			  const QString &title,
-			  const QString &dialogId,
-			  const QString &dialogTittle)
+void DirPicker::configure(const QString &settingsKey, const QString &title, const QString &dialogId,
+	const QString &dialogTittle)
 {
 	mDialogId = dialogId;
 	mDialogTittle = dialogTittle;
@@ -70,8 +67,8 @@ void DirPicker::restore()
 
 void DirPicker::pick()
 {
-	const auto dirPath = utils::QRealFileDialog::getExistingDirectory(mDialogId, this
-			, mDialogTittle).replace("\\", "/");
+	const auto dirPath =
+		utils::QRealFileDialog::getExistingDirectory(mDialogId, this, mDialogTittle).replace("\\", "/");
 	SettingsManager::setValue(mSettingsKey, dirPath);
 	mPathEditor->setText(dirPath);
 }

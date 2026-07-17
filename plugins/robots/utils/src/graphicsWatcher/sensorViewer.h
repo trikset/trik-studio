@@ -73,28 +73,27 @@ private:
 
 	QGraphicsScene *mScene; // Has ownership as the parent
 	QScopedPointer<AbstractTimer> mVisualTimer;
-	KeyPoint mMainPoint { Qt::yellow };
-	KeyPoint mMarker { Qt::red };
+	KeyPoint mMainPoint {Qt::yellow};
+	KeyPoint mMarker {Qt::red};
 	QScopedPointer<PointsQueueProcessor> mPointsDataProcessor;
-	QBrush mPenBrush { Qt::yellow };
+	QBrush mPenBrush {Qt::yellow};
 
 	/// Output update delay in ms
-	int mFpsInterval { 50 };
+	int mFpsInterval {50};
 	/// Time in milliseconds
-	int mAutoScaleInterval { 3000 };
+	int mAutoScaleInterval {3000};
 	/// Update interval of current value
-	int mUpdateTextInfoInterval { 500 };
+	int mUpdateTextInfoInterval {500};
 	/// Shift in pixels each frame
 	static const int stepSize = 2;
 	/// Zoom coefficent
 	static const int zoomRate = 2;
 
-	int mScaleCoefficient { 0 };
-	int mAutoScaleTimer { 0 };
-	int mUpdateCurrValueTimer { 0 };
-	qreal mOutputValue { 0.0 };
+	int mScaleCoefficient {0};
+	int mAutoScaleTimer {0};
+	int mUpdateCurrValueTimer {0};
+	qreal mOutputValue {0.0};
 };
 
 }
 }
-

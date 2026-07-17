@@ -34,18 +34,16 @@ using namespace qReal;
 using namespace utils;
 
 ShapeEdit::ShapeEdit(QWidget *parent)
-		: QWidget(parent), mUi(new Ui::ShapeEdit), mRole(0)
+	: QWidget(parent)
+	, mUi(new Ui::ShapeEdit)
+	, mRole(0)
 {
 	init();
 	connect(this, SIGNAL(saveSignal()), this, SLOT(saveToXml()));
 }
 
-ShapeEdit::ShapeEdit(
-	qReal::models::details::LogicalModel *model
-	, const QPersistentModelIndex &index
-	, int role
-	, bool useTypedPorts
-	)
+ShapeEdit::ShapeEdit(qReal::models::details::LogicalModel *model, const QPersistentModelIndex &index, int role,
+	bool useTypedPorts)
 	: QWidget(nullptr)
 	, mUi(new Ui::ShapeEdit)
 	, mModel(model)
@@ -58,14 +56,9 @@ ShapeEdit::ShapeEdit(
 	connect(this, SIGNAL(saveSignal()), this, SLOT(save()));
 }
 
-ShapeEdit::ShapeEdit(
-	const Id &id
-	, const EditorManagerInterface &editorManager
-	, const qrRepo::GraphicalRepoApi &graphicalRepoApi
-	, MainWindow *mainWindow
-	, qReal::gui::editor::EditorView *editorView
-	, bool useTypedPorts
-	)
+ShapeEdit::ShapeEdit(const Id &id, const EditorManagerInterface &editorManager,
+	const qrRepo::GraphicalRepoApi &graphicalRepoApi, MainWindow *mainWindow,
+	qReal::gui::editor::EditorView *editorView, bool useTypedPorts)
 	: QWidget(nullptr)
 	, mUi(new Ui::ShapeEdit)
 	, mRole(0)
@@ -119,18 +112,21 @@ void ShapeEdit::init()
 	connect(mUi->stylusButton, SIGNAL(clicked(bool)), this, SLOT(addStylus(bool)));
 	connect(mUi->addImageButton, SIGNAL(clicked(bool)), this, SLOT(addImage(bool)));
 
-	connect(mUi->penStyleComboBox, SIGNAL(activated(const QString &)), mScene, SLOT(changePenStyle(const QString &)));
+	connect(mUi->penStyleComboBox, SIGNAL(activated(const QString &)), mScene,
+		SLOT(changePenStyle(const QString &)));
 	connect(mUi->penWidthSpinBox, SIGNAL(valueChanged(int)), mScene, SLOT(changePenWidth(int)));
-	connect(mUi->penColorComboBox, SIGNAL(activated(const QString &)), mScene, SLOT(changePenColor(const QString &)));
-	connect(mUi->brushStyleComboBox, SIGNAL(activated(const QString &))
-			, mScene, SLOT(changeBrushStyle(const QString &)));
-	connect(mUi->brushColorComboBox, SIGNAL(activated(const QString &))
-			, mScene, SLOT(changeBrushColor(const QString &)));
+	connect(mUi->penColorComboBox, SIGNAL(activated(const QString &)), mScene,
+		SLOT(changePenColor(const QString &)));
+	connect(mUi->brushStyleComboBox, SIGNAL(activated(const QString &)), mScene,
+		SLOT(changeBrushStyle(const QString &)));
+	connect(mUi->brushColorComboBox, SIGNAL(activated(const QString &)), mScene,
+		SLOT(changeBrushColor(const QString &)));
 
-	connect(mUi->textFamilyFontComboBox, SIGNAL(currentFontChanged(const QFont&))
-			, mScene, SLOT(changeFontFamily(const QFont&)));
+	connect(mUi->textFamilyFontComboBox, SIGNAL(currentFontChanged(const QFont &)), mScene,
+		SLOT(changeFontFamily(const QFont &)));
 	connect(mUi->textPixelSizeSpinBox, SIGNAL(valueChanged(int)), mScene, SLOT(changeFontPixelSize(int)));
-	connect(mUi->textColorComboBox, SIGNAL(activated(const QString &)), mScene, SLOT(changeFontColor(const QString &)));
+	connect(mUi->textColorComboBox, SIGNAL(activated(const QString &)), mScene,
+		SLOT(changeFontColor(const QString &)));
 	connect(mUi->textEditField, SIGNAL(textChanged()), this, SLOT(changeTextName()));
 	connect(mUi->italicCheckBox, SIGNAL(toggled(bool)), mScene, SLOT(changeFontItalic(bool)));
 	connect(mUi->boldCheckBox, SIGNAL(toggled(bool)), mScene, SLOT(changeFontBold(bool)));
@@ -150,12 +146,12 @@ void ShapeEdit::init()
 	connect(this, SIGNAL(openSignal()), this, SLOT(open()));
 
 	connect(mScene, SIGNAL(noSelectedItems()), this, SLOT(setNoPalette()));
-	connect(mScene, SIGNAL(existSelectedItems(const QPen &, const QBrush &))
-			, this, SLOT(setItemPalette(const QPen&, const QBrush&)));
+	connect(mScene, SIGNAL(existSelectedItems(const QPen &, const QBrush &)), this,
+		SLOT(setItemPalette(const QPen &, const QBrush &)));
 	connect(mScene, SIGNAL(resetHighlightAllButtons()), this, SLOT(resetHighlightAllButtons()));
 	connect(mScene, SIGNAL(noSelectedTextPictureItems()), this, SLOT(setNoFontPalette()));
-	connect(mScene, SIGNAL(existSelectedTextPictureItems(const QPen &, const QFont &, const QString &))
-			, this, SLOT(setItemFontPalette(const QPen&, const QFont&, const QString &)));
+	connect(mScene, SIGNAL(existSelectedTextPictureItems(const QPen &, const QFont &, const QString &)), this,
+		SLOT(setItemFontPalette(const QPen &, const QFont &, const QString &)));
 	connect(mScene, SIGNAL(noSelectedPortItems()), this, SLOT(setNoPortType()));
 	connect(mScene, SIGNAL(existSelectedPortItems(const QString &)), this, SLOT(setPortType(const QString &)));
 }
@@ -222,7 +218,7 @@ ShapeEdit::~ShapeEdit()
 	delete mUi;
 }
 
-graphicsUtils::AbstractView* ShapeEdit::getView()
+graphicsUtils::AbstractView *ShapeEdit::getView()
 {
 	return mUi->graphicsView;
 }
@@ -246,9 +242,11 @@ void ShapeEdit::keyPressEvent(QKeyEvent *event)
 		Q_EMIT saveToXmlSignal();
 	} else if (event->key() == Qt::Key_F2) {
 		Q_EMIT saveSignal();
-	} if (event->matches(QKeySequence::Open)) {
+	}
+	if (event->matches(QKeySequence::Open)) {
 		Q_EMIT openSignal();
-	} if (event->matches(QKeySequence::ZoomIn)) {
+	}
+	if (event->matches(QKeySequence::ZoomIn)) {
 		mScene->mainView()->zoomIn();
 	} else if (event->matches(QKeySequence::ZoomOut)) {
 		mScene->mainView()->zoomOut();
@@ -267,9 +265,10 @@ QList<QDomElement> ShapeEdit::generateGraphics()
 	QList<QGraphicsItem *> list = mScene->items();
 	for (QGraphicsItem *graphicsItem : list) {
 
-		Item* item = dynamic_cast<Item*>(graphicsItem);
+		Item *item = dynamic_cast<Item *>(graphicsItem);
 		if (item != nullptr) {
-			QPair<QDomElement, Item::DomElementTypes> genItem = item->generateDom(mDocument, mTopLeftPicture);
+			QPair<QDomElement, Item::DomElementTypes> genItem =
+				item->generateDom(mDocument, mTopLeftPicture);
 			QDomElement domItem = genItem.first;
 			Item::DomElementTypes domType = genItem.second;
 			switch (domType) {
@@ -338,8 +337,8 @@ void ShapeEdit::save()
 		mEditorManager->updateShape(mId, mDocument.documentElement());
 		for (const Id &graphicalElement : mGraphicalElements) {
 			mEditorManager->updateShape(graphicalElement, mDocument.documentElement());
-			for (QGraphicsItem * const item : mEditorView->editorViewScene().items()) {
-				auto * const element = dynamic_cast<qReal::gui::editor::NodeElement *>(item);
+			for (QGraphicsItem *const item : mEditorView->editorViewScene().items()) {
+				auto *const element = dynamic_cast<qReal::gui::editor::NodeElement *>(item);
 				if (element && element->id().type() == mId.type()) {
 					element->updateShape(mDocument.documentElement());
 				}
@@ -569,7 +568,6 @@ void ShapeEdit::changeTextName()
 	mScene->changeTextName(newName);
 }
 
-
 void ShapeEdit::drawLine(bool checked)
 {
 	mScene->drawLine(checked);
@@ -676,12 +674,14 @@ QMap<QString, VisibilityConditionsDialog::PropertyInfo> ShapeEdit::getProperties
 
 		QString type = repoApi->stringProperty(child, "attributeType");
 		if (type == "int") {
-			result.insert(repoApi->name(child), PropertyInfo(VisibilityConditionsDialog::Int, QStringList()));
+			result.insert(repoApi->name(child),
+				PropertyInfo(VisibilityConditionsDialog::Int, QStringList()));
 		} else if (type == "bool") {
-			result.insert(repoApi->name(child), PropertyInfo(VisibilityConditionsDialog::Bool
-					, QStringList() << "true" << "false"));
+			result.insert(repoApi->name(child),
+				PropertyInfo(VisibilityConditionsDialog::Bool, QStringList() << "true" << "false"));
 		} else if (type == "string") {
-			result.insert(repoApi->name(child), PropertyInfo(VisibilityConditionsDialog::String, QStringList()));
+			result.insert(repoApi->name(child),
+				PropertyInfo(VisibilityConditionsDialog::String, QStringList()));
 		} else {
 			for (const qReal::Id &enumElement : enums) {
 				if (!repoApi->isLogicalElement(enumElement)) {
@@ -694,7 +694,8 @@ QMap<QString, VisibilityConditionsDialog::PropertyInfo> ShapeEdit::getProperties
 						enumValues << repoApi->stringProperty(value, "valueName");
 					}
 
-					result.insert(repoApi->name(child), PropertyInfo(VisibilityConditionsDialog::Enum, enumValues));
+					result.insert(repoApi->name(child),
+						PropertyInfo(VisibilityConditionsDialog::Enum, enumValues));
 				}
 			}
 		}

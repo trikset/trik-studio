@@ -30,8 +30,8 @@ const QString deletionGesture = "0, 200 : 200, 0 : ";
 
 using namespace qReal::gestures;
 
-DummyMouseMovementManager::DummyMouseMovementManager(const Id &diagram
-		, const qReal::EditorManagerInterface &editorManagerInterface)
+DummyMouseMovementManager::DummyMouseMovementManager(const Id &diagram,
+	const qReal::EditorManagerInterface &editorManagerInterface)
 	: mDiagram(diagram)
 	, mEditorManagerInterface(editorManagerInterface)
 {
@@ -41,23 +41,23 @@ DummyMouseMovementManager::DummyMouseMovementManager(const Id &diagram
 
 QWidget *DummyMouseMovementManager::producePainter() const
 {
-	auto * const result = new GesturesWidget;
-	QList<QPair<QString, Id> > elements;
+	auto *const result = new GesturesWidget;
+	QList<QPair<QString, Id>> elements;
 	for (const Id &element : mEditorManagerInterface.elements(mDiagram)) {
 		if (!mEditorManagerInterface.mouseGesture(element).isEmpty()) {
 			elements << qMakePair(mEditorManagerInterface.friendlyName(element), element);
 		}
 	}
 
-	connect(result, &GesturesWidget::currentElementChanged
-			, this, &DummyMouseMovementManager::drawIdealPath, Qt::QueuedConnection);
+	connect(result, &GesturesWidget::currentElementChanged, this, &DummyMouseMovementManager::drawIdealPath,
+		Qt::QueuedConnection);
 	result->setElements(elements);
 	return result;
 }
 
 void DummyMouseMovementManager::drawIdealPath()
 {
-	auto * const gesturesPainter = static_cast<GesturesWidget *>(sender());
+	auto *const gesturesPainter = static_cast<GesturesWidget *>(sender());
 	const Id currentElement = gesturesPainter->currentElement();
 	if (mEditorManagerInterface.elements(mDiagram).contains(currentElement)) {
 		const QString paths = mEditorManagerInterface.mouseGesture(currentElement);
@@ -157,8 +157,7 @@ QPointF DummyMouseMovementManager::lastPoint()
 
 bool DummyMouseMovementManager::wasMoving()
 {
-	return (firstPoint() != lastPoint() || mPath.size() > 1 ||
-			(!mPath.isEmpty() && mPath.at(0).size() > 2));
+	return (firstPoint() != lastPoint() || mPath.size() > 1 || (!mPath.isEmpty() && mPath.at(0).size() > 2));
 }
 
 bool DummyMouseMovementManager::isEdgeCandidate()

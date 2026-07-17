@@ -22,7 +22,7 @@
 
 using namespace graphicsUtils;
 
-void AnimatedEffects::highlight(QGraphicsItem * const item)
+void AnimatedEffects::highlight(QGraphicsItem *const item)
 {
 	if (!item) {
 		return;
@@ -33,13 +33,12 @@ void AnimatedEffects::highlight(QGraphicsItem * const item)
 	animation->setStartValue(1.0);
 	animation->setEndValue(0.0);
 	qreal const oldOpacity = item->opacity();
-	QObject::connect(animation, &QVariantAnimation::valueChanged
-			, [item](QVariant const &value) { item->setOpacity(value.toReal()); });
-	QObject::connect(animation, &QVariantAnimation::finished
-			, [item, oldOpacity]() { item->setOpacity(oldOpacity); });
+	QObject::connect(animation, &QVariantAnimation::valueChanged,
+		[item](QVariant const &value) { item->setOpacity(value.toReal()); });
+	QObject::connect(animation, &QVariantAnimation::finished,
+		[item, oldOpacity]() { item->setOpacity(oldOpacity); });
 	animation->start(QAbstractAnimation::DeleteWhenStopped);
 }
-
 
 void AnimatedEffects::disappear(QWidget *widget, int duration)
 {
@@ -47,7 +46,7 @@ void AnimatedEffects::disappear(QWidget *widget, int duration)
 		return;
 	}
 
-	auto * const opacityEffect = new QGraphicsOpacityEffect(widget);
+	auto *const opacityEffect = new QGraphicsOpacityEffect(widget);
 	opacityEffect->setOpacity(1);
 	widget->setGraphicsEffect(opacityEffect);
 	auto *opacityAnim = new QPropertyAnimation(opacityEffect, "opacity", widget);

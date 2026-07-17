@@ -20,21 +20,17 @@
 using namespace trik::simple;
 using namespace generatorBase::simple;
 
-SystemGenerator::SystemGenerator(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, const qReal::Id &id
-		, QObject *parent)
-	: BindingGenerator(repo, customizer, id
-			, repo.property(id, "Code").toBool() ? "nativeCode.t" : "system.t"
-			, { repo.property(id, "Code").toBool()
-					? Binding::createStatic("@@COMMAND@@"
-							, utils::StringUtils::dequote(repo.property(id, "Command").toString()))
-					: repo.property(id, "Evaluate").toBool()
-							? Binding::createConverting("@@COMMAND@@", "Command"
-									, customizer.factory()->stringPropertyConverter(id, "Command"))
-							: Binding::createStatic("@@COMMAND@@"
-									, utils::StringUtils::wrap(repo.property(id, "Command").toString()))
-			}
-			, parent)
+SystemGenerator::SystemGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+	const qReal::Id &id, QObject *parent)
+	: BindingGenerator(repo, customizer, id, repo.property(id, "Code").toBool() ? "nativeCode.t" : "system.t",
+		  {repo.property(id, "Code").toBool()
+				  ? Binding::createStatic("@@COMMAND@@",
+					    utils::StringUtils::dequote(repo.property(id, "Command").toString()))
+			  : repo.property(id, "Evaluate").toBool()
+				  ? Binding::createConverting("@@COMMAND@@", "Command",
+					    customizer.factory()->stringPropertyConverter(id, "Command"))
+				  : Binding::createStatic("@@COMMAND@@",
+					    utils::StringUtils::wrap(repo.property(id, "Command").toString()))},
+		  parent)
 {
 }

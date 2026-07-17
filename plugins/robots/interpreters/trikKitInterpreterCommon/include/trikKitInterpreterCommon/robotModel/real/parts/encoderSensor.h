@@ -29,9 +29,8 @@ class ROBOTS_TRIK_KIT_INTERPRETER_COMMON_EXPORT EncoderSensor : public kitBase::
 	Q_OBJECT
 
 public:
-	EncoderSensor(const kitBase::robotModel::DeviceInfo &info
-		, const kitBase::robotModel::PortInfo &port
-		, utils::robotCommunication::TcpRobotCommunicator &tcpRobotCommunicator);
+	EncoderSensor(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+		utils::robotCommunication::TcpRobotCommunicator &tcpRobotCommunicator);
 
 	void read() override;
 	void nullify() override;
@@ -41,7 +40,7 @@ public Q_SLOTS:
 
 private:
 	utils::robotCommunication::TcpRobotCommunicator &mRobotCommunicator;
-	int mOldValue  { -1 };
+	int mOldValue {-1};
 };
 
 }

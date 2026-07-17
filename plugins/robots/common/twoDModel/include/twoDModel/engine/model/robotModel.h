@@ -54,19 +54,11 @@ class TWO_D_MODEL_EXPORT RobotModel : public QObject
 	Q_PROPERTY(bool isRiding READ isRiding)
 
 public:
-	enum ATime {
-		DoInf,
-		DoByLimit,
-		End
-	};
+	enum ATime { DoInf, DoByLimit, End };
 
-	enum WheelEnum {
-		left
-		, right
-	};
+	enum WheelEnum { left, right };
 
-	struct Wheel
-	{
+	struct Wheel {
 		int radius;
 		int speed;
 		int spoiledSpeed;
@@ -76,10 +68,8 @@ public:
 		bool breakMode;
 	};
 
-	RobotModel(twoDModel::robotModel::TwoDRobotModel &robotModel
-		   , Settings *settings
-		   , twoDModel::model::MetricCoordinateSystem *metricSystem
-	           , QObject *parent = nullptr);
+	RobotModel(twoDModel::robotModel::TwoDRobotModel &robotModel, Settings *settings,
+		twoDModel::model::MetricCoordinateSystem *metricSystem, QObject *parent = nullptr);
 
 	~RobotModel() override;
 
@@ -196,7 +186,7 @@ Q_SIGNALS:
 
 	/// Emitted when left or right wheel was reconnected to another port.
 	void wheelOnPortChanged(twoDModel::model::RobotModel::WheelEnum wheel,
-				const kitBase::robotModel::PortInfo &port);
+		const kitBase::robotModel::PortInfo &port);
 
 private:
 	QVector2D robotDirectionVector() const;
@@ -237,19 +227,19 @@ private:
 	// Takes ownership.
 	QPointer<SensorsConfiguration> mSensorsConfiguration;
 
-	QPointF mPos { 0, 0 };
-	qreal mAngle { 0 };
-	qreal mGyroAngle { 0 };
-	qreal mDeltaDegreesOfAngle { 0 };
-	int mBeepTime { 0 };
-	bool mIsOnTheGround { true };
+	QPointF mPos {0, 0};
+	qreal mAngle {0};
+	qreal mGyroAngle {0};
+	qreal mDeltaDegreesOfAngle {0};
+	int mBeepTime {0};
+	bool mIsOnTheGround {true};
 	QColor mMarker;
-	QPointF mAcceleration { 0, 0 };
+	QPointF mAcceleration {0, 0};
 	utils::CircularQueue<QPointF> mPosStamps;
-	bool mIsFirstAngleStamp { true };
-	qreal mAngleStampPrevious { 0 };
+	bool mIsFirstAngleStamp {true};
+	qreal mAngleStampPrevious {0};
 
-	physics::PhysicsEngineBase *mPhysicsEngine {};  // Does not take ownership
+	physics::PhysicsEngineBase *mPhysicsEngine {}; // Does not take ownership
 
 	QPointer<items::StartPosition> mStartPositionMarker;
 	// Doesn't take ownership, ownership is twoDModel::model::Model.

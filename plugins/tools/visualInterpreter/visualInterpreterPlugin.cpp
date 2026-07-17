@@ -40,13 +40,12 @@ void VisualInterpreterPlugin::init(PluginConfigurator const &configurator)
 {
 	mErrorReporter = configurator.mainWindowInterpretersInterface().errorReporter();
 
-	mMetamodelGeneratorSupport = new MetamodelGeneratorSupport(
-			configurator.mainWindowInterpretersInterface().errorReporter()
-			, &configurator.mainWindowInterpretersInterface());
+	mMetamodelGeneratorSupport =
+		new MetamodelGeneratorSupport(configurator.mainWindowInterpretersInterface().errorReporter(),
+			&configurator.mainWindowInterpretersInterface());
 
-	mVisualInterpreterUnit = new VisualInterpreterUnit(configurator.logicalModelApi()
-			, configurator.graphicalModelApi()
-			, configurator.mainWindowInterpretersInterface());
+	mVisualInterpreterUnit = new VisualInterpreterUnit(configurator.logicalModelApi(),
+		configurator.graphicalModelApi(), configurator.mainWindowInterpretersInterface());
 }
 
 QPair<QString, gui::PreferencesPage *> VisualInterpreterPlugin::preferencesPage()
@@ -90,7 +89,7 @@ QList<qReal::ActionInfo> VisualInterpreterPlugin::actions()
 void VisualInterpreterPlugin::generateMetamodels() const
 {
 	QString editorMetamodelFilePath =
-			QFileDialog::getOpenFileName(nullptr, tr("Specify editor metamodel:"), QString(), "xml (*.xml)");
+		QFileDialog::getOpenFileName(nullptr, tr("Specify editor metamodel:"), QString(), "xml (*.xml)");
 	QString qrealSourceFilesPath = SettingsManager::value("qrealSourcesLocation").toString();
 
 	if (editorMetamodelFilePath.isEmpty() || qrealSourceFilesPath.isEmpty()) {
@@ -101,22 +100,22 @@ void VisualInterpreterPlugin::generateMetamodels() const
 	generateEditorMetamodel(editorMetamodelFilePath, qrealSourceFilesPath);
 }
 
-void VisualInterpreterPlugin::generateSemanticsMetamodel(QString const &editorMetamodelFilePath
-		, QString const &qrealSourceFilesPath) const
+void VisualInterpreterPlugin::generateSemanticsMetamodel(QString const &editorMetamodelFilePath,
+	QString const &qrealSourceFilesPath) const
 {
 	QDomDocument const metamodel = mMetamodelGeneratorSupport->loadMetamodelFromFile(editorMetamodelFilePath);
 
 	QDomElement diagram = mMetamodelGeneratorSupport->diagramElement(metamodel);
 	QString const diagramName = diagram.attribute("name");
-	QString const displayedName = diagram.attribute("displayedName").isEmpty()
-			? diagramName
-			: diagram.attribute("displayedName");
+	QString const displayedName =
+		diagram.attribute("displayedName").isEmpty() ? diagramName : diagram.attribute("displayedName");
 
 	diagram.setAttribute("displayedName", displayedName + " Semantics");
 
 	removePropertyDefaultValues(metamodel);
 	insertSemanticsEnums(metamodel, "SemanticsStatus", QStringList() << "@new@" << "@deleted@");
-	insertSemanticsEnums(metamodel, "LanguageType", QStringList() << "Block Scheme (C-like)" << "Python" << "QtScript");
+	insertSemanticsEnums(metamodel, "LanguageType",
+		QStringList() << "Block Scheme (C-like)" << "Python" << "QtScript");
 	insertSemanticsEnums(metamodel, "SemanticsType", QStringList() << "Interpretation" << "Generation");
 	insertSematicsStateProperty(metamodel);
 	insertPaletteGroups(metamodel, displayedName);
@@ -126,30 +125,25 @@ void VisualInterpreterPlugin::generateSemanticsMetamodel(QString const &editorMe
 	QString const relativeEditorPath = diagramName + "SemanticsEditor";
 	QString const editorPath = qrealSourceFilesPath + "/plugins/" + relativeEditorPath;
 
-	mMetamodelGeneratorSupport->generateProFile(metamodel
-			, editorMetamodelFilePath, qrealSourceFilesPath, metamodelName
-			, editorPath, relativeEditorPath);
+	mMetamodelGeneratorSupport->generateProFile(metamodel, editorMetamodelFilePath, qrealSourceFilesPath,
+		metamodelName, editorPath, relativeEditorPath);
 
-	mMetamodelGeneratorSupport->saveMetamodelInFile(metamodel, editorPath
-			+ "/" + metamodelName + ".xml");
+	mMetamodelGeneratorSupport->saveMetamodelInFile(metamodel, editorPath + "/" + metamodelName + ".xml");
 
-	mMetamodelGeneratorSupport->loadPlugin(editorPath, metamodelName
-			, SettingsManager::value("pathToQmake").toString()
-			, SettingsManager::value("pathToMake").toString()
-			, SettingsManager::value("pluginExtension").toString()
-			, SettingsManager::value("prefix").toString());
+	mMetamodelGeneratorSupport->loadPlugin(editorPath, metamodelName,
+		SettingsManager::value("pathToQmake").toString(), SettingsManager::value("pathToMake").toString(),
+		SettingsManager::value("pluginExtension").toString(), SettingsManager::value("prefix").toString());
 }
 
-void VisualInterpreterPlugin::generateEditorMetamodel(QString const &editorMetamodelFilePath
-		, QString const &qrealSourceFilesPath) const
+void VisualInterpreterPlugin::generateEditorMetamodel(QString const &editorMetamodelFilePath,
+	QString const &qrealSourceFilesPath) const
 {
 	QDomDocument const metamodel = mMetamodelGeneratorSupport->loadMetamodelFromFile(editorMetamodelFilePath);
 
 	QDomElement diagram = mMetamodelGeneratorSupport->diagramElement(metamodel);
 	QString const diagramName = diagram.attribute("name");
-	QString const displayedName = diagram.attribute("displayedName").isEmpty()
-			? diagramName
-			: diagram.attribute("displayedName");
+	QString const displayedName =
+		diagram.attribute("displayedName").isEmpty() ? diagramName : diagram.attribute("displayedName");
 
 	diagram.setAttribute("displayedName", displayedName + " With Semantics Properties");
 
@@ -159,22 +153,18 @@ void VisualInterpreterPlugin::generateEditorMetamodel(QString const &editorMetam
 	QString const relativeEditorPath = diagramName + "WithSemanticsEditor";
 	QString const editorPath = qrealSourceFilesPath + "/plugins/" + relativeEditorPath;
 
-	mMetamodelGeneratorSupport->generateProFile(metamodel
-			, editorMetamodelFilePath, qrealSourceFilesPath, metamodelName
-			, editorPath, relativeEditorPath);
+	mMetamodelGeneratorSupport->generateProFile(metamodel, editorMetamodelFilePath, qrealSourceFilesPath,
+		metamodelName, editorPath, relativeEditorPath);
 
-	mMetamodelGeneratorSupport->saveMetamodelInFile(metamodel, editorPath
-			+ "/" + metamodelName + ".xml");
+	mMetamodelGeneratorSupport->saveMetamodelInFile(metamodel, editorPath + "/" + metamodelName + ".xml");
 
-	mMetamodelGeneratorSupport->loadPlugin(editorPath, metamodelName
-			, SettingsManager::value("pathToQmake").toString()
-			, SettingsManager::value("pathToMake").toString()
-			, SettingsManager::value("pluginExtension").toString()
-			, SettingsManager::value("prefix").toString());
+	mMetamodelGeneratorSupport->loadPlugin(editorPath, metamodelName,
+		SettingsManager::value("pathToQmake").toString(), SettingsManager::value("pathToMake").toString(),
+		SettingsManager::value("pluginExtension").toString(), SettingsManager::value("prefix").toString());
 }
 
-void VisualInterpreterPlugin::insertSemanticsEnums(QDomDocument metamodel, QString const &name
-		, QStringList const &values) const
+void VisualInterpreterPlugin::insertSemanticsEnums(QDomDocument metamodel, QString const &name,
+	QStringList const &values) const
 {
 	QDomElement semanticsEnum = metamodel.createElement("enum");
 	semanticsEnum.setAttribute("name", name);
@@ -195,8 +185,8 @@ void VisualInterpreterPlugin::insertSematicsStateProperty(QDomDocument metamodel
 	insertSemanticsStatePropertiesInSpecificElemType(metamodel, metamodel.elementsByTagName("edge"), false);
 }
 
-void VisualInterpreterPlugin::insertSemanticsStatePropertiesInSpecificElemType(QDomDocument metamodel
-		, QDomNodeList const &nodes, bool isNode) const
+void VisualInterpreterPlugin::insertSemanticsStatePropertiesInSpecificElemType(QDomDocument metamodel,
+	QDomNodeList const &nodes, bool isNode) const
 {
 	for (int i = 0; i < nodes.length(); i++) {
 		QDomElement const elem = nodes.at(i).toElement();
@@ -250,8 +240,8 @@ void VisualInterpreterPlugin::insertIdPropertyToBasicElements(QDomDocument metam
 	insertIdPropertyInSpecificElemType(metamodel, metamodel.elementsByTagName("edge"));
 }
 
-void VisualInterpreterPlugin::insertIdPropertyInSpecificElemType(QDomDocument metamodel
-		, QDomNodeList const &nodes) const
+void VisualInterpreterPlugin::insertIdPropertyInSpecificElemType(QDomDocument metamodel,
+	QDomNodeList const &nodes) const
 {
 	for (int i = 0; i < nodes.length(); i++) {
 		QDomElement const elem = nodes.at(i).toElement();
@@ -287,141 +277,141 @@ void VisualInterpreterPlugin::removePropertyDefaultValues(QDomDocument metamodel
 void VisualInterpreterPlugin::insertSpecialSemanticsElements(QDomDocument metamodel, QString const &diagramName) const
 {
 	QString const elementsXml =
-	"<semanticElements>"
-	"<node displayedName=\"Semantics Rule\" name=\"SemanticsRule\">"
+		"<semanticElements>"
+		"<node displayedName=\"Semantics Rule\" name=\"SemanticsRule\">"
 		"<graphics>"
-			"<picture sizex=\"100\" sizey=\"100\">"
-				"<line fill=\"#000000\" stroke-style=\"solid\" stroke=\"#000000\" "
-						"y1=\"10\" x1=\"0\" y2=\"10\" stroke-width=\"2\" x2=\"100\" fill-style=\"solid\" />"
-				"<line fill=\"#000000\" stroke-style=\"solid\" stroke=\"#000000\" "
-						"y1=\"10\" x1=\"100\" y2=\"100\" stroke-width=\"2\" x2=\"100\" fill-style=\"solid\" />"
-				"<line fill=\"#000000\" stroke-style=\"solid\" stroke=\"#000000\" "
-						"y1=\"100\" x1=\"100\" y2=\"100\" stroke-width=\"2\" x2=\"0\" fill-style=\"solid\" />"
-				"<line fill=\"#000000\" stroke-style=\"solid\" stroke=\"#000000\" "
-						"y1=\"100\" x1=\"0\" y2=\"0\" stroke-width=\"2\" x2=\"0\" fill-style=\"solid\" />"
-				"<line fill=\"#000000\" stroke-style=\"solid\" stroke=\"#000000\" "
-						"y1=\"0\" x1=\"0\" y2=\"0\" stroke-width=\"2\" x2=\"50\" fill-style=\"solid\" />"
-				"<line fill=\"#000000\" stroke-style=\"solid\" stroke=\"#000000\" "
-						"y1=\"0\" x1=\"50\" y2=\"10\" stroke-width=\"2\" x2=\"50\" fill-style=\"solid\" />"
-			"</picture>"
-			"<labels>"
-				"<label x=\"0\" y=\"0\" textBinded=\"ruleName\"/>"
-			"</labels>"
+		"<picture sizex=\"100\" sizey=\"100\">"
+		"<line fill=\"#000000\" stroke-style=\"solid\" stroke=\"#000000\" "
+		"y1=\"10\" x1=\"0\" y2=\"10\" stroke-width=\"2\" x2=\"100\" fill-style=\"solid\" />"
+		"<line fill=\"#000000\" stroke-style=\"solid\" stroke=\"#000000\" "
+		"y1=\"10\" x1=\"100\" y2=\"100\" stroke-width=\"2\" x2=\"100\" fill-style=\"solid\" />"
+		"<line fill=\"#000000\" stroke-style=\"solid\" stroke=\"#000000\" "
+		"y1=\"100\" x1=\"100\" y2=\"100\" stroke-width=\"2\" x2=\"0\" fill-style=\"solid\" />"
+		"<line fill=\"#000000\" stroke-style=\"solid\" stroke=\"#000000\" "
+		"y1=\"100\" x1=\"0\" y2=\"0\" stroke-width=\"2\" x2=\"0\" fill-style=\"solid\" />"
+		"<line fill=\"#000000\" stroke-style=\"solid\" stroke=\"#000000\" "
+		"y1=\"0\" x1=\"0\" y2=\"0\" stroke-width=\"2\" x2=\"50\" fill-style=\"solid\" />"
+		"<line fill=\"#000000\" stroke-style=\"solid\" stroke=\"#000000\" "
+		"y1=\"0\" x1=\"50\" y2=\"10\" stroke-width=\"2\" x2=\"50\" fill-style=\"solid\" />"
+		"</picture>"
+		"<labels>"
+		"<label x=\"0\" y=\"0\" textBinded=\"ruleName\"/>"
+		"</labels>"
 		"</graphics>"
 		"<logic>"
-			"<properties>"
-				"<property type=\"string\" name=\"ruleName\" />"
-				"<property type=\"code\" name=\"procedure\" />"
-				"<property type=\"LanguageType\" name=\"type\">"
-					"<default>Block Scheme (C-like)</default>"
-				"</property>"
-				"<property type=\"code\" name=\"applicationCondition\" />"
-				"<property type=\"int\" name=\"priority\">"
-					"<default>0</default>"
-				"</property>"
-			"</properties>"
-			"<container>"
-			"</container>"
+		"<properties>"
+		"<property type=\"string\" name=\"ruleName\" />"
+		"<property type=\"code\" name=\"procedure\" />"
+		"<property type=\"LanguageType\" name=\"type\">"
+		"<default>Block Scheme (C-like)</default>"
+		"</property>"
+		"<property type=\"code\" name=\"applicationCondition\" />"
+		"<property type=\"int\" name=\"priority\">"
+		"<default>0</default>"
+		"</property>"
+		"</properties>"
+		"<container>"
+		"</container>"
 		"</logic>"
-	"</node>"
-	"<node displayedName=\"Wildcard\" name=\"Wildcard\">"
+		"</node>"
+		"<node displayedName=\"Wildcard\" name=\"Wildcard\">"
 		"<graphics>"
-			"<picture sizex=\"50\" sizey=\"50\">"
-				"<line fill=\"#000000\" stroke-style=\"solid\" stroke=\"#000000\" "
-						"y1=\"10\" x1=\"10\" y2=\"40\" stroke-width=\"2\" x2=\"40\" fill-style=\"solid\" />"
-				"<line fill=\"#000000\" stroke-style=\"solid\" stroke=\"#000000\" "
-						"y1=\"10\" x1=\"40\" y2=\"40\" stroke-width=\"2\" x2=\"10\" fill-style=\"solid\" />"
-				"<line fill=\"#000000\" stroke-style=\"solid\" stroke=\"#000000\" "
-						"y1=\"1\" x1=\"25\" y2=\"49\" stroke-width=\"2\" x2=\"25\" fill-style=\"solid\" />"
-				"<line fill=\"#000000\" stroke-style=\"solid\" stroke=\"#000000\" "
-						"y1=\"25\" x1=\"1\" y2=\"25\" stroke-width=\"2\" x2=\"49\" fill-style=\"solid\" />"
-			"</picture>"
-			"<ports>"
-				"<pointPort x=\"10\" y=\"10\"/>"
-				"<pointPort x=\"1\" y=\"25\"/>"
-				"<pointPort x=\"10\" y=\"40\"/>"
-				"<pointPort x=\"25\" y=\"1\"/>"
-				"<pointPort x=\"25\" y=\"49\"/>"
-				"<pointPort x=\"40\" y=\"10\"/>"
-				"<pointPort x=\"49\" y=\"25\"/>"
-				"<pointPort x=\"40\" y=\"40\"/>"
-			"</ports>"
+		"<picture sizex=\"50\" sizey=\"50\">"
+		"<line fill=\"#000000\" stroke-style=\"solid\" stroke=\"#000000\" "
+		"y1=\"10\" x1=\"10\" y2=\"40\" stroke-width=\"2\" x2=\"40\" fill-style=\"solid\" />"
+		"<line fill=\"#000000\" stroke-style=\"solid\" stroke=\"#000000\" "
+		"y1=\"10\" x1=\"40\" y2=\"40\" stroke-width=\"2\" x2=\"10\" fill-style=\"solid\" />"
+		"<line fill=\"#000000\" stroke-style=\"solid\" stroke=\"#000000\" "
+		"y1=\"1\" x1=\"25\" y2=\"49\" stroke-width=\"2\" x2=\"25\" fill-style=\"solid\" />"
+		"<line fill=\"#000000\" stroke-style=\"solid\" stroke=\"#000000\" "
+		"y1=\"25\" x1=\"1\" y2=\"25\" stroke-width=\"2\" x2=\"49\" fill-style=\"solid\" />"
+		"</picture>"
+		"<ports>"
+		"<pointPort x=\"10\" y=\"10\"/>"
+		"<pointPort x=\"1\" y=\"25\"/>"
+		"<pointPort x=\"10\" y=\"40\"/>"
+		"<pointPort x=\"25\" y=\"1\"/>"
+		"<pointPort x=\"25\" y=\"49\"/>"
+		"<pointPort x=\"40\" y=\"10\"/>"
+		"<pointPort x=\"49\" y=\"25\"/>"
+		"<pointPort x=\"40\" y=\"40\"/>"
+		"</ports>"
 		"</graphics>"
 		"<logic>"
-			"<properties>"
-				"<property type=\"int\" name=\"id\">"
-					"<default>-1</default>"
-				"</property>"
-			"</properties>"
+		"<properties>"
+		"<property type=\"int\" name=\"id\">"
+		"<default>-1</default>"
+		"</property>"
+		"</properties>"
 		"</logic>"
-	"</node>"
-	"<node displayedName=\"Initialization\" name=\"Initialization\">"
+		"</node>"
+		"<node displayedName=\"Initialization\" name=\"Initialization\">"
 		"<graphics>"
-			"<picture sizex=\"50\" sizey=\"50\">"
-				"<line fill=\"#000000\" stroke-style=\"solid\" stroke=\"#000000\" "
-						"y1=\"0\" x1=\"0\" y2=\"40\" stroke-width=\"2\" x2=\"0\" fill-style=\"solid\" />"
-				"<line fill=\"#000000\" stroke-style=\"solid\" stroke=\"#000000\" "
-						"y1=\"0\" x1=\"0\" y2=\"0\" stroke-width=\"2\" x2=\"40\" fill-style=\"solid\" />"
-				"<line fill=\"#000000\" stroke-style=\"solid\" stroke=\"#000000\" "
-						"y1=\"40\" x1=\"0\" y2=\"40\" stroke-width=\"2\" x2=\"40\" fill-style=\"solid\" />"
-				"<line fill=\"#000000\" stroke-style=\"solid\" stroke=\"#000000\" "
-						"y1=\"0\" x1=\"40\" y2=\"40\" stroke-width=\"2\" x2=\"40\" fill-style=\"solid\" />"
-			"</picture>"
+		"<picture sizex=\"50\" sizey=\"50\">"
+		"<line fill=\"#000000\" stroke-style=\"solid\" stroke=\"#000000\" "
+		"y1=\"0\" x1=\"0\" y2=\"40\" stroke-width=\"2\" x2=\"0\" fill-style=\"solid\" />"
+		"<line fill=\"#000000\" stroke-style=\"solid\" stroke=\"#000000\" "
+		"y1=\"0\" x1=\"0\" y2=\"0\" stroke-width=\"2\" x2=\"40\" fill-style=\"solid\" />"
+		"<line fill=\"#000000\" stroke-style=\"solid\" stroke=\"#000000\" "
+		"y1=\"40\" x1=\"0\" y2=\"40\" stroke-width=\"2\" x2=\"40\" fill-style=\"solid\" />"
+		"<line fill=\"#000000\" stroke-style=\"solid\" stroke=\"#000000\" "
+		"y1=\"0\" x1=\"40\" y2=\"40\" stroke-width=\"2\" x2=\"40\" fill-style=\"solid\" />"
+		"</picture>"
 		"</graphics>"
 		"<logic>"
-			"<properties>"
-				"<property type=\"code\" name=\"initializationCode\" />"
-				"<property type=\"LanguageType\" name=\"languageType\">"
-					"<default>Block Scheme (C-like)</default>"
-				"</property>"
-				"<property type=\"SemanticsType\" name=\"semanticsType\">"
-					"<default>Interpretation</default>"
-				"</property>"
-			"</properties>"
+		"<properties>"
+		"<property type=\"code\" name=\"initializationCode\" />"
+		"<property type=\"LanguageType\" name=\"languageType\">"
+		"<default>Block Scheme (C-like)</default>"
+		"</property>"
+		"<property type=\"SemanticsType\" name=\"semanticsType\">"
+		"<default>Interpretation</default>"
+		"</property>"
+		"</properties>"
 		"</logic>"
-	"</node>"
-	"<node displayedName=\"Control Flow Mark\" name=\"ControlFlowMark\">"
+		"</node>"
+		"<node displayedName=\"Control Flow Mark\" name=\"ControlFlowMark\">"
 		"<graphics>"
-			"<picture sizex=\"20\" sizey=\"20\">"
-				"<ellipse fill=\"#FFFFFF\" stroke-style=\"solid\" stroke=\"#000000\" "
-						"y1=\"0\" x1=\"0\" y2=\"20\" stroke-width=\"1\" x2=\"20\" fill-style=\"solid\"/>"
-			"</picture>"
-			"<ports>"
-				"<pointPort x=\"0\" y=\"10\"/>"
-				"<pointPort x=\"10\" y=\"0\"/>"
-				"<pointPort x=\"10\" y=\"20\"/>"
-				"<pointPort x=\"20\" y=\"10\"/>"
-				"<pointPort x=\"10\" y=\"10\"/>"
-			"</ports>"
-			"<labels>"
-				"<label x=\"20\" y=\"0\" textBinded=\"semanticsStatus\"/>"
-			"</labels>"
+		"<picture sizex=\"20\" sizey=\"20\">"
+		"<ellipse fill=\"#FFFFFF\" stroke-style=\"solid\" stroke=\"#000000\" "
+		"y1=\"0\" x1=\"0\" y2=\"20\" stroke-width=\"1\" x2=\"20\" fill-style=\"solid\"/>"
+		"</picture>"
+		"<ports>"
+		"<pointPort x=\"0\" y=\"10\"/>"
+		"<pointPort x=\"10\" y=\"0\"/>"
+		"<pointPort x=\"10\" y=\"20\"/>"
+		"<pointPort x=\"20\" y=\"10\"/>"
+		"<pointPort x=\"10\" y=\"10\"/>"
+		"</ports>"
+		"<labels>"
+		"<label x=\"20\" y=\"0\" textBinded=\"semanticsStatus\"/>"
+		"</labels>"
 		"</graphics>"
 		"<logic>"
-			"<properties>"
-				"<property type=\"SemanticsStatus\" name=\"semanticsStatus\"/>"
-			"</properties>"
+		"<properties>"
+		"<property type=\"SemanticsStatus\" name=\"semanticsStatus\"/>"
+		"</properties>"
 		"</logic>"
-	"</node>"
-	"<edge displayedName=\"Replacement\" name=\"Replacement\">"
+		"</node>"
+		"<edge displayedName=\"Replacement\" name=\"Replacement\">"
 		"<graphics>"
-			"<lineType type=\"dashLine\"/>"
+		"<lineType type=\"dashLine\"/>"
 		"</graphics>"
 		"<logic>"
-			"<associations endType=\"open_arrow\" beginType=\"no_arrow\">"
-			"</associations>"
+		"<associations endType=\"open_arrow\" beginType=\"no_arrow\">"
+		"</associations>"
 		"</logic>"
-	"</edge>"
-	"<edge displayedName=\"Control Flow Location\" name=\"ControlFlowLocation\">"
+		"</edge>"
+		"<edge displayedName=\"Control Flow Location\" name=\"ControlFlowLocation\">"
 		"<graphics>"
-			"<lineType type=\"dotLine\"/>"
+		"<lineType type=\"dotLine\"/>"
 		"</graphics>"
 		"<logic>"
-			"<associations endType=\"open_arrow\" beginType=\"no_arrow\">"
-			"</associations>"
+		"<associations endType=\"open_arrow\" beginType=\"no_arrow\">"
+		"</associations>"
 		"</logic>"
-	"</edge>"
-	"</semanticElements>";
+		"</edge>"
+		"</semanticElements>";
 
 	QDomDocument const elements = mMetamodelGeneratorSupport->loadElementsFromString(elementsXml);
 	QDomElement const container = elements.elementsByTagName("container").at(0).toElement();
@@ -429,8 +419,7 @@ void VisualInterpreterPlugin::insertSpecialSemanticsElements(QDomDocument metamo
 	QStringList elementNames = mMetamodelGeneratorSupport->collectAllGraphicTypesInMetamodel(metamodel, false);
 	elementNames << "Wildcard" << "ControlFlowMark" << "Replacement" << "ControlFlowLocation";
 
-	mMetamodelGeneratorSupport->appendTypesToElement(elements, container
-			, "contains", diagramName, elementNames);
+	mMetamodelGeneratorSupport->appendTypesToElement(elements, container, "contains", diagramName, elementNames);
 
 	QDomNodeList const semanticsElems = elements.firstChild().childNodes();
 	mMetamodelGeneratorSupport->insertElementsInDiagramSublevel(metamodel, "graphicTypes", semanticsElems);
@@ -438,21 +427,20 @@ void VisualInterpreterPlugin::insertSpecialSemanticsElements(QDomDocument metamo
 
 void VisualInterpreterPlugin::insertPaletteGroups(QDomDocument metamodel, QString const &diagramDisplayedName) const
 {
-	QString const elementsXml =
-	"<palette>"
-		"<group name=\"Semantics Elements\">"
-			"<element name=\"SemanticsRule\"/>"
-			"<element name=\"Wildcard\"/>"
-			"<element name=\"ControlFlowMark\"/>"
-			"<element name=\"Replacement\"/>"
-			"<element name=\"ControlFlowLocation\"/>"
-			"<element name=\"Initialization\"/>"
-		"</group>"
-	"</palette>";
+	QString const elementsXml = "<palette>"
+				    "<group name=\"Semantics Elements\">"
+				    "<element name=\"SemanticsRule\"/>"
+				    "<element name=\"Wildcard\"/>"
+				    "<element name=\"ControlFlowMark\"/>"
+				    "<element name=\"Replacement\"/>"
+				    "<element name=\"ControlFlowLocation\"/>"
+				    "<element name=\"Initialization\"/>"
+				    "</group>"
+				    "</palette>";
 
 	QDomDocument elements = mMetamodelGeneratorSupport->loadElementsFromString(elementsXml);
 	QStringList const elementNames =
-			mMetamodelGeneratorSupport->collectAllGraphicTypesInMetamodel(metamodel, false);
+		mMetamodelGeneratorSupport->collectAllGraphicTypesInMetamodel(metamodel, false);
 
 	QDomElement editorGroup = metamodel.createElement("group");
 	editorGroup.setAttribute("name", diagramDisplayedName);
@@ -465,17 +453,15 @@ void VisualInterpreterPlugin::insertPaletteGroups(QDomDocument metamodel, QStrin
 	elements.firstChild().appendChild(editorGroup);
 
 	QDomNodeList const palette = elements.childNodes();
-	mMetamodelGeneratorSupport->insertElementsInDiagramSublevel(
-			metamodel, "diagram", palette);
+	mMetamodelGeneratorSupport->insertElementsInDiagramSublevel(metamodel, "diagram", palette);
 }
 
 void VisualInterpreterPlugin::removeDirectory(QString const &dirName)
 {
 	QDir const dir(dirName);
 
-	for (QFileInfo info : dir.entryInfoList(QDir::Hidden
-			| QDir::NoDotAndDotDot | QDir::Dirs | QDir::Files, QDir::DirsFirst))
-	{
+	for (QFileInfo info :
+		dir.entryInfoList(QDir::Hidden | QDir::NoDotAndDotDot | QDir::Dirs | QDir::Files, QDir::DirsFirst)) {
 		if (info.isDir()) {
 			removeDirectory(info.absoluteFilePath());
 		} else {

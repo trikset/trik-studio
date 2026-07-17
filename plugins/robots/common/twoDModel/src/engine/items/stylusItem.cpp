@@ -19,8 +19,7 @@
 using namespace twoDModel::items;
 using namespace graphicsUtils;
 
-StylusItem::StylusItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-			qreal x1, qreal y1)
+StylusItem::StylusItem(graphicsUtils::AbstractCoordinateSystem *metricSystem, qreal x1, qreal y1)
 	: ColorFieldItem(metricSystem)
 {
 	QPen pen(this->pen());
@@ -42,7 +41,7 @@ AbstractItem *StylusItem::clone() const
 {
 	const auto cloned = new StylusItem(coordinateSystem(), x1(), y1());
 	AbstractItem::copyTo(cloned);
-	connect(this, &StylusItem::segmentAdded, this, [=](LineItem * const segment) {
+	connect(this, &StylusItem::segmentAdded, this, [=](LineItem *const segment) {
 		cloned->mAbstractListLine << segment->clone();
 		cloned->recalculateProperties();
 	});
@@ -59,7 +58,7 @@ AbstractItem *StylusItem::clone() const
 
 QAction *StylusItem::stylusTool()
 {
-	auto * const result = new QAction(loadTextColorIcon(":/icons/2d_pencil.png"), tr("Stylus (S)"), nullptr);
+	auto *const result = new QAction(loadTextColorIcon(":/icons/2d_pencil.png"), tr("Stylus (S)"), nullptr);
 	result->setShortcuts({QKeySequence(Qt::Key_S), QKeySequence(Qt::Key_9)});
 	result->setCheckable(true);
 	return result;
@@ -69,7 +68,7 @@ void StylusItem::addLine(qreal x2, qreal y2)
 {
 	setX2(x2);
 	setY2(y2);
-	auto * const line = new LineItem(coordinateSystem(), QPointF(mTmpX1, mTmpY1), QPointF(this->x2(), this->y2()));
+	auto *const line = new LineItem(coordinateSystem(), QPointF(mTmpX1, mTmpY1), QPointF(this->x2(), this->y2()));
 	line->setPen(pen());
 	line->setBrush(brush());
 	line->setSerializeName(QString("stylusLine"));
@@ -90,27 +89,27 @@ QRectF StylusItem::boundingRect() const
 	return mBoundingRect;
 }
 
-void StylusItem::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
+void StylusItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 	mStylusImpl.drawItem(mAbstractListLine, painter, option, widget);
 }
 
-void StylusItem::drawExtractionForItem(QPainter* painter)
+void StylusItem::drawExtractionForItem(QPainter *painter)
 {
 	mStylusImpl.drawExtractionForItem(mAbstractListLine, painter);
 }
 
-void StylusItem::drawFieldForResizeItem(QPainter* painter)
+void StylusItem::drawFieldForResizeItem(QPainter *painter)
 {
 	mStylusImpl.drawFieldForResizeItem(painter);
 }
 
-void StylusItem::drawScalingRects(QPainter* painter)
+void StylusItem::drawScalingRects(QPainter *painter)
 {
 	mStylusImpl.drawScalingRects(painter);
 }
 
-void StylusItem::setPenStyle(const QString& text)
+void StylusItem::setPenStyle(const QString &text)
 {
 	AbstractItem::setPenStyle(text);
 	mStylusImpl.setPenStyle(mAbstractListLine, text);
@@ -122,19 +121,19 @@ void StylusItem::setPenWidth(qreal width)
 	mStylusImpl.setPenWidth(mAbstractListLine, width);
 }
 
-void StylusItem::setPenColor(const QString& text)
+void StylusItem::setPenColor(const QString &text)
 {
 	AbstractItem::setPenColor(text);
 	mStylusImpl.setPenColor(mAbstractListLine, text);
 }
 
-void StylusItem::setBrushStyle(const QString& text)
+void StylusItem::setBrushStyle(const QString &text)
 {
 	AbstractItem::setBrushStyle(text);
 	mStylusImpl.setBrushStyle(mAbstractListLine, text);
 }
 
-void StylusItem::setBrushColor(const QString& text)
+void StylusItem::setBrushColor(const QString &text)
 {
 	AbstractItem::setBrushColor(text);
 	mStylusImpl.setBrushColor(mAbstractListLine, text);
@@ -144,9 +143,9 @@ QDomElement StylusItem::serialize(QDomElement &parent) const
 {
 	QDomElement stylusNode = ColorFieldItem::serialize(parent);
 	setPenBrushToElement(stylusNode, "stylus");
-	for (AbstractItem * const abstractItem : mAbstractListLine) {
+	for (AbstractItem *const abstractItem : mAbstractListLine) {
 		// NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
-		auto * const line = static_cast<LineItem *>(abstractItem);
+		auto *const line = static_cast<LineItem *>(abstractItem);
 		line->setSerializeName("stylusLine");
 		line->serializeWithIndent(stylusNode, -scenePos());
 	}
@@ -168,15 +167,15 @@ void StylusItem::deserialize(const QDomElement &element)
 	setPen(pen);
 	QDomNodeList stylusAttributes = element.childNodes();
 	for (int i = 0; i < stylusAttributes.length(); ++i) {
-			QDomElement type = stylusAttributes.at(i).toElement();
-			if (type.tagName() == "stylusLine") {
-				auto * const line = new LineItem(coordinateSystem(), QPointF(0, 0), QPointF(0, 0));
-				line->deserialize(type);
-				line->setPen(this->pen());
-				mAbstractListLine.append(line);
-				Q_EMIT segmentAdded(line);
-				recalculateProperties();
-			}
+		QDomElement type = stylusAttributes.at(i).toElement();
+		if (type.tagName() == "stylusLine") {
+			auto *const line = new LineItem(coordinateSystem(), QPointF(0, 0), QPointF(0, 0));
+			line->deserialize(type);
+			line->setPen(this->pen());
+			mAbstractListLine.append(line);
+			Q_EMIT segmentAdded(line);
+			recalculateProperties();
+		}
 	}
 }
 

@@ -24,7 +24,7 @@ PortInfo RobotModelUtils::findPort(const RobotModelInterface &robotModel, const 
 {
 	for (const auto &port : robotModel.getPortsBy(name)) {
 		if (port.isValid() && port.direction() == direction) {
-				return port;
+			return port;
 		}
 	}
 	return {};
@@ -35,14 +35,14 @@ QMap<QString, QMap<PortInfo, DeviceInfo>> RobotModelUtils::deserializeFromWorldM
 	QMap<QString, QMap<PortInfo, DeviceInfo>> result;
 
 	QDomDocument parsedWorldModel;
-	if(parsedWorldModel.setContent(worldModel)) {
+	if (parsedWorldModel.setContent(worldModel)) {
 		const auto &robots = parsedWorldModel.firstChildElement("root").firstChildElement("robots");
-		for (QDomElement robot = robots.firstChildElement("robot"); !robot.isNull()
-				; robot = robot.nextSiblingElement("robot")) {
+		for (QDomElement robot = robots.firstChildElement("robot"); !robot.isNull();
+			robot = robot.nextSiblingElement("robot")) {
 			const auto &robotModel = robot.attribute("id");
 			const auto &sensors = robot.firstChildElement("sensors");
-			for (QDomElement sensor = sensors.firstChildElement("sensor"); !sensor.isNull()
-					; sensor = sensor.nextSiblingElement("sensor")) {
+			for (QDomElement sensor = sensors.firstChildElement("sensor"); !sensor.isNull();
+				sensor = sensor.nextSiblingElement("sensor")) {
 				const auto &port = PortInfo::fromString(sensor.attribute("port"));
 				if (port.isValid()) {
 					result[robotModel][port] = DeviceInfo::fromString(sensor.attribute("type"));
@@ -65,8 +65,8 @@ RobotModelInterface *RobotModelUtils::selectedRobotModelFor(QList<KitPluginInter
 
 	if (!previouslySelectedRobotModel.isEmpty()) {
 		// Searching for previously selected robot model in the kit.
-		for (KitPluginInterface * const kitPlugin : kits) {
-			for (RobotModelInterface * const robotModel : kitPlugin->robotModels()) {
+		for (KitPluginInterface *const kitPlugin : kits) {
+			for (RobotModelInterface *const robotModel : kitPlugin->robotModels()) {
 				if (robotModel->name() == previouslySelectedRobotModel) {
 					return robotModel;
 				}
@@ -76,15 +76,15 @@ RobotModelInterface *RobotModelUtils::selectedRobotModelFor(QList<KitPluginInter
 
 	// Robot model for this kit was never selected or previous selection was not found in the kit.
 	// Falling back to kit`s default robot model.
-	for (KitPluginInterface * const kitPlugin : kits) {
-		if (RobotModelInterface * const kitDefaultRobotModel = kitPlugin->defaultRobotModel()) {
+	for (KitPluginInterface *const kitPlugin : kits) {
+		if (RobotModelInterface *const kitDefaultRobotModel = kitPlugin->defaultRobotModel()) {
 			return kitDefaultRobotModel;
 		}
 	}
 
 	// No robot model was selected previously and no default robot model was specified.
 	// Falling back to first met robot model.
-	for (KitPluginInterface * const kitPlugin : kits) {
+	for (KitPluginInterface *const kitPlugin : kits) {
 		if (!kitPlugin->robotModels().isEmpty()) {
 			return kitPlugin->robotModels().at(0);
 		}
@@ -96,8 +96,8 @@ RobotModelInterface *RobotModelUtils::selectedRobotModelFor(QList<KitPluginInter
 
 void RobotModelUtils::sortRobotModels(QList<RobotModelInterface *> &robotModels)
 {
-	std::sort(robotModels.begin(), robotModels.end()
-			, [](RobotModelInterface * const robot1, RobotModelInterface * const robot2) {
+	std::sort(robotModels.begin(), robotModels.end(),
+		[](RobotModelInterface *const robot1, RobotModelInterface *const robot2) {
 		return robot1->priority() > robot2->priority();
 	});
 }

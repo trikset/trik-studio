@@ -22,14 +22,11 @@ using namespace trik::python;
 using namespace kitBase::robotModel;
 
 TrikV62PythonGeneratorPlugin::TrikV62PythonGeneratorPlugin()
-	: TrikPythonGeneratorPluginBase(new robotModel::TrikV62GeneratorRobotModel(
-					"trikV62Kit"
-					, "trikKitRobot"
-					, "TrikV62PythonGeneratorRobotModel"
-					, tr("Generation (Python)")
-					, 7 /* After PascalABC model */)
-			, QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface>(new blocks::TrikV62BlocksFactory())
-			, {":/trikPython/templates"})
+	: TrikPythonGeneratorPluginBase(new robotModel::TrikV62GeneratorRobotModel("trikV62Kit", "trikKitRobot",
+						"TrikV62PythonGeneratorRobotModel", tr("Generation (Python)"),
+						7 /* After PascalABC model */),
+		  QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface>(new blocks::TrikV62BlocksFactory()),
+		  {":/trikPython/templates"})
 	, mModel(static_cast<robotModel::TrikV62GeneratorRobotModel *>(robotModels().first()))
 {
 }

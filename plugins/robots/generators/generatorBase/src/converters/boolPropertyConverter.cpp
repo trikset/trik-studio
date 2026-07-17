@@ -21,12 +21,9 @@
 using namespace generatorBase::converters;
 using namespace qReal;
 
-BoolPropertyConverter::BoolPropertyConverter(const QStringList &pathsToTemplates
-		, lua::LuaProcessor &luaTranslator
-		, const qReal::Id &id
-		, const QString &propertyName
-		, simple::Binding::ConverterInterface *reservedVariablesConverter
-		, bool needInverting)
+BoolPropertyConverter::BoolPropertyConverter(const QStringList &pathsToTemplates, lua::LuaProcessor &luaTranslator,
+	const qReal::Id &id, const QString &propertyName,
+	simple::Binding::ConverterInterface *reservedVariablesConverter, bool needInverting)
 	: CodeConverterBase(luaTranslator, id, propertyName, reservedVariablesConverter)
 	, TemplateParametrizedEntity(pathsToTemplates)
 	, mNeedInverting(needInverting)
@@ -36,6 +33,6 @@ BoolPropertyConverter::BoolPropertyConverter(const QStringList &pathsToTemplates
 QString BoolPropertyConverter::convert(const QString &luaCode) const
 {
 	const QString actualCode = mNeedInverting ? QString("not(%1)").arg(luaCode) : luaCode;
-	return mLuaTranslator.castTo(qrtext::core::wrap(new qrtext::lua::types::Boolean)
-			, actualCode, mId, mPropertyName, mReservedVariablesConverter);
+	return mLuaTranslator.castTo(qrtext::core::wrap(new qrtext::lua::types::Boolean), actualCode, mId,
+		mPropertyName, mReservedVariablesConverter);
 }

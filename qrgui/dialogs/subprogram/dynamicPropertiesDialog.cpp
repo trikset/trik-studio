@@ -30,10 +30,8 @@ using namespace gui;
 
 const bool hideLabels = false;
 
-DynamicPropertiesDialog::DynamicPropertiesDialog(const qReal::Id &id
-		, models::LogicalModelAssistApi &logicalRepoApi
-		, models::Exploser &exploser
-		, Controller &controller, QWidget *parent)
+DynamicPropertiesDialog::DynamicPropertiesDialog(const qReal::Id &id, models::LogicalModelAssistApi &logicalRepoApi,
+	models::Exploser &exploser, Controller &controller, QWidget *parent)
 	: QDialog(parent)
 	, mUi(new Ui::DynamicPropertiesDialog)
 	, mShapeWidget(new ShapePropertyWidget(this))
@@ -171,37 +169,26 @@ void DynamicPropertiesDialog::saveButtonClicked()
 		return;
 	}
 
-	auto command = new commands::ChangePropertyCommand(
-			&mLogicalRepoApi.mutableLogicalRepoApi()
-			, "name"
-			, mId
-			, localStringPropertyName
-			, mUi->subprogramName->text()
-	);
+	auto command = new commands::ChangePropertyCommand(&mLogicalRepoApi.mutableLogicalRepoApi(), "name", mId,
+		localStringPropertyName, mUi->subprogramName->text());
 
 	const QString localStringPropertyShape = mLogicalRepoApi.mutableLogicalRepoApi().stringProperty(mId, "shape");
 	const QString selectedShape = mShapeWidget->selectedShape();
 	const QString selectedBackground = mShapeBackgroundWidget->selectedShape();
-	command->addPostAction(new commands::ChangePropertyCommand(
-			&mLogicalRepoApi.mutableLogicalRepoApi()
-			, "shape"
-			, mId
-			, localStringPropertyShape
-			, generateShapeXml(selectedShape, selectedBackground)
-	));
+	command->addPostAction(new commands::ChangePropertyCommand(&mLogicalRepoApi.mutableLogicalRepoApi(), "shape",
+		mId, localStringPropertyShape, generateShapeXml(selectedShape, selectedBackground)));
 
 	// dirty hack to forward values. It's is not labels, it's just name for restoring values
 	QDomDocument dynamicLabels;
 	QDomElement labels = dynamicLabels.createElement("labels");
 
 	QMap<QString, QString> previousLabels;
-	const QString currentDynamicLabelsString = mLogicalRepoApi.mutableLogicalRepoApi().stringProperty(mId, "labels");
+	const QString currentDynamicLabelsString =
+		mLogicalRepoApi.mutableLogicalRepoApi().stringProperty(mId, "labels");
 	QDomDocument currentDynamicLabels;
 	currentDynamicLabels.setContent(currentDynamicLabelsString);
-	for (QDomElement element = currentDynamicLabels.firstChildElement("labels").firstChildElement("label")
-			; !element.isNull()
-			; element = element.nextSiblingElement("label"))
-	{
+	for (QDomElement element = currentDynamicLabels.firstChildElement("labels").firstChildElement("label");
+		!element.isNull(); element = element.nextSiblingElement("label")) {
 		const QString key = QString("%1 %2").arg(element.attribute("text"), element.attribute("type"));
 		previousLabels[key] = element.attribute("textBinded");
 	}
@@ -212,17 +199,16 @@ void DynamicPropertiesDialog::saveButtonClicked()
 		const QString name = mUi->labels->item(i, 0)->text();
 		const QString type = qobject_cast<QComboBox *>(mUi->labels->cellWidget(i, 1))->currentText();
 		const QString value = type == "bool"
-				? qobject_cast<QComboBox*>(mUi->labels->cellWidget(i, 2))->currentText()
-				: mUi->labels->item(i, 2) ? mUi->labels->item(i, 2)->text() : QString();
+		                              ? qobject_cast<QComboBox *>(mUi->labels->cellWidget(i, 2))->currentText()
+		                      : mUi->labels->item(i, 2) ? mUi->labels->item(i, 2)->text()
+		                                                : QString();
 
 		QDomElement label = dynamicLabels.createElement("label");
 		label.setAttribute("x", x);
 		label.setAttribute("y", y);
 		const QString key = QString("%1 %2").arg(name, type);
-		label.setAttribute("textBinded", previousLabels.contains(key)
-				? previousLabels[key]
-				: QUuid::createUuid().toString()
-		);
+		label.setAttribute("textBinded",
+			previousLabels.contains(key) ? previousLabels[key] : QUuid::createUuid().toString());
 
 		label.setAttribute("type", type);
 		label.setAttribute("value", value.trimmed().isEmpty() ? defaultLabelValue(type) : value);
@@ -234,20 +220,15 @@ void DynamicPropertiesDialog::saveButtonClicked()
 
 	const QString localStringPropertyLabels = mLogicalRepoApi.mutableLogicalRepoApi().stringProperty(mId, "labels");
 	dynamicLabels.appendChild(labels);
-	command->addPostAction(new commands::ChangePropertyCommand(
-			&mLogicalRepoApi.mutableLogicalRepoApi()
-			, "labels"
-			, mId
-			, localStringPropertyLabels
-			, dynamicLabels.toString(4)
-	));
+	command->addPostAction(new commands::ChangePropertyCommand(&mLogicalRepoApi.mutableLogicalRepoApi(), "labels",
+		mId, localStringPropertyLabels, dynamicLabels.toString(4)));
 
-	connect(command, &commands::ChangePropertyCommand::redoComplete, &mExploser, [=](){
+	connect(command, &commands::ChangePropertyCommand::redoComplete, &mExploser, [=]() {
 		Q_EMIT mExploser.explosionTargetCouldChangeProperties(mId);
 		Q_EMIT mExploser.explosionsSetCouldChange();
 	});
 
-	connect(command, &commands::ChangePropertyCommand::undoComplete, &mExploser, [=](){
+	connect(command, &commands::ChangePropertyCommand::undoComplete, &mExploser, [=]() {
 		Q_EMIT mExploser.explosionTargetCouldChangeProperties(mId);
 		Q_EMIT mExploser.explosionsSetCouldChange();
 	});
@@ -336,10 +317,8 @@ void DynamicPropertiesDialog::init()
 
 	QDomDocument dynamicLabels;
 	dynamicLabels.setContent(labels);
-	for (QDomElement element = dynamicLabels.firstChildElement("labels").firstChildElement("label")
-			; !element.isNull()
-			; element = element.nextSiblingElement("label"))
-	{
+	for (QDomElement element = dynamicLabels.firstChildElement("labels").firstChildElement("label");
+		!element.isNull(); element = element.nextSiblingElement("label")) {
 		const QString type = element.attribute("type");
 		const QString value = element.attribute("value");
 		const QString text = element.attribute("text");
@@ -361,7 +340,7 @@ QString DynamicPropertiesDialog::tryToSave() const
 			return tr("Name should start with a letter(row %1)").arg(i + 1);
 		}
 
-		const QString type = qobject_cast<QComboBox*>(mUi->labels->cellWidget(i, 1))->currentText();
+		const QString type = qobject_cast<QComboBox *>(mUi->labels->cellWidget(i, 1))->currentText();
 		QString value = mUi->labels->item(i, 2) ? mUi->labels->item(i, 2)->text() : "";
 		if (!value.isEmpty()) {
 			bool ok;

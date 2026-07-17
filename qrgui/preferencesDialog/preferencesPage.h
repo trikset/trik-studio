@@ -48,6 +48,7 @@ Q_SIGNALS:
 
 	/// Emitted when user closed or opened settings dialog.
 	void restored();
+
 private:
 	bool mShouldRestartSystemToApply;
 };

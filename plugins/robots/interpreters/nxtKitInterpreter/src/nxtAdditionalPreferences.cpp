@@ -31,18 +31,15 @@ NxtAdditionalPreferences::NxtAdditionalPreferences(const QString &realRobotName,
 {
 	mUi->setupUi(this);
 	mUi->robotImagePicker->configure("nxtRobot2DImage", tr("2D robot image:"));
-	if (PlatformInfo::osType()  == "linux") {
-		mUi->compilerPicker->configure("pathToArmNoneEabi",
-					       tr("Path to arm-none-eabi:"),
-					       "pathToArmNoneEabiDirectoryChooser",
-					       "Choose arm-none-eabi directory:");
+	if (PlatformInfo::osType() == "linux") {
+		mUi->compilerPicker->configure("pathToArmNoneEabi", tr("Path to arm-none-eabi:"),
+			"pathToArmNoneEabiDirectoryChooser", "Choose arm-none-eabi directory:");
 		setTextOnGeneratorLabel();
-	}
-	else {
+	} else {
 		mUi->generatorSettingsGroupBox->setVisible(false);
 	}
-	connect(mUi->manualComPortCheckbox, &QCheckBox::toggled
-			, this, &NxtAdditionalPreferences::manualComPortCheckboxChecked);
+	connect(mUi->manualComPortCheckbox, &QCheckBox::toggled, this,
+		&NxtAdditionalPreferences::manualComPortCheckboxChecked);
 }
 
 NxtAdditionalPreferences::~NxtAdditionalPreferences()
@@ -50,25 +47,26 @@ NxtAdditionalPreferences::~NxtAdditionalPreferences()
 	delete mUi;
 }
 
-void NxtAdditionalPreferences::setColorOnGeneratorLabel(const QColor& color){
+void NxtAdditionalPreferences::setColorOnGeneratorLabel(const QColor &color)
+{
 	QPalette palette = mUi->generatorLabel->palette();
 	palette.setColor(mUi->generatorLabel->foregroundRole(), color);
 	mUi->generatorLabel->setPalette(palette);
 }
 
-void NxtAdditionalPreferences::setTextOnGeneratorLabel(){
-	if (!mUi->compilerPicker->isSavedDirExist()){
+void NxtAdditionalPreferences::setTextOnGeneratorLabel()
+{
+	if (!mUi->compilerPicker->isSavedDirExist()) {
 		mUi->generatorLabel->setText(tr("WARNING: Current directory doesn't exist. \nOpen "
-										"<a href=\"https://help.trikset.com/nxt/run-upload-programs\">link</a>"
-										" for instructions"));
+						"<a href=\"https://help.trikset.com/nxt/run-upload-programs\">link</a>"
+						" for instructions"));
 		mUi->generatorLabel->setTextFormat(Qt::RichText);
 		mUi->generatorLabel->setTextInteractionFlags(Qt::TextBrowserInteraction);
 		mUi->generatorLabel->setOpenExternalLinks(true);
 		setColorOnGeneratorLabel(QColor("red"));
-	}
-	else {
-	mUi->generatorLabel->setText("Current directory exist.");
-	setColorOnGeneratorLabel(QColor("black"));
+	} else {
+		mUi->generatorLabel->setText("Current directory exist.");
+		setColorOnGeneratorLabel(QColor("black"));
 	}
 }
 
@@ -105,15 +103,16 @@ void NxtAdditionalPreferences::restoreSettings()
 		mUi->directInputComPortLineEdit->hide();
 		mUi->noComPortsFoundLabel->hide();
 		mUi->manualComPortCheckbox->setChecked(false);
-		mUi->manualComPortCheckbox->setChecked(SettingsManager::value("NxtManualComPortCheckboxChecked").toBool());
+		mUi->manualComPortCheckbox->setChecked(
+			SettingsManager::value("NxtManualComPortCheckboxChecked").toBool());
 	}
 }
 
-void NxtAdditionalPreferences::onRobotModelChanged(kitBase::robotModel::RobotModelInterface * const robotModel)
+void NxtAdditionalPreferences::onRobotModelChanged(kitBase::robotModel::RobotModelInterface *const robotModel)
 {
 	QLOG_DEBUG() << robotModel->name();
 	mUi->bluetoothSettingsGroupBox->setVisible(robotModel->name() == mBluetoothRobotName);
-	if (PlatformInfo::osType()  == "linux") {
+	if (PlatformInfo::osType() == "linux") {
 		mUi->generatorSettingsGroupBox->setVisible(robotModel->name() == "NxtOsekCGeneratorRobotModel");
 	}
 }
@@ -139,7 +138,6 @@ void NxtAdditionalPreferences::manualComPortCheckboxChecked(bool state)
 
 QString NxtAdditionalPreferences::selectedPortName() const
 {
-	return mUi->comPortComboBox->isVisible()
-			? mUi->comPortComboBox->currentText()
-			: mUi->directInputComPortLineEdit->text();
+	return mUi->comPortComboBox->isVisible() ? mUi->comPortComboBox->currentText()
+	                                         : mUi->directInputComPortLineEdit->text();
 }

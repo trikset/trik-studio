@@ -39,35 +39,25 @@ using namespace kitBase::robotModel;
 NxtRobotModelBase::NxtRobotModelBase(const QString &kitId, const QString &robotId)
 	: CommonRobotModel(kitId, robotId)
 {
-	QList<DeviceInfo> const inputPortConnections = {
-			touchSensorInfo()
-			, sonarSensorInfo()
-			, lightSensorInfo()
-			, colorFullSensorInfo()
-			, colorRedSensorInfo()
-			, colorGreenSensorInfo()
-			, colorBlueSensorInfo()
-			, colorPassiveSensorInfo()
-			, soundSensorInfo()
-			, gyroscopeSensorInfo()
-			, accelerometerSensorInfo()
-	};
+	QList<DeviceInfo> const inputPortConnections = {touchSensorInfo(), sonarSensorInfo(), lightSensorInfo(),
+		colorFullSensorInfo(), colorRedSensorInfo(), colorGreenSensorInfo(), colorBlueSensorInfo(),
+		colorPassiveSensorInfo(), soundSensorInfo(), gyroscopeSensorInfo(), accelerometerSensorInfo()};
 
-	addAllowedConnection(PortInfo("DisplayPort", output), { displayInfo() });
-	addAllowedConnection(PortInfo("SpeakerPort", output), { speakerInfo() });
+	addAllowedConnection(PortInfo("DisplayPort", output), {displayInfo()});
+	addAllowedConnection(PortInfo("SpeakerPort", output), {speakerInfo()});
 
-	addAllowedConnection(PortInfo("Left", input, {}, "buttonLeft"), { buttonInfo() });
-	addAllowedConnection(PortInfo("Right", input, {}, "buttonRight"), { buttonInfo() });
-	addAllowedConnection(PortInfo("Enter", input, {}, "buttonEnter"), { buttonInfo() });
-	addAllowedConnection(PortInfo("Escape", input, {}, "buttonEscape"), { buttonInfo() });
+	addAllowedConnection(PortInfo("Left", input, {}, "buttonLeft"), {buttonInfo()});
+	addAllowedConnection(PortInfo("Right", input, {}, "buttonRight"), {buttonInfo()});
+	addAllowedConnection(PortInfo("Enter", input, {}, "buttonEnter"), {buttonInfo()});
+	addAllowedConnection(PortInfo("Escape", input, {}, "buttonEscape"), {buttonInfo()});
 
-	addAllowedConnection(PortInfo("A", output, { QString::fromUtf8("А") }), { motorInfo() });
-	addAllowedConnection(PortInfo("B", output, { QString::fromUtf8("В") }), { motorInfo() });
-	addAllowedConnection(PortInfo("C", output, { QString::fromUtf8("С") }), { motorInfo() });
+	addAllowedConnection(PortInfo("A", output, {QString::fromUtf8("А")}), {motorInfo()});
+	addAllowedConnection(PortInfo("B", output, {QString::fromUtf8("В")}), {motorInfo()});
+	addAllowedConnection(PortInfo("C", output, {QString::fromUtf8("С")}), {motorInfo()});
 
-	addAllowedConnection(PortInfo("A", input, { QString::fromUtf8("А") }, "encoderA"), { encoderInfo() });
-	addAllowedConnection(PortInfo("B", input, { QString::fromUtf8("В") }, "encoderB"), { encoderInfo() });
-	addAllowedConnection(PortInfo("C", input, { QString::fromUtf8("С") }, "encoderC"), { encoderInfo() });
+	addAllowedConnection(PortInfo("A", input, {QString::fromUtf8("А")}, "encoderA"), {encoderInfo()});
+	addAllowedConnection(PortInfo("B", input, {QString::fromUtf8("В")}, "encoderB"), {encoderInfo()});
+	addAllowedConnection(PortInfo("C", input, {QString::fromUtf8("С")}, "encoderC"), {encoderInfo()});
 
 	addAllowedConnection(PortInfo("1", input, {}, "sensor1"), inputPortConnections);
 	addAllowedConnection(PortInfo("2", input, {}, "sensor2"), inputPortConnections);
@@ -77,18 +67,12 @@ NxtRobotModelBase::NxtRobotModelBase(const QString &kitId, const QString &robotI
 
 QList<DeviceInfo> NxtRobotModelBase::convertibleBases() const
 {
-	return { DeviceInfo::create<robotParts::TouchSensor>()
-			, DeviceInfo::create<robotParts::RangeSensor>()
-			, DeviceInfo::create<robotParts::LightSensor>()
-			, DeviceInfo::create<robotParts::ColorSensorFull>()
-			, DeviceInfo::create<robotParts::ColorSensorRed>()
-			, DeviceInfo::create<robotParts::ColorSensorGreen>()
-			, DeviceInfo::create<robotParts::ColorSensorBlue>()
-			, DeviceInfo::create<robotParts::ColorSensorPassive>()
-			, DeviceInfo::create<robotParts::SoundSensor>()
-			, DeviceInfo::create<robotParts::GyroscopeSensor>()
-			, DeviceInfo::create<robotParts::AccelerometerSensor>()
-	};
+	return {DeviceInfo::create<robotParts::TouchSensor>(), DeviceInfo::create<robotParts::RangeSensor>(),
+		DeviceInfo::create<robotParts::LightSensor>(), DeviceInfo::create<robotParts::ColorSensorFull>(),
+		DeviceInfo::create<robotParts::ColorSensorRed>(), DeviceInfo::create<robotParts::ColorSensorGreen>(),
+		DeviceInfo::create<robotParts::ColorSensorBlue>(), DeviceInfo::create<robotParts::ColorSensorPassive>(),
+		DeviceInfo::create<robotParts::SoundSensor>(), DeviceInfo::create<robotParts::GyroscopeSensor>(),
+		DeviceInfo::create<robotParts::AccelerometerSensor>()};
 }
 
 DeviceInfo NxtRobotModelBase::displayInfo() const

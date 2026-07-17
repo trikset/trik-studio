@@ -22,7 +22,9 @@ using namespace utils;
 using namespace qReal;
 
 ExpressionsParser::ExpressionsParser(ErrorReporterInterface *errorReporter)
-	: mHasParseErrors(false), mErrorReporter(errorReporter), mCurrentId (Id::rootId())
+	: mHasParseErrors(false)
+	, mErrorReporter(errorReporter)
+	, mCurrentId(Id::rootId())
 {
 	srand(time(nullptr));
 }
@@ -54,7 +56,7 @@ bool ExpressionsParser::isSign(QChar c) const
 bool ExpressionsParser::isLetter(QChar c) const
 {
 	char symbol = c.toLatin1();
-	return ('A' <= symbol && symbol <= 'Z') || ('a'<= symbol && symbol <= 'z');
+	return ('A' <= symbol && symbol <= 'Z') || ('a' <= symbol && symbol <= 'z');
 }
 
 bool ExpressionsParser::isExp(QChar c) const
@@ -161,7 +163,8 @@ QSharedPointer<Number> ExpressionsParser::parseNumber(const QString &stream, int
 		}
 	}
 	if (isDouble) {
-		return QSharedPointer<Number>::create(stream.midRef(beginPos, pos - beginPos).toDouble(), Number::doubleType);
+		return QSharedPointer<Number>::create(stream.midRef(beginPos, pos - beginPos).toDouble(),
+			Number::doubleType);
 	} else {
 		return QSharedPointer<Number>::create(stream.midRef(beginPos, pos - beginPos).toInt(), Number::intType);
 	}
@@ -182,9 +185,7 @@ QString ExpressionsParser::parseIdentifier(const QString &stream, int &pos)
 
 void ExpressionsParser::skip(const QString &stream, int &pos) const
 {
-	while (pos < stream.length() &&
-		   (isDelimiter(stream.at(pos)) || stream.at(pos).toLatin1() == '<' ))
-	{
+	while (pos < stream.length() && (isDelimiter(stream.at(pos)) || stream.at(pos).toLatin1() == '<')) {
 		if (isHtmlBrTag(stream, pos)) {
 			pos += 4;
 			return;
@@ -199,10 +200,8 @@ void ExpressionsParser::skip(const QString &stream, int &pos) const
 bool ExpressionsParser::isHtmlBrTag(const QString &stream, int &pos) const
 {
 	if (pos + 3 < stream.length()) {
-		return stream.at(pos).toLatin1() == '<'
-				&& stream.at(pos + 1).toLatin1() == 'b'
-				&& stream.at(pos + 2).toLatin1() == 'r'
-				&& stream.at(pos + 3).toLatin1() == '>';
+		return stream.at(pos).toLatin1() == '<' && stream.at(pos + 1).toLatin1() == 'b'
+		       && stream.at(pos + 2).toLatin1() == 'r' && stream.at(pos + 3).toLatin1() == '>';
 	} else {
 		return false;
 	}
@@ -261,8 +260,8 @@ QSharedPointer<Number> ExpressionsParser::parseTerm(const QString &stream, int &
 				error(unknownIdentifier, QString::number(unknownIdentifierIndex + 1), "", variable);
 			}
 		} else {
-			error(unexpectedSymbol, QString::number(pos + 1)
-					, R"('digit' or 'letter' or 'bracket' or 'sign')", QString(stream.at(pos)));
+			error(unexpectedSymbol, QString::number(pos + 1),
+				R"('digit' or 'letter' or 'bracket' or 'sign')", QString(stream.at(pos)));
 		}
 		break;
 	}
@@ -283,17 +282,16 @@ QSharedPointer<Number> ExpressionsParser::parseMult(const QString &stream, int &
 		case '*':
 			*res *= *parseTerm(stream, pos);
 			break;
-		case '/':
-			{
-				auto divisor = parseTerm(stream, pos);
-				if (divisor->type() == Number::intType && divisor->value().toInt() == 0) {
-					error(divisionByZero);
-				} else {
-					*res /= *divisor;
-				}
-
-				break;
+		case '/': {
+			auto divisor = parseTerm(stream, pos);
+			if (divisor->type() == Number::intType && divisor->value().toInt() == 0) {
+				error(divisionByZero);
+			} else {
+				*res /= *divisor;
 			}
+
+			break;
+		}
 		}
 	}
 
@@ -348,14 +346,15 @@ void ExpressionsParser::parseCommand(const QString &stream, int &pos)
 			} else {
 				if (t1 == Number::intType) {
 					mVariables[variable]->setValue(n->value().toInt());
-					error(typesMismatch, QString::number(typesMismatchIndex + 1), "\'int\'", "\'double\'");
+					error(typesMismatch, QString::number(typesMismatchIndex + 1), "\'int\'",
+						"\'double\'");
 				} else {
 					mVariables[variable]->setValue(n->value().toDouble());
 				}
 			}
 		}
 	} else {
-		error(unexpectedSymbol, QString::number(pos+1), "=", QString(stream.at(pos)));
+		error(unexpectedSymbol, QString::number(pos + 1), "=", QString(stream.at(pos)));
 		return;
 	}
 	if (!hasErrors() && checkForColon(stream, pos)) {
@@ -384,7 +383,7 @@ void ExpressionsParser::parseProcess(const QString &stream, int &pos, const Id &
 bool ExpressionsParser::parseSingleComprasion(const QString &stream, int &pos)
 {
 	auto left = parseExpression(stream, pos);
-	decltype (left) right;
+	decltype(left) right;
 	if (hasErrors() || isEndOfStream(stream, pos)) {
 		return false;
 	}
@@ -434,8 +433,7 @@ bool ExpressionsParser::parseSingleComprasion(const QString &stream, int &pos)
 		break;
 	}
 
-	error(unexpectedSymbol, QString::number(pos + 1), R"(=','!','>','<)"
-			, QString(stream.at(pos)));
+	error(unexpectedSymbol, QString::number(pos + 1), R"(=','!','>','<)", QString(stream.at(pos)));
 	return false;
 }
 
@@ -447,10 +445,9 @@ bool ExpressionsParser::parseDisjunction(const QString &stream, int &pos)
 
 	switch (stream.at(pos).toLatin1()) {
 	case '(':
-		if ((index < stream.indexOf('<', pos) || stream.indexOf('<', pos) == -1) &&
-				(index < stream.indexOf('>', pos) || stream.indexOf('>', pos) == -1) &&
-				(index < stream.indexOf('=', pos) || stream.indexOf('=', pos) == -1))
-		{
+		if ((index < stream.indexOf('<', pos) || stream.indexOf('<', pos) == -1)
+			&& (index < stream.indexOf('>', pos) || stream.indexOf('>', pos) == -1)
+			&& (index < stream.indexOf('=', pos) || stream.indexOf('=', pos) == -1)) {
 			res = parseSingleComprasion(stream, pos);
 		} else {
 			pos++;
@@ -479,8 +476,8 @@ bool ExpressionsParser::parseDisjunction(const QString &stream, int &pos)
 		if (isDigit(stream.at(pos)) || isLetter(stream.at(pos))) {
 			res = parseSingleComprasion(stream, pos);
 		} else {
-			error(unexpectedSymbol, QString::number(pos + 1)
-				, R"('digit' or 'letter' or 'sign')", QString(stream.at(pos)));
+			error(unexpectedSymbol, QString::number(pos + 1), R"('digit' or 'letter' or 'sign')",
+				QString(stream.at(pos)));
 		}
 		break;
 	}
@@ -491,7 +488,7 @@ bool ExpressionsParser::parseDisjunction(const QString &stream, int &pos)
 bool ExpressionsParser::parseConjunction(const QString &stream, int &pos)
 {
 	bool res = parseDisjunction(stream, pos);
-	while (pos < (stream.length()-1) && isConjunction(stream.at(pos))) {
+	while (pos < (stream.length() - 1) && isConjunction(stream.at(pos))) {
 		pos++;
 		if (isConjunction(stream.at(pos))) {
 			pos++;
@@ -507,7 +504,7 @@ bool ExpressionsParser::parseConjunction(const QString &stream, int &pos)
 bool ExpressionsParser::parseConditionHelper(const QString &stream, int &pos)
 {
 	bool res = parseConjunction(stream, pos);
-	while (pos < (stream.length()-1) && isDisjunction(stream.at(pos))) {
+	while (pos < (stream.length() - 1) && isDisjunction(stream.at(pos))) {
 		pos++;
 		if (isDisjunction(stream.at(pos))) {
 			pos++;
@@ -536,7 +533,7 @@ bool ExpressionsParser::parseCondition(const QString &stream, int &pos, const Id
 	return res;
 }
 
-ErrorReporterInterface& ExpressionsParser::getErrors()
+ErrorReporterInterface &ExpressionsParser::getErrors()
 {
 	return *mErrorReporter;
 }
@@ -633,23 +630,25 @@ bool ExpressionsParser::isEmpty(const QString &stream, int &pos) const
 	return pos == stream.length();
 }
 
-void ExpressionsParser::error(utils::ExpressionsParser::ParseErrorType type, const QString &pos
-		, const QString &expected, const QString &got)
+void ExpressionsParser::error(utils::ExpressionsParser::ParseErrorType type, const QString &pos,
+	const QString &expected, const QString &got)
 {
 	switch (type) {
 	case unexpectedEndOfStream:
 		mHasParseErrors = true;
-		mErrorReporter->addCritical(QObject::tr("Unexpected end of stream at %1. Mb you forget \';\'?").arg(pos)
-				, mCurrentId);
+		mErrorReporter->addCritical(
+			QObject::tr("Unexpected end of stream at %1. Mb you forget \';\'?").arg(pos), mCurrentId);
 		break;
 	case unexpectedSymbol:
 		mHasParseErrors = true;
-		mErrorReporter->addCritical(QObject::tr("Unexpected symbol at %1 : expected %2, got %3").arg(pos, expected, got)
-				, mCurrentId);
+		mErrorReporter->addCritical(
+			QObject::tr("Unexpected symbol at %1 : expected %2, got %3").arg(pos, expected, got),
+			mCurrentId);
 		break;
 	case typesMismatch:
-		mErrorReporter->addWarning(QObject::tr("Types mismatch at %1: %2 = %3. Possible loss of data")
-				.arg(pos, expected, got), mCurrentId);
+		mErrorReporter->addWarning(
+			QObject::tr("Types mismatch at %1: %2 = %3. Possible loss of data").arg(pos, expected, got),
+			mCurrentId);
 		break;
 	case unknownIdentifier:
 		mHasParseErrors = true;
@@ -671,8 +670,8 @@ void ExpressionsParser::error(utils::ExpressionsParser::ParseErrorType type, con
 		mErrorReporter->addCritical(QObject::tr("No value of expression"), mCurrentId);
 		break;
 	case incorrectVariableDeclaration:
-		mErrorReporter->addWarning(QObject::tr("Incorrect variable declaration: use function block for it")
-				, mCurrentId);
+		mErrorReporter->addWarning(QObject::tr("Incorrect variable declaration: use function block for it"),
+			mCurrentId);
 		break;
 	case unexpectedSymbolAfterTheEndOfExpression:
 		mHasParseErrors = true;
@@ -719,18 +718,9 @@ void ExpressionsParser::checkForVariable(const QString &nameOfVariable, int &ind
 
 bool ExpressionsParser::isFunction(const QString &variable)
 {
-	return variable == "cos"
-			|| variable == "sin"
-			|| variable == "ln"
-			|| variable == "exp"
-			|| variable == "asin"
-			|| variable == "acos"
-			|| variable == "atan"
-			|| variable == "sgn"
-			|| variable == "sqrt"
-			|| variable == "abs"
-			|| variable == "random"
-			;
+	return variable == "cos" || variable == "sin" || variable == "ln" || variable == "exp" || variable == "asin"
+	       || variable == "acos" || variable == "atan" || variable == "sgn" || variable == "sqrt"
+	       || variable == "abs" || variable == "random";
 }
 
 QSharedPointer<Number> ExpressionsParser::applyFunction(const QString &variable, const QSharedPointer<Number> &value)
@@ -738,9 +728,9 @@ QSharedPointer<Number> ExpressionsParser::applyFunction(const QString &variable,
 	Number *result {};
 	qreal argument = value->value().toDouble();
 	if (variable == "cos") {
-		result= new Number(cos(argument), Number::doubleType);
+		result = new Number(cos(argument), Number::doubleType);
 	} else if (variable == "sin") {
-		result= new Number(sin(argument), Number::doubleType);
+		result = new Number(sin(argument), Number::doubleType);
 	} else if (variable == "ln") {
 		result = new Number(log(argument), Number::doubleType);
 	} else if (variable == "exp") {

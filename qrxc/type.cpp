@@ -19,8 +19,10 @@
 #include "property.h"
 
 Type::Type(bool isResolved, Diagram *diagram)
-	: mResolvingFinished(isResolved), mDiagram(diagram)
-{}
+	: mResolvingFinished(isResolved)
+	, mDiagram(diagram)
+{
+}
 
 Type::~Type()
 {
@@ -97,7 +99,7 @@ void Type::setDisplayedName(const QString &displayedName)
 	mDisplayedName = displayedName;
 }
 
-QMap<QString, Property*> Type::properties() const
+QMap<QString, Property *> Type::properties() const
 {
 	return mProperties;
 }
@@ -113,7 +115,7 @@ void Type::copyFields(Type *type) const
 	type->mContext = mContext;
 	type->mNativeContext = mNativeContext;
 	type->mDisplayedName = mDisplayedName;
-	for (const QString &propertyName :mProperties.keys())
+	for (const QString &propertyName : mProperties.keys())
 		type->mProperties.insert(propertyName, mProperties[propertyName]->clone());
 	type->mResolvingFinished = mResolvingFinished;
 	type->mDiagram = mDiagram;

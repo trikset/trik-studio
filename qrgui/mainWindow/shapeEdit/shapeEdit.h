@@ -47,14 +47,14 @@ class ShapeEdit : public QWidget, public EditorInterface
 
 public:
 	explicit ShapeEdit(QWidget *parent = nullptr);
-	ShapeEdit(qReal::models::details::LogicalModel *model, const QPersistentModelIndex &index, int role
-		, bool useTypedPorts);
-	ShapeEdit(const Id &id, const EditorManagerInterface &editorManagerProxy
-		, const qrRepo::GraphicalRepoApi &graphicalRepoApi, MainWindow *mainWindow
-		, qReal::gui::editor::EditorView *editorView, bool useTypedPorts);
+	ShapeEdit(qReal::models::details::LogicalModel *model, const QPersistentModelIndex &index, int role,
+		bool useTypedPorts);
+	ShapeEdit(const Id &id, const EditorManagerInterface &editorManagerProxy,
+		const qrRepo::GraphicalRepoApi &graphicalRepoApi, MainWindow *mainWindow,
+		qReal::gui::editor::EditorView *editorView, bool useTypedPorts);
 	~ShapeEdit() override;
 
-	graphicsUtils::AbstractView* getView();
+	graphicsUtils::AbstractView *getView();
 	void load(const QString &text);
 
 	QString editorId() const override;
@@ -105,22 +105,22 @@ private Q_SLOTS:
 	void resetHighlightAllButtons();
 
 private:
-	Scene *mScene {};  // Has ownership.
+	Scene *mScene {}; // Has ownership.
 	QGraphicsItemGroup mItemGroup;
-	QList<QAbstractButton *> mButtonGroup;  // Doesn't have direct ownership (owned by mUi).
+	QList<QAbstractButton *> mButtonGroup; // Doesn't have direct ownership (owned by mUi).
 	QDomDocument mDocument;
 	QPoint mTopLeftPicture;
-	Ui::ShapeEdit *mUi;  // Has ownership.
+	Ui::ShapeEdit *mUi; // Has ownership.
 
 	// TODO: lolwut? Use assist API instead.
-	qReal::models::details::LogicalModel *mModel {};  // Doesn't have ownership.
+	qReal::models::details::LogicalModel *mModel {}; // Doesn't have ownership.
 	const QPersistentModelIndex mIndex;
-	const int mRole { -1 };
+	const int mRole {-1};
 	Id mId;
-	const EditorManagerInterface *mEditorManager {};  // Doesn't have ownership.
+	const EditorManagerInterface *mEditorManager {}; // Doesn't have ownership.
 	IdList mGraphicalElements;
-	MainWindow *mMainWindow {};  // Doesn't have ownership.
-	qReal::gui::editor::EditorView *mEditorView {};  // Doesn't have ownership.
+	MainWindow *mMainWindow {}; // Doesn't have ownership.
+	qReal::gui::editor::EditorView *mEditorView {}; // Doesn't have ownership.
 
 	bool mUseTypedPorts {};
 

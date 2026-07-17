@@ -20,14 +20,12 @@ namespace ev3 {
 namespace simple {
 
 /// Generator for 'NullifyEncoder' block
-class NullificationEncoderGenerator: public generatorBase::simple::BindingGenerator
+class NullificationEncoderGenerator : public generatorBase::simple::BindingGenerator
 {
 	Q_OBJECT
 public:
-	NullificationEncoderGenerator(const qrRepo::RepoApi &repo
-			, generatorBase::GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent = nullptr);
+	NullificationEncoderGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+		const qReal::Id &id, QObject *parent = nullptr);
 };
 
 }

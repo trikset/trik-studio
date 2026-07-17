@@ -25,18 +25,16 @@ class ROBOTS_NXT_GENERATOR_BASE_EXPORT NxtGeneratorFactory : public generatorBas
 {
 	Q_OBJECT
 public:
-	NxtGeneratorFactory(const qrRepo::RepoApi &repo
-			, qReal::ErrorReporterInterface &errorReporter
-			, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
-			, generatorBase::lua::LuaProcessor &luaProcessor
-			, const QString &generatorName);
+	NxtGeneratorFactory(const qrRepo::RepoApi &repo, qReal::ErrorReporterInterface &errorReporter,
+		const kitBase::robotModel::RobotModelManagerInterface &robotModelManager,
+		generatorBase::lua::LuaProcessor &luaProcessor, const QString &generatorName);
 	~NxtGeneratorFactory() override;
 
 	/// Returns an entity processing everything about BMP images that will be embedded into an executable.
 	parts::Images &images();
 
-	generatorBase::simple::AbstractSimpleGenerator *simpleGenerator(const qReal::Id &id
-			, generatorBase::GeneratorCustomizer &customizer) override;
+	generatorBase::simple::AbstractSimpleGenerator *simpleGenerator(const qReal::Id &id,
+		generatorBase::GeneratorCustomizer &customizer) override;
 
 	QStringList pathsToTemplates() const override;
 

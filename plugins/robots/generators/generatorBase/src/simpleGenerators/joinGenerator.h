@@ -24,12 +24,8 @@ class JoinGenerator : public AbstractSimpleGenerator
 {
 	Q_OBJECT
 public:
-	JoinGenerator(const qrRepo::RepoApi &repo
-			, GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, const QStringList &joinedThreads
-			, const QString &mainThreadId
-			, QObject *parent = nullptr);
+	JoinGenerator(const qrRepo::RepoApi &repo, GeneratorCustomizer &customizer, const qReal::Id &id,
+		const QStringList &joinedThreads, const QString &mainThreadId, QObject *parent = nullptr);
 
 	QString generate() override;
 

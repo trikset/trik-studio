@@ -23,7 +23,7 @@ using namespace tcpRobotSimulator;
 
 TcpRobotSimulator::TcpRobotSimulator(int port)
 {
-	if(!listen(QHostAddress::LocalHost, port)) {
+	if (!listen(QHostAddress::LocalHost, port)) {
 		qErrnoWarning(errno, "Failed to open TCP port");
 	}
 }
@@ -43,10 +43,10 @@ void TcpRobotSimulator::incomingConnection(qintptr socketDescriptor)
 	mConnectionThread.reset(new QThread());
 	mConnection->moveToThread(mConnectionThread.data());
 	connect(mConnectionThread.data(), &QThread::finished, mConnection, &QObject::deleteLater);
-	connect(mConnection, &Connection::runProgramRequestReceivedSignal
-			, this, &TcpRobotSimulator::runProgramRequestReceivedSignal, Qt::QueuedConnection);
-	connect(mConnectionThread.data(), &QThread::started
-			, mConnection, [this, socketDescriptor](){ mConnection->init(socketDescriptor); });
+	connect(mConnection, &Connection::runProgramRequestReceivedSignal, this,
+		&TcpRobotSimulator::runProgramRequestReceivedSignal, Qt::QueuedConnection);
+	connect(mConnectionThread.data(), &QThread::started, mConnection,
+		[this, socketDescriptor]() { mConnection->init(socketDescriptor); });
 	mConnectionThread->start();
 }
 

@@ -31,16 +31,16 @@ bool PreconditionalLoopBlock::initNextBlocks()
 	bool conditionFound = false;
 	bool nextFound = false;
 
-	const auto & links = mGraphicalModelApi->graphicalRepoApi().outgoingLinks(id());
+	const auto &links = mGraphicalModelApi->graphicalRepoApi().outgoingLinks(id());
 
-	for (auto && linkId : links) {
-		const auto & targetBlockId = mGraphicalModelApi->graphicalRepoApi().otherEntityFromLink(linkId, id());
+	for (auto &&linkId : links) {
+		const auto &targetBlockId = mGraphicalModelApi->graphicalRepoApi().otherEntityFromLink(linkId, id());
 		if (targetBlockId.isNull()) {
 			error(tr("Outgoing link is not connected"));
 			return false;
 		}
 
-		const auto & guard = stringProperty(linkId, "Guard").toLower();
+		const auto &guard = stringProperty(linkId, "Guard").toLower();
 		if (guard == "iteration") {
 			if (!conditionFound) {
 				mLoopStartBlockId = targetBlockId;

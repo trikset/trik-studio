@@ -32,7 +32,6 @@ class GraphicalModelAssistApi;
 class LogicalModelAssistApi;
 }
 
-
 namespace gui {
 namespace editor {
 
@@ -52,10 +51,9 @@ public:
 	QRect visualRect(const QModelIndex &index) const override;
 	void scrollTo(const QModelIndex &index, ScrollHint hint = EnsureVisible) override;
 	bool isDescendentOf(const QModelIndex &descendent, const QModelIndex &ancestor);
-	void configure(models::GraphicalModelAssistApi &graphicalAssistApi
-			, models::LogicalModelAssistApi &logicalAssistApi
-			, models::Exploser &exploser);
-	void setLogicalModel(QAbstractItemModel * const logicalModel);
+	void configure(models::GraphicalModelAssistApi &graphicalAssistApi,
+		models::LogicalModelAssistApi &logicalAssistApi, models::Exploser &exploser);
+	void setLogicalModel(QAbstractItemModel *const logicalModel);
 	Id rootId() const;
 
 	EditorViewScene *scene() const;
@@ -69,20 +67,20 @@ Q_SIGNALS:
 public Q_SLOTS:
 	void reset() override;
 	void setRootIndex(const QModelIndex &index) override;
-	void rowsAboutToBeMoved(const QModelIndex &sourceParent, int sourceStart, int sourceEnd
-			, const QModelIndex &destinationParent, int destinationRow);
-	void rowsMoved(const QModelIndex &sourceParent, int sourceStart, int sourceEnd
-			, const QModelIndex &destinationParent, int destinationRow);
+	void rowsAboutToBeMoved(const QModelIndex &sourceParent, int sourceStart, int sourceEnd,
+		const QModelIndex &destinationParent, int destinationRow);
+	void rowsMoved(const QModelIndex &sourceParent, int sourceStart, int sourceEnd,
+		const QModelIndex &destinationParent, int destinationRow);
 
 private Q_SLOTS:
-	void dataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight
-			, const QVector<int> &roles = QVector<int>()) override;
+	void dataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight,
+		const QVector<int> &roles = QVector<int>()) override;
 	void rowsAboutToBeRemoved(const QModelIndex &parent, int start, int end) override;
 	void rowsInserted(const QModelIndex &parent, int start, int end) override;
 	void logicalDataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight);
 
 private:
-	typedef QPair<QPersistentModelIndex, Element*> IndexElementPair;
+	typedef QPair<QPersistentModelIndex, Element *> IndexElementPair;
 
 	EditorViewScene *mScene;
 	EditorView *mView;
@@ -100,23 +98,23 @@ private:
 
 	bool isIndexHidden(const QModelIndex &index) const override;
 
-	void setSelection(const QRect& rect, QItemSelectionModel::SelectionFlags command) override;
+	void setSelection(const QRect &rect, QItemSelectionModel::SelectionFlags command) override;
 
-	QRegion visualRegionForSelection(const QItemSelection &selection ) const override;
+	QRegion visualRegionForSelection(const QItemSelection &selection) const override;
 
 	Element *item(const QPersistentModelIndex &index) const;
 	void setItem(const QPersistentModelIndex &index, Element *item);
 	void removeItem(const QPersistentModelIndex &index);
 	void clearItems();
 
-	void handleAddingSequenceForRowsInserted(const QModelIndex &parent
-		, Element *elem, const QPersistentModelIndex &current);
+	void handleAddingSequenceForRowsInserted(const QModelIndex &parent, Element *elem,
+		const QPersistentModelIndex &current);
 
 	void handleElemDataForRowsInserted(Element *elem, const QPersistentModelIndex &current);
-	void handleNodeElementsForRowsInserted(const QList<QPair<NodeElement *, QPersistentModelIndex>> &nodes
-			, const QModelIndex &parent);
-	void handleEdgeElementsForRowsInserted(const QList<QPair<EdgeElement *, QPersistentModelIndex>> &edges
-			, const QModelIndex &parent);
+	void handleNodeElementsForRowsInserted(const QList<QPair<NodeElement *, QPersistentModelIndex>> &nodes,
+		const QModelIndex &parent);
+	void handleEdgeElementsForRowsInserted(const QList<QPair<EdgeElement *, QPersistentModelIndex>> &edges,
+		const QModelIndex &parent);
 };
 
 }

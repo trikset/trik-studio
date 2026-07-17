@@ -20,9 +20,8 @@ const unsigned pressed = 63;
 using namespace ev3::robotModel::real::parts;
 using namespace kitBase::robotModel;
 
-TouchSensor::TouchSensor(const kitBase::robotModel::DeviceInfo &info
-		, const kitBase::robotModel::PortInfo &port
-		, utils::robotCommunication::RobotCommunicator &robotCommunicator)
+TouchSensor::TouchSensor(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+	utils::robotCommunication::RobotCommunicator &robotCommunicator)
 	: robotParts::TouchSensor(info, port)
 	, mImplementation(robotCommunicator, port)
 	, mRobotCommunicator(robotCommunicator)

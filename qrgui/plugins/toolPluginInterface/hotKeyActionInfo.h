@@ -24,7 +24,7 @@ namespace qReal {
 class HotKeyActionInfo
 {
 public:
-	HotKeyActionInfo(const QString &id, const QString &label, QAction * const action)
+	HotKeyActionInfo(const QString &id, const QString &label, QAction *const action)
 		: mAction(action)
 		, mId(id)
 		, mLabel(label)
@@ -48,10 +48,9 @@ public:
 
 private:
 	/// Does not have ownership.
-	QAction * mAction;
+	QAction *mAction;
 	QString mId;
 	QString mLabel;
 };
 
 }
-

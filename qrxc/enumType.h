@@ -17,7 +17,7 @@
 #include "nonGraphicType.h"
 
 namespace utils {
-	class OutFile;
+class OutFile;
 }
 
 class EnumType : public NonGraphicType

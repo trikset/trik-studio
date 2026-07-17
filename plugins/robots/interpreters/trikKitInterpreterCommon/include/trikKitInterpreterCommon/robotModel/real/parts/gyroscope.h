@@ -29,9 +29,8 @@ class ROBOTS_TRIK_KIT_INTERPRETER_COMMON_EXPORT Gyroscope : public kitBase::robo
 	Q_OBJECT
 
 public:
-	Gyroscope(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port
-			, utils::robotCommunication::TcpRobotCommunicator &tcpRobotCommunicator);
+	Gyroscope(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+		utils::robotCommunication::TcpRobotCommunicator &tcpRobotCommunicator);
 
 	void read() override;
 

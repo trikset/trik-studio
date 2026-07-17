@@ -21,7 +21,7 @@ namespace trik {
 namespace blocks {
 namespace details {
 
-class WaitForMessageBlock: public kitBase::blocksBase::common::WaitBlock
+class WaitForMessageBlock : public kitBase::blocksBase::common::WaitBlock
 {
 	Q_OBJECT
 public:
@@ -29,6 +29,7 @@ public:
 
 private Q_SLOTS:
 	void timerTimeout() override;
+
 private:
 	void run() override;
 

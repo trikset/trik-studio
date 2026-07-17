@@ -26,7 +26,7 @@
 #include "qrgui/dialogs/dialogsDeclSpec.h"
 
 namespace Ui {
-	class FindReplaceDialog;
+class FindReplaceDialog;
 }
 
 /// Class that manages ui of find & replace menu.
@@ -75,7 +75,7 @@ private Q_SLOTS:
 
 private:
 	/// Checkboxes with find modes.
-	QList<QCheckBox*> mCheckBoxes;
+	QList<QCheckBox *> mCheckBoxes;
 
 	/// Repository's interface.
 	const qrRepo::LogicalRepoApi &mCommonApi;

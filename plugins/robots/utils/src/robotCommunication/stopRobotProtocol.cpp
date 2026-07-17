@@ -26,9 +26,10 @@ StopRobotProtocol::StopRobotProtocol(TcpRobotCommunicator &communicator)
 	, mWaitingForStopRobotCommandSent(new QState())
 	, mWaitingForDeinitializeCommandSent(new QState())
 {
-	mProtocol->addTransition(mWaitingForStopRobotCommandSent, &TcpRobotCommunicator::stopRobotDone
-			, mWaitingForDeinitializeCommandSent);
-	mProtocol->addSuccessTransition(mWaitingForDeinitializeCommandSent, &TcpRobotCommunicator::runDirectCommandDone);
+	mProtocol->addTransition(mWaitingForStopRobotCommandSent, &TcpRobotCommunicator::stopRobotDone,
+		mWaitingForDeinitializeCommandSent);
+	mProtocol->addSuccessTransition(mWaitingForDeinitializeCommandSent,
+		&TcpRobotCommunicator::runDirectCommandDone);
 
 	connect(mProtocol.data(), &Protocol::success, this, &StopRobotProtocol::success);
 	connect(mProtocol.data(), &Protocol::error, this, &StopRobotProtocol::error);
@@ -39,13 +40,12 @@ StopRobotProtocol::~StopRobotProtocol() = default;
 
 void StopRobotProtocol::run(const QString &shutdownCommand)
 {
-	mProtocol->setAction(mWaitingForStopRobotCommandSent, [](TcpRobotCommunicatorInterface &communicator) {
-		communicator.stopRobot();
-	});
+	mProtocol->setAction(mWaitingForStopRobotCommandSent,
+		[](TcpRobotCommunicatorInterface &communicator) { communicator.stopRobot(); });
 
-	mProtocol->setAction(mWaitingForDeinitializeCommandSent
-			, [shutdownCommand](TcpRobotCommunicatorInterface &communicator) {
-				communicator.runDirectCommand(shutdownCommand, true);
+	mProtocol->setAction(mWaitingForDeinitializeCommandSent,
+		[shutdownCommand](TcpRobotCommunicatorInterface &communicator) {
+		communicator.runDirectCommand(shutdownCommand, true);
 	});
 
 	mProtocol->run();

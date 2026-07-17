@@ -32,7 +32,7 @@ public:
 
 	void save() override;
 	void restoreSettings() override;
-	void onRobotModelChanged(kitBase::robotModel::RobotModelInterface * const robotModel) override;
+	void onRobotModelChanged(kitBase::robotModel::RobotModelInterface *const robotModel) override;
 
 Q_SIGNALS:
 	void settingsChanged();

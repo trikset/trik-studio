@@ -26,7 +26,8 @@ class QRREPO_EXPORT SaveFileNotReadableException : public QrRepoException
 public:
 	explicit SaveFileNotReadableException(const QString &fileName)
 		: QrRepoException("Save file not readable: " + fileName)
-	{}
+	{
+	}
 };
 
 }

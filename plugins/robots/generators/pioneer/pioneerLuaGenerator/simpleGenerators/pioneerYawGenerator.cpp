@@ -20,17 +20,11 @@
 using namespace pioneer::lua;
 using namespace generatorBase::simple;
 
-PioneerYawGenerator::PioneerYawGenerator(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, const qReal::Id &id
-		, QObject *parent)
-	: BindingGenerator(repo, customizer, id, "quadcopterCommands/yaw.t"
-		, {
-			Binding::createConverting(
-					"@@ANGLE@@"
-					, "Angle"
-					, customizer.factory()->floatPropertyConverter(id, "Angle"))
-			}
-		, parent)
+PioneerYawGenerator::PioneerYawGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+	const qReal::Id &id, QObject *parent)
+	: BindingGenerator(repo, customizer, id, "quadcopterCommands/yaw.t",
+		  {Binding::createConverting("@@ANGLE@@", "Angle",
+			  customizer.factory()->floatPropertyConverter(id, "Angle"))},
+		  parent)
 {
 }

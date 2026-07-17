@@ -20,9 +20,8 @@
 using namespace twoDModel::robotModel::parts;
 using namespace kitBase::robotModel;
 
-ColorSensorBlue::ColorSensorBlue(const kitBase::robotModel::DeviceInfo &info
-		, const kitBase::robotModel::PortInfo &port
-		, engine::TwoDModelEngineInterface &engine)
+ColorSensorBlue::ColorSensorBlue(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+	engine::TwoDModelEngineInterface &engine)
 	: kitBase::robotModel::robotParts::ColorSensorBlue(info, port)
 	, mEngine(engine)
 {

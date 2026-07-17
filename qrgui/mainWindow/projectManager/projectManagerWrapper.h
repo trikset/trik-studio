@@ -77,7 +77,7 @@ private:
 
 	MainWindow *mMainWindow;
 	TextManagerInterface *mTextManager;
-	bool mStackUnsaved { false };
+	bool mStackUnsaved {false};
 
 	bool openQRProject(const QFileInfo &fileInfo); //move to public?
 };

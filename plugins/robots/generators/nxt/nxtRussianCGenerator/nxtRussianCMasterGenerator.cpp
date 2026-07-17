@@ -16,15 +16,12 @@
 
 using namespace nxt::russianC;
 
-NxtRussianCMasterGenerator::NxtRussianCMasterGenerator(const qrRepo::RepoApi &repo
-		, qReal::ErrorReporterInterface &errorReporter
-		, const utils::ParserErrorReporter &parserErrorReporter
-		, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
-		, qrtext::LanguageToolboxInterface &textLanguage
-		, const qReal::Id &diagramId
-		, const QString &generatorName)
-	: NxtMasterGeneratorBase(repo, errorReporter, parserErrorReporter
-			, robotModelManager, textLanguage, diagramId, generatorName)
+NxtRussianCMasterGenerator::NxtRussianCMasterGenerator(const qrRepo::RepoApi &repo,
+	qReal::ErrorReporterInterface &errorReporter, const utils::ParserErrorReporter &parserErrorReporter,
+	const kitBase::robotModel::RobotModelManagerInterface &robotModelManager,
+	qrtext::LanguageToolboxInterface &textLanguage, const qReal::Id &diagramId, const QString &generatorName)
+	: NxtMasterGeneratorBase(repo, errorReporter, parserErrorReporter, robotModelManager, textLanguage, diagramId,
+		  generatorName)
 {
 }
 

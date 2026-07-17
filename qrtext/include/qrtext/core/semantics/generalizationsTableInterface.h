@@ -28,8 +28,8 @@ public:
 	virtual ~GeneralizationsTableInterface() = default;
 
 	/// Shall return true if "specific" type is a subtype of "general" type, including case when they are equivalent.
-	virtual bool isGeneralization(const QSharedPointer<types::TypeExpression> &specific
-			, const QSharedPointer<types::TypeExpression> &general) const = 0;
+	virtual bool isGeneralization(const QSharedPointer<types::TypeExpression> &specific,
+		const QSharedPointer<types::TypeExpression> &general) const = 0;
 };
 
 }

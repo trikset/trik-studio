@@ -27,8 +27,8 @@
 using namespace interpreterCore;
 using namespace kitBase;
 
-ExerciseExportManager::ExerciseExportManager(qReal::LogicalModelAssistInterface &logicalModel
-		, qrRepo::RepoControlInterface &repoControlApi, qReal::ProjectManagementInterface &projectManager)
+ExerciseExportManager::ExerciseExportManager(qReal::LogicalModelAssistInterface &logicalModel,
+	qrRepo::RepoControlInterface &repoControlApi, qReal::ProjectManagementInterface &projectManager)
 	: mLogicalModel(logicalModel)
 	, mRepoControlApi(repoControlApi)
 	, mProjectManager(projectManager)
@@ -46,11 +46,8 @@ bool ExerciseExportManager::save()
 
 	ReadOnlyFlags flags = dialog.readOnlyFlags();
 
-	QString fileName = utils::QRealFileDialog::getSaveFileName("SaveAsTask"
-			, nullptr
-			, QObject::tr("Select file to export save to")
-			, "."
-			, QObject::tr("QReal Save File(*.qrs)"));
+	QString fileName = utils::QRealFileDialog::getSaveFileName("SaveAsTask", nullptr,
+		QObject::tr("Select file to export save to"), ".", QObject::tr("QReal Save File(*.qrs)"));
 
 	if (fileName.isEmpty()) {
 		return false;
@@ -66,7 +63,7 @@ bool ExerciseExportManager::save()
 		metaInfo[metaKey] = mLogicalModel.logicalRepoApi().metaInformation(metaKey);
 	}
 	// Set new meta information
-	const auto setFlag = [this, &flags] (const QString &tag, ReadOnly::ReadOnlyEnum flag) {
+	const auto setFlag = [this, &flags](const QString &tag, ReadOnly::ReadOnlyEnum flag) {
 		mLogicalModel.mutableLogicalRepoApi().setMetaInformation(tag, flags.testFlag(flag));
 	};
 	setFlag("twoDModelWorldReadOnly", ReadOnly::World);

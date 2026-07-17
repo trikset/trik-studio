@@ -38,7 +38,7 @@ struct SensorsGraph::TrackObject {
 	{
 	}
 
-	bool operator ==(const TrackObject &other) const
+	bool operator==(const TrackObject &other) const
 	{
 		return index == other.index;
 	}
@@ -170,10 +170,10 @@ void SensorsGraph::makeConnections()
 	connect(&mZoomInButton, &QAbstractButton::clicked, &*mPlotFrame, &SensorViewer::zoomIn);
 	connect(&mZoomOutButton, &QAbstractButton::clicked, &*mPlotFrame, &SensorViewer::zoomOut);
 
-	connect(&mSlotComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged)
-			, &*mPlotFrame, &SensorViewer::onSensorChange);
-	connect(&mSlotComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged)
-			, this, &SensorsGraph::setCurrentSensor);
+	connect(&mSlotComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), &*mPlotFrame,
+		&SensorViewer::onSensorChange);
+	connect(&mSlotComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+		&SensorsGraph::setCurrentSensor);
 }
 
 void SensorsGraph::watchListChanged()
@@ -236,8 +236,7 @@ void SensorsGraph::resetAll()
 	mPlotFrame->zoomOut();
 }
 
-void SensorsGraph::configureUpdateIntervals(int readSensorsInterval, int autoScaleInterval
-		, int textUpdaterInterval)
+void SensorsGraph::configureUpdateIntervals(int readSensorsInterval, int autoScaleInterval, int textUpdaterInterval)
 {
 	mPlotFrame->configureUserOptions(readSensorsInterval, autoScaleInterval, textUpdaterInterval);
 }

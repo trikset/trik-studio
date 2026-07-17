@@ -16,10 +16,9 @@
 
 using namespace qReal;
 
-QtScriptGenerator::QtScriptGenerator(LogicalModelAssistInterface &logicalModelApi
-		, GraphicalModelAssistInterface &graphicalModelApi
-		, gui::MainWindowInterpretersInterface &interpretersInterface)
-		: TextCodeGenerator(logicalModelApi, graphicalModelApi, interpretersInterface)
+QtScriptGenerator::QtScriptGenerator(LogicalModelAssistInterface &logicalModelApi,
+	GraphicalModelAssistInterface &graphicalModelApi, gui::MainWindowInterpretersInterface &interpretersInterface)
+	: TextCodeGenerator(logicalModelApi, graphicalModelApi, interpretersInterface)
 {
 }
 
@@ -33,7 +32,8 @@ QString QtScriptGenerator::createProperInitAndOutput(QString const &code, bool c
 			QString const curPropertyValue = property(mMatch.value(idByName(elemName)), propertyName);
 
 			bool isStringProp = isStringProperty(mMatch.value(idByName(elemName)), propertyName);
-			QString const propertyValue = isStringProp ? "'" + escape(curPropertyValue) + "'" : curPropertyValue;
+			QString const propertyValue =
+				isStringProp ? "'" + escape(curPropertyValue) + "'" : curPropertyValue;
 			QString const representationOfProperty = "'\\'' + String(" + variable + ") + '\\''";
 
 			init += variable + "=" + propertyValue + "; ";

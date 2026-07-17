@@ -21,14 +21,13 @@
 
 using namespace qReal;
 
-EdgeInfo::EdgeInfo(const Id &graphicalId
-		, const Id &logicalId
-		, LogicalModelAssistInterface &logicalModel
-		, GraphicalModelAssistInterface &graphicalModel)
-	: EdgeInfo(graphicalId, logicalId, logicalModel.parent(logicalId), graphicalModel.parent(graphicalId)
-			, graphicalModel.fromPort(graphicalId), graphicalModel.toPort(graphicalId)
-			, graphicalModel.configuration(graphicalId), static_cast<int>(
-					stringToShape(graphicalModel.graphicalRepoApi().property(graphicalId, "linkShape").toString())))
+EdgeInfo::EdgeInfo(const Id &graphicalId, const Id &logicalId, LogicalModelAssistInterface &logicalModel,
+	GraphicalModelAssistInterface &graphicalModel)
+	: EdgeInfo(graphicalId, logicalId, logicalModel.parent(logicalId), graphicalModel.parent(graphicalId),
+		  graphicalModel.fromPort(graphicalId), graphicalModel.toPort(graphicalId),
+		  graphicalModel.configuration(graphicalId),
+		  static_cast<int>(stringToShape(
+			  graphicalModel.graphicalRepoApi().property(graphicalId, "linkShape").toString())))
 {
 	setSrcId(graphicalModel.from(graphicalId));
 	setDstId(graphicalModel.to(graphicalId));
@@ -43,15 +42,8 @@ EdgeInfo::EdgeInfo(const Id &graphicalId
 	mInfo.setGraphicalProperty("position", graphicalModel.position(graphicalId));
 }
 
-EdgeInfo::EdgeInfo(const Id &id
-		, const Id &logicalId
-		, const Id &logicalParent
-		, const Id &graphicalParent
-		, qreal portFrom
-		, qreal portTo
-		, const QPolygon &configuration
-		, int shapeType
-		)
+EdgeInfo::EdgeInfo(const Id &id, const Id &logicalId, const Id &logicalParent, const Id &graphicalParent,
+	qreal portFrom, qreal portTo, const QPolygon &configuration, int shapeType)
 	: mInfo(id, logicalId, logicalParent, graphicalParent, {}, {}, Id(), true)
 	, mPortFrom(portFrom)
 	, mPortTo(portTo)
@@ -104,12 +96,9 @@ bool EdgeInfo::equals(const EdgeInfo &other) const
 		return false;
 	}
 
-	return mInfo.equals(other.getInfo())
-			&& mSrcId == otherEdge->mSrcId
-			&& mDstId == otherEdge->mDstId
-			&& mPortFrom == otherEdge->mPortFrom
-			&& mPortTo == otherEdge->mPortTo
-			&& mConfiguration == otherEdge->mConfiguration;
+	return mInfo.equals(other.getInfo()) && mSrcId == otherEdge->mSrcId && mDstId == otherEdge->mDstId
+	       && mPortFrom == otherEdge->mPortFrom && mPortTo == otherEdge->mPortTo
+	       && mConfiguration == otherEdge->mConfiguration;
 }
 
 QMimeData *EdgeInfo::mimeData() const
@@ -242,17 +231,17 @@ void EdgeInfo::setAllGraphicalProperties(const QMap<QString, QVariant> &graphica
 	mInfo.setAllLogicalProperties(graphicalProperties);
 }
 
-QDataStream &operator<< (QDataStream &out, const EdgeInfo &data)
+QDataStream &operator<<(QDataStream &out, const EdgeInfo &data)
 {
 	return data.serialize(out);
 }
 
-QDataStream &operator>> (QDataStream &in, EdgeInfo &data)
+QDataStream &operator>>(QDataStream &in, EdgeInfo &data)
 {
 	return data.deserialize(in);
 }
 
-bool operator== (const EdgeInfo &first, const EdgeInfo &second)
+bool operator==(const EdgeInfo &first, const EdgeInfo &second)
 {
 	return first.equals(second);
 }

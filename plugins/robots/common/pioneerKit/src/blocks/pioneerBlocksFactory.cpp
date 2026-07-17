@@ -24,27 +24,14 @@ qReal::interpretation::Block *PioneerBlocksFactory::produceBlock(const qReal::Id
 
 qReal::IdList PioneerBlocksFactory::providedBlocks() const
 {
-	return {
-			id("GeoTakeoff")
-			, id("GeoLanding")
-			, id("GoToPoint")
-//			, id("GoToGPSPoint")
-			, id("PioneerGetLPSPosition")
-			, id("PioneerGetLPSVelocity")
-			, id("PioneerGetLPSYaw")
-			, id("PioneerGetOrientation")
-			, id("PioneerGetAccel")
-			, id("PioneerGetGyro")
-			, id("PioneerGPIOInit")
-			, id("PioneerSetGPIO")
-			, id("PioneerReadGPIO")
-			, id("PioneerPrint")
-			, id("PioneerSystem")
-			, id("PioneerLed")
-			, id("PioneerReadRangeSensor")
-			, id("PioneerMagnet")
-			, id("PioneerYaw")
-	};
+	return {id("GeoTakeoff"), id("GeoLanding"),
+		id("GoToPoint")
+		//			, id("GoToGPSPoint")
+		,
+		id("PioneerGetLPSPosition"), id("PioneerGetLPSVelocity"), id("PioneerGetLPSYaw"),
+		id("PioneerGetOrientation"), id("PioneerGetAccel"), id("PioneerGetGyro"), id("PioneerGPIOInit"),
+		id("PioneerSetGPIO"), id("PioneerReadGPIO"), id("PioneerPrint"), id("PioneerSystem"), id("PioneerLed"),
+		id("PioneerReadRangeSensor"), id("PioneerMagnet"), id("PioneerYaw")};
 }
 
 qReal::IdList PioneerBlocksFactory::blocksToDisable() const
@@ -54,22 +41,17 @@ qReal::IdList PioneerBlocksFactory::blocksToDisable() const
 
 qReal::IdList PioneerBlocksFactory::blocksToHide() const
 {
-	return { id("Loop")
-			, id("PreconditionalLoop")
-			, id("Subprogram")
-			, id("Fork")
-			, id("Join")
-			, id("KillThread")
+	return {id("Loop"), id("PreconditionalLoop"), id("Subprogram"), id("Fork"), id("Join"), id("KillThread")
 
-			, id("SendMessageThreads")
+													,
+		id("SendMessageThreads")
 
-			, id("ReceiveMessageThreads")
+			,
+		id("ReceiveMessageThreads")
 
-			, id("PrintText")
-			, id("ClearScreen")
-			, id("MarkerDown")
-			, id("MarkerUp")
+			,
+		id("PrintText"), id("ClearScreen"), id("MarkerDown"), id("MarkerUp")
 
-			, id("Input")
-	};
+									      ,
+		id("Input")};
 }

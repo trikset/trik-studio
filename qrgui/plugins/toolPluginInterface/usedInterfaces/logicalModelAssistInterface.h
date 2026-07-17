@@ -21,7 +21,7 @@
 
 namespace qReal {
 
-class LogicalModelAssistInterface: public details::ModelsAssistInterface
+class LogicalModelAssistInterface : public details::ModelsAssistInterface
 {
 public:
 	/// Returns reference to a constant logical repository.
@@ -29,12 +29,14 @@ public:
 
 	/// Returns reference to a mutable logical repository.
 	virtual qrRepo::LogicalRepoApi &mutableLogicalRepoApi() const = 0;
-	qrRepo::CommonRepoApi &mutableRepoApi() const override {return mutableLogicalRepoApi();}
+	qrRepo::CommonRepoApi &mutableRepoApi() const override
+	{
+		return mutableLogicalRepoApi();
+	}
 
 	Id createElement(const Id &parent, const Id &type) override = 0;
-	Id createElement(const Id &parent, const Id &id
-			, bool isFromLogicalModel, const QString &name
-			, const QPointF &position, const Id &preferedLogicalId = Id()) override = 0;
+	Id createElement(const Id &parent, const Id &id, bool isFromLogicalModel, const QString &name,
+		const QPointF &position, const Id &preferedLogicalId = Id()) override = 0;
 	IdList children(const Id &element) const override = 0;
 	void changeParent(const Id &element, const Id &parent, const QPointF &position = QPointF()) override = 0;
 

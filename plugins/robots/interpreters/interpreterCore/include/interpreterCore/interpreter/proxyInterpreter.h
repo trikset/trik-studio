@@ -29,7 +29,7 @@ public:
 	~ProxyInterpreter() override;
 
 	/// Sets \a interpreter as an active interpreter instance.
-	void resetInterpreter(InterpreterInterface * const interpreter);
+	void resetInterpreter(InterpreterInterface *const interpreter);
 
 	int timeElapsed() const override;
 	qReal::IdList supportedDiagrams() const override;
@@ -41,7 +41,7 @@ public Q_SLOTS:
 	void stopRobot(qReal::interpretation::StopReason reason = qReal::interpretation::StopReason::userStop) override;
 
 private:
-	kitBase::InterpreterInterface *mProxiedInterpreter;  // Does not have ownership.
+	kitBase::InterpreterInterface *mProxiedInterpreter; // Does not have ownership.
 };
 
 }

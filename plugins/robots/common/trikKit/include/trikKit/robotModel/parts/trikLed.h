@@ -28,8 +28,7 @@ class TrikLed : public kitBase::robotModel::robotParts::Device
 	Q_CLASSINFO("direction", "output")
 
 public:
-	TrikLed(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port);
+	TrikLed(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port);
 
 public Q_SLOTS:
 	/// @todo: led color enum here

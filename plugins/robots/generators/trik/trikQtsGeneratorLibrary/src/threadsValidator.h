@@ -25,9 +25,8 @@ namespace generatorBase {
 class ThreadsValidator : public RobotsDiagramVisitor
 {
 public:
-	ThreadsValidator(const qrRepo::RepoApi &repo
-			, GeneratorCustomizer &customizer
-			, qReal::ErrorReporterInterface &errorReporter);
+	ThreadsValidator(const qrRepo::RepoApi &repo, GeneratorCustomizer &customizer,
+		qReal::ErrorReporterInterface &errorReporter);
 
 	bool validate(const qReal::Id &startNode, const QString &threadId);
 

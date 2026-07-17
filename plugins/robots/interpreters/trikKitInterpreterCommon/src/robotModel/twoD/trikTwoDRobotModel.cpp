@@ -55,8 +55,8 @@ TrikTwoDRobotModel::TrikTwoDRobotModel(RobotModelInterface &realModel)
 	, mLeftWheelPort("M3")
 	, mRightWheelPort("M4")
 	, mDisplayWidget(new TrikDisplayWidget())
-	, mCollidingPolygon({QPointF(1, 10), QPointF(47, 10), QPointF(49, 20)
-			, QPointF(49, 30), QPointF(47, 40), QPointF(1, 40)})
+	, mCollidingPolygon(
+		  {QPointF(1, 10), QPointF(47, 10), QPointF(49, 20), QPointF(49, 30), QPointF(47, 40), QPointF(1, 40)})
 {
 	/// @todo: One day we will support gamepad in 2D model and there will be piece.
 	/// But till that day gamepad ports must be killed cause they spam logs.
@@ -68,13 +68,13 @@ TrikTwoDRobotModel::TrikTwoDRobotModel(RobotModelInterface &realModel)
 	}
 }
 
-QPair<qreal, int> TrikTwoDRobotModel::rangeSensorAngleAndDistance
-		(const kitBase::robotModel::DeviceInfo &deviceType) const
+QPair<qreal, int> TrikTwoDRobotModel::rangeSensorAngleAndDistance(
+	const kitBase::robotModel::DeviceInfo &deviceType) const
 {
-	return deviceType.isA<robotModel::parts::TrikInfraredSensor>() ? QPair<qreal, int>(5, 80) :
-			deviceType.isA<robotModel::parts::TrikSonarSensor>() ? QPair<qreal, int>(20, 300) :
-			deviceType.isA<robotParts::LidarSensor>() ? QPair<qreal,int>(360, 400) :
-			TwoDRobotModel::rangeSensorAngleAndDistance(deviceType);
+	return deviceType.isA<robotModel::parts::TrikInfraredSensor>() ? QPair<qreal, int>(5, 80)
+	       : deviceType.isA<robotModel::parts::TrikSonarSensor>()  ? QPair<qreal, int>(20, 300)
+	       : deviceType.isA<robotParts::LidarSensor>()             ? QPair<qreal, int>(360, 400)
+	                                                   : TwoDRobotModel::rangeSensorAngleAndDistance(deviceType);
 }
 
 robotParts::Device *TrikTwoDRobotModel::createDevice(const PortInfo &port, const DeviceInfo &deviceInfo)
@@ -82,7 +82,6 @@ robotParts::Device *TrikTwoDRobotModel::createDevice(const PortInfo &port, const
 	if (deviceInfo.isA<robotParts::Communicator>()) {
 		return new parts::TwoDNetworkCommunicator(deviceInfo, port, mMailbox);
 	}
-
 
 	if (deviceInfo.isA<robotParts::Display>()) {
 		return new parts::Display(deviceInfo, port, *engine());
@@ -97,7 +96,7 @@ robotParts::Device *TrikTwoDRobotModel::createDevice(const PortInfo &port, const
 	}
 
 	if (deviceInfo.isA<robotModel::parts::TrikShell>()) {
-		auto * const shell = new parts::Shell(deviceInfo, port, *engine());
+		auto *const shell = new parts::Shell(deviceInfo, port, *engine());
 		// Error reporter will come only after global plugin init() is called. Shell is however
 		// configured even later. So setting error reporter only when everything will be ready.
 		connect(shell, &parts::Shell::configured, this, [=]() { shell->setErrorReporter(*mErrorReporter); });
@@ -129,8 +128,7 @@ robotParts::Device *TrikTwoDRobotModel::createDevice(const PortInfo &port, const
 
 void TrikTwoDRobotModel::onInterpretationStarted()
 {
-	auto * const display =
-			RobotModelUtils::findDevice<robotModel::parts::TrikDisplay>(*this, "DisplayPort");
+	auto *const display = RobotModelUtils::findDevice<robotModel::parts::TrikDisplay>(*this, "DisplayPort");
 	if (display) {
 		display->clearScreen();
 		display->setBackground(QColor(Qt::gray));
@@ -139,14 +137,14 @@ void TrikTwoDRobotModel::onInterpretationStarted()
 		QLOG_WARN() << "TRIK display is not configured before intepretation start!";
 	}
 
-	auto * const shell = RobotModelUtils::findDevice<parts::Shell>(*this, "ShellPort");
+	auto *const shell = RobotModelUtils::findDevice<parts::Shell>(*this, "ShellPort");
 	if (shell) {
 		shell->reset();
 	} else {
 		QLOG_WARN() << "TRIK shell is not configured before intepretation start!";
 	}
 
-	auto * const mailbox = RobotModelUtils::findDevice<parts::TwoDNetworkCommunicator>(*this, "CommunicatorPort");
+	auto *const mailbox = RobotModelUtils::findDevice<parts::TwoDNetworkCommunicator>(*this, "CommunicatorPort");
 	if (mailbox) {
 		mailbox->release();
 	} else {
@@ -207,7 +205,7 @@ void TrikTwoDRobotModel::setWheelPorts(const QString &leftWheelPort, const QStri
 QRect TrikTwoDRobotModel::sensorImageRect(const kitBase::robotModel::DeviceInfo &deviceType) const
 {
 	if (deviceType.isA<robotParts::TouchSensor>()) {
-			return {-12, -5, 25, 10};
+		return {-12, -5, 25, 10};
 	} else if (deviceType.isA<robotParts::LightSensor>()) {
 		return {-6, -6, 12, 12};
 	} else if (deviceType.isA<robotModel::parts::TrikInfraredSensor>()) {
@@ -246,7 +244,7 @@ qreal TrikTwoDRobotModel::mass() const
 
 qreal TrikTwoDRobotModel::friction() const
 {
-	return 0.3;  /// @todo measure it
+	return 0.3; /// @todo measure it
 }
 
 qreal TrikTwoDRobotModel::onePercentAngularVelocity() const

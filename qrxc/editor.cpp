@@ -25,8 +25,11 @@
 #include <QtCore/QDebug>
 
 Editor::Editor(const QDomDocument &domDocument, XmlCompiler *xmlCompiler)
-	: mXmlCompiler(xmlCompiler), mXmlDomDocument(domDocument), mLoadingComplete(false)
-{}
+	: mXmlCompiler(xmlCompiler)
+	, mXmlDomDocument(domDocument)
+	, mLoadingComplete(false)
+{
+}
 
 Editor::~Editor()
 {
@@ -45,8 +48,7 @@ bool Editor::isLoaded()
 bool Editor::load(const QDir &currentDir)
 {
 	const QDomElement metamodel = mXmlDomDocument.firstChildElement("metamodel");
-	if (metamodel.isNull())
-	{
+	if (metamodel.isNull()) {
 		qCritical() << "Metamodel tag not found";
 		return false;
 	}
@@ -61,18 +63,14 @@ bool Editor::load(const QDir &currentDir)
 	}
 
 	// Load includes
-	for (QDomElement includeElement = metamodel.firstChildElement("include")
-		; !includeElement.isNull()
-		; includeElement = includeElement.nextSiblingElement("include"))
-	{
+	for (QDomElement includeElement = metamodel.firstChildElement("include"); !includeElement.isNull();
+		includeElement = includeElement.nextSiblingElement("include")) {
 		resolveInclude(includeElement, currentDir);
 	}
 
 	// Load diagrams part one: don't process inherited properties.
-	for (QDomElement diagramElement = metamodel.firstChildElement("diagram")
-		; !diagramElement.isNull()
-		; diagramElement = diagramElement.nextSiblingElement("diagram"))
-	{
+	for (QDomElement diagramElement = metamodel.firstChildElement("diagram"); !diagramElement.isNull();
+		diagramElement = diagramElement.nextSiblingElement("diagram")) {
 		const QString diagramName = diagramElement.attribute("name");
 		const QString nodeName = diagramElement.attribute("nodeName", "");
 		const QString diagramDisplayedName = diagramElement.attribute("displayedName", diagramName);
@@ -99,7 +97,7 @@ bool Editor::load(const QDir &currentDir)
 	return true;
 }
 
-XmlCompiler* Editor::xmlCompiler() const
+XmlCompiler *Editor::xmlCompiler() const
 {
 	return mXmlCompiler;
 }
@@ -109,7 +107,7 @@ QString Editor::version() const
 	return mVersion;
 }
 
-Type* Editor::findType(const QString &name)
+Type *Editor::findType(const QString &name)
 {
 	for (Diagram *diagram : mDiagrams.values()) {
 		for (Type *type : diagram->types()) {
@@ -149,14 +147,14 @@ Type *Editor::findTypeByNormalizedName(const QString &name)
 	return nullptr;
 }
 
-QSet<EnumType*> Editor::getAllEnumTypes()
+QSet<EnumType *> Editor::getAllEnumTypes()
 {
 	EnumType *current = nullptr;
-	QSet<EnumType*> result;
+	QSet<EnumType *> result;
 
 	for (Diagram *diagram : mDiagrams.values()) {
 		for (Type *type : diagram->types()) {
-			current = dynamic_cast<EnumType*>(type);
+			current = dynamic_cast<EnumType *>(type);
 			if (current)
 				result << current;
 		}
@@ -169,14 +167,14 @@ QSet<EnumType*> Editor::getAllEnumTypes()
 	return result;
 }
 
-Diagram* Editor::findDiagram(const QString &name)
+Diagram *Editor::findDiagram(const QString &name)
 {
 	if (mDiagrams.contains(name))
 		return mDiagrams[name];
 	return nullptr;
 }
 
-QMap<QString, Diagram*> Editor::diagrams()
+QMap<QString, Diagram *> Editor::diagrams()
 {
 	return mDiagrams;
 }
@@ -194,7 +192,8 @@ QString Editor::resolveInclude(const QDomElement &includeElement, const QDir &cu
 	}
 
 	mIncludes.append(includeFile);
-	return NameNormalizer::normalize(includeFileInfo.completeBaseName());;
+	return NameNormalizer::normalize(includeFileInfo.completeBaseName());
+	;
 }
 
 QString Editor::extendedEditor() const

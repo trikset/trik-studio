@@ -20,14 +20,15 @@
 namespace qReal {
 
 /// Represents a state of an action on the main toolbar.
-enum class ActionVisibility
-{
+enum class ActionVisibility {
 	/// The action is visible in main menu and on the toolbar (if it added there).
 	VisibleEverywhere = 0
 	/// The action is visible only in main menu (if was visible on the toolbar it will be dropped from it).
-	, VisibleOnlyInMenu
+	,
+	VisibleOnlyInMenu
 	/// The action is visible neither in main menu nor in toolbar.
-	, Invisible
+	,
+	Invisible
 };
 
 /// Customization class for configuring QReal's main GUI module
@@ -115,8 +116,8 @@ public:
 
 	virtual QString userPaletteDescription() const
 	{
-		return QObject::tr("Elements from this group exist"\
-				" for reusing all created connections");
+		return QObject::tr("Elements from this group exist"
+				   " for reusing all created connections");
 	}
 };
 

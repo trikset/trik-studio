@@ -62,24 +62,24 @@ public Q_SLOTS:
 private:
 	void initItem(QTreeWidgetItem *item, const QString &text, bool expanded);
 
-	QTreeWidgetItem *mDisplayRoot;  // Takes ownership
-	QTreeWidgetItem *mDevicesRoot;  // Takes ownership
-	QTreeWidgetItem *mMotorsRoot;   // Takes ownership
-	QTreeWidgetItem *mPhysicsRoot;  // Takes ownership
-	QTreeWidgetItem *mParamsRoot;  // Takes ownership
-	QTreeWidgetItem *mMetricRoot;  // Takes ownership
-	QTreeWidgetItem *mDisplayItem;  // Takes ownership
-	QTreeWidgetItem *mDevicesItem;  // Takes ownership
-	QTreeWidgetItem *mMotorsItem;   // Takes ownership
-	QTreeWidgetItem *mPhysicsItem;  // Takes ownership
-	QTreeWidgetItem *mParamsItem;  // Takes ownership
-	QTreeWidgetItem *mMetricItem;  // Takes ownership
-	QWidget *mDisplay {};  // Doesn`t take ownership
-	QWidget *mDevices {};  // Doesn`t take ownership
-	QWidget *mMotors {};   // Doesn`t take ownership
-	QWidget *mPhysics {};  // Doesn`t take ownership
-	QWidget *mParams {};  // Doesn`t take ownership
-	QWidget *mMetric {};  // Doesn`t take ownership
+	QTreeWidgetItem *mDisplayRoot; // Takes ownership
+	QTreeWidgetItem *mDevicesRoot; // Takes ownership
+	QTreeWidgetItem *mMotorsRoot; // Takes ownership
+	QTreeWidgetItem *mPhysicsRoot; // Takes ownership
+	QTreeWidgetItem *mParamsRoot; // Takes ownership
+	QTreeWidgetItem *mMetricRoot; // Takes ownership
+	QTreeWidgetItem *mDisplayItem; // Takes ownership
+	QTreeWidgetItem *mDevicesItem; // Takes ownership
+	QTreeWidgetItem *mMotorsItem; // Takes ownership
+	QTreeWidgetItem *mPhysicsItem; // Takes ownership
+	QTreeWidgetItem *mParamsItem; // Takes ownership
+	QTreeWidgetItem *mMetricItem; // Takes ownership
+	QWidget *mDisplay {}; // Doesn`t take ownership
+	QWidget *mDevices {}; // Doesn`t take ownership
+	QWidget *mMotors {}; // Doesn`t take ownership
+	QWidget *mPhysics {}; // Doesn`t take ownership
+	QWidget *mParams {}; // Doesn`t take ownership
+	QWidget *mMetric {}; // Doesn`t take ownership
 };
 
 }

@@ -19,10 +19,8 @@
 using namespace generatorBase;
 using namespace trik::python;
 
-TrikPythonControlFlowValidator::TrikPythonControlFlowValidator(const qrRepo::RepoApi &repo
-		, qReal::ErrorReporterInterface &errorReporter
-		, GeneratorCustomizer &customizer
-		, QObject *parent)
+TrikPythonControlFlowValidator::TrikPythonControlFlowValidator(const qrRepo::RepoApi &repo,
+	qReal::ErrorReporterInterface &errorReporter, GeneratorCustomizer &customizer, QObject *parent)
 	: PrimaryControlFlowValidator(repo, errorReporter, customizer, parent)
 {
 }
@@ -38,7 +36,7 @@ bool TrikPythonControlFlowValidator::validate(const qReal::Id &diagramId, const 
 
 	ThreadsValidator threadsValidator(mRepo, mCustomizer, mErrorReporter);
 	return threadsValidator.validate(mInitialNode, threadId)
-			&& PrimaryControlFlowValidator::validate(diagramId, threadId);
+	       && PrimaryControlFlowValidator::validate(diagramId, threadId);
 }
 
 PrimaryControlFlowValidator *TrikPythonControlFlowValidator::clone()

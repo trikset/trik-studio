@@ -27,8 +27,7 @@ class WallItem : public graphicsUtils::AbstractItem, public SolidItem
 	Q_DISABLE_COPY(WallItem)
 
 public:
-	WallItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-	         QPointF begin, QPointF end);
+	WallItem(graphicsUtils::AbstractCoordinateSystem *metricSystem, QPointF begin, QPointF end);
 
 	/// Creates a copy of this wall item. Transfers ownership to the caller.
 	WallItem *clone() const;
