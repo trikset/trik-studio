@@ -62,7 +62,7 @@ void ExploserView::createAddExplosionMenu(const Element * const element
 			}
 			QAction *action = addExplosionMenu->addAction(mLogicalApi.logicalRepoApi().name(elementId));
 			hasAnyActions = true;
-			connect(action, SIGNAL(triggered()), SLOT(addExplosionActionTriggered()));
+			connect(action, &QAction::triggered, this, &ExploserView::addExplosionActionTriggered);
 			QList<QVariant> tag;
 			tag << element->logicalId().toVariant() << elementId.toVariant();
 			action->setData(tag);
@@ -79,14 +79,14 @@ void ExploserView::createAddExplosionMenu(const Element * const element
 		const QString editorName = mLogicalApi.editorManagerInterface().friendlyName(Id(diagramType.editor()));
 		QAction *action = addExplosionMenu->addAction(tr("New ") + editorName + "/" + name);
 		hasAnyActions = true;
-		connect(action, SIGNAL(triggered()), SLOT(addExplosionActionTriggered()));
+		connect(action, &QAction::triggered, this, &ExploserView::addExplosionActionTriggered);
 		action->setData(QVariantList() << element->logicalId().toVariant() << diagramType.toVariant());
 	}
 	contextMenu.addMenu(addExplosionMenu);
 
 	if (alreadyConnectedElement != Id()) {
 		QAction * const gotoAction = contextMenu.addAction(mSceneCustomizer.goToConnectedMenuName()
-				, this, SLOT(goToActionTriggered()));
+				, this, &ExploserView::goToActionTriggered);
 		gotoAction->setData(alreadyConnectedElement.toVariant());
 	}
 }
@@ -99,7 +99,7 @@ void ExploserView::createRemoveExplosionMenu(const Element * const element, QMen
 	}
 
 	QAction * const action = contextMenu.addAction(mSceneCustomizer.deleteExplosionMenuName());
-	connect(action, SIGNAL(triggered()), SLOT(removeExplosionActionTriggered()));
+	connect(action, &QAction::triggered, this, &ExploserView::removeExplosionActionTriggered);
 	action->setData(QVariantList() << element->logicalId().toVariant() << outgoingConnection.toVariant());
 }
 
@@ -118,7 +118,7 @@ void ExploserView::createExpandAction(const Element * const element, QMenu &cont
 	QAction *expandAction = contextMenu.addAction(node->isExpanded()
 			? mSceneCustomizer.collapseExplosionActionText()
 			: mSceneCustomizer.expandExplosionActionText());
-	connect(expandAction, SIGNAL(triggered()), SLOT(expandExplosionActionTriggered()));
+	connect(expandAction, &QAction::triggered, this, &ExploserView::expandExplosionActionTriggered);
 
 	expandAction->setData(element->id().toVariant());
 }
@@ -128,14 +128,14 @@ void ExploserView::createConnectionSubmenus(QMenu &contextMenu, const Element * 
 	if (mLogicalApi.editorManagerInterface().isInterpretationMode()) {
 		contextMenu.addSeparator();
 		QAction * const changePropertiesAction = contextMenu.addAction(tr("Change Properties"));
-		connect(changePropertiesAction, SIGNAL(triggered()), SLOT(changePropertiesActionTriggered()));
+		connect(changePropertiesAction, &QAction::triggered, this, &ExploserView::changePropertiesActionTriggered);
 		changePropertiesAction->setData(element->id().toVariant());
 		QAction * const changeAppearancePaletteAction = contextMenu.addAction(tr("Change Appearance"));
-		connect(changeAppearancePaletteAction, SIGNAL(triggered()), SLOT(changeAppearanceActionTriggered()));
+		connect(changeAppearancePaletteAction, &QAction::triggered, this, &ExploserView::changeAppearanceActionTriggered);
 		changeAppearancePaletteAction->setData(element->id().toVariant());
 		if (mLogicalApi.editorManagerInterface().isHidden(element->id())) {
 			QAction * const addElementToPaletteAction = contextMenu.addAction(tr("Add element to palette"));
-			connect(addElementToPaletteAction, SIGNAL(triggered()), SLOT(addElementToPaletteActionTriggered()));
+			connect(addElementToPaletteAction, &QAction::triggered, this, &ExploserView::addElementToPaletteActionTriggered);
 			addElementToPaletteAction->setData(element->id().toVariant());
 		}
 	} else if (element->id().element() == "Subprogram") {

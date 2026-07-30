@@ -111,7 +111,7 @@ void Interpreter::addThread(Thread * const thread, const QString &threadId)
 	}
 
 	mThreads[threadId] = thread;
-	connect(thread, SIGNAL(stopped()), this, SLOT(threadStopped()));
+	connect(thread, &Thread::stopped, this, &Interpreter::threadStopped);
 
 	connect(thread, &Thread::newThread, this, &Interpreter::newThread);
 	connect(thread, &Thread::killThread, this, &Interpreter::killThread);

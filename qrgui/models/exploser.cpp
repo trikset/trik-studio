@@ -162,7 +162,7 @@ AbstractCommand *Exploser::createElementWithIncomingExplosionCommand(const Id &s
 
 	result->addPostAction(addExplosionCommand(source, newElementId, &models.graphicalModelAssistApi()));
 	result->addPostAction(new RenameExplosionCommand(mApi, &models.graphicalModelAssistApi(), *this, newElementId));
-	connect(result, SIGNAL(undoComplete(bool)), this, SIGNAL(explosionTargetRemoved()));
+	connect(result, &AbstractCommand::undoComplete, this, &Exploser::explosionTargetRemoved);
 	return result;
 }
 

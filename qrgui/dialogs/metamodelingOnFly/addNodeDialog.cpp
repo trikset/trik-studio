@@ -32,7 +32,7 @@ AddNodeDialog::AddNodeDialog(const Id &diagram
 {
 	mUi->setupUi(this);
 	this->setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
-	connect(mUi->okPushButton, SIGNAL(clicked()), this, SLOT(okButtonClicked()));
+	connect(mUi->okPushButton, &QAbstractButton::clicked, this, &AddNodeDialog::okButtonClicked);
 }
 
 AddNodeDialog::~AddNodeDialog()

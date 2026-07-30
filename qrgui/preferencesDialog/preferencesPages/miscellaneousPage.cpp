@@ -28,7 +28,7 @@ PreferencesMiscellaneousPage::PreferencesMiscellaneousPage(QWidget *parent)
 	setObjectName("preferencesMiscellaneousPage");
 	setWindowIcon(QIcon(":/preferencesDialog/images/miscellaneous.png"));
 
-	connect(mUi->imagesPathBrowseButton, SIGNAL(clicked()), this, SLOT(browseImagesPath()));
+	connect(mUi->imagesPathBrowseButton, &QAbstractButton::clicked, this, &PreferencesMiscellaneousPage::browseImagesPath);
 	connect(mUi->toolbarSizeSlider, &QSlider::valueChanged
 			, [=](int value ) { SettingsManager::setValue("toolbarSize", value); });
 

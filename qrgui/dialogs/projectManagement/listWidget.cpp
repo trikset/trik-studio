@@ -27,8 +27,8 @@ ListWidget::ListWidget(QWidget *parent)
 	mainLayout->addWidget(mListWidget);
 	setLayout(mainLayout);
 
-	connect(mListWidget, SIGNAL(itemDoubleClicked(QListWidgetItem*))
-			, this, SLOT(doubleClickHandler(QListWidgetItem*)));
+	connect(mListWidget, &QListWidget::itemDoubleClicked
+			, this, &ListWidget::doubleClickHandler);
 }
 
 void ListWidget::addItem(const QString &text, const QString &userData, const QString &toolTip)

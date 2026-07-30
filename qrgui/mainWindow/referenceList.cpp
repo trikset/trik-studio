@@ -72,10 +72,10 @@ void ReferenceList::highlightCurrentValue(const QStringList &currentValue)
 
 void ReferenceList::initConnections()
 {
-	connect(mUi->listWidget, SIGNAL(itemClicked(QListWidgetItem*))
-			, this, SLOT(activateElement(QListWidgetItem*)));
-	connect(this, SIGNAL(accepted()), this, SLOT(valueChanged()));
-	connect(this, SIGNAL(finished(int)), this, SLOT(restoreSelected()));
+	connect(mUi->listWidget, &QListWidget::itemClicked
+			, this, &ReferenceList::activateElement);
+	connect(this, &QDialog::accepted, this, &ReferenceList::valueChanged);
+	connect(this, &QDialog::finished, this, &ReferenceList::restoreSelected);
 }
 
 void ReferenceList::activateElement(QListWidgetItem *item)

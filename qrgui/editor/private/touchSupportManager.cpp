@@ -221,7 +221,7 @@ void TouchSupportManager::handleOneFingerTouch(QTouchEvent *event)
 			}
 
 			// For some reason grabbing tap & hold back right now still generates gesture event
-			QTimer::singleShot(30, this, SLOT(grabTapAndHold()));
+			QTimer::singleShot(30, this, &TouchSupportManager::grabTapAndHold);
 		} else {
 			if (elementUnder) {
 				// Simulating right button click for links gesture

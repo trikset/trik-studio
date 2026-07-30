@@ -42,10 +42,10 @@ PropertiesDialog::PropertiesDialog(const EditorManagerInterface &interpreterEdit
 	mUi->propertiesNamesList->setWrapping(true);
 	updatePropertiesNamesList();
 
-	connect(mUi->closeButton, SIGNAL(clicked()), this, SLOT(closeDialog()));
-	connect(mUi->deleteButton, SIGNAL(clicked()), this, SLOT(deleteProperty()));
-	connect(mUi->addButton, SIGNAL(clicked()), this, SLOT(addProperty()));
-	connect(mUi->changeButton, SIGNAL(clicked()), this, SLOT(changeProperty()));
+	connect(mUi->closeButton, &QAbstractButton::clicked, this, &PropertiesDialog::closeDialog);
+	connect(mUi->deleteButton, &QAbstractButton::clicked, this, &PropertiesDialog::deleteProperty);
+	connect(mUi->addButton, &QAbstractButton::clicked, this, &PropertiesDialog::addProperty);
+	connect(mUi->changeButton, &QAbstractButton::clicked, this, &PropertiesDialog::changeProperty);
 }
 
 PropertiesDialog::~PropertiesDialog()
@@ -120,7 +120,7 @@ void PropertiesDialog::change(const QString &text)
 	mElementsOnDiagram->clear();
 	mEditPropertiesDialog.setModal(true);
 	mEditPropertiesDialog.show();
-	connect(&mEditPropertiesDialog, SIGNAL(finished(int)), SLOT(updatePropertiesNamesList()));
+	connect(&mEditPropertiesDialog, &QDialog::finished, this, &PropertiesDialog::updatePropertiesNamesList);
 }
 
 

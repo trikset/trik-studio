@@ -48,13 +48,13 @@ PreferencesHotKeyManagerPage:: PreferencesHotKeyManagerPage(QWidget *parent)
 	mUi->importPushButton->hide();
 	mUi->exportPushButton->hide();
 
-	connect(mUi->hotKeysTable, SIGNAL(cellClicked(int,int)), this, SLOT(activateShortcutLineEdit(int,int)));
-	connect(mUi->hotKeysTable, SIGNAL(cellDoubleClicked(int,int)), this, SLOT(doubleClicked(int,int)));
-	connect(mUi->shortcutLineEdit, SIGNAL(newModifiers(Qt::KeyboardModifiers))
-			, this, SLOT(newModifiers(Qt::KeyboardModifiers)));
-	connect(mUi->shortcutLineEdit, SIGNAL(newKey(int)), this, SLOT(newKey(int)));
-	connect(mUi->resetShortcutPushButton, SIGNAL(clicked()), this, SLOT(resetShortcuts()));
-	connect(mUi->resetAllPushButton, SIGNAL(clicked()), this, SLOT(resetAllShortcuts()));
+	connect(mUi->hotKeysTable, &QTableWidget::cellClicked, this, &PreferencesHotKeyManagerPage::activateShortcutLineEdit);
+	connect(mUi->hotKeysTable, &QTableWidget::cellDoubleClicked, this, &PreferencesHotKeyManagerPage::doubleClicked);
+	connect(mUi->shortcutLineEdit, &ShortcutEdit::newModifiers
+			, this, &PreferencesHotKeyManagerPage::newModifiers);
+	connect(mUi->shortcutLineEdit, &ShortcutEdit::newKey, this, &PreferencesHotKeyManagerPage::newKey);
+	connect(mUi->resetShortcutPushButton, &QAbstractButton::clicked, this, &PreferencesHotKeyManagerPage::resetShortcuts);
+	connect(mUi->resetAllPushButton, &QAbstractButton::clicked, this, &PreferencesHotKeyManagerPage::resetAllShortcuts);
 
 	restoreSettings();
 }

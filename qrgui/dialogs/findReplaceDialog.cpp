@@ -32,11 +32,11 @@ FindReplaceDialog::FindReplaceDialog(const qrRepo::LogicalRepoApi &logicalRepoAp
 	mCheckBoxes.first()->setChecked(true);
 
 	for (QCheckBox *current : mCheckBoxes) {
-		connect(current, SIGNAL(clicked()), this, SLOT(tryEnableReplaceButton()));
+		connect(current, &QAbstractButton::clicked, this, &FindReplaceDialog::tryEnableReplaceButton);
 	}
 
-	connect(mUi->mFindButton, SIGNAL(clicked()), this, SLOT(findClicked()));
-	connect(mUi->mReplaceButton, SIGNAL(clicked()), this, SLOT(replaceHandler()));
+	connect(mUi->mFindButton, &QAbstractButton::clicked, this, &FindReplaceDialog::findClicked);
+	connect(mUi->mReplaceButton, &QAbstractButton::clicked, this, &FindReplaceDialog::replaceHandler);
 
 	stateClear();
 
@@ -122,6 +122,6 @@ void FindReplaceDialog::initIds(QMap<QString, QString> foundData)
 		}
 	}
 
-	QObject::connect(mUi->mListWidget, SIGNAL(itemClicked(QListWidgetItem*)), this
-			, SLOT(itemChosen(QListWidgetItem*)));
+	QObject::connect(mUi->mListWidget, &QListWidget::itemClicked, this
+			, &FindReplaceDialog::itemChosen);
 }

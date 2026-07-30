@@ -37,7 +37,7 @@ ShapeEdit::ShapeEdit(QWidget *parent)
 		: QWidget(parent), mUi(new Ui::ShapeEdit), mRole(0)
 {
 	init();
-	connect(this, SIGNAL(saveSignal()), this, SLOT(saveToXml()));
+	connect(this, &ShapeEdit::saveSignal, this, &ShapeEdit::saveToXml);
 }
 
 ShapeEdit::ShapeEdit(
@@ -55,7 +55,7 @@ ShapeEdit::ShapeEdit(
 {
 	init();
 	mUi->saveButton->setEnabled(true);
-	connect(this, SIGNAL(saveSignal()), this, SLOT(save()));
+	connect(this, &ShapeEdit::saveSignal, this, &ShapeEdit::save);
 }
 
 ShapeEdit::ShapeEdit(
@@ -78,7 +78,7 @@ ShapeEdit::ShapeEdit(
 	mGraphicalElements = graphicalRepoApi.graphicalElements(Id(mId.editor(), mId.diagram(), mId.element()));
 	init();
 	mUi->saveButton->setEnabled(true);
-	connect(this, SIGNAL(saveSignal()), this, SLOT(save()));
+	connect(this, &ShapeEdit::saveSignal, this, &ShapeEdit::save);
 }
 
 void ShapeEdit::init()
@@ -107,17 +107,17 @@ void ShapeEdit::init()
 	initFontPalette();
 
 	initButtonGroup();
-	connect(mUi->drawLineButton, SIGNAL(clicked(bool)), this, SLOT(drawLine(bool)));
-	connect(mUi->drawEllipseButton, SIGNAL(clicked(bool)), this, SLOT(drawEllipse(bool)));
-	connect(mUi->drawCurveButton, SIGNAL(clicked(bool)), this, SLOT(drawCurve(bool)));
-	connect(mUi->drawRectButton, SIGNAL(clicked(bool)), this, SLOT(drawRectangle(bool)));
-	connect(mUi->addTextButton, SIGNAL(clicked(bool)), this, SLOT(addText(bool)));
-	connect(mUi->addDynamicTextButton, SIGNAL(clicked(bool)), this, SLOT(addDynamicText(bool)));
-	connect(mUi->addTextPictureButton, SIGNAL(clicked(bool)), this, SLOT(addTextPicture(bool)));
-	connect(mUi->addPointPortButton, SIGNAL(clicked(bool)), this, SLOT(addPointPort(bool)));
-	connect(mUi->addLinePortButton, SIGNAL(clicked(bool)), this, SLOT(addLinePort(bool)));
-	connect(mUi->stylusButton, SIGNAL(clicked(bool)), this, SLOT(addStylus(bool)));
-	connect(mUi->addImageButton, SIGNAL(clicked(bool)), this, SLOT(addImage(bool)));
+	connect(mUi->drawLineButton, &QAbstractButton::clicked, this, &ShapeEdit::drawLine);
+	connect(mUi->drawEllipseButton, &QAbstractButton::clicked, this, &ShapeEdit::drawEllipse);
+	connect(mUi->drawCurveButton, &QAbstractButton::clicked, this, &ShapeEdit::drawCurve);
+	connect(mUi->drawRectButton, &QAbstractButton::clicked, this, &ShapeEdit::drawRectangle);
+	connect(mUi->addTextButton, &QAbstractButton::clicked, this, &ShapeEdit::addText);
+	connect(mUi->addDynamicTextButton, &QAbstractButton::clicked, this, &ShapeEdit::addDynamicText);
+	connect(mUi->addTextPictureButton, &QAbstractButton::clicked, this, &ShapeEdit::addTextPicture);
+	connect(mUi->addPointPortButton, &QAbstractButton::clicked, this, &ShapeEdit::addPointPort);
+	connect(mUi->addLinePortButton, &QAbstractButton::clicked, this, &ShapeEdit::addLinePort);
+	connect(mUi->stylusButton, &QAbstractButton::clicked, this, &ShapeEdit::addStylus);
+	connect(mUi->addImageButton, &QAbstractButton::clicked, this, &ShapeEdit::addImage);
 
 	connect(mUi->penStyleComboBox, SIGNAL(activated(const QString &)), mScene, SLOT(changePenStyle(const QString &)));
 	connect(mUi->penWidthSpinBox, SIGNAL(valueChanged(int)), mScene, SLOT(changePenWidth(int)));
@@ -131,33 +131,33 @@ void ShapeEdit::init()
 			, mScene, SLOT(changeFontFamily(const QFont&)));
 	connect(mUi->textPixelSizeSpinBox, SIGNAL(valueChanged(int)), mScene, SLOT(changeFontPixelSize(int)));
 	connect(mUi->textColorComboBox, SIGNAL(activated(const QString &)), mScene, SLOT(changeFontColor(const QString &)));
-	connect(mUi->textEditField, SIGNAL(textChanged()), this, SLOT(changeTextName()));
+	connect(mUi->textEditField, &QTextEdit::textChanged, this, &ShapeEdit::changeTextName);
 	connect(mUi->italicCheckBox, SIGNAL(toggled(bool)), mScene, SLOT(changeFontItalic(bool)));
 	connect(mUi->boldCheckBox, SIGNAL(toggled(bool)), mScene, SLOT(changeFontBold(bool)));
 	connect(mUi->underlineCheckBox, SIGNAL(toggled(bool)), mScene, SLOT(changeFontUnderline(bool)));
 
 	connect(mUi->portsComboBox, SIGNAL(activated(const QString &)), mScene, SLOT(changePortsType(const QString &)));
 
-	connect(mUi->visibilityConditionsButton, SIGNAL(clicked()), this, SLOT(visibilityButtonClicked()));
+	connect(mUi->visibilityConditionsButton, &QAbstractButton::clicked, this, &ShapeEdit::visibilityButtonClicked);
 	connect(mUi->deleteItemButton, SIGNAL(clicked()), mScene, SLOT(deleteItem()));
 	connect(mUi->graphicsView, SIGNAL(deleteItem()), mScene, SLOT(deleteItem()));
 	connect(mUi->clearButton, SIGNAL(clicked()), mScene, SLOT(clearScene()));
-	connect(mUi->saveAsPictureButton, SIGNAL(clicked()), this, SLOT(savePicture()));
-	connect(mUi->saveToXmlButton, SIGNAL(clicked()), this, SLOT(saveToXml()));
-	connect(this, SIGNAL(saveToXmlSignal()), this, SLOT(saveToXml()));
-	connect(mUi->saveButton, SIGNAL(clicked()), this, SLOT(save()));
-	connect(mUi->openButton, SIGNAL(clicked()), this, SLOT(open()));
-	connect(this, SIGNAL(openSignal()), this, SLOT(open()));
+	connect(mUi->saveAsPictureButton, &QAbstractButton::clicked, this, &ShapeEdit::savePicture);
+	connect(mUi->saveToXmlButton, &QAbstractButton::clicked, this, &ShapeEdit::saveToXml);
+	connect(this, &ShapeEdit::saveToXmlSignal, this, &ShapeEdit::saveToXml);
+	connect(mUi->saveButton, &QAbstractButton::clicked, this, &ShapeEdit::save);
+	connect(mUi->openButton, &QAbstractButton::clicked, this, &ShapeEdit::open);
+	connect(this, &ShapeEdit::openSignal, this, &ShapeEdit::open);
 
-	connect(mScene, SIGNAL(noSelectedItems()), this, SLOT(setNoPalette()));
-	connect(mScene, SIGNAL(existSelectedItems(const QPen &, const QBrush &))
-			, this, SLOT(setItemPalette(const QPen&, const QBrush&)));
-	connect(mScene, SIGNAL(resetHighlightAllButtons()), this, SLOT(resetHighlightAllButtons()));
-	connect(mScene, SIGNAL(noSelectedTextPictureItems()), this, SLOT(setNoFontPalette()));
-	connect(mScene, SIGNAL(existSelectedTextPictureItems(const QPen &, const QFont &, const QString &))
-			, this, SLOT(setItemFontPalette(const QPen&, const QFont&, const QString &)));
-	connect(mScene, SIGNAL(noSelectedPortItems()), this, SLOT(setNoPortType()));
-	connect(mScene, SIGNAL(existSelectedPortItems(const QString &)), this, SLOT(setPortType(const QString &)));
+	connect(mScene, &Scene::noSelectedItems, this, &ShapeEdit::setNoPalette);
+	connect(mScene, &Scene::existSelectedItems
+			, this, &ShapeEdit::setItemPalette);
+	connect(mScene, &Scene::resetHighlightAllButtons, this, &ShapeEdit::resetHighlightAllButtons);
+	connect(mScene, &Scene::noSelectedTextPictureItems, this, &ShapeEdit::setNoFontPalette);
+	connect(mScene, &Scene::existSelectedTextPictureItems
+			, this, &ShapeEdit::setItemFontPalette);
+	connect(mScene, &Scene::noSelectedPortItems, this, &ShapeEdit::setNoPortType);
+	connect(mScene, &Scene::existSelectedPortItems, this, &ShapeEdit::setPortType);
 }
 
 void ShapeEdit::resetHighlightAllButtons()
