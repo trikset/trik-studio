@@ -662,8 +662,11 @@ void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::FunctionCall> &
 
 	const QStringList unused = {"print"};
 	const QStringList int32Functions = {"time", "sgn"};
-	const QStringList shouldCastToIntAfterFunctions = {"ceil", "floor"};
-	bool shouldCastToIntAfter = false;
+	const QStringList int16Functions = {"random"};
+	const QStringList shouldCastFromFloatToIntAfterFunctions = {"ceil", "floor"};
+	const QStringList shouldCastFromInt16ToIntAfterFunctions = {"random"};
+	const QStringList int16ArgumentFunctions = {"random"};
+	auto shouldCastToIntAfterType = Ev3RbfType::other;
 
 	QStringList arguments;
 	QString reservedFunctionCall;
@@ -675,14 +678,26 @@ void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::FunctionCall> &
 		if (unused.contains(nodeName)) {
 			arguments = popResults(qrtext::as<qrtext::lua::ast::Node>(node->arguments()));
 		} else {
-			shouldCastToIntAfter = shouldCastToIntAfterFunctions.contains(nodeName);
+			if (shouldCastFromFloatToIntAfterFunctions.contains(nodeName)) {
+				shouldCastToIntAfterType = Ev3RbfType::dataF;
+			} else if (shouldCastFromInt16ToIntAfterFunctions.contains(nodeName)) {
+				shouldCastToIntAfterType = Ev3RbfType::data16;
+			}
 			if (int32Functions.contains(nodeName)) {
 				type = Ev3RbfType::data32;
+			}
+			if (int16Functions.contains(nodeName)) {
+				type = Ev3RbfType::data16;
+			}
+
+			auto argumentType = Ev3RbfType::dataF;
+			if (int16ArgumentFunctions.contains(nodeName)) {
+				argumentType = Ev3RbfType::data16;
 			}
 
 			// All arguments are considered float here due to bytecode spec.
 			for (auto &argument : node->arguments()) {
-				arguments << castTo(Ev3RbfType::dataF, qrtext::as<qrtext::lua::ast::Node>(argument));
+				arguments << castTo(argumentType, qrtext::as<qrtext::lua::ast::Node>(argument));
 			}
 
 			if (mReservedFunctionsConverter.isCosOrSin(nodeName)) {
@@ -699,7 +714,7 @@ void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::FunctionCall> &
 	}
 
 	const QString functionResult = newRegister(type);
-	QString result = shouldCastToIntAfter ? newRegister(Ev3RbfType::data32) : functionResult;
+	QString result = (shouldCastToIntAfterType != Ev3RbfType::other) ? newRegister(Ev3RbfType::data32) : functionResult;
 
 	if (reservedFunctionCall.isEmpty()) {
 		pushResult(node, result, readTemplate("functionCall.t")
@@ -709,8 +724,9 @@ void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::FunctionCall> &
 	} else {
 		additionalResults << reservedFunctionCall.replace("@@RESULT@@", functionResult);
 		pushResult(node, result, additionalResults.join("\n"));
-		if (shouldCastToIntAfter) {
-			mAdditionalCode[node.data()] << QString("MOVEF_32(%1, %2)").arg(functionResult, result);
+		if (shouldCastToIntAfterType != Ev3RbfType::other) {
+			mAdditionalCode[node.data()] << QString("MOVE%1_32(%2, %3)").arg(
+								typeNames[shouldCastToIntAfterType], functionResult, result);
 		}
 	}
 }
