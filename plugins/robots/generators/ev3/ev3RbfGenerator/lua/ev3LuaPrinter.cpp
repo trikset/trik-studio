@@ -666,7 +666,7 @@ void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::FunctionCall> &
 	const QStringList shouldCastFromFloatToIntAfterFunctions = {"ceil", "floor"};
 	const QStringList shouldCastFromInt16ToIntAfterFunctions = {"random"};
 	const QStringList int16ArgumentFunctions = {"random"};
-	auto souldCastToIntAfterType = Ev3RbfType::other;
+	auto shouldCastToIntAfterType = Ev3RbfType::other;
 
 	QStringList arguments;
 	QString reservedFunctionCall;
@@ -679,9 +679,9 @@ void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::FunctionCall> &
 			arguments = popResults(qrtext::as<qrtext::lua::ast::Node>(node->arguments()));
 		} else {
 			if (shouldCastFromFloatToIntAfterFunctions.contains(nodeName)) {
-				souldCastToIntAfterType = Ev3RbfType::dataF;
+				shouldCastToIntAfterType = Ev3RbfType::dataF;
 			} else if (shouldCastFromInt16ToIntAfterFunctions.contains(nodeName)) {
-				souldCastToIntAfterType = Ev3RbfType::data16;
+				shouldCastToIntAfterType = Ev3RbfType::data16;
 			}
 			if (int32Functions.contains(nodeName)) {
 				type = Ev3RbfType::data32;
@@ -714,7 +714,7 @@ void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::FunctionCall> &
 	}
 
 	const QString functionResult = newRegister(type);
-	QString result = (souldCastToIntAfterType != Ev3RbfType::other) ? newRegister(Ev3RbfType::data32) : functionResult;
+	QString result = (shouldCastToIntAfterType != Ev3RbfType::other) ? newRegister(Ev3RbfType::data32) : functionResult;
 
 	if (reservedFunctionCall.isEmpty()) {
 		pushResult(node, result, readTemplate("functionCall.t")
@@ -724,9 +724,9 @@ void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::FunctionCall> &
 	} else {
 		additionalResults << reservedFunctionCall.replace("@@RESULT@@", functionResult);
 		pushResult(node, result, additionalResults.join("\n"));
-		if (souldCastToIntAfterType != Ev3RbfType::other) {
+		if (shouldCastToIntAfterType != Ev3RbfType::other) {
 			mAdditionalCode[node.data()] << QString("MOVE%1_32(%2, %3)").arg(
-								typeNames[souldCastToIntAfterType], functionResult, result);
+								typeNames[shouldCastToIntAfterType], functionResult, result);
 		}
 	}
 }
