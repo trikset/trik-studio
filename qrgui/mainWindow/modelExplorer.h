@@ -73,9 +73,9 @@ protected:
 private:
 	void updateActions();
 
-	Controller *mController;  // Doesn`t have ownership
-	details::ModelsAssistInterface *mModel;  // Doesn`t have ownership
-	models::Exploser *mExploser;  // Doesn`t have ownership
+	Controller *mController; // Doesn`t have ownership
+	details::ModelsAssistInterface *mModel; // Doesn`t have ownership
+	models::Exploser *mExploser; // Doesn`t have ownership
 	QScopedPointer<models::Clipboard> mClipboard;
 	QAction mDeleteAction;
 };

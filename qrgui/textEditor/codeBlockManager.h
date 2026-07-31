@@ -47,8 +47,8 @@ public:
 private:
 	void readDbgFile(const QString &path);
 
-	QMap<QString, QMap<Id, QPair<int, int> > > mBlockToCode;
-	QMap<QString, QMap<int, QList<Id> > > mCodeToBlock;
+	QMap<QString, QMap<Id, QPair<int, int>>> mBlockToCode;
+	QMap<QString, QMap<int, QList<Id>>> mCodeToBlock;
 	QMap<QString, bool> mActive;
 };
 

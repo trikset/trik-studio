@@ -19,8 +19,8 @@
 
 using namespace qrgraph;
 
-bool dfs(const Node &start, const std::function<bool(const Node &node)> &processor
-		, uint edgeType, QSet<const Node *> *visited)
+bool dfs(const Node &start, const std::function<bool(const Node &node)> &processor, uint edgeType,
+	QSet<const Node *> *visited)
 {
 	if (visited->contains(&start)) {
 		return false;
@@ -32,20 +32,19 @@ bool dfs(const Node &start, const std::function<bool(const Node &node)> &process
 		return true;
 	}
 
-	auto goNext = [&processor, edgeType, &visited](const Node &node) {
-		return dfs(node, processor, edgeType, visited);
-	};
+	auto goNext = [&processor, edgeType, &visited](
+			      const Node &node) { return dfs(node, processor, edgeType, visited); };
 
 	return Queries::oneStep(start, goNext, edgeType);
 }
 
-bool Queries::dfs(const Node &start, const std::function<bool (const Node &)> &processor, uint edgeType)
+bool Queries::dfs(const Node &start, const std::function<bool(const Node &)> &processor, uint edgeType)
 {
 	QSet<const Node *> visited;
 	return ::dfs(start, processor, edgeType, &visited);
 }
 
-bool Queries::bfs(const Node &start, const std::function<bool (const Node &)> &processor, uint edgeType)
+bool Queries::bfs(const Node &start, const std::function<bool(const Node &)> &processor, uint edgeType)
 {
 	QSet<const Node *> visited;
 	QQueue<const Node *> queue;
@@ -71,7 +70,7 @@ bool Queries::bfs(const Node &start, const std::function<bool (const Node &)> &p
 	return false;
 }
 
-bool Queries::treeLift(const Node &start, const std::function<bool (const Node &)> &processor, uint edgeType)
+bool Queries::treeLift(const Node &start, const std::function<bool(const Node &)> &processor, uint edgeType)
 {
 	const Node *currentNode = &start;
 	int stepsRemained = start.graph().verticesCount();
@@ -95,7 +94,7 @@ bool Queries::treeLift(const Node &start, const std::function<bool (const Node &
 	return false;
 }
 
-bool Queries::oneStep(const Node &start, const std::function<bool (const Node &)> &processor, uint edgeType)
+bool Queries::oneStep(const Node &start, const std::function<bool(const Node &)> &processor, uint edgeType)
 {
 	const QList<Edge *> edges = start.outgoingEdges(edgeType);
 	for (const Edge *edge : edges) {
@@ -109,12 +108,12 @@ bool Queries::oneStep(const Node &start, const std::function<bool (const Node &)
 
 bool Queries::isReachable(const Node &from, const Node &to, uint edgeType)
 {
-	return dfs(from, [&to](const Node &node) {return &node == &to;}, edgeType);
+	return dfs(from, [&to](const Node &node) { return &node == &to; }, edgeType);
 }
 
 bool Queries::isReachableInTree(const Node &from, const Node &to, uint edgeType)
 {
-	return treeLift(from, [&to](const Node &node) {return &node == &to;}, edgeType);
+	return treeLift(from, [&to](const Node &node) { return &node == &to; }, edgeType);
 }
 
 QList<const Node *> Queries::immediateFollowers(const Node &node, uint edgeType)
@@ -146,6 +145,6 @@ QList<const Node *> Queries::immediatePredecessors(const Node &node, uint edgeTy
 QList<const Node *> Queries::reachableSet(const Node &node, uint edgeType)
 {
 	QSet<const Node *> result;
-	::dfs(node, [](const Node &) {return false;}, edgeType, &result);
+	::dfs(node, [](const Node &) { return false; }, edgeType, &result);
 	return result.values();
 }

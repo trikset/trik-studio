@@ -18,10 +18,9 @@ using namespace qReal;
 
 void Logger::addLogTarget(const QString &path, int maxSize, int maxOldLogsCount)
 {
-	auto dest = QsLogging::DestinationFactory::MakeFileDestination(path
-							   , QsLogging::LogRotationOption::EnableLogRotation
-							   , QsLogging::MaxSizeBytes(maxSize)
-							  , QsLogging::MaxOldLogCount(maxOldLogsCount));
+	auto dest = QsLogging::DestinationFactory::MakeFileDestination(path,
+		QsLogging::LogRotationOption::EnableLogRotation, QsLogging::MaxSizeBytes(maxSize),
+		QsLogging::MaxOldLogCount(maxOldLogsCount));
 	QsLogging::Logger::instance().setLoggingLevel(QsLogging::DebugLevel);
 	QsLogging::Logger::instance().addDestination(std::move(dest));
 }

@@ -46,7 +46,7 @@ FindReplaceDialog::FindReplaceDialog(const qrRepo::LogicalRepoApi &logicalRepoAp
 void FindReplaceDialog::tryEnableReplaceButton()
 {
 	mUi->mReplaceButton->setEnabled((mUi->mByNameBox->isChecked() || mUi->mByContentBox->isChecked())
-			&& (!mUi->mByPropertyBox->isChecked()) && (!mUi->mByTypeBox->isChecked()));
+					&& (!mUi->mByPropertyBox->isChecked()) && (!mUi->mByTypeBox->isChecked()));
 }
 
 void FindReplaceDialog::stateClear()
@@ -115,13 +115,13 @@ void FindReplaceDialog::initIds(QMap<QString, QString> foundData)
 		QString parentName = mCommonApi.name(parentId);
 		if (!parentName.contains("qrm:/")) {
 			auto *item = new QListWidgetItem();
-			item->setText(parentName + tr(" / ") +
-				mCommonApi.name(qReal::Id::loadFromString(currentId)) + foundData[currentId]);
+			item->setText(parentName + tr(" / ") + mCommonApi.name(qReal::Id::loadFromString(currentId))
+				      + foundData[currentId]);
 			item->setData(Qt::ToolTipRole, currentId);
 			mUi->mListWidget->addItem(item);
 		}
 	}
 
-	QObject::connect(mUi->mListWidget, SIGNAL(itemClicked(QListWidgetItem*)), this
-			, SLOT(itemChosen(QListWidgetItem*)));
+	QObject::connect(mUi->mListWidget, SIGNAL(itemClicked(QListWidgetItem *)), this,
+		SLOT(itemChosen(QListWidgetItem *)));
 }

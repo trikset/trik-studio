@@ -35,10 +35,10 @@ void WaitForSensorBlock::run()
 	mPort = RobotModelUtils::findPort(mRobotModel, port, input);
 	auto const sensor = RobotModelUtils::findDevice<robotParts::AbstractSensor>(mRobotModel, mPort);
 	if (sensor) {
-		mConnections << connect(sensor, &robotParts::AbstractSensor::newData
-								, this, &WaitForSensorBlock::responseSlot, Qt::UniqueConnection);
-		mConnections << connect(sensor, &robotParts::AbstractSensor::failure
-								, this, &WaitForSensorBlock::failureSlot, Qt::UniqueConnection);
+		mConnections << connect(sensor, &robotParts::AbstractSensor::newData, this,
+			&WaitForSensorBlock::responseSlot, Qt::UniqueConnection);
+		mConnections << connect(sensor, &robotParts::AbstractSensor::failure, this,
+			&WaitForSensorBlock::failureSlot, Qt::UniqueConnection);
 		mActiveWaitingTimer->start();
 		sensor->read();
 	} else {
@@ -50,8 +50,8 @@ void WaitForSensorBlock::run()
 void WaitForSensorBlock::timerTimeout()
 {
 	/// @todo True horror.
-	robotParts::Device * const device = mRobotModel.configuration().device(mPort);
-	auto * const sensor = dynamic_cast<robotParts::ScalarSensor *>(device);
+	robotParts::Device *const device = mRobotModel.configuration().device(mPort);
+	auto *const sensor = dynamic_cast<robotParts::ScalarSensor *>(device);
 	if (sensor) {
 		sensor->read();
 	}
@@ -59,7 +59,7 @@ void WaitForSensorBlock::timerTimeout()
 
 void WaitForSensorBlock::disconnectSensor()
 {
-	for (auto &&c: mConnections) {
+	for (auto &&c : mConnections) {
 		disconnect(c);
 	}
 	mConnections.clear();

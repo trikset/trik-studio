@@ -64,9 +64,9 @@ class ImageItemPopup;
 class RobotItemPopup;
 class SpeedPopup;
 
-class TWO_D_MODEL_EXPORT TwoDModelWidget : public QWidget
-		, public kitBase::DevicesConfigurationProvider
-		, public qReal::EditorInterface
+class TWO_D_MODEL_EXPORT TwoDModelWidget : public QWidget,
+					   public kitBase::DevicesConfigurationProvider,
+					   public qReal::EditorInterface
 {
 	Q_OBJECT
 
@@ -108,8 +108,8 @@ public:
 
 	QString editorId() const override;
 	bool supportsZooming() const override;
-	void configure(QAction &zoomIn, QAction &zoomOut, QAction &undo, QAction &redo, QAction &copy, QAction &paste
-			, QAction &cut, QAction &find, QAction &findAndeReplace, QAction &replaceBy) override;
+	void configure(QAction &zoomIn, QAction &zoomOut, QAction &undo, QAction &redo, QAction &copy, QAction &paste,
+		QAction &cut, QAction &find, QAction &findAndeReplace, QAction &replaceBy) override;
 	QDomDocument generateWorldModelWithBlobsXml() const;
 	QDomDocument generateWorldModelXml() const;
 	QDomDocument generateBlobsXml() const;
@@ -142,10 +142,8 @@ protected:
 
 	void focusInEvent(QFocusEvent *event) override;
 
-	void onDeviceConfigurationChanged(const QString &robotId
-			, const kitBase::robotModel::PortInfo &port
-			, const kitBase::robotModel::DeviceInfo &device
-			, Reason reason) override;
+	void onDeviceConfigurationChanged(const QString &robotId, const kitBase::robotModel::PortInfo &port,
+		const kitBase::robotModel::DeviceInfo &device, Reason reason) override;
 
 private Q_SLOTS:
 	void saveWorldModelToRepo();
@@ -178,22 +176,22 @@ private Q_SLOTS:
 
 	void updateUIPhysicsSettings();
 	void updateRobotInfoWidget(const QSharedPointer<twoDModel::model::SizeUnit> &sizeUnit);
+
 private:
-	enum CursorType
-	{
-		noDrag = 0
-		, hand
-		, multiselection
-		, drawWall
-		, drawSkittle
-		, drawBall
-		, drawCube
-		, drawLine
-		, drawStylus
-		, drawEllipse
-		, drawRectangle
-		, drawBezier
-		, drawComment
+	enum CursorType {
+		noDrag = 0,
+		hand,
+		multiselection,
+		drawWall,
+		drawSkittle,
+		drawBall,
+		drawCube,
+		drawLine,
+		drawStylus,
+		drawEllipse,
+		drawRectangle,
+		drawBezier,
+		drawComment
 	};
 
 	static const int defaultPenWidth = 6;
@@ -218,7 +216,7 @@ private:
 	void initDetailsTab();
 
 	QList<graphicsUtils::AbstractItem *> selectedColorItems() const;
-	bool isColorItem(graphicsUtils::AbstractItem * const item) const;
+	bool isColorItem(graphicsUtils::AbstractItem *const item) const;
 
 	void centerOnRobot();
 	QGraphicsView::DragMode cursorTypeToDragType(CursorType type) const;
@@ -231,7 +229,7 @@ private:
 	void initRunStopButtons();
 
 	template<class T>
-	bool setSelectedValue(QComboBox * const comboBox, const T &port);
+	bool setSelectedValue(QComboBox *const comboBox, const T &port);
 	void updateWheelComboBoxes();
 	void connectMetricComboBoxes();
 
@@ -247,10 +245,10 @@ private:
 	Ui::TwoDModelWidget *mUi {};
 	QScopedPointer<TwoDModelScene> mScene;
 	QScopedPointer<ActionsBox> mActions;
-	ColorItemPopup *mColorFieldItemPopup {};  // Takes ownership
-	ImageItemPopup *mImageItemPopup {};  // Takes ownership
-	RobotItemPopup *mRobotItemPopup {};  // Takes ownership
-	SpeedPopup *mSpeedPopup {};  // Takes owneship
+	ColorItemPopup *mColorFieldItemPopup {}; // Takes ownership
+	ImageItemPopup *mImageItemPopup {}; // Takes ownership
+	RobotItemPopup *mRobotItemPopup {}; // Takes ownership
+	SpeedPopup *mSpeedPopup {}; // Takes owneship
 
 	RobotItem *mSelectedRobotItem {};
 	kitBase::DevicesConfigurationWidget *mCurrentConfigurer {};
@@ -261,14 +259,14 @@ private:
 	engine::TwoDModelDisplayWidget *mDisplay {}; // Transfers ownership to parent widget upon creation
 	engine::TwoDModelDisplayWidget *mNullDisplay {}; // Transfers ownership to parent widget upon creation
 
-	int mCurrentSpeed { -1 };
+	int mCurrentSpeed {-1};
 
-	CursorType mNoneCursorType { CursorType::noDrag }; // cursorType for noneStatus
-	CursorType mCursorType { CursorType::noDrag }; // current cursorType
+	CursorType mNoneCursorType {CursorType::noDrag}; // cursorType for noneStatus
+	CursorType mCursorType {CursorType::noDrag}; // current cursorType
 
 	bool mFollowRobot {};
 	bool mDetailsAreVisible {};
-	bool mFirstShow { true };
+	bool mFirstShow {true};
 
 	bool mRobotPositionReadOnly {};
 

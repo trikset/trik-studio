@@ -18,9 +18,8 @@ using namespace trik::robotModel::twoD::parts;
 
 const int duration = 1000;
 
-TwoDSpeaker::TwoDSpeaker(const kitBase::robotModel::DeviceInfo &info
-		, const kitBase::robotModel::PortInfo &port
-		, twoDModel::engine::TwoDModelEngineInterface &engine)
+TwoDSpeaker::TwoDSpeaker(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+	twoDModel::engine::TwoDModelEngineInterface &engine)
 	: robotModel::parts::TrikSpeaker(info, port)
 	, mEngine(engine)
 {

@@ -28,12 +28,9 @@ class CreateSensorCommand : public qReal::commands::AbstractCommand
 public:
 	/// Creates and configures sensor for the \a robotModel on port \a port of the type \a device.
 	/// Sensor will be placed at \a position and oriented at \a direction degrees.
-	CreateSensorCommand(model::SensorsConfiguration &configurator
-						, const QString &robotModel
-						, const kitBase::robotModel::PortInfo &port
-						, const kitBase::robotModel::DeviceInfo &device
-						, QPointF position
-						, const qreal direction);
+	CreateSensorCommand(model::SensorsConfiguration &configurator, const QString &robotModel,
+		const kitBase::robotModel::PortInfo &port, const kitBase::robotModel::DeviceInfo &device,
+		QPointF position, const qreal direction);
 
 protected:
 	bool execute() override;

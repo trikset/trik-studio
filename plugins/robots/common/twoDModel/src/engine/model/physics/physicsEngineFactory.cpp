@@ -19,27 +19,22 @@
 
 using namespace twoDModel::model::physics;
 
-namespace  {
+namespace {
 
-template <typename EngineType>
-PhysicsEngineBase* createEngine(
-	const twoDModel::model::WorldModel& world,
-	const QList<twoDModel::model::RobotModel*>& robots)
+template<typename EngineType>
+PhysicsEngineBase *createEngine(const twoDModel::model::WorldModel &world,
+	const QList<twoDModel::model::RobotModel *> &robots)
 {
 	return new EngineType(world, robots);
 }
 
 }
 
-PhysicsEngineFactory::CreateEngineCallback
-	PhysicsEngineFactory::create(bool isRealistic) const {
+PhysicsEngineFactory::CreateEngineCallback PhysicsEngineFactory::create(bool isRealistic) const
+{
 	if (isRealistic) {
-		return std::bind(
-		        &createEngine<Box2DPhysicsEngine>,
-		        std::placeholders::_1, std::placeholders::_2);
+		return std::bind(&createEngine<Box2DPhysicsEngine>, std::placeholders::_1, std::placeholders::_2);
 	}
 
-	return std::bind(
-	        &createEngine<SimplePhysicsEngine>,
-	        std::placeholders::_1, std::placeholders::_2);
+	return std::bind(&createEngine<SimplePhysicsEngine>, std::placeholders::_1, std::placeholders::_2);
 }

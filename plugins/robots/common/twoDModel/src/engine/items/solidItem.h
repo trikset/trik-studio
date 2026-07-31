@@ -36,12 +36,7 @@ public:
 	/// static: zero mass, zero velocity, may be manually moved
 	/// kinematic: zero mass, non-zero velocity set by user
 	/// dynamic: positive mass, non-zero velocity determined by forces
-	enum class BodyType
-	{
-		DYNAMIC,
-		STATIC,
-		KINEMATIC
-	};
+	enum class BodyType { DYNAMIC, STATIC, KINEMATIC };
 
 	SolidItem() = default;
 
@@ -58,22 +53,37 @@ public:
 	void deserialize(const QDomElement &element);
 
 	/// Returns body's mass in kg.
-	qreal mass() const { return mMass; }
+	qreal mass() const
+	{
+		return mMass;
+	}
 
 	/// Returns body's friction.
-	qreal friction() const { return mFriction; }
+	qreal friction() const
+	{
+		return mFriction;
+	}
 
 	/// Returns body's restitution.
-	qreal restitution() const { return mRestitution; }
+	qreal restitution() const
+	{
+		return mRestitution;
+	}
 
 	/// Returns body's type.
 	virtual BodyType bodyType() const = 0;
 
 	/// Returns body's angular damping.
-	qreal angularDamping() const { return mAngularDamping; }
+	qreal angularDamping() const
+	{
+		return mAngularDamping;
+	}
 
 	/// Returns body's linear damping.
-	qreal linearDamping() const {return mLinearDamping; }
+	qreal linearDamping() const
+	{
+		return mLinearDamping;
+	}
 
 protected:
 	ItemProperty<qreal> mMass {"mass", 0.0f};

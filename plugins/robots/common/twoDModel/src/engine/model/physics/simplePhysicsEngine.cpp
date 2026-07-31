@@ -73,8 +73,8 @@ void SimplePhysicsEngine::recalculateParameters(qreal timeInterval, RobotModel &
 	const qreal averageSpeed = (speed1 + speed2) / 2;
 
 	if (!Math::eq(speed1, speed2)) {
-		const qreal distBtwWheels = qAbs(robot.parameters()->wheelsPosition()[0].y()
-					- robot.parameters()->wheelsPosition()[1].y());
+		const qreal distBtwWheels =
+			qAbs(robot.parameters()->wheelsPosition()[0].y() - robot.parameters()->wheelsPosition()[1].y());
 		const auto shiftToCenter = robot.parameters()->rotationCenter() - robot.parameters()->robotCenter();
 		const qreal gammaRadians = (speed1 - speed2) * timeInterval / distBtwWheels;
 		const qreal gammaDegrees = gammaRadians * 180 / pi;

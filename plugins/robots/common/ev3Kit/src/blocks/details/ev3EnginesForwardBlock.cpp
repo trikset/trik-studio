@@ -32,7 +32,7 @@ void Ev3EnginesForwardBlock::run()
 		return;
 	}
 
-	for (Ev3Motor * const motor : parsePorts<Ev3Motor>()) {
+	for (Ev3Motor *const motor : parsePorts<Ev3Motor>()) {
 		motor->on(power);
 	}
 

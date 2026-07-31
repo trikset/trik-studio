@@ -26,7 +26,7 @@ class ROBOTS_GENERATOR_EXPORT RootNode : public SemanticNode
 {
 	Q_OBJECT
 public:
-	explicit RootNode(SemanticNode * const initialBlock, QObject *parent = nullptr);
+	explicit RootNode(SemanticNode *const initialBlock, QObject *parent = nullptr);
 
 	qReal::Id initialBlock() const;
 
@@ -35,7 +35,7 @@ protected:
 	QString toStringImpl(GeneratorCustomizer &customizer, int indent, const QString &indentString) const override;
 
 private:
-	ZoneNode *mZone;  // Takes ownership
+	ZoneNode *mZone; // Takes ownership
 	const qReal::Id mInitialBlock;
 };
 

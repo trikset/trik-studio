@@ -22,10 +22,8 @@
 using namespace generatorBase::lua;
 using namespace qReal;
 
-LuaProcessor::LuaProcessor(qReal::ErrorReporterInterface &errorReporter
-		, qrtext::LanguageToolboxInterface &textLanguage
-		, const utils::ParserErrorReporter &parserErrorReporter
-		, QObject *parent)
+LuaProcessor::LuaProcessor(qReal::ErrorReporterInterface &errorReporter, qrtext::LanguageToolboxInterface &textLanguage,
+	const utils::ParserErrorReporter &parserErrorReporter, QObject *parent)
 	: QObject(parent)
 	, mErrorReporter(errorReporter)
 	, mTextLanguage(textLanguage)
@@ -33,31 +31,25 @@ LuaProcessor::LuaProcessor(qReal::ErrorReporterInterface &errorReporter
 {
 }
 
-QString LuaProcessor::translate(const QString &data
-		, const Id &id
-		, const QString &propertyName
-		, const simple::Binding::ConverterInterface *reservedVariablesConverter)
+QString LuaProcessor::translate(const QString &data, const Id &id, const QString &propertyName,
+	const simple::Binding::ConverterInterface *reservedVariablesConverter)
 {
 	const QSharedPointer<qrtext::core::ast::Node> tree = parse(data, id, propertyName);
-	return lua::LuaPrinter(pathsToRoot(), mTextLanguage
-			, precedenceConverter(), reservedVariablesConverter).print(tree);
+	return lua::LuaPrinter(pathsToRoot(), mTextLanguage, precedenceConverter(), reservedVariablesConverter)
+	        .print(tree);
 }
 
-
-QString LuaProcessor::castTo(const QSharedPointer<qrtext::core::types::TypeExpression> &type
-		, const QString &data
-		, const Id &id
-		, const QString &propertyName
-		, const simple::Binding::ConverterInterface *reservedVariablesConverter)
+QString LuaProcessor::castTo(const QSharedPointer<qrtext::core::types::TypeExpression> &type, const QString &data,
+	const Id &id, const QString &propertyName,
+	const simple::Binding::ConverterInterface *reservedVariablesConverter)
 {
 	const QSharedPointer<qrtext::core::ast::Node> tree = parse(data, id, propertyName);
-	return lua::LuaPrinter(pathsToRoot(), mTextLanguage
-			, precedenceConverter(), reservedVariablesConverter).castTo(type, tree);
+	return lua::LuaPrinter(pathsToRoot(), mTextLanguage, precedenceConverter(), reservedVariablesConverter)
+	        .castTo(type, tree);
 }
 
-QSharedPointer<qrtext::core::ast::Node> LuaProcessor::parse(const QString &data
-		, const qReal::Id &id
-		, const QString &propertyName) const
+QSharedPointer<qrtext::core::ast::Node> LuaProcessor::parse(const QString &data, const qReal::Id &id,
+	const QString &propertyName) const
 {
 	const QSharedPointer<qrtext::core::ast::Node> tree = mTextLanguage.parse(id, propertyName, data);
 	if (!mTextLanguage.diagnosticMessages().isEmpty()) {

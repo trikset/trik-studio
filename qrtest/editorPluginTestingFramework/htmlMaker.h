@@ -26,53 +26,31 @@ class HtmlMaker
 {
 public:
 	/// creates .html-file with results of testing
-	void makeHtml(QList<MethodsTester::ResultOfGenerating> qrxcAndQrmcResult
-			, QList<MethodsTester::ResultOfGenerating> qrxcAndInterpreterResult
-			, QList<MethodsTester::ResultOfGenerating> timeResult
-			, QList<MethodsTester::ResultOfGenerating> timeResultIntertpter
-			, const QString &pathToHtml);
+	void makeHtml(QList<MethodsTester::ResultOfGenerating> qrxcAndQrmcResult,
+		QList<MethodsTester::ResultOfGenerating> qrxcAndInterpreterResult,
+		QList<MethodsTester::ResultOfGenerating> timeResult,
+		QList<MethodsTester::ResultOfGenerating> timeResultIntertpter, const QString &pathToHtml);
 
 private:
 	/// adds one table with results of testing for qrxc-qrmc or qrxc-interpreter
-	void addTable(QDomElement parent
-			, QList<MethodsTester::ResultOfGenerating> listOfLines
-			, const QString &text
-			, const QString &firstColumnTitle
-			, const QString &secondColumnTitle
-			, const QString &thirdColumnTitle
-			);
+	void addTable(QDomElement parent, QList<MethodsTester::ResultOfGenerating> listOfLines, const QString &text,
+		const QString &firstColumnTitle, const QString &secondColumnTitle, const QString &thirdColumnTitle);
 
 	/// adds one line to table
-	void addLineToTable(
-			QDomElement parent
-			, const QString &methodName
-			, const QString &firstResult
-			, const QString &secondResult
-			, const bool &isTitle
-			);
+	void addLineToTable(QDomElement parent, const QString &methodName, const QString &firstResult,
+		const QString &secondResult, const bool &isTitle);
 
 	/// creates new qDomElement
 	QDomElement newElement(QDomElement &parent, const QString &newElementName);
 
 	/// adds column to line
-	void addColumnToLine(
-			QDomElement parent
-			, const QString &value
-			, const bool &isTitle
-			, const bool &isMethodName);
+	void addColumnToLine(QDomElement parent, const QString &value, const bool &isTitle, const bool &isMethodName);
 
 	/// adds inner table into column (table for results of testing one method of one interface)
-	void addTableToColumn(
-			QDomElement &parent
-			, const QPair<QString, QStringList> &tableElements
-			);
+	void addTableToColumn(QDomElement &parent, const QPair<QString, QStringList> &tableElements);
 
 	/// adds line to inner table
-	void addLineToResultTable(
-			QDomElement &parent
-			, const QString &firstColumn
-			, const QStringList &secondColumn
-			);
+	void addLineToResultTable(QDomElement &parent, const QString &firstColumn, const QStringList &secondColumn);
 
 	/// finds out if string consists only of given symbol (for example, "aaa" consists only of symbol 'a')
 	static bool containsOnly(const QString &string, const QChar &symbol);
@@ -99,4 +77,3 @@ private:
 };
 
 }
-

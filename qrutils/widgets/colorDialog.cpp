@@ -41,7 +41,7 @@ ColorDialog::ColorDialog(QWidget *parent)
 void ColorDialog::configure(const QString &settingsKey)
 {
 	mSettingsKey = settingsKey;
-	qReal::SettingsListener::listen(mSettingsKey, [this](const QColor &color) {  setColor(color); }, this);
+	qReal::SettingsListener::listen(mSettingsKey, [this](const QColor &color) { setColor(color); }, this);
 }
 
 void ColorDialog::save()
@@ -55,7 +55,7 @@ void ColorDialog::save()
 void ColorDialog::restore()
 {
 	if (!mSettingsKey.isEmpty()) {
-		const auto& value = SettingsManager::value(mSettingsKey);
+		const auto &value = SettingsManager::value(mSettingsKey);
 		if (value.canConvert<QColor>()) {
 			mSavedColor = value.value<QColor>();
 		}
@@ -72,7 +72,8 @@ void ColorDialog::setColor(const QColor &color)
 
 void ColorDialog::chooseColor()
 {
-	const auto &chosenColor = QColorDialog::getColor(mSavedColor, this, tr("Select the background color of the scene"));
+	const auto &chosenColor =
+		QColorDialog::getColor(mSavedColor, this, tr("Select the background color of the scene"));
 
 	if (chosenColor.isValid()) {
 		mSavedColor = chosenColor;

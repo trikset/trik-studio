@@ -40,14 +40,15 @@ class GraphicalPartModel : public QAbstractItemModel
 public:
 	/// Roles specific to graphical parts.
 	enum Roles {
-		positionRole = Qt::UserRole + 1  // element's position within current context
-		, configurationRole  // element's configuration (e.g. shape, size) within current context
+		positionRole = Qt::UserRole + 1 // element's position within current context
+		,
+		configurationRole // element's configuration (e.g. shape, size) within current context
 	};
 
 	/// Constructor.
 	/// @param repoApi - reference to repository API.
-	GraphicalPartModel(qrRepo::GraphicalRepoApi &repoApi
-			, const modelsImplementation::ModelIndexesInterface &graphicalModel);
+	GraphicalPartModel(qrRepo::GraphicalRepoApi &repoApi,
+		const modelsImplementation::ModelIndexesInterface &graphicalModel);
 
 	~GraphicalPartModel() override;
 
@@ -88,7 +89,7 @@ private:
 	QModelIndex addGraphicalPart(const Id &element, int index, bool addToRepo);
 
 	qrRepo::GraphicalRepoApi &mRepoApi;
-	QList<QList<modelsImplementation::GraphicalPartModelItem *> > mItems;  // Has ownership.
+	QList<QList<modelsImplementation::GraphicalPartModelItem *>> mItems; // Has ownership.
 
 	/// Maps id to an index of this id in mItems list.
 	QHash<Id, int> mIdPositions;

@@ -19,7 +19,7 @@
 #include <qrgui/preferencesDialog/preferencesPage.h>
 
 namespace Ui {
-	class visualInterpreterPreferencesPage;
+class visualInterpreterPreferencesPage;
 }
 
 namespace qReal {
@@ -45,4 +45,3 @@ private:
 };
 
 }
-

@@ -16,10 +16,8 @@
 
 using namespace nxt::simple;
 
-DrawCircleBlockGenerator::DrawCircleBlockGenerator(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, const qReal::Id &id
-		, QObject *parent)
+DrawCircleBlockGenerator::DrawCircleBlockGenerator(const qrRepo::RepoApi &repo,
+	generatorBase::GeneratorCustomizer &customizer, const qReal::Id &id, QObject *parent)
 	: DrawBlockGenerator(repo, customizer, id, parent)
 {
 }

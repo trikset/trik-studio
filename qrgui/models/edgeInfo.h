@@ -29,20 +29,11 @@ class QRGUI_MODELS_EXPORT EdgeInfo
 public:
 	EdgeInfo() = default;
 
-	EdgeInfo(const Id &graphicalId
-			, const Id &logicalId
-			, LogicalModelAssistInterface &logicalModel
-			, GraphicalModelAssistInterface &graphicalModel);
+	EdgeInfo(const Id &graphicalId, const Id &logicalId, LogicalModelAssistInterface &logicalModel,
+		GraphicalModelAssistInterface &graphicalModel);
 
-	EdgeInfo(const Id &id
-			, const Id &logicalId
-			, const Id &logicalParent
-			, const Id &graphicalParent
-			, qreal portFrom
-			, qreal portTo
-			, const QPolygon &configuration
-			, int shapeType
-	);
+	EdgeInfo(const Id &id, const Id &logicalId, const Id &logicalParent, const Id &graphicalParent, qreal portFrom,
+		qreal portTo, const QPolygon &configuration, int shapeType);
 
 	QDataStream &serialize(QDataStream &out) const;
 
@@ -100,7 +91,6 @@ public:
 
 	void setAllGraphicalProperties(const QMap<QString, QVariant> &graphicalProperties);
 
-
 	/// @return String representation of shapeType
 	static QString shapeToString(LinkShape shapeType);
 
@@ -139,6 +129,6 @@ private:
 
 }
 
-QRGUI_MODELS_EXPORT QDataStream &operator<< (QDataStream &out, const qReal::EdgeInfo &data);
-QRGUI_MODELS_EXPORT QDataStream &operator>> (QDataStream &in, qReal::EdgeInfo &data);
-QRGUI_MODELS_EXPORT bool operator== (const qReal::EdgeInfo &first, const qReal::EdgeInfo &second);
+QRGUI_MODELS_EXPORT QDataStream &operator<<(QDataStream &out, const qReal::EdgeInfo &data);
+QRGUI_MODELS_EXPORT QDataStream &operator>>(QDataStream &in, qReal::EdgeInfo &data);
+QRGUI_MODELS_EXPORT bool operator==(const qReal::EdgeInfo &first, const qReal::EdgeInfo &second);

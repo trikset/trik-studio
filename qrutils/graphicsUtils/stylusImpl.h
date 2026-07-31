@@ -23,18 +23,18 @@ namespace graphicsUtils {
 
 class QRUTILS_EXPORT StylusImpl
 {
-public :
+public:
 	StylusImpl();
 
 	QRectF boundingRect(const QList<AbstractItem *> &listLine) const;
 	QPainterPath shape(const QList<AbstractItem *> &listLine) const;
 
-	void drawItem(const QList<AbstractItem *> &listLine, QPainter *painter, const QStyleOptionGraphicsItem *option
-			, QWidget *widget = nullptr);
+	void drawItem(const QList<AbstractItem *> &listLine, QPainter *painter, const QStyleOptionGraphicsItem *option,
+		QWidget *widget = nullptr);
 
 	void drawExtractionForItem(const QList<AbstractItem *> &listLine, QPainter *painter);
-	void drawFieldForResizeItem(QPainter* painter);
-	void drawScalingRects(QPainter* painter);
+	void drawFieldForResizeItem(QPainter *painter);
+	void drawScalingRects(QPainter *painter);
 
 	void setPenStyle(const QList<AbstractItem *> &listLine, const QString &text);
 	void setPenWidth(const QList<AbstractItem *> &listLine, qreal width);

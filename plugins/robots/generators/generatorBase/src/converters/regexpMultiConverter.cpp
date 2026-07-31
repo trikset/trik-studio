@@ -16,8 +16,8 @@
 
 using namespace generatorBase::converters;
 
-RegexpMultiConverter::RegexpMultiConverter(const QString &splitRegexp
-		, const simple::Binding::ConverterInterface * const converter)
+RegexpMultiConverter::RegexpMultiConverter(const QString &splitRegexp,
+	const simple::Binding::ConverterInterface *const converter)
 	: mSplitRegexp(splitRegexp)
 	, mSimpleConverter(converter)
 {

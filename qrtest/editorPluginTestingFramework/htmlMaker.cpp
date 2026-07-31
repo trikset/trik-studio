@@ -28,14 +28,12 @@
 using namespace editorPluginTestingFramework;
 using namespace utils;
 
-void HtmlMaker::makeHtml(
-		QList<MethodsTester::ResultOfGenerating> qrxcAndQrmcResult
-		, QList<MethodsTester::ResultOfGenerating> qrxcAndInterpreterResult
-		, QList<MethodsTester::ResultOfGenerating> timeResult
-		, QList<MethodsTester::ResultOfGenerating> timeResultIntertpter
-		, const QString &pathToHtml)
+void HtmlMaker::makeHtml(QList<MethodsTester::ResultOfGenerating> qrxcAndQrmcResult,
+	QList<MethodsTester::ResultOfGenerating> qrxcAndInterpreterResult,
+	QList<MethodsTester::ResultOfGenerating> timeResult,
+	QList<MethodsTester::ResultOfGenerating> timeResultIntertpter, const QString &pathToHtml)
 {
-//	typedef QPair<QString, QPair<QString, QString>> StringTriplet;
+	//	typedef QPair<QString, QPair<QString, QString>> StringTriplet;
 
 	qDebug() << "STARTING HTML GENERATING";
 	QDomElement root = mHtml.createElement("html");
@@ -49,20 +47,20 @@ void HtmlMaker::makeHtml(
 
 	QDomElement body = newElement(root, "body");
 
-	addTable(body, qrxcAndQrmcResult, QObject::tr("Table with results of comparison between qrxc and qrmc")
-			 , QObject::tr("Method name"), "QRXC", "QRMC");
+	addTable(body, qrxcAndQrmcResult, QObject::tr("Table with results of comparison between qrxc and qrmc"),
+		QObject::tr("Method name"), "QRXC", "QRMC");
 
 	QDomElement breakLine = newElement(body, "br");
 
-	addTable(body, qrxcAndInterpreterResult
-			, QObject::tr("Table with results of comparison between qrxc and interpreter")
-			, QObject::tr("Method name"), "QRXC", "Interpreter");
+	addTable(body, qrxcAndInterpreterResult,
+		QObject::tr("Table with results of comparison between qrxc and interpreter"),
+		QObject::tr("Method name"), "QRXC", "Interpreter");
 
-	addTable(body, timeResult, QObject::tr("Table with results of time qrxc and qrmc")
-			, QObject::tr("Method name"), "qrxc", "qrmc");
+	addTable(body, timeResult, QObject::tr("Table with results of time qrxc and qrmc"), QObject::tr("Method name"),
+		"qrxc", "qrmc");
 
-	addTable(body, timeResultIntertpter, QObject::tr("Table with results of time qrxc and interpreter")
-			, QObject::tr("Method name"), "qrxc", "interpreter");
+	addTable(body, timeResultIntertpter, QObject::tr("Table with results of time qrxc and interpreter"),
+		QObject::tr("Method name"), "qrxc", "interpreter");
 
 	const QString &fileName = pathToHtml + "/output.html";
 	OutFile outHtml(fileName);
@@ -78,16 +76,10 @@ QDomElement HtmlMaker::newElement(QDomElement &parent, const QString &newElement
 	return newElement;
 }
 
-void HtmlMaker::addTable(
-		QDomElement parent
-		, QList<MethodsTester::ResultOfGenerating> listOfLines
-		, const QString &text
-		, const QString &firstColumnTitle
-		, const QString &secondColumnTitle
-		, const QString &thirdColumnTitle
-		)
+void HtmlMaker::addTable(QDomElement parent, QList<MethodsTester::ResultOfGenerating> listOfLines, const QString &text,
+	const QString &firstColumnTitle, const QString &secondColumnTitle, const QString &thirdColumnTitle)
 {
-	typedef QPair<QString, QPair<QString, QString> > StringTriplet;
+	typedef QPair<QString, QPair<QString, QString>> StringTriplet;
 
 	QDomElement bold = newElement(parent, "b");
 
@@ -108,11 +100,8 @@ void HtmlMaker::addTable(
 	}
 }
 
-void HtmlMaker::addLineToTable(QDomElement parent
-			, const QString &methodName
-			, const QString &firstResult
-			, const QString &secondResult
-			, const bool &isTitle)
+void HtmlMaker::addLineToTable(QDomElement parent, const QString &methodName, const QString &firstResult,
+	const QString &secondResult, const bool &isTitle)
 {
 	QDomElement newLine = newElement(parent, "tr");
 

@@ -61,7 +61,7 @@ public:
 			const auto offsetY = y - currentTopLeft.y();
 			derived->moveBy(offsetX, offsetY);
 		} else {
-			derived->setPos(QPointF{x, y});
+			derived->setPos(QPointF {x, y});
 		}
 		derived->setStartPosition({markerX, markerY});
 	}
@@ -74,10 +74,8 @@ public:
 		const auto startPosition = derived->startPosition();
 		const auto derivedScenePosition = derived->scenePos();
 		if (!mPreferLeftTopPoint) {
-			element.setAttribute("x",
-					 QString::number(coordSystem->toUnit(derivedScenePosition.x())));
-			element.setAttribute("y",
-					 QString::number(coordSystem->toUnit(derivedScenePosition.y())));
+			element.setAttribute("x", QString::number(coordSystem->toUnit(derivedScenePosition.x())));
+			element.setAttribute("y", QString::number(coordSystem->toUnit(derivedScenePosition.y())));
 		} else {
 			auto &&boundingRectTopLeft = derived->mapToScene(derived->boundingRect().topLeft());
 			auto x1InSystem = coordSystem->toUnit(boundingRectTopLeft.x());
@@ -85,10 +83,8 @@ public:
 			element.setAttribute("begin", QString::number(x1InSystem) + ":" + QString::number(y1InSystem));
 		}
 
-		element.setAttribute("markerX",
-					 QString::number(coordSystem->toUnit(startPosition.x())));
-		element.setAttribute("markerY",
-					 QString::number(coordSystem->toUnit(startPosition.y())));
+		element.setAttribute("markerX", QString::number(coordSystem->toUnit(startPosition.x())));
+		element.setAttribute("markerY", QString::number(coordSystem->toUnit(startPosition.y())));
 		element.setAttribute("rotation", QString::number(derived->rotation()));
 		element.setAttribute("startRotation", QString::number(startRotation));
 	}

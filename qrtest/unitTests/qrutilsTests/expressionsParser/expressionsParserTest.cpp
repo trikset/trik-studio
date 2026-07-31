@@ -28,11 +28,13 @@ ExpressionsParserTest::ExpressionsParserTest()
 	mErrorReporter = new ErrorReporterMock();
 }
 
-void ExpressionsParserTest::SetUp() {
+void ExpressionsParserTest::SetUp()
+{
 	mParser = new ExpressionsParser(mErrorReporter);
 }
 
-void ExpressionsParserTest::TearDown() {
+void ExpressionsParserTest::TearDown()
+{
 	delete mParser;
 }
 
@@ -41,21 +43,24 @@ ExpressionsParserTest::~ExpressionsParserTest()
 	delete mErrorReporter;
 }
 
-TEST_F(ExpressionsParserTest, priorityTest) {
+TEST_F(ExpressionsParserTest, priorityTest)
+{
 	QString const stream = "2 + 2 * 2";
 	int pos = 0;
 
 	EXPECT_EQ(mParser->parseExpression(stream, pos)->value().toInt(), 6);
 }
 
-TEST_F(ExpressionsParserTest, multiplicativityTest) {
+TEST_F(ExpressionsParserTest, multiplicativityTest)
+{
 	QString const stream = "(2 + 2) * 3 + 4";
 	int pos = 0;
 
 	EXPECT_EQ(mParser->parseExpression(stream, pos)->value().toInt(), 16);
 }
 
-TEST_F(ExpressionsParserTest, associativityTest) {
+TEST_F(ExpressionsParserTest, associativityTest)
+{
 	QString const stream1 = "(2 + 2) + 2";
 	int pos1 = 0;
 
@@ -66,42 +71,48 @@ TEST_F(ExpressionsParserTest, associativityTest) {
 	EXPECT_EQ(mParser->parseExpression(stream2, pos2)->value().toInt(), 6);
 }
 
-TEST_F(ExpressionsParserTest, doubleTest) {
+TEST_F(ExpressionsParserTest, doubleTest)
+{
 	QString const stream = "(2.2 + 2.2) * 5";
 	int pos = 0;
 
 	EXPECT_EQ(mParser->parseExpression(stream, pos)->value().toDouble(), 22.0);
 }
 
-TEST_F(ExpressionsParserTest, unaryMinusTest) {
+TEST_F(ExpressionsParserTest, unaryMinusTest)
+{
 	QString const stream = "-2 * 2 + 3";
 	int pos = 0;
 
 	EXPECT_EQ(mParser->parseExpression(stream, pos)->value().toInt(), -1);
 }
 
-TEST_F(ExpressionsParserTest, basicComparisonTest) {
+TEST_F(ExpressionsParserTest, basicComparisonTest)
+{
 	QString const stream = "2 + 3 < 3 * 2";
 	int pos = 0;
 
 	EXPECT_TRUE(mParser->parseConditionHelper(stream, pos));
 }
 
-TEST_F(ExpressionsParserTest, conjunctionTest) {
+TEST_F(ExpressionsParserTest, conjunctionTest)
+{
 	QString const stream = "2 < 3 && 3 > 5";
 	int pos = 0;
 
 	EXPECT_FALSE(mParser->parseConditionHelper(stream, pos));
 }
 
-TEST_F(ExpressionsParserTest, disjunctionTest) {
+TEST_F(ExpressionsParserTest, disjunctionTest)
+{
 	QString const stream = "2 < 3 || 3 > 5";
 	int pos = 0;
 
 	EXPECT_TRUE(mParser->parseConditionHelper(stream, pos));
 }
 
-TEST_F(ExpressionsParserTest, complexComparisonTest) {
+TEST_F(ExpressionsParserTest, complexComparisonTest)
+{
 	QString const stream1 = "(2+2)*3 < 5 || 2*(6-3) < 7 && 7 < 8";
 	QString const stream2 = "(2 < 5 || 8 < 7) && 7 < 8";
 	int pos1 = 0;
@@ -111,14 +122,16 @@ TEST_F(ExpressionsParserTest, complexComparisonTest) {
 	EXPECT_TRUE(mParser->parseConditionHelper(stream2, pos2));
 }
 
-TEST_F(ExpressionsParserTest, negationTest) {
+TEST_F(ExpressionsParserTest, negationTest)
+{
 	QString const stream = "!(2+2 < 5)";
 	int pos = 0;
 
 	EXPECT_FALSE(mParser->parseConditionHelper(stream, pos));
 }
 
-TEST_F(ExpressionsParserTest, parseErrorTest1) {
+TEST_F(ExpressionsParserTest, parseErrorTest1)
+{
 	EXPECT_CALL(*mErrorReporter, addCritical(_, _)).Times(Exactly(1));
 
 	QString const stream = "((2+2)*5";
@@ -127,7 +140,8 @@ TEST_F(ExpressionsParserTest, parseErrorTest1) {
 	mParser->parseExpression(stream, pos);
 }
 
-TEST_F(ExpressionsParserTest, parseErrorTest2) {
+TEST_F(ExpressionsParserTest, parseErrorTest2)
+{
 	EXPECT_CALL(*mErrorReporter, addCritical(_, _)).Times(Exactly(1));
 
 	QString const stream = "2**2";
@@ -136,7 +150,8 @@ TEST_F(ExpressionsParserTest, parseErrorTest2) {
 	mParser->parseExpression(stream, pos);
 }
 
-TEST_F(ExpressionsParserTest, parseErrorTest3) {
+TEST_F(ExpressionsParserTest, parseErrorTest3)
+{
 	EXPECT_CALL(*mErrorReporter, addCritical(_, _)).Times(Exactly(1));
 
 	QString const stream = "abc + 2";

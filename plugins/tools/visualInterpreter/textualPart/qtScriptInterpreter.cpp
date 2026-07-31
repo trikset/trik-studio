@@ -17,7 +17,8 @@
 
 using namespace qReal;
 
-QtScriptInterpreter::QtScriptInterpreter(QObject *parent) : TextCodeInterpreter(parent)
+QtScriptInterpreter::QtScriptInterpreter(QObject *parent)
+	: TextCodeInterpreter(parent)
 {
 }
 

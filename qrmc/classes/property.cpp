@@ -19,9 +19,10 @@
 
 using namespace qrmc;
 
-Property::Property(const qrRepo::LogicalRepoApi &api, const qReal::Id &id) : mApi(api), mId(id)
+Property::Property(const qrRepo::LogicalRepoApi &api, const qReal::Id &id)
+	: mApi(api)
+	, mId(id)
 {
-
 }
 
 bool Property::init()
@@ -74,7 +75,7 @@ QString Property::defaultValue() const
 	return mDefaultValue;
 }
 
-Property * Property::clone() const
+Property *Property::clone() const
 {
 	auto *result = new Property(mApi, mId);
 	result->mName = mName;
@@ -87,18 +88,14 @@ Property * Property::clone() const
 	return result;
 }
 
-bool Property::operator == (const Property &other) const
+bool Property::operator==(const Property &other) const
 {
-	return other.mName == mName
-		&& other.mType == mType
-		&& other.mIsEnum == mIsEnum
-		&& other.mIsReference == mIsReference
-		&& other.mDescription == mDescription
-		&& other.mDefaultValue == mDefaultValue
-		;
+	return other.mName == mName && other.mType == mType && other.mIsEnum == mIsEnum
+	       && other.mIsReference == mIsReference && other.mDescription == mDescription
+	       && other.mDefaultValue == mDefaultValue;
 }
 
-bool Property::operator != (const Property &other) const
+bool Property::operator!=(const Property &other) const
 {
 	return !(other == *this);
 }
@@ -111,13 +108,8 @@ bool Property::isReferenceProperty() const
 void Property::print() const
 {
 	qDebug() << "property"
-			<< "\t" << mName
-			<< "\t" << mType
-			<< "\t" << mIsEnum
-			<< "\t" << mIsReference
-			<< "\t" << mDescription
-			<< "\t" << mDefaultValue
-			<< "\t" << mDisplayedName;
+		 << "\t" << mName << "\t" << mType << "\t" << mIsEnum << "\t" << mIsReference << "\t" << mDescription
+		 << "\t" << mDefaultValue << "\t" << mDisplayedName;
 }
 
 QString Property::generatePropertyLine(const QString &lineTemplate) const

@@ -27,8 +27,7 @@ class RectangleItem : public ColorFieldItem
 	Q_PROPERTY(bool filled READ filled WRITE setFilled)
 
 public:
-	RectangleItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-	              QPointF begin, QPointF end);
+	RectangleItem(graphicsUtils::AbstractCoordinateSystem *metricSystem, QPointF begin, QPointF end);
 
 	AbstractItem *clone() const override;
 

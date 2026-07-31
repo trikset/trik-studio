@@ -32,13 +32,9 @@ class DotRunner : public QObject
 {
 	Q_OBJECT
 public:
-	explicit DotRunner(
-			const Id &diagramId
-			, const models::GraphicalModelAssistApi &graphicalModelApi
-			, const models::LogicalModelAssistApi &logicalModelApi
-			, const EditorManagerInterface &editorManagerProxy
-			, const QString &absolutePathToDotFiles
-			);
+	explicit DotRunner(const Id &diagramId, const models::GraphicalModelAssistApi &graphicalModelApi,
+		const models::LogicalModelAssistApi &logicalModelApi, const EditorManagerInterface &editorManagerProxy,
+		const QString &absolutePathToDotFiles);
 
 	bool run(const QString &algorithm);
 
@@ -57,8 +53,8 @@ private:
 	const models::GraphicalModelAssistApi &mGraphicalModelApi;
 	const models::LogicalModelAssistApi &mLogicalModelApi;
 	const qReal::EditorManagerInterface &mEditorManagerInterface;
-	QHash <QString, Id> mElementNamesForDOT;
-	QHash <Id, QPair<QPointF, QPair<qreal, qreal> > > mDOTCoordinatesOfElements;
+	QHash<QString, Id> mElementNamesForDOT;
+	QHash<Id, QPair<QPointF, QPair<qreal, qreal>>> mDOTCoordinatesOfElements;
 	QString mAlgorithm;
 	QString mAbsolutePathToDotFiles;
 };

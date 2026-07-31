@@ -24,8 +24,8 @@ class NxtGeneratorRobotModel : public NxtRobotModelBase
 	Q_OBJECT
 
 public:
-	NxtGeneratorRobotModel(const QString &kitId, const QString &robotId
-			, const QString &name, const QString &friendlyName, int priority);
+	NxtGeneratorRobotModel(const QString &kitId, const QString &robotId, const QString &name,
+		const QString &friendlyName, int priority);
 
 	QString name() const override;
 	QString friendlyName() const override;

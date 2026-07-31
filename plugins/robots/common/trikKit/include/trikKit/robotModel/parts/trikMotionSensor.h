@@ -28,8 +28,7 @@ class TrikMotionSensor : public kitBase::robotModel::robotParts::ScalarSensor
 	Q_CLASSINFO("simulated", "true")
 
 public:
-	TrikMotionSensor(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port);
+	TrikMotionSensor(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port);
 };
 
 }

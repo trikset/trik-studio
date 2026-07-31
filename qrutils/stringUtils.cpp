@@ -52,6 +52,6 @@ QString StringUtils::lowercaseFirstLetter(const QString &string)
 QString StringUtils::dequote(const QString &string)
 {
 	return (string.startsWith("'") && string.endsWith("'")) || (string.startsWith("\"") && string.endsWith("\""))
-		? string.mid(1, string.length() - 2)
-		: string;
+	               ? string.mid(1, string.length() - 2)
+	               : string;
 }

@@ -36,24 +36,18 @@ bool LinePort::init(const QDomElement &element, int width, int height)
 
 void LinePort::generateCode(OutFile &out)
 {
-	const QString line = QString("QLineF(%1, %2, %3, %4)").arg(
-				QString::number(mStartX.value())
-				, QString::number(mStartY.value())
-				, QString::number(mEndX.value())
-				, QString::number(mEndY.value()));
+	const QString line = QString("QLineF(%1, %2, %3, %4)")
+	                             .arg(QString::number(mStartX.value()), QString::number(mStartY.value()),
+					     QString::number(mEndX.value()), QString::number(mEndY.value()));
 
 	if (mType.isNull() || mType.isEmpty()) {
 		mType = "NonTyped";
 	}
 
-	out() << QString("qReal::LinePortInfo(%1, %2, %3, %4, %5, %6, %7, \"%8\")").arg(line
-			, mStartX.isScalable() ? "true" : "false"
-			, mStartY.isScalable() ? "true" : "false"
-			, mEndX.isScalable() ? "true" : "false"
-			, mEndY.isScalable() ? "true" : "false"
-			, QString::number(mInitWidth)
-			, QString::number(mInitHeight)
-			, mType);
+	out() << QString("qReal::LinePortInfo(%1, %2, %3, %4, %5, %6, %7, \"%8\")")
+			 .arg(line, mStartX.isScalable() ? "true" : "false", mStartY.isScalable() ? "true" : "false",
+				 mEndX.isScalable() ? "true" : "false", mEndY.isScalable() ? "true" : "false",
+				 QString::number(mInitWidth), QString::number(mInitHeight), mType);
 }
 
 Port *LinePort::clone() const
@@ -68,4 +62,3 @@ Port *LinePort::clone() const
 	result->mInitHeight = mInitHeight;
 	return result;
 }
-

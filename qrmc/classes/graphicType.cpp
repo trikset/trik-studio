@@ -32,7 +32,8 @@ GraphicType::ContainerProperties::ContainerProperties()
 	, isMinimizingToChildren(false)
 	, isClass(false)
 	, isMaximizingChildren(false)
-{}
+{
+}
 
 GraphicType::ResolvingHelper::ResolvingHelper(bool &resolvingFlag)
 	: mResolvingFlag(resolvingFlag)
@@ -40,11 +41,8 @@ GraphicType::ResolvingHelper::ResolvingHelper(bool &resolvingFlag)
 	mResolvingFlag = true;
 }
 
-GraphicType::GraphicType(
-		const Diagram &diagram
-		, const qrRepo::LogicalRepoApi &api
-		, const qReal::Id &id
-		, const QString &targetDirectory)
+GraphicType::GraphicType(const Diagram &diagram, const qrRepo::LogicalRepoApi &api, const qReal::Id &id,
+	const QString &targetDirectory)
 	: Type(false, diagram, api, id)
 	, mShape("", targetDirectory)
 	, mResolving(false)
@@ -136,24 +134,25 @@ bool GraphicType::initPossibleEdges()
 		const QString directedField = mApi.stringProperty(id, "directed");
 		bool directed = false;
 
-		if (beginName.isEmpty() || endName.isEmpty() || ((directedField != "true") && (directedField != "false"))) {
-				qDebug() << "Error: one of attributes is incorrect " <<
-					R"((perhaps, "beginName" or "emptyName" is empty or )" <<
-					R"("directed" isn't "true" or "false".'))" << qualifiedName();
-				return false;
+		if (beginName.isEmpty() || endName.isEmpty()
+			|| ((directedField != "true") && (directedField != "false"))) {
+			qDebug() << "Error: one of attributes is incorrect "
+				 << R"((perhaps, "beginName" or "emptyName" is empty or )"
+				 << R"("directed" isn't "true" or "false".'))" << qualifiedName();
+			return false;
 		}
 
 		directed = (directedField == "true");
 		const QString edgeName = NameNormalizer::normalize(qualifiedName());
-		QPair<QPair<QString, QString>, QPair<bool, QString>> possibleEdge(
-				qMakePair(beginName,endName),qMakePair(directed,edgeName));
+		QPair<QPair<QString, QString>, QPair<bool, QString>> possibleEdge(qMakePair(beginName, endName),
+			qMakePair(directed, edgeName));
 
 		if (!mPossibleEdges.contains(possibleEdge)) {
-				mPossibleEdges.append(possibleEdge);
+			mPossibleEdges.append(possibleEdge);
 		} else {
 			// FIXME: ignoring for now
-				//qDebug() << "ERROR: this edge is already in list " << qualifiedName();
-//				return false;
+			//qDebug() << "ERROR: this edge is already in list " << qualifiedName();
+			//				return false;
 		}
 	}
 
@@ -181,7 +180,7 @@ void GraphicType::copyFields(Type *type) const
 {
 	Type::copyFields(type);
 	/// @todo: Not good, requires non-const fields.
-	auto graphicType = dynamic_cast<GraphicType*>(type);
+	auto graphicType = dynamic_cast<GraphicType *>(type);
 	graphicType->mParents = mParents;
 	graphicType->mIsVisible = mIsVisible;
 	graphicType->mContainerProperties = mContainerProperties;
@@ -200,8 +199,8 @@ bool GraphicType::resolve()
 	mParents.removeDuplicates();
 	for (const QString &parentName : mParents) {
 		// searching for parents in native context. if it was imported, references will remain valid
-		const QString qualifiedParentName = parentName.contains("::") ? parentName : nativeContext() + "::"
-				+ parentName;
+		const QString qualifiedParentName =
+			parentName.contains("::") ? parentName : nativeContext() + "::" + parentName;
 
 		Type *parent = mDiagram->findType(qualifiedParentName);
 		if (!parent) {
@@ -224,16 +223,16 @@ bool GraphicType::resolve()
 			}
 		}
 
-		for (const Property * const property : parent->properties().values()) {
+		for (const Property *const property : parent->properties().values()) {
 			if (!addProperty(property->clone())) {
 				return false;
 			}
 		}
 
-		auto* gParent = dynamic_cast<GraphicType*>(parent);
+		auto *gParent = dynamic_cast<GraphicType *>(parent);
 		if (gParent) {
 			for (const PossibleEdge &pEdge : gParent->mPossibleEdges) {
-				mPossibleEdges.append(qMakePair(pEdge.first,qMakePair(pEdge.second.first,name())));
+				mPossibleEdges.append(qMakePair(pEdge.first, qMakePair(pEdge.second.first, name())));
 			}
 		}
 	}
@@ -275,14 +274,12 @@ QString GraphicType::generateProperties(const QString &lineTemplate) const
 	}
 
 	QString propertiesString;
-	for (const Property * const property : mProperties) {
+	for (const Property *const property : mProperties) {
 		// hack: don't generate pre-defined properties
-		if (property->name() == "fromPort" || property->name() == "toPort"
-			|| property->name() == "from" || property->name() == "to"
-			|| property->name() == "name")
-		{
+		if (property->name() == "fromPort" || property->name() == "toPort" || property->name() == "from"
+			|| property->name() == "to" || property->name() == "name") {
 			qDebug() << "ERROR: predefined property" << property->name()
-				<< "shall not appear in metamodels, ignored";
+				 << "shall not appear in metamodels, ignored";
 			continue;
 		}
 
@@ -300,7 +297,7 @@ QString GraphicType::generatePropertyDefaults(const QString &lineTemplate) const
 	}
 
 	QString defaultsString;
-	for (const Property * const property : mProperties) {
+	for (const Property *const property : mProperties) {
 		QString tmp = property->generateDefaultsLine(lineTemplate);
 		if (!tmp.isEmpty()) {
 			defaultsString += tmp.replace(elementNameTag, name()) + endline;
@@ -317,10 +314,11 @@ QString GraphicType::generatePropertyDisplayedNames(const QString &lineTemplate)
 	}
 
 	QString displayedNamesString;
-	for (const Property * const property : mProperties) {
+	for (const Property *const property : mProperties) {
 		QString tmp = property->generateDisplayedNameLine(lineTemplate);
 		if (!tmp.isEmpty()) {
-			displayedNamesString += tmp.replace(elementNameTag, name()).replace(diagramNameTag, mContext) + endline;
+			displayedNamesString +=
+				tmp.replace(elementNameTag, name()).replace(diagramNameTag, mContext) + endline;
 		}
 	}
 
@@ -336,7 +334,8 @@ QString GraphicType::generateElementDescription(const QString &lineTemplate) con
 	QString displayedNamesString;
 	QString temp = generateElementDescriptionLine(lineTemplate);
 	if (!temp.isEmpty()) {
-		displayedNamesString += temp.replace(elementNameTag, name()).replace(diagramNameTag, mContext) + endline;
+		displayedNamesString +=
+			temp.replace(elementNameTag, name()).replace(diagramNameTag, mContext) + endline;
 	}
 
 	return displayedNamesString;
@@ -357,20 +356,18 @@ QString GraphicType::generateReferenceProperties(const QString &lineTemplate) co
 
 	QString referencePropertiesString = lineTemplate;
 	QString referencePropertiesList;
-	for (const Property * const property : mProperties) {
+	for (const Property *const property : mProperties) {
 		if (property->isReferenceProperty()) {
-			referencePropertiesList = referencePropertiesList + " << "  + "\"" + property->name() + "\"";
+			referencePropertiesList = referencePropertiesList + " << " + "\"" + property->name() + "\"";
 		}
 	}
 
 	if (referencePropertiesList.isEmpty()) {
-		referencePropertiesString
-				.replace(referencePropertiesListTag, "*/}//")
-				.replace(elementNameTag, name() + "\"){/*");
+		referencePropertiesString.replace(referencePropertiesListTag, "*/}//")
+			.replace(elementNameTag, name() + "\"){/*");
 	} else {
-		referencePropertiesString
-				.replace(referencePropertiesListTag, referencePropertiesList)
-				.replace(elementNameTag, name());
+		referencePropertiesString.replace(referencePropertiesListTag, referencePropertiesList)
+			.replace(elementNameTag, name());
 	}
 
 	return referencePropertiesString;
@@ -381,9 +378,9 @@ QString GraphicType::generatePortTypes(const QString &lineTemplate) const
 	QString portTypesString = lineTemplate;
 	QString portTypesList;
 
-	const QList<Port*> portTypes = this->mShape.getPorts();
+	const QList<Port *> portTypes = this->mShape.getPorts();
 	QSet<QString> portTypesSet;
-	for (Port * const port : portTypes) {
+	for (Port *const port : portTypes) {
 		portTypesSet.insert(port->type());
 	}
 
@@ -410,12 +407,12 @@ QString GraphicType::generatePropertyName(const QString &lineTemplate) const
 	}
 
 	QString propertyNameString = lineTemplate;
-	QString propertyNameList ;
+	QString propertyNameList;
 
-	for (const Property * const property: mProperties) {
+	for (const Property *const property : mProperties) {
 		if (!property->isReferenceProperty()) {
 			if (!propertyNameList.isEmpty()) {
-				propertyNameList = propertyNameList + " << " + + "\"" + property->name() + "\"";
+				propertyNameList = propertyNameList + " << " + +"\"" + property->name() + "\"";
 			} else {
 				propertyNameList = propertyNameList + "\"" + property->name() + "\"";
 			}
@@ -425,9 +422,8 @@ QString GraphicType::generatePropertyName(const QString &lineTemplate) const
 	if (propertyNameList.isEmpty()) {
 		propertyNameString.replace(propertyNameListTag, "*/}//").replace(elementNameTag, name() + "\"){/*");
 	} else {
-		propertyNameString
-				.replace(propertyNameListTag, propertyNameList + ";\n	}//")
-				.replace(elementNameTag, name() + "\"){//");
+		propertyNameString.replace(propertyNameListTag, propertyNameList + ";\n	}//")
+			.replace(elementNameTag, name() + "\"){//");
 	}
 
 	return propertyNameString;
@@ -440,11 +436,10 @@ QString GraphicType::generateParents(const QString &lineTemplate) const
 	QString parentName = qualifiedName().remove(diagramName);
 	for (const QString &child : mChildren) {
 		QString tmp = lineTemplate;
-		parentsMapString += tmp
-				.replace(parentNameTag, parentName)
-				.replace(childNameTag, child)
-				.replace(diagramNameTag, mContext)
-				+ endline;
+		parentsMapString += tmp.replace(parentNameTag, parentName)
+		                            .replace(childNameTag, child)
+		                            .replace(diagramNameTag, mContext)
+		                    + endline;
 	}
 	return parentsMapString;
 }

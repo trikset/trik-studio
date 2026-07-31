@@ -29,7 +29,7 @@ int LevenshteinDistance::getLevenshteinDistance(const QString &key1, const QStri
 	if (n == 0)
 		return m;
 
-	QList<QList<int> > matrix;
+	QList<QList<int>> matrix;
 	for (int i = 0; i <= m; i++) {
 		QList<int> list;
 		for (int j = 0; j <= n; j++)
@@ -45,7 +45,7 @@ int LevenshteinDistance::getLevenshteinDistance(const QString &key1, const QStri
 	matrix[0][0] = 0;
 	int cost = 0;
 	for (int i = 1; i <= m; ++i) {
-		for(int j = 1; j <= n; ++j) {
+		for (int j = 1; j <= n; ++j) {
 			cost = (key1[i - 1] == key2[j - 1]) ? 0 : 1;
 			const int aboveCell = matrix[i - 1][j];
 			const int leftCell = matrix[i][j - 1];

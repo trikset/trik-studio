@@ -24,14 +24,15 @@ class TabInfo
 {
 public:
 	/// Enumerates all possible types of tabs that can be opened in main window`s central tab area.
-	enum class TabType
-	{
+	enum class TabType {
 		/// Represents diagram editor, the core of visual programming environment
 		editor = 0
 		/// Represents code editor, the core of textual programming environment
-		, code
+		,
+		code
 		/// Other type of tab, such as start widget or mouse gestures
-		, other
+		,
+		other
 	};
 
 	/// Constructs invalid tab info, can be used when no tab is opened.
@@ -109,7 +110,7 @@ private:
 	const QString mPathToOpenedTextFile;
 
 	/// Does not take ownership.
-	QWidget * const mOpenedWidget;
+	QWidget *const mOpenedWidget;
 };
 
 }

@@ -44,12 +44,11 @@ using namespace model;
 //#define D2_MODEL_FRAMES_DEBUG
 
 #ifdef D2_MODEL_FRAMES_DEBUG
-#include <QtWidgets/QGraphicsPathItem>
+#	include <QtWidgets/QGraphicsPathItem>
 QGraphicsPathItem *debugPath = nullptr;
 #endif
 
-WorldModel::WorldModel(Settings *settings,
-			twoDModel::model::MetricCoordinateSystem *metricSystem)
+WorldModel::WorldModel(Settings *settings, twoDModel::model::MetricCoordinateSystem *metricSystem)
 	: mSettings(settings)
 	, mXmlFactory(new QDomDocument)
 	, mErrorReporter(nullptr)
@@ -104,9 +103,7 @@ int WorldModel::rangeReading(QPointF position, qreal direction, int maxDistance,
 		return maxRangeCms;
 	}
 
-	for ( ; minRangeCms < maxRangeCms;
-			currentRangeInCm = (minRangeCms + maxRangeCms) / 2)
-	{
+	for (; minRangeCms < maxRangeCms; currentRangeInCm = (minRangeCms + maxRangeCms) / 2) {
 		if (checkRangeDistance(currentRangeInCm, position, direction, maxAngle, path)) {
 			maxRangeCms = currentRangeInCm;
 		} else {
@@ -117,28 +114,28 @@ int WorldModel::rangeReading(QPointF position, qreal direction, int maxDistance,
 	return currentRangeInCm;
 }
 
-bool WorldModel::checkRangeDistance(const int distance, QPointF position
-		, const qreal direction, const qreal scanningAngle, const QPainterPath &wallPath) const
+bool WorldModel::checkRangeDistance(const int distance, QPointF position, const qreal direction,
+	const qreal scanningAngle, const QPainterPath &wallPath) const
 {
-	const QPainterPath rayPath = rangeSensorScanningRegion(position, direction
-			, QPair<qreal,int>(scanningAngle, distance));
+	const QPainterPath rayPath =
+		rangeSensorScanningRegion(position, direction, QPair<qreal, int>(scanningAngle, distance));
 	return rayPath.intersects(wallPath);
 }
 
-QPainterPath WorldModel::rangeSensorScanningRegion(QPointF position, QPair<qreal,int> angleAndRange) const
+QPainterPath WorldModel::rangeSensorScanningRegion(QPointF position, QPair<qreal, int> angleAndRange) const
 {
 	return rangeSensorScanningRegion(position, 0, angleAndRange);
 }
 
-QPainterPath WorldModel::rangeSensorScanningRegion(QPointF position, qreal direction
-		, QPair<qreal,int> angleAndRange) const
+QPainterPath WorldModel::rangeSensorScanningRegion(QPointF position, qreal direction,
+	QPair<qreal, int> angleAndRange) const
 {
 	const qreal rayWidthDegrees = angleAndRange.first;
 	const qreal rangeInPixels = angleAndRange.second * mSettings->pixelsInCm();
 
 	QPainterPath rayPath;
-	rayPath.arcTo(QRectF(-rangeInPixels, -rangeInPixels, 2 * rangeInPixels, 2 * rangeInPixels)
-			, -direction - rayWidthDegrees / 2, rayWidthDegrees);
+	rayPath.arcTo(QRectF(-rangeInPixels, -rangeInPixels, 2 * rangeInPixels, 2 * rangeInPixels),
+		-direction - rayWidthDegrees / 2, rayWidthDegrees);
 	rayPath.closeSubpath();
 	const QTransform sensorPositionTransform = QTransform().translate(position.x(), position.y());
 	return sensorPositionTransform.map(rayPath);
@@ -155,9 +152,9 @@ bool WorldModel::checkCollision(const QPainterPath &path) const
 	debugPath->setPen(QPen(QColor(Qt::blue)));
 	debugPath->setZValue(100);
 
-	QGraphicsScene * const scene = mWalls.isEmpty()
-			? (mColorFields.isEmpty() ? nullptr : mColorFields.first()->scene())
-			: mWalls.first()->scene();
+	QGraphicsScene *const scene = mWalls.isEmpty()
+	                                      ? (mColorFields.isEmpty() ? nullptr : mColorFields.first()->scene())
+	                                      : mWalls.first()->scene();
 
 	if (scene) {
 		scene->addItem(debugPath);
@@ -168,7 +165,7 @@ bool WorldModel::checkCollision(const QPainterPath &path) const
 	return buildSolidItemsPath().intersects(path);
 }
 
-const QMap<QString, QSharedPointer<items::WallItem> > &WorldModel::walls() const
+const QMap<QString, QSharedPointer<items::WallItem>> &WorldModel::walls() const
 {
 	return mWalls;
 }
@@ -313,7 +310,7 @@ const QMap<QString, QSharedPointer<items::ImageItem>> &WorldModel::imageItems() 
 	return mImageItems;
 }
 
-const QMap<QString, QSharedPointer<items::CommentItem> > &WorldModel::commentItems() const
+const QMap<QString, QSharedPointer<items::CommentItem>> &WorldModel::commentItems() const
 {
 	return mComments;
 }
@@ -323,7 +320,7 @@ const QMap<QString, QSharedPointer<items::RegionItem>> &WorldModel::regions() co
 	return mRegions;
 }
 
-const QList<QSharedPointer<QGraphicsPathItem> > &WorldModel::trace() const
+const QList<QSharedPointer<QGraphicsPathItem>> &WorldModel::trace() const
 {
 	return mRobotTrace;
 }
@@ -360,14 +357,14 @@ void WorldModel::addImageItem(const QSharedPointer<items::ImageItem> &imageItem)
 	mImages[imageItem->image()->imageId()] = imageItem->image();
 	mOrder[id] = mOrder.size();
 	connect(&*imageItem, &items::ImageItem::internalImageChanged, this, &WorldModel::blobsChanged);
-	connect(&*imageItem, &items::ImageItem::internalImageChanged, this, [this, id](){
-			if (auto item = mImageItems.value(id))	{
-				auto imageSize = item->image()->preferedSize();
-				if (imageSize.height() == 0 || imageSize.width() == 0) {
-					mErrorReporter->addWarning(tr("Incorrect image, please try anouther one"));
-				}
+	connect(&*imageItem, &items::ImageItem::internalImageChanged, this, [this, id]() {
+		if (auto item = mImageItems.value(id)) {
+			auto imageSize = item->image()->preferedSize();
+			if (imageSize.height() == 0 || imageSize.width() == 0) {
+				mErrorReporter->addWarning(tr("Incorrect image, please try anouther one"));
 			}
-		});
+		}
+	});
 	Q_EMIT imageItemAdded(imageItem);
 	Q_EMIT blobsChanged();
 }
@@ -381,7 +378,7 @@ void WorldModel::removeImageItem(QSharedPointer<items::ImageItem> imageItem)
 	Q_EMIT blobsChanged();
 }
 
-void WorldModel::setRobotModel(RobotModel * robotModel)
+void WorldModel::setRobotModel(RobotModel *robotModel)
 {
 	mRobotModel = robotModel;
 }
@@ -480,28 +477,27 @@ QPainterPath WorldModel::buildSolidItemsPath() const
 		path.addPath(wall->path());
 	}
 
-	for (auto &&skittle: mSkittles) {
+	for (auto &&skittle : mSkittles) {
 		path.addPath(skittle->path());
 	}
 
-	for (auto &&ball: mBalls) {
+	for (auto &&ball : mBalls) {
 		path.addPath(ball->path());
 	}
 
-	for (auto &&cube: mCubes) {
+	for (auto &&cube : mCubes) {
 		path.addPath(cube->path());
 	}
 
 	return path;
 }
 
-void WorldModel::serializeBackground(QDomElement &background, QRect rect, const Image * const img) const
+void WorldModel::serializeBackground(QDomElement &background, QRect rect, const Image *const img) const
 {
-	background.setAttribute("backgroundRect", QString("%1:%2:%3:%4").arg(
-			QString::number(rect.x())
-			, QString::number(rect.y())
-			, QString::number(rect.width())
-			, QString::number(rect.height())));
+	background.setAttribute("backgroundRect",
+		QString("%1:%2:%3:%4")
+			.arg(QString::number(rect.x()), QString::number(rect.y()), QString::number(rect.width()),
+				QString::number(rect.height())));
 
 	const QString imageId = img ? img->imageId() : "";
 	background.setAttribute("imageId", imageId);
@@ -532,7 +528,7 @@ QDomElement WorldModel::serializeWorld(QDomElement &parent) const
 	result.appendChild(walls);
 	QList<QString> wallsIds = mWalls.keys();
 	std::sort(wallsIds.begin(), wallsIds.end(), comparator);
-	for (auto &&wall: wallsIds) {
+	for (auto &&wall : wallsIds) {
 		mWalls[wall]->serialize(walls);
 	}
 
@@ -633,18 +629,18 @@ void WorldModel::deserialize(const QDomElement &element, const QDomElement &blob
 
 	// blobs section
 	if (!blobs.isNull()) {
-		for (QDomElement imagesNode = blobs.firstChildElement("images"); !imagesNode.isNull()
-				; imagesNode = imagesNode.nextSiblingElement("images")) {
-			for (QDomElement imageNode = imagesNode.firstChildElement("image"); !imageNode.isNull()
-					; imageNode = imageNode.nextSiblingElement("image")) {
+		for (QDomElement imagesNode = blobs.firstChildElement("images"); !imagesNode.isNull();
+			imagesNode = imagesNode.nextSiblingElement("images")) {
+			for (QDomElement imageNode = imagesNode.firstChildElement("image"); !imageNode.isNull();
+				imageNode = imageNode.nextSiblingElement("image")) {
 				auto img = Image::deserialize(imageNode);
 				mImages.insert(img->imageId(), img);
 			}
 		}
 	}
 
-	for (QDomElement backgroundNode = element.firstChildElement("background"); !backgroundNode.isNull()
-			; backgroundNode = backgroundNode.nextSiblingElement("background")) {
+	for (QDomElement backgroundNode = element.firstChildElement("background"); !backgroundNode.isNull();
+		backgroundNode = backgroundNode.nextSiblingElement("background")) {
 		QString imageId = backgroundNode.attribute("imageId");
 		const QRectF backgroundRect = deserializeRect(backgroundNode.attribute("backgroundRect"));
 		if (backgroundRect.isNull()) {
@@ -659,13 +655,14 @@ void WorldModel::deserialize(const QDomElement &element, const QDomElement &blob
 		}
 	}
 
-
-	for (QDomElement traceNode = element.firstChildElement("trace"); !traceNode.isNull()
-			; traceNode = traceNode.nextSiblingElement("trace")) {
-		for (QDomElement segmentNode = traceNode.firstChildElement("segment"); !segmentNode.isNull()
-				; segmentNode = segmentNode.nextSiblingElement("segment")) {
-			const QPointF from(segmentNode.attribute("x1").toDouble(), segmentNode.attribute("y1").toDouble());
-			const QPointF to(segmentNode.attribute("x2").toDouble(), segmentNode.attribute("y2").toDouble());
+	for (QDomElement traceNode = element.firstChildElement("trace"); !traceNode.isNull();
+		traceNode = traceNode.nextSiblingElement("trace")) {
+		for (QDomElement segmentNode = traceNode.firstChildElement("segment"); !segmentNode.isNull();
+			segmentNode = segmentNode.nextSiblingElement("segment")) {
+			const QPointF from(segmentNode.attribute("x1").toDouble(),
+				segmentNode.attribute("y1").toDouble());
+			const QPointF to(segmentNode.attribute("x2").toDouble(),
+				segmentNode.attribute("y2").toDouble());
 			QPen pen;
 			pen.setColor(QColor(segmentNode.attribute("color")));
 			pen.setWidth(segmentNode.attribute("width").toInt());
@@ -673,58 +670,58 @@ void WorldModel::deserialize(const QDomElement &element, const QDomElement &blob
 		}
 	}
 
-	for (QDomElement wallsNode = element.firstChildElement("walls"); !wallsNode.isNull()
-			; wallsNode = wallsNode.nextSiblingElement("walls")) {
-		for (QDomElement wallNode = wallsNode.firstChildElement("wall"); !wallNode.isNull()
-				; wallNode = wallNode.nextSiblingElement("wall")) {
+	for (QDomElement wallsNode = element.firstChildElement("walls"); !wallsNode.isNull();
+		wallsNode = wallsNode.nextSiblingElement("walls")) {
+		for (QDomElement wallNode = wallsNode.firstChildElement("wall"); !wallNode.isNull();
+			wallNode = wallNode.nextSiblingElement("wall")) {
 			createWall(wallNode);
 		}
 	}
 
-	for (QDomElement skittlesNode = element.firstChildElement("skittles"); !skittlesNode.isNull()
-			; skittlesNode = skittlesNode.nextSiblingElement("skittles")) {
-		for (QDomElement skittleNode = skittlesNode.firstChildElement("skittle"); !skittleNode.isNull()
-				; skittleNode = skittleNode.nextSiblingElement("skittle")) {
+	for (QDomElement skittlesNode = element.firstChildElement("skittles"); !skittlesNode.isNull();
+		skittlesNode = skittlesNode.nextSiblingElement("skittles")) {
+		for (QDomElement skittleNode = skittlesNode.firstChildElement("skittle"); !skittleNode.isNull();
+			skittleNode = skittleNode.nextSiblingElement("skittle")) {
 			createSkittle(skittleNode);
 		}
 	}
 
-	for (QDomElement ballsNode = element.firstChildElement("balls"); !ballsNode.isNull()
-			; ballsNode = ballsNode.nextSiblingElement("balls")) {
-		for (QDomElement ballNode = ballsNode.firstChildElement("ball"); !ballNode.isNull()
-				; ballNode = ballNode.nextSiblingElement("ball")) {
+	for (QDomElement ballsNode = element.firstChildElement("balls"); !ballsNode.isNull();
+		ballsNode = ballsNode.nextSiblingElement("balls")) {
+		for (QDomElement ballNode = ballsNode.firstChildElement("ball"); !ballNode.isNull();
+			ballNode = ballNode.nextSiblingElement("ball")) {
 			createBall(ballNode);
 		}
 	}
 
-	for (auto cubesNode = element.firstChildElement("cubes"); !cubesNode.isNull()
-			; cubesNode = cubesNode.nextSiblingElement("cubes")) {
-		for (auto cubeNode = cubesNode.firstChildElement("cube"); !cubeNode.isNull()
-				; cubeNode = cubeNode.nextSiblingElement("cube")) {
+	for (auto cubesNode = element.firstChildElement("cubes"); !cubesNode.isNull();
+		cubesNode = cubesNode.nextSiblingElement("cubes")) {
+		for (auto cubeNode = cubesNode.firstChildElement("cube"); !cubeNode.isNull();
+			cubeNode = cubeNode.nextSiblingElement("cube")) {
 			createCube(cubeNode);
 		}
 	}
 
-	for (QDomElement colorFieldsNode = element.firstChildElement("colorFields"); !colorFieldsNode.isNull()
-			; colorFieldsNode = colorFieldsNode.nextSiblingElement("colorFields")) {
-		for (QDomElement elementNode = colorFieldsNode.firstChildElement(); !elementNode.isNull()
-				; elementNode = elementNode.nextSiblingElement()) {
+	for (QDomElement colorFieldsNode = element.firstChildElement("colorFields"); !colorFieldsNode.isNull();
+		colorFieldsNode = colorFieldsNode.nextSiblingElement("colorFields")) {
+		for (QDomElement elementNode = colorFieldsNode.firstChildElement(); !elementNode.isNull();
+			elementNode = elementNode.nextSiblingElement()) {
 			createElement(elementNode);
 		}
 	}
 
-	for (QDomElement commentsNode = element.firstChildElement("comments"); !commentsNode.isNull()
-			; commentsNode = commentsNode.nextSiblingElement("comments")) {
-		for (QDomElement elementNode = commentsNode.firstChildElement(); !elementNode.isNull()
-				; elementNode = elementNode.nextSiblingElement()) {
+	for (QDomElement commentsNode = element.firstChildElement("comments"); !commentsNode.isNull();
+		commentsNode = commentsNode.nextSiblingElement("comments")) {
+		for (QDomElement elementNode = commentsNode.firstChildElement(); !elementNode.isNull();
+			elementNode = elementNode.nextSiblingElement()) {
 			createComment(elementNode);
 		}
 	}
 
-	for (QDomElement imagesNode = element.firstChildElement("images"); !imagesNode.isNull()
-			; imagesNode = imagesNode.nextSiblingElement("images")) {
-		for (QDomElement imageNode = imagesNode.firstChildElement("image"); !imageNode.isNull()
-				; imageNode = imageNode.nextSiblingElement("image")) {
+	for (QDomElement imagesNode = element.firstChildElement("images"); !imagesNode.isNull();
+		imagesNode = imagesNode.nextSiblingElement("images")) {
+		for (QDomElement imageNode = imagesNode.firstChildElement("image"); !imageNode.isNull();
+			imageNode = imageNode.nextSiblingElement("image")) {
 			if (imageNode.hasAttribute("path")) {
 				auto img = Image::deserialize(imageNode);
 				QString id = element.attribute("imageId");
@@ -739,10 +736,8 @@ void WorldModel::deserialize(const QDomElement &element, const QDomElement &blob
 		}
 	}
 
-	for (QDomElement regionNode = element.firstChildElement("regions").firstChildElement("region")
-			; !regionNode.isNull()
-			; regionNode = regionNode.nextSiblingElement("region"))
-	{
+	for (QDomElement regionNode = element.firstChildElement("regions").firstChildElement("region");
+		!regionNode.isNull(); regionNode = regionNode.nextSiblingElement("region")) {
 		createRegion(regionNode);
 	}
 
@@ -823,80 +818,71 @@ void WorldModel::createElement(const QDomElement &element)
 
 void WorldModel::createWall(const QDomElement &element)
 {
-	auto wall = QSharedPointer<items::WallItem>::create(
-				mMetricCoordinateSystem, QPointF(), QPointF());
+	auto wall = QSharedPointer<items::WallItem>::create(mMetricCoordinateSystem, QPointF(), QPointF());
 	wall->deserialize(element);
 	addWall(wall);
 }
 
 void WorldModel::createSkittle(const QDomElement &element)
 {
-	auto skittle = QSharedPointer<items::SkittleItem>::create(
-				mMetricCoordinateSystem, QPointF());
+	auto skittle = QSharedPointer<items::SkittleItem>::create(mMetricCoordinateSystem, QPointF());
 	skittle->deserialize(element);
 	addSkittle(skittle);
 }
 
 void WorldModel::createBall(const QDomElement &element)
 {
-	auto ball = QSharedPointer<items::BallItem>::create(
-				mMetricCoordinateSystem, QPointF());
+	auto ball = QSharedPointer<items::BallItem>::create(mMetricCoordinateSystem, QPointF());
 	ball->deserialize(element);
 	addBall(ball);
 }
 
 void WorldModel::createCube(const QDomElement &element)
 {
-	auto cube = QSharedPointer<items::CubeItem>::create(
-				mMetricCoordinateSystem, QPointF());
+	auto cube = QSharedPointer<items::CubeItem>::create(mMetricCoordinateSystem, QPointF());
 	cube->deserialize(element);
 	addCube(cube);
 }
 
 void WorldModel::createLine(const QDomElement &element)
 {
-	auto lineItem = QSharedPointer<items::LineItem>::create(
-				mMetricCoordinateSystem, QPointF(), QPointF());
+	auto lineItem = QSharedPointer<items::LineItem>::create(mMetricCoordinateSystem, QPointF(), QPointF());
 	lineItem->deserialize(element);
 	addColorField(lineItem);
 }
 
 void WorldModel::createRectangle(const QDomElement &element)
 {
-	auto rectangleItem = QSharedPointer<items::RectangleItem>::create(
-				 mMetricCoordinateSystem, QPointF(), QPointF());
+	auto rectangleItem =
+		QSharedPointer<items::RectangleItem>::create(mMetricCoordinateSystem, QPointF(), QPointF());
 	rectangleItem->deserialize(element);
 	addColorField(rectangleItem);
 }
 
 void WorldModel::createEllipse(const QDomElement &element)
 {
-	auto ellipseItem = QSharedPointer<items::EllipseItem>::create(
-				 mMetricCoordinateSystem, QPointF(), QPointF());
+	auto ellipseItem = QSharedPointer<items::EllipseItem>::create(mMetricCoordinateSystem, QPointF(), QPointF());
 	ellipseItem->deserialize(element);
 	addColorField(ellipseItem);
 }
 
 void WorldModel::createCubicBezier(const QDomElement &element)
 {
-	auto curveItem = QSharedPointer<items::CurveItem>::create(
-				 mMetricCoordinateSystem, QPointF(), QPointF());
+	auto curveItem = QSharedPointer<items::CurveItem>::create(mMetricCoordinateSystem, QPointF(), QPointF());
 	curveItem->deserialize(element);
 	addColorField(curveItem);
 }
 
 void WorldModel::createStylus(const QDomElement &element)
 {
-	auto stylusItem = QSharedPointer<items::StylusItem>::create(
-				 mMetricCoordinateSystem, 0, 0);
+	auto stylusItem = QSharedPointer<items::StylusItem>::create(mMetricCoordinateSystem, 0, 0);
 	stylusItem->deserialize(element);
 	addColorField(stylusItem);
 }
 
 void WorldModel::createComment(const QDomElement &element)
 {
-	auto commentItem = QSharedPointer<items::CommentItem>::create(
-				mMetricCoordinateSystem, QPointF(), QPointF());
+	auto commentItem = QSharedPointer<items::CommentItem>::create(mMetricCoordinateSystem, QPointF(), QPointF());
 	commentItem->deserialize(element);
 	addComment(commentItem);
 }
@@ -909,8 +895,7 @@ QSharedPointer<items::ImageItem> WorldModel::createImageItem(const QDomElement &
 		image.reset(new Image(imageId));
 		mErrorReporter->addError(tr("Unknown image with imageId %1").arg(imageId));
 	}
-	auto imageItem = QSharedPointer<items::ImageItem>::create(
-					mMetricCoordinateSystem.data(), image, QRect());
+	auto imageItem = QSharedPointer<items::ImageItem>::create(mMetricCoordinateSystem.data(), image, QRect());
 	imageItem->deserialize(element);
 	imageItem->setBackgroundRole(background || element.attribute("isBackground") == "true");
 	addImageItem(imageItem);
@@ -930,7 +915,7 @@ QSharedPointer<items::RegionItem> WorldModel::createRegionFromItem(const items::
 
 	if (bound) {
 		regionItem.reset(new items::BoundRegion(mMetricCoordinateSystem, value, id));
-	} else if (qSharedPointerDynamicCast<items::EllipseItem >(value)) {
+	} else if (qSharedPointerDynamicCast<items::EllipseItem>(value)) {
 		regionItem.reset(new items::EllipseRegion(value, mMetricCoordinateSystem));
 	} else if (qSharedPointerDynamicCast<items::RectangleItem>(value)) {
 		regionItem.reset(new items::RectangularRegion(value, mMetricCoordinateSystem));
@@ -952,9 +937,8 @@ void WorldModel::createRegion(const QDomElement &element)
 		auto id = element.attribute("boundItem");
 		boundItem = findId(id);
 		if (boundItem && dynamic_cast<items::ColorFieldItem *>(boundItem.data())) {
-			item.reset(new items::BoundRegion(mMetricCoordinateSystem
-					, qSharedPointerCast<items::ColorFieldItem>(boundItem),
-							  id));
+			item.reset(new items::BoundRegion(mMetricCoordinateSystem,
+				qSharedPointerCast<items::ColorFieldItem>(boundItem), id));
 		} /// @todo: else report error
 	}
 
@@ -963,9 +947,7 @@ void WorldModel::createRegion(const QDomElement &element)
 		auto itemId = item->id();
 		mRegions[itemId] = item;
 		if (boundItem) {
-			connect(boundItem.data(), &QObject::destroyed, this, [this, item]() {
-				removeRegion(item);
-			});
+			connect(boundItem.data(), &QObject::destroyed, this, [this, item]() { removeRegion(item); });
 		}
 		Q_EMIT regionItemAdded(item);
 	}

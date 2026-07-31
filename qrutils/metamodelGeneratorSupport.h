@@ -32,8 +32,8 @@ class QRUTILS_EXPORT MetamodelGeneratorSupport : public QObject
 	Q_OBJECT
 
 public:
-	MetamodelGeneratorSupport(qReal::ErrorReporterInterface *errorReporter
-			, qReal::gui::MainWindowInterpretersInterface *mainWindowInterface);
+	MetamodelGeneratorSupport(qReal::ErrorReporterInterface *errorReporter,
+		qReal::gui::MainWindowInterpretersInterface *mainWindowInterface);
 
 	~MetamodelGeneratorSupport() override;
 
@@ -44,21 +44,14 @@ public:
 	/// @param pathToMake - make command.
 	/// @param extension - extension of the resulting binary file with editor plugin (.dll/.so).
 	/// @param prefix - Optional OS-dependent prefix for resulting binary file (lib for linux, for example).
-	void loadPlugin(
-			const QString &directoryName
-			, const QString &metamodelName
-			, const QString &pathToQmake
-			, const QString &pathToMake
-			, const QString &extension
-			, const QString &prefix
-	);
+	void loadPlugin(const QString &directoryName, const QString &metamodelName, const QString &pathToQmake,
+		const QString &pathToMake, const QString &extension, const QString &prefix);
 
 	/// Generate .pro file of new editor plugin
 	void generateProFile(const QDomDocument &metamodel ///< Metamodel is needed to fix 'include' .xml paths
-			, const QString &baseMetamodelPath, const QString &qrealSourceFilesPath
-			, const QString &newMetamodelName
-			, const QString &newEditorPath, const QString &relativeNewEditorPath
-	);
+		,
+		const QString &baseMetamodelPath, const QString &qrealSourceFilesPath, const QString &newMetamodelName,
+		const QString &newEditorPath, const QString &relativeNewEditorPath);
 
 	/// Returns dom document which contains metamodel
 	QDomDocument loadMetamodelFromFile(const QString &metamodelPath);
@@ -72,25 +65,25 @@ public:
 
 	/// Inserts elements in <diagram></diagram> specified sublevel with creating
 	/// this sublevel if it doesn't exist. For example graphicTypes and nonGraphicTypes.
-	void insertElementsInDiagramSublevel(QDomDocument metamodel
-			, const QString &sublevelName, const QDomNodeList &elements);
+	void insertElementsInDiagramSublevel(QDomDocument metamodel, const QString &sublevelName,
+		const QDomNodeList &elements);
 
 	/// Inserts one element
-	void insertElementInDiagramSublevel(QDomDocument metamodel
-			, const QString &sublevelName, const QDomElement &element);
+	void insertElementInDiagramSublevel(QDomDocument metamodel, const QString &sublevelName,
+		const QDomElement &element);
 
 	/// Appends all childrens to parent
 	void appendElements(QDomNode parent, const QDomNodeList &children);
 
-	QStringList collectAllGraphicTypesInMetamodel(const QDomDocument &metamodel
-			, bool isDisplayedName) const;
+	QStringList collectAllGraphicTypesInMetamodel(const QDomDocument &metamodel, bool isDisplayedName) const;
 
 	/// Appends types to specified child of element for creating container or smth
-	void appendTypesToElement(
-			QDomDocument parentDomDocument ///< Used for creating new elements
-			, QDomElement parent, const QString &childName
-			, const QString &prefix ///< Prefix of the whole name of element type like metamodel name
-			, const QStringList &elementTypes ///< Element types w/o prefix
+	void appendTypesToElement(QDomDocument parentDomDocument ///< Used for creating new elements
+		,
+		QDomElement parent, const QString &childName,
+		const QString &prefix ///< Prefix of the whole name of element type like metamodel name
+		,
+		const QStringList &elementTypes ///< Element types w/o prefix
 	);
 
 	QDomElement diagramElement(const QDomDocument &metamodel) const;

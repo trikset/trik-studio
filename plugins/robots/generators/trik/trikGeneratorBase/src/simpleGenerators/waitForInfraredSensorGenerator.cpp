@@ -18,15 +18,15 @@
 using namespace generatorBase::simple;
 using namespace qReal;
 
-WaitForInfraredSensorGenerator::WaitForInfraredSensorGenerator(const qrRepo::RepoApi &repo
-		, GeneratorCustomizer &customizer
-		, const Id &id
-		, QObject *parent)
-	: BindingGenerator(repo, customizer, id, "wait/infrared.t", QList<Binding *>()
-			<< Binding::createConverting("@@PORT@@", "Port", customizer.factory()->portNameConverter())
-			<< Binding::createConverting("@@DISTANCE@@", "Distance"
-					, customizer.factory()->intPropertyConverter(id, "Distance"))
-			<< Binding::createConverting("@@SIGN@@", "Sign", customizer.factory()->inequalitySignConverter())
-			, parent)
+WaitForInfraredSensorGenerator::WaitForInfraredSensorGenerator(const qrRepo::RepoApi &repo,
+	GeneratorCustomizer &customizer, const Id &id, QObject *parent)
+	: BindingGenerator(repo, customizer, id, "wait/infrared.t",
+		  QList<Binding *>() << Binding::createConverting("@@PORT@@", "Port",
+			  customizer.factory()->portNameConverter())
+				     << Binding::createConverting("@@DISTANCE@@", "Distance",
+						customizer.factory()->intPropertyConverter(id, "Distance"))
+				     << Binding::createConverting("@@SIGN@@", "Sign",
+						customizer.factory()->inequalitySignConverter()),
+		  parent)
 {
 }

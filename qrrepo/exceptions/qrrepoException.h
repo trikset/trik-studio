@@ -26,7 +26,8 @@ class QRREPO_EXPORT QrRepoException : public qReal::Exception
 public:
 	explicit QrRepoException(const QString &message)
 		: qReal::Exception(message)
-	{}
+	{
+	}
 };
 
 }

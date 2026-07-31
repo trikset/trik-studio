@@ -26,7 +26,7 @@ namespace model {
 /// (mass, size, and so on) That is, all requests required to obtain robot parameters using RobotModel::info()
 /// now use this class. This complicates the architecture and leads to errors, so it may be worth extending this
 /// class to become a full proxy class for twoDModel::robotModel::TwoDRobotModel and use it in all 2D-model classes.
-class TWO_D_MODEL_EXPORT TwoDRobotModelParameters: public QObject
+class TWO_D_MODEL_EXPORT TwoDRobotModelParameters : public QObject
 {
 	Q_OBJECT
 	Q_PROPERTY(qreal mass READ mass WRITE setMass)
@@ -39,7 +39,8 @@ class TWO_D_MODEL_EXPORT TwoDRobotModelParameters: public QObject
 	Q_PROPERTY(qreal wheelFriction READ wheelFriction WRITE setWheelFriction)
 	Q_PROPERTY(qreal wheelMass READ wheelMass WRITE setWheelMass)
 public:
-	TwoDRobotModelParameters(const twoDModel::robotModel::TwoDRobotModel &twoDRobotModel, QObject *parent = nullptr);
+	TwoDRobotModelParameters(const twoDModel::robotModel::TwoDRobotModel &twoDRobotModel,
+		QObject *parent = nullptr);
 
 	/// A function required to set default parameters (from twoDModel::robotModel::TwoDRobotModel) that are read-only.
 	///  Useful when loading an empty project, when all robot parameters should have a default value, or
@@ -124,6 +125,7 @@ public:
 	qreal robotTrack() const;
 Q_SIGNALS:
 	void robotParamChanged();
+
 private:
 	const twoDModel::robotModel::TwoDRobotModel &mRobotModel;
 	qreal mWidth;

@@ -33,8 +33,8 @@ public:
 	NetworkCommunicationErrorReporter() = delete;
 
 	/// Connects TcpRobotCommunicator to ErrorReporter, prints network errors from communicator.
-	static void connectErrorReporter(const TcpRobotCommunicator &communicator
-			, qReal::ErrorReporterInterface &errorReporter);
+	static void connectErrorReporter(const TcpRobotCommunicator &communicator,
+		qReal::ErrorReporterInterface &errorReporter);
 };
 
 }

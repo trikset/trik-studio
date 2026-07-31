@@ -46,8 +46,8 @@ public:
 	LabelProperties();
 	LabelProperties(int index, qreal x, qreal y, const QString &text, qreal rotation);
 	LabelProperties(int index, qreal x, qreal y, const QString &binding, bool isReadOnly, qreal rotation);
-	LabelProperties(int index, qreal x, qreal y, const QString &binding, const QString &roleName
-			, const QString &nameOfRoleProperty, bool isReadOnly, qreal rotation);
+	LabelProperties(int index, qreal x, qreal y, const QString &binding, const QString &roleName,
+		const QString &nameOfRoleProperty, bool isReadOnly, qreal rotation);
 
 	/// Returns label`s index among other siblings.
 	int index() const;

@@ -33,9 +33,9 @@ class ROBOTS_EV3_GENERATOR_BASE_EXPORT Ev3GeneratorRobotModel : public Ev3RobotM
 public:
 	/// Does not take ownership over \a communicator.
 	/// @param priority A priority of this model over other among their kit.
-	Ev3GeneratorRobotModel(const QString &kitId, const QString &robotId
-			, const QString &name, const QString &friendlyName, int priority
-			, const QSharedPointer<communication::Ev3RobotCommunicationThread> &communicator);
+	Ev3GeneratorRobotModel(const QString &kitId, const QString &robotId, const QString &name,
+		const QString &friendlyName, int priority,
+		const QSharedPointer<communication::Ev3RobotCommunicationThread> &communicator);
 	~Ev3GeneratorRobotModel() override;
 
 	QString name() const override;

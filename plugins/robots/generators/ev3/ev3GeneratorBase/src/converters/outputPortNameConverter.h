@@ -29,8 +29,7 @@ namespace converters {
 class OutputPortNameConverter : public generatorBase::converters::TemplateParametrizedConverter
 {
 public:
-	OutputPortNameConverter(const QStringList &pathsToTemplates
-			, const QList<kitBase::robotModel::PortInfo> &ports);
+	OutputPortNameConverter(const QStringList &pathsToTemplates, const QList<kitBase::robotModel::PortInfo> &ports);
 
 	QString convert(const QString &portNameOrAlias) const override;
 
@@ -40,4 +39,3 @@ private:
 
 }
 }
-

@@ -19,7 +19,7 @@
 #include "qrgui/preferencesDialog/preferencesPage.h"
 
 namespace Ui {
-	class PreferencesEditorPage;
+class PreferencesEditorPage;
 }
 
 class PreferencesEditorPage : public qReal::gui::PreferencesPage

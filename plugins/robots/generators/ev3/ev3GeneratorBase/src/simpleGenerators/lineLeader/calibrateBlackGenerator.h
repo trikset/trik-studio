@@ -20,16 +20,13 @@ namespace ev3 {
 namespace simple {
 namespace lineLeader {
 
-
 /// Generator for 'Calibrate Black' block
-class CalibrateBlackGenerator: public generatorBase::simple::BindingGenerator
+class CalibrateBlackGenerator : public generatorBase::simple::BindingGenerator
 {
 	Q_OBJECT
 public:
-	CalibrateBlackGenerator(const qrRepo::RepoApi &repo
-			, generatorBase::GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent = nullptr);
+	CalibrateBlackGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+		const qReal::Id &id, QObject *parent = nullptr);
 };
 
 }

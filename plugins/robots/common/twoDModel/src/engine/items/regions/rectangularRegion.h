@@ -27,11 +27,10 @@ class RectangularRegion : public RegionItem
 	Q_OBJECT
 public:
 	explicit RectangularRegion(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-			       QGraphicsItem *parent = nullptr);
+		QGraphicsItem *parent = nullptr);
 
 	explicit RectangularRegion(QSharedPointer<graphicsUtils::AbstractItem> item,
-			graphicsUtils::AbstractCoordinateSystem *metricSystem,
-			QGraphicsItem *parent = nullptr);
+		graphicsUtils::AbstractCoordinateSystem *metricSystem, QGraphicsItem *parent = nullptr);
 	void drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 	void resizeItem(QGraphicsSceneMouseEvent *event) override;
 	// Regions are editable by the user and can be expanded

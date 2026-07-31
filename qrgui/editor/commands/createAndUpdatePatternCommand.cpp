@@ -19,16 +19,14 @@
 
 using namespace qReal::gui::editor::commands;
 
-CreateAndUpdatePatternCommand::CreateAndUpdatePatternCommand(EditorViewScene &scene
-		, const models::Models &models, const ElementInfo &pattern)
+CreateAndUpdatePatternCommand::CreateAndUpdatePatternCommand(EditorViewScene &scene, const models::Models &models,
+	const ElementInfo &pattern)
 	: CreatePatternCommand(models, pattern)
 	, mScene(scene)
 {
-	auto * const insertCommand = new InsertIntoEdgeCommand(mScene, mModels
-			, mCreatedNodes[mPattern.inNode()]
-			, mCreatedNodes[mPattern.outNode()]
-			, pattern.graphicalParent(), pattern.position()
-			, mPattern.size(), pattern.logicalId() == pattern.id());
+	auto *const insertCommand = new InsertIntoEdgeCommand(mScene, mModels, mCreatedNodes[mPattern.inNode()],
+		mCreatedNodes[mPattern.outNode()], pattern.graphicalParent(), pattern.position(), mPattern.size(),
+		pattern.logicalId() == pattern.id());
 
 	insertCommand->setUndoEnabled(false);
 	addPostAction(insertCommand);

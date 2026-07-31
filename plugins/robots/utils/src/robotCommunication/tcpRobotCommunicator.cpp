@@ -29,37 +29,37 @@ TcpRobotCommunicator::TcpRobotCommunicator(const QString &serverIpSettingsKey)
 
 	mWorker->moveToThread(&mWorkerThread);
 
-	QObject::connect(mWorker.data(), &TcpRobotCommunicatorWorker::connected
-			, this, &TcpRobotCommunicator::onConnected, Qt::QueuedConnection);
-	QObject::connect(mWorker.data(), &TcpRobotCommunicatorWorker::disconnected
-			, this, &TcpRobotCommunicator::disconnected, Qt::QueuedConnection);
-	QObject::connect(mWorker.data(), &TcpRobotCommunicatorWorker::newScalarSensorData
-			, this, &TcpRobotCommunicator::newScalarSensorData, Qt::QueuedConnection);
-	QObject::connect(mWorker.data(), &TcpRobotCommunicatorWorker::newVectorSensorData
-			, this, &TcpRobotCommunicator::newVectorSensorData, Qt::QueuedConnection);
-	QObject::connect(mWorker.data(), &TcpRobotCommunicatorWorker::printText
-			, this, &TcpRobotCommunicator::printText, Qt::QueuedConnection);
-	QObject::connect(mWorker.data(), &TcpRobotCommunicatorWorker::startedRunning
-			, this, &TcpRobotCommunicator::startedRunning, Qt::QueuedConnection);
+	QObject::connect(mWorker.data(), &TcpRobotCommunicatorWorker::connected, this,
+		&TcpRobotCommunicator::onConnected, Qt::QueuedConnection);
+	QObject::connect(mWorker.data(), &TcpRobotCommunicatorWorker::disconnected, this,
+		&TcpRobotCommunicator::disconnected, Qt::QueuedConnection);
+	QObject::connect(mWorker.data(), &TcpRobotCommunicatorWorker::newScalarSensorData, this,
+		&TcpRobotCommunicator::newScalarSensorData, Qt::QueuedConnection);
+	QObject::connect(mWorker.data(), &TcpRobotCommunicatorWorker::newVectorSensorData, this,
+		&TcpRobotCommunicator::newVectorSensorData, Qt::QueuedConnection);
+	QObject::connect(mWorker.data(), &TcpRobotCommunicatorWorker::printText, this, &TcpRobotCommunicator::printText,
+		Qt::QueuedConnection);
+	QObject::connect(mWorker.data(), &TcpRobotCommunicatorWorker::startedRunning, this,
+		&TcpRobotCommunicator::startedRunning, Qt::QueuedConnection);
 
-	QObject::connect(mWorker.data(), &TcpRobotCommunicatorWorker::messageFromRobot
-			, this, &TcpRobotCommunicator::onMessageFromRobot, Qt::QueuedConnection);
-	QObject::connect(mWorker.data(), &TcpRobotCommunicatorWorker::connectionError
-			, this, &TcpRobotCommunicator::onConnectionError, Qt::QueuedConnection);
-	QObject::connect(mWorker.data(), &TcpRobotCommunicatorWorker::trikRuntimeVersionError
-			, this, &TcpRobotCommunicator::trikRuntimeVersionError, Qt::QueuedConnection);
-	QObject::connect(mWorker.data(), &TcpRobotCommunicatorWorker::trikRuntimeVersionGettingError
-			, this, &TcpRobotCommunicator::trikRuntimeVersionGettingError, Qt::QueuedConnection);
+	QObject::connect(mWorker.data(), &TcpRobotCommunicatorWorker::messageFromRobot, this,
+		&TcpRobotCommunicator::onMessageFromRobot, Qt::QueuedConnection);
+	QObject::connect(mWorker.data(), &TcpRobotCommunicatorWorker::connectionError, this,
+		&TcpRobotCommunicator::onConnectionError, Qt::QueuedConnection);
+	QObject::connect(mWorker.data(), &TcpRobotCommunicatorWorker::trikRuntimeVersionError, this,
+		&TcpRobotCommunicator::trikRuntimeVersionError, Qt::QueuedConnection);
+	QObject::connect(mWorker.data(), &TcpRobotCommunicatorWorker::trikRuntimeVersionGettingError, this,
+		&TcpRobotCommunicator::trikRuntimeVersionGettingError, Qt::QueuedConnection);
 
-	QObject::connect(mWorker.data(), &TcpRobotCommunicatorWorker::uploadProgramDone
-			, this, &TcpRobotCommunicator::uploadProgramDone, Qt::QueuedConnection);
-	QObject::connect(mWorker.data(), &TcpRobotCommunicatorWorker::stopRobotDone
-			, this, &TcpRobotCommunicator::stopRobotDone, Qt::QueuedConnection);
-	QObject::connect(mWorker.data(), &TcpRobotCommunicatorWorker::runDirectCommandDone
-			, this, &TcpRobotCommunicator::runDirectCommandDone, Qt::QueuedConnection);
+	QObject::connect(mWorker.data(), &TcpRobotCommunicatorWorker::uploadProgramDone, this,
+		&TcpRobotCommunicator::uploadProgramDone, Qt::QueuedConnection);
+	QObject::connect(mWorker.data(), &TcpRobotCommunicatorWorker::stopRobotDone, this,
+		&TcpRobotCommunicator::stopRobotDone, Qt::QueuedConnection);
+	QObject::connect(mWorker.data(), &TcpRobotCommunicatorWorker::runDirectCommandDone, this,
+		&TcpRobotCommunicator::runDirectCommandDone, Qt::QueuedConnection);
 
-	QObject::connect(mWorker.data(), &TcpRobotCommunicatorWorker::casingVersionReceived
-			, this, &TcpRobotCommunicator::casingVersionReceived, Qt::QueuedConnection);
+	QObject::connect(mWorker.data(), &TcpRobotCommunicatorWorker::casingVersionReceived, this,
+		&TcpRobotCommunicator::casingVersionReceived, Qt::QueuedConnection);
 	QObject::connect(&mWorkerThread, &QThread::started, mWorker.data(), &TcpRobotCommunicatorWorker::init);
 	mWorkerThread.start();
 }
@@ -92,23 +92,19 @@ void TcpRobotCommunicator::uploadProgram(const QString &programName)
 
 	const QString fileNameOnARobot = QFileInfo(programName).fileName();
 
-	QMetaObject::invokeMethod(mWorker.data(), [this, fileNameOnARobot, fileContents](){
-		mWorker->uploadProgram(fileNameOnARobot, fileContents);
-	});
+	QMetaObject::invokeMethod(mWorker.data(),
+		[this, fileNameOnARobot, fileContents]() { mWorker->uploadProgram(fileNameOnARobot, fileContents); });
 }
 
 void TcpRobotCommunicator::runProgram(const QString &programName)
 {
-	QMetaObject::invokeMethod(mWorker.data(), [this, programName]() {
-		mWorker->runProgram(programName);
-	});
+	QMetaObject::invokeMethod(mWorker.data(), [this, programName]() { mWorker->runProgram(programName); });
 }
 
 void TcpRobotCommunicator::runDirectCommand(const QString &directCommand, bool asScript)
 {
-	QMetaObject::invokeMethod(mWorker.data(), [this, directCommand, asScript] {
-		mWorker->runDirectCommand(directCommand, asScript);
-	});
+	QMetaObject::invokeMethod(mWorker.data(),
+		[this, directCommand, asScript] { mWorker->runDirectCommand(directCommand, asScript); });
 }
 
 void TcpRobotCommunicator::requestCasingVersion()
@@ -123,9 +119,7 @@ void TcpRobotCommunicator::stopRobot()
 
 void TcpRobotCommunicator::requestData(const QString &sensor)
 {
-	QMetaObject::invokeMethod(mWorker.data(), [this, sensor]() {
-		mWorker->requestData(sensor);
-	});
+	QMetaObject::invokeMethod(mWorker.data(), [this, sensor]() { mWorker->requestData(sensor); });
 }
 
 void TcpRobotCommunicator::requestData()
@@ -144,7 +138,7 @@ void TcpRobotCommunicator::disconnect()
 }
 
 void TcpRobotCommunicator::onMessageFromRobot(utils::robotCommunication::MessageKind messageKind,
-											 const QString &message)
+	const QString &message)
 {
 	switch (messageKind) {
 	case MessageKind::error:

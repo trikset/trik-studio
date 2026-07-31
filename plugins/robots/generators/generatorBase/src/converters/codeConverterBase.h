@@ -32,10 +32,8 @@ class CodeConverterBase : public simple::Binding::ConverterInterface
 {
 public:
 	/// Takes ownership on @arg reservedVariablesConverter.
-	CodeConverterBase(lua::LuaProcessor &luaTranslator
-			, const qReal::Id &id
-			, const QString &propertyName
-			, simple::Binding::ConverterInterface *reservedVariablesConverter);
+	CodeConverterBase(lua::LuaProcessor &luaTranslator, const qReal::Id &id, const QString &propertyName,
+		simple::Binding::ConverterInterface *reservedVariablesConverter);
 
 	QString convert(const QString &luaCode) const override;
 
@@ -45,7 +43,7 @@ protected:
 	lua::LuaProcessor &mLuaTranslator;
 	const qReal::Id mId;
 	const QString mPropertyName;
-	const simple::Binding::ConverterInterface *mReservedVariablesConverter;  // Takes ownership;
+	const simple::Binding::ConverterInterface *mReservedVariablesConverter; // Takes ownership;
 };
 
 }

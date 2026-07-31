@@ -33,13 +33,13 @@ NxtRussianCGeneratorPlugin::NxtRussianCGeneratorPlugin()
 
 QList<qReal::ActionInfo> NxtRussianCGeneratorPlugin::customActions()
 {
-	return { qReal::ActionInfo(mGenerateCodeAction, "generators", "tools") };
+	return {qReal::ActionInfo(mGenerateCodeAction, "generators", "tools")};
 }
 
 QList<qReal::HotKeyActionInfo> NxtRussianCGeneratorPlugin::hotKeyActions()
 {
-	return { qReal::HotKeyActionInfo("Generator.GenerateNxtRussianC"
-			, tr("Generate Russian C Code"), mGenerateCodeAction) };
+	return {qReal::HotKeyActionInfo("Generator.GenerateNxtRussianC", tr("Generate Russian C Code"),
+		mGenerateCodeAction)};
 }
 
 QIcon NxtRussianCGeneratorPlugin::iconForFastSelector(const kitBase::robotModel::RobotModelInterface &robotModel) const
@@ -65,13 +65,8 @@ QString NxtRussianCGeneratorPlugin::generatorName() const
 
 generatorBase::MasterGeneratorBase *NxtRussianCGeneratorPlugin::masterGenerator()
 {
-	return new NxtRussianCMasterGenerator(*mRepo
-			, *mMainWindowInterface->errorReporter()
-			, *mParserErrorReporter
-			, *mRobotModelManager
-			, *mTextLanguage
-			, mMainWindowInterface->activeDiagram()
-			, generatorName());
+	return new NxtRussianCMasterGenerator(*mRepo, *mMainWindowInterface->errorReporter(), *mParserErrorReporter,
+		*mRobotModelManager, *mTextLanguage, mMainWindowInterface->activeDiagram(), generatorName());
 }
 
 void NxtRussianCGeneratorPlugin::regenerateExtraFiles(const QFileInfo &newFileInfo)

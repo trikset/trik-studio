@@ -32,7 +32,8 @@ class ParserContext
 public:
 	/// Constructor. Gets reference to error stream and stream of tokens to get connection from.
 	ParserContext(QList<Error> &errors, TokenStream<TokenType> const &tokenStream)
-		: mErrors(errors), mTokenStream(tokenStream)
+		: mErrors(errors)
+		, mTokenStream(tokenStream)
 	{
 	}
 

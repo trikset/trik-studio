@@ -33,12 +33,10 @@ using namespace qReal;
 using namespace editorPluginTestingFramework;
 using namespace qrRepo;
 
-MainClass::MainClass(const QString &metamodelFileName
-		, const QString &pathToQrmc
-		, const QString &applicationPath
-		, const QString &configurationFileName)
-		: mTempOldValue(SettingsManager::value("temp").toString())
-		, mApplicationPath(applicationPath)
+MainClass::MainClass(const QString &metamodelFileName, const QString &pathToQrmc, const QString &applicationPath,
+	const QString &configurationFileName)
+	: mTempOldValue(SettingsManager::value("temp").toString())
+	, mApplicationPath(applicationPath)
 {
 	setTempFolderValue();
 
@@ -51,14 +49,16 @@ MainClass::MainClass(const QString &metamodelFileName
 	const QString normalizedFileName = normalizedName(metamodelFileName);
 
 	launchEditorGenerator(metamodelFileName, mConfiguration.generatedCodeDirQrxc());
-	const QFileInfo qrxcPluginBinaryInfo = compilePlugin(normalizedFileName, PluginCompiler::MetamodelCompiler::qrxc);
-	Metamodel * const qrxcGeneratedPlugin = loadPlugin(qrxcPluginBinaryInfo);
+	const QFileInfo qrxcPluginBinaryInfo =
+		compilePlugin(normalizedFileName, PluginCompiler::MetamodelCompiler::qrxc);
+	Metamodel *const qrxcGeneratedPlugin = loadPlugin(qrxcPluginBinaryInfo);
 
-//	appendPluginNames();
+	//	appendPluginNames();
 
 	launchQrmc(metamodelFileName);
-	const QFileInfo qrmcPluginBinaryInfo = compilePlugin(normalizedFileName, PluginCompiler::MetamodelCompiler::qrmc);
-	Metamodel * const qrmcGeneratedPlugin = loadPlugin(qrmcPluginBinaryInfo);
+	const QFileInfo qrmcPluginBinaryInfo =
+		compilePlugin(normalizedFileName, PluginCompiler::MetamodelCompiler::qrmc);
+	Metamodel *const qrmcGeneratedPlugin = loadPlugin(qrmcPluginBinaryInfo);
 
 	/*
 	InterpreterEditorManager interpreterEditorManager(metamodelFileName, nullptr);
@@ -111,7 +111,8 @@ QString MainClass::normalizedName(const QString &fileName)
 void MainClass::deleteOldFiles(const QString &directory)
 {
 	if (directory.isEmpty()) {
-		throw qReal::Exception("Trying to delete everything in application directory, possibly error in a config file");
+		throw qReal::Exception(
+			"Trying to delete everything in application directory, possibly error in a config file");
 	}
 
 	qDebug() << "Wiping directory" << directory;
@@ -146,39 +147,34 @@ void MainClass::launchQrmc(const QString &fileName)
 	QrmcLauncher::launchQrmc(fileName, mConfiguration.generatedCodeDirQrmc());
 }
 
-QFileInfo MainClass::compilePlugin(const QString &fileWithMetamodel
-		, PluginCompiler::MetamodelCompiler metamodelCompiler)
+QFileInfo MainClass::compilePlugin(const QString &fileWithMetamodel,
+	PluginCompiler::MetamodelCompiler metamodelCompiler)
 {
-	return PluginCompiler::compilePlugin(
-			fileWithMetamodel
-			, metamodelCompiler == PluginCompiler::MetamodelCompiler::qrxc
-					? mConfiguration.generatedCodeDirQrxc()
-					: mConfiguration.generatedCodeDirQrmc()
-			, mConfiguration.qmakeParameter()
-			, mConfiguration.makeParameter()
-			, mConfiguration.configurationParameter()
-			, metamodelCompiler
-	);
+	return PluginCompiler::compilePlugin(fileWithMetamodel,
+		metamodelCompiler == PluginCompiler::MetamodelCompiler::qrxc ? mConfiguration.generatedCodeDirQrxc()
+									     : mConfiguration.generatedCodeDirQrmc(),
+		mConfiguration.qmakeParameter(), mConfiguration.makeParameter(),
+		mConfiguration.configurationParameter(), metamodelCompiler);
 }
 
 void MainClass::launchEditorGenerator(const QString &fileName, const QString &generatedXmlForQrxcDir)
 {
-	MetamodelXmlGeneratorLauncher::launchEditorGenerator(fileName, mConfiguration.qRealRootPath()
-			, generatedXmlForQrxcDir);
+	MetamodelXmlGeneratorLauncher::launchEditorGenerator(fileName, mConfiguration.qRealRootPath(),
+		generatedXmlForQrxcDir);
 }
 
-Metamodel* MainClass::loadPlugin(const QFileInfo &file)
+Metamodel *MainClass::loadPlugin(const QFileInfo &file)
 {
 	return mPluginLoader.loadPlugin(file);
 }
 
-void MainClass::createHtml(QList<MethodsTester::ResultOfGenerating> qrxcAndQrmcResult
-		, QList<MethodsTester::ResultOfGenerating> qrxcAndInterpreterResult
-		, QList<MethodsTester::ResultOfGenerating> timeResult
-		, QList<MethodsTester::ResultOfGenerating> timeResultInterpter)
+void MainClass::createHtml(QList<MethodsTester::ResultOfGenerating> qrxcAndQrmcResult,
+	QList<MethodsTester::ResultOfGenerating> qrxcAndInterpreterResult,
+	QList<MethodsTester::ResultOfGenerating> timeResult,
+	QList<MethodsTester::ResultOfGenerating> timeResultInterpter)
 {
-//	mHtmlMaker.makeHtml(qrxcAndQrmcResult, qrxcAndInterpreterResult, timeResult
-//			, timeResultInterpter, mGeneratedDirHtml);
+	//	mHtmlMaker.makeHtml(qrxcAndQrmcResult, qrxcAndInterpreterResult, timeResult
+	//			, timeResultInterpter, mGeneratedDirHtml);
 }
 
 //void MainClass::appendPluginNames()

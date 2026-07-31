@@ -76,7 +76,7 @@ SearchLinePanel::SearchLinePanel(QWidget *parent)
 	gridLayout->addLayout(hLayoutSnd, 1, 0);
 	setFrameShape(QFrame::StyledPanel);
 
-	connect(mSearchLineEdit, &SearchLineEdit::textChanged, this, [this](const QRegExp &text){
+	connect(mSearchLineEdit, &SearchLineEdit::textChanged, this, [this](const QRegExp &text) {
 		setSearchLineColor(QColor("white"));
 		Q_EMIT findTextChanged(text);
 	});
@@ -84,7 +84,7 @@ SearchLinePanel::SearchLinePanel(QWidget *parent)
 	connect(mNextButton, &QPushButton::pressed, this, &SearchLinePanel::nextPressed);
 	connect(mPreviousButton, &QPushButton::pressed, this, &SearchLinePanel::previousPressed);
 	connect(mReplaceButton, &QPushButton::pressed, this, &SearchLinePanel::replacePressed);
-	connect(mCloseButton, &QPushButton::pressed, this, [this](){
+	connect(mCloseButton, &QPushButton::pressed, this, [this]() {
 		Q_EMIT closePressed();
 		detach();
 		hide();
@@ -125,36 +125,36 @@ void SearchLinePanel::setMode(SearchLinePanel::OperationOptions option)
 	mCurrentOption = option;
 
 	switch (option) {
-		case SearchLinePanel::OperationOptions::Find: {
-			mReplaceButton->hide();
-			mReplaceLineEdit->hide();
-			mPreviousButton->show();
-			mSearchLineEdit->setSearchOption(SearchLineEdit::SearchOptions::CaseInsensitive);
-			mSearchLineEdit->makeSearchOptionsSelectable(true);
-			mSearchLineEdit->setPlaceHolderTextToLineEdit(tr("Enter search text..."));
-			break;
-		}
+	case SearchLinePanel::OperationOptions::Find: {
+		mReplaceButton->hide();
+		mReplaceLineEdit->hide();
+		mPreviousButton->show();
+		mSearchLineEdit->setSearchOption(SearchLineEdit::SearchOptions::CaseInsensitive);
+		mSearchLineEdit->makeSearchOptionsSelectable(true);
+		mSearchLineEdit->setPlaceHolderTextToLineEdit(tr("Enter search text..."));
+		break;
+	}
 
-		case SearchLinePanel::OperationOptions::FindAndReplace: {
-			mReplaceButton->show();
-			mReplaceLineEdit->show();
-			mPreviousButton->show();
-			mSearchLineEdit->setSearchOption(SearchLineEdit::SearchOptions::CaseInsensitive);
-			mSearchLineEdit->makeSearchOptionsSelectable(true);
-			mSearchLineEdit->setPlaceHolderTextToLineEdit(tr("Enter search text..."));
-			break;
-		}
+	case SearchLinePanel::OperationOptions::FindAndReplace: {
+		mReplaceButton->show();
+		mReplaceLineEdit->show();
+		mPreviousButton->show();
+		mSearchLineEdit->setSearchOption(SearchLineEdit::SearchOptions::CaseInsensitive);
+		mSearchLineEdit->makeSearchOptionsSelectable(true);
+		mSearchLineEdit->setPlaceHolderTextToLineEdit(tr("Enter search text..."));
+		break;
+	}
 
-		case SearchLinePanel::OperationOptions::GoToLineAndColumn: {
-			mReplaceButton->hide();
-			mReplaceLineEdit->hide();
-			mSearchLineEdit->clearText();
-			mPreviousButton->hide();
-			mSearchLineEdit->setSearchOption(SearchLineEdit::SearchOptions::CaseInsensitive);
-			mSearchLineEdit->makeSearchOptionsSelectable(false);
-			mSearchLineEdit->setPlaceHolderTextToLineEdit(tr("<line>:<column>"));
-			break;
-		}
+	case SearchLinePanel::OperationOptions::GoToLineAndColumn: {
+		mReplaceButton->hide();
+		mReplaceLineEdit->hide();
+		mSearchLineEdit->clearText();
+		mPreviousButton->hide();
+		mSearchLineEdit->setSearchOption(SearchLineEdit::SearchOptions::CaseInsensitive);
+		mSearchLineEdit->makeSearchOptionsSelectable(false);
+		mSearchLineEdit->setPlaceHolderTextToLineEdit(tr("<line>:<column>"));
+		break;
+	}
 	}
 }
 

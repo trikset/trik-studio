@@ -44,7 +44,7 @@ void GraphicalPart::setProperty(const QString &name, const QVariant &value)
 
 GraphicalPart *GraphicalPart::clone() const
 {
-	auto * const result = new GraphicalPart();
+	auto *const result = new GraphicalPart();
 	result->mProperties = this->mProperties;
 	return result;
 }

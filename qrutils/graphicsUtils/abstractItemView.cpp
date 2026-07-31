@@ -17,7 +17,8 @@
 
 using namespace graphicsUtils;
 
-AbstractView::AbstractView(QWidget * parent) : QGraphicsView(parent)
+AbstractView::AbstractView(QWidget *parent)
+	: QGraphicsView(parent)
 {
 }
 
@@ -29,7 +30,7 @@ void AbstractView::zoomIn()
 
 void AbstractView::zoomOut()
 {
-	scaleTo(1/1.5);
+	scaleTo(1 / 1.5);
 }
 
 void AbstractView::wheelEvent(QWheelEvent *event)

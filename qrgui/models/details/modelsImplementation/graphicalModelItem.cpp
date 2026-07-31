@@ -20,7 +20,8 @@ using namespace qReal;
 using namespace models::details::modelsImplementation;
 
 GraphicalModelItem::GraphicalModelItem(const Id &id, const Id &logicalId, GraphicalModelItem *parent)
-	: AbstractModelItem(id, parent), mLogicalId(logicalId)
+	: AbstractModelItem(id, parent)
+	, mLogicalId(logicalId)
 {
 }
 

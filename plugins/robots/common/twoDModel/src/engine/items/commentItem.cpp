@@ -24,8 +24,7 @@
 using namespace twoDModel::items;
 using namespace graphicsUtils;
 
-CommentItem::CommentItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-			QPointF begin, QPointF end)
+CommentItem::CommentItem(graphicsUtils::AbstractCoordinateSystem *metricSystem, QPointF begin, QPointF end)
 	: mTextItem(this)
 	, mHtmlText("Your comment can be here")
 {
@@ -39,7 +38,7 @@ CommentItem::CommentItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 
 QAction *CommentItem::commentTool()
 {
-	auto * const result = new QAction(loadTextColorIcon(":/icons/2d_comment.svg"), tr("Text (T)"), nullptr);
+	auto *const result = new QAction(loadTextColorIcon(":/icons/2d_comment.svg"), tr("Text (T)"), nullptr);
 	result->setShortcuts({QKeySequence(Qt::Key_T), QKeySequence(Qt::Key_0)});
 	result->setCheckable(true);
 	return result;
@@ -63,7 +62,7 @@ QPainterPath CommentItem::shape() const
 	return result;
 }
 
-void CommentItem::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
+void CommentItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 	Q_UNUSED(option)
 	Q_UNUSED(widget)
@@ -72,7 +71,7 @@ void CommentItem::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* op
 	RectangleImpl::drawRectItem(painter, x1(), y1(), x2(), y2());
 }
 
-void CommentItem::drawExtractionForItem(QPainter* painter)
+void CommentItem::drawExtractionForItem(QPainter *painter)
 {
 	AbstractItem::drawExtractionForItem(painter);
 }
@@ -88,11 +87,13 @@ void CommentItem::calcResizeItem(QGraphicsSceneMouseEvent *event)
 	switch (state) {
 	case TopLeft:
 	case BottomLeft:
-		if (x <= x2() - textRect.width()) setX1(x);
+		if (x <= x2() - textRect.width())
+			setX1(x);
 		break;
 	case TopRight:
 	case BottomRight:
-		if (x >= x1() + textRect.width()) setX2(x);
+		if (x >= x1() + textRect.width())
+			setX2(x);
 		break;
 	default:
 		break;
@@ -101,11 +102,13 @@ void CommentItem::calcResizeItem(QGraphicsSceneMouseEvent *event)
 	switch (state) {
 	case TopLeft:
 	case TopRight:
-		if (y <= y2() - textRect.height()) setY1(y);
+		if (y <= y2() - textRect.height())
+			setY1(y);
 		break;
 	case BottomLeft:
 	case BottomRight:
-		if (y >= y1() + textRect.height()) setY2(y);
+		if (y >= y1() + textRect.height())
+			setY2(y);
 		break;
 	default:
 		break;
@@ -127,12 +130,10 @@ QDomElement CommentItem::serialize(QDomElement &parent) const
 	auto *coordSystem = coordinateSystem();
 	QDomElement commentNode = AbstractItem::serialize(parent);
 	commentNode.setTagName("comment");
-	commentNode.setAttribute("begin",
-	                         QString::number(coordSystem->toUnit(x1() + scenePos().x()))
-	                 + ":" + QString::number(coordSystem->toUnit(y1() + scenePos().y())));
-	commentNode.setAttribute("end",
-	                         QString::number(coordSystem->toUnit(x2() + scenePos().x()))
-	                 + ":" + QString::number(coordSystem->toUnit(y2() + scenePos().y())));
+	commentNode.setAttribute("begin", QString::number(coordSystem->toUnit(x1() + scenePos().x())) + ":"
+						  + QString::number(coordSystem->toUnit(y1() + scenePos().y())));
+	commentNode.setAttribute("end", QString::number(coordSystem->toUnit(x2() + scenePos().x())) + ":"
+						+ QString::number(coordSystem->toUnit(y2() + scenePos().y())));
 	commentNode.setAttribute("text", mTextItem.toHtml());
 	return commentNode;
 }
@@ -181,7 +182,8 @@ void CommentItem::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 	QAction *removeAction = menu->addAction(QObject::tr("Remove"));
 	QAction *editAction = menu->addAction(mIsEditing ? QObject::tr("Save") : QObject::tr("Edit"));
 	QAction *cancelAction = menu->addAction(QObject::tr("Cancel"));
-	if (!mIsEditing) menu->removeAction(cancelAction);
+	if (!mIsEditing)
+		menu->removeAction(cancelAction);
 	QAction *selectedAction = menu->exec(event->screenPos());
 	delete menu;
 	if (selectedAction == removeAction) {
@@ -193,7 +195,8 @@ void CommentItem::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 	}
 }
 
-void CommentItem::startEditing() {
+void CommentItem::startEditing()
+{
 	mIsEditing = true;
 	setBrushStyle("Solid");
 	mTextItem.setTextInteractionFlags(Qt::TextEditorInteraction);
@@ -215,7 +218,8 @@ void CommentItem::endEditing()
 
 QRectF CommentItem::moveRect() const
 {
-	return QRectF((x1() + x2())/2, y1(), 0, 0).adjusted(-2*resizeDrift, -resizeDrift, 2*resizeDrift, resizeDrift);
+	return QRectF((x1() + x2()) / 2, y1(), 0, 0)
+	        .adjusted(-2 * resizeDrift, -resizeDrift, 2 * resizeDrift, resizeDrift);
 }
 
 QRectF CommentItem::textBoundingRect() const

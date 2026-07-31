@@ -21,10 +21,10 @@ class LinePort : public Line
 {
 	Q_OBJECT
 public:
-	LinePort(qreal x1, qreal y1, qreal x2, qreal y2, Line* parent = nullptr);
+	LinePort(qreal x1, qreal y1, qreal x2, qreal y2, Line *parent = nullptr);
 
-	QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document
-			, const QPoint &topLeftPicture) override;
+	QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document,
+		const QPoint &topLeftPicture) override;
 
 	void setType(const QString &type);
 	QString getType() const;

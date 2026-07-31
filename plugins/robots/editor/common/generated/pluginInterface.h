@@ -30,6 +30,5 @@ private:
 	void initShallPaletteBeSortedMap();
 
 private:
-	qReal::Metamodel *mMetamodel;  // Does not have ownership.
+	qReal::Metamodel *mMetamodel; // Does not have ownership.
 };
-

@@ -42,11 +42,8 @@ namespace details {
 class ConstraintsParser
 {
 public:
-	ConstraintsParser(Events &events
-		, Variables &variables
-		, const Objects &objects
-		, const utils::TimelineInterface &timeline
-		, StatusReporter &status);
+	ConstraintsParser(Events &events, Variables &variables, const Objects &objects,
+		const utils::TimelineInterface &timeline, StatusReporter &status);
 
 	/// Parses the given program, initializes events map given in constructor.
 	/// Returns true if parsing process completed successfully. Otherwise returns false. The errors list in that case
@@ -119,10 +116,10 @@ private:
 	qreal doubleAttribute(const QDomElement &element, const QString &attributeName, qreal defaultValue = 0.0);
 	bool boolAttribute(const QDomElement &element, const QString &attributeName, bool defaultValue = false);
 
-	bool addToEvents(Event * const event);
+	bool addToEvents(Event *const event);
 	bool assertChildrenExactly(const QDomElement &element, int count, bool isError = true);
-	bool assertAttributesExactly(const QDomElement &element, int actualCount,
-							int expectedCount, bool isError = true);
+	bool assertAttributesExactly(const QDomElement &element, int actualCount, int expectedCount,
+		bool isError = true);
 	bool assertChildrenMoreThan(const QDomElement &element, int count, bool isError = true);
 	bool assertHasAttribute(const QDomElement &element, const QString &attribute, bool isError = true);
 	bool assertTagName(const QDomElement &element, const QString &nameInLowerCase, bool isError = true);

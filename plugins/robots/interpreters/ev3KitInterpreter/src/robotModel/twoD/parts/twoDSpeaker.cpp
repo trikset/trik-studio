@@ -16,9 +16,8 @@
 
 using namespace ev3::robotModel::twoD::parts;
 
-TwoDSpeaker::TwoDSpeaker(kitBase::robotModel::DeviceInfo const &info
-		, kitBase::robotModel::PortInfo const &port
-		, twoDModel::engine::TwoDModelEngineInterface &engine)
+TwoDSpeaker::TwoDSpeaker(kitBase::robotModel::DeviceInfo const &info, kitBase::robotModel::PortInfo const &port,
+	twoDModel::engine::TwoDModelEngineInterface &engine)
 	: robotModel::parts::Ev3Speaker(info, port)
 	, mEngine(engine)
 {

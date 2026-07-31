@@ -16,7 +16,8 @@
 
 using namespace qReal;
 
-UndoStack::UndoStack(QObject *parent): QUndoStack(parent)
+UndoStack::UndoStack(QObject *parent)
+	: QUndoStack(parent)
 {
 }
 

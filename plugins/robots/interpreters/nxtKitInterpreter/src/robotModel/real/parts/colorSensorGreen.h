@@ -29,9 +29,8 @@ class ColorSensorGreen : public kitBase::robotModel::robotParts::ColorSensorGree
 	Q_OBJECT
 
 public:
-	ColorSensorGreen(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port
-			, utils::robotCommunication::RobotCommunicator &robotCommunicator);
+	ColorSensorGreen(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+		utils::robotCommunication::RobotCommunicator &robotCommunicator);
 
 	void read() override;
 

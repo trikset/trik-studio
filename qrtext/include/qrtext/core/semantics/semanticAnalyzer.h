@@ -69,7 +69,8 @@ public:
 	/// Constructor. Takes generalizations table for a language and a list of errors to put semantic errors to. Typical
 	/// usage pattern is to subclass SemanticAnalyzer for concrete language and provide generalizations table in
 	/// constructor there.
-	SemanticAnalyzer(QSharedPointer<GeneralizationsTableInterface> const &generalizationsTable, QList<Error> &errors);
+	SemanticAnalyzer(QSharedPointer<GeneralizationsTableInterface> const &generalizationsTable,
+		QList<Error> &errors);
 
 	virtual ~SemanticAnalyzer();
 
@@ -87,8 +88,8 @@ public:
 	QMap<QString, QSharedPointer<core::types::TypeExpression>> variableTypes() const;
 
 	/// Returns true if \a specific type is a subtype of \a general type, including case when they are equivalent.
-	bool isGeneralization(const QSharedPointer<core::types::TypeExpression> &specific
-			, const QSharedPointer<core::types::TypeExpression> &general) const;
+	bool isGeneralization(const QSharedPointer<core::types::TypeExpression> &specific,
+		const QSharedPointer<core::types::TypeExpression> &general) const;
 
 	/// Clears the state of semantic analyzer, forgetting known identifiers and expression types.
 	virtual void clear();
@@ -97,7 +98,10 @@ public:
 	/// types of identifiers declared there.
 	void forget(QSharedPointer<ast::Node> const &root);
 
-	void setNeedGeneralization(bool needGeneralization) { mNeedGeneralization = needGeneralization; }
+	void setNeedGeneralization(bool needGeneralization)
+	{
+		mNeedGeneralization = needGeneralization;
+	}
 
 protected:
 	/// Assigns given type to given expression.
@@ -105,8 +109,8 @@ protected:
 
 	/// Constrains given expression (passed as "node" parameter) to a given set of types, on behalf of given operation.
 	/// Operation is used for error connection purposes only.
-	void constrain(QSharedPointer<ast::Node> const &operation
-			, QSharedPointer<ast::Node> const &node, QList<QSharedPointer<types::TypeExpression>> const &types);
+	void constrain(QSharedPointer<ast::Node> const &operation, QSharedPointer<ast::Node> const &node,
+		QList<QSharedPointer<types::TypeExpression>> const &types);
 
 	/// Unifies left-hand side expression with right-hand side expression, so the type of left expressions becomes the
 	/// same type as right expression. These types change together afterwards.
@@ -139,7 +143,10 @@ protected:
 	/// and request another pass on AST to recheck type constraints.
 	void requestRecheck();
 
-	bool needGeneralization() const { return mNeedGeneralization; }
+	bool needGeneralization() const
+	{
+		return mNeedGeneralization;
+	}
 
 private:
 	/// Collects type information on a subtree.

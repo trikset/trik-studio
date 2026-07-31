@@ -20,19 +20,15 @@
 using namespace pioneer::lua;
 using namespace generatorBase::simple;
 
-PioneerPrintGenerator::PioneerPrintGenerator(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, const qReal::Id &id
-		, QObject *parent)
-	: BindingGenerator(repo, customizer, id, "functions/print.t"
-		, {
-				repo.property(id, "Evaluate").toBool()
-						? Binding::createConverting("@@TEXT@@", "PrintText"
-								, customizer.factory()->stringPropertyConverter(id, "PrintText"))
-						: Binding::createStaticConverting("@@TEXT@@"
-								, utils::StringUtils::wrap(repo.stringProperty(id, "PrintText"))
-								, customizer.factory()->stringPropertyConverter(id, "PrintText"))
-			}
-		, parent)
+PioneerPrintGenerator::PioneerPrintGenerator(const qrRepo::RepoApi &repo,
+	generatorBase::GeneratorCustomizer &customizer, const qReal::Id &id, QObject *parent)
+	: BindingGenerator(repo, customizer, id, "functions/print.t",
+		  {repo.property(id, "Evaluate").toBool()
+				  ? Binding::createConverting("@@TEXT@@", "PrintText",
+					    customizer.factory()->stringPropertyConverter(id, "PrintText"))
+				  : Binding::createStaticConverting("@@TEXT@@",
+					    utils::StringUtils::wrap(repo.stringProperty(id, "PrintText")),
+					    customizer.factory()->stringPropertyConverter(id, "PrintText"))},
+		  parent)
 {
 }

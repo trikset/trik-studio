@@ -35,9 +35,9 @@ public:
 	/// Constructor.
 	/// @param parser - parser that has error stream we shall look to.
 	/// @param errorReporter - Error Reporter object to which we shall put errors from parser.
-	ParserErrorReporter(const qrtext::LanguageToolboxInterface &parser
-			, qReal::ErrorReporterInterface &errorReporter
-			, const qReal::EditorManagerInterface &editorManagerInterface);
+	ParserErrorReporter(const qrtext::LanguageToolboxInterface &parser,
+		qReal::ErrorReporterInterface &errorReporter,
+		const qReal::EditorManagerInterface &editorManagerInterface);
 
 	/// Adds errors to Error Reporter according to their severity.
 	/// @param id - id of a block which property was parsed.

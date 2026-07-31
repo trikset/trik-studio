@@ -43,10 +43,8 @@ Diagram::~Diagram()
 
 bool Diagram::init(const QDomElement &diagramElement)
 {
-	for (QDomElement element = diagramElement.firstChildElement();
-		!element.isNull();
-		element = element.nextSiblingElement())
-	{
+	for (QDomElement element = diagramElement.firstChildElement(); !element.isNull();
+		element = element.nextSiblingElement()) {
 		if (element.nodeName() == "graphicTypes") {
 			if (!initGraphicTypes(element)) {
 				return false;
@@ -67,10 +65,8 @@ bool Diagram::init(const QDomElement &diagramElement)
 
 bool Diagram::initGraphicTypes(const QDomElement &graphicTypesElement)
 {
-	for (QDomElement element = graphicTypesElement.firstChildElement();
-		!element.isNull();
-		element = element.nextSiblingElement())
-	{
+	for (QDomElement element = graphicTypesElement.firstChildElement(); !element.isNull();
+		element = element.nextSiblingElement()) {
 		if (element.nodeName() == "node") {
 			Type *nodeType = new NodeType(this);
 			if (!nodeType->init(element, mDiagramName)) {
@@ -88,15 +84,10 @@ bool Diagram::initGraphicTypes(const QDomElement &graphicTypesElement)
 			}
 			mTypes[edgeType->qualifiedName()] = edgeType;
 		} else if (element.nodeName() == "import") {
-			ImportSpecification import = {
-					element.attribute("name", "")
-					, element.attribute("as", "")
-					, element.attribute("displayedName", "")
-			};
+			ImportSpecification import = {element.attribute("name", ""), element.attribute("as", ""),
+				element.attribute("displayedName", "")};
 			mImports.append(import);
-		}
-		else
-		{
+		} else {
 			qDebug() << "ERROR: unknown graphic type" << element.nodeName();
 			return false;
 		}
@@ -106,18 +97,14 @@ bool Diagram::initGraphicTypes(const QDomElement &graphicTypesElement)
 
 bool Diagram::initNonGraphicTypes(const QDomElement &nonGraphicTypesElement)
 {
-	for (QDomElement element = nonGraphicTypesElement.firstChildElement();
-		!element.isNull();
-		element = element.nextSiblingElement())
-	{
+	for (QDomElement element = nonGraphicTypesElement.firstChildElement(); !element.isNull();
+		element = element.nextSiblingElement()) {
 		if (element.nodeName() == "groups") {
 			/// @todo: How the f*ck groups are not graphics type? They describe graphical positions and connections of
 			/// elements! It is also now explicitly inherited from GraphicType, so it should be generated into
 			/// a graphics section.
-			for (QDomElement group = element.firstChildElement("group")
-					;!group.isNull()
-					; group = group.nextSiblingElement("group"))
-			{
+			for (QDomElement group = element.firstChildElement("group"); !group.isNull();
+				group = group.nextSiblingElement("group")) {
 				QString xml;
 				QTextStream stream(&xml);
 				group.save(stream, 1);
@@ -164,7 +151,7 @@ bool Diagram::initNonGraphicTypes(const QDomElement &nonGraphicTypesElement)
 				return false;
 			}
 			mTypes[portType->qualifiedName()] = portType;
-		} else if  (element.nodeName() == "role") {
+		} else if (element.nodeName() == "role") {
 			Type *roleType = new RoleType();
 			if (!roleType->init(element, mDiagramName)) {
 				delete roleType;
@@ -173,8 +160,7 @@ bool Diagram::initNonGraphicTypes(const QDomElement &nonGraphicTypesElement)
 			}
 
 			mTypes[roleType->qualifiedName()] = roleType;
-		}
-		else {
+		} else {
 			qDebug() << "ERROR: unknown non graphic type" << element.nodeName();
 			return false;
 		}
@@ -186,19 +172,15 @@ void Diagram::initPalette(const QDomElement &paletteElement)
 {
 	mShallPaletteBeSorted = paletteElement.attribute("sorted", "true") == "true";
 
-	for (QDomElement element = paletteElement.firstChildElement("group");
-		!element.isNull();
-		element = element.nextSiblingElement("group"))
-	{
+	for (QDomElement element = paletteElement.firstChildElement("group"); !element.isNull();
+		element = element.nextSiblingElement("group")) {
 		QString name = element.attribute("name");
 		QString description = element.attribute("description", "");
 		mPaletteGroupsDescriptions[name] = description;
 
 		QStringList groupElements;
-		for (QDomElement groupElement = element.firstChildElement("element");
-			!groupElement.isNull();
-			groupElement = groupElement.nextSiblingElement("element"))
-		{
+		for (QDomElement groupElement = element.firstChildElement("element"); !groupElement.isNull();
+			groupElement = groupElement.nextSiblingElement("element")) {
 			groupElements << groupElement.attribute("name");
 		}
 
@@ -222,7 +204,7 @@ bool Diagram::resolve()
 		mTypes.insert(copiedType->qualifiedName(), copiedType);
 	}
 
-	for(auto *type: mTypes.values())
+	for (auto *type : mTypes.values())
 		if (!type->resolve()) {
 			qDebug() << "ERROR: can't resolve type" << type->name();
 			return false;
@@ -231,12 +213,12 @@ bool Diagram::resolve()
 	return true;
 }
 
-Editor* Diagram::editor() const
+Editor *Diagram::editor() const
 {
 	return mEditor;
 }
 
-Type* Diagram::findType(const QString &name)
+Type *Diagram::findType(const QString &name)
 {
 	if (mTypes.contains(name)) {
 		return mTypes[name];
@@ -245,7 +227,7 @@ Type* Diagram::findType(const QString &name)
 	}
 }
 
-QMap<QString, Type*> Diagram::types() const
+QMap<QString, Type *> Diagram::types() const
 {
 	return mTypes;
 }

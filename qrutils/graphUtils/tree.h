@@ -18,8 +18,7 @@
 
 #include "qrutils/utilsDeclSpec.h"
 
-namespace qReal
-{
+namespace qReal {
 
 /// A base class for tree structures
 class QRUTILS_EXPORT Tree
@@ -31,9 +30,9 @@ public:
 
 	QListIterator<Tree *> children() const;
 
-	void appendChild(Tree * const child);
-	void insertChild(int index, Tree * const child);
-	void removeChild(Tree * const child);
+	void appendChild(Tree *const child);
+	void insertChild(int index, Tree *const child);
+	void removeChild(Tree *const child);
 
 	/// Visits all tree nodes in parent-leftChild-rightChild order
 	/// with @param visitor functor invocation in each node

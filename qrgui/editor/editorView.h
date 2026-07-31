@@ -33,11 +33,8 @@ class QRGUI_EDITOR_EXPORT EditorView : public QGraphicsView, public EditorInterf
 	Q_OBJECT
 
 public:
-	EditorView(const models::Models &models
-			, Controller &controller
-			, const SceneCustomizer &sceneCustomizer
-			, const Id &rootId
-			, QWidget *parent = nullptr);
+	EditorView(const models::Models &models, Controller &controller, const SceneCustomizer &sceneCustomizer,
+		const Id &rootId, QWidget *parent = nullptr);
 
 	const EditorViewMViface &mvIface() const;
 	EditorViewMViface &mutableMvIface();
@@ -45,8 +42,8 @@ public:
 	EditorViewScene &mutableScene();
 
 	void setDrawSceneGrid(bool show);
-	void ensureElementVisible(const Element * const element);
-	void ensureElementVisible(const Element * const element, int xMargin, int yMargin);
+	void ensureElementVisible(const Element *const element);
+	void ensureElementVisible(const Element *const element, int xMargin, int yMargin);
 
 	QString editorId() const override;
 	bool supportsZooming() const override;
@@ -55,8 +52,8 @@ public:
 	bool supportsCutting() const override;
 	bool supportsReplacingBy() const override;
 	bool supportsSearching() const override;
-	void configure(QAction &zoomIn, QAction &zoomOut, QAction &undo, QAction &redo, QAction &copy
-			, QAction &paste, QAction &cut, QAction &find, QAction &findAndReplace, QAction &replaceBy) override;
+	void configure(QAction &zoomIn, QAction &zoomOut, QAction &undo, QAction &redo, QAction &copy, QAction &paste,
+		QAction &cut, QAction &find, QAction &findAndReplace, QAction &replaceBy) override;
 
 Q_SIGNALS:
 	/// Emitted when for some reason root element was removed and editor must be closed.

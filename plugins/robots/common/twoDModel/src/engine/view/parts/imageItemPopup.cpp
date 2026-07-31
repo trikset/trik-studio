@@ -52,15 +52,18 @@ QString ImageItemPopup::lastPath() const
 
 void ImageItemPopup::updateMemorizationToolTip()
 {
-	mMemorizationPicker->setToolTip(mMemorizationPicker->isChecked()
+	mMemorizationPicker->setToolTip(
+		mMemorizationPicker->isChecked()
 			? tr("Image will be packed into save file. Warning: this will increase save file size.")
-			: tr("Image will not be packed into a save file. Warning: if will use save file on other machine or "
-					"rename file this image will disappear from 2D model."));
+			: tr("Image will not be packed into a save file. Warning: if will use save file on other "
+	                     "machine or "
+			     "rename file this image will disappear from 2D model."));
 }
 
 void ImageItemPopup::updateBackgroundToolTip()
 {
-	mBackgroundRolePicker->setToolTip(mBackgroundRolePicker->isChecked()
+	mBackgroundRolePicker->setToolTip(
+		mBackgroundRolePicker->isChecked()
 			? tr("The image will be in the background. Warning: the robot does not see this image.")
 			: tr("The image will be in the foreground. Warning: robot sees this image with sensors."));
 }
@@ -100,7 +103,7 @@ bool ImageItemPopup::attachTo(const QList<QGraphicsItem *> &items)
 
 void ImageItemPopup::initWidget()
 {
-	auto * const layout = new QVBoxLayout(this);
+	auto *const layout = new QVBoxLayout(this);
 	layout->addWidget(initMemorizationPicker());
 	layout->addWidget(initBackgroundPicker());
 	layout->addWidget(initPathPicker());
@@ -117,7 +120,7 @@ QWidget *ImageItemPopup::initMemorizationPicker()
 	updateMemorizationToolTip();
 	box->setFocusPolicy(Qt::NoFocus);
 	connect(mMemorizationPicker, &QAbstractButton::toggled, this, &ImageItemPopup::updateMemorizationToolTip);
-	connect(mMemorizationPicker, &QAbstractButton::toggled, this, [=](bool memorized){
+	connect(mMemorizationPicker, &QAbstractButton::toggled, this, [=](bool memorized) {
 		setPropertyMassively("memorize", memorized);
 		if (mLastIsMemorized != memorized) {
 			mLastIsMemorized = memorized;
@@ -136,7 +139,7 @@ QWidget *ImageItemPopup::initBackgroundPicker()
 	updateBackgroundToolTip();
 	box->setFocusPolicy(Qt::NoFocus);
 	connect(mBackgroundRolePicker, &QAbstractButton::toggled, this, &ImageItemPopup::updateBackgroundToolTip);
-	connect(mBackgroundRolePicker, &QAbstractButton::toggled, this, [=](bool isBackground){
+	connect(mBackgroundRolePicker, &QAbstractButton::toggled, this, [=](bool isBackground) {
 		setPropertyMassively("background", isBackground);
 		if (mLastIsBackground != isBackground) {
 			mLastIsBackground = isBackground;
@@ -156,10 +159,10 @@ QWidget *ImageItemPopup::initPathPicker()
 	button->setToolTip(tr("Change image..."));
 	connect(button, &QPushButton::clicked, this, [=]() {
 		// Loads world and robot models simultaneously.
-		const QString loadFileName = utils::QRealFileDialog::getOpenFileName("2DSelectImage", mScene.views().first()
-				, tr("Select image")
-				, qReal::PlatformInfo::invariantSettingsPath("pathToImages") + "/../fields"
-				, tr("Graphics (*.*)"));
+		const QString loadFileName = utils::QRealFileDialog::getOpenFileName("2DSelectImage",
+			mScene.views().first(), tr("Select image"),
+			qReal::PlatformInfo::invariantSettingsPath("pathToImages") + "/../fields",
+			tr("Graphics (*.*)"));
 		if (loadFileName.isEmpty()) {
 			return;
 		}

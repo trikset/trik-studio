@@ -39,20 +39,20 @@ public:
 	~DeploymentInterpreterPlugin();
 
 	void init(qReal::PluginConfigurator const &configurator) override;
-	QList<qReal::ActionInfo> actions() override;  // Does not transfer ownership of QAction objects.
-	QList<qReal::HotKeyActionInfo> hotKeyActions() override;  // Does not transfer ownership of QAction objects.
+	QList<qReal::ActionInfo> actions() override; // Does not transfer ownership of QAction objects.
+	QList<qReal::HotKeyActionInfo> hotKeyActions() override; // Does not transfer ownership of QAction objects.
 
 private:
 	void placeShellWidget(QWidget *shell, QWidget *mainWindow);
 
 	qrtext::lua::LuaToolbox mTextLanguage;
 	/// Main window interface object, used to call GUI functionality.
-	BlocksTable *mBlocksTable;  // Takes ownership
-	qReal::interpretation::Interpreter *mInterpreter;  // Takes ownership
+	BlocksTable *mBlocksTable; // Takes ownership
+	qReal::interpretation::Interpreter *mInterpreter; // Takes ownership
 
-	QAction *mRunAction;  // Transfers ownership to QObject parent-child system
-	QAction *mStopAction;  // Transfers ownership to QObject parent-child system
-	QWidget *mShellDock;  // Transfers ownership to QObject parent-child system
+	QAction *mRunAction; // Transfers ownership to QObject parent-child system
+	QAction *mStopAction; // Transfers ownership to QObject parent-child system
+	QWidget *mShellDock; // Transfers ownership to QObject parent-child system
 };
 
 }

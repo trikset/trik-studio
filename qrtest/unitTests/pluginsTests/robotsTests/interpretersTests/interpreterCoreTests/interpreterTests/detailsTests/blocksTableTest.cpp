@@ -32,21 +32,20 @@ void BlocksTableTest::SetUp()
 	ON_CALL(mBlocksFactoryManager, addFactory(_, _)).WillByDefault(Return());
 	EXPECT_CALL(mBlocksFactoryManager, addFactory(_, _)).Times(0);
 
-	ON_CALL(mBlocksFactoryManager, block(_, _)).WillByDefault(
-			Invoke([=] (qReal::Id const &id, kitBase::robotModel::RobotModelInterface const &robotModel) {
-					Q_UNUSED(robotModel)
-					return blocksFactory->block(id);
-			} )
-			);
+	ON_CALL(mBlocksFactoryManager, block(_, _))
+		.WillByDefault(
+			Invoke([=](qReal::Id const &id, kitBase::robotModel::RobotModelInterface const &robotModel) {
+		Q_UNUSED(robotModel)
+		return blocksFactory->block(id);
+	}));
 
 	EXPECT_CALL(mBlocksFactoryManager, block(_, _)).Times(AtLeast(0));
 
-	ON_CALL(mBlocksFactoryManager, enabledBlocks(_)).WillByDefault(
-			Invoke([=] (kitBase::robotModel::RobotModelInterface const &robotModel) {
-					Q_UNUSED(robotModel)
-					return blocksFactory->providedBlocks().toSet();
-			} )
-			);
+	ON_CALL(mBlocksFactoryManager, enabledBlocks(_))
+		.WillByDefault(Invoke([=](kitBase::robotModel::RobotModelInterface const &robotModel) {
+		Q_UNUSED(robotModel)
+		return blocksFactory->providedBlocks().toSet();
+	}));
 	EXPECT_CALL(mBlocksFactoryManager, enabledBlocks(_)).Times(0);
 
 	ON_CALL(mModelManager, model()).WillByDefault(ReturnRef(mModel));

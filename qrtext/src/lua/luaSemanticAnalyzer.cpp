@@ -102,14 +102,14 @@ void LuaSemanticAnalyzer::precheck(QSharedPointer<ast::Node> const &node)
 	checkReservedIdentifiersUsage(node, {});
 }
 
-void LuaSemanticAnalyzer::checkReservedIdentifiersUsage(const QSharedPointer<core::ast::Node> &node
-		, const QSharedPointer<core::ast::Node> &parent)
+void LuaSemanticAnalyzer::checkReservedIdentifiersUsage(const QSharedPointer<core::ast::Node> &node,
+	const QSharedPointer<core::ast::Node> &parent)
 {
 	if (node->is<ast::Identifier>()) {
 		const auto identifier = as<ast::Identifier>(node);
 		if (mIntrinsicFunctions.contains(identifier->name())
-				&& (!parent || !parent->is<ast::FunctionCall>() || as<ast::FunctionCall>(parent)->function() != node))
-		{
+			&& (!parent || !parent->is<ast::FunctionCall>()
+				|| as<ast::FunctionCall>(parent)->function() != node)) {
 			reportError(node, QObject::tr("Intrinsic function used as an identifier"));
 		}
 	}
@@ -172,7 +172,8 @@ void LuaSemanticAnalyzer::analyzeNode(const QSharedPointer<core::ast::Node> &nod
 			elementType = type(as<ast::FieldInitialization>(firstInitializer)->value());
 		}
 
-		const auto tableType = core::wrap(new types::Table(elementType, tableConstructor->initializers().size()));
+		const auto tableType =
+			core::wrap(new types::Table(elementType, tableConstructor->initializers().size()));
 
 		assign(node, tableType);
 	} else if (node->is<ast::IndexingExpression>()) {
@@ -183,8 +184,9 @@ void LuaSemanticAnalyzer::analyzeNode(const QSharedPointer<core::ast::Node> &nod
 			assign(node, tableElementType);
 		} else {
 			/// It's a table, but we see it for the first time so know nothing about it.
-			const auto elementType = QSharedPointer<core::types::TypeVariable>(new core::types::TypeVariable());
-			constrain(table, table, { core::wrap(new types::Table(elementType, -1)) });
+			const auto elementType =
+				QSharedPointer<core::types::TypeVariable>(new core::types::TypeVariable());
+			constrain(table, table, {core::wrap(new types::Table(elementType, -1))});
 			assign(node, elementType);
 		}
 	} else if (node->is<ast::Block>()) {
@@ -233,8 +235,8 @@ void LuaSemanticAnalyzer::analyzeBinaryOperator(const QSharedPointer<core::ast::
 		///       (http://www.lua.org/work/doc/manual.html#3.4.1)
 		///       Code below is a hack, here we need more complex constraints over type variables.
 		if (typeVariable(left)->isResolved() && typeVariable(left)->finalType()->is<types::Integer>()
-				&& typeVariable(right)->isResolved() && typeVariable(right)->finalType()->is<types::Integer>())
-		{
+			&& typeVariable(right)->isResolved()
+			&& typeVariable(right)->finalType()->is<types::Integer>()) {
 			assign(node, mInteger);
 		} else {
 			assign(node, mFloat);
@@ -248,16 +250,14 @@ void LuaSemanticAnalyzer::analyzeBinaryOperator(const QSharedPointer<core::ast::
 		constrain(node, right, {mInteger});
 		assign(node, mInteger);
 	} else if (node->is<ast::BitwiseAnd>() || node->is<ast::BitwiseXor>() || node->is<ast::BitwiseOr>()
-			|| node->is<ast::BitwiseRightShift>() || node->is<ast::BitwiseLeftShift>())
-	{
+		   || node->is<ast::BitwiseRightShift>() || node->is<ast::BitwiseLeftShift>()) {
 		constrain(node, left, {mInteger});
 		constrain(node, right, {mInteger});
 		assign(node, mInteger);
 	} else if (node->is<ast::Equality>() || node->is<ast::Inequality>()) {
 		assign(node, mBoolean);
 	} else if (node->is<ast::LessThan>() || node->is<ast::LessOrEqual>() || node->is<ast::GreaterThan>()
-			|| node->is<ast::GreaterOrEqual>())
-	{
+		   || node->is<ast::GreaterOrEqual>()) {
 		constrain(node, left, {mInteger, mFloat, mString});
 		constrain(node, right, {mInteger, mFloat, mString});
 		assign(node, mBoolean);
@@ -273,11 +273,12 @@ void LuaSemanticAnalyzer::analyzeBinaryOperator(const QSharedPointer<core::ast::
 	}
 }
 
-void LuaSemanticAnalyzer::constrainAssignment(const QSharedPointer<core::ast::Node> &operation
-		, const QSharedPointer<core::ast::Node> &lhs, const QSharedPointer<core::ast::Node> &rhs)
+void LuaSemanticAnalyzer::constrainAssignment(const QSharedPointer<core::ast::Node> &operation,
+	const QSharedPointer<core::ast::Node> &lhs, const QSharedPointer<core::ast::Node> &rhs)
 {
 	if (!lhs->is<ast::Identifier>() && !lhs->is<ast::IndexingExpression>()) {
-		reportError(operation, QObject::tr("Incorrect assignment, only variables and tables can be assigned to."));
+		reportError(operation,
+			QObject::tr("Incorrect assignment, only variables and tables can be assigned to."));
 		return;
 	}
 
@@ -297,9 +298,9 @@ void LuaSemanticAnalyzer::constrainAssignment(const QSharedPointer<core::ast::No
 		if (wasCoercion) {
 			if (!needGeneralize) {
 				const auto typeName = lhsType->toString();
-				reportWarning(operation,
-					QObject::tr("An attempt will be made to implicitly"
-						    " cast the right operand to the type '%1'").arg(typeName));
+				reportWarning(operation, QObject::tr("An attempt will be made to implicitly"
+								     " cast the right operand to the type '%1'")
+								 .arg(typeName));
 				return;
 			}
 			if (lhs->is<ast::IndexingExpression>()) {
@@ -307,17 +308,13 @@ void LuaSemanticAnalyzer::constrainAssignment(const QSharedPointer<core::ast::No
 				const auto table = as<ast::IndexingExpression>(lhs)->table();
 				const auto tableType = typeVariable(table);
 				if (rhsType->isResolved()) {
-					const auto tableTypePattern = QSharedPointer<core::types::TypeVariable>(
-							new core::types::TypeVariable(
-									QSharedPointer<core::types::TypeExpression>(
-										new types::Table(rhsType->finalType(), 1))
-									));
+					const auto tableTypePattern =
+						QSharedPointer<core::types::TypeVariable>(new core::types::TypeVariable(
+							QSharedPointer<core::types::TypeExpression>(
+								new types::Table(rhsType->finalType(), 1))));
 
-					tableType->constrainAssignment(
-							tableTypePattern
-							, generalizationsTable()
-							, &wasCoercion
-							, needGeneralize);
+					tableType->constrainAssignment(tableTypePattern, generalizationsTable(),
+						&wasCoercion, needGeneralize);
 				}
 			}
 

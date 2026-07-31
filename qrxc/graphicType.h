@@ -67,7 +67,7 @@ protected:
 	QString boolToString(bool value) const;
 
 	/// @todo Remove this sh~.
-	typedef QPair<QPair<QString,QString>,QPair<bool,QString> > PossibleEdge;  // Lol
+	typedef QPair<QPair<QString, QString>, QPair<bool, QString>> PossibleEdge; // Lol
 
 	struct ContainerProperties {
 		ContainerProperties();
@@ -95,11 +95,11 @@ protected:
 	bool mVisible;
 	int mWidth;
 	int mHeight;
-	QList<Label*> mLabels;
+	QList<Label *> mLabels;
 	QStringList mContains;
 	ContainerProperties mContainerProperties;
 	QList<PossibleEdge> mPossibleEdges;
-	QMap<QString, QPair<bool, bool> > mExplosions;
+	QMap<QString, QPair<bool, bool>> mExplosions;
 	bool mCreateChildrenFromMenu;
 	QString mAbstract;
 	void copyFields(GraphicType *type) const;
@@ -110,10 +110,12 @@ protected:
 	bool addProperty(Property *property, const QString &roleName);
 
 private:
-	class ResolvingHelper {
+	class ResolvingHelper
+	{
 	public:
 		ResolvingHelper(bool &resolvingFlag);
 		~ResolvingHelper();
+
 	private:
 		bool &mResolvingFlag;
 	};
@@ -128,11 +130,11 @@ private:
 	virtual bool initCreateChildrenFromMenu();
 	virtual bool initPossibleEdges();
 	virtual bool initExplosions();
-	virtual bool initTypeList(const QString &listName, const QString &listElementName
-		, QStringList &resultingList) const;
+	virtual bool initTypeList(const QString &listName, const QString &listElementName,
+		QStringList &resultingList) const;
 
-	bool initFieldList(const QString &listName, const QString &listElementName
-		, QStringList &resultingList, const QString &fieldName, const bool isNeedToNormalizeAtt) const;
+	bool initFieldList(const QString &listName, const QString &listElementName, QStringList &resultingList,
+		const QString &fieldName, const bool isNeedToNormalizeAtt) const;
 
 	virtual bool initGraphics() = 0;
 	virtual bool initRoles() = 0;
@@ -146,7 +148,7 @@ private:
 	bool addPort(Port *port);
 	bool generateListForElement(utils::OutFile &out, bool isNotFirst, const QStringList &list) const;
 
-	QVector<int> toIntVector(const QString &s, bool * isOk) const;
+	QVector<int> toIntVector(const QString &s, bool *isOk) const;
 	QStringList sortProperties(const QList<QString> &properties) const;
 
 	QString mDescription;

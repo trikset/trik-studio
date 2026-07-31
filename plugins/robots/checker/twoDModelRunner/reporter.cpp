@@ -25,9 +25,10 @@ using namespace twoDModel;
 
 Reporter::Reporter(const QString &messagesFile, const QString &trajectoryFile, QObject *parent)
 	: QObject(parent)
-	,  mMessagesFile(new utils::OutFile(messagesFile))
+	, mMessagesFile(new utils::OutFile(messagesFile))
 	, mTrajectoryFile(new utils::OutFile(trajectoryFile))
-{}
+{
+}
 
 Reporter::~Reporter() = default;
 
@@ -79,8 +80,8 @@ void Reporter::newTrajectoryPoint(const QString &robotId, int timestamp, QPointF
 	}
 }
 
-void Reporter::newDeviceState(const QString &robotId, int timestamp, const QString &deviceType
-		, const QString &devicePort, const QString &property, const QVariant &value)
+void Reporter::newDeviceState(const QString &robotId, int timestamp, const QString &deviceType,
+	const QString &devicePort, const QString &property, const QVariant &value)
 {
 	if (!mTrajectoryFile.isNull()) {
 		QJsonObject modification;
@@ -113,10 +114,8 @@ void Reporter::reportMessages()
 				messages.append(rootObject);
 			}
 		} else {
-			messages.append(QJsonObject::fromVariantMap({
-				{ "level", levelToString(message.first) }
-				, { "message", message.second }
-			}));
+			messages.append(QJsonObject::fromVariantMap(
+				{{"level", levelToString(message.first)}, {"message", message.second}}));
 		}
 	}
 
@@ -125,21 +124,22 @@ void Reporter::reportMessages()
 	report(document.toJson(), mMessagesFile);
 }
 
-QString Reporter::levelToString(const Level level) const {
+QString Reporter::levelToString(const Level level) const
+{
 	// GCC 10.3.1 in AltLinux has problems understanding enums
 	// Thus we need this redundant code with a temporary variable
 	QString tmp;
 
 	switch (level) {
 	case Level::information:
-	    tmp = "info";
-	    break;
+		tmp = "info";
+		break;
 	case Level::error:
-	    tmp = "error";
-	    break;
+		tmp = "error";
+		break;
 	case Level::log:
-	    tmp = "log";
-	    break;
+		tmp = "log";
+		break;
 	}
 	return tmp;
 }

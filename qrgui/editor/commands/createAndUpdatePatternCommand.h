@@ -28,9 +28,7 @@ class CreateAndUpdatePatternCommand : public qReal::commands::CreatePatternComma
 {
 	Q_OBJECT
 public:
-	CreateAndUpdatePatternCommand(EditorViewScene &scene
-			, const models::Models &models
-			, const ElementInfo &pattern);
+	CreateAndUpdatePatternCommand(EditorViewScene &scene, const models::Models &models, const ElementInfo &pattern);
 
 private:
 	bool execute() override;

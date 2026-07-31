@@ -16,8 +16,8 @@
 
 using namespace graphicsUtils;
 
-QRealRectangle::QRealRectangle(qreal x1, qreal y1, qreal x2, qreal y2, Item* parent)
-	:Item(parent)
+QRealRectangle::QRealRectangle(qreal x1, qreal y1, qreal x2, qreal y2, Item *parent)
+	: Item(parent)
 {
 	mNeedScalingRect = true;
 	setPen(QPen(Qt::black));
@@ -34,15 +34,15 @@ QRectF QRealRectangle::boundingRect() const
 	return RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), scalingDrift);
 }
 
-void QRealRectangle::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
+void QRealRectangle::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 	Q_UNUSED(option);
 	Q_UNUSED(widget);
 	RectangleImpl::drawRectItem(painter, x1(), y1(), x2(), y2());
 }
 
-QPair<QDomElement, Item::DomElementTypes> QRealRectangle::generateItem(QDomDocument &document
-		, const QPoint &topLeftPicture)
+QPair<QDomElement, Item::DomElementTypes> QRealRectangle::generateItem(QDomDocument &document,
+	const QPoint &topLeftPicture)
 {
 	QDomElement rectangle = setPenBrushToDoc(document, "rectangle");
 	setXandY(rectangle, sceneBoundingRectCoord(topLeftPicture));

@@ -26,7 +26,8 @@ public:
 	using QDoubleSpinBox::QDoubleSpinBox;
 
 protected:
-	QString textFromValue(double value) const override {
+	QString textFromValue(double value) const override
+	{
 		return QString::number(value, 'g');
 	}
 };

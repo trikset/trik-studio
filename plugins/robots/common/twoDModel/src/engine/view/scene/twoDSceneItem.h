@@ -22,20 +22,25 @@ namespace view {
 /// not make any changes to the behavior. Otherwise, in the region editing mode, all regions
 /// (depending on their semantics) should be able to be edited.  For other elements on the scene,
 /// this may involve additional functionality that can be accessed in this mode.
-enum class EditorMode {
-	defaultMode,
-	regionEditorMode
-};
+enum class EditorMode { defaultMode, regionEditorMode };
 
-class TwoDSceneItem: public graphicsUtils::AbstractItem
+class TwoDSceneItem : public graphicsUtils::AbstractItem
 {
 	Q_OBJECT
 	Q_DISABLE_COPY(TwoDSceneItem)
 public:
 	using EditorMode = twoDModel::view::EditorMode;
-	explicit TwoDSceneItem(QGraphicsItem *parent = nullptr): AbstractItem(parent) {};
-	virtual void switchToMode(EditorMode mode) { mCurrentEditorMode = mode; };
-	EditorMode editorMode() const {return mCurrentEditorMode; }
+	explicit TwoDSceneItem(QGraphicsItem *parent = nullptr)
+		: AbstractItem(parent) {};
+	virtual void switchToMode(EditorMode mode)
+	{
+		mCurrentEditorMode = mode;
+	};
+	EditorMode editorMode() const
+	{
+		return mCurrentEditorMode;
+	}
+
 protected:
 	EditorMode mCurrentEditorMode = EditorMode::defaultMode;
 };

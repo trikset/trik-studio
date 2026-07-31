@@ -83,9 +83,7 @@ qReal::interpretation::Block *TrikBlocksFactoryBase::produceBlock(const qReal::I
 		return new SpeakerBlock(mRobotModelManager->model(), false);
 	} else if (elementMetatypeIs(element, "TrikPlayToneHz")) {
 		return new SpeakerBlock(mRobotModelManager->model(), true);
-	} else if (elementMetatypeIs(element, "TrikV4EnginesStop")
-			|| elementMetatypeIs(element, "TrikV6EnginesStop"))
-	{
+	} else if (elementMetatypeIs(element, "TrikV4EnginesStop") || elementMetatypeIs(element, "TrikV6EnginesStop")) {
 		return new EnginesStopBlock(mRobotModelManager->model());
 
 	} else if (elementMetatypeIs(element, "TrikSay")) {
@@ -110,15 +108,15 @@ qReal::interpretation::Block *TrikBlocksFactoryBase::produceBlock(const qReal::I
 		return new LedBlock(mRobotModelManager->model());
 
 	} else if (elementMetatypeIs(element, "TrikWaitForIRDistance")) {
-		return new WaitForSonarDistanceBlock(mRobotModelManager->model()
-				, kitBase::robotModel::DeviceInfo::create<robotModel::parts::TrikInfraredSensor>());
+		return new WaitForSonarDistanceBlock(mRobotModelManager->model(),
+			kitBase::robotModel::DeviceInfo::create<robotModel::parts::TrikInfraredSensor>());
 	} else if (elementMetatypeIs(element, "TrikWaitForTouchSensor")) {
 		return new WaitForTouchSensorBlock(mRobotModelManager->model());
 	} else if (elementMetatypeIs(element, "TrikWaitForLight")) {
 		return new WaitForLightSensorBlock(mRobotModelManager->model());
 	} else if (elementMetatypeIs(element, "TrikWaitForSonarDistance")) {
-		return new WaitForSonarDistanceBlock(mRobotModelManager->model()
-				, kitBase::robotModel::DeviceInfo::create<robotModel::parts::TrikSonarSensor>());
+		return new WaitForSonarDistanceBlock(mRobotModelManager->model(),
+			kitBase::robotModel::DeviceInfo::create<robotModel::parts::TrikSonarSensor>());
 	} else if (elementMetatypeIs(element, "TrikWaitForGyroscope")) {
 		return new details::TrikWaitForGyroscopeBlock(mRobotModelManager->model());
 	} else if (elementMetatypeIs(element, "TrikWaitForAccelerometer")) {
@@ -186,65 +184,26 @@ qReal::IdList TrikBlocksFactoryBase::providedBlocks() const
 	result << id("TrikPlayTone");
 	result << id("TrikPlayToneHz");
 
-	result
-			<< id("TrikV6EnginesBackward")
-			<< id("TrikV6EnginesForward")
-			<< id("TrikV6EnginesStop")
-			;
+	result << id("TrikV6EnginesBackward") << id("TrikV6EnginesForward") << id("TrikV6EnginesStop");
 
-	result
-			<< id("TrikSay")
-			<< id("TrikLed")
-			<< id("TrikSystem")
-			<< id("TrikInitCamera")
-			<< id("TrikStopCamera")
-			<< id("TrikDetect")
-			<< id("TrikDetectorToVariable")
-			<< id("TrikInitVideoStreaming")
-			<< id("TrikStopVideoStreaming")
-//			<< id("TrikReadLidar")
-			<< id("TrikSendMessage")
-			<< id("TrikWaitForMessage")
-			<< id("TrikJoinNetwork")
-			;
+	result << id("TrikSay") << id("TrikLed") << id("TrikSystem") << id("TrikInitCamera") << id("TrikStopCamera")
+	       << id("TrikDetect") << id("TrikDetectorToVariable") << id("TrikInitVideoStreaming")
+	       << id("TrikStopVideoStreaming")
+	       //			<< id("TrikReadLidar")
+	       << id("TrikSendMessage") << id("TrikWaitForMessage") << id("TrikJoinNetwork");
 
-	result
-			<< id("TrikWaitForTouchSensor")
-			<< id("TrikWaitForLight")
-			<< id("TrikWaitForIRDistance")
-			<< id("TrikWaitForSonarDistance")
-			<< id("TrikWaitForGyroscope")
-			<< id("TrikWaitForAccelerometer")
-			<< id("TrikWaitForMotion")
-			<< id("TrikWaitForButton")
-			;
+	result << id("TrikWaitForTouchSensor") << id("TrikWaitForLight") << id("TrikWaitForIRDistance")
+	       << id("TrikWaitForSonarDistance") << id("TrikWaitForGyroscope") << id("TrikWaitForAccelerometer")
+	       << id("TrikWaitForMotion") << id("TrikWaitForButton");
 
-	result
-			<< id("TrikPrintText")
-			<< id("TrikSetPainterColor")
-			<< id("TrikSetPainterWidth")
-			<< id("TrikDrawPixel")
-			<< id("TrikDrawLine")
-			<< id("TrikDrawRect")
-			<< id("TrikDrawEllipse")
-			<< id("TrikDrawArc")
-			<< id("TrikSmile")
-			<< id("TrikSadSmile")
-			<< id("TrikSetBackground")
-			;
+	result << id("TrikPrintText") << id("TrikSetPainterColor") << id("TrikSetPainterWidth") << id("TrikDrawPixel")
+	       << id("TrikDrawLine") << id("TrikDrawRect") << id("TrikDrawEllipse") << id("TrikDrawArc")
+	       << id("TrikSmile") << id("TrikSadSmile") << id("TrikSetBackground");
 
-	result
-			<< id("TrikWaitGamepadButton")
-			<< id("TrikWaitPadPress")
-			<< id("TrikWaitGamepadWheel")
-			<< id("TrikWaitGamepadDisconnect")
-			<< id("TrikWaitGamepadConnect")
-			;
+	result << id("TrikWaitGamepadButton") << id("TrikWaitPadPress") << id("TrikWaitGamepadWheel")
+	       << id("TrikWaitGamepadDisconnect") << id("TrikWaitGamepadConnect");
 
-	result
-			<< id("TrikWriteToFile")
-			<< id("TrikRemoveFile")
-			;
+	result << id("TrikWriteToFile") << id("TrikRemoveFile");
 
 	result << id("GetButtonCode");
 	result << id("TrikCalibrateGyroscope");
@@ -263,30 +222,15 @@ qReal::IdList TrikBlocksFactoryBase::blocksToDisable() const
 	}
 
 	if (mRobotModelManager->model().name().contains("TwoD")) {
-		result
-				<< id("TrikWaitForAccelerometer")
-				<< id("TrikSystem")
-				<< id("TrikWaitForMotion")
-				<< id("TrikWaitGamepadButton")
-				<< id("TrikWaitPadPress")
-				<< id("TrikWaitGamepadWheel")
-				<< id("TrikWaitGamepadDisconnect")
-				<< id("TrikWaitGamepadConnect")
-				<< id("TrikInitVideoStreaming")
-				<< id("TrikStopCamera")
-				<< id("TrikStopVideoStreaming")
-				;
+		result << id("TrikWaitForAccelerometer") << id("TrikSystem") << id("TrikWaitForMotion")
+		       << id("TrikWaitGamepadButton") << id("TrikWaitPadPress") << id("TrikWaitGamepadWheel")
+		       << id("TrikWaitGamepadDisconnect") << id("TrikWaitGamepadConnect")
+		       << id("TrikInitVideoStreaming") << id("TrikStopCamera") << id("TrikStopVideoStreaming");
 		if (!qReal::SettingsManager::value("TRIK2DMailbox", "").toBool()) {
-			result
-				<< id("TrikSendMessage")
-				<< id("TrikWaitForMessage")
-				<< id("TrikJoinNetwork")
-				;
+			result << id("TrikSendMessage") << id("TrikWaitForMessage") << id("TrikJoinNetwork");
 		}
 	} else {
-		result
-				<< id("TrikCalibrateGyroscope")
-				;
+		result << id("TrikCalibrateGyroscope");
 	}
 
 	result << id("PrintText");

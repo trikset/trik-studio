@@ -39,7 +39,7 @@ public:
 	QImage render(const QRectF &piece);
 
 private:
-	void addClone(const QWeakPointer<QGraphicsItem> &original, QGraphicsItem * const cloned);
+	void addClone(const QWeakPointer<QGraphicsItem> &original, QGraphicsItem *const cloned);
 	void deleteItem(const QSharedPointer<QGraphicsItem> &original);
 
 	QMap<QSharedPointer<QGraphicsItem>, QGraphicsItem *> mClonedItems; // Owns values

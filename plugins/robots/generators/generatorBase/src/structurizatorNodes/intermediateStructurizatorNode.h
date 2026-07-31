@@ -25,14 +25,14 @@ class IntermediateStructurizatorNode : public QObject
 public:
 
 	enum Type {
-		simple
-		, block
-		, ifThenElseCondition
-		, switchCondition
-		, infiniteloop
-		, whileloop
-		, breakNode
-		, nodeWithBreaks
+		simple,
+		block,
+		ifThenElseCondition,
+		switchCondition,
+		infiniteloop,
+		whileloop,
+		breakNode,
+		nodeWithBreaks
 	};
 
 	explicit IntermediateStructurizatorNode(QObject *parent);

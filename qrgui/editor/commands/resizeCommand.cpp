@@ -26,8 +26,8 @@ ResizeCommand::ResizeCommand(const EditorView *view, const Id &id)
 {
 }
 
-ResizeCommand::ResizeCommand(const EditorViewScene *scene, const Id &id
-		, const QRectF &oldGeometry, const QRectF &newGeometry)
+ResizeCommand::ResizeCommand(const EditorViewScene *scene, const Id &id, const QRectF &oldGeometry,
+	const QRectF &newGeometry)
 	: NodeElementCommand(scene, id)
 {
 	mOldGeometrySnapshot.insert(id, oldGeometry);
@@ -37,16 +37,15 @@ ResizeCommand::ResizeCommand(const EditorViewScene *scene, const Id &id
 	TrackingEntity::stopTracking();
 }
 
-ResizeCommand *ResizeCommand::create(const NodeElement * const element
-		, const QRectF &newContents, QPointF newPos
-		, const QRectF &oldContents, QPointF oldPos)
+ResizeCommand *ResizeCommand::create(const NodeElement *const element, const QRectF &newContents, QPointF newPos,
+	const QRectF &oldContents, QPointF oldPos)
 {
 	QRectF newContentsAndPos = newContents;
 	newContentsAndPos.moveTo(newPos);
 	QRectF oldContentsAndPos = oldContents;
 	oldContentsAndPos.moveTo(oldPos);
-	return new ResizeCommand(dynamic_cast<EditorViewScene *>(element->scene())
-			, element->id(), oldContentsAndPos, newContentsAndPos);
+	return new ResizeCommand(dynamic_cast<EditorViewScene *>(element->scene()), element->id(), oldContentsAndPos,
+		newContentsAndPos);
 }
 
 bool ResizeCommand::execute()
@@ -108,7 +107,7 @@ void ResizeCommand::resizeTree(QMap<Id, QRectF> const &snapshot, const Id &root)
 	resize(element, snapshot[root]);
 }
 
-void ResizeCommand::resize(NodeElement * const element, const QRectF &geometry)
+void ResizeCommand::resize(NodeElement *const element, const QRectF &geometry)
 {
 	if (element && geometryOf(element) != geometry) {
 		ResizeHandler handler(*element);
@@ -146,11 +145,11 @@ void ResizeCommand::makeCommonSnapshot(QMap<Id, QRectF> &target)
 	makeHierarchySnapshot(mNode, target);
 	const QList<QGraphicsItem *> selectedItems = mNode->scene()->selectedItems();
 	for (QGraphicsItem *const item : selectedItems) {
-		auto * const node = dynamic_cast<NodeElement *>(item);
+		auto *const node = dynamic_cast<NodeElement *>(item);
 		if (node && node != mNode) {
 			makeHierarchySnapshot(node, target);
 		} else {
-			auto * const edge = dynamic_cast<EdgeElement *>(item);
+			auto *const edge = dynamic_cast<EdgeElement *>(item);
 			if (edge) {
 				mEdges.insert(edge);
 			}
@@ -165,8 +164,7 @@ void ResizeCommand::makeHierarchySnapshot(NodeElement *node, QMap<Id, QRectF> &t
 	// all parents and children (siblings are not considered)
 	makeChildrenSnapshot(node, target);
 	for (NodeElement *parentElement = node; parentElement;
-			parentElement = dynamic_cast<NodeElement *>(parentElement->parentItem()))
-	{
+		parentElement = dynamic_cast<NodeElement *>(parentElement->parentItem())) {
 		target.insert(parentElement->id(), geometryOf(parentElement));
 		addEdges(parentElement);
 	}
@@ -176,8 +174,8 @@ void ResizeCommand::makeChildrenSnapshot(const NodeElement *element, QMap<Id, QR
 {
 	target.insert(element->id(), geometryOf(element));
 	addEdges(element);
-	for (const QGraphicsItem * const childItem : element->childItems()) {
-		const auto * const child = dynamic_cast<const NodeElement * const>(childItem);
+	for (const QGraphicsItem *const childItem : element->childItems()) {
+		const auto *const child = dynamic_cast<const NodeElement *const>(childItem);
 		if (child) {
 			makeChildrenSnapshot(child, target);
 		}
@@ -186,14 +184,14 @@ void ResizeCommand::makeChildrenSnapshot(const NodeElement *element, QMap<Id, QR
 
 void ResizeCommand::addEdges(const NodeElement *node)
 {
-	for (EdgeElement * const edge : node->getEdges()) {
+	for (EdgeElement *const edge : node->getEdges()) {
 		mEdges.insert(edge);
 	}
 }
 
 void ResizeCommand::startEdgeTracking()
 {
-	for (EdgeElement * const edge : mEdges) {
+	for (EdgeElement *const edge : mEdges) {
 		auto *reshapeCommand = new ReshapeEdgeCommand(edge);
 		mEdgeCommands << reshapeCommand;
 		reshapeCommand->startTracking();
@@ -203,7 +201,7 @@ void ResizeCommand::startEdgeTracking()
 
 void ResizeCommand::stopEdgeTracking()
 {
-	for (ReshapeEdgeCommand * const command : mEdgeCommands) {
+	for (ReshapeEdgeCommand *const command : mEdgeCommands) {
 		command->stopTracking();
 	}
 }

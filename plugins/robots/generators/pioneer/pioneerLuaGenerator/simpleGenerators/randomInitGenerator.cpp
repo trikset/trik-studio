@@ -23,25 +23,21 @@
 using namespace pioneer::lua;
 using namespace generatorBase::simple;
 
-RandomInitGenerator::RandomInitGenerator(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, const qReal::Id &id
-		, QObject *parent)
-	: BindingGenerator(repo, customizer, id, "variables/randomInitialization.t"
-			, { Binding::createConverting("@@VARIABLE@@"
-					, "Variable"
-					, customizer.factory()->functionBlockConverter(id, "Variable"))
-				, Binding::createStaticConverting("@@FROM@@"
-					, repo.property(id, "LowerBound").toString()
-					, customizer.factory()->functionBlockConverter(id, "LowerBound"))
-				, Binding::createStaticConverting("@@TO@@"
-					, repo.property(id, "UpperBound").toString()
-					, customizer.factory()->functionBlockConverter(id, "UpperBound")) }
-			, parent)
+RandomInitGenerator::RandomInitGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+	const qReal::Id &id, QObject *parent)
+	: BindingGenerator(repo, customizer, id, "variables/randomInitialization.t",
+		  {Binding::createConverting("@@VARIABLE@@", "Variable",
+			   customizer.factory()->functionBlockConverter(id, "Variable")),
+			  Binding::createStaticConverting("@@FROM@@", repo.property(id, "LowerBound").toString(),
+				  customizer.factory()->functionBlockConverter(id, "LowerBound")),
+			  Binding::createStaticConverting("@@TO@@", repo.property(id, "UpperBound").toString(),
+				  customizer.factory()->functionBlockConverter(id, "UpperBound"))},
+		  parent)
 {
-	const QString separator = !repo.stringProperty(id, "LowerBound").isEmpty()
-			&& !repo.stringProperty(id, "UpperBound").isEmpty()
-					? readTemplate("luaPrinting/fieldInitializersSeparator.t") : "";
+	const QString separator =
+		!repo.stringProperty(id, "LowerBound").isEmpty() && !repo.stringProperty(id, "UpperBound").isEmpty()
+			? readTemplate("luaPrinting/fieldInitializersSeparator.t")
+			: "";
 	addBinding(Binding::createStatic("@@SEP@@", separator));
 
 	auto factory = dynamic_cast<PioneerLuaGeneratorFactory *>(mCustomizer.factory());

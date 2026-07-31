@@ -20,8 +20,8 @@ using namespace twoDModel::model::physics;
 using namespace twoDModel::items;
 using namespace parts;
 
-Box2DItem::Box2DItem(twoDModel::model::physics::Box2DPhysicsEngine *engine
-		, const SolidItem *item, b2Vec2 pos, float angle)
+Box2DItem::Box2DItem(twoDModel::model::physics::Box2DPhysicsEngine *engine, const SolidItem *item, b2Vec2 pos,
+	float angle)
 	: mIsCircle(false)
 	, mEngine(*engine)
 {
@@ -122,6 +122,5 @@ bool Box2DItem::angleOrPositionChanged() const
 	auto position = b2Body_GetPosition(mBodyId);
 
 	auto angle = Box2DPhysicsEngine::countAngle(mPreviousRotation, currentAngle);
-	return b2Distance(mPreviousPosition, position) > FLT_EPSILON
-	                || qAbs(angle) > FLT_EPSILON;
+	return b2Distance(mPreviousPosition, position) > FLT_EPSILON || qAbs(angle) > FLT_EPSILON;
 }

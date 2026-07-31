@@ -74,9 +74,8 @@ qReal::interpretation::Block *Ev3BlocksFactory::produceBlock(const qReal::Id &el
 	} else if (elementMetatypeIs(element, "Ev3WaitForTouchSensor")) {
 		return new WaitForTouchSensorBlock(mRobotModelManager->model());
 	} else if (elementMetatypeIs(element, "Ev3WaitForSonarDistance")) {
-		return new WaitForSonarDistanceBlock(mRobotModelManager->model()
-				, kitBase::robotModel::DeviceInfo::create<
-						kitBase::robotModel::robotParts::RangeSensor>());
+		return new WaitForSonarDistanceBlock(mRobotModelManager->model(),
+			kitBase::robotModel::DeviceInfo::create<kitBase::robotModel::robotParts::RangeSensor>());
 	} else if (elementMetatypeIs(element, "Ev3WaitForColor")) {
 		return new WaitForColorBlock(mRobotModelManager->model());
 	} else if (elementMetatypeIs(element, "Ev3WaitForEncoder")) {
@@ -109,45 +108,21 @@ qReal::interpretation::Block *Ev3BlocksFactory::produceBlock(const qReal::Id &el
 
 qReal::IdList Ev3BlocksFactory::providedBlocks() const
 {
-	return {
-		id("Ev3Beep")
-		, id("Ev3PlayTone")
-		, id("Ev3EnginesForward")
-		, id("Ev3EnginesBackward")
-		, id("Ev3EnginesStop")
-		, id("Ev3ClearEncoder")
-		, id("Ev3CalibrateGyroscope")
-		, id("Ev3Led")
-		, id("Ev3SendMail")
-		, id("Ev3StartCompassCalibration")
-		, id("Ev3StopCompassCalibration")
-		, id("Ev3ReadRGB")
+	return {id("Ev3Beep"), id("Ev3PlayTone"), id("Ev3EnginesForward"), id("Ev3EnginesBackward"),
+		id("Ev3EnginesStop"), id("Ev3ClearEncoder"), id("Ev3CalibrateGyroscope"), id("Ev3Led"),
+		id("Ev3SendMail"), id("Ev3StartCompassCalibration"), id("Ev3StopCompassCalibration"), id("Ev3ReadRGB")
 
-		, id("Ev3WaitForTouchSensor")
-		, id("Ev3WaitForSonarDistance")
-		, id("Ev3WaitForLight")
-		, id("Ev3WaitForColor")
-		, id("Ev3WaitForColorIntensity")
-		, id("Ev3WaitForEncoder")
-		, id("Ev3WaitForButton")
-		, id("Ev3WaitForSound")
-		, id("Ev3WaitForGyroscope")
-		, id("Ev3WaitForReceivingMail")
+													      ,
+		id("Ev3WaitForTouchSensor"), id("Ev3WaitForSonarDistance"), id("Ev3WaitForLight"),
+		id("Ev3WaitForColor"), id("Ev3WaitForColorIntensity"), id("Ev3WaitForEncoder"), id("Ev3WaitForButton"),
+		id("Ev3WaitForSound"), id("Ev3WaitForGyroscope"), id("Ev3WaitForReceivingMail")
 
-		, id("Ev3CalibrateWhiteLL")
-		, id("Ev3CalibrateBlackLL")
-		, id("Ev3CalibratePIDLL")
-		, id("Ev3SleepLL")
-		, id("Ev3WakeUpLL")
-		, id("Ev3ReadAvrLL")
-		, id("Ev3ReadAllLL")
-		, id("Ev3ReadSteeringLL")
+									  ,
+		id("Ev3CalibrateWhiteLL"), id("Ev3CalibrateBlackLL"), id("Ev3CalibratePIDLL"), id("Ev3SleepLL"),
+		id("Ev3WakeUpLL"), id("Ev3ReadAvrLL"), id("Ev3ReadAllLL"), id("Ev3ReadSteeringLL")
 
-		, id("Ev3DrawPixel")
-		, id("Ev3DrawLine")
-		, id("Ev3DrawCircle")
-		, id("Ev3DrawRect")
-	};
+										   ,
+		id("Ev3DrawPixel"), id("Ev3DrawLine"), id("Ev3DrawCircle"), id("Ev3DrawRect")};
 }
 
 qReal::IdList Ev3BlocksFactory::blocksToDisable() const
@@ -155,33 +130,20 @@ qReal::IdList Ev3BlocksFactory::blocksToDisable() const
 	qReal::IdList result;
 
 	if (mRobotModelManager->model().name().contains("TwoD")) {
-		result
-				<< id("Ev3WaitForSound")
-				<< id("Ev3SendMail")
-				<< id("Ev3WaitForReceivingMail")
-				<< id("Ev3StartCompassCalibration")
-				<< id("Ev3StopCompassCalibration")
-				<< id("Ev3CalibrateWhiteLL")
-				<< id("Ev3CalibrateBlackLL")
-				<< id("Ev3CalibratePIDLL")
-				<< id("Ev3SleepLL")
-				<< id("Ev3WakeUpLL")
-				<< id("Ev3ReadAvrLL")
-				<< id("Ev3ReadAllLL")
-				<< id("Ev3ReadSteeringLL")
-				<< id("Ev3WaitForReceivingMail")
-				;
+		result << id("Ev3WaitForSound") << id("Ev3SendMail") << id("Ev3WaitForReceivingMail")
+		       << id("Ev3StartCompassCalibration") << id("Ev3StopCompassCalibration")
+		       << id("Ev3CalibrateWhiteLL") << id("Ev3CalibrateBlackLL") << id("Ev3CalibratePIDLL")
+		       << id("Ev3SleepLL") << id("Ev3WakeUpLL") << id("Ev3ReadAvrLL") << id("Ev3ReadAllLL")
+		       << id("Ev3ReadSteeringLL") << id("Ev3WaitForReceivingMail");
 	} else {
 		if (!mInterpretedModels.contains(mRobotModelManager->model().robotId())) {
-			result << id("Join") << id("SendMessageThreads") << id("ReceiveMessageThreads") << id("KillThread");
+			result << id("Join") << id("SendMessageThreads") << id("ReceiveMessageThreads")
+			       << id("KillThread");
 		}
 		if (!mRobotModelManager->model().name().contains("Gen")) {
-			result
-					<< id("Ev3CalibrateGyroscope")
-					;
+			result << id("Ev3CalibrateGyroscope");
 		} else {
-			result << id("SwitchBlock")
-					;
+			result << id("SwitchBlock");
 		}
 	}
 

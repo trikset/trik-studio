@@ -18,13 +18,10 @@
 
 using namespace ev3;
 
-Ev3MasterGeneratorBase::Ev3MasterGeneratorBase(const qrRepo::RepoApi &repo
-		, qReal::ErrorReporterInterface &errorReporter
-		, const utils::ParserErrorReporter &parserErrorReporter
-		, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
-		, qrtext::LanguageToolboxInterface &textLanguage
-		, const qReal::Id &diagramId
-		, const QString &generatorName)
+Ev3MasterGeneratorBase::Ev3MasterGeneratorBase(const qrRepo::RepoApi &repo,
+	qReal::ErrorReporterInterface &errorReporter, const utils::ParserErrorReporter &parserErrorReporter,
+	const kitBase::robotModel::RobotModelManagerInterface &robotModelManager,
+	qrtext::LanguageToolboxInterface &textLanguage, const qReal::Id &diagramId, const QString &generatorName)
 	: MasterGeneratorBase(repo, errorReporter, robotModelManager, textLanguage, parserErrorReporter, diagramId)
 	, mGeneratorName(generatorName)
 {
@@ -33,7 +30,7 @@ Ev3MasterGeneratorBase::Ev3MasterGeneratorBase(const qrRepo::RepoApi &repo
 generatorBase::GeneratorCustomizer *Ev3MasterGeneratorBase::createCustomizer()
 {
 	return new Ev3GeneratorCustomizer(mRepo, mErrorReporter, mRobotModelManager, *createLuaProcessor(),
-			mGeneratorName, supportsSwitchUnstableToBreaks());
+		mGeneratorName, supportsSwitchUnstableToBreaks());
 }
 
 void Ev3MasterGeneratorBase::beforeGeneration()

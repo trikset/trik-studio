@@ -24,10 +24,8 @@ class ReadLidarGenerator : public generatorBase::simple::BindingGenerator
 {
 	Q_OBJECT
 public:
-	ReadLidarGenerator(const qrRepo::RepoApi &repo
-			, generatorBase::GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent);
+	ReadLidarGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+		const qReal::Id &id, QObject *parent);
 };
 
 }

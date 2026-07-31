@@ -61,6 +61,7 @@ public:
 
 	/// Returns a list of children of this zone node.
 	QLinkedList<SemanticNode *> children() const override;
+
 protected:
 	QString toStringImpl(GeneratorCustomizer &customizer, int indent, const QString &indentString) const override;
 

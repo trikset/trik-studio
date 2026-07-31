@@ -37,7 +37,6 @@ public:
 protected:
 	// Override.
 	Object *createClone() const override;
-
 };
 
 }

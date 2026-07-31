@@ -28,10 +28,7 @@ namespace robotModel {
 class ROBOTS_KIT_BASE_EXPORT PortInfo
 {
 public:
-	enum class ReservedVariableType {
-		scalar
-		, vector
-	};
+	enum class ReservedVariableType { scalar, vector };
 
 	/// Deserializes PortInfo instance from the string obtained by toString() method.
 	static PortInfo fromString(const QString &string);
@@ -41,16 +38,14 @@ public:
 
 	/// Constructs new PortInfo instance. If name is empty then the port is considered to be invalid.
 	/// Ports with same names but different directions are considered to be different.
-	PortInfo(const QString &name, Direction direction
-			, const QStringList &nameAliases = QStringList()
-			, const QString &reservedVariableName = QString()
-			, ReservedVariableType reservedVariableType = ReservedVariableType::scalar);
+	PortInfo(const QString &name, Direction direction, const QStringList &nameAliases = QStringList(),
+		const QString &reservedVariableName = QString(),
+		ReservedVariableType reservedVariableType = ReservedVariableType::scalar);
 
 	/// Constructs new PortInfo instance with given user-friendly name.
-	PortInfo(const QString &name, const QString &userFriendlyName, Direction direction
-			, const QStringList &nameAliases = QStringList()
-			, const QString &reservedVariableName = QString()
-			, ReservedVariableType reservedVariableType = ReservedVariableType::scalar);
+	PortInfo(const QString &name, const QString &userFriendlyName, Direction direction,
+		const QStringList &nameAliases = QStringList(), const QString &reservedVariableName = QString(),
+		ReservedVariableType reservedVariableType = ReservedVariableType::scalar);
 
 	/// Returns true if this PortInfo is non-empty (i.e. really describes some port)
 	bool isValid() const;
@@ -81,18 +76,18 @@ public:
 private:
 	QString mName;
 	QString mUserFriendlyName;
-	Direction mDirection { output };
+	Direction mDirection {output};
 	QStringList mNameAliases;
 	QString mReservedVariable;
-	ReservedVariableType mReservedVariableType { ReservedVariableType::scalar };
+	ReservedVariableType mReservedVariableType {ReservedVariableType::scalar};
 };
 
-inline bool operator ==(const PortInfo &left, const PortInfo &right)
+inline bool operator==(const PortInfo &left, const PortInfo &right)
 {
 	return left.direction() == right.direction() && left.name() == right.name();
 }
 
-inline bool operator !=(const PortInfo &left, const PortInfo &right)
+inline bool operator!=(const PortInfo &left, const PortInfo &right)
 {
 	return !(left == right);
 }
@@ -102,7 +97,7 @@ inline size_t qHash(const PortInfo &key)
 	return qHash(key.name()) ^ qHash(QString(key.direction() == input ? "input" : "output"));
 }
 
-inline bool operator <(const PortInfo &left, const PortInfo &right)
+inline bool operator<(const PortInfo &left, const PortInfo &right)
 {
 	if (left.name() == right.name()) {
 		return left.direction() == input && right.direction() == output;

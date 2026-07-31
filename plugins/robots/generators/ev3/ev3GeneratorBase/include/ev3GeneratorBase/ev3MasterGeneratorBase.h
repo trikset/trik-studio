@@ -25,13 +25,11 @@ class ROBOTS_EV3_GENERATOR_BASE_EXPORT Ev3MasterGeneratorBase : public generator
 {
 	Q_OBJECT
 public:
-	Ev3MasterGeneratorBase(const qrRepo::RepoApi &repo
-			, qReal::ErrorReporterInterface &errorReporter
-			, const utils::ParserErrorReporter &parserErrorReporter
-			, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
-			, qrtext::LanguageToolboxInterface &textLanguage
-			, const qReal::Id &diagramId
-			, const QString &generatorName);
+	Ev3MasterGeneratorBase(const qrRepo::RepoApi &repo, qReal::ErrorReporterInterface &errorReporter,
+		const utils::ParserErrorReporter &parserErrorReporter,
+		const kitBase::robotModel::RobotModelManagerInterface &robotModelManager,
+		qrtext::LanguageToolboxInterface &textLanguage, const qReal::Id &diagramId,
+		const QString &generatorName);
 
 protected:
 	generatorBase::GeneratorCustomizer *createCustomizer() override;

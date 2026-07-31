@@ -22,27 +22,25 @@ using namespace ev3::simple::lineLeader;
 using namespace generatorBase::simple;
 using namespace qReal;
 
-CalibratePIDGenerator::CalibratePIDGenerator(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, const Id &id
-		, QObject *parent)
-	: BindingGenerator(repo, customizer, id, "sensors/lineLeader/calibratePID.t", QList<Binding *>()
-			<< Binding::createConverting("@@PORT@@", "Port"
-					, static_cast<Ev3GeneratorFactory *>(customizer.factory())->portNameConverter())
-			<< Binding::createConverting("@@SET_POINT@@", "SetPoint"
-					, customizer.factory()->intPropertyConverter(id, "SetPoint"))
-			<< Binding::createConverting("@@P@@", "P"
-					, customizer.factory()->intPropertyConverter(id, "P"))
-			<< Binding::createConverting("@@K@@", "I"
-					, customizer.factory()->intPropertyConverter(id, "I"))
-			<< Binding::createConverting("@@D@@", "D"
-					, customizer.factory()->intPropertyConverter(id, "D"))
-			<< Binding::createConverting("@@KPF@@", "PFactor"
-					, customizer.factory()->intPropertyConverter(id, "PFactor"))
-			<< Binding::createConverting("@@KIF@@", "IFactor"
-					, customizer.factory()->intPropertyConverter(id, "IFactor"))
-			<< Binding::createConverting("@@KDF@@", "DFactor"
-					, customizer.factory()->intPropertyConverter(id, "DFactor"))
-			, parent)
+CalibratePIDGenerator::CalibratePIDGenerator(const qrRepo::RepoApi &repo,
+	generatorBase::GeneratorCustomizer &customizer, const Id &id, QObject *parent)
+	: BindingGenerator(repo, customizer, id, "sensors/lineLeader/calibratePID.t",
+		  QList<Binding *>() << Binding::createConverting("@@PORT@@", "Port",
+			  static_cast<Ev3GeneratorFactory *>(customizer.factory())->portNameConverter())
+				     << Binding::createConverting("@@SET_POINT@@", "SetPoint",
+						customizer.factory()->intPropertyConverter(id, "SetPoint"))
+				     << Binding::createConverting("@@P@@", "P",
+						customizer.factory()->intPropertyConverter(id, "P"))
+				     << Binding::createConverting("@@K@@", "I",
+						customizer.factory()->intPropertyConverter(id, "I"))
+				     << Binding::createConverting("@@D@@", "D",
+						customizer.factory()->intPropertyConverter(id, "D"))
+				     << Binding::createConverting("@@KPF@@", "PFactor",
+						customizer.factory()->intPropertyConverter(id, "PFactor"))
+				     << Binding::createConverting("@@KIF@@", "IFactor",
+						customizer.factory()->intPropertyConverter(id, "IFactor"))
+				     << Binding::createConverting("@@KDF@@", "DFactor",
+						customizer.factory()->intPropertyConverter(id, "DFactor")),
+		  parent)
 {
 }

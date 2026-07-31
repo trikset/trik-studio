@@ -22,16 +22,15 @@
 using namespace twoDModel::items;
 
 namespace {
-	constexpr int skittleDiameter = 20;
-	constexpr qreal skittleMass = 0.05f;
-	constexpr qreal skittleFriction = 0.2f;
-	constexpr qreal skittleRestituion = 0.8f;
-	constexpr qreal skittleAngularDamping = 6.0f;
-	constexpr qreal skittleLinearDamping = 6.0f;
+constexpr int skittleDiameter = 20;
+constexpr qreal skittleMass = 0.05f;
+constexpr qreal skittleFriction = 0.2f;
+constexpr qreal skittleRestituion = 0.8f;
+constexpr qreal skittleAngularDamping = 6.0f;
+constexpr qreal skittleLinearDamping = 6.0f;
 }
 
-SkittleItem::SkittleItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-			QPointF position)
+SkittleItem::SkittleItem(graphicsUtils::AbstractCoordinateSystem *metricSystem, QPointF position)
 	: mDiameterPx("diameter", skittleDiameter)
 	, mSvgRenderer(std::make_unique<QSvgRenderer>())
 {
@@ -51,7 +50,7 @@ SkittleItem::~SkittleItem() = default;
 
 QAction *SkittleItem::skittleTool()
 {
-	auto * const result = new QAction(QIcon(":/icons/2d_can.svg"), tr("Can (C)"), nullptr);
+	auto *const result = new QAction(QIcon(":/icons/2d_can.svg"), tr("Can (C)"), nullptr);
 	result->setShortcuts({QKeySequence(Qt::Key_C), QKeySequence(Qt::Key_3)});
 	result->setCheckable(true);
 	return result;
@@ -59,7 +58,7 @@ QAction *SkittleItem::skittleTool()
 
 QRectF SkittleItem::boundingRect() const
 {
-	return {{-mDiameterPx / 2, -mDiameterPx / 2} , QSizeF{mDiameterPx, mDiameterPx}};
+	return {{-mDiameterPx / 2, -mDiameterPx / 2}, QSizeF {mDiameterPx, mDiameterPx}};
 }
 
 QPainterPath SkittleItem::shape() const
@@ -119,8 +118,7 @@ void SkittleItem::deserialize(const QDomElement &element)
 
 	auto *coordSystem = coordinateSystem();
 	if (element.hasAttribute("diameter")) {
-		setDiameter(coordSystem->toPx(
-				element.attribute("diameter").toDouble()));
+		setDiameter(coordSystem->toPx(element.attribute("diameter").toDouble()));
 	}
 
 	Serializer<SkittleItem>::deserialize(element);

@@ -22,14 +22,11 @@
 using namespace pioneer::lua;
 using namespace generatorBase::simple;
 
-GotoGenerator::GotoGenerator(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, const qReal::Id &id
-		, QObject *parent
-		, GotoLabelManager &gotoLabelManager)
-	: BindingGenerator(repo, customizer, id, "goto.t"
-			, { Binding::createStaticConverting("@@ID@@", gotoLabelManager.labelFor(id)
-					, customizer.factory()->nameNormalizerConverter()) }
-			, parent)
+GotoGenerator::GotoGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+	const qReal::Id &id, QObject *parent, GotoLabelManager &gotoLabelManager)
+	: BindingGenerator(repo, customizer, id, "goto.t",
+		  {Binding::createStaticConverting("@@ID@@", gotoLabelManager.labelFor(id),
+			  customizer.factory()->nameNormalizerConverter())},
+		  parent)
 {
 }

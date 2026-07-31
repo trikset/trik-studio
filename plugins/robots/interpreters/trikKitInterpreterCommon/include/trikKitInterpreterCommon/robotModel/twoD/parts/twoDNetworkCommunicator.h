@@ -26,18 +26,17 @@ namespace parts {
 
 /// Class for implementing 2D-model network communication between robots
 class ROBOTS_TRIK_KIT_INTERPRETER_COMMON_EXPORT TwoDNetworkCommunicator
-		: public robotModel::parts::TrikNetworkCommunicator
+	: public robotModel::parts::TrikNetworkCommunicator
 {
 	Q_OBJECT
 
 public:
-	TwoDNetworkCommunicator(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port
-			, trikNetwork::MailboxInterface *mailbox);
+	TwoDNetworkCommunicator(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+		trikNetwork::MailboxInterface *mailbox);
 	~TwoDNetworkCommunicator() override;
 
 	/// Send a message to a robot
-	void send(const QString& message, int hullNumber) override;
+	void send(const QString &message, int hullNumber) override;
 
 	/// Receive message from robot
 	QString receive(bool wait) override;
@@ -53,6 +52,7 @@ public:
 
 	/// Deinitializing a TRIK network communicator
 	void release() override;
+
 private:
 	trikNetwork::MailboxInterface *mMailbox {}; // ownership --- TrikKitInterpreterPluginBase
 };

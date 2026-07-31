@@ -18,17 +18,13 @@
 
 #include "nonGraphicType.h"
 
-enum BaseType
-{
-	intType
-	, floatType
-};
+enum BaseType { intType, floatType };
 
 class NumericType : public NonGraphicType
 {
 public:
 	bool init(const QDomElement &element, const QString &context) override;
-	Type* clone() const override;
+	Type *clone() const override;
 
 private:
 	BaseType mBaseType;

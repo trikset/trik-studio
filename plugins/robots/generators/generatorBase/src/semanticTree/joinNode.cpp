@@ -36,7 +36,9 @@ QLinkedList<SemanticNode *> JoinNode::children() const
 
 QString JoinNode::toStringImpl(GeneratorCustomizer &customizer, int indent, const QString &indentString) const
 {
-	const QString code = customizer.factory()->joinGenerator(mId, customizer
-			, customizer.factory()->threads().joinedThreads(mId), mThreadId)->generate();
+	const QString code =
+		customizer.factory()
+			->joinGenerator(mId, customizer, customizer.factory()->threads().joinedThreads(mId), mThreadId)
+			->generate();
 	return utils::StringUtils::addIndent(code, indent, indentString);
 }

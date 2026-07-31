@@ -24,12 +24,10 @@ namespace rbf {
 class Ev3RbfGeneratorCustomizer : public generatorBase::GeneratorCustomizer
 {
 public:
-	Ev3RbfGeneratorCustomizer(const qrRepo::RepoApi &repo
-			, qReal::ErrorReporterInterface &errorReporter
-			, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
-			, generatorBase::lua::LuaProcessor &luaProcessor
-			, const QString &generatorName
-			, bool supportsSwitchUnstableToBreaks);
+	Ev3RbfGeneratorCustomizer(const qrRepo::RepoApi &repo, qReal::ErrorReporterInterface &errorReporter,
+		const kitBase::robotModel::RobotModelManagerInterface &robotModelManager,
+		generatorBase::lua::LuaProcessor &luaProcessor, const QString &generatorName,
+		bool supportsSwitchUnstableToBreaks);
 
 	generatorBase::GeneratorFactoryBase *factory() override;
 

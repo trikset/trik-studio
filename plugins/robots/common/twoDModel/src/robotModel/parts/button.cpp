@@ -20,10 +20,8 @@
 using namespace twoDModel::robotModel::parts;
 using namespace kitBase::robotModel;
 
-Button::Button(const kitBase::robotModel::DeviceInfo &info
-		, const kitBase::robotModel::PortInfo &port
-		, int code
-		, engine::TwoDModelEngineInterface &engine)
+Button::Button(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port, int code,
+	engine::TwoDModelEngineInterface &engine)
 	: robotParts::Button(info, port, code)
 	, mEngine(engine)
 {

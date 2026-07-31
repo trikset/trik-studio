@@ -30,7 +30,7 @@ public:
 	TrikV62RuntimeUploaderPlugin();
 
 	void init(const qReal::PluginConfigurator &configurator) override;
-	QList<qReal::ActionInfo> actions() override;  // Transfers ownership of QAction objects.
+	QList<qReal::ActionInfo> actions() override; // Transfers ownership of QAction objects.
 
 private:
 	UploaderTool mUploaderTool;

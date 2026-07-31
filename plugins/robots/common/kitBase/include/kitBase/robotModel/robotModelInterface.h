@@ -69,7 +69,8 @@ public:
 		connectedState
 
 		/// Model is disconnected.
-		, disconnectedState
+		,
+		disconnectedState
 	};
 
 	/// Destructor.

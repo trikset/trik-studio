@@ -21,8 +21,8 @@
 using namespace trik::robotModel::real::parts;
 using namespace kitBase::robotModel;
 
-PowerMotorsAggregator::PowerMotorsAggregator(const DeviceInfo &info, const PortInfo &port
-		, utils::robotCommunication::TcpRobotCommunicator &tcpRobotCommunicator)
+PowerMotorsAggregator::PowerMotorsAggregator(const DeviceInfo &info, const PortInfo &port,
+	utils::robotCommunication::TcpRobotCommunicator &tcpRobotCommunicator)
 	: robotModel::parts::TrikMotorsAggregator(info, port)
 	, mRobotCommunicator(tcpRobotCommunicator)
 {
@@ -39,9 +39,8 @@ void PowerMotorsAggregator::on(const QList<QPair<QString, int>> &powerForMotors)
 		if (power(motorAndPower.first) != motorAndPower.second) {
 			mSpeeds.insert(motorAndPower.first, motorAndPower.second);
 			directCommand += command;
-			directCommand
-					.replace("@@PORT@@", "\"" + motorAndPower.first + "\"")
-					.replace("@@POWER@@", QString::number(motorAndPower.second));
+			directCommand.replace("@@PORT@@", "\"" + motorAndPower.first + "\"")
+				.replace("@@POWER@@", QString::number(motorAndPower.second));
 		}
 	}
 

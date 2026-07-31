@@ -86,35 +86,51 @@ public:
 
 	/// Can be reimplemented to zoom the picture shown in editor in. Implementation has sense only when
 	/// supportsZooming() returns true.
-	virtual void zoomIn() {}
+	virtual void zoomIn()
+	{
+	}
 
 	/// Can be reimplemented to zoom the picture shown in editor out. Implementation has sense only when
 	/// supportsZooming() returns true.
-	virtual void zoomOut() {}
+	virtual void zoomOut()
+	{
+	}
 
 	/// Can be to copy current editor items into the clipoard. Implementation has sense only when
 	/// supportsCopyPaste() returns true.
-	virtual void copy() {}
+	virtual void copy()
+	{
+	}
 
 	/// Can be to copy current editor items into the clipoard. Implementation has sense only when
 	/// supportsCopyPaste() returns true.
-	virtual void paste() {}
+	virtual void paste()
+	{
+	}
 
 	/// Can be to copy current editor items into the clipoard. Implementation has sense only when
 	/// supportsCopyPaste() returns true.
-	virtual void cut() {}
+	virtual void cut()
+	{
+	}
 
 	/// Can be to find items in editors space. Implementation has sense only when
 	/// supportsFinding() returns true.
-	virtual void find() {}
+	virtual void find()
+	{
+	}
 
 	/// Can be to reblace items by smth in editors space. Implementation has sense only when
 	/// supportsReplacingBy() returns true.
-	virtual void replaceBy() {}
+	virtual void replaceBy()
+	{
+	}
 
 	/// Can be to find and reblace items by smth in editors space. Implementation has sense only when
 	/// supportsFindAndReplace() returns true.
-	virtual void findAndReplace() {}
+	virtual void findAndReplace()
+	{
+	}
 
 	/// Can be reimplemented to force focus capturing when system requires that. By default simply triggers focusAction.
 	virtual void forceFocus()
@@ -123,8 +139,8 @@ public:
 	}
 
 	/// Configures editor with the given set of editor actions.
-	virtual void configure(QAction &zoomIn, QAction &zoomOut, QAction &undo, QAction &redo
-		, QAction &copy, QAction &paste, QAction &cut, QAction &find, QAction &findAndReplace, QAction &replaceBy)
+	virtual void configure(QAction &zoomIn, QAction &zoomOut, QAction &undo, QAction &redo, QAction &copy,
+		QAction &paste, QAction &cut, QAction &find, QAction &findAndReplace, QAction &replaceBy)
 	{
 		mZoomInAction = &zoomIn;
 		mZoomOutAction = &zoomOut;
@@ -147,26 +163,27 @@ public:
 	}
 
 protected:
-	void onFocusIn() {
+	void onFocusIn()
+	{
 		mFocusAction.trigger();
 	}
 
 	QList<QAction *> editorActions() const
 	{
-		return { mZoomInAction, mZoomOutAction, mUndoAction, mRedoAction
-				, mCopyAction, mPasteAction, mCutAction, mFindAction, mReplaceByAction };
+		return {mZoomInAction, mZoomOutAction, mUndoAction, mRedoAction, mCopyAction, mPasteAction, mCutAction,
+			mFindAction, mReplaceByAction};
 	}
 
-	QAction *mZoomInAction;  // Does not have ownership.
-	QAction *mZoomOutAction;  // Does not have ownership.
-	QAction *mUndoAction;  // Does not have ownership.
-	QAction *mRedoAction;  // Does not have ownership.
-	QAction *mCopyAction;  // Does not have ownership.
-	QAction *mPasteAction;  // Does not have ownership.
-	QAction *mCutAction;  // Does not have ownership.
-	QAction *mFindAction;  // Does not have ownership.
-	QAction *mFindAndReplaceAction;  // Does not have ownership.
-	QAction *mReplaceByAction;  // Does not have ownership.
+	QAction *mZoomInAction; // Does not have ownership.
+	QAction *mZoomOutAction; // Does not have ownership.
+	QAction *mUndoAction; // Does not have ownership.
+	QAction *mRedoAction; // Does not have ownership.
+	QAction *mCopyAction; // Does not have ownership.
+	QAction *mPasteAction; // Does not have ownership.
+	QAction *mCutAction; // Does not have ownership.
+	QAction *mFindAction; // Does not have ownership.
+	QAction *mFindAndReplaceAction; // Does not have ownership.
+	QAction *mReplaceByAction; // Does not have ownership.
 
 private:
 	QAction mFocusAction;

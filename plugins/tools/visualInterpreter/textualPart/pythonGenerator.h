@@ -28,9 +28,8 @@ class PythonGenerator : public TextCodeGenerator
 	Q_OBJECT
 
 public:
-	PythonGenerator(LogicalModelAssistInterface &logicalModelApi
-			, GraphicalModelAssistInterface &graphicalModelApi
-			, gui::MainWindowInterpretersInterface &interpretersInterface);
+	PythonGenerator(LogicalModelAssistInterface &logicalModelApi, GraphicalModelAssistInterface &graphicalModelApi,
+		gui::MainWindowInterpretersInterface &interpretersInterface);
 
 	/// Generate and return reaction script or application condition script on python
 	QString generateScript(bool const isApplicationCondition);

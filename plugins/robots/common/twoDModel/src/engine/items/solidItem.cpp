@@ -56,7 +56,6 @@ void SolidItem::deserialize(const QDomElement &element)
 	}
 }
 
-
 bool SolidItem::isCircle() const
 {
 	return false;

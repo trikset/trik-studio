@@ -23,16 +23,14 @@ class TrikGeneratorFactory : public generatorBase::GeneratorFactoryBase
 {
 	Q_OBJECT
 public:
-	TrikGeneratorFactory(const qrRepo::RepoApi &repo
-			, qReal::ErrorReporterInterface &errorReporter
-			, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
-			, generatorBase::lua::LuaProcessor &luaProcessor
-			, const QStringList &pathsToTemplates);
+	TrikGeneratorFactory(const qrRepo::RepoApi &repo, qReal::ErrorReporterInterface &errorReporter,
+		const kitBase::robotModel::RobotModelManagerInterface &robotModelManager,
+		generatorBase::lua::LuaProcessor &luaProcessor, const QStringList &pathsToTemplates);
 
 	~TrikGeneratorFactory() override;
 
-	generatorBase::simple::AbstractSimpleGenerator *simpleGenerator(const qReal::Id &id
-			, generatorBase::GeneratorCustomizer &customizer) override;
+	generatorBase::simple::AbstractSimpleGenerator *simpleGenerator(const qReal::Id &id,
+		generatorBase::GeneratorCustomizer &customizer) override;
 
 	QStringList pathsToTemplates() const override;
 	void initDeviceVariables() override;

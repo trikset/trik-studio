@@ -25,11 +25,13 @@ using namespace trik;
 using robotModel::twoD::parts::Display;
 
 TrikDisplayEmu::TrikDisplayEmu(const QSharedPointer<robotModel::twoD::TrikTwoDRobotModel> &model)
-	: mTwoDRobotModel(model), mDisplay(nullptr)
+	: mTwoDRobotModel(model)
+	, mDisplay(nullptr)
 {
 }
 
-Qt::ConnectionType TrikDisplayEmu::callType() const {
+Qt::ConnectionType TrikDisplayEmu::callType() const
+{
 	return Qt::AutoConnection;
 	// Very strange, but forced blocking connection causes SIGSEGV crash....
 	// return thread() != mDisplay->thread()? Qt::BlockingQueuedConnection : Qt::DirectConnection;
@@ -43,32 +45,32 @@ void TrikDisplayEmu::init()
 void TrikDisplayEmu::showImage(const QString &fileName)
 {
 	const bool smile = fileName.endsWith(QLatin1String("sad.png"));
-	QMetaObject::invokeMethod(mDisplay, [=](){ mDisplay->drawSmile(smile); }, callType());
+	QMetaObject::invokeMethod(mDisplay, [=]() { mDisplay->drawSmile(smile); }, callType());
 }
 
 void TrikDisplayEmu::show(const QVector<int32_t> &array, int width, int height, const QString &format)
 {
-	QMetaObject::invokeMethod(mDisplay, [=](){ mDisplay->show(array, width, height, format); }, callType());
+	QMetaObject::invokeMethod(mDisplay, [=]() { mDisplay->show(array, width, height, format); }, callType());
 }
 
 void TrikDisplayEmu::addLabel(const QString &text, int x, int y, int fontSize)
 {
-	QMetaObject::invokeMethod(mDisplay, [=](){ mDisplay->printText(x, y, text, fontSize); }, callType());
+	QMetaObject::invokeMethod(mDisplay, [=]() { mDisplay->printText(x, y, text, fontSize); }, callType());
 }
 
 void TrikDisplayEmu::setPainterColor(const QString &color)
 {
-	QMetaObject::invokeMethod(mDisplay, [=](){ mDisplay->setPainterColor(color); }, callType());
+	QMetaObject::invokeMethod(mDisplay, [=]() { mDisplay->setPainterColor(color); }, callType());
 }
 
 void TrikDisplayEmu::setPainterWidth(int penWidth)
 {
-	QMetaObject::invokeMethod(mDisplay,[=](){ mDisplay->setPainterWidth(penWidth); }, callType());
+	QMetaObject::invokeMethod(mDisplay, [=]() { mDisplay->setPainterWidth(penWidth); }, callType());
 }
 
 void TrikDisplayEmu::drawLine(int x1, int y1, int x2, int y2)
 {
-	QMetaObject::invokeMethod(mDisplay, [=](){ mDisplay->drawLine(x1, y1, x2, y2); }, callType());
+	QMetaObject::invokeMethod(mDisplay, [=]() { mDisplay->drawLine(x1, y1, x2, y2); }, callType());
 }
 
 void TrikDisplayEmu::drawPoint(int x, int y)
@@ -78,22 +80,22 @@ void TrikDisplayEmu::drawPoint(int x, int y)
 
 void TrikDisplayEmu::drawRect(int x, int y, int w, int h, bool filled)
 {
-	QMetaObject::invokeMethod(mDisplay, [=](){ mDisplay->drawRect(x, y, w, h, filled); }, callType());
+	QMetaObject::invokeMethod(mDisplay, [=]() { mDisplay->drawRect(x, y, w, h, filled); }, callType());
 }
 
 void TrikDisplayEmu::drawEllipse(int x, int y, int w, int h, bool filled)
 {
-	QMetaObject::invokeMethod(mDisplay, [=](){ mDisplay->drawEllipse(x, y, w, h, filled); }, callType());
+	QMetaObject::invokeMethod(mDisplay, [=]() { mDisplay->drawEllipse(x, y, w, h, filled); }, callType());
 }
 
 void TrikDisplayEmu::drawArc(int x, int y, int w, int h, int start, int span)
 {
-	QMetaObject::invokeMethod(mDisplay, [=]() { mDisplay->drawArc(x, y, w, h, start, span); },  callType());
+	QMetaObject::invokeMethod(mDisplay, [=]() { mDisplay->drawArc(x, y, w, h, start, span); }, callType());
 }
 
 void TrikDisplayEmu::setBackground(const QString &color)
 {
-	QMetaObject::invokeMethod(mDisplay, [=](){ mDisplay->setBackground(color); }, callType());
+	QMetaObject::invokeMethod(mDisplay, [=]() { mDisplay->setBackground(color); }, callType());
 }
 
 void TrikDisplayEmu::clear()
@@ -108,5 +110,5 @@ void TrikDisplayEmu::reset()
 
 void TrikDisplayEmu::redraw()
 {
-	QMetaObject::invokeMethod(mDisplay, &Display::redraw,  callType());
+	QMetaObject::invokeMethod(mDisplay, &Display::redraw, callType());
 }

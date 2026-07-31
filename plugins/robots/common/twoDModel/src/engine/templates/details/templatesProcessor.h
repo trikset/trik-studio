@@ -28,10 +28,10 @@ class TemplatesManager;
 class TemplatesProcessor
 {
 public:
-	TemplatesProcessor(const TemplatesProcessor&) = delete;
-	TemplatesProcessor& operator=(const TemplatesProcessor&) = delete;
-	TemplatesProcessor(TemplatesProcessor&&) noexcept = default;
-	TemplatesProcessor& operator=(TemplatesProcessor&&) noexcept = default;
+	TemplatesProcessor(const TemplatesProcessor &) = delete;
+	TemplatesProcessor &operator=(const TemplatesProcessor &) = delete;
+	TemplatesProcessor(TemplatesProcessor &&) noexcept = default;
+	TemplatesProcessor &operator=(TemplatesProcessor &&) noexcept = default;
 	virtual ~TemplatesProcessor() = default;
 	explicit TemplatesProcessor(details::TemplatesManager *manager) noexcept;
 
@@ -50,6 +50,7 @@ public:
 
 	/// Clear all error messages
 	void clear();
+
 protected:
 	using SubstitutionErrorCode = XmlTemplate::TemplateSubstitutionErrorCode;
 	/// During template disclosure, it is necessary to prevent cyclic references to other templates,
@@ -61,7 +62,8 @@ protected:
 		QStringList mOrder;
 		uint32_t mDepth {};
 
-		ExpansionContext fork() const {
+		ExpansionContext fork() const
+		{
 			auto newCtx = ExpansionContext();
 			newCtx.mMacrosInProgress = mMacrosInProgress;
 			newCtx.mOrder = mOrder;
@@ -69,18 +71,17 @@ protected:
 			return newCtx;
 		}
 	};
-	virtual void error(const QString& message,
-				     int line,
-				     const ExpansionContext &context,
-				     SubstitutionErrorCode code);
+	virtual void error(const QString &message, int line, const ExpansionContext &context,
+		SubstitutionErrorCode code);
+
 private:
 	struct ExpansionItem {
-	    QDomElement mElement;
-	    ExpansionContext mContext;
+		QDomElement mElement;
+		ExpansionContext mContext;
 	};
 	TemplatesManager *mManager;
 	QStringList mErrors;
-	QDomElement processTemplate(const QDomElement &elements, ExpansionContext& context);
+	QDomElement processTemplate(const QDomElement &elements, ExpansionContext &context);
 };
 }
 }

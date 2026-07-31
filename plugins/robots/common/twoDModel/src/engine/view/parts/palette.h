@@ -37,7 +37,7 @@ public:
 
 public Q_SLOTS:
 	/// Appends an item to 2D model`s palette.
-	void registerTool(QAction * const tool);
+	void registerTool(QAction *const tool);
 
 	/// Activates cursor action.
 	void unselect();
@@ -48,7 +48,7 @@ public Q_SLOTS:
 private:
 	QScopedPointer<QAction> mCursorAction;
 	QScopedPointer<QActionGroup> mGroup;
-	QToolBar *mToolBar;  // Takes ownership
+	QToolBar *mToolBar; // Takes ownership
 };
 
 }

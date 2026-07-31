@@ -18,8 +18,8 @@ using namespace trik::blocks::details;
 using namespace kitBase::robotModel;
 
 SpeakerBlock::SpeakerBlock(RobotModelInterface &robotModel, bool isPlayToneHz)
-	: kitBase::blocksBase::common::DeviceBlock<robotModel::parts::TrikSpeaker>(robotModel),
-	  mIsPlayToneHz(isPlayToneHz)
+	: kitBase::blocksBase::common::DeviceBlock<robotModel::parts::TrikSpeaker>(robotModel)
+	, mIsPlayToneHz(isPlayToneHz)
 {
 }
 
@@ -28,8 +28,7 @@ void SpeakerBlock::doJob(robotModel::parts::TrikSpeaker &speaker)
 	if (mIsPlayToneHz) {
 		auto duration = intProperty("Duration");
 		speaker.play(duration);
-	}
-	else {
+	} else {
 		const QString toSpeak = stringProperty("FileName");
 		speaker.play(toSpeak);
 	}

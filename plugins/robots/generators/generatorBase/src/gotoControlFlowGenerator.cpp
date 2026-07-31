@@ -18,23 +18,17 @@ using namespace generatorBase;
 using namespace qReal;
 using namespace semantics;
 
-GotoControlFlowGenerator::GotoControlFlowGenerator(
-		const qrRepo::RepoApi &repo
-		, ErrorReporterInterface &errorReporter
-		, GeneratorCustomizer &customizer
-		, PrimaryControlFlowValidator &validator
-		, const Id &diagramId
-		, QObject *parent
-		, bool isThisDiagramMain)
+GotoControlFlowGenerator::GotoControlFlowGenerator(const qrRepo::RepoApi &repo, ErrorReporterInterface &errorReporter,
+	GeneratorCustomizer &customizer, PrimaryControlFlowValidator &validator, const Id &diagramId, QObject *parent,
+	bool isThisDiagramMain)
 	: ControlFlowGeneratorBase(repo, errorReporter, customizer, validator, diagramId, parent, isThisDiagramMain)
 {
 }
 
 ControlFlowGeneratorBase *GotoControlFlowGenerator::cloneFor(const qReal::Id &diagramId, bool cloneForNewDiagram)
 {
-	auto * const copy = new GotoControlFlowGenerator(mRepo
-			, mErrorReporter, mCustomizer, (cloneForNewDiagram ? *mValidator.clone() : mValidator)
-			, diagramId, parent(), !cloneForNewDiagram);
+	auto *const copy = new GotoControlFlowGenerator(mRepo, mErrorReporter, mCustomizer,
+		(cloneForNewDiagram ? *mValidator.clone() : mValidator), diagramId, parent(), !cloneForNewDiagram);
 
 	return copy;
 }
@@ -46,7 +40,7 @@ void GotoControlFlowGenerator::beforeSearch()
 void GotoControlFlowGenerator::visitRegular(const Id &id, const QList<LinkInfo> &links)
 {
 	ControlFlowGeneratorBase::visitRegular(id, links);
-	auto * const thisNode = static_cast<SimpleNode *>(mSemanticTree->findNodeFor(id));
+	auto *const thisNode = static_cast<SimpleNode *>(mSemanticTree->findNodeFor(id));
 	SemanticNode *nextNode = nullptr;
 	if (mSemanticTree->findNodeFor(links[0].target)) {
 		nextNode = produceGotoNode(links[0].target);
@@ -66,7 +60,7 @@ void GotoControlFlowGenerator::visitConditional(const Id &id, const QList<LinkIn
 	const LinkInfo thenLink = branches.first;
 	const LinkInfo elseLink = branches.second;
 
-	auto * const thisNode = static_cast<IfNode *>(mSemanticTree->findNodeFor(id));
+	auto *const thisNode = static_cast<IfNode *>(mSemanticTree->findNodeFor(id));
 	thisNode->thenZone()->appendChild(produceGotoNode(thenLink.target));
 	thisNode->elseZone()->appendChild(produceGotoNode(elseLink.target));
 
@@ -82,7 +76,7 @@ void GotoControlFlowGenerator::visitLoop(const Id &id, const QList<LinkInfo> &li
 	const LinkInfo bodyLink = branches.first;
 	const LinkInfo nextLink = branches.second;
 
-	auto * const thisNode = static_cast<LoopNode *>(mSemanticTree->findNodeFor(id));
+	auto *const thisNode = static_cast<LoopNode *>(mSemanticTree->findNodeFor(id));
 	thisNode->bodyZone()->appendChild(produceGotoNode(bodyLink.target));
 	thisNode->insertSiblingAfterThis(produceGotoNode(nextLink.target));
 
@@ -97,7 +91,7 @@ void GotoControlFlowGenerator::visitPreconditionalLoop(const Id &id, const QList
 
 void GotoControlFlowGenerator::visitSwitch(const Id &id, const QList<LinkInfo> &links)
 {
-	auto * const thisNode = static_cast<SwitchNode *>(mSemanticTree->findNodeFor(id));
+	auto *const thisNode = static_cast<SwitchNode *>(mSemanticTree->findNodeFor(id));
 	for (const LinkInfo &branch : links) {
 		const QString value = mRepo.property(branch.linkId, "Guard").toString();
 		thisNode->addBranch(value, produceGotoNode(branch.target));
@@ -124,15 +118,15 @@ SimpleNode *GotoControlFlowGenerator::produceGotoNode(const qReal::Id &id)
 {
 	// Using other id to eliminate collisions with original node
 	const Id gotoId("label_" + id.editor(), id.diagram(), id.element(), id.id());
-	SimpleNode * const result = mSemanticTree->produceSimple(gotoId);
+	SimpleNode *const result = mSemanticTree->produceSimple(gotoId);
 	result->bindToSyntheticConstruction(SimpleNode::gotoNode);
 	return result;
 }
 
-void GotoControlFlowGenerator::produceNextNodeIfNeeded(const LinkInfo &info, NonZoneNode * const parent)
+void GotoControlFlowGenerator::produceNextNodeIfNeeded(const LinkInfo &info, NonZoneNode *const parent)
 {
 	if (!mSemanticTree->findNodeFor(info.target)) {
-		SemanticNode * const nextNode = mSemanticTree->produceNodeFor(info.target);
+		SemanticNode *const nextNode = mSemanticTree->produceNodeFor(info.target);
 		nextNode->addLabel();
 		parent->appendSibling(nextNode);
 	}

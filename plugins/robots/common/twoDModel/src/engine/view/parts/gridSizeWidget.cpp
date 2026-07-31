@@ -29,12 +29,14 @@ constexpr auto pixelMaximumValue = 150.0;
 
 GridSizeWidget::~GridSizeWidget() = default;
 
-GridSizeWidget::GridSizeWidget(QWidget *parent): StackMetricWidget(parent)
+GridSizeWidget::GridSizeWidget(QWidget *parent)
+	: StackMetricWidget(parent)
 {
 	auto createSpinBoxLambda = [this](qreal step, int decimals, twoDModel::model::SizeUnit unit) {
 		auto *spinBox = new QDoubleSpinBox(this);
 		addWidget(spinBox, unit, pixelMinimalValue, pixelMaximumValue, step, decimals);
-		connect(spinBox, QOverload<qreal>::of(&QDoubleSpinBox::valueChanged), this, &GridSizeWidget::gridSizeChanged);
+		connect(spinBox, QOverload<qreal>::of(&QDoubleSpinBox::valueChanged), this,
+			&GridSizeWidget::gridSizeChanged);
 	};
 
 	createSpinBoxLambda(0.1, 3, twoDModel::model::SizeUnit::Unit::Pixels);

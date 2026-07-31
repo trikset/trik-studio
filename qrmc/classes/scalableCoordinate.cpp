@@ -17,12 +17,18 @@
 using namespace qrmc;
 
 ScalableCoordinate::ScalableCoordinate()
-	: mValue(0), mWidth(0), mIsScalable(false)
-{}
+	: mValue(0)
+	, mWidth(0)
+	, mIsScalable(false)
+{
+}
 
 ScalableCoordinate::ScalableCoordinate(qreal value, int width, bool isScalable)
-	: mValue(value), mWidth(width), mIsScalable(isScalable)
-{}
+	: mValue(value)
+	, mWidth(width)
+	, mIsScalable(isScalable)
+{
+}
 
 qreal ScalableCoordinate::value() const
 {
@@ -39,7 +45,7 @@ QString ScalableCoordinate::toString(bool isScaled) const
 	qreal value = isScaled ? mValue * mWidth : mValue;
 	QString result = QString::number(value);
 	// uncomment this when it's supported
-//	result += mIsScalable ? "a" : "%";
+	//	result += mIsScalable ? "a" : "%";
 	return result;
 }
 

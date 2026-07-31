@@ -21,7 +21,7 @@ namespace trik {
 namespace blocks {
 namespace details {
 
-class JoinNetworkBlock: public kitBase::blocksBase::common::DeviceBlock<robotModel::parts::TrikNetworkCommunicator>
+class JoinNetworkBlock : public kitBase::blocksBase::common::DeviceBlock<robotModel::parts::TrikNetworkCommunicator>
 {
 	Q_OBJECT
 public:

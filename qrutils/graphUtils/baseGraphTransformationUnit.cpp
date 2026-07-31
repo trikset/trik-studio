@@ -21,19 +21,17 @@
 
 using namespace qReal;
 
-BaseGraphTransformationUnit::BaseGraphTransformationUnit(
-		qReal::LogicalModelAssistInterface &logicalModelApi
-		, qReal::GraphicalModelAssistInterface &graphicalModelApi
-		, qReal::gui::MainWindowInterpretersInterface &interpretersInterface)
-		: mInterpretersInterface(interpretersInterface)
-		, mLogicalModelApi(logicalModelApi)
-		, mGraphicalModelApi(graphicalModelApi)
-		, mHasRuleSyntaxErr(false)
+BaseGraphTransformationUnit::BaseGraphTransformationUnit(qReal::LogicalModelAssistInterface &logicalModelApi,
+	qReal::GraphicalModelAssistInterface &graphicalModelApi,
+	qReal::gui::MainWindowInterpretersInterface &interpretersInterface)
+	: mInterpretersInterface(interpretersInterface)
+	, mLogicalModelApi(logicalModelApi)
+	, mGraphicalModelApi(graphicalModelApi)
+	, mHasRuleSyntaxErr(false)
 {
-	mDefaultProperties = (QSet<QString>()
-		<< "from" << "incomingConnections" << "incomingUsages" << "links"
-		<< "name" << "outgoingConnections" << "outgoingUsages" << "to"
-			<< "fromPort" << "toPort");
+	mDefaultProperties = (QSet<QString>() << "from" << "incomingConnections" << "incomingUsages" << "links"
+					      << "name" << "outgoingConnections" << "outgoingUsages" << "to"
+					      << "fromPort" << "toPort");
 }
 
 BaseGraphTransformationUnit::~BaseGraphTransformationUnit() = default;
@@ -71,7 +69,8 @@ bool BaseGraphTransformationUnit::checkRuleMatching(const IdList &elements)
 	const Id startElem = startElement();
 	if (startElem == Id::rootId()) {
 		report(tr("Rule '") + property(mRuleToFind, "ruleName").toString()
-				+ tr("' has not any appropriate nodes"), true);
+				+ tr("' has not any appropriate nodes"),
+			true);
 
 		mHasRuleSyntaxErr = true;
 		return false;
@@ -118,7 +117,9 @@ bool BaseGraphTransformationUnit::checkRuleMatchingRecursively()
 	if (linkInRule != Id::rootId()) {
 		const Id linkEndInRuleElement = linkEndInRule(linkInRule, nodeInRule);
 		if (linkEndInRuleElement == Id::rootId()) {
-			report(tr("Rule '") + property(mRuleToFind, "ruleName").toString() + tr("' has unconnected link"), true);
+			report(tr("Rule '") + property(mRuleToFind, "ruleName").toString()
+					+ tr("' has unconnected link"),
+				true);
 			mHasRuleSyntaxErr = true;
 			return false;
 		}
@@ -189,8 +190,8 @@ bool BaseGraphTransformationUnit::checkNodeForAddingToMatch(const Id &nodeInMode
 	return res;
 }
 
-bool BaseGraphTransformationUnit::checkExistingLinks(const Id &nodeInModel
-		, const Id &nodeInRule, QHash<Id, Id> *linksToAddInMatch)
+bool BaseGraphTransformationUnit::checkExistingLinks(const Id &nodeInModel, const Id &nodeInRule,
+	QHash<Id, Id> *linksToAddInMatch)
 {
 	const IdList linksInRuleElement = linksInRule(nodeInRule);
 
@@ -202,7 +203,8 @@ bool BaseGraphTransformationUnit::checkExistingLinks(const Id &nodeInModel
 				return false;
 			} else {
 				if (mLogicalModelApi.logicalRepoApi().isLogicalElement(properLinkInModel)) {
-					const IdList properGraphicalLinks = mGraphicalModelApi.graphicalIdsByLogicalId(properLinkInModel);
+					const IdList properGraphicalLinks =
+						mGraphicalModelApi.graphicalIdsByLogicalId(properLinkInModel);
 					if (!properGraphicalLinks.isEmpty()) {
 						properLinkInModel = properGraphicalLinks.first();
 					}
@@ -319,16 +321,15 @@ IdList BaseGraphTransformationUnit::properLinks(const Id &nodeInModel, const Id 
 	return result;
 }
 
-bool BaseGraphTransformationUnit::compareLinks(const Id &first,const Id &second) const
+bool BaseGraphTransformationUnit::compareLinks(const Id &first, const Id &second) const
 {
-	Id  idTo1 = toInModel(first);
+	Id idTo1 = toInModel(first);
 	const Id idTo2 = toInRule(second);
 	Id idFrom1 = fromInModel(first);
 	const Id idFrom2 = fromInRule(second);
 
-	bool result = compareElementTypesAndProperties(first, second)
-			&& compareElements(idTo1, idTo2)
-			&& compareElements(idFrom1, idFrom2);
+	bool result = compareElementTypesAndProperties(first, second) && compareElements(idTo1, idTo2)
+	              && compareElements(idFrom1, idFrom2);
 
 	if (mMatch.contains(idTo2)) {
 		Id matchTo = mMatch.value(idTo2);
@@ -360,8 +361,7 @@ bool BaseGraphTransformationUnit::compareElements(const Id &first, const Id &sec
 	return compareElementTypesAndProperties(first, second);
 }
 
-bool BaseGraphTransformationUnit::compareElementTypesAndProperties(const Id &first
-		, const Id &second) const
+bool BaseGraphTransformationUnit::compareElementTypesAndProperties(const Id &first, const Id &second) const
 {
 	if (first.element() == second.element() && first.diagram() == second.diagram()) {
 		QHash<QString, QVariant> secondProperties = properties(second);
@@ -413,8 +413,8 @@ QHash<QString, QVariant> BaseGraphTransformationUnit::properties(const Id &id) c
 QMapIterator<QString, QVariant> BaseGraphTransformationUnit::propertiesIterator(const Id &id) const
 {
 	return (mLogicalModelApi.isLogicalId(id))
-			? mLogicalModelApi.logicalRepoApi().propertiesIterator(id)
-			: mLogicalModelApi.logicalRepoApi().propertiesIterator(mGraphicalModelApi.logicalId(id));
+	               ? mLogicalModelApi.logicalRepoApi().propertiesIterator(id)
+	               : mLogicalModelApi.logicalRepoApi().propertiesIterator(mGraphicalModelApi.logicalId(id));
 }
 
 QVariant BaseGraphTransformationUnit::property(const Id &id, const QString &propertyName) const
@@ -425,8 +425,7 @@ QVariant BaseGraphTransformationUnit::property(const Id &id, const QString &prop
 	return mLogicalModelApi.logicalRepoApi().property(mGraphicalModelApi.logicalId(id), propertyName);
 }
 
-void BaseGraphTransformationUnit::setProperty(const Id &id, const QString &propertyName
-		, const QVariant &value) const
+void BaseGraphTransformationUnit::setProperty(const Id &id, const QString &propertyName, const QVariant &value) const
 {
 	if (mLogicalModelApi.isLogicalId(id)) {
 		mLogicalModelApi.mutableLogicalRepoApi().setProperty(id, propertyName, value);
@@ -546,7 +545,7 @@ void BaseGraphTransformationUnit::report(const QString &message, bool isError) c
 	}
 }
 
-QList<QHash<Id, Id> > BaseGraphTransformationUnit::matches()
+QList<QHash<Id, Id>> BaseGraphTransformationUnit::matches()
 {
 	return mMatches;
 }

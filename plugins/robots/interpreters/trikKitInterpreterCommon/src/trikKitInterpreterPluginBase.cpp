@@ -35,8 +35,9 @@ using namespace qReal;
 const Id robotDiagramType = Id("RobotsMetamodel", "RobotsDiagram", "RobotsDiagramNode");
 const Id subprogramDiagramType = Id("RobotsMetamodel", "RobotsDiagram", "SubprogramDiagram");
 
-TrikKitInterpreterPluginBase::TrikKitInterpreterPluginBase() :
-	mStart(tr("Start"), this), mStop(tr("Stop"), this)
+TrikKitInterpreterPluginBase::TrikKitInterpreterPluginBase()
+	: mStart(tr("Start"), this)
+	, mStop(tr("Stop"), this)
 {
 }
 
@@ -45,11 +46,9 @@ TrikKitInterpreterPluginBase::~TrikKitInterpreterPluginBase()
 	release();
 }
 
-void TrikKitInterpreterPluginBase::initKitInterpreterPluginBase
-		(robotModel::TrikRobotModelBase * const realRobotModel
-		, robotModel::twoD::TrikTwoDRobotModel * const twoDRobotModel
-		, const QSharedPointer<blocks::TrikBlocksFactoryBase> &blocksFactory
-		)
+void TrikKitInterpreterPluginBase::initKitInterpreterPluginBase(robotModel::TrikRobotModelBase *const realRobotModel,
+	robotModel::twoD::TrikTwoDRobotModel *const twoDRobotModel,
+	const QSharedPointer<blocks::TrikBlocksFactoryBase> &blocksFactory)
 {
 	auto isMailboxEnabled = qReal::SettingsManager::value("TRIK2DMailbox", "").toBool();
 	if (isMailboxEnabled) {
@@ -68,7 +67,7 @@ void TrikKitInterpreterPluginBase::initKitInterpreterPluginBase
 
 	connectDevicesConfigurationProvider(devicesConfigurationProvider()); // ... =(
 
-	mAdditionalPreferences = new TrikAdditionalPreferences({ mRealRobotModel->name() });
+	mAdditionalPreferences = new TrikAdditionalPreferences({mRealRobotModel->name()});
 
 	bool enablePython = false;
 #ifndef TRIK_NOPYTHON
@@ -76,7 +75,7 @@ void TrikKitInterpreterPluginBase::initKitInterpreterPluginBase
 		if (!qEnvironmentVariableIsEmpty("TRIK_PYTHONPATH")) {
 			enablePython = true;
 		} else if (PlatformInfo::osType().startsWith("windows")) {
-			auto dir = QDir(QCoreApplication::applicationDirPath()+"/python-runtime/");
+			auto dir = QDir(QCoreApplication::applicationDirPath() + "/python-runtime/");
 			dir.makeAbsolute();
 			if (dir.exists()) {
 				enablePython = true;
@@ -97,7 +96,8 @@ void TrikKitInterpreterPluginBase::initKitInterpreterPluginBase
 void TrikKitInterpreterPluginBase::startCodeInterpretation(const QString &code, const QString &extension)
 {
 	if (extension.endsWith("py") && QProcessEnvironment::systemEnvironment().value("TRIK_PYTHONPATH").isEmpty()) {
-		mMainWindow->errorReporter()->addError(tr("TRIK_PYTHONPATH must be set correctly to run Python script."));
+		mMainWindow->errorReporter()->addError(
+			tr("TRIK_PYTHONPATH must be set correctly to run Python script."));
 		return;
 	}
 
@@ -125,8 +125,8 @@ void TrikKitInterpreterPluginBase::startCodeInterpretation(const QString &code, 
 	textualInterpreter()->interpretScript(code, extension);
 }
 
-void TrikKitInterpreterPluginBase::startCodeInterpretation(const QString &code
-		, const QString &inputs, const QString &extension)
+void TrikKitInterpreterPluginBase::startCodeInterpretation(const QString &code, const QString &inputs,
+	const QString &extension)
 {
 
 	// we are in exercise mode (maybe rename it later)
@@ -154,14 +154,15 @@ void TrikKitInterpreterPluginBase::startCodeInterpretation(const QString &code
 
 void TrikKitInterpreterPluginBase::handleImitationCameraWork()
 {
-	auto prepareImagesFromProject = [this](const QString&) {
+	auto prepareImagesFromProject = [this](const QString &) {
 		if (mCurrentlySelectedModelName.contains("trik", Qt::CaseInsensitive)
-				&& qReal::SettingsManager::value("TrikSimulatedCameraImagesFromProject").toBool()
-				&& mProjectManager->somethingOpened()) {
+			&& qReal::SettingsManager::value("TrikSimulatedCameraImagesFromProject").toBool()
+			&& mProjectManager->somethingOpened()) {
 			QVariant rawData = mLogicalModel->logicalRepoApi().metaInformation("cameraImitationImages");
 
 			if (not rawData.isNull()) {
-				const QString path = qReal::PlatformInfo::invariantSettingsPath("trikCameraImitationImagesDir");
+				const QString path =
+					qReal::PlatformInfo::invariantSettingsPath("trikCameraImitationImagesDir");
 				QDir dir(path);
 				const QString curPath = QDir::currentPath();
 				if (dir.exists()) {
@@ -174,10 +175,9 @@ void TrikKitInterpreterPluginBase::handleImitationCameraWork()
 
 				QDomDocument images;
 				images.setContent(rawData.toString());
-				for (QDomElement element = images.firstChildElement("images").firstChildElement("image")
-						; !element.isNull()
-						; element = element.nextSiblingElement("image"))
-				{
+				for (QDomElement element =
+						images.firstChildElement("images").firstChildElement("image");
+					!element.isNull(); element = element.nextSiblingElement("image")) {
 					const QString fileName = element.attribute("name");
 					QByteArray content = QByteArray::fromBase64(element.text().toLatin1());
 					QFile file(dir.filePath(fileName));
@@ -192,7 +192,6 @@ void TrikKitInterpreterPluginBase::handleImitationCameraWork()
 		}
 	};
 
-
 	connect(mProjectManager, &ProjectManagementInterface::afterOpen, this, prepareImagesFromProject);
 	qReal::SettingsListener::listen("TrikSimulatedCameraImagesFromProject", prepareImagesFromProject, this);
 	qReal::SettingsListener::listen("TrikSimulatedCameraImagesPath", prepareImagesFromProject, this);
@@ -201,7 +200,7 @@ void TrikKitInterpreterPluginBase::handleImitationCameraWork()
 		// in case if user works with images and want to pack them into qrs
 		// we are saving images to metadata using logicalRepoApi
 		if (mCurrentlySelectedModelName.contains("trik", Qt::CaseInsensitive)
-				&& mProjectManager->somethingOpened()) {
+			&& mProjectManager->somethingOpened()) {
 			const QString path = qReal::SettingsManager::value("TrikSimulatedCameraImagesPath").toString();
 			QDir dir(path);
 			const QStringList imagesToSave = dir.entryList({"*.jpg", "*.png"});
@@ -225,38 +224,33 @@ void TrikKitInterpreterPluginBase::handleImitationCameraWork()
 				}
 
 				imagesDomDoc.appendChild(images);
-				mLogicalModel->mutableLogicalRepoApi().setMetaInformation("cameraImitationImages"
-						, imagesDomDoc.toString());
+				mLogicalModel->mutableLogicalRepoApi().setMetaInformation("cameraImitationImages",
+					imagesDomDoc.toString());
 				mProjectManager->setUnsavedIndicator(true);
 			}
 		}
 	});
 }
 
-TrikTextualInterpreter * TrikKitInterpreterPluginBase::textualInterpreter() const
+TrikTextualInterpreter *TrikKitInterpreterPluginBase::textualInterpreter() const
 {
 	return mTextualInterpreter.data();
 }
 
 void TrikKitInterpreterPluginBase::init(const kitBase::KitPluginConfigurator &configurer)
 {
-	connect(&configurer.eventsForKitPlugin()
-			, &kitBase::EventsForKitPluginInterface::robotModelChanged
-			, [this](const QString &modelName) { mCurrentlySelectedModelName = modelName; });
+	connect(&configurer.eventsForKitPlugin(), &kitBase::EventsForKitPluginInterface::robotModelChanged,
+		[this](const QString &modelName) { mCurrentlySelectedModelName = modelName; });
 
-	qReal::gui::MainWindowInterpretersInterface &interpretersInterface
-			= configurer.qRealConfigurator().mainWindowInterpretersInterface();
+	qReal::gui::MainWindowInterpretersInterface &interpretersInterface =
+		configurer.qRealConfigurator().mainWindowInterpretersInterface();
 
 	mProjectManager = &configurer.qRealConfigurator().projectManager();
 
-	mTwoDModel->init(configurer.eventsForKitPlugin()
-			, configurer.qRealConfigurator().systemEvents()
-			, configurer.qRealConfigurator().logicalModelApi()
-			, configurer.qRealConfigurator().controller()
-			, interpretersInterface
-			, configurer.qRealConfigurator().mainWindowDockInterface()
-			, configurer.qRealConfigurator().projectManager()
-			, configurer.interpreterControl());
+	mTwoDModel->init(configurer.eventsForKitPlugin(), configurer.qRealConfigurator().systemEvents(),
+		configurer.qRealConfigurator().logicalModelApi(), configurer.qRealConfigurator().controller(),
+		interpretersInterface, configurer.qRealConfigurator().mainWindowDockInterface(),
+		configurer.qRealConfigurator().projectManager(), configurer.interpreterControl());
 
 	mRealRobotModel->setErrorReporter(*interpretersInterface.errorReporter());
 	mTwoDRobotModel->setErrorReporter(*interpretersInterface.errorReporter());
@@ -282,19 +276,15 @@ void TrikKitInterpreterPluginBase::init(const kitBase::KitPluginConfigurator &co
 	mStop.setVisible(false);
 	mStart.setVisible(false);
 
-	connect(&configurer.eventsForKitPlugin()
-			, &kitBase::EventsForKitPluginInterface::interpretCode
-			, this
-			, [this](const QString &code, const QString &inputs, const QString &ext){
+	connect(&configurer.eventsForKitPlugin(), &kitBase::EventsForKitPluginInterface::interpretCode, this,
+		[this](const QString &code, const QString &inputs, const QString &ext) {
 		if (mIsModelSelected) {
 			startCodeInterpretation(code, inputs, ext);
 		}
 	});
 
-	connect(&configurer.robotModelManager()
-			, &kitBase::robotModel::RobotModelManagerInterface::robotModelChanged
-			, this
-			, [this](kitBase::robotModel::RobotModelInterface &model){
+	connect(&configurer.robotModelManager(), &kitBase::robotModel::RobotModelManagerInterface::robotModelChanged,
+		this, [this](kitBase::robotModel::RobotModelInterface &model) {
 		mStart.setVisible(false);
 		mStop.setVisible(false);
 
@@ -308,89 +298,62 @@ void TrikKitInterpreterPluginBase::init(const kitBase::KitPluginConfigurator &co
 	});
 
 	connect(&configurer.interpreterControl()
-// Naive approach to fix crash/pause when stopping from 2d model.
-// Changed from `stopAllInterpretation` to `stopped`, see git blame and corresponding PR
-			, &kitBase::InterpreterControlInterface::stopped
-			, this
-			, [this](qReal::interpretation::StopReason reason) {
+		// Naive approach to fix crash/pause when stopping from 2d model.
+		// Changed from `stopAllInterpretation` to `stopped`, see git blame and corresponding PR
+		,
+		&kitBase::InterpreterControlInterface::stopped, this, [this](qReal::interpretation::StopReason reason) {
 		if (mTextualInterpreter->isRunning()) {
 			testStop(reason);
 		}
 	});
 
-	connect(&configurer.interpreterControl()
-			, &kitBase::InterpreterControlInterface::startScriptInterpretation
-			, this
-			, [this]() {
+	connect(&configurer.interpreterControl(), &kitBase::InterpreterControlInterface::startScriptInterpretation,
+		this, [this]() {
 		if (!mTextualInterpreter->isRunning() && mIsModelSelected) { // temporary
 			testStart();
 		}
 	});
 
 	connect(&mStart, &QAction::triggered, this, &TrikKitInterpreterPluginBase::testStart);
-	connect(&mStop, &QAction::triggered, this, [this](){
-		this->testStop(qReal::interpretation::StopReason::userStop);
-	});
-	connect(mTextualInterpreter.data()
-			, &TrikTextualInterpreter::completed
-			, this
-			, [this](){
-		this->testStop(qReal::interpretation::StopReason::finished);
-	});
+	connect(&mStop, &QAction::triggered, this,
+		[this]() { this->testStop(qReal::interpretation::StopReason::userStop); });
+	connect(mTextualInterpreter.data(), &TrikTextualInterpreter::completed, this,
+		[this]() { this->testStop(qReal::interpretation::StopReason::finished); });
 	// refactor?
-	connect(this
-			, &TrikKitInterpreterPluginBase::started
-			, &configurer.eventsForKitPlugin()
-			, &kitBase::EventsForKitPluginInterface::interpretationStarted
-			);
+	connect(this, &TrikKitInterpreterPluginBase::started, &configurer.eventsForKitPlugin(),
+		&kitBase::EventsForKitPluginInterface::interpretationStarted);
 
-	connect(this
-			, &TrikKitInterpreterPluginBase::stopped
-			, &configurer.eventsForKitPlugin()
-			, &kitBase::EventsForKitPluginInterface::interpretationStopped
-			);
+	connect(this, &TrikKitInterpreterPluginBase::stopped, &configurer.eventsForKitPlugin(),
+		&kitBase::EventsForKitPluginInterface::interpretationStopped);
 
-//	connect(&configurer.qRealConfigurator().systemEvents(),
-//			&kitBase::EventsForKitPluginInterface:)
+	//	connect(&configurer.qRealConfigurator().systemEvents(),
+	//			&kitBase::EventsForKitPluginInterface:)
 
-	connect(&configurer.eventsForKitPlugin()
-			, &kitBase::EventsForKitPluginInterface::interpretationStarted
-			, this
-			, [this](){ /// @todo
+	connect(&configurer.eventsForKitPlugin(), &kitBase::EventsForKitPluginInterface::interpretationStarted, this,
+		[this]() { /// @todo
 		const bool isQtsInt = mTextualInterpreter->isRunning();
 		mStart.setEnabled(isQtsInt);
 		mStop.setEnabled(isQtsInt);
-	}
-	);
+	});
 
-	QObject::connect(
-				this
-				, &TrikKitInterpreterPluginBase::codeInterpretationStarted
-				, &configurer.eventsForKitPlugin()
-				, &kitBase::EventsForKitPluginInterface::codeInterpretationStarted
-				);
+	QObject::connect(this, &TrikKitInterpreterPluginBase::codeInterpretationStarted,
+		&configurer.eventsForKitPlugin(), &kitBase::EventsForKitPluginInterface::codeInterpretationStarted);
 
-	QObject::connect(
-				&configurer.eventsForKitPlugin()
-				, &kitBase::EventsForKitPluginInterface::interpretationStopped
-				, this
-				, [this](qReal::interpretation::StopReason reason){ /// @todo
+	QObject::connect(&configurer.eventsForKitPlugin(), &kitBase::EventsForKitPluginInterface::interpretationStopped,
+		this, [this](qReal::interpretation::StopReason reason) { /// @todo
 		Q_UNUSED(reason);
 		mStart.setEnabled(true);
 		mStop.setEnabled(true);
-	}
-	);
+	});
 
-	connect(mSystemEvents
-			, &qReal::SystemEvents::activeTabChanged
-			, this
-			, &TrikKitInterpreterPluginBase::onTabChanged);
+	connect(mSystemEvents, &qReal::SystemEvents::activeTabChanged, this,
+		&TrikKitInterpreterPluginBase::onTabChanged);
 
-	connect(mAdditionalPreferences, &TrikAdditionalPreferences::settingsChanged
-			, mRealRobotModel.data(), &robotModel::TrikRobotModelBase::rereadSettings);
+	connect(mAdditionalPreferences, &TrikAdditionalPreferences::settingsChanged, mRealRobotModel.data(),
+		&robotModel::TrikRobotModelBase::rereadSettings);
 
-	connect(mAdditionalPreferences, &TrikAdditionalPreferences::settingsChanged
-			, mTwoDRobotModel.data(), &robotModel::twoD::TrikTwoDRobotModel::rereadSettings);
+	connect(mAdditionalPreferences, &TrikAdditionalPreferences::settingsChanged, mTwoDRobotModel.data(),
+		&robotModel::twoD::TrikTwoDRobotModel::rereadSettings);
 
 	handleImitationCameraWork();
 }
@@ -415,7 +378,7 @@ QList<kitBase::robotModel::RobotModelInterface *> TrikKitInterpreterPluginBase::
 }
 
 QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> TrikKitInterpreterPluginBase::blocksFactoryFor(
-		const kitBase::robotModel::RobotModelInterface *model)
+	const kitBase::robotModel::RobotModelInterface *model)
 {
 	Q_UNUSED(model);
 	return mBlocksFactory;
@@ -434,14 +397,13 @@ QList<kitBase::AdditionalPreferences *> TrikKitInterpreterPluginBase::settingsWi
 
 QWidget *TrikKitInterpreterPluginBase::quickPreferencesFor(const kitBase::robotModel::RobotModelInterface &model)
 {
-	return model.name().toLower().contains("twod")
-			? nullptr
-			: produceIpAddressConfigurer();
+	return model.name().toLower().contains("twod") ? nullptr : produceIpAddressConfigurer();
 }
 
 QList<qReal::ActionInfo> TrikKitInterpreterPluginBase::customActions()
 {
-	return { qReal::ActionInfo(&mStart, "interpreters", "tools"), qReal::ActionInfo(&mStop, "interpreters", "tools") };
+	return {qReal::ActionInfo(&mStart, "interpreters", "tools"),
+		qReal::ActionInfo(&mStop, "interpreters", "tools")};
 }
 
 QList<HotKeyActionInfo> TrikKitInterpreterPluginBase::hotKeyActions()
@@ -455,13 +417,11 @@ QString TrikKitInterpreterPluginBase::defaultSettingsFile() const
 }
 
 QIcon TrikKitInterpreterPluginBase::iconForFastSelector(
-		const kitBase::robotModel::RobotModelInterface &robotModel) const
+	const kitBase::robotModel::RobotModelInterface &robotModel) const
 {
-	return &robotModel == mRealRobotModel.data()
-			? QIcon(":/icons/switch-real-trik.svg")
-			: &robotModel == mTwoDRobotModel.data()
-					? QIcon(":/icons/switch-2d.svg")
-					: QIcon();
+	return &robotModel == mRealRobotModel.data()   ? QIcon(":/icons/switch-real-trik.svg")
+	       : &robotModel == mTwoDRobotModel.data() ? QIcon(":/icons/switch-2d.svg")
+	                                               : QIcon();
 }
 
 kitBase::DevicesConfigurationProvider *TrikKitInterpreterPluginBase::devicesConfigurationProvider()
@@ -483,7 +443,7 @@ QWidget *TrikKitInterpreterPluginBase::produceIpAddressConfigurer()
 
 		// Handle duplicates
 		auto found = false;
-		for(int i = 0; i < quickPreferences->count(); ++i) {
+		for (int i = 0; i < quickPreferences->count(); ++i) {
 			if (quickPreferences->itemText(i) == ip) {
 				found = true;
 				break;
@@ -515,10 +475,9 @@ void TrikKitInterpreterPluginBase::testStart()
 	mStart.setVisible(false);
 	/// todo: bad
 
-
 	auto texttab = dynamic_cast<qReal::text::QScintillaTextEdit *>(mMainWindow->currentTab());
-	auto isJS = [](const QString &ext){ return ext == "js" || ext == "qts"; };
-	auto isPython = [](const QString &ext){ return ext == "py"; };
+	auto isJS = [](const QString &ext) { return ext == "js" || ext == "qts"; };
+	auto isPython = [](const QString &ext) { return ext == "py"; };
 
 	if (texttab) {
 		if (isJS(texttab->currentLanguage().extension)) {
@@ -554,7 +513,7 @@ void TrikKitInterpreterPluginBase::onTabChanged(const TabInfo &info)
 
 	if (isCodeTab) {
 		auto texttab = dynamic_cast<qReal::text::QScintillaTextEdit *>(mMainWindow->currentTab());
-		auto isScript = [](const QString &ext){ return ext == "py" || ext == "js" || ext == "qts"; };
+		auto isScript = [](const QString &ext) { return ext == "py" || ext == "js" || ext == "qts"; };
 		bool enable = texttab && isScript(texttab->currentLanguage().extension) && isQtsInterp;
 		mStart.setEnabled(enable);
 		mStop.setEnabled(enable);

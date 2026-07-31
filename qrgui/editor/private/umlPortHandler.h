@@ -34,23 +34,21 @@ public:
 	 * Constructs a UmlPortHandler.
 	 * @param node Node that is actually dealt with.
 	 */
-	UmlPortHandler(NodeElement * const node);
+	UmlPortHandler(NodeElement *const node);
 
 	/**
 	 * Handles NodeElement behaviour (sets its position and parent).
 	 * @param leftPressed Shows is left mouse button pressed of not.
 	 */
-	void handleMoveEvent(const bool leftPressed
-			, QPointF &pos, QPointF scenePos
-			, NodeElement *&parentNode);
+	void handleMoveEvent(const bool leftPressed, QPointF &pos, QPointF scenePos, NodeElement *&parentNode);
 
 private:
-	void handleHorizontalBorders(const NodeElement * const tmpNode, const NodeElement * const parentNode
-			, QPointF pos, QPointF posInItem) const;
+	void handleHorizontalBorders(const NodeElement *const tmpNode, const NodeElement *const parentNode, QPointF pos,
+		QPointF posInItem) const;
 	// whatever it means
 	// TODO: rename
 
-	NodeElement * const mNode;
+	NodeElement *const mNode;
 	bool mBelongsToHorizontalBorders;
 };
 

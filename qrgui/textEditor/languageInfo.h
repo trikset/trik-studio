@@ -29,8 +29,7 @@ namespace text {
 
 /// Represents the information about the language code on which is will be
 /// opened by QReal text editor.
-struct LanguageInfo
-{
+struct LanguageInfo {
 	/// The extension of the files containing code on this language.
 	QString extension;
 
@@ -87,157 +86,257 @@ public:
 	/// Returns editor settings when it edits information on an unknown language.
 	static LanguageInfo textFileInfo(const QString &extension, const QStringList &additionalTokens = QStringList())
 	{
-		return LanguageInfo{extension                                        /* extension */
-				, QObject::tr("Text File")                                   /* extension description */
-				, true                                                       /* tabs indentation */
-				, 8                                                          /* tab size */
-				, 2                                                          /* folding margin */
-				, QString()                                                  /* line comment start */
-				, QString()                                                  /* line comment end */
-				, QString()                                                  /* multiline comment start */
-				, QString()                                                  /* multiline comment end */
-				, nullptr                                                    /* lexer */
-				, additionalTokens                                           /* additional autocompletion tokens */
+		return LanguageInfo {
+			extension /* extension */
+			,
+			QObject::tr("Text File") /* extension description */
+			,
+			true /* tabs indentation */
+			,
+			8 /* tab size */
+			,
+			2 /* folding margin */
+			,
+			QString() /* line comment start */
+			,
+			QString() /* line comment end */
+			,
+			QString() /* multiline comment start */
+			,
+			QString() /* multiline comment end */
+			,
+			nullptr /* lexer */
+			,
+			additionalTokens /* additional autocompletion tokens */
 		};
 	}
 
 	/// Returns the information about the c language.
 	static LanguageInfo c(const QStringList &additionalTokens = QStringList())
 	{
-		return LanguageInfo{"c"                                              /* extension */
-				, QObject::tr("C Language Source File")                      /* extension description */
-				, true                                                       /* tabs indentation */
-				, 8                                                          /* tab size */
-				, 2                                                          /* folding margin */
-				, "//"                                                       /* line comment start */
-				, QString()                                                  /* line comment end */
-				, "/*"                                                       /* multiline comment start */
-				, "*/"                                                       /* multiline comment end */
-				, QSharedPointer<QsciLexer> {new QsciLexerCPP()}             /* lexer */
-				, additionalTokens                                           /* additional autocompletion tokens */
+		return LanguageInfo {
+			"c" /* extension */
+			,
+			QObject::tr("C Language Source File") /* extension description */
+			,
+			true /* tabs indentation */
+			,
+			8 /* tab size */
+			,
+			2 /* folding margin */
+			,
+			"//" /* line comment start */
+			,
+			QString() /* line comment end */
+			,
+			"/*" /* multiline comment start */
+			,
+			"*/" /* multiline comment end */
+			,
+			QSharedPointer<QsciLexer> {new QsciLexerCPP()} /* lexer */
+			,
+			additionalTokens /* additional autocompletion tokens */
 		};
 	}
 
 	/// The information about the russian algorithmic language.
 	static LanguageInfo russianC(const QStringList &additionalTokens = QStringList())
 	{
-		return LanguageInfo{QString::fromUtf8("си")                          /* extension */
-				, QObject::tr("Russian Algorithmic Language Source File")    /* extension description */
-				, true                                                       /* tabs indentation */
-				, 8                                                          /* tab size */
-				, 2                                                          /* folding margin */
-				, "//"                                                       /* line comment start */
-				, QString()                                                  /* line comment end */
-				, "/*"                                                       /* multiline comment start */
-				, "*/"                                                       /* multiline comment end */
-				/// @todo: write own lexer
-				, QSharedPointer<QsciLexer> { new QsciLexerCPP() }           /* lexer */
-				, additionalTokens                                           /* additional autocompletion tokens */
+		return LanguageInfo {
+			QString::fromUtf8("си") /* extension */
+			,
+			QObject::tr("Russian Algorithmic Language Source File") /* extension description */
+			,
+			true /* tabs indentation */
+			,
+			8 /* tab size */
+			,
+			2 /* folding margin */
+			,
+			"//" /* line comment start */
+			,
+			QString() /* line comment end */
+			,
+			"/*" /* multiline comment start */
+			,
+			"*/" /* multiline comment end */
+			/// @todo: write own lexer
+			,
+			QSharedPointer<QsciLexer> {new QsciLexerCPP()} /* lexer */
+			,
+			additionalTokens /* additional autocompletion tokens */
 		};
 	}
 
 	/// The information about the python language.
 	static LanguageInfo python(const QStringList &additionalTokens = QStringList())
 	{
-		return LanguageInfo{"py"                                             /* extension */
-				, QObject::tr("Python Source File")                          /* extension description */
-				, false                                                      /* tabs indentation */
-				, 2                                                          /* tab size */
-				, 2                                                          /* folding margin */
-				, "#"                                                        /* line comment start */
-				, QString()                                                  /* line comment end */
-				, R"(""")"                                                   /* multiline comment start */
-				, R"(""")"                                                   /* multiline comment end */
-				, QSharedPointer<QsciLexer> { new QsciLexerPython() }        /* lexer */
-				, additionalTokens                                           /* additional autocompletion tokens */
+		return LanguageInfo {
+			"py" /* extension */
+			,
+			QObject::tr("Python Source File") /* extension description */
+			,
+			false /* tabs indentation */
+			,
+			2 /* tab size */
+			,
+			2 /* folding margin */
+			,
+			"#" /* line comment start */
+			,
+			QString() /* line comment end */
+			,
+			R"(""")" /* multiline comment start */
+			,
+			R"(""")" /* multiline comment end */
+			,
+			QSharedPointer<QsciLexer> {new QsciLexerPython()} /* lexer */
+			,
+			additionalTokens /* additional autocompletion tokens */
 		};
 	}
 
 	/// The information about the java script language.
 	static LanguageInfo javaScript(const QStringList &additionalTokens = QStringList())
 	{
-		return LanguageInfo{"js"                                             /* extension */
-				, QObject::tr("Java Script Language Source File")            /* extension description */
-				, true                                                       /* tabs indentation */
-				, 4                                                          /* tab size */
-				, 2                                                          /* folding margin */
-				, "//"                                                       /* line comment start */
-				, QString()                                                  /* line comment end */
-				, "/*"                                                       /* multiline comment start */
-				, "*/"                                                       /* multiline comment end */
-				, QSharedPointer<QsciLexer> { new QsciLexerJavaScript() }    /* lexer */
-				, additionalTokens                                           /* additional autocompletion tokens */
+		return LanguageInfo {
+			"js" /* extension */
+			,
+			QObject::tr("Java Script Language Source File") /* extension description */
+			,
+			true /* tabs indentation */
+			,
+			4 /* tab size */
+			,
+			2 /* folding margin */
+			,
+			"//" /* line comment start */
+			,
+			QString() /* line comment end */
+			,
+			"/*" /* multiline comment start */
+			,
+			"*/" /* multiline comment end */
+			,
+			QSharedPointer<QsciLexer> {new QsciLexerJavaScript()} /* lexer */
+			,
+			additionalTokens /* additional autocompletion tokens */
 		};
 	}
 
 	/// The information about the qt-script language.
 	static LanguageInfo qtScript(const QStringList &additionalTokens = QStringList())
 	{
-		return LanguageInfo{"qts"                                            /* extension */
-				, QObject::tr("QtScript Language Source File")               /* extension description */
-				, true                                                       /* tabs indentation */
-				, 8                                                          /* tab size */
-				, 2                                                          /* folding margin */
-				, "//"                                                       /* line comment start */
-				, QString()                                                  /* line comment end */
-				, "/*"                                                       /* multiline comment start */
-				, "*/"                                                       /* multiline comment end */
-				, QSharedPointer<QsciLexer> { new QsciLexerJavaScript() }    /* lexer */
-				, additionalTokens                                           /* additional autocompletion tokens */
+		return LanguageInfo {
+			"qts" /* extension */
+			,
+			QObject::tr("QtScript Language Source File") /* extension description */
+			,
+			true /* tabs indentation */
+			,
+			8 /* tab size */
+			,
+			2 /* folding margin */
+			,
+			"//" /* line comment start */
+			,
+			QString() /* line comment end */
+			,
+			"/*" /* multiline comment start */
+			,
+			"*/" /* multiline comment end */
+			,
+			QSharedPointer<QsciLexer> {new QsciLexerJavaScript()} /* lexer */
+			,
+			additionalTokens /* additional autocompletion tokens */
 		};
 	}
 
 	/// The information about the F# language.
 	static LanguageInfo fSharp(const QStringList &additionalTokens = QStringList())
 	{
-		return LanguageInfo{"fs"                                             /* extension */
-				, QObject::tr("F# Language Source File")                     /* extension description */
-				, false                                                      /* tabs indentation */
-				, 4                                                          /* tab size */
-				, 2                                                          /* folding margin */
-				, "//"                                                       /* line comment start */
-				, QString()                                                  /* line comment end */
-				, "(*"                                                       /* multiline comment start */
-				, "*)"                                                       /* multiline comment end */
-				/// @todo: write own lexer?
-				, QSharedPointer<QsciLexer> { new QsciLexerCPP() }           /* lexer */
-				, additionalTokens                                           /* additional autocompletion tokens */
+		return LanguageInfo {
+			"fs" /* extension */
+			,
+			QObject::tr("F# Language Source File") /* extension description */
+			,
+			false /* tabs indentation */
+			,
+			4 /* tab size */
+			,
+			2 /* folding margin */
+			,
+			"//" /* line comment start */
+			,
+			QString() /* line comment end */
+			,
+			"(*" /* multiline comment start */
+			,
+			"*)" /* multiline comment end */
+			/// @todo: write own lexer?
+			,
+			QSharedPointer<QsciLexer> {new QsciLexerCPP()} /* lexer */
+			,
+			additionalTokens /* additional autocompletion tokens */
 		};
 	}
 
 	/// The information about the PascalABC language.
 	static LanguageInfo pascalABC(const QStringList &additionalTokens = QStringList())
 	{
-		return LanguageInfo{"pas"                                            /* extension */
-				, QObject::tr("PascalABC Language Source File")              /* extension description */
-				, false                                                      /* tabs indentation */
-				, 4                                                          /* tab size */
-				, 2                                                          /* folding margin */
-				, "--"                                                       /* line comment start */
-				, QString()                                                  /* line comment end */
-				, "{*"                                                       /* multiline comment start */
-				, "*}"                                                       /* multiline comment end */
-				, QSharedPointer<QsciLexer> { new QsciLexerPascal() }        /* lexer */
-				, additionalTokens                                           /* additional autocompletion tokens */
+		return LanguageInfo {
+			"pas" /* extension */
+			,
+			QObject::tr("PascalABC Language Source File") /* extension description */
+			,
+			false /* tabs indentation */
+			,
+			4 /* tab size */
+			,
+			2 /* folding margin */
+			,
+			"--" /* line comment start */
+			,
+			QString() /* line comment end */
+			,
+			"{*" /* multiline comment start */
+			,
+			"*}" /* multiline comment end */
+			,
+			QSharedPointer<QsciLexer> {new QsciLexerPascal()} /* lexer */
+			,
+			additionalTokens /* additional autocompletion tokens */
 		};
 	}
 
 	/// The information about the Lua language.
 	static LanguageInfo lua(const QStringList &additionalTokens = QStringList())
 	{
-		return LanguageInfo{"lua"                                            /* extension */
-				, QObject::tr("Lua Language Source File")                    /* extension description */
-				, true                                                       /* tabs indentation */
-				, 4                                                          /* tab size */
-				, 2                                                          /* folding margin */
-				, "--"                                                       /* line comment start */
-				, QString()                                                  /* line comment end */
-				, "--[["                                                     /* multiline comment start */
-				, "]]"                                                       /* multiline comment end */
-				, QSharedPointer<QsciLexer> { new QsciLexerLua() }           /* lexer */
-				, additionalTokens                                           /* additional autocompletion tokens */
+		return LanguageInfo {
+			"lua" /* extension */
+			,
+			QObject::tr("Lua Language Source File") /* extension description */
+			,
+			true /* tabs indentation */
+			,
+			4 /* tab size */
+			,
+			2 /* folding margin */
+			,
+			"--" /* line comment start */
+			,
+			QString() /* line comment end */
+			,
+			"--[[" /* multiline comment start */
+			,
+			"]]" /* multiline comment end */
+			,
+			QSharedPointer<QsciLexer> {new QsciLexerLua()} /* lexer */
+			,
+			additionalTokens /* additional autocompletion tokens */
 		};
 	}
+
 private:
 	static QList<LanguageInfo> mUserDefinedLanguages;
 };

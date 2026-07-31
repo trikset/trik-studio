@@ -57,10 +57,10 @@ qReal::Id GesturesWidget::currentElement() const
 	return mUi->listWidget->currentItem()->data(Qt::UserRole).value<qReal::Id>();
 }
 
-void GesturesWidget::setElements(QList<QPair<QString, qReal::Id> > const &elements)
+void GesturesWidget::setElements(QList<QPair<QString, qReal::Id>> const &elements)
 {
 	mUi->listWidget->clear();
-	QListIterator<QPair<QString, qReal::Id> > iterator(elements);
+	QListIterator<QPair<QString, qReal::Id>> iterator(elements);
 	while (iterator.hasNext()) {
 		QPair<QString, qReal::Id> const element(iterator.next());
 		auto *item = new QListWidgetItem(element.first);

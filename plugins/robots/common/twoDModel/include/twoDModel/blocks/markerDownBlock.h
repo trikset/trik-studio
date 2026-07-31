@@ -22,8 +22,7 @@ namespace twoDModel {
 namespace blocks {
 
 /// An interpreter`s implementation for PrepareMarker block. See description in documentation.
-class TWO_D_MODEL_EXPORT MarkerDownBlock
-		: public kitBase::blocksBase::common::DeviceBlock<robotModel::parts::Marker>
+class TWO_D_MODEL_EXPORT MarkerDownBlock : public kitBase::blocksBase::common::DeviceBlock<robotModel::parts::Marker>
 {
 	Q_OBJECT
 

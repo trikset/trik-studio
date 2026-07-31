@@ -39,7 +39,9 @@ public Q_SLOTS:
 	void showImage(const QString &fileName) override;
 	void show(const QVector<int32_t> &array, int width, int height, const QString &format) override;
 	void addLabel(const QString &text, int x, int y, int fontSize) override;
-	void removeLabels() override {}
+	void removeLabels() override
+	{
+	}
 	void setPainterColor(const QString &color) override;
 	void setPainterWidth(int penWidth) override;
 	void drawLine(int x1, int y1, int x2, int y2) override;
@@ -48,7 +50,9 @@ public Q_SLOTS:
 	void drawEllipse(int x, int y, int width, int height, bool filled) override;
 	void drawArc(int x, int y, int width, int height, int startAngle, int spanAngle) override;
 	void setBackground(const QString &color) override;
-	void hide() override {}
+	void hide() override
+	{
+	}
 	void clear() override;
 	void reset() override;
 	void redraw() override;

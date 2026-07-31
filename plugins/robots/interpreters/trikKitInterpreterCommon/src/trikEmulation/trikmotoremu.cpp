@@ -14,7 +14,8 @@
 
 #include "trikKitInterpreterCommon/trikEmulation/trikmotoremu.h"
 
-trik::TrikMotorEmu::TrikMotorEmu(kitBase::robotModel::robotParts::Motor *motor) : mMotor(motor)
+trik::TrikMotorEmu::TrikMotorEmu(kitBase::robotModel::robotParts::Motor *motor)
+	: mMotor(motor)
 {
 }
 

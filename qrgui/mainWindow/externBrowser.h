@@ -15,13 +15,13 @@
 #pragma once
 
 #ifdef Q_OS_WIN
-#include "mainwindow/windowsExternBrowser.h"
+#	include "mainwindow/windowsExternBrowser.h"
 #endif
 
 #ifdef Q_OS_LINUX
-#include "mainwindow/linuxExternBrowser.h"
+#	include "mainwindow/linuxExternBrowser.h"
 #endif
 
 #ifdef Q_OS_MACOS
-#include "mainwindow/macExternBrowser.h"
+#	include "mainwindow/macExternBrowser.h"
 #endif

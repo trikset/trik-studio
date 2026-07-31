@@ -27,7 +27,8 @@ public:
 
 	QString convert(const QString &name, const QStringList &args) const;
 
-	inline bool isCosOrSin(const QString &name) const {
+	inline bool isCosOrSin(const QString &name) const
+	{
 		return name == "cos" || name == "sin";
 	}
 };

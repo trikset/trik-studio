@@ -20,10 +20,8 @@
 
 using namespace qReal::commands;
 
-RenameExplosionCommand::RenameExplosionCommand(models::LogicalModelAssistApi &logicalApi
-		, const models::GraphicalModelAssistApi * const graphicalApi
-		, const models::Exploser &exploser
-		, const Id &target)
+RenameExplosionCommand::RenameExplosionCommand(models::LogicalModelAssistApi &logicalApi,
+	const models::GraphicalModelAssistApi *const graphicalApi, const models::Exploser &exploser, const Id &target)
 	: mLogicalApi(logicalApi)
 	, mGraphicalApi(graphicalApi)
 	, mExploser(exploser)

@@ -61,7 +61,8 @@ public:
 	~Protocol() override;
 
 	/// Adds transition from "source" state to "destination" state initiated by given signal.
-	template <typename Func> void addTransition(QState *source, Func signal, QState *destination)
+	template<typename Func>
+	void addTransition(QState *source, Func signal, QState *destination)
 	{
 		registerStateIfNeeded(source);
 		registerStateIfNeeded(destination);
@@ -70,7 +71,8 @@ public:
 	}
 
 	/// Adds transition from "source" state to error state by given signal.
-	template <typename Func> void addErrorTransition(QState *source, Func signal)
+	template<typename Func>
+	void addErrorTransition(QState *source, Func signal)
 	{
 		registerStateIfNeeded(source);
 		const QMetaMethod signalMetaMethod = QMetaMethod::fromSignal(signal);
@@ -78,7 +80,8 @@ public:
 	}
 
 	/// Adds transition from "source" state to success state by given signal.
-	template <typename Func> void addSuccessTransition(QState *source, Func signal)
+	template<typename Func>
+	void addSuccessTransition(QState *source, Func signal)
 	{
 		registerStateIfNeeded(source);
 		const QMetaMethod signalMetaMethod = QMetaMethod::fromSignal(signal);
@@ -101,23 +104,22 @@ public:
 
 		typedef typename function_traits<GuardFunc>::template arg<0>::type ParamType;
 
-		QSharedPointer<GuardSignalGenerator> successGuardSignalGenerator(new GuardSignalGenerator{});
-		QSharedPointer<GuardSignalGenerator> errorGuardSignalGenerator(new GuardSignalGenerator{});
+		QSharedPointer<GuardSignalGenerator> successGuardSignalGenerator(new GuardSignalGenerator {});
+		QSharedPointer<GuardSignalGenerator> errorGuardSignalGenerator(new GuardSignalGenerator {});
 
 		const QMetaMethod signalMetaMethod = QMetaMethod::fromSignal(&GuardSignalGenerator::guardSatisfied);
 		const QByteArray signature = signalMetaMethod.methodSignature().constData();
 		source->addTransition(successGuardSignalGenerator.data(), signature, destination);
 		source->addTransition(errorGuardSignalGenerator.data(), signature, mErrored);
 
-		connect(&mCommunicator, signal, this, [guard, successGuardSignalGenerator, errorGuardSignalGenerator]
-				(const ParamType &&param) {
-					if (guard(param)) {
-						successGuardSignalGenerator->onTrigger();
-					} else {
-						errorGuardSignalGenerator->onTrigger();
-					}
-				}
-		);
+		connect(&mCommunicator, signal, this,
+			[guard, successGuardSignalGenerator, errorGuardSignalGenerator](const ParamType &&param) {
+			if (guard(param)) {
+				successGuardSignalGenerator->onTrigger();
+			} else {
+				errorGuardSignalGenerator->onTrigger();
+			}
+		});
 	}
 
 	/// Sets action that shall be done when entering a state. Action receives communicator to be able to send
@@ -151,7 +153,7 @@ private Q_SLOTS:
 private:
 	/// If this state is not added to state machine yet, adds it, adds transition to error state on network error
 	/// and if this state is first in a protocol, marks it as starting state.
-	void registerStateIfNeeded(QState * const state);
+	void registerStateIfNeeded(QState *const state);
 
 	/// Special internal state meaning successful protocol execution.
 	/// Does not have direct ownership, will be disposed by mStateMachine.

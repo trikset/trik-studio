@@ -35,14 +35,11 @@ class PioneerLuaMasterGenerator : public generatorBase::MasterGeneratorBase
 	Q_OBJECT
 
 public:
-	PioneerLuaMasterGenerator(const qrRepo::RepoApi &repo
-			, qReal::ErrorReporterInterface &errorReporter
-			, const utils::ParserErrorReporter &parserErrorReporter
-			, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
-			, qrtext::LanguageToolboxInterface &textLanguage
-			, const qReal::Id &diagramId
-			, const QString &generatorName
-			, const qReal::EditorManagerInterface &metamodel);
+	PioneerLuaMasterGenerator(const qrRepo::RepoApi &repo, qReal::ErrorReporterInterface &errorReporter,
+		const utils::ParserErrorReporter &parserErrorReporter,
+		const kitBase::robotModel::RobotModelManagerInterface &robotModelManager,
+		qrtext::LanguageToolboxInterface &textLanguage, const qReal::Id &diagramId,
+		const QString &generatorName, const qReal::EditorManagerInterface &metamodel);
 
 	~PioneerLuaMasterGenerator() override;
 

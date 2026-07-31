@@ -15,9 +15,9 @@
 #include "miniMap.h"
 
 MiniMap::MiniMap(QWidget *parent)
-		: QGraphicsView(parent)
-		, mEditorView(nullptr)
-		, mMode(None)
+	: QGraphicsView(parent)
+	, mEditorView(nullptr)
+	, mMode(None)
 {
 }
 
@@ -154,9 +154,9 @@ QList<QRectF> MiniMap::getNonExistentAreas(const QRectF &rect)
 
 	QList<QRectF> areas;
 	areas << QRectF(rect.topLeft(), existent.bottomLeft())
-			<< QRectF(rect.topLeft(), QPointF(rect.right(), existent.top()))
-			<< QRectF(existent.topRight(), rect.bottomRight())
-			<< QRectF(QPointF(rect.left(), existent.bottom()), rect.bottomRight());
+	      << QRectF(rect.topLeft(), QPointF(rect.right(), existent.top()))
+	      << QRectF(existent.topRight(), rect.bottomRight())
+	      << QRectF(QPointF(rect.left(), existent.bottom()), rect.bottomRight());
 
 	return areas;
 }

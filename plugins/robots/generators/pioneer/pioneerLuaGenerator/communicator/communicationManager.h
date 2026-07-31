@@ -40,10 +40,8 @@ class CommunicationManager : public QObject
 	Q_OBJECT
 
 public:
-	CommunicationManager(
-			qReal::ErrorReporterInterface &errorReporter
-			, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
-	);
+	CommunicationManager(qReal::ErrorReporterInterface &errorReporter,
+		const kitBase::robotModel::RobotModelManagerInterface &robotModelManager);
 
 	~CommunicationManager() override;
 
@@ -79,12 +77,7 @@ private Q_SLOTS:
 
 private:
 	/// Enum with possible actions of communicator.
-	enum class Action {
-		none
-		, uploading
-		, starting
-		, stopping
-	};
+	enum class Action { none, uploading, starting, stopping };
 
 	/// Returns reference to a currently selected quadcopter communicator.
 	CommunicatorInterface &communicator() const;

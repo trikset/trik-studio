@@ -55,6 +55,7 @@ Q_SIGNALS:
 
 	/// Emitted when new message with level 'Log' added to error reporter.
 	void logAdded(const QString &message);
+
 private:
 	bool mWereErrors = false;
 };

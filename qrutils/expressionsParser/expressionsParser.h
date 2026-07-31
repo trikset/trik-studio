@@ -31,10 +31,10 @@ public:
 	virtual ~ExpressionsParser();
 
 	QSharedPointer<Number> parseExpression(const QString &stream, int &pos);
-	void parseProcess(const QString &stream, int& pos, const qReal::Id &curId);
+	void parseProcess(const QString &stream, int &pos, const qReal::Id &curId);
 	bool parseConditionHelper(const QString &stream, int &pos);
-	bool parseCondition(const QString &stream, int& pos, const qReal::Id &curId);
-	qReal::ErrorReporterInterface& getErrors();
+	bool parseCondition(const QString &stream, int &pos, const qReal::Id &curId);
+	qReal::ErrorReporterInterface &getErrors();
 	bool hasErrors() const;
 	void setErrorReporter(qReal::ErrorReporterInterface *errorReporter);
 	void clear();
@@ -44,19 +44,19 @@ public:
 
 protected:
 	enum ParseErrorType {
-		unexpectedEndOfStream
-		, unexpectedSymbol
-		, typesMismatch
-		, unknownIdentifier
-		, emptyProcess
-		, emptyCondition
-		, usingReservedVariable
-		, noExpression
-		, incorrectVariableDeclaration
-		, unexpectedSymbolAfterTheEndOfExpression
-		, unknownElementProperty
-		, unknownElementName
-		, divisionByZero
+		unexpectedEndOfStream,
+		unexpectedSymbol,
+		typesMismatch,
+		unknownIdentifier,
+		emptyProcess,
+		emptyCondition,
+		usingReservedVariable,
+		noExpression,
+		incorrectVariableDeclaration,
+		unexpectedSymbolAfterTheEndOfExpression,
+		unknownElementProperty,
+		unknownElementName,
+		divisionByZero
 	};
 
 protected:
@@ -82,7 +82,7 @@ protected:
 	void skip(const QString &stream, int &pos) const;
 
 	QSharedPointer<Number> parseTerm(const QString &stream, int &pos);
-	QSharedPointer<Number> parseMult(const QString &stream, int&pos);
+	QSharedPointer<Number> parseMult(const QString &stream, int &pos);
 
 	virtual void parseVarPart(const QString &stream, int &pos);
 	void parseCommand(const QString &stream, int &pos);
@@ -91,8 +91,8 @@ protected:
 	bool parseConjunction(const QString &stream, int &pos);
 	bool parseDisjunction(const QString &stream, int &pos);
 
-	void error(utils::ExpressionsParser::ParseErrorType type, const QString &pos = "", const QString &expected = ""
-			, const QString &got = "");
+	void error(utils::ExpressionsParser::ParseErrorType type, const QString &pos = "", const QString &expected = "",
+		const QString &got = "");
 
 	bool isEndOfStream(const QString &stream, int &pos);
 	bool checkForLetter(const QString &stream, int &pos);
@@ -111,8 +111,7 @@ protected:
 
 	QMap<QString, QSharedPointer<Number>> mVariables;
 	bool mHasParseErrors;
-	qReal::ErrorReporterInterface *mErrorReporter;  // Does not take ownership
+	qReal::ErrorReporterInterface *mErrorReporter; // Does not take ownership
 	qReal::Id mCurrentId;
-
 };
 }

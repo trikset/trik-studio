@@ -68,14 +68,12 @@ namespace view {
 class RobotItem;
 
 /// Implementation of QGraphicsScene for 2D robot model
-class TwoDModelScene: public graphicsUtils::AbstractScene, public kitBase::DevicesConfigurationProvider
+class TwoDModelScene : public graphicsUtils::AbstractScene, public kitBase::DevicesConfigurationProvider
 {
 	Q_OBJECT
 
 public:
-	TwoDModelScene(model::Model &model
-			, graphicsUtils::AbstractView *view
-			, QObject *parent = nullptr);
+	TwoDModelScene(model::Model &model, graphicsUtils::AbstractView *view, QObject *parent = nullptr);
 
 	~TwoDModelScene() override;
 
@@ -184,11 +182,11 @@ private Q_SLOTS:
 	/// Called after new cube is added to a world model.
 	void onCubeAdded(const QSharedPointer<twoDModel::items::CubeItem> &cube);
 
-//	/// Called after new color field item is added to a world model.
-//	void onColorItemAdded(const QSharedPointer<graphicsUtils::AbstractItem> &item);
+	//	/// Called after new color field item is added to a world model.
+	//	void onColorItemAdded(const QSharedPointer<graphicsUtils::AbstractItem> &item);
 
-//	/// Called after new image item is added to a world model.
-//	void onImageItemAdded(const QSharedPointer<graphicsUtils::AbstractItem> &item);
+	//	/// Called after new image item is added to a world model.
+	//	void onImageItemAdded(const QSharedPointer<graphicsUtils::AbstractItem> &item);
 
 	void onColorFieldAdded(QSharedPointer<twoDModel::items::ColorFieldItem> item);
 
@@ -204,21 +202,20 @@ private Q_SLOTS:
 	void drawAxes(QPainter *painter);
 
 private:
-	enum DrawingAction
-	{
-		none = 0
-		, wall
-		, skittle
-		, ball
-		, cube
-		, line
-		, bezier
-		, stylus
-		, rectangle
-		, ellipse
-		, comment
-		, image
-		, region
+	enum DrawingAction {
+		none = 0,
+		wall,
+		skittle,
+		ball,
+		cube,
+		line,
+		bezier,
+		stylus,
+		rectangle,
+		ellipse,
+		comment,
+		image,
+		region
 	};
 
 	void switchToEditorMode(EditorMode mode);
@@ -230,12 +227,12 @@ private:
 	void drawBackground(QPainter *painter, const QRectF &rect) override;
 	void keyPressEvent(QKeyEvent *event) override;
 
-	QPair<QStringList, QList<QPair<model::RobotModel *
-			, kitBase::robotModel::PortInfo>>> parseItemsToID (const QList<QGraphicsItem *> &items);
+	QPair<QStringList, QList<QPair<model::RobotModel *, kitBase::robotModel::PortInfo>>> parseItemsToID(
+		const QList<QGraphicsItem *> &items);
 	void deleteSelectedItems();
-	void deleteWithCommand(const QStringList &worldItems
-			, const QList<QPair<model::RobotModel *, kitBase::robotModel::PortInfo>> &sensors
-			, const QList<qReal::commands::AbstractCommand *> &additionalCommands);
+	void deleteWithCommand(const QStringList &worldItems,
+		const QList<QPair<model::RobotModel *, kitBase::robotModel::PortInfo>> &sensors,
+		const QList<qReal::commands::AbstractCommand *> &additionalCommands);
 	void copySelectedItems();
 	void pasteItemsFromClipboard();
 
@@ -252,8 +249,7 @@ private:
 
 	void handleMouseInteractionWithSelectedItems();
 
-	bool hasIntersect(const graphicsUtils::AbstractItem *item2
-					  , const graphicsUtils::AbstractItem *item1) const;
+	bool hasIntersect(const graphicsUtils::AbstractItem *item2, const graphicsUtils::AbstractItem *item1) const;
 	bool isCorrectScene(const QList<QGraphicsItem *> &checkItems) const;
 
 	qreal currentZoom() const;
@@ -262,7 +258,7 @@ private:
 	qReal::ControllerInterface *mController = nullptr;
 
 	graphicsUtils::GridDrawer mGridDrawer;
-	qreal mWidthOfGrid { -1 };
+	qreal mWidthOfGrid {-1};
 
 	/// Current action (toggled button on left panel)
 	DrawingAction mDrawingAction;

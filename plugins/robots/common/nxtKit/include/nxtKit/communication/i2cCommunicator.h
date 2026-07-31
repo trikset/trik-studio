@@ -27,9 +27,8 @@ class I2CCommunicator
 public:
 	explicit I2CCommunicator(utils::robotCommunication::RobotCommunicator &robotCommunicator);
 
-	void sendI2C(QObject *addressee, const QByteArray &buffer
-			, const int responseSize
-			, const kitBase::robotModel::PortInfo &port);
+	void sendI2C(QObject *addressee, const QByteArray &buffer, const int responseSize,
+		const kitBase::robotModel::PortInfo &port);
 
 private:
 	static const int i2cTimeout = 5000;

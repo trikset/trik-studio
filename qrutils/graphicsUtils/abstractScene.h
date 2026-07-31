@@ -20,8 +20,7 @@
 #include "abstractItem.h"
 #include "qrutils/utilsDeclSpec.h"
 
-namespace graphicsUtils
-{
+namespace graphicsUtils {
 
 class QRUTILS_EXPORT AbstractScene : public QGraphicsScene
 {
@@ -40,9 +39,9 @@ public:
 	virtual void forMoveResize(QGraphicsSceneMouseEvent *event);
 	virtual void forReleaseResize(QGraphicsSceneMouseEvent *event);
 
-	static bool compareItems(graphicsUtils::AbstractItem* first, graphicsUtils::AbstractItem* second);
-	static bool compareSharedPtrItems(const QSharedPointer<graphicsUtils::AbstractItem> &first
-							 , const QSharedPointer<graphicsUtils::AbstractItem> &second);
+	static bool compareItems(graphicsUtils::AbstractItem *first, graphicsUtils::AbstractItem *second);
+	static bool compareSharedPtrItems(const QSharedPointer<graphicsUtils::AbstractItem> &first,
+		const QSharedPointer<graphicsUtils::AbstractItem> &second);
 	QString convertPenToString(const QPen &pen);
 	QString convertBrushToString(const QBrush &brush);
 	void setPenBrushItems(const QPen &pen, const QBrush &brush);
@@ -55,7 +54,7 @@ public:
 	void setBrushColorItems(const QString &text);
 
 	/// Appends the given action to the context menu shown on empty scene.
-	void addAction(QAction * const action);
+	void addAction(QAction *const action);
 
 	/// Appends the given list of action to the context menu shown on empty scene.
 	void addActions(const QList<QAction *> &actions);
@@ -83,7 +82,7 @@ protected:
 	void reshapeItem(QGraphicsSceneMouseEvent *event);
 	void reshapeItem(QGraphicsSceneMouseEvent *event, graphicsUtils::AbstractItem *item);
 
-	void removeMoveFlag(QGraphicsSceneMouseEvent *event, QGraphicsItem* item);
+	void removeMoveFlag(QGraphicsSceneMouseEvent *event, QGraphicsItem *item);
 	void setMoveFlag(QGraphicsSceneMouseEvent *event);
 
 	void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) override;

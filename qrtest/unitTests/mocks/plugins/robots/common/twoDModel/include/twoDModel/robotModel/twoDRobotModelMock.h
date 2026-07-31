@@ -25,27 +25,27 @@ class TwoDRobotModelMock : public twoDModel::robotModel::TwoDRobotModel
 
 public:
 	// NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init)
-	explicit TwoDRobotModelMock(const RobotModelInterface &realModel):
-	        twoDModel::robotModel::TwoDRobotModel(realModel) {};
+	explicit TwoDRobotModelMock(const RobotModelInterface &realModel)
+		: twoDModel::robotModel::TwoDRobotModel(realModel) {};
 	// clazy:excludeall=function-args-by-value,returning-void-expression
-	MOCK_METHOD(QString, robotId, (),(const, override));
+	MOCK_METHOD(QString, robotId, (), (const, override));
 	MOCK_METHOD(QString, name, (), (const, override));
 	MOCK_METHOD(QString, friendlyName, (), (const, override));
 	MOCK_METHOD(bool, needsConnection, (), (const, override));
 	MOCK_METHOD(int, updateIntervalForInterpretation, (), (const, override));
 	MOCK_METHOD(utils::TimelineInterface &, timeline, (), (override));
-	MOCK_METHOD(QList< kitBase::robotModel::PortInfo>, configurablePorts, (), (const, override));
-	MOCK_METHOD(QList< kitBase::robotModel::DeviceInfo>, convertibleBases, (), (const, override));
+	MOCK_METHOD(QList<kitBase::robotModel::PortInfo>, configurablePorts, (), (const, override));
+	MOCK_METHOD(QList<kitBase::robotModel::DeviceInfo>, convertibleBases, (), (const, override));
 	MOCK_METHOD(int, priority, (), (const, override));
 	MOCK_METHOD(void, rereadSettings, (), (override));
 	MOCK_METHOD(QString, robotImage, (), (const, override));
 	MOCK_METHOD(kitBase::robotModel::PortInfo, defaultLeftWheelPort, (), (const, override));
 	MOCK_METHOD(kitBase::robotModel::PortInfo, defaultRightWheelPort, (), (const, override));
-	MOCK_METHOD(twoDModel::engine::TwoDModelDisplayWidget *, displayWidget,(), (const, override));
+	MOCK_METHOD(twoDModel::engine::TwoDModelDisplayWidget *, displayWidget, (), (const, override));
 	MOCK_METHOD(QPolygonF, collidingPolygon, (), (const, override));
 	MOCK_METHOD(qreal, mass, (), (const, override));
 	MOCK_METHOD(qreal, friction, (), (const, override));
-	MOCK_METHOD(QSizeF, size,(), (const, override));
+	MOCK_METHOD(QSizeF, size, (), (const, override));
 	MOCK_METHOD(QPointF, rotationCenter, (), (const, override));
 	MOCK_METHOD(QPointF, robotCenter, (), (const, override));
 	MOCK_METHOD(QList<QPointF>, wheelsPosition, (), (const, override));

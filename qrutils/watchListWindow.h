@@ -25,7 +25,7 @@
 #include "expressionsParser/expressionsParser.h"
 
 namespace Ui {
-	class watchListWindow;
+class watchListWindow;
 }
 
 const int watchWindowRefreshInterval = 500;
@@ -66,14 +66,13 @@ private:
 	QString toString(const QVariant &value) const;
 	void focusInEvent(QFocusEvent *event) override;
 
-	WatchListWindow(const utils::ExpressionsParser * const parser
-			, const qrtext::DebuggerInterface * const newParser
-			, QWidget *parent);
+	WatchListWindow(const utils::ExpressionsParser *const parser, const qrtext::DebuggerInterface *const newParser,
+		QWidget *parent);
 
 	Ui::watchListWindow *mUi;
 	QTimer mTimer;
-	const qrtext::DebuggerInterface * const mNewParser;  // Does not have ownership.
-	const utils::ExpressionsParser * const mParser;  // Does not have ownership.
+	const qrtext::DebuggerInterface *const mNewParser; // Does not have ownership.
+	const utils::ExpressionsParser *const mParser; // Does not have ownership.
 	QSet<QString> mHiddenVariables;
 };
 

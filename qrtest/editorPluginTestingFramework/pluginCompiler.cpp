@@ -27,32 +27,30 @@
 
 using namespace editorPluginTestingFramework;
 
-QFileInfo PluginCompiler::compilePlugin(const QString &fileWithMetamodel
-		, const QString &directoryToCompile
-		, const QString &pathToQmake
-		, const QString &pathToMake
-		, const QString &configurationParameter
-		, MetamodelCompiler metamodelCompiler)
+QFileInfo PluginCompiler::compilePlugin(const QString &fileWithMetamodel, const QString &directoryToCompile,
+	const QString &pathToQmake, const QString &pathToMake, const QString &configurationParameter,
+	MetamodelCompiler metamodelCompiler)
 {
 	qDebug() << "Compiling plugin from" << fileWithMetamodel << "in folder" << directoryToCompile
-			<< ", configuration: " << configurationParameter;
+		 << ", configuration: " << configurationParameter;
 
 	QProcess builder;
 	const QStringList environment = QProcess::systemEnvironment();
 	builder.setEnvironment(environment);
-	QStringList qmakeArgs{"CONFIG+=" + configurationParameter};
+	QStringList qmakeArgs {"CONFIG+=" + configurationParameter};
 
 	const QString pluginName = getPluginName(fileWithMetamodel);
 
 	const QString proFileName = metamodelCompiler == MetamodelCompiler::qrxc
-			? patchProFileForQrxc(pluginName, directoryToCompile)
-			: patchProFileForQrmc(pluginName, directoryToCompile);
+	                                    ? patchProFileForQrxc(pluginName, directoryToCompile)
+	                                    : patchProFileForQrmc(pluginName, directoryToCompile);
 
 	builder.setWorkingDirectory(QFileInfo(proFileName).canonicalPath());
 
 	qmakeArgs.append(QFileInfo(proFileName).fileName());
 
-	qDebug() << "Running qmake with the following arguments:" << qmakeArgs << ", from" << builder.workingDirectory();
+	qDebug() << "Running qmake with the following arguments:" << qmakeArgs << ", from"
+		 << builder.workingDirectory();
 
 	builder.start(pathToQmake, qmakeArgs);
 
@@ -63,19 +61,19 @@ QFileInfo PluginCompiler::compilePlugin(const QString &fileWithMetamodel
 			builder.start(pathToMake);
 
 			if (!builder.waitForStarted()) {
-				qDebug()  << "make failed to start, used this make command:" << pathToMake;
+				qDebug() << "make failed to start, used this make command:" << pathToMake;
 				throw qReal::Exception("make failed to start");
 			}
 
 			if (!builder.waitForFinished(100000)) {
-				qDebug()  << "make failed to finish.";
+				qDebug() << "make failed to finish.";
 				throw qReal::Exception("make failed to finish");
 			}
 
 			if (builder.exitCode() == 0) {
-				qDebug()  << "make successful";
+				qDebug() << "make successful";
 			} else {
-				qDebug()  << "make failed with exit code" << builder.exitCode();
+				qDebug() << "make failed with exit code" << builder.exitCode();
 				throw qReal::Exception("make failed");
 			}
 		} else {
@@ -113,7 +111,8 @@ QString PluginCompiler::getPluginName(const QString &fileWithMetamodel)
 	for (const qReal::Id &key : metamodels) {
 		if (repoApi.isLogicalElement(key)) {
 			if (pluginName.isEmpty()) {
-				pluginName = utils::NameNormalizer::normalize(repoApi.stringProperty(key, "name"), false);
+				pluginName =
+					utils::NameNormalizer::normalize(repoApi.stringProperty(key, "name"), false);
 			} else {
 				throw qReal::Exception("More than one metamodel in a .qrs file, will not compile it.");
 			}
@@ -140,7 +139,7 @@ QString PluginCompiler::patchProFileForQrxc(const QString &pluginName, const QSt
 QString PluginCompiler::patchProFileForQrmc(const QString &pluginName, const QString &directoryToCompile)
 {
 	qDebug() << "Using QRMC";
-	const QString proFileName = directoryToCompile + "/" + pluginName + "/" +  pluginName + ".pro";
+	const QString proFileName = directoryToCompile + "/" + pluginName + "/" + pluginName + ".pro";
 	QFile proFile(proFileName);
 	proFile.open(QIODevice::ReadOnly);
 	const QByteArray oldProFileContents = proFile.readAll();

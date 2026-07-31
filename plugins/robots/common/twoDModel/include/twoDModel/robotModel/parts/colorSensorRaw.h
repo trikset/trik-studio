@@ -35,9 +35,8 @@ class TWO_D_MODEL_EXPORT ColorSensorRaw : public kitBase::robotModel::robotParts
 	Q_CLASSINFO("friendlyName", tr("Color sensor (raw)"))
 
 public:
-	ColorSensorRaw(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port
-			, engine::TwoDModelEngineInterface &engine);
+	ColorSensorRaw(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+		engine::TwoDModelEngineInterface &engine);
 
 	void read() override;
 

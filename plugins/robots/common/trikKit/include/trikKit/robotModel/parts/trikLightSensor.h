@@ -16,7 +16,6 @@
 
 #include <kitBase/robotModel/robotParts/lightSensor.h>
 
-
 namespace trik {
 namespace robotModel {
 namespace parts {

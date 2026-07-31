@@ -24,13 +24,11 @@ class TrikPythonMasterGenerator : public TrikMasterGeneratorBase
 {
 	Q_OBJECT
 public:
-	TrikPythonMasterGenerator(const qrRepo::RepoApi &repo
-			, qReal::ErrorReporterInterface &errorReporter
-			, const utils::ParserErrorReporter &parserErrorReporter
-			, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
-			, qrtext::LanguageToolboxInterface &textLanguage
-			, const qReal::Id &diagramId
-			, const QStringList &pathsToTemplates);
+	TrikPythonMasterGenerator(const qrRepo::RepoApi &repo, qReal::ErrorReporterInterface &errorReporter,
+		const utils::ParserErrorReporter &parserErrorReporter,
+		const kitBase::robotModel::RobotModelManagerInterface &robotModelManager,
+		qrtext::LanguageToolboxInterface &textLanguage, const qReal::Id &diagramId,
+		const QStringList &pathsToTemplates);
 
 protected:
 	QString targetPath() override;

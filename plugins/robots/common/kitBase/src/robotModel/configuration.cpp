@@ -22,13 +22,13 @@ Configuration::~Configuration()
 	qDeleteAll(mConfiguredDevices);
 }
 
-void Configuration::configureDevice(robotParts::Device * const device)
+void Configuration::configureDevice(robotParts::Device *const device)
 {
 	Q_ASSERT(device);
 
 	if (mConfiguredDevices.contains(device->port())
-			&& mConfiguredDevices.value(device->port())->deviceInfo() == device->deviceInfo()
-			&& device->port().name() != "DisplayPort")  // hack for cleaning display in 2D model
+		&& mConfiguredDevices.value(device->port())->deviceInfo() == device->deviceInfo()
+		&& device->port().name() != "DisplayPort") // hack for cleaning display in 2D model
 	{
 		// It is same device that is already configured on that port, we don't need to do anything.
 		if (device != mConfiguredDevices.value(device->port())) {
@@ -114,7 +114,7 @@ void Configuration::applyConfiguration()
 {
 	checkAllDevicesConfigured();
 
-	for (robotParts::Device * const device : mPendingDevices.values()) {
+	for (robotParts::Device *const device : mPendingDevices.values()) {
 		if (!mConfigurationInProgress.contains(device->port())) {
 			mConfigurationInProgress.insert(device->port());
 			connect(device, &robotParts::Device::configured, this, &Configuration::onDeviceConfigured);

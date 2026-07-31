@@ -25,12 +25,14 @@ class UnaryOperator : public Expression
 {
 public:
 	/// Returns operand.
-	QSharedPointer<Node> operand() const {
+	QSharedPointer<Node> operand() const
+	{
 		return mOperand;
 	}
 
 	/// Sets operator.
-	void setOperand(QSharedPointer<Node> operand) {
+	void setOperand(QSharedPointer<Node> operand)
+	{
 		mOperand = operand;
 		connect(operand);
 	}
@@ -41,8 +43,8 @@ public:
 	}
 
 private:
-	void accept(AstVisitorInterface &visitor, const QSharedPointer<Node> &pointer
-			, const QSharedPointer<Node> &parent) override
+	void accept(AstVisitorInterface &visitor, const QSharedPointer<Node> &pointer,
+		const QSharedPointer<Node> &parent) override
 	{
 		visitor.visit(qSharedPointerCast<UnaryOperator>(pointer), parent);
 	}

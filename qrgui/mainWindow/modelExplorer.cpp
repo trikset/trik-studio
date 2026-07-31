@@ -38,7 +38,7 @@ ModelExplorer::ModelExplorer(QWidget *parent)
 	connect(&mDeleteAction, &QAction::triggered, this, &ModelExplorer::elementRemoved);
 	mDeleteAction.setEnabled(false);
 
-	auto * const deleteActionSeparator = new QAction(this);
+	auto *const deleteActionSeparator = new QAction(this);
 	deleteActionSeparator->setSeparator(true);
 
 	addAction(&mDeleteAction);
@@ -47,8 +47,8 @@ ModelExplorer::ModelExplorer(QWidget *parent)
 
 ModelExplorer::~ModelExplorer() = default;
 
-void ModelExplorer::initialize(Controller &controller, const models::Models &models
-		, details::ModelsAssistInterface &model)
+void ModelExplorer::initialize(Controller &controller, const models::Models &models,
+	details::ModelsAssistInterface &model)
 {
 	mController = &controller;
 	mModel = &model;

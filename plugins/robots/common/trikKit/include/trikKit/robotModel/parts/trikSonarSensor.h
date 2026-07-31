@@ -28,8 +28,7 @@ class TrikSonarSensor : public kitBase::robotModel::robotParts::RangeSensor
 	Q_CLASSINFO("simulated", "true")
 
 public:
-	TrikSonarSensor(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port);
+	TrikSonarSensor(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port);
 };
 
 }

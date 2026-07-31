@@ -18,11 +18,10 @@
 
 using namespace twoDModel::model;
 
-MetricCoordinateSystem::MetricCoordinateSystem(
-		const QSharedPointer<twoDModel::model::SizeUnit> &metricSystem,
-		QObject* parent)
+MetricCoordinateSystem::MetricCoordinateSystem(const QSharedPointer<twoDModel::model::SizeUnit> &metricSystem,
+	QObject *parent)
 	: graphicsUtils::AbstractCoordinateSystem(parent)
-	,  mMetricSystem(metricSystem)
+	, mMetricSystem(metricSystem)
 {
 }
 
@@ -55,5 +54,5 @@ QPointF MetricCoordinateSystem::toUnit(const QPointF &size) const
 
 QPointF MetricCoordinateSystem::toPx(const QPointF &size) const
 {
-	return QPointF{this->toPx(size.x()), this->toPx(size.y())};
+	return QPointF {this->toPx(size.x()), this->toPx(size.y())};
 }

@@ -57,7 +57,7 @@ public:
 
 	Pattern parsePattern(const Id &id) const override;
 	QStringList paletteGroups(const Id &editor, const Id &diagram) const override;
-	QStringList paletteGroupList(const Id &editor,const Id &diagram, const QString &group) const override;
+	QStringList paletteGroupList(const Id &editor, const Id &diagram, const QString &group) const override;
 	QString paletteGroupDescription(const Id &editor, const Id &diagram, const QString &group) const override;
 	bool shallPaletteBeSorted(const Id &editor, const Id &diagram) const override;
 
@@ -105,8 +105,8 @@ public:
 	QString diagramNodeNameString(const Id &editor, const Id &diagram) const override;
 
 	int isNodeOrEdge(const Id &id) const override;
-	bool isParentOf(const QString &editor, const QString &parentDiagram, const QString &parentElement
-			, const QString &childDiagram, const QString &childElement) const override;
+	bool isParentOf(const QString &editor, const QString &parentDiagram, const QString &parentElement,
+		const QString &childDiagram, const QString &childElement) const override;
 	QString diagramName(const QString &editor, const QString &diagram) const override;
 	QString diagramNodeName(const QString &editor, const QString &diagram) const override;
 
@@ -116,8 +116,8 @@ public:
 	bool isParentProperty(const Id &id, const QString &propertyName) const override;
 	void deleteProperty(const QString &propDisplayedName) const override;
 	void addProperty(const Id &id, const QString &propDisplayedName) const override;
-	void updateProperties(const Id &id, const QString &property, const QString &propertyType
-			, const QString &propertyDefaultValue, const QString &propertyDisplayedName) const override;
+	void updateProperties(const Id &id, const QString &property, const QString &propertyType,
+		const QString &propertyDefaultValue, const QString &propertyDisplayedName) const override;
 	QString propertyNameByDisplayedName(const Id &id, const QString &displayedPropertyName) const override;
 	IdList children(const Id &parent) const override;
 	QString shape(const Id &id) const override;
@@ -125,18 +125,18 @@ public:
 	void resetIsHidden(const Id &id) const override;
 	bool isHidden(const Id &id) const override;
 	void deleteElement(const Id &id) const override;
-	void addNodeElement(const Id &diagram, const QString &name, const QString &displayedName
-			, bool isRootDiagramNode) const override;
-	void addEdgeElement(const Id &diagram, const QString &name, const QString &displayedName, const QString &labelText
-			, const QString &labelType, const QString &lineType, const QString &beginType
-			, const QString &endType) const override;
+	void addNodeElement(const Id &diagram, const QString &name, const QString &displayedName,
+		bool isRootDiagramNode) const override;
+	void addEdgeElement(const Id &diagram, const QString &name, const QString &displayedName,
+		const QString &labelText, const QString &labelType, const QString &lineType, const QString &beginType,
+		const QString &endType) const override;
 	void createEditorAndDiagram(const QString &name) override;
 	void saveMetamodel(const QString &newMetamodelFileName) override;
 	QString saveMetamodelFilePath() const override;
 
 	IdList elementsWithTheSameName(const Id &diagram, const QString &name, const QString &type) const override;
-	IdList propertiesWithTheSameName(const Id &id
-			, const QString &propertyCurrentName, const QString &propertyNewName) const override;
+	IdList propertiesWithTheSameName(const Id &id, const QString &propertyCurrentName,
+		const QString &propertyNewName) const override;
 
 	void updateGenerationRule(const Id &id, const QString &newRule) const override;
 	QString generationRule(const Id &id) const override;
@@ -152,10 +152,10 @@ private:
 	Metamodel *metamodel(const QString &editor) const;
 
 	void init();
-	bool registerPlugin(MetamodelLoaderInterface * const loader);
+	bool registerPlugin(MetamodelLoaderInterface *const loader);
 
-	bool isParentOf(const Metamodel *plugin, const QString &childDiagram, const QString &child
-			, const QString &parentDiagram, const QString &parent) const;
+	bool isParentOf(const Metamodel *plugin, const QString &childDiagram, const QString &child,
+		const QString &parentDiagram, const QString &parent) const;
 
 	QMap<QString, QStringList> mPluginFileNames;
 	QMap<QString, Pattern> mGroups;

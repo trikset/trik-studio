@@ -40,7 +40,7 @@ public:
 	virtual bool isMultistroke() = 0;
 };
 
-template <typename TKey>
+template<typename TKey>
 class GesturesRecognizer : public GesturesManager
 {
 public:

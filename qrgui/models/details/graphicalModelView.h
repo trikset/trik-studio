@@ -29,14 +29,13 @@ class GraphicalModelView : public modelsImplementation::AbstractView
 	Q_OBJECT
 
 public:
-	GraphicalModelView(LogicalModel * const model);
+	GraphicalModelView(LogicalModel *const model);
 
 protected Q_SLOTS:
 	void rowsInserted(const QModelIndex &parent, int start, int end) override;
-	void dataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight
-			, QVector<int> const &roles = QVector<int>()) override;
+	void dataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight,
+		QVector<int> const &roles = QVector<int>()) override;
 	void rowsAboutToBeRemoved(const QModelIndex &parent, int start, int end) override;
-
 };
 
 }

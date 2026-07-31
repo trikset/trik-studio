@@ -31,10 +31,8 @@ class Label : public QGraphicsTextItem, public LabelInterface
 	Q_OBJECT
 
 public:
-	Label(models::GraphicalModelAssistApi &graphicalAssistApi
-			, models::LogicalModelAssistApi &logicalAssistApi
-			, const Id &elementId
-			, const QSharedPointer<LabelProperties> &properties);
+	Label(models::GraphicalModelAssistApi &graphicalAssistApi, models::LogicalModelAssistApi &logicalAssistApi,
+		const Id &elementId, const QSharedPointer<LabelProperties> &properties);
 
 	~Label() override;
 

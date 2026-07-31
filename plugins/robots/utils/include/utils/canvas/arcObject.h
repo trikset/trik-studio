@@ -32,12 +32,8 @@ class ROBOTS_UTILS_EXPORT ArcObject : public CanvasObject
 
 public:
 	explicit ArcObject(QObject *parent = nullptr);
-	ArcObject(QRect rect
-			, int startAngle
-			, int spanAngle
-			, const QColor &color = Qt::black
-			, int thickness = 1
-			, QObject *parent = nullptr);
+	ArcObject(QRect rect, int startAngle, int spanAngle, const QColor &color = Qt::black, int thickness = 1,
+		QObject *parent = nullptr);
 
 	/// Returns the coordinates of the central point of arc`s ellipse in pixels.
 	QPoint ellipseCenter() const;

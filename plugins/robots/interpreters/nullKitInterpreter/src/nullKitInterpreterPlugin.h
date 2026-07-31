@@ -35,7 +35,7 @@ public:
 	QList<kitBase::robotModel::RobotModelInterface *> robotModels() override;
 
 	QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> blocksFactoryFor(
-			const kitBase::robotModel::RobotModelInterface *model) override;
+		const kitBase::robotModel::RobotModelInterface *model) override;
 
 	// Transfers ownership.
 	QList<kitBase::AdditionalPreferences *> settingsWidgets() override;

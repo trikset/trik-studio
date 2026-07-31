@@ -32,8 +32,8 @@ class ROBOTS_UTILS_EXPORT TextObject : public CanvasObject
 
 public:
 	explicit TextObject(QObject *parent = nullptr);
-	TextObject(int x, int y, const QString &text
-			, const QColor &color = Qt::black, int thickness = 1, int fontSize = -1, QObject *parent = nullptr);
+	TextObject(int x, int y, const QString &text, const QColor &color = Qt::black, int thickness = 1,
+		int fontSize = -1, QObject *parent = nullptr);
 
 	/// Returns the x-coordinate of the text`s top left corner.
 	int x() const;

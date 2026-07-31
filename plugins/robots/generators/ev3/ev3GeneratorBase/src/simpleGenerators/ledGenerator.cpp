@@ -21,14 +21,11 @@
 using namespace ev3::simple;
 using namespace generatorBase::simple;
 
-LedGenerator::LedGenerator(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, const qReal::Id &id
-		, QObject *parent)
-	: BindingGenerator(repo, customizer, id
-			, "led/led.t"
-			, { Binding::createConverting("@@COLOR@@", "Color"
-					, static_cast<Ev3GeneratorFactory *>(customizer.factory())->ledColorConverter()) }
-			, parent)
+LedGenerator::LedGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+	const qReal::Id &id, QObject *parent)
+	: BindingGenerator(repo, customizer, id, "led/led.t",
+		  {Binding::createConverting("@@COLOR@@", "Color",
+			  static_cast<Ev3GeneratorFactory *>(customizer.factory())->ledColorConverter())},
+		  parent)
 {
 }

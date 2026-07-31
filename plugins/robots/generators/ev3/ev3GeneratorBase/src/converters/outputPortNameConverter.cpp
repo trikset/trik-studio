@@ -16,8 +16,8 @@
 
 using namespace ev3::converters;
 
-OutputPortNameConverter::OutputPortNameConverter(const QStringList &pathsToTemplates
-		, const QList<kitBase::robotModel::PortInfo> &ports)
+OutputPortNameConverter::OutputPortNameConverter(const QStringList &pathsToTemplates,
+	const QList<kitBase::robotModel::PortInfo> &ports)
 	: TemplateParametrizedConverter(pathsToTemplates)
 	, mPorts(ports)
 {

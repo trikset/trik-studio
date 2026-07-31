@@ -48,7 +48,7 @@ QList<kitBase::KitPluginInterface *> KitPluginManager::kitsById(const QString &k
 QList<kitBase::robotModel::RobotModelInterface *> KitPluginManager::allRobotModels() const
 {
 	QList<kitBase::robotModel::RobotModelInterface *> result;
-	for (kitBase::KitPluginInterface * const kit : mPluginInterfaces) {
+	for (kitBase::KitPluginInterface *const kit : mPluginInterfaces) {
 		result += kit->robotModels();
 	}
 
@@ -58,7 +58,7 @@ QList<kitBase::robotModel::RobotModelInterface *> KitPluginManager::allRobotMode
 int KitPluginManager::priority(const QString &kitId) const
 {
 	int result = 0;
-	for (kitBase::KitPluginInterface * const kit : kitsById(kitId)) {
+	for (kitBase::KitPluginInterface *const kit : kitsById(kitId)) {
 		result = qMax(result, kit->priority());
 	}
 
@@ -68,9 +68,9 @@ int KitPluginManager::priority(const QString &kitId) const
 void KitPluginManager::tryToLoadKitPlugins()
 {
 	QList<kitBase::KitPluginInterface *> const loadedKitPlugins =
-			mPluginManager.loadAllPlugins<kitBase::KitPluginInterface>();
+		mPluginManager.loadAllPlugins<kitBase::KitPluginInterface>();
 
-	for (kitBase::KitPluginInterface * const kitPlugin : loadedKitPlugins) {
+	for (kitBase::KitPluginInterface *const kitPlugin : loadedKitPlugins) {
 		mPluginInterfaces.insertMulti(kitPlugin->kitId(), kitPlugin);
 	}
 }

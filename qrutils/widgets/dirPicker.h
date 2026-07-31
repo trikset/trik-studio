@@ -32,10 +32,8 @@ public:
 	explicit DirPicker(QWidget *parent = nullptr);
 
 	/// Sets parameters of the directory picker.
-	void configure(const QString &settingsKey,
-		       const QString &title,
-		       const QString &dialogId,
-		       const QString &dialogTittle);
+	void configure(const QString &settingsKey, const QString &title, const QString &dialogId,
+		const QString &dialogTittle);
 
 	/// Saves picked location into settings.
 	void save() const;
@@ -45,7 +43,6 @@ public:
 
 	/// Determines whether the picked location exists or not
 	bool isSavedDirExist();
-
 
 private Q_SLOTS:
 	void pick();

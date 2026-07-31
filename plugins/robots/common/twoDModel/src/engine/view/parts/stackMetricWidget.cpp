@@ -34,8 +34,8 @@ StackMetricWidget::StackMetricWidget(QWidget *parent)
 
 StackMetricWidget::~StackMetricWidget() = default;
 
-void StackMetricWidget::addWidget(QWidget *widget, twoDModel::model::SizeUnit sizeUnit,
-				     qreal rangeMinimum, qreal rangeMaximum, qreal step, qreal decimals)
+void StackMetricWidget::addWidget(QWidget *widget, twoDModel::model::SizeUnit sizeUnit, qreal rangeMinimum,
+	qreal rangeMaximum, qreal step, qreal decimals)
 {
 	const auto displayMin = rangeMinimum / sizeUnit.countFactor();
 	const auto displayMax = rangeMaximum / sizeUnit.countFactor();
@@ -65,8 +65,8 @@ void StackMetricWidget::onSizeUnitChanged(const QSharedPointer<twoDModel::model:
 	mUnit = unit;
 	const auto it = mSlubWidgets.find(mUnit->unit());
 	if (it != mSlubWidgets.end() && it->second != mStackedWidget->currentWidget()) {
-	    mStackedWidget->setCurrentWidget(it->second);
-	    sizeUnitHandler(it->second);
+		mStackedWidget->setCurrentWidget(it->second);
+		sizeUnitHandler(it->second);
 	}
 
 	blockSignals(false);

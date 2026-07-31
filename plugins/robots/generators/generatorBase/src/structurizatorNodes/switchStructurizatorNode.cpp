@@ -16,10 +16,8 @@
 
 using namespace generatorBase;
 
-SwitchStructurizatorNode::SwitchStructurizatorNode(IntermediateStructurizatorNode *condition
-		, const QList<IntermediateStructurizatorNode *> &branches
-		, IntermediateStructurizatorNode *exit
-		, QObject *parent)
+SwitchStructurizatorNode::SwitchStructurizatorNode(IntermediateStructurizatorNode *condition,
+	const QList<IntermediateStructurizatorNode *> &branches, IntermediateStructurizatorNode *exit, QObject *parent)
 	: IntermediateStructurizatorNode(parent)
 	, mCondition(condition)
 	, mBranches(QList<IntermediateStructurizatorNode *>(branches))

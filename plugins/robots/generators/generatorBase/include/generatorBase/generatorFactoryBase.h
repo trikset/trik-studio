@@ -50,10 +50,9 @@ class ROBOTS_GENERATOR_EXPORT GeneratorFactoryBase : public QObject
 {
 	Q_OBJECT
 public:
-	GeneratorFactoryBase(const qrRepo::RepoApi &repo
-			, qReal::ErrorReporterInterface &errorReporter
-			, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
-			, lua::LuaProcessor &luaProcessor);
+	GeneratorFactoryBase(const qrRepo::RepoApi &repo, qReal::ErrorReporterInterface &errorReporter,
+		const kitBase::robotModel::RobotModelManagerInterface &robotModelManager,
+		lua::LuaProcessor &luaProcessor);
 
 	~GeneratorFactoryBase() override;
 
@@ -92,68 +91,60 @@ public:
 	// ----------------------------- Generators --------------------------------
 
 	/// Returns a pointer to a code generator for blocks with if semantics
-	virtual simple::AbstractSimpleGenerator *ifGenerator(const qReal::Id &id
-			, GeneratorCustomizer &customizer
-			, bool elseIsEmpty
-			, bool needInverting);
+	virtual simple::AbstractSimpleGenerator *ifGenerator(const qReal::Id &id, GeneratorCustomizer &customizer,
+		bool elseIsEmpty, bool needInverting);
 
 	/// Returns a pointer to a code generator for infinite loops
-	virtual simple::AbstractSimpleGenerator *infiniteLoopGenerator(const qReal::Id &id
-			, GeneratorCustomizer &customizer);
+	virtual simple::AbstractSimpleGenerator *infiniteLoopGenerator(const qReal::Id &id,
+		GeneratorCustomizer &customizer);
 
 	/// Returns a pointer to a code generator for 'while-do' and 'do-while' loops
-	virtual simple::AbstractSimpleGenerator *whileLoopGenerator(const qReal::Id &id
-			, GeneratorCustomizer &customizer
-			, bool doWhileForm
-			, bool needInverting);
+	virtual simple::AbstractSimpleGenerator *whileLoopGenerator(const qReal::Id &id,
+		GeneratorCustomizer &customizer, bool doWhileForm, bool needInverting);
 
 	/// Returns a pointer to a code generator for loops in 'for' form
-	virtual simple::AbstractSimpleGenerator *forLoopGenerator(const qReal::Id &id
-			, GeneratorCustomizer &customizer);
+	virtual simple::AbstractSimpleGenerator *forLoopGenerator(const qReal::Id &id, GeneratorCustomizer &customizer);
 
 	/// Returns a pointer to a code generator for switch first enumeration block.
-	virtual simple::AbstractSimpleGenerator *switchHeadGenerator(const qReal::Id &id
-			, GeneratorCustomizer &customizer, const QStringList &values, bool generateIfs);
+	virtual simple::AbstractSimpleGenerator *switchHeadGenerator(const qReal::Id &id,
+		GeneratorCustomizer &customizer, const QStringList &values, bool generateIfs);
 
 	/// Returns a pointer to a code generator for switch enumeration block somewhere in the middle.
-	virtual simple::AbstractSimpleGenerator *switchMiddleGenerator(const qReal::Id &id
-			, GeneratorCustomizer &customizer, const QStringList &values, bool generateIfs);
+	virtual simple::AbstractSimpleGenerator *switchMiddleGenerator(const qReal::Id &id,
+		GeneratorCustomizer &customizer, const QStringList &values, bool generateIfs);
 
 	/// Returns a pointer to a code generator for switch enumeration block in the end (default case).
-	virtual simple::AbstractSimpleGenerator *switchDefaultGenerator(const qReal::Id &id
-			, GeneratorCustomizer &customizer, bool generateIfs);
+	virtual simple::AbstractSimpleGenerator *switchDefaultGenerator(const qReal::Id &id,
+		GeneratorCustomizer &customizer, bool generateIfs);
 
 	/// Returns a pointer to a threads instantiation generator
-	virtual simple::AbstractSimpleGenerator *forkCallGenerator(const qReal::Id &id
-			, GeneratorCustomizer &customizer, const QMap<qReal::Id, QString> &threads);
+	virtual simple::AbstractSimpleGenerator *forkCallGenerator(const qReal::Id &id, GeneratorCustomizer &customizer,
+		const QMap<qReal::Id, QString> &threads);
 
 	/// Returns a pointer to a generator of thread joins
-	virtual simple::AbstractSimpleGenerator *joinGenerator(const qReal::Id &id
-			, GeneratorCustomizer &customizer, const QStringList &joinedThreads, const QString &mainThreadId);
+	virtual simple::AbstractSimpleGenerator *joinGenerator(const qReal::Id &id, GeneratorCustomizer &customizer,
+		const QStringList &joinedThreads, const QString &mainThreadId);
 
 	/// Returns a pointer to a code generator for blocks with regular semantics
-	virtual simple::AbstractSimpleGenerator *simpleGenerator(const qReal::Id &id
-			, GeneratorCustomizer &customizer);
+	virtual simple::AbstractSimpleGenerator *simpleGenerator(const qReal::Id &id, GeneratorCustomizer &customizer);
 
 	/// Returns a pointer to a code generator for 'break' instruction
-	virtual simple::AbstractSimpleGenerator *breakGenerator(const qReal::Id &id
-			, GeneratorCustomizer &customizer);
+	virtual simple::AbstractSimpleGenerator *breakGenerator(const qReal::Id &id, GeneratorCustomizer &customizer);
 
 	/// Returns a pointer to a code generator for 'continue' instruction
-	virtual simple::AbstractSimpleGenerator *continueGenerator(const qReal::Id &id
-			, GeneratorCustomizer &customizer);
+	virtual simple::AbstractSimpleGenerator *continueGenerator(const qReal::Id &id,
+		GeneratorCustomizer &customizer);
 
 	/// Returns a pointer to a code generator for goto label declaration
-	virtual simple::AbstractSimpleGenerator *labelGenerator(const qReal::Id &id
-			, GeneratorCustomizer &customizer);
+	virtual simple::AbstractSimpleGenerator *labelGenerator(const qReal::Id &id, GeneratorCustomizer &customizer);
 
 	/// Returns a pointer to a code generator for 'goto' instruction
-	virtual simple::AbstractSimpleGenerator *gotoSimpleGenerator(const qReal::Id &id
-			, GeneratorCustomizer &customizer);
+	virtual simple::AbstractSimpleGenerator *gotoSimpleGenerator(const qReal::Id &id,
+		GeneratorCustomizer &customizer);
 
 	/// Returns a pointer to a code generator for blocks with final-blocks semantics
-	virtual simple::AbstractSimpleGenerator *finalNodeGenerator(const qReal::Id &id
-			, GeneratorCustomizer &customizer, bool fromMainGenerator);
+	virtual simple::AbstractSimpleGenerator *finalNodeGenerator(const qReal::Id &id,
+		GeneratorCustomizer &customizer, bool fromMainGenerator);
 
 	/// Implementation must return a list of paths to folders containing templates for
 	/// customizing concrete generator. List must be sorted by folder priority --- generator looks for template
@@ -165,23 +156,23 @@ public:
 
 	/// Produces converter for expressions which should have int type
 	/// without taking ownership on it
-	virtual simple::Binding::ConverterInterface *intPropertyConverter(const qReal::Id &block
-			, const QString &property) const;
+	virtual simple::Binding::ConverterInterface *intPropertyConverter(const qReal::Id &block,
+		const QString &property) const;
 
 	/// Produces converter for expressions which should have float type
 	/// without taking ownership on it
-	virtual simple::Binding::ConverterInterface *floatPropertyConverter(const qReal::Id &block
-			, const QString &property) const;
+	virtual simple::Binding::ConverterInterface *floatPropertyConverter(const qReal::Id &block,
+		const QString &property) const;
 
 	/// Produces converter for expressions which should have bool type
 	/// without taking ownership on it
-	virtual simple::Binding::ConverterInterface *boolPropertyConverter(const qReal::Id &block
-			, const QString &property, bool needInverting) const;
+	virtual simple::Binding::ConverterInterface *boolPropertyConverter(const qReal::Id &block,
+		const QString &property, bool needInverting) const;
 
 	/// Produces converter for expressions which should have string type
 	/// without taking ownership on it
-	virtual simple::Binding::ConverterInterface *stringPropertyConverter(const qReal::Id &block
-			, const QString &property) const;
+	virtual simple::Binding::ConverterInterface *stringPropertyConverter(const qReal::Id &block,
+		const QString &property) const;
 
 	/// Produces a converter that returns an expression that obtain values of system variables
 	/// getting its name or the given string othrewise. Transfers ownership.
@@ -197,8 +188,8 @@ public:
 
 	/// Produces converter for transformation function block code into
 	/// generator-dependent code without taking ownership on it
-	virtual simple::Binding::ConverterInterface *functionBlockConverter(const qReal::Id &block
-			, const QString &property) const;
+	virtual simple::Binding::ConverterInterface *functionBlockConverter(const qReal::Id &block,
+		const QString &property) const;
 
 	/// Produces converter for transformation repo property of the type 'Sign' to
 	/// generator-dependent infix inequality sign without taking ownership on it
@@ -219,8 +210,8 @@ public:
 
 	/// Returns a pointer to a converter that makes one composite switch enumeration block from a set
 	/// of their values. Accepts an expression that will be compared to @arg values.
-	virtual simple::Binding::ConverterInterface *switchConditionsMerger(const QStringList &values
-			, bool generateIf) const;
+	virtual simple::Binding::ConverterInterface *switchConditionsMerger(const QStringList &values,
+		bool generateIf) const;
 
 	// ------------------------- Init-terminate code ---------------------------
 
@@ -276,7 +267,7 @@ protected:
 	QScopedPointer<parts::Sensors> mSensors;
 	QScopedPointer<parts::Functions> mFunctions;
 	QScopedPointer<parts::DeviceVariables> mDeviceVariables;
-	int mLoopGeneratorIndex  { 0 };
+	int mLoopGeneratorIndex {0};
 };
 
 }

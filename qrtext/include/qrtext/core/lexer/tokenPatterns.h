@@ -30,7 +30,7 @@ namespace core {
 /// Also note that keywords and other tokens are treated differently by lexer so shall be defined by two separate
 /// methods --- defineToken() and defineKeyword(). Keywords are described as strings, other tokens --- as regexps.
 /// Token types and keywords are still in one enum because we want to process them uniformly by parser.
-template <typename TokenType>
+template<typename TokenType>
 class TokenPatterns
 {
 public:

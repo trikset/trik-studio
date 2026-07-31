@@ -52,12 +52,11 @@ public:
 	virtual qReal::IdList blocksToHide() const = 0;
 
 	/// Initializes this factory with external compoments. Those components are used for correct blocks initialization.
-	virtual void configure(const qReal::GraphicalModelAssistInterface &graphicalModelApi
-			, const qReal::LogicalModelAssistInterface &logicalModelApi
-			, kitBase::robotModel::RobotModelManagerInterface &robotModelManager
-			, qReal::ErrorReporterInterface &errorReporter
-			, qrtext::LanguageToolboxInterface &textLanguageToolbox
-			) = 0;
+	virtual void configure(const qReal::GraphicalModelAssistInterface &graphicalModelApi,
+		const qReal::LogicalModelAssistInterface &logicalModelApi,
+		kitBase::robotModel::RobotModelManagerInterface &robotModelManager,
+		qReal::ErrorReporterInterface &errorReporter,
+		qrtext::LanguageToolboxInterface &textLanguageToolbox) = 0;
 };
 
 }

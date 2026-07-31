@@ -27,9 +27,9 @@ using namespace nxt::communication;
 
 const int packetHeaderSize = 2;
 
-static const int NXT_VID   = 0x0694;
-static const int NXT_PID   = 0x0002;
-static const int ATMEL_VID  = 0x03EB;
+static const int NXT_VID = 0x0694;
+static const int NXT_PID = 0x0002;
+static const int ATMEL_VID = 0x03EB;
 static const int SAMBA_PID = 0x6124;
 static const int NXT_USB_TIMEOUT = 2000;
 static const int NXT_EP_OUT = 0x01;
@@ -47,12 +47,12 @@ UsbRobotCommunicationThread::UsbRobotCommunicationThread()
 	QObject::connect(mKeepAliveTimer, &QTimer::timeout, this, &UsbRobotCommunicationThread::checkForConnection);
 	QObject::connect(this, &UsbRobotCommunicationThread::disconnected, mKeepAliveTimer, &QTimer::stop);
 	mDriverInstaller->moveToThread(qApp->thread());
-	QObject::connect(this, &UsbRobotCommunicationThread::noDriversFound, mDriverInstaller.data()
-			, &NxtUsbDriverInstaller::installUsbDriver, Qt::QueuedConnection);
-	QObject::connect(mDriverInstaller.data(), &NxtUsbDriverInstaller::errorOccured
-			, this, &UsbRobotCommunicationThread::errorOccured, Qt::QueuedConnection);
-	QObject::connect(mDriverInstaller.data(), &NxtUsbDriverInstaller::messageArrived
-			, this, &UsbRobotCommunicationThread::messageArrived, Qt::QueuedConnection);
+	QObject::connect(this, &UsbRobotCommunicationThread::noDriversFound, mDriverInstaller.data(),
+		&NxtUsbDriverInstaller::installUsbDriver, Qt::QueuedConnection);
+	QObject::connect(mDriverInstaller.data(), &NxtUsbDriverInstaller::errorOccured, this,
+		&UsbRobotCommunicationThread::errorOccured, Qt::QueuedConnection);
+	QObject::connect(mDriverInstaller.data(), &NxtUsbDriverInstaller::messageArrived, this,
+		&UsbRobotCommunicationThread::messageArrived, Qt::QueuedConnection);
 }
 
 UsbRobotCommunicationThread::~UsbRobotCommunicationThread()
@@ -121,15 +121,15 @@ bool UsbRobotCommunicationThread::connectImpl(bool firmwareMode, int vid, int pi
 	for (int configuration = 0; configuration <= possibleConfigurations; configuration++) {
 		const int err = libusb_set_configuration(mHandle, configuration);
 		if (err < 0) {
-			QLOG_ERROR() << "libusb_set_configuration for NXT returned" << err << "for configuration" << configuration;
+			QLOG_ERROR() << "libusb_set_configuration for NXT returned" << err << "for configuration"
+				     << configuration;
 		}
-		if (err >= 0
-				|| err != LIBUSB_ERROR_NOT_FOUND
-				|| err != LIBUSB_ERROR_INVALID_PARAM
-// Seems like a WinUSB driver supports only one configuration
-// and sometimes even complains on libusb_set_configuration API call
-// Probably, this line for LIBUSB_ERROR_NOT_SUPPORTED is redundant or obsolete in 2023
-				|| err != LIBUSB_ERROR_NOT_SUPPORTED) {
+		if (err >= 0 || err != LIBUSB_ERROR_NOT_FOUND
+			|| err != LIBUSB_ERROR_INVALID_PARAM
+			// Seems like a WinUSB driver supports only one configuration
+			// and sometimes even complains on libusb_set_configuration API call
+			// Probably, this line for LIBUSB_ERROR_NOT_SUPPORTED is redundant or obsolete in 2023
+			|| err != LIBUSB_ERROR_NOT_SUPPORTED) {
 			configurationFound = configuration + 1; // Encode number as boolean value
 			auto config_descriptor = new libusb_config_descriptor;
 			const int err = libusb_get_active_config_descriptor(devices[i], &config_descriptor);
@@ -140,9 +140,10 @@ bool UsbRobotCommunicationThread::connectImpl(bool firmwareMode, int vid, int pi
 				const int interfacesBound = possibleInterfaces < 3 ? possibleInterfaces : 3;
 				for (int i = 0; i <= interfacesBound; i++) {
 					const int err = libusb_claim_interface(mHandle, interfaces[i]);
-					if (err < 0 && err != LIBUSB_ERROR_NOT_FOUND && err != LIBUSB_ERROR_INVALID_PARAM) {
-						QLOG_ERROR() << "libusb_claim_interface for NXT returned"
-								<< err << "for interface" << i;
+					if (err < 0 && err != LIBUSB_ERROR_NOT_FOUND
+						&& err != LIBUSB_ERROR_INVALID_PARAM) {
+						QLOG_ERROR() << "libusb_claim_interface for NXT returned" << err
+							     << "for interface" << i;
 					} else if (err >= 0) {
 						interfaceFound = true;
 						break;
@@ -154,7 +155,8 @@ bool UsbRobotCommunicationThread::connectImpl(bool firmwareMode, int vid, int pi
 					break;
 				}
 			} else {
-				QLOG_ERROR() << "libusb_get_active_config_descriptor for" << configuration << "returned" << err;
+				QLOG_ERROR() << "libusb_get_active_config_descriptor for" << configuration << "returned"
+					     << err;
 			}
 
 			delete config_descriptor;
@@ -162,11 +164,12 @@ bool UsbRobotCommunicationThread::connectImpl(bool firmwareMode, int vid, int pi
 	}
 
 	if (!configurationFound) {
-		QLOG_ERROR() << "No appropriate configuration found among all possible configurations. Giving up.";		
+		QLOG_ERROR() << "No appropriate configuration found among all possible configurations. Giving up.";
 		libusb_close(mHandle);
 		mHandle = nullptr;
 		libusb_free_device_list(devices, 1);
-		Q_EMIT connected(false, tr("USB Device configuration problem. Try to restart TRIK Studio and re-plug NXT."));
+		Q_EMIT connected(false,
+			tr("USB Device configuration problem. Try to restart TRIK Studio and re-plug NXT."));
 		return false;
 	}
 
@@ -184,14 +187,16 @@ bool UsbRobotCommunicationThread::connectImpl(bool firmwareMode, int vid, int pi
 	getFirmwareCommand[0] = '\0';
 	getFirmwareCommand[1] = '\0';
 	// Sending direct command telegram to flashed robot or "N#" in samba mode
-	getFirmwareCommand[2] = firmwareMode ? 'N' : static_cast<char>(enums::telegramType::directCommandResponseRequired);
+	getFirmwareCommand[2] =
+		firmwareMode ? 'N' : static_cast<char>(enums::telegramType::directCommandResponseRequired);
 	getFirmwareCommand[3] = firmwareMode ? '#' : 0x88;
 
 	QByteArray handshakeResponse;
 	send(getFirmwareCommand, firmwareMode ? 4 : 9, handshakeResponse);
 	// In samba mode NXT should answer "\n\r"
-	const bool correctFirmwareResponce = !firmwareMode ||
-			(handshakeResponse.length() == 4 && handshakeResponse[2] == '\n' && handshakeResponse[3] == '\r');
+	const bool correctFirmwareResponce =
+		!firmwareMode
+		|| (handshakeResponse.length() == 4 && handshakeResponse[2] == '\n' && handshakeResponse[3] == '\r');
 	if (handshakeResponse.isEmpty() || !correctFirmwareResponce) {
 		libusb_close(mHandle);
 		mHandle = nullptr;
@@ -245,9 +250,8 @@ bool UsbRobotCommunicationThread::send(const QByteArray &buffer, int responseSiz
 	auto *cmd = reinterpret_cast<uchar *>(const_cast<char *>(newBuffer.data()));
 	int actualLength = 0;
 	int err = libusb_bulk_transfer(mHandle, NXT_EP_OUT, cmd, newBuffer.length(), &actualLength, NXT_USB_TIMEOUT);
-	if (err == LIBUSB_ERROR_IO || err == LIBUSB_ERROR_PIPE
-			|| err == LIBUSB_ERROR_INTERRUPTED || err == LIBUSB_ERROR_NO_DEVICE)
-	{
+	if (err == LIBUSB_ERROR_IO || err == LIBUSB_ERROR_PIPE || err == LIBUSB_ERROR_INTERRUPTED
+		|| err == LIBUSB_ERROR_NO_DEVICE) {
 		QLOG_ERROR() << "Connection to NXT lost with code" << err << "during sending buffers";
 		Q_EMIT errorOccured(tr("Connection to NXT lost"));
 		disconnect();
@@ -257,7 +261,8 @@ bool UsbRobotCommunicationThread::send(const QByteArray &buffer, int responseSiz
 		return false;
 	}
 
-	const bool responceUnneeded = (mFirmwareMode && responseSize == 0) || (!mFirmwareMode && !isResponseNeeded(buffer));
+	const bool responceUnneeded =
+		(mFirmwareMode && responseSize == 0) || (!mFirmwareMode && !isResponseNeeded(buffer));
 	if (responceUnneeded) {
 		return true;
 	}
@@ -308,8 +313,8 @@ void UsbRobotCommunicationThread::allowLongJobs(bool allow)
 
 bool UsbRobotCommunicationThread::connectFirmware()
 {
-	const QString error = tr("Cannot find NXT device in resetted mode. Check robot resetted, connected and ticking "\
-			"and try again.");
+	const QString error = tr("Cannot find NXT device in resetted mode. Check robot resetted, connected and ticking "
+				 "and try again.");
 	return connectImpl(true, ATMEL_VID, SAMBA_PID, error);
 }
 
@@ -332,6 +337,7 @@ void UsbRobotCommunicationThread::checkForConnection()
 
 bool UsbRobotCommunicationThread::isResponseNeeded(const QByteArray &buffer)
 {
-	return buffer.size() >= 3 && (buffer[2] == enums::telegramType::directCommandResponseRequired
-			|| buffer[2] == enums::telegramType::systemCommandResponseRequired);
+	return buffer.size() >= 3
+	       && (buffer[2] == enums::telegramType::directCommandResponseRequired
+		       || buffer[2] == enums::telegramType::systemCommandResponseRequired);
 }

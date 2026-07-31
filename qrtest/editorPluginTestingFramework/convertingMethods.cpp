@@ -31,7 +31,7 @@ using namespace qReal;
 QStringList ConvertingMethods::convertingQPairListIntoStringList(const QList<QPair<QString, QString>> &qPairList)
 {
 	QStringList resultList;
-	for (const auto &element : qPairList ) {
+	for (const auto &element : qPairList) {
 		resultList.append(element.first);
 		resultList.append(element.second);
 	}
@@ -85,11 +85,7 @@ QStringList ConvertingMethods::convertIntIntoStringList(const int &integer)
 //	return result;
 //}
 
-QString ConvertingMethods::transformateOutput(
-		const QStringList &output
-		, const Id &id
-		, const QString &name
-		)
+QString ConvertingMethods::transformateOutput(const QStringList &output, const Id &id, const QString &name)
 {
 	QString result;
 	if (name.isEmpty()) {

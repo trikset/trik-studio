@@ -41,28 +41,22 @@ DeploymentInterpreterPlugin::~DeploymentInterpreterPlugin()
 
 void DeploymentInterpreterPlugin::init(PluginConfigurator const &configurator)
 {
-	ShellWidget * const shell = new ShellWidget(configurator.mainWindowInterpretersInterface().windowWidget());
+	ShellWidget *const shell = new ShellWidget(configurator.mainWindowInterpretersInterface().windowWidget());
 	placeShellWidget(shell, configurator.mainWindowInterpretersInterface().windowWidget());
 
-	mBlocksTable = new BlocksTable(configurator.graphicalModelApi()
-			, configurator.logicalModelApi()
-			, *configurator.mainWindowInterpretersInterface().errorReporter()
-			, mTextLanguage
-			, shell);
-	mInterpreter = new qReal::interpretation::Interpreter(configurator.graphicalModelApi()
-			, configurator.logicalModelApi()
-			, configurator.mainWindowInterpretersInterface()
-			, *mBlocksTable
-			, mTextLanguage
-			, startingElementType);
-	connect(&configurator.projectManager(), &qReal::ProjectManagementInterface::beforeOpen
-			, mInterpreter, &interpretation::Interpreter::stopInterpretation);
+	mBlocksTable = new BlocksTable(configurator.graphicalModelApi(), configurator.logicalModelApi(),
+		*configurator.mainWindowInterpretersInterface().errorReporter(), mTextLanguage, shell);
+	mInterpreter = new qReal::interpretation::Interpreter(configurator.graphicalModelApi(),
+		configurator.logicalModelApi(), configurator.mainWindowInterpretersInterface(), *mBlocksTable,
+		mTextLanguage, startingElementType);
+	connect(&configurator.projectManager(), &qReal::ProjectManagementInterface::beforeOpen, mInterpreter,
+		&interpretation::Interpreter::stopInterpretation);
 	connect(mRunAction, &QAction::triggered, mInterpreter, &interpretation::Interpreter::startInterpretation);
 	connect(mStopAction, &QAction::triggered, mInterpreter, &interpretation::Interpreter::stopInterpretation);
 
 	connect(&configurator.systemEvents(), &SystemEvents::activeTabChanged, [=](TabInfo const &info) {
 		const bool isOurTab = info.rootDiagramId().editor() == startingElementType.editor()
-				&& info.rootDiagramId().diagram() == startingElementType.diagram();
+		                      && info.rootDiagramId().diagram() == startingElementType.diagram();
 		mRunAction->setVisible(isOurTab);
 		mStopAction->setVisible(isOurTab);
 		mShellDock->setVisible(isOurTab);
@@ -71,23 +65,21 @@ void DeploymentInterpreterPlugin::init(PluginConfigurator const &configurator)
 
 QList<ActionInfo> DeploymentInterpreterPlugin::actions()
 {
-	return { qReal::ActionInfo(mRunAction, "interpreters", "tools")
-			, qReal::ActionInfo(mStopAction, "interpreters", "tools")
-	};
+	return {qReal::ActionInfo(mRunAction, "interpreters", "tools"),
+		qReal::ActionInfo(mStopAction, "interpreters", "tools")};
 }
 
 QList<HotKeyActionInfo> DeploymentInterpreterPlugin::hotKeyActions()
 {
-	return { qReal::HotKeyActionInfo("DeploymentInterpreter.Run", QObject::tr("Run deployment"), mRunAction)
-		, qReal::HotKeyActionInfo("DeploymentInterpreter.Stop", QObject::tr("Stop deployment"), mStopAction)
-	};
+	return {qReal::HotKeyActionInfo("DeploymentInterpreter.Run", QObject::tr("Run deployment"), mRunAction),
+		qReal::HotKeyActionInfo("DeploymentInterpreter.Stop", QObject::tr("Stop deployment"), mStopAction)};
 }
 
 void DeploymentInterpreterPlugin::placeShellWidget(QWidget *shell, QWidget *mainWindowWidget)
 {
 	/// @todo: This is pretty hacky implementation. Rewrite this using mainWindowDockInterface
-	QMainWindow * const mainWindow = dynamic_cast<QMainWindow *>(mainWindowWidget);
-	QDockWidget * const shellDock = new QDockWidget(tr("Console output"), mainWindow);
+	QMainWindow *const mainWindow = dynamic_cast<QMainWindow *>(mainWindowWidget);
+	QDockWidget *const shellDock = new QDockWidget(tr("Console output"), mainWindow);
 	shellDock->setWidget(shell);
 	mainWindow->tabifyDockWidget(mainWindow->findChild<QDockWidget *>("errorDock"), shellDock);
 	mShellDock = shellDock;

@@ -36,7 +36,7 @@ public:
 
 	/// Called each time when user selects another robot model.
 	/// @param robotModel - newly selected robot model.
-	virtual void onRobotModelChanged(robotModel::RobotModelInterface * const robotModel)
+	virtual void onRobotModelChanged(robotModel::RobotModelInterface *const robotModel)
 	{
 		Q_UNUSED(robotModel)
 	}

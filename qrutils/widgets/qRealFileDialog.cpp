@@ -18,16 +18,10 @@
 
 using namespace utils;
 
-QString QRealFileDialog::getOpenFileName(const QString &id
-		, QWidget *parent
-		, const QString &caption
-		, const QString &dir
-		, const QString &filter
-		, QString *selectedFilter
-		, bool openLast
-		, QFileDialog::Options options)
+QString QRealFileDialog::getOpenFileName(const QString &id, QWidget *parent, const QString &caption, const QString &dir,
+	const QString &filter, QString *selectedFilter, bool openLast, QFileDialog::Options options)
 {
-	const QString lastDir = openLast ? lastSelectedDirectory(id, dir): dir;
+	const QString lastDir = openLast ? lastSelectedDirectory(id, dir) : dir;
 	QString lastSelectedFilter;
 	if (selectedFilter) {
 		lastSelectedFilter = *selectedFilter;
@@ -37,7 +31,8 @@ QString QRealFileDialog::getOpenFileName(const QString &id
 	auto filters = filter.split(";;");
 	filters.removeDuplicates();
 	auto cleanedFilter = filters.join(";;");
-	auto result = QFileDialog::getOpenFileName(parent, caption, lastDir, cleanedFilter, &lastSelectedFilter, options);
+	auto result =
+		QFileDialog::getOpenFileName(parent, caption, lastDir, cleanedFilter, &lastSelectedFilter, options);
 	if (selectedFilter) {
 		*selectedFilter = lastSelectedFilter;
 	}
@@ -45,14 +40,8 @@ QString QRealFileDialog::getOpenFileName(const QString &id
 	return result;
 }
 
-QString QRealFileDialog::getSaveFileName(const QString &id
-		, QWidget *parent
-		, const QString &caption
-		, const QString &dir
-		, const QString &filter
-		, const QString &defaultFile
-		, QString *selectedFilter
-		, QFileDialog::Options options)
+QString QRealFileDialog::getSaveFileName(const QString &id, QWidget *parent, const QString &caption, const QString &dir,
+	const QString &filter, const QString &defaultFile, QString *selectedFilter, QFileDialog::Options options)
 {
 	const QString lastDir = lastSelectedDirectory(id, dir) + "/" + defaultFile;
 	QString lastSelectedFilter;
@@ -69,11 +58,8 @@ QString QRealFileDialog::getSaveFileName(const QString &id
 	return result;
 }
 
-QString QRealFileDialog::getExistingDirectory(const QString &id
-		, QWidget *parent
-		, const QString &caption
-		, const QString &dir
-		, QFileDialog::Options options)
+QString QRealFileDialog::getExistingDirectory(const QString &id, QWidget *parent, const QString &caption,
+	const QString &dir, QFileDialog::Options options)
 {
 	const QString lastDir = lastSelectedDirectory(id, dir);
 	const QString result = QFileDialog::getExistingDirectory(parent, caption, lastDir, options);
@@ -81,13 +67,8 @@ QString QRealFileDialog::getExistingDirectory(const QString &id
 	return result;
 }
 
-QStringList QRealFileDialog::getOpenFileNames(const QString &id
-		, QWidget *parent
-		, const QString &caption
-		, const QString &dir
-		, const QString &filter
-		, QString *selectedFilter
-		, QFileDialog::Options options)
+QStringList QRealFileDialog::getOpenFileNames(const QString &id, QWidget *parent, const QString &caption,
+	const QString &dir, const QString &filter, QString *selectedFilter, QFileDialog::Options options)
 {
 	const QString lastDir = lastSelectedDirectory(id, dir);
 	QString lastSelectedFilter;
@@ -96,7 +77,8 @@ QStringList QRealFileDialog::getOpenFileNames(const QString &id
 	} else {
 		lastSelectedFilter = QRealFileDialog::lastSelectedFilter(id, filter.split(";;")[0]);
 	}
-	const QStringList result = QFileDialog::getOpenFileNames(parent, caption, lastDir, filter, selectedFilter, options);
+	const QStringList result =
+		QFileDialog::getOpenFileNames(parent, caption, lastDir, filter, selectedFilter, options);
 
 	if (selectedFilter) {
 		*selectedFilter = lastSelectedFilter;

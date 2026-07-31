@@ -17,8 +17,7 @@
 using namespace generatorBase;
 using namespace qReal;
 
-RobotsDiagramVisitor::RobotsDiagramVisitor(const qrRepo::RepoApi &repo
-		, GeneratorCustomizer &customizer)
+RobotsDiagramVisitor::RobotsDiagramVisitor(const qrRepo::RepoApi &repo, GeneratorCustomizer &customizer)
 	: mRepo(repo)
 	, mCustomizer(customizer)
 	, mDfser(repo)

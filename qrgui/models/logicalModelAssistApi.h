@@ -33,7 +33,8 @@ class QRGUI_MODELS_EXPORT LogicalModelAssistApi : public QObject, public qReal::
 	Q_OBJECT
 
 public:
-	LogicalModelAssistApi(details::LogicalModel &logicalModel, const EditorManagerInterface &editorManagerInterface);
+	LogicalModelAssistApi(details::LogicalModel &logicalModel,
+		const EditorManagerInterface &editorManagerInterface);
 	virtual ~LogicalModelAssistApi() override = default;
 
 	const EditorManagerInterface &editorManagerInterface() const override;
@@ -41,8 +42,8 @@ public:
 	const qrRepo::LogicalRepoApi &logicalRepoApi() const override;
 	qrRepo::LogicalRepoApi &mutableLogicalRepoApi() const override;
 	Id createElement(const Id &parent, const Id &type) override;
-	Id createElement(const Id &parent, const Id &id, bool isFromLogicalModel, const QString &name
-			, const QPointF &position, const Id &preferedLogicalId = Id()) override;
+	Id createElement(const Id &parent, const Id &id, bool isFromLogicalModel, const QString &name,
+		const QPointF &position, const Id &preferedLogicalId = Id()) override;
 	void createElements(QList<ElementInfo> &elements) override;
 
 	Id parent(const Id &element) const override;
@@ -89,8 +90,8 @@ Q_SIGNALS:
 	void elementAdded(const qReal::Id &id);
 
 private:
-	LogicalModelAssistApi(const LogicalModelAssistApi &);  // Copying is forbidden
-	LogicalModelAssistApi& operator =(const LogicalModelAssistApi &); // Assignment is forbidden too
+	LogicalModelAssistApi(const LogicalModelAssistApi &); // Copying is forbidden
+	LogicalModelAssistApi &operator=(const LogicalModelAssistApi &); // Assignment is forbidden too
 
 	details::ModelsAssistApi mModelsAssistApi;
 	details::LogicalModel &mLogicalModel;

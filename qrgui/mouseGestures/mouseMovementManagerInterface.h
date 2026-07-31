@@ -31,16 +31,10 @@ class QRGUI_MOUSE_GESTURES_EXPORT MouseMovementManagerInterface : public QObject
 public:
 	/// Specifies the type of the result of the gesture made by user: regular element creation or some metagesture
 	/// (e.g. element deletion).
-	enum GestureResultType
-	{
-		invalidGesture
-		, createElementGesture
-		, deleteGesture
-	};
+	enum GestureResultType { invalidGesture, createElementGesture, deleteGesture };
 
 	/// Specifies the result of the gesture made.
-	struct QRGUI_MOUSE_GESTURES_EXPORT GestureResult
-	{
+	struct QRGUI_MOUSE_GESTURES_EXPORT GestureResult {
 	public:
 		GestureResult()
 			: mType(invalidGesture)

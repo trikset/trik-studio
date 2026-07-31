@@ -38,23 +38,22 @@ CircleWidget::CircleWidget(QSize size, const QString &icon, QWidget *parent)
 	const QRect iconRect(QPoint(), iconSize);
 	QRect resultingRect = iconRect;
 	if (targetHeight * pictureWidth < pictureHeight * targetWidth) {
-		resultingRect.setLeft(iconRect.left()
-				+ (targetWidth - targetHeight * pictureWidth / pictureHeight) / 2);
-		resultingRect.setRight(iconRect.right()
-				- (targetWidth - targetHeight * pictureWidth / pictureHeight) / 2);
+		resultingRect.setLeft(
+			iconRect.left() + (targetWidth - targetHeight * pictureWidth / pictureHeight) / 2);
+		resultingRect.setRight(
+			iconRect.right() - (targetWidth - targetHeight * pictureWidth / pictureHeight) / 2);
 	} else if (targetHeight * pictureWidth > pictureHeight * targetWidth) {
-		resultingRect.setTop(iconRect.top() + (targetHeight
-				- targetWidth * pictureHeight / pictureWidth) / 2);
-		resultingRect.setBottom(iconRect.bottom()
-				- (targetHeight - targetWidth * pictureHeight / pictureWidth) / 2);
+		resultingRect.setTop(iconRect.top() + (targetHeight - targetWidth * pictureHeight / pictureWidth) / 2);
+		resultingRect.setBottom(
+			iconRect.bottom() - (targetHeight - targetWidth * pictureHeight / pictureWidth) / 2);
 	}
 
-	auto * const iconLabel = new QLabel;
+	auto *const iconLabel = new QLabel;
 	iconLabel->setFixedSize(resultingRect.size());
 	iconLabel->setScaledContents(true);
 	iconLabel->setPixmap(pixmap);
 
-	auto * const circleLayout = new QVBoxLayout;
+	auto *const circleLayout = new QVBoxLayout;
 	circleLayout->setContentsMargins(0, 0, 0, 0);
 	circleLayout->setSpacing(0);
 	circleLayout->setMargin(0);

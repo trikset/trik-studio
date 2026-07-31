@@ -23,80 +23,86 @@ namespace lua {
 namespace details {
 
 /// Tokens recognizable by Lua lexer.
-enum class LuaTokenTypes
-{
-	whitespace
-	, newline
-	, identifier
+enum class LuaTokenTypes {
+	whitespace,
+	newline,
+	identifier
 
-	, andKeyword
-	, breakKeyword
-	, doKeyword
-	, elseKeyword
-	, elseifKeyword
-	, endKeyword
-	, falseKeyword
-	, forKeyword
-	, functionKeyword
-	, gotoKeyword
-	, ifKeyword
-	, inKeyword
-	, localKeyword
-	, nilKeyword
-	, notKeyword
-	, orKeyword
-	, repeatKeyword
-	, returnKeyword
-	, thenKeyword
-	, trueKeyword
-	, untilKeyword
-	, whileKeyword
+	,
+	andKeyword,
+	breakKeyword,
+	doKeyword,
+	elseKeyword,
+	elseifKeyword,
+	endKeyword,
+	falseKeyword,
+	forKeyword,
+	functionKeyword,
+	gotoKeyword,
+	ifKeyword,
+	inKeyword,
+	localKeyword,
+	nilKeyword,
+	notKeyword,
+	orKeyword,
+	repeatKeyword,
+	returnKeyword,
+	thenKeyword,
+	trueKeyword,
+	untilKeyword,
+	whileKeyword
 
-	, plus
-	, minus
-	, asterick
-	, slash
-	, percent
-	, hat
-	, sharp
+	,
+	plus,
+	minus,
+	asterick,
+	slash,
+	percent,
+	hat,
+	sharp
 
-	, ampersand
-	, doubleAmpersand
-	, tilda
-	, verticalLine
-	, doubleVerticalLine
-	, doubleLess
-	, doubleGreater
-	, doubleSlash
+	,
+	ampersand,
+	doubleAmpersand,
+	tilda,
+	verticalLine,
+	doubleVerticalLine,
+	doubleLess,
+	doubleGreater,
+	doubleSlash
 
-	, doubleEquals
-	, tildaEquals
-	, exclamationMarkEquals
-	, lessEquals
-	, greaterEquals
-	, less
-	, greater
-	, equals
+	,
+	doubleEquals,
+	tildaEquals,
+	exclamationMarkEquals,
+	lessEquals,
+	greaterEquals,
+	less,
+	greater,
+	equals
 
-	, openingBracket
-	, closingBracket
-	, openingCurlyBracket
-	, closingCurlyBracket
-	, openingSquareBracket
-	, closingSquareBracket
-	, doubleColon
+	,
+	openingBracket,
+	closingBracket,
+	openingCurlyBracket,
+	closingCurlyBracket,
+	openingSquareBracket,
+	closingSquareBracket,
+	doubleColon
 
-	, semicolon
-	, colon
-	, comma
-	, dot
-	, doubleDot
-	, tripleDot
+	,
+	semicolon,
+	colon,
+	comma,
+	dot,
+	doubleDot,
+	tripleDot
 
-	, string
-	, integerLiteral
-	, floatLiteral
-	, comment
+	,
+	string,
+	integerLiteral,
+	floatLiteral,
+	comment
 };
 
 /// Overload that allows to use token types as hash keys.
@@ -106,7 +112,7 @@ inline uint qHash(qrtext::lua::details::LuaTokenTypes key)
 }
 
 /// Helper operator for debugging.
-inline QDebug &operator <<(QDebug &debug, qrtext::lua::details::LuaTokenTypes token)
+inline QDebug &operator<<(QDebug &debug, qrtext::lua::details::LuaTokenTypes token)
 {
 	debug << static_cast<std::underlying_type<LuaTokenTypes>::type>(token);
 	return debug;

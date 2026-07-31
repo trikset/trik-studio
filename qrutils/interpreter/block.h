@@ -46,12 +46,10 @@ public:
 
 	/// Initializes this block with external components that may be used during the intepretetation process.
 	/// @todo Not good.
-	void init(const qReal::Id &graphicalId
-			, const qReal::GraphicalModelAssistInterface *graphicalModelApi
-			, const qReal::LogicalModelAssistInterface *logicalModelApi
-			, qReal::ErrorReporterInterface * const errorReporter
-			, qrtext::LanguageToolboxInterface *textLanguageToolbox
-			);
+	void init(const qReal::Id &graphicalId, const qReal::GraphicalModelAssistInterface *graphicalModelApi,
+		const qReal::LogicalModelAssistInterface *logicalModelApi,
+		qReal::ErrorReporterInterface *const errorReporter,
+		qrtext::LanguageToolboxInterface *textLanguageToolbox);
 
 	/// A list of identifiers currently known to interpreter.
 	QStringList identifiers() const;
@@ -85,7 +83,8 @@ protected:
 
 		/// Do not report errors to user. Used when parser shall only try to parse a code (for example, in
 		/// autoconfigurer).
-		, doNotReport
+		,
+		doNotReport
 	};
 
 	Block();
@@ -172,8 +171,8 @@ protected:
 	/// @todo: there is no such things as protected fields. State of a class shall not be directly available to
 	/// descendants.
 	qReal::Id mNextBlockId;
-	const qReal::GraphicalModelAssistInterface *mGraphicalModelApi;  // Doesn't have ownership.
-	const qReal::LogicalModelAssistInterface *mLogicalModelApi;  // Doesn't have ownership.
+	const qReal::GraphicalModelAssistInterface *mGraphicalModelApi; // Doesn't have ownership.
+	const qReal::LogicalModelAssistInterface *mLogicalModelApi; // Doesn't have ownership.
 
 	qReal::Id mGraphicalId;
 	Thread *mThread {};
@@ -182,11 +181,7 @@ private Q_SLOTS:
 	void finishedRunning();
 
 private:
-	enum State {
-		idle
-		, running
-		, failed
-	};
+	enum State { idle, running, failed };
 
 	/// Shall be reimplemented to set ids of next blocks. Default implementation covers usual sequential blocks, like
 	/// "motors on", it is reimplemented in "if", "loop" and such kinds of blocks.
@@ -195,10 +190,10 @@ private:
 	/// Shall be reimplemented to provide semantics of block execution.
 	virtual void run() = 0;
 
-	qrtext::LanguageToolboxInterface *mParser {};  // Doesn't have ownership.
+	qrtext::LanguageToolboxInterface *mParser {}; // Doesn't have ownership.
 
 	State mState;
-	qReal::ErrorReporterInterface *mErrorReporter {};  // Doesn't have ownership.
+	qReal::ErrorReporterInterface *mErrorReporter {}; // Doesn't have ownership.
 
 	/// @todo: Block shall not own ParserErrorReporter, it shall be received from factory.
 	QScopedPointer<utils::ParserErrorReporter> mParserErrorReporter;

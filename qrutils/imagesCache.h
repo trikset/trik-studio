@@ -26,7 +26,7 @@ namespace utils {
 
 /// Cache for images that contains them pre-loaded and parsed and is able to quickly draw it on a painter.
 /// Pixmaps and svg images are contained separately as they are rendered differently.
-class QRUTILS_EXPORT ImagesCache: public utils::Singleton<ImagesCache>
+class QRUTILS_EXPORT ImagesCache : public utils::Singleton<ImagesCache>
 {
 	Q_OBJECT
 public:

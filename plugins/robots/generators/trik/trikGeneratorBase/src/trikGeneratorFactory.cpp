@@ -62,11 +62,9 @@ using namespace trik::simple;
 using namespace generatorBase;
 using namespace generatorBase::simple;
 
-TrikGeneratorFactory::TrikGeneratorFactory(const qrRepo::RepoApi &repo
-		, qReal::ErrorReporterInterface &errorReporter
-		, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
-		, lua::LuaProcessor &luaProcessor
-		, const QStringList &pathsToTemplates)
+TrikGeneratorFactory::TrikGeneratorFactory(const qrRepo::RepoApi &repo, qReal::ErrorReporterInterface &errorReporter,
+	const kitBase::robotModel::RobotModelManagerInterface &robotModelManager, lua::LuaProcessor &luaProcessor,
+	const QStringList &pathsToTemplates)
 	: GeneratorFactoryBase(repo, errorReporter, robotModelManager, luaProcessor)
 	, mPathsToTemplates(pathsToTemplates)
 {
@@ -80,14 +78,11 @@ void TrikGeneratorFactory::initDeviceVariables()
 	mDeviceVariables.reset(new trik::parts::TrikDeviceVariables());
 }
 
-AbstractSimpleGenerator *TrikGeneratorFactory::simpleGenerator(const qReal::Id &id
-		, GeneratorCustomizer &customizer)
+AbstractSimpleGenerator *TrikGeneratorFactory::simpleGenerator(const qReal::Id &id, GeneratorCustomizer &customizer)
 {
 	const QString elementType = id.element();
-	if (elementType.contains("EnginesForward")
-			|| elementType.contains("EnginesBackward")
-			|| elementType.contains("AngularServo"))
-	{
+	if (elementType.contains("EnginesForward") || elementType.contains("EnginesBackward")
+		|| elementType.contains("AngularServo")) {
 		return new TrikEnginesGenerator(mRepo, customizer, id, elementType, this);
 	} else if (elementType == "TrikPlayTone") {
 		return new PlayToneGenerator(mRepo, customizer, id, this);

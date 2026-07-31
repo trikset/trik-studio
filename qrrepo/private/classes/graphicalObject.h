@@ -75,7 +75,7 @@ private:
 	qReal::Id mLogicalId;
 
 	/// A list of graphical parts with their indexes.
-	QHash<int, GraphicalPart *> mGraphicalParts;  // Has ownership.
+	QHash<int, GraphicalPart *> mGraphicalParts; // Has ownership.
 };
 
 }

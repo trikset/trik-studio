@@ -39,7 +39,7 @@ public Q_SLOTS:
 	virtual void stop() = 0;
 
 Q_SIGNALS:
-	void timeout() ;
+	void timeout();
 
 protected Q_SLOTS:
 	virtual void onTimeout();

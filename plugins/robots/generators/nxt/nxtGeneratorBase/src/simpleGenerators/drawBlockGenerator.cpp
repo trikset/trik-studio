@@ -20,20 +20,17 @@
 
 using namespace nxt::simple;
 
-DrawBlockGenerator::DrawBlockGenerator(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, const qReal::Id &id
-		, QObject *parent)
-	: BindingGenerator(repo, customizer, id, "drawing/drawBitmap.t"
-			, { generatorBase::simple::Binding::createStatic("@@IMAGE_NAME@@", imageName(customizer)) }
-			, parent)
+DrawBlockGenerator::DrawBlockGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+	const qReal::Id &id, QObject *parent)
+	: BindingGenerator(repo, customizer, id, "drawing/drawBitmap.t",
+		  {generatorBase::simple::Binding::createStatic("@@IMAGE_NAME@@", imageName(customizer))}, parent)
 {
 }
 
 QString DrawBlockGenerator::generate()
 {
 	parts::Images &images = static_cast<NxtGeneratorFactory *>(mCustomizer.factory())->images();
-	const int width =  images.displayWidth();
+	const int width = images.displayWidth();
 	const int height = images.displayHeight();
 
 	QImage image(width, height, QImage::Format_Mono);

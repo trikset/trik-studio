@@ -24,10 +24,8 @@ class PioneerGetLPSVelocity : public generatorBase::simple::BindingGenerator
 {
 	Q_OBJECT
 public:
-	PioneerGetLPSVelocity(const qrRepo::RepoApi &repo
-			, generatorBase::GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent);
+	PioneerGetLPSVelocity(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+		const qReal::Id &id, QObject *parent);
 };
 
 }

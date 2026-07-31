@@ -62,10 +62,10 @@ namespace details {
 class XmlTemplate
 {
 public:
-	XmlTemplate(const XmlTemplate&) = delete;
-	XmlTemplate& operator=(const XmlTemplate&) = delete;
-	XmlTemplate(XmlTemplate&&) noexcept = default;
-	XmlTemplate& operator=(XmlTemplate&&) noexcept = default;
+	XmlTemplate(const XmlTemplate &) = delete;
+	XmlTemplate &operator=(const XmlTemplate &) = delete;
+	XmlTemplate(XmlTemplate &&) noexcept = default;
+	XmlTemplate &operator=(XmlTemplate &&) noexcept = default;
 	virtual ~XmlTemplate() = default;
 
 	enum class TemplateParseErrorCode {
@@ -91,7 +91,7 @@ public:
 		QtXmlParserError
 	};
 
-	template <typename T>
+	template<typename T>
 	struct ErrorDescription {
 		int line {};
 		QString error {};
@@ -122,9 +122,11 @@ public:
 	/// Returns errors received when substituting template parameters, which can later be displayed
 	/// to the user from the ConsoleReporter interface or recorded in logs.
 	SubstitutionErrors substitutionErrors() const;
+
 protected:
-	virtual void addDeclarationError(const QString& message, int lineNumber, TemplateParseErrorCode code);
-	virtual void addSubstitutionError(const QString& message, int lineNumber, TemplateSubstitutionErrorCode code);
+	virtual void addDeclarationError(const QString &message, int lineNumber, TemplateParseErrorCode code);
+	virtual void addSubstitutionError(const QString &message, int lineNumber, TemplateSubstitutionErrorCode code);
+
 private:
 	/// Parses template parameters, checking their compliance with template grammar,
 	/// correct use of default values, and initializes parameters
@@ -140,9 +142,9 @@ private:
 	void parseWith(const QDomElement &with, QHash<QString, QString> &paramsForReplace);
 
 	bool validateParam(const QDomNode &with, const QString &param);
-	void parseParams(const QDomElement &paramTag, QHash<QString, QString>
-			 &paramsForReplace, bool fromTemplate = false);
-	void substitute(const QString& name, const QString& value, QString &result);
+	void parseParams(const QDomElement &paramTag, QHash<QString, QString> &paramsForReplace,
+		bool fromTemplate = false);
+	void substitute(const QString &name, const QString &value, QString &result);
 	void clear();
 
 	struct TemplateParamInfo {
@@ -152,15 +154,13 @@ private:
 		// std::optional is a c++17 feature, but I don't want to write my own
 		bool mHasDefaultValue {};
 
-		TemplateParamInfo(
-			QString parameterName,
-			QString defaultValue,
-			bool hasDefaultValue) noexcept
-		    : mName(std::move(parameterName))
-		    , mDefaultValue(std::move(defaultValue))
-		    , mHasDefaultValue(hasDefaultValue) {}
+		TemplateParamInfo(QString parameterName, QString defaultValue, bool hasDefaultValue) noexcept
+			: mName(std::move(parameterName))
+			, mDefaultValue(std::move(defaultValue))
+			, mHasDefaultValue(hasDefaultValue)
+		{
+		}
 	};
-
 
 	DeclarationErrors mDeclarationErrors;
 	SubstitutionErrors mSubstitutionErrors;

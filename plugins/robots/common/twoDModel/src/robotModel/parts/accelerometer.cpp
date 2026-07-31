@@ -19,9 +19,7 @@
 using namespace twoDModel::robotModel::parts;
 using namespace kitBase::robotModel;
 
-Accelerometer::Accelerometer(const DeviceInfo &info
-		, const PortInfo &port
-		, engine::TwoDModelEngineInterface &engine)
+Accelerometer::Accelerometer(const DeviceInfo &info, const PortInfo &port, engine::TwoDModelEngineInterface &engine)
 	: robotParts::AccelerometerSensor(info, port)
 	, mEngine(engine)
 {

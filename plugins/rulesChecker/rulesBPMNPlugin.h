@@ -19,8 +19,8 @@
 #include "rulesChecker.h"
 #include "bpmnCustomizer.h"
 
-namespace qReal{
-namespace rulesChecker{
+namespace qReal {
+namespace rulesChecker {
 
 //! @class RulesPlugin allows to check diagram for BPMN rules
 class RulesPlugin : public QObject, public qReal::ToolPluginInterface
@@ -37,6 +37,7 @@ public:
 	qReal::Customizer *customizationInterface();
 
 	QList<ActionInfo> actions();
+
 private:
 	//! init start key
 	void initAction();
@@ -54,5 +55,3 @@ private:
 
 }
 }
-
-

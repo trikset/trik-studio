@@ -33,9 +33,8 @@ class TWO_D_MODEL_EXPORT ColorSensorReflected : public kitBase::robotModel::robo
 	Q_CLASSINFO("friendlyName", tr("EV3 color sensor (reflected)"))
 
 public:
-	ColorSensorReflected(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port
-			, engine::TwoDModelEngineInterface &engine);
+	ColorSensorReflected(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+		engine::TwoDModelEngineInterface &engine);
 
 	void read() override;
 

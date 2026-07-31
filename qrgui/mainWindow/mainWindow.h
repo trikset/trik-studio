@@ -24,7 +24,6 @@
 #include <qrgui/preferencesDialog/preferencesDialog.h>
 #include <textEditor/qscintillaTextEdit.h>
 
-
 class QGraphicsView;
 class QSignalMapper;
 class QListWidget;
@@ -67,9 +66,9 @@ namespace text {
 class TextManager;
 }
 
-class MainWindow : public QMainWindow
-		, public qReal::gui::MainWindowInterpretersInterface
-		, public qReal::gui::MainWindowDockInterface
+class MainWindow : public QMainWindow,
+		   public qReal::gui::MainWindowInterpretersInterface,
+		   public qReal::gui::MainWindowDockInterface
 {
 	Q_OBJECT
 
@@ -96,18 +95,18 @@ public:
 	ErrorReporterInterface *errorReporter() override;
 	Id activeDiagram() const override;
 	IdList openedDiagrams() const override;
-	void openShapeEditor(const QPersistentModelIndex &index, int role, const QString &propertyValue
-		, bool useTypedPorts);
+	void openShapeEditor(const QPersistentModelIndex &index, int role, const QString &propertyValue,
+		bool useTypedPorts);
 	void openQscintillaTextEditor(const QPersistentModelIndex &index, const int role, const QString &propertyValue);
-	void openShapeEditor(const Id &id
-			, const QString &propertyValue
-			/// @todo: whan passing it by reference the build on travis fails
-			, const EditorManagerInterface *editorManager
-			, bool useTypedPorts);
-	void showAndEditPropertyInTextEditor(const QString &title, const QString &text, const QPersistentModelIndex &index
-			, const int &role);
-	void openReferenceList(const QPersistentModelIndex &index, const QString &referenceType
-			, const QString &propertyValue, int role);
+	void openShapeEditor(const Id &id,
+		const QString &propertyValue
+		/// @todo: whan passing it by reference the build on travis fails
+		,
+		const EditorManagerInterface *editorManager, bool useTypedPorts);
+	void showAndEditPropertyInTextEditor(const QString &title, const QString &text,
+		const QPersistentModelIndex &index, const int &role);
+	void openReferenceList(const QPersistentModelIndex &index, const QString &referenceType,
+		const QString &propertyValue, int role);
 
 	void openSettingsDialog(const QString &tab) override;
 
@@ -131,7 +130,7 @@ public:
 
 	void reportOperation(const QFuture<void> &operation, const QString &description = QString()) override;
 	QWidget *currentTab() override;
-	QList<QWidget*> allTabs() const override;
+	QList<QWidget *> allTabs() const override;
 	void openTab(QWidget *tab, const QString &title) override;
 	void closeTab(QWidget *tab) override;
 
@@ -158,7 +157,7 @@ public:
 
 	void tabifyDockWidget(QDockWidget *first, QDockWidget *second) override;
 	void addDockWidget(Qt::DockWidgetArea area, QDockWidget *dockWidget) override;
-	void addToolBar(Qt::ToolBarArea area, QToolBar * const toolbar) override;
+	void addToolBar(Qt::ToolBarArea area, QToolBar *const toolbar) override;
 
 	QByteArray saveState(int version = 0) const override;
 	bool restoreState(const QByteArray &state, int version = 0) override;
@@ -189,7 +188,7 @@ public Q_SLOTS:
 	void selectItemOrDiagram(const qReal::Id &graphicalId) override;
 
 	void selectItemWithError(const qReal::Id &id);
-	void showErrors(const qReal::gui::ErrorReporter * const errorReporter);
+	void showErrors(const qReal::gui::ErrorReporter *const errorReporter);
 
 	void changePaletteRepresentation();
 	void closeStartTab();
@@ -284,17 +283,17 @@ private:
 	/// models, connects to various main window actions and so on
 	/// @param tab Tab to be initialized
 	/// @param rootIndex Index of a graphical model element that will be root of a diagram shown in this tab
-	void initCurrentTab(qReal::gui::editor::EditorView * const tab, const QModelIndex &rootIndex);
+	void initCurrentTab(qReal::gui::editor::EditorView *const tab, const QModelIndex &rootIndex);
 
 	/// Sets shortcuts for a given tab which don`t have own buttons anywhere
 	/// @param tab Tab to be initialized with shortcuts
-	void setShortcuts(qReal::gui::editor::EditorView * const tab);
+	void setShortcuts(qReal::gui::editor::EditorView *const tab);
 
 	void setDefaultShortcuts();
 
 	void registerMetaTypes();
 
-	QListWidget* createSaveListWidget();
+	QListWidget *createSaveListWidget();
 
 	void closeEvent(QCloseEvent *event) override;
 	void deleteFromLogicalExplorer();
@@ -384,7 +383,7 @@ private:
 	QScopedPointer<ProjectManagerWrapper> mProjectManager;
 	QScopedPointer<Controller> mController;
 
-	EditorInterface* mCurrentEditor {}; // No ownership
+	EditorInterface *mCurrentEditor {}; // No ownership
 
 	QVector<bool> mSaveListChecked;
 
@@ -392,7 +391,7 @@ private:
 	QModelIndex mRootIndex;
 
 	/// Fullscreen mode flag
-	bool mIsFullscreen { false };
+	bool mIsFullscreen {false};
 
 	/// Internal map table to store info what widgets should we hide/show
 	QMap<QString, bool> mDocksVisibility;

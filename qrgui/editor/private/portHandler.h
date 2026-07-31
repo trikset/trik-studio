@@ -43,11 +43,9 @@ public:
 	/// @param pointPorts Point ports which belong to node.
 	/// @param linePorts Line ports which belong to node.
 	/// @param circularPorts Circular ports which belong to node.
-	PortHandler(NodeElement *node
-			, models::GraphicalModelAssistApi &graphicalAssistApi
-			, const QList<StatPoint *> &pointPorts
-			, const QList<StatLine *> &linePorts
-			, const QList<StatCircular *> &circularPorts);
+	PortHandler(NodeElement *node, models::GraphicalModelAssistApi &graphicalAssistApi,
+		const QList<StatPoint *> &pointPorts, const QList<StatLine *> &linePorts,
+		const QList<StatCircular *> &circularPorts);
 
 	~PortHandler();
 
@@ -200,15 +198,15 @@ private:
 
 	/// Transforms point port for current node size.
 	/// @param port Port that will be actually dealt with.
-	QLineF transformPortForNodeSize(const StatLine * const port) const;
+	QLineF transformPortForNodeSize(const StatLine *const port) const;
 
 	/// Transforms line port for current node size.
 	/// @param port Port that will be actually dealt with.
-	QPointF transformPortForNodeSize(const StatPoint * const port) const;
+	QPointF transformPortForNodeSize(const StatPoint *const port) const;
 
 	/// Transforms circular port for current node size.
 	/// @param port Port that will be actually dealt with.
-	StatCircular::CircularPort transformPortForNodeSize(const StatCircular * const port) const;
+	StatCircular::CircularPort transformPortForNodeSize(const StatCircular *const port) const;
 
 	/// Node that ports are actually dealt with.
 	NodeElement *mNode;

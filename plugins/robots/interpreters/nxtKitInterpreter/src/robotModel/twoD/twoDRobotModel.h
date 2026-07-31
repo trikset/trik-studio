@@ -40,13 +40,11 @@ public:
 	QList<QPointF> wheelsPosition() const override;
 
 protected:
-	kitBase::robotModel::robotParts::Device *createDevice(
-			const kitBase::robotModel::PortInfo &port
-			, const kitBase::robotModel::DeviceInfo &deviceInfo
-			) override;
+	kitBase::robotModel::robotParts::Device *createDevice(const kitBase::robotModel::PortInfo &port,
+		const kitBase::robotModel::DeviceInfo &deviceInfo) override;
 
 private:
-	twoDModel::engine::TwoDModelDisplayWidget *mDisplayWidget;  // Does not have ownership
+	twoDModel::engine::TwoDModelDisplayWidget *mDisplayWidget; // Does not have ownership
 	QPolygonF mCollidingPolygon;
 };
 

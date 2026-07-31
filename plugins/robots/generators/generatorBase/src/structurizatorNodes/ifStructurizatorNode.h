@@ -23,11 +23,9 @@ class IfStructurizatorNode : public IntermediateStructurizatorNode
 	Q_OBJECT
 
 public:
-	explicit IfStructurizatorNode(IntermediateStructurizatorNode *condition
-			, IntermediateStructurizatorNode *thenBranch
-			, IntermediateStructurizatorNode *elseBranch
-			, IntermediateStructurizatorNode *exit
-			, QObject *parent);
+	explicit IfStructurizatorNode(IntermediateStructurizatorNode *condition,
+		IntermediateStructurizatorNode *thenBranch, IntermediateStructurizatorNode *elseBranch,
+		IntermediateStructurizatorNode *exit, QObject *parent);
 
 	IntermediateStructurizatorNode *condition() const;
 	IntermediateStructurizatorNode *thenBranch() const;
@@ -37,6 +35,7 @@ public:
 	bool analyzeBreak() override;
 	Type type() const override;
 	qReal::Id firstId() const override;
+
 private:
 	IntermediateStructurizatorNode *mCondition;
 	IntermediateStructurizatorNode *mThenBranch;

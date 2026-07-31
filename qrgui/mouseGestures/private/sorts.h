@@ -31,15 +31,14 @@ public:
 				if (key.at(j).first > key.at(j + 1).first
 					|| (key.at(j).second > key.at(j + 1).second
 						&& key.at(j).first == key.at(j + 1).first)) {
-					key.insert(j, key.at(j+1));
-					key.removeAt(j+2);
+					key.insert(j, key.at(j + 1));
+					key.removeAt(j + 2);
 				}
 			}
 		}
 		int k = 0;
 		while (k < key.size() - 1) {
-			if (key.at(k).first == key.at(k + 1).first
-				&& key.at(k).second == key.at(k + 1).second)
+			if (key.at(k).first == key.at(k + 1).first && key.at(k).second == key.at(k + 1).second)
 				key.removeAt(k);
 			else
 				k++;
@@ -100,8 +99,7 @@ private:
 		if (!key.isEmpty())
 			minPos = key.at(0);
 		for (SquarePos pos : key) {
-			if (pos.first < minPos.first || (pos.first == minPos.first
-											 && pos.second < minPos.second))
+			if (pos.first < minPos.first || (pos.first == minPos.first && pos.second < minPos.second))
 				minPos = pos;
 		}
 		return minPos;

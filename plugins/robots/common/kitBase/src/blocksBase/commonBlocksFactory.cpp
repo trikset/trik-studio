@@ -31,16 +31,16 @@ CommonBlocksFactory::CommonBlocksFactory()
 qReal::interpretation::BlockInterface *CommonBlocksFactory::block(const qReal::Id &element)
 {
 	qReal::interpretation::Block *newBlock = blocksToDisable().contains(element.type())
-			? new qReal::interpretation::blocks::EmptyBlock
-			: produceBlock(element);
+	                                                 ? new qReal::interpretation::blocks::EmptyBlock
+	                                                 : produceBlock(element);
 
 	if (!newBlock) {
 		newBlock = new qReal::interpretation::blocks::EmptyBlock;
 	}
 
 	if (auto robotsBlock = dynamic_cast<RobotsBlock *>(newBlock)) {
-		robotsBlock->init(element, mGraphicalModelApi, mLogicalModelApi
-				, mErrorReporter, *mRobotModelManager, mParser);
+		robotsBlock->init(element, mGraphicalModelApi, mLogicalModelApi, mErrorReporter, *mRobotModelManager,
+			mParser);
 	} else {
 		newBlock->init(element, mGraphicalModelApi, mLogicalModelApi, mErrorReporter, mParser);
 	}
@@ -48,11 +48,10 @@ qReal::interpretation::BlockInterface *CommonBlocksFactory::block(const qReal::I
 	return newBlock;
 }
 
-void CommonBlocksFactory::configure(const qReal::GraphicalModelAssistInterface &graphicalModelApi
-		, const qReal::LogicalModelAssistInterface &logicalModelApi
-		, kitBase::robotModel::RobotModelManagerInterface &robotModelManager
-		, qReal::ErrorReporterInterface &errorReporter
-		, qrtext::LanguageToolboxInterface &textLanguageToolbox)
+void CommonBlocksFactory::configure(const qReal::GraphicalModelAssistInterface &graphicalModelApi,
+	const qReal::LogicalModelAssistInterface &logicalModelApi,
+	kitBase::robotModel::RobotModelManagerInterface &robotModelManager,
+	qReal::ErrorReporterInterface &errorReporter, qrtext::LanguageToolboxInterface &textLanguageToolbox)
 {
 	mRobotModelManager = &robotModelManager;
 	mGraphicalModelApi = &graphicalModelApi;

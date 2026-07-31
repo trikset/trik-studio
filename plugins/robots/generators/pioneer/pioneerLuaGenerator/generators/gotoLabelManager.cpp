@@ -23,11 +23,8 @@ QString GotoLabelManager::labelFor(const qReal::Id &id)
 {
 	qReal::Id actualId = id;
 	if (actualId.editor().startsWith("label_")) {
-		actualId = qReal::Id(
-				actualId.editor().mid(QString("label_").length())
-				, actualId.diagram()
-				, actualId.element()
-				, actualId.id());
+		actualId = qReal::Id(actualId.editor().mid(QString("label_").length()), actualId.diagram(),
+			actualId.element(), actualId.id());
 	}
 
 	if (mLabels.contains(actualId)) {

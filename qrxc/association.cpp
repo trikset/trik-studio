@@ -27,9 +27,9 @@ bool Association::init(const QDomElement &element)
 	return true;
 }
 
-Association* Association::clone() const
+Association *Association::clone() const
 {
-	Association* result = new Association();
+	Association *result = new Association();
 	result->mBeginName = mBeginName;
 	result->mEndName = mEndName;
 	return result;

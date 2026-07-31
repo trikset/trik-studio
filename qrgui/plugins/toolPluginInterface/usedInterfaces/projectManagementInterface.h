@@ -19,7 +19,6 @@
 #include "qrgui/systemFacade/components/autosaver.h"
 #include "qrgui/plugins/toolPluginInterface/toolPluginInterfaceDeclSpec.h"
 
-
 #include <QDebug>
 
 namespace qReal {

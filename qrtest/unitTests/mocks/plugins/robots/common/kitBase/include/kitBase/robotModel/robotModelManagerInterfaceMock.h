@@ -29,15 +29,18 @@ class RobotModelManagerInterfaceMock : public kitBase::robotModel::RobotModelMan
 public:
 	MOCK_CONST_METHOD0(model, kitBase::robotModel::RobotModelInterface &());
 
-	void emitConnected() {
+	void emitConnected()
+	{
 		Q_EMIT connected(true, "");
 	}
 
-	void emitAllDevicesConfigured() {
+	void emitAllDevicesConfigured()
+	{
 		Q_EMIT allDevicesConfigured();
 	}
 
-	void emitDisconnected() {
+	void emitDisconnected()
+	{
 		Q_EMIT disconnected();
 	}
 };

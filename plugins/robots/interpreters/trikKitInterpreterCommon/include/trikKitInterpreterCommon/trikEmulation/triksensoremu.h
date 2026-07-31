@@ -28,20 +28,31 @@ class TrikSensorEmu : public trikControl::SensorInterface
 public:
 	TrikSensorEmu(kitBase::robotModel::robotParts::ScalarSensor *sensor);
 
-	Status status() const override {return Status::ready;}
+	Status status() const override
+	{
+		return Status::ready;
+	}
 
 	// SensorInterface interface
 public:
-	int minValue() const override {return 0;}
-	int maxValue() const override {return 100;}
+	int minValue() const override
+	{
+		return 0;
+	}
+	int maxValue() const override
+	{
+		return 100;
+	}
 
 public Q_SLOTS:
 	int read() override;
-	int readRawData() override {return read();}
+	int readRawData() override
+	{
+		return read();
+	}
 
 private:
 	kitBase::robotModel::robotParts::ScalarSensor *mSensor;
-
 };
 
 }

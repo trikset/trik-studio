@@ -20,7 +20,7 @@
 class TrikLineSensorAdapter : public trikControl::LineSensorInterface
 {
 
-Q_OBJECT
+	Q_OBJECT
 
 public:
 	TrikLineSensorAdapter(trik::robotModel::parts::TrikLineSensor *sensor);

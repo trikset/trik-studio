@@ -44,7 +44,7 @@ const Id metamodelContainmentLinkType = Id("MetaEditor", "MetaEditor", "Containe
 const Id metamodelExplosionLinkType = Id("MetaEditor", "MetaEditor", "Explosion");
 const Id metamodelPropertiesAsContainerType = Id("MetaEditor", "MetaEditor", "MetaEntityPropertiesAsContainer");
 
-QList<QSharedPointer<Metamodel> > QrsMetamodelLoader::load(const QString &pathToQrs)
+QList<QSharedPointer<Metamodel>> QrsMetamodelLoader::load(const QString &pathToQrs)
 {
 	QList<QSharedPointer<Metamodel>> result;
 	const qrRepo::RepoApi repo(pathToQrs);
@@ -124,8 +124,7 @@ void QrsMetamodelLoader::parseImport(const qrRepo::RepoApi &repo, Metamodel &met
 	Q_UNUSED(id)
 }
 
-void QrsMetamodelLoader::parseNode(const qrRepo::RepoApi &repo
-		, Metamodel &metamodel, const Id &diagram, const Id &id)
+void QrsMetamodelLoader::parseNode(const qrRepo::RepoApi &repo, Metamodel &metamodel, const Id &diagram, const Id &id)
 {
 	auto *node = new NodeElementType(metamodel);
 
@@ -145,8 +144,7 @@ void QrsMetamodelLoader::parseNode(const qrRepo::RepoApi &repo
 	metamodel.addElement(*node);
 }
 
-void QrsMetamodelLoader::parseEdge(const qrRepo::RepoApi &repo
-		, Metamodel &metamodel, const Id &diagram, const Id &id)
+void QrsMetamodelLoader::parseEdge(const qrRepo::RepoApi &repo, Metamodel &metamodel, const Id &diagram, const Id &id)
 {
 	auto *edge = new EdgeElementType(metamodel);
 
@@ -200,8 +198,7 @@ void QrsMetamodelLoader::parsePort(const qrRepo::RepoApi &repo, Metamodel &metam
 	Q_UNUSED(id)
 }
 
-void QrsMetamodelLoader::parseGroup(const qrRepo::RepoApi &repo
-		, Metamodel &metamodel, const Id &diagram, const Id &id)
+void QrsMetamodelLoader::parseGroup(const qrRepo::RepoApi &repo, Metamodel &metamodel, const Id &diagram, const Id &id)
 {
 	/// @todo: We should not use XML here, PatternType must not parse XML at all.
 	QDomDocument document;
@@ -223,17 +220,16 @@ void QrsMetamodelLoader::parseProperties(const qrRepo::RepoApi &repo, ElementTyp
 	for (const Id &child : children) {
 		if (child.type() == metamodelAttributeType && repo.isLogicalElement(id)) {
 			const QString type = repo.stringProperty(child, "attributeType");
-			element.addProperty(repo.name(child), type
-					, stringProperty(repo, child, "defaultValue", "string")
-					, stringProperty(repo, child, "displayedName")
-					, stringProperty(repo, child, "description")
-					, type == "reference");
+			element.addProperty(repo.name(child), type,
+				stringProperty(repo, child, "defaultValue", "string"),
+				stringProperty(repo, child, "displayedName"),
+				stringProperty(repo, child, "description"), type == "reference");
 		}
 	}
 }
 
-void QrsMetamodelLoader::parsePorts(const qrRepo::RepoApi &repo
-		, EdgeElementType &edge, const Id &id, const QString &direction)
+void QrsMetamodelLoader::parsePorts(const qrRepo::RepoApi &repo, EdgeElementType &edge, const Id &id,
+	const QString &direction)
 {
 	const QString propertyName = direction + "Ports";
 	const QStringList ports = stringProperty(repo, id, propertyName).split(',', QString::SkipEmptyParts);
@@ -311,12 +307,11 @@ void QrsMetamodelLoader::parseSdfGraphics(const qrRepo::RepoApi &repo, NodeEleme
 void QrsMetamodelLoader::parseLabels(NodeElementType &node, const QDomElement &labels, int width, int height)
 {
 	int index = 0;
-	for (QDomElement labelTag = labels.firstChildElement("label")
-			; !labelTag.isNull()
-			; labelTag = labelTag.nextSiblingElement("label"))
-	{
+	for (QDomElement labelTag = labels.firstChildElement("label"); !labelTag.isNull();
+		labelTag = labelTag.nextSiblingElement("label")) {
 		const utils::ScalableCoordinate x = utils::ScalableItem::initCoordinate(labelTag.attribute("x"), width);
-		const utils::ScalableCoordinate y = utils::ScalableItem::initCoordinate(labelTag.attribute("y"), height);
+		const utils::ScalableCoordinate y =
+			utils::ScalableItem::initCoordinate(labelTag.attribute("y"), height);
 
 		const QString text = labelTag.attribute("text");
 		const QString textBinded = labelTag.attribute("textBinded");
@@ -326,7 +321,8 @@ void QrsMetamodelLoader::parseLabels(NodeElementType &node, const QDomElement &l
 		const qreal rotation = labelTag.attribute("rotation", "0").toDouble();
 
 		++index;
-		const QString background = labelTag.attribute("background", textBinded.isEmpty() ? "transparent" : "white");
+		const QString background =
+			labelTag.attribute("background", textBinded.isEmpty() ? "transparent" : "white");
 		const bool isHard = labelTag.attribute("hard", "false").toLower().trimmed() == "true";
 		const bool isPlainText = labelTag.attribute("isPlainText", "false").toLower().trimmed() == "true";
 		if (text.isEmpty() && textBinded.isEmpty()) {
@@ -354,53 +350,55 @@ void QrsMetamodelLoader::parseLabels(NodeElementType &node, const QDomElement &l
 
 void QrsMetamodelLoader::parseNodePorts(NodeElementType &node, const QDomElement &portsTag, int width, int height)
 {
-	for (QDomElement pointPort = portsTag.firstChildElement("pointPort")
-			; !pointPort.isNull()
-			; pointPort = pointPort.nextSiblingElement("pointPort"))
-	{
-		const utils::ScalableCoordinate x = utils::ScalableItem::initCoordinate(pointPort.attribute("x"), width);
-		const utils::ScalableCoordinate y = utils::ScalableItem::initCoordinate(pointPort.attribute("y"), height);
+	for (QDomElement pointPort = portsTag.firstChildElement("pointPort"); !pointPort.isNull();
+		pointPort = pointPort.nextSiblingElement("pointPort")) {
+		const utils::ScalableCoordinate x =
+			utils::ScalableItem::initCoordinate(pointPort.attribute("x"), width);
+		const utils::ScalableCoordinate y =
+			utils::ScalableItem::initCoordinate(pointPort.attribute("y"), height);
 		const int initialWidth = width;
 		const int initialHeight = height;
 		const QString type = pointPort.attribute("type", "NonTyped");
 
-		node.addPointPort(PointPortInfo(QPointF(x.value(), y.value()), x.isScalable(), y.isScalable()
-				, initialWidth, initialHeight, type));
+		node.addPointPort(PointPortInfo(QPointF(x.value(), y.value()), x.isScalable(), y.isScalable(),
+			initialWidth, initialHeight, type));
 	}
 
-	for (QDomElement linePort = portsTag.firstChildElement("linePort")
-			; !linePort.isNull()
-			; linePort = linePort.nextSiblingElement("linePort"))
-	{
+	for (QDomElement linePort = portsTag.firstChildElement("linePort"); !linePort.isNull();
+		linePort = linePort.nextSiblingElement("linePort")) {
 		const QDomElement start = linePort.firstChildElement("start");
 		const QDomElement end = linePort.firstChildElement("end");
 
-		const utils::ScalableCoordinate startX = utils::ScalableItem::initCoordinate(start.attribute("startx"), width);
-		const utils::ScalableCoordinate startY = utils::ScalableItem::initCoordinate(start.attribute("starty"), width);
-		const utils::ScalableCoordinate endX = utils::ScalableItem::initCoordinate(end.attribute("endx"), height);
-		const utils::ScalableCoordinate endY = utils::ScalableItem::initCoordinate(end.attribute("endy"), height);
+		const utils::ScalableCoordinate startX =
+			utils::ScalableItem::initCoordinate(start.attribute("startx"), width);
+		const utils::ScalableCoordinate startY =
+			utils::ScalableItem::initCoordinate(start.attribute("starty"), width);
+		const utils::ScalableCoordinate endX =
+			utils::ScalableItem::initCoordinate(end.attribute("endx"), height);
+		const utils::ScalableCoordinate endY =
+			utils::ScalableItem::initCoordinate(end.attribute("endy"), height);
 		const int initialWidth = width;
 		const int initialHeight = height;
 		const QString type = linePort.attribute("type", "NonTyped");
 
-		node.addLinePort(LinePortInfo(QLineF(startX.value(), startY.value(), endX.value(), endY.value())
-				, startX.isScalable(), startY.isScalable(), endX.isScalable(), endY.isScalable()
-				, initialWidth, initialHeight, type));
+		node.addLinePort(LinePortInfo(QLineF(startX.value(), startY.value(), endX.value(), endY.value()),
+			startX.isScalable(), startY.isScalable(), endX.isScalable(), endY.isScalable(), initialWidth,
+			initialHeight, type));
 	}
 
-	for (QDomElement circlePort = portsTag.firstChildElement("circularPort")
-			; !circlePort.isNull()
-			; circlePort = circlePort.nextSiblingElement("circularPort"))
-	{
-		const utils::ScalableCoordinate x = utils::ScalableItem::initCoordinate(circlePort.attribute("x"), width);
-		const utils::ScalableCoordinate y = utils::ScalableItem::initCoordinate(circlePort.attribute("y"), height);
+	for (QDomElement circlePort = portsTag.firstChildElement("circularPort"); !circlePort.isNull();
+		circlePort = circlePort.nextSiblingElement("circularPort")) {
+		const utils::ScalableCoordinate x =
+			utils::ScalableItem::initCoordinate(circlePort.attribute("x"), width);
+		const utils::ScalableCoordinate y =
+			utils::ScalableItem::initCoordinate(circlePort.attribute("y"), height);
 		const qreal r = circlePort.attribute("r").toDouble();
 		const int initialWidth = width;
 		const int initialHeight = height;
 		const QString type = circlePort.attribute("type", "NonTyped");
 
-		node.addCircularPort(CircularPortInfo(QPointF(x.value(), y.value()), r, x.isScalable(), y.isScalable()
-				, initialWidth, initialHeight, type));
+		node.addCircularPort(CircularPortInfo(QPointF(x.value(), y.value()), r, x.isScalable(), y.isScalable(),
+			initialWidth, initialHeight, type));
 	}
 }
 
@@ -411,7 +409,7 @@ void QrsMetamodelLoader::parseContainerProperties(const qrRepo::RepoApi &repo, N
 	for (const Id &child : elements) {
 		if (child.type() == metamodelPropertiesAsContainerType && repo.isLogicalElement(child)) {
 			node.setContainer(true);
-			node.setSizeOfForestalling(intVectorProperty(repo, child, "forestallingSize", {0,0,0,0}));
+			node.setSizeOfForestalling(intVectorProperty(repo, child, "forestallingSize", {0, 0, 0, 0}));
 			node.setSizeOfChildrenForestalling(intProperty(repo, child, "childrenForestallingSize"));
 
 			node.setSortingContainer(boolProperty(repo, child, "sortContainer"));
@@ -431,8 +429,8 @@ void QrsMetamodelLoader::parseLinksOnDiagram(const qrRepo::RepoApi &repo, Metamo
 	for (const Id &id : repo.children(diagram)) {
 		const Id elementType = id.type();
 		if ((elementType == metamodelNodeType || elementType == metamodelEdgeType
-				|| elementType == metamodelImportType) && repo.isLogicalElement(id))
-		{
+			    || elementType == metamodelImportType)
+			&& repo.isLogicalElement(id)) {
 			const IdList inLinks = repo.incomingLinks(id);
 			for (const Id &inLink : inLinks) {
 				if (!repo.isLogicalElement(inLink)) {
@@ -443,7 +441,8 @@ void QrsMetamodelLoader::parseLinksOnDiagram(const qrRepo::RepoApi &repo, Metamo
 					ElementType *from = nullptr;
 					ElementType *to = nullptr;
 					QString overridingProperty;
-					parseGeneralization(repo, metamodel, inLink, diagramName, from, to, overridingProperty);
+					parseGeneralization(repo, metamodel, inLink, diagramName, from, to,
+						overridingProperty);
 					overridingProperties[qMakePair(from, to)] = overridingProperty;
 					elements.insert(from);
 					elements.insert(to);
@@ -459,8 +458,8 @@ void QrsMetamodelLoader::parseLinksOnDiagram(const qrRepo::RepoApi &repo, Metamo
 	resolveInheritance(elements, overridingProperties);
 }
 
-void QrsMetamodelLoader::parseGeneralization(const qrRepo::RepoApi &repo, Metamodel &metamodel, const Id &id
-		, const QString &diagram, ElementType *&fromElement, ElementType *&toElement, QString &overridingProperties)
+void QrsMetamodelLoader::parseGeneralization(const qrRepo::RepoApi &repo, Metamodel &metamodel, const Id &id,
+	const QString &diagram, ElementType *&fromElement, ElementType *&toElement, QString &overridingProperties)
 {
 	const Id from = repo.from(id);
 	const Id to = repo.to(id);
@@ -478,8 +477,8 @@ void QrsMetamodelLoader::parseGeneralization(const qrRepo::RepoApi &repo, Metamo
 	overridingProperties = stringProperty(repo, id, "overrides");
 }
 
-void QrsMetamodelLoader::parseContainer(const qrRepo::RepoApi &repo, Metamodel &metamodel
-		, const Id &id, const QString &diagram)
+void QrsMetamodelLoader::parseContainer(const qrRepo::RepoApi &repo, Metamodel &metamodel, const Id &id,
+	const QString &diagram)
 {
 	const Id from = repo.from(id);
 	const Id to = repo.to(id);
@@ -495,8 +494,8 @@ void QrsMetamodelLoader::parseContainer(const qrRepo::RepoApi &repo, Metamodel &
 	metamodel.produceEdge(fromElement, toElement, ElementType::containmentLinkType);
 }
 
-void QrsMetamodelLoader::parseExplosion(const qrRepo::RepoApi &repo, Metamodel &metamodel
-		, const Id &id, const QString &diagram)
+void QrsMetamodelLoader::parseExplosion(const qrRepo::RepoApi &repo, Metamodel &metamodel, const Id &id,
+	const QString &diagram)
 {
 	const Id from = repo.from(id);
 	const Id to = repo.to(id);
@@ -509,12 +508,12 @@ void QrsMetamodelLoader::parseExplosion(const qrRepo::RepoApi &repo, Metamodel &
 	const QString toName = validateName(repo, to);
 	ElementType &fromElement = metamodel.elementType(diagram, fromName);
 	ElementType &toElement = metamodel.elementType(diagram, toName);
-	metamodel.addExplosion(fromElement, toElement, boolProperty(repo, id, "makeReusable")
-			, boolProperty(repo, id, "requireImmediateLinkage"));
+	metamodel.addExplosion(fromElement, toElement, boolProperty(repo, id, "makeReusable"),
+		boolProperty(repo, id, "requireImmediateLinkage"));
 }
 
-void QrsMetamodelLoader::resolveInheritance(QSet<ElementType *> &elements
-		, const QHash<QPair<ElementType *, ElementType *>, QString> &overridingProperties)
+void QrsMetamodelLoader::resolveInheritance(QSet<ElementType *> &elements,
+	const QHash<QPair<ElementType *, ElementType *>, QString> &overridingProperties)
 {
 	// Here we should copy properties, labels and so on from parent subtypes to child subtypes.
 	// So we should traverse multigraph from starting from parent types, then child ones and so on.
@@ -534,7 +533,8 @@ void QrsMetamodelLoader::resolveInheritance(QSet<ElementType *> &elements
 
 			if (allParentsAreVisited) {
 				elements.remove(child);
-				for (const qrgraph::Edge *edge : child->outgoingEdges(ElementType::generalizationLinkType)) {
+				for (const qrgraph::Edge *edge :
+					child->outgoingEdges(ElementType::generalizationLinkType)) {
 					auto *parent = static_cast<ElementType *>(edge->end());
 					inherit(*child, *parent, overridingProperties[qMakePair(child, parent)]);
 				}
@@ -545,8 +545,7 @@ void QrsMetamodelLoader::resolveInheritance(QSet<ElementType *> &elements
 	}
 }
 
-void QrsMetamodelLoader::inherit(ElementType &child, const ElementType &parent
-		, const QString &generalizationProperties)
+void QrsMetamodelLoader::inherit(ElementType &child, const ElementType &parent, const QString &generalizationProperties)
 {
 	const bool overrideAll = generalizationProperties.contains("all");
 	const bool overridePictures = overrideAll || generalizationProperties.contains("pictures");
@@ -590,13 +589,15 @@ QString QrsMetamodelLoader::validateRootNode(const qrRepo::RepoApi &repo, const 
 
 	const QString rootNode = repo.property(diagram, "nodeName").toString();
 	for (const Id &child : repo.children(diagram)) {
-		if (repo.name(child) == rootNode && (child.type() == metamodelNodeType || child.type() == metamodelGroupType)) {
+		if (repo.name(child) == rootNode
+			&& (child.type() == metamodelNodeType || child.type() == metamodelGroupType)) {
 			return rootNode;
 		}
 	}
 
-	Q_EMIT errorOccured(QObject::tr("Root node for diagram %1 (which is %2) does not exist!")
-			.arg(repo.name(diagram), rootNode), diagram);
+	Q_EMIT errorOccured(
+		QObject::tr("Root node for diagram %1 (which is %2) does not exist!").arg(repo.name(diagram), rootNode),
+		diagram);
 	return rootNode;
 }
 
@@ -609,8 +610,10 @@ QString QrsMetamodelLoader::validateName(const qrRepo::RepoApi &repo, const Id &
 
 	const QRegExp patten("[A-Za-z_]+([A-Za-z_0-9 :]*)");
 	if (!patten.exactMatch(result)) {
-		Q_EMIT errorOccured(QObject::tr("Name should contain only latin letters, digits, spaces and underscores "
-			"and should start with latin letter or underscore"), id);
+		Q_EMIT errorOccured(QObject::tr(
+					    "Name should contain only latin letters, digits, spaces and underscores "
+					    "and should start with latin letter or underscore"),
+			id);
 	}
 
 	return result;
@@ -632,8 +635,8 @@ QString QrsMetamodelLoader::validatePortName(const qrRepo::RepoApi &repo, const 
 	return "NonTyped";
 }
 
-QString QrsMetamodelLoader::stringProperty(const qrRepo::RepoApi &repo, const Id &id
-		, const QString &propertyName, const QString &defaultValue)
+QString QrsMetamodelLoader::stringProperty(const qrRepo::RepoApi &repo, const Id &id, const QString &propertyName,
+	const QString &defaultValue)
 {
 	if (!repo.hasProperty(id, propertyName)) {
 		return defaultValue;
@@ -642,8 +645,8 @@ QString QrsMetamodelLoader::stringProperty(const qrRepo::RepoApi &repo, const Id
 	return repo.stringProperty(id, propertyName);
 }
 
-bool QrsMetamodelLoader::boolProperty(const qrRepo::RepoApi &repo, const Id &id
-		, const QString &propertyName, bool defaultValue)
+bool QrsMetamodelLoader::boolProperty(const qrRepo::RepoApi &repo, const Id &id, const QString &propertyName,
+	bool defaultValue)
 {
 	if (!repo.hasProperty(id, propertyName)) {
 		return defaultValue;
@@ -691,8 +694,8 @@ int QrsMetamodelLoader::parseInt(const QString &string, const Id &id)
 	return result;
 }
 
-int QrsMetamodelLoader::intProperty(const qrRepo::RepoApi &repo, const Id &id
-		, const QString &propertyName, int defaultValue)
+int QrsMetamodelLoader::intProperty(const qrRepo::RepoApi &repo, const Id &id, const QString &propertyName,
+	int defaultValue)
 {
 	if (!repo.hasProperty(id, propertyName)) {
 		return defaultValue;
@@ -701,8 +704,8 @@ int QrsMetamodelLoader::intProperty(const qrRepo::RepoApi &repo, const Id &id
 	return parseInt(repo.stringProperty(id, propertyName), id);
 }
 
-QVector<int> QrsMetamodelLoader::intVectorProperty(const qrRepo::RepoApi &repo, const Id &id
-		, const QString &propertyName, const QVector<int> &defaultValue)
+QVector<int> QrsMetamodelLoader::intVectorProperty(const qrRepo::RepoApi &repo, const Id &id,
+	const QString &propertyName, const QVector<int> &defaultValue)
 {
 	if (!repo.hasProperty(id, propertyName)) {
 		return defaultValue;

@@ -33,7 +33,7 @@ public:
 	~PluginLoader();
 
 	/// Loads editor plugin and returns its main interface. Transfers ownership to the caller.
-	qReal::Metamodel* loadPlugin(const QFileInfo &file);
+	qReal::Metamodel *loadPlugin(const QFileInfo &file);
 
 private:
 	QList<QSharedPointer<QPluginLoader>> mLoadedPluginLoaders;

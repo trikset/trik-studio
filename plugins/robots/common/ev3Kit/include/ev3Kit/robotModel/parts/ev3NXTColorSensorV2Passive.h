@@ -27,8 +27,8 @@ class Ev3NXTColorSensorV2Passive : public kitBase::robotModel::robotParts::Vecto
 	Q_CLASSINFO("friendlyName", tr("NXT color sensor V2 (passive)"))
 
 public:
-	Ev3NXTColorSensorV2Passive(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port);
+	Ev3NXTColorSensorV2Passive(const kitBase::robotModel::DeviceInfo &info,
+		const kitBase::robotModel::PortInfo &port);
 };
 
 }

@@ -31,9 +31,9 @@ public:
 	/// pass graphical ids as source or target parameters.
 	/// Otherwise both source and target must be logical ids.
 	/// @param mustAdd Specifies if this command should create or remove explosions.
-	ExplosionCommand(models::LogicalModelAssistApi &logicalApi
-			, const models::GraphicalModelAssistApi * const graphicalApi
-			, const Id &source, const Id &target, bool mustAdd);
+	ExplosionCommand(models::LogicalModelAssistApi &logicalApi,
+		const models::GraphicalModelAssistApi *const graphicalApi, const Id &source, const Id &target,
+		bool mustAdd);
 
 	~ExplosionCommand() override;
 
@@ -46,7 +46,7 @@ private:
 	void saveTargetShape();
 
 	models::LogicalModelAssistApi &mLogicalApi;
-	const models::GraphicalModelAssistApi * const mGraphicalApi;  // Doesn't take ownership.
+	const models::GraphicalModelAssistApi *const mGraphicalApi; // Doesn't take ownership.
 	Id mSource;
 	Id mTarget;
 	const bool mMustAdd;

@@ -23,21 +23,30 @@
 using namespace qReal;
 
 GroupNode::GroupNode(const QString &type, const QString &id, QPointF position, const QString &parent)
-	: type(type), id(id), position(position), parent(parent)
+	: type(type)
+	, id(id)
+	, position(position)
+	, parent(parent)
 {
 }
 
 GroupEdge::GroupEdge(const QString &type, const QString &from, const QString &to)
-	: type(type), from(from), to(to)
+	: type(type)
+	, from(from)
+	, to(to)
 {
 }
 
 Pattern::Pattern() = default;
 
-Pattern::Pattern(const QString &editor, const QString &diagram, const QString &name
-		, const QString &inNode, const QString &outNode, const QString &rootNode)
-	: mEditor(editor), mDiagram(diagram), mGroupName(name)
-	, mInNode(inNode), mOutNode(outNode), mRootNode(rootNode)
+Pattern::Pattern(const QString &editor, const QString &diagram, const QString &name, const QString &inNode,
+	const QString &outNode, const QString &rootNode)
+	: mEditor(editor)
+	, mDiagram(diagram)
+	, mGroupName(name)
+	, mInNode(inNode)
+	, mOutNode(outNode)
+	, mRootNode(rootNode)
 {
 }
 

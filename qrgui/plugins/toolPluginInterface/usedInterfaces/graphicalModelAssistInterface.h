@@ -26,11 +26,13 @@ class GraphicalModelAssistInterface : public details::ModelsAssistInterface
 public:
 	virtual const qrRepo::GraphicalRepoApi &graphicalRepoApi() const = 0;
 	virtual qrRepo::GraphicalRepoApi &mutableGraphicalRepoApi() const = 0;
-	qrRepo::CommonRepoApi &mutableRepoApi() const override {return mutableGraphicalRepoApi();}
+	qrRepo::CommonRepoApi &mutableRepoApi() const override
+	{
+		return mutableGraphicalRepoApi();
+	}
 	Id createElement(const Id &parent, const Id &type) override = 0;
-	Id createElement(const Id &parent, const Id &id, bool isFromLogicalModel
-		, const QString &name, const QPointF &position
-		, const Id &preferedLogicalId = Id()) override = 0;
+	Id createElement(const Id &parent, const Id &id, bool isFromLogicalModel, const QString &name,
+		const QPointF &position, const Id &preferedLogicalId = Id()) override = 0;
 	virtual Id copyElement(const Id &source) = 0;
 	IdList children(const Id &element) const override = 0;
 	void changeParent(const Id &element, const Id &parent, const QPointF &position) override = 0;

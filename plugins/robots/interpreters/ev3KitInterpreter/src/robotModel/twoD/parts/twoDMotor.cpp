@@ -16,9 +16,8 @@
 
 using namespace ev3::robotModel::twoD::parts;
 
-TwoDMotor::TwoDMotor(kitBase::robotModel::DeviceInfo const &info
-		, kitBase::robotModel::PortInfo const &port
-		, twoDModel::engine::TwoDModelEngineInterface &engine)
+TwoDMotor::TwoDMotor(kitBase::robotModel::DeviceInfo const &info, kitBase::robotModel::PortInfo const &port,
+	twoDModel::engine::TwoDModelEngineInterface &engine)
 	: Ev3Motor(info, port)
 	, mEngine(engine)
 {

@@ -23,8 +23,7 @@ namespace robotsTests {
 namespace utilsTests {
 
 class CircularQueueTests : public testing::Test
-{
-};
+{};
 
 }
 }

@@ -26,15 +26,13 @@
 
 namespace trik {
 
-class ROBOTS_TRIK_KIT_INTERPRETER_COMMON_EXPORT TrikTextualInterpreter
-		: public QObject
+class ROBOTS_TRIK_KIT_INTERPRETER_COMMON_EXPORT TrikTextualInterpreter : public QObject
 {
 	Q_OBJECT
 
 public:
-	TrikTextualInterpreter(const QSharedPointer<robotModel::twoD::TrikTwoDRobotModel> &model
-			       , trikNetwork::MailboxInterface *mailbox
-						   , bool enablePython = false);
+	TrikTextualInterpreter(const QSharedPointer<robotModel::twoD::TrikTwoDRobotModel> &model,
+		trikNetwork::MailboxInterface *mailbox, bool enablePython = false);
 	~TrikTextualInterpreter() override;
 
 	void interpretCommand(const QString &script);
@@ -64,7 +62,7 @@ private:
 	QString addCodeAfterImport(const QString &script, const QString &addCode) const;
 
 	//QSharedPointer<robotModel::twoD::TrikTwoDRobotModel> mTwoDRobotModel;
-	bool mRunning { false };
+	bool mRunning {false};
 
 	TrikBrick mBrick;
 	trikNetwork::MailboxInterface *mMailbox {}; // ownership --- TrikKitInterpreterPluginBase

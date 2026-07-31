@@ -44,28 +44,31 @@ class QRKERNEL_EXPORT SettingsListener : public QObject
 public:
 	/// Starts listening of the settings manager`s updates by the given key. The usage syntax is similar to
 	/// QObject::connect() function in member case. The slot must be parameterless.
-	template <typename Func>
-	static void listen(const QString &key
-			, typename QtPrivate::QEnableIf<
-					QtPrivate::FunctionPointer<Func>::ArgumentCount <= 0
-					, typename QtPrivate::FunctionPointer<Func>::Object *>::Type sender, Func signal)
+	template<typename Func>
+	static void listen(const QString &key,
+		typename QtPrivate::QEnableIf<QtPrivate::FunctionPointer<Func>::ArgumentCount <= 0,
+			typename QtPrivate::FunctionPointer<Func>::Object *>::Type sender,
+		Func signal)
 	{
 		instance().mListeners.insertMulti(key, new SlotListener0<Func>(sender, signal));
-		connect(sender, &QObject::destroyed, &instance(), QOverload<QObject*>::of(&SettingsListener::disconnectSource));
+		connect(sender, &QObject::destroyed, &instance(),
+			QOverload<QObject *>::of(&SettingsListener::disconnectSource));
 	}
 
 	/// Starts listening of the settings manager`s updates by the given key. The usage syntax is similar to
 	/// QObject::connect() function in member case. The slot must accept one parameter of the arbitary type
 	/// to which modified settings value will be casted by qvariant_cast.
-	template <typename Func>
-	static void listen(const QString &key
-			, typename QtPrivate::QEnableIf<
-					QtPrivate::FunctionPointer<Func>::ArgumentCount == 1
-					, typename QtPrivate::FunctionPointer<Func>::Object *>::Type sender, Func signal)
+	template<typename Func>
+	static void listen(const QString &key,
+		typename QtPrivate::QEnableIf<QtPrivate::FunctionPointer<Func>::ArgumentCount == 1,
+			typename QtPrivate::FunctionPointer<Func>::Object *>::Type sender,
+		Func signal)
 	{
-		instance().mListeners.insertMulti(key, new SlotListener1<
-				typename QtPrivate::FunctionPointer<Func>::Arguments::Car, Func>(sender, signal));
-		connect(sender, &QObject::destroyed, &instance(), QOverload<QObject*>::of(&SettingsListener::disconnectSource));
+		instance().mListeners.insertMulti(key,
+			new SlotListener1<typename QtPrivate::FunctionPointer<Func>::Arguments::Car, Func>(sender,
+				signal));
+		connect(sender, &QObject::destroyed, &instance(),
+			QOverload<QObject *>::of(&SettingsListener::disconnectSource));
 	}
 
 	/// Starts listening of the settings manager`s updates by the given key. The usage syntax is similar to
@@ -75,8 +78,8 @@ public:
 	{
 		instance().mListeners.insertMulti(key, new LambdaListener0(lambda, owner));
 		if (owner) {
-			connect(owner, &QObject::destroyed
-					, &instance(), QOverload<QObject*>::of(&SettingsListener::disconnectSource));
+			connect(owner, &QObject::destroyed, &instance(),
+				QOverload<QObject *>::of(&SettingsListener::disconnectSource));
 		}
 	}
 
@@ -84,14 +87,14 @@ public:
 	/// QObject::connect() function in lambda case. The lambda must accept one parameter of the arbitary type
 	/// to which modified settings value will be casted by qvariant_cast.
 	/// @param owner The QObject whoose disposal will disconnect this lambda too.
-	template <typename Func, typename Type
-			= typename QtPrivate::FunctionPointer<decltype(&Func::operator())>::Arguments::Car>
+	template<typename Func,
+		typename Type = typename QtPrivate::FunctionPointer<decltype(&Func::operator())>::Arguments::Car>
 	static void listen(const QString &key, Func lambda, QObject *owner)
 	{
 		instance().mListeners.insertMulti(key, new LambdaListener1<Type>(lambda, owner));
 		if (owner) {
-			connect(owner, &QObject::destroyed
-					, &instance(), QOverload<QObject*>::of(&SettingsListener::disconnectSource));
+			connect(owner, &QObject::destroyed, &instance(),
+				QOverload<QObject *>::of(&SettingsListener::disconnectSource));
 		}
 	}
 

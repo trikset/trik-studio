@@ -21,9 +21,7 @@ const int ev3DisplayWidth = 178;
 using namespace ev3::robotModel::twoD::parts;
 using namespace kitBase::robotModel;
 
-Display::Display(const DeviceInfo &info
-		, const PortInfo &port
-		, twoDModel::engine::TwoDModelEngineInterface &engine)
+Display::Display(const DeviceInfo &info, const PortInfo &port, twoDModel::engine::TwoDModelEngineInterface &engine)
 	: robotModel::parts::Ev3Display(info, port)
 	, mEngine(engine)
 {
@@ -71,8 +69,8 @@ void Display::paint(QPainter *painter, const QRect &outputRect)
 	Q_UNUSED(outputRect);
 
 	painter->save();
-	painter->scale(static_cast<qreal>(mEngine.display()->displayWidth()) / ev3DisplayWidth
-			, static_cast<qreal>(mEngine.display()->displayHeight()) / ev3DisplayHeight);
+	painter->scale(static_cast<qreal>(mEngine.display()->displayWidth()) / ev3DisplayWidth,
+		static_cast<qreal>(mEngine.display()->displayHeight()) / ev3DisplayHeight);
 
 	QPen pen;
 	QFont font;

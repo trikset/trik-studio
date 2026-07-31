@@ -44,11 +44,7 @@ qReal::IdList TrikV62BlocksFactory::providedBlocks() const
 
 	result << TrikBlocksFactoryBase::providedBlocks();
 
-	result
-			<< id("TrikV62AngularServo")
-			<< id("TrikV62ClearEncoder")
-			<< id("TrikV62WaitForEncoder")
-	;
+	result << id("TrikV62AngularServo") << id("TrikV62ClearEncoder") << id("TrikV62WaitForEncoder");
 
 	return result;
 }

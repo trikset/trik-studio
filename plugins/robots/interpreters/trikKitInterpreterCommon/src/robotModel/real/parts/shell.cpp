@@ -19,24 +19,24 @@
 using namespace trik::robotModel::real::parts;
 using namespace kitBase::robotModel;
 
-Shell::Shell(const DeviceInfo &info, const PortInfo &port
-		, utils::robotCommunication::TcpRobotCommunicator &tcpRobotCommunicator)
+Shell::Shell(const DeviceInfo &info, const PortInfo &port,
+	utils::robotCommunication::TcpRobotCommunicator &tcpRobotCommunicator)
 	: robotModel::parts::TrikShell(info, port)
 	, mRobotCommunicator(tcpRobotCommunicator)
 {
-	connect(&mRobotCommunicator, &utils::robotCommunication::TcpRobotCommunicator::printText
-			, this, &Shell::textPrinted);
-	connect(&mRobotCommunicator, &utils::robotCommunication::TcpRobotCommunicator::fileContentsFromRobot
-			, this, &Shell::fileContents);
-	connect(&mRobotCommunicator, &utils::robotCommunication::TcpRobotCommunicator::mailFromRobot
-			, this, &Shell::mailArrived);
+	connect(&mRobotCommunicator, &utils::robotCommunication::TcpRobotCommunicator::printText, this,
+		&Shell::textPrinted);
+	connect(&mRobotCommunicator, &utils::robotCommunication::TcpRobotCommunicator::fileContentsFromRobot, this,
+		&Shell::fileContents);
+	connect(&mRobotCommunicator, &utils::robotCommunication::TcpRobotCommunicator::mailFromRobot, this,
+		&Shell::mailArrived);
 }
 
 void Shell::say(const QString &text)
 {
 	const QString pathToCommand = ":/trikQts/templates/say.t";
-	const QString directCommand = utils::InFile::readAll(pathToCommand)
-			.replace("@@TEXT@@", "\"" + text + "\"") + "script.run();";
+	const QString directCommand =
+		utils::InFile::readAll(pathToCommand).replace("@@TEXT@@", "\"" + text + "\"") + "script.run();";
 
 	mRobotCommunicator.runDirectCommand(directCommand);
 }
@@ -44,8 +44,8 @@ void Shell::say(const QString &text)
 void Shell::runCommand(const QString &command)
 {
 	const QString pathToCommand = ":/trikQts/templates/system.t";
-	const QString directCommand = utils::InFile::readAll(pathToCommand)
-			.replace("@@COMMAND@@", command) + "script.run();";
+	const QString directCommand =
+		utils::InFile::readAll(pathToCommand).replace("@@COMMAND@@", command) + "script.run();";
 
 	mRobotCommunicator.runDirectCommand(directCommand);
 }
@@ -59,7 +59,9 @@ void Shell::writeToFile(const QString &filePath, const QString &text)
 {
 	const QString pathToCommand = ":/trikQts/templates/files/writeFile.t";
 	const QString directCommand = utils::InFile::readAll(pathToCommand)
-			.replace("@@FILE@@", filePath).replace("@@TEXT@@", "\"" + text + "\"") + "script.run();";
+	                                      .replace("@@FILE@@", filePath)
+	                                      .replace("@@TEXT@@", "\"" + text + "\"")
+	                              + "script.run();";
 
 	mRobotCommunicator.runDirectCommand(directCommand);
 }
@@ -67,8 +69,8 @@ void Shell::writeToFile(const QString &filePath, const QString &text)
 void Shell::removeFile(const QString &filePath)
 {
 	const QString pathToCommand = ":/trikQts/templates/files/removeFile.t";
-	const QString directCommand = utils::InFile::readAll(pathToCommand)
-			.replace("@@FILE@@", filePath) + "script.run();";
+	const QString directCommand =
+		utils::InFile::readAll(pathToCommand).replace("@@FILE@@", filePath) + "script.run();";
 
 	mRobotCommunicator.runDirectCommand(directCommand);
 }
@@ -82,8 +84,8 @@ void Shell::readFile(const QString &filePath)
 void Shell::print(const QString &text)
 {
 	const QString pathToCommand = ":/trikQts/templates/functions/print.t";
-	const QString directCommand = utils::InFile::readAll(pathToCommand)
-			.replace("@@ARGUMENT@@", "\"" + text + "\"") + ";script.run();";
+	const QString directCommand =
+		utils::InFile::readAll(pathToCommand).replace("@@ARGUMENT@@", "\"" + text + "\"") + ";script.run();";
 
 	mRobotCommunicator.runDirectCommand(directCommand);
 }
@@ -91,7 +93,8 @@ void Shell::print(const QString &text)
 void Shell::initVideoStreaming(int qual, bool grayscale)
 {
 	const QString shellToExecute = QString("\"/etc/init.d/mjpg-encoder-ov7670 start --jpeg-qual %1 "
-		"--white-black %2 && /etc/init.d/mjpg-streamer-ov7670"
-		" start\"").arg(qual, grayscale);
+					       "--white-black %2 && /etc/init.d/mjpg-streamer-ov7670"
+					       " start\"")
+	                                       .arg(qual, grayscale);
 	runCommand(shellToExecute);
 }

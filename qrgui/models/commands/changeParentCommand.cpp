@@ -16,11 +16,9 @@
 
 using namespace qReal::commands;
 
-ChangeParentCommand::ChangeParentCommand(models::LogicalModelAssistApi &logicalApi
-		, models::GraphicalModelAssistApi &graphicalApi
-		, bool isLogical, const Id &id, const Id &oldParent
-		, const Id &newParent, QPointF oldPosition
-		, QPointF newPosition)
+ChangeParentCommand::ChangeParentCommand(models::LogicalModelAssistApi &logicalApi,
+	models::GraphicalModelAssistApi &graphicalApi, bool isLogical, const Id &id, const Id &oldParent,
+	const Id &newParent, QPointF oldPosition, QPointF newPosition)
 	: mLogicalApi(logicalApi)
 	, mGraphicalApi(graphicalApi)
 	, mIsLogical(isLogical)

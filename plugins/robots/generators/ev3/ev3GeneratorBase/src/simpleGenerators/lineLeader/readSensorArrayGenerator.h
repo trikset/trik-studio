@@ -20,16 +20,13 @@ namespace ev3 {
 namespace simple {
 namespace lineLeader {
 
-
 /// Generator for 'Read Sensor to Array' block
-class ReadSensorArrayGenerator: public generatorBase::simple::BindingGenerator
+class ReadSensorArrayGenerator : public generatorBase::simple::BindingGenerator
 {
 	Q_OBJECT
 public:
-	ReadSensorArrayGenerator(const qrRepo::RepoApi &repo
-			, generatorBase::GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent = nullptr);
+	ReadSensorArrayGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+		const qReal::Id &id, QObject *parent = nullptr);
 };
 
 }

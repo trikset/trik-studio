@@ -72,167 +72,167 @@ void PrecedenceConverter::returnAssociativity(qrtext::core::Associativity associ
 	mLastRequestAssociativity = associativity;
 }
 
-void PrecedenceConverter::visit(const QSharedPointer<qrtext::lua::ast::UnaryMinus> &
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void PrecedenceConverter::visit(const QSharedPointer<qrtext::lua::ast::UnaryMinus> &,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	returnPrecedence(unaryNegation);
 }
 
-void PrecedenceConverter::visit(const QSharedPointer<qrtext::lua::ast::Not> &
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void PrecedenceConverter::visit(const QSharedPointer<qrtext::lua::ast::Not> &,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	returnPrecedence(logicalNot);
 }
 
-void PrecedenceConverter::visit(const QSharedPointer<qrtext::lua::ast::BitwiseNegation> &
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void PrecedenceConverter::visit(const QSharedPointer<qrtext::lua::ast::BitwiseNegation> &,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	returnPrecedence(bitwiseNot);
 	returnAssociativity(qrtext::core::Associativity::left);
 }
 
-void PrecedenceConverter::visit(const QSharedPointer<qrtext::lua::ast::LogicalAnd> &
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void PrecedenceConverter::visit(const QSharedPointer<qrtext::lua::ast::LogicalAnd> &,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	returnPrecedence(logicalAnd);
 	returnAssociativity(qrtext::core::Associativity::left);
 }
 
-void PrecedenceConverter::visit(const QSharedPointer<qrtext::lua::ast::LogicalOr> &
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void PrecedenceConverter::visit(const QSharedPointer<qrtext::lua::ast::LogicalOr> &,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	returnPrecedence(logicalOr);
 	returnAssociativity(qrtext::core::Associativity::left);
 }
 
-void PrecedenceConverter::visit(const QSharedPointer<qrtext::lua::ast::Addition> &
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void PrecedenceConverter::visit(const QSharedPointer<qrtext::lua::ast::Addition> &,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	returnPrecedence(addition);
 	returnAssociativity(qrtext::core::Associativity::left);
 }
 
-void PrecedenceConverter::visit(const QSharedPointer<qrtext::lua::ast::Subtraction> &
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void PrecedenceConverter::visit(const QSharedPointer<qrtext::lua::ast::Subtraction> &,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	returnPrecedence(subtraction);
 	returnAssociativity(qrtext::core::Associativity::left);
 }
 
-void PrecedenceConverter::visit(const QSharedPointer<qrtext::lua::ast::Multiplication> &
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void PrecedenceConverter::visit(const QSharedPointer<qrtext::lua::ast::Multiplication> &,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	returnPrecedence(multiplication);
 	returnAssociativity(qrtext::core::Associativity::left);
 }
 
-void PrecedenceConverter::visit(const QSharedPointer<qrtext::lua::ast::Division> &
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void PrecedenceConverter::visit(const QSharedPointer<qrtext::lua::ast::Division> &,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	returnPrecedence(division);
 	returnAssociativity(qrtext::core::Associativity::left);
 }
 
-void PrecedenceConverter::visit(const QSharedPointer<qrtext::lua::ast::IntegerDivision> &
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void PrecedenceConverter::visit(const QSharedPointer<qrtext::lua::ast::IntegerDivision> &,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	returnPrecedence(division);
 	returnAssociativity(qrtext::core::Associativity::left);
 }
 
-void PrecedenceConverter::visit(const QSharedPointer<qrtext::lua::ast::Modulo> &
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void PrecedenceConverter::visit(const QSharedPointer<qrtext::lua::ast::Modulo> &,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	returnPrecedence(modulo);
 	returnAssociativity(qrtext::core::Associativity::left);
 }
 
-void PrecedenceConverter::visit(const QSharedPointer<qrtext::lua::ast::Exponentiation> &
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void PrecedenceConverter::visit(const QSharedPointer<qrtext::lua::ast::Exponentiation> &,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	returnPrecedence(functionCall);
 	returnAssociativity(qrtext::core::Associativity::right);
 }
 
-void PrecedenceConverter::visit(const QSharedPointer<qrtext::lua::ast::BitwiseAnd> &
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void PrecedenceConverter::visit(const QSharedPointer<qrtext::lua::ast::BitwiseAnd> &,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	returnPrecedence(bitwiseAnd);
 	returnAssociativity(qrtext::core::Associativity::left);
 }
 
-void PrecedenceConverter::visit(const QSharedPointer<qrtext::lua::ast::BitwiseOr> &
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void PrecedenceConverter::visit(const QSharedPointer<qrtext::lua::ast::BitwiseOr> &,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	returnPrecedence(bitwiseOr);
 	returnAssociativity(qrtext::core::Associativity::left);
 }
 
-void PrecedenceConverter::visit(const QSharedPointer<qrtext::lua::ast::BitwiseXor> &
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void PrecedenceConverter::visit(const QSharedPointer<qrtext::lua::ast::BitwiseXor> &,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	returnPrecedence(bitwiseXor);
 	returnAssociativity(qrtext::core::Associativity::left);
 }
 
-void PrecedenceConverter::visit(const QSharedPointer<qrtext::lua::ast::BitwiseLeftShift> &
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void PrecedenceConverter::visit(const QSharedPointer<qrtext::lua::ast::BitwiseLeftShift> &,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	returnPrecedence(bitwiseLeftShift);
 	returnAssociativity(qrtext::core::Associativity::left);
 }
 
-void PrecedenceConverter::visit(const QSharedPointer<qrtext::lua::ast::BitwiseRightShift> &
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void PrecedenceConverter::visit(const QSharedPointer<qrtext::lua::ast::BitwiseRightShift> &,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	returnPrecedence(bitwiseRightShift);
 	returnAssociativity(qrtext::core::Associativity::left);
 }
 
-void PrecedenceConverter::visit(const QSharedPointer<qrtext::lua::ast::Concatenation> &
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void PrecedenceConverter::visit(const QSharedPointer<qrtext::lua::ast::Concatenation> &,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	returnPrecedence(addition);
 	returnAssociativity(qrtext::core::Associativity::left);
 }
 
-void PrecedenceConverter::visit(const QSharedPointer<qrtext::lua::ast::Equality> &
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void PrecedenceConverter::visit(const QSharedPointer<qrtext::lua::ast::Equality> &,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	returnPrecedence(equality);
 	returnAssociativity(qrtext::core::Associativity::left);
 }
 
-void PrecedenceConverter::visit(const QSharedPointer<qrtext::lua::ast::LessThan> &
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void PrecedenceConverter::visit(const QSharedPointer<qrtext::lua::ast::LessThan> &,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	returnPrecedence(lessThan);
 	returnAssociativity(qrtext::core::Associativity::left);
 }
 
-void PrecedenceConverter::visit(const QSharedPointer<qrtext::lua::ast::LessOrEqual> &
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void PrecedenceConverter::visit(const QSharedPointer<qrtext::lua::ast::LessOrEqual> &,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	returnPrecedence(lessOrEqual);
 	returnAssociativity(qrtext::core::Associativity::left);
 }
 
-void PrecedenceConverter::visit(const QSharedPointer<qrtext::lua::ast::Inequality> &
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void PrecedenceConverter::visit(const QSharedPointer<qrtext::lua::ast::Inequality> &,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	returnPrecedence(inequality);
 	returnAssociativity(qrtext::core::Associativity::left);
 }
 
-void PrecedenceConverter::visit(const QSharedPointer<qrtext::lua::ast::GreaterThan> &
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void PrecedenceConverter::visit(const QSharedPointer<qrtext::lua::ast::GreaterThan> &,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	returnPrecedence(greaterThan);
 	returnAssociativity(qrtext::core::Associativity::left);
 }
 
-void PrecedenceConverter::visit(const QSharedPointer<qrtext::lua::ast::GreaterOrEqual> &
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+void PrecedenceConverter::visit(const QSharedPointer<qrtext::lua::ast::GreaterOrEqual> &,
+	const QSharedPointer<qrtext::core::ast::Node> &)
 {
 	returnPrecedence(greaterOrEqual);
 	returnAssociativity(qrtext::core::Associativity::left);

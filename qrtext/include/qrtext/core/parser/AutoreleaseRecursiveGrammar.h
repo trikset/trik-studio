@@ -23,35 +23,34 @@ namespace core {
 /// without hacks. Thus we manage a full list of shared pointers
 /// to clean up manually in the dtor.
 template<typename TokenTypes>
-struct AutoreleaseRecursiveGrammarParser : ParserInterface<TokenTypes>
-{
-		AutoreleaseRecursiveGrammarParser(const ParserRef<TokenTypes> &main
-										  , const QList<ParserRef<TokenTypes>> &other = {})
-		{
-				mParsers << main << other;
-		}
+struct AutoreleaseRecursiveGrammarParser : ParserInterface<TokenTypes> {
+	AutoreleaseRecursiveGrammarParser(const ParserRef<TokenTypes> &main,
+		const QList<ParserRef<TokenTypes>> &other = {})
+	{
+		mParsers << main << other;
+	}
 
-		QSet<TokenTypes> first() const override
-		{
-				return mParsers[0]->first();
-		}
+	QSet<TokenTypes> first() const override
+	{
+		return mParsers[0]->first();
+	}
 
-		QSharedPointer<qrtext::core::ast::Node>
-		parse(TokenStream<TokenTypes> &tokenStream, ParserContext<TokenTypes> &parserContext) const override
-		{
-				return mParsers[0]->parse(tokenStream, parserContext);
-		}
+	QSharedPointer<qrtext::core::ast::Node> parse(TokenStream<TokenTypes> &tokenStream,
+		ParserContext<TokenTypes> &parserContext) const override
+	{
+		return mParsers[0]->parse(tokenStream, parserContext);
+	}
 
-		~AutoreleaseRecursiveGrammarParser() override
-		{
-				for (auto &&p: mParsers) {
-						p.internalPointer()->clear();
-				}
+	~AutoreleaseRecursiveGrammarParser() override
+	{
+		for (auto &&p : mParsers) {
+			p.internalPointer()->clear();
 		}
+	}
 
 private:
-		Q_DISABLE_COPY_MOVE(AutoreleaseRecursiveGrammarParser)
-		QList<ParserRef<TokenTypes>> mParsers;
+	Q_DISABLE_COPY_MOVE(AutoreleaseRecursiveGrammarParser)
+	QList<ParserRef<TokenTypes>> mParsers;
 };
 }
 }

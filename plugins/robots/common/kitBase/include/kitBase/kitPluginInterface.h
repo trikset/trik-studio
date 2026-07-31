@@ -52,7 +52,6 @@ public:
 	{
 	}
 
-
 	/// An identifier of constructor kit. Kit plugins with same kitId are automaticly grouped
 	/// together extending each other.
 	virtual QString kitId() const = 0;
@@ -67,7 +66,7 @@ public:
 	/// Returns a blocks factory for a given robot model. Nullptr can be returned and means that no factory is provided
 	/// by this plugin. Ownership must be transfered.
 	virtual QSharedPointer<blocksBase::BlocksFactoryInterface> blocksFactoryFor(
-			const robotModel::RobotModelInterface *model) = 0;
+		const robotModel::RobotModelInterface *model) = 0;
 
 	/// If overrided and returns some model as value that model will be used as default selected model for this kit
 	/// @todo is it possible that plugin does not provide default model? Maybe first model in robotModels() list will be
@@ -92,7 +91,7 @@ public:
 		return nullptr;
 	}
 
-	virtual QList<QWidget *>listOfQuickPreferencesFor(const robotModel::RobotModelInterface &model)
+	virtual QList<QWidget *> listOfQuickPreferencesFor(const robotModel::RobotModelInterface &model)
 	{
 		return {quickPreferencesFor(model)};
 	}
@@ -119,7 +118,7 @@ public:
 	/// Sensor configuration provider object for this plugin that needs to be registered in providers network.
 	/// Can be a root of plugin-specific providers network. Null, if there is no need for sensors configuration.
 	/// Does not transfer ownership.
-	virtual kitBase::DevicesConfigurationProvider * devicesConfigurationProvider()
+	virtual kitBase::DevicesConfigurationProvider *devicesConfigurationProvider()
 	{
 		return nullptr;
 	}

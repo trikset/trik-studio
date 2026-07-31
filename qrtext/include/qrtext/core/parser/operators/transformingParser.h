@@ -35,16 +35,17 @@ class TransformingParser : public ParserInterface<TokenType>
 public:
 	/// Constructor. Takes parser and semantic action to execute on a result of a parser.
 	TransformingParser(const ParserRef<TokenType> &parser, const Transformation &transformation)
-		: mTransformation(transformation), mParser(parser)
+		: mTransformation(transformation)
+		, mParser(parser)
 	{
 	}
 
-	QSharedPointer<ast::Node> parse(TokenStream<TokenType> &tokenStream
-			, ParserContext<TokenType> &parserContext) const override
+	QSharedPointer<ast::Node> parse(TokenStream<TokenType> &tokenStream,
+		ParserContext<TokenType> &parserContext) const override
 	{
 		typedef typename utils::function_traits<Transformation>::template arg<0>::type PointerToNodeTypeRaw;
 		typedef typename std::remove_reference<PointerToNodeTypeRaw>::type PointerToNodeType;
-		typedef decltype(&PointerToNodeType::operator *) DereferenceOperatorType;
+		typedef decltype(&PointerToNodeType::operator*) DereferenceOperatorType;
 		typedef typename utils::function_traits<DereferenceOperatorType>::result_type NodeReference;
 		typedef typename std::remove_reference<NodeReference>::type NodeType;
 

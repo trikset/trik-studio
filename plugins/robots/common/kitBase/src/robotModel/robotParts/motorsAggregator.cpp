@@ -29,7 +29,7 @@ int kitBase::robotModel::robotParts::MotorsAggregator::power(const QString &port
 	return mSpeeds.value(port, 0);
 }
 
-void MotorsAggregator::on(const QList<QPair<QString, int> > &powerForMotors)
+void MotorsAggregator::on(const QList<QPair<QString, int>> &powerForMotors)
 {
 	for (const QPair<QString, int> &pair : powerForMotors) {
 		mSpeeds.insert(pair.first, pair.second);

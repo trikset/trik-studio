@@ -77,11 +77,7 @@ public Q_SLOTS:
 	/// @arg fpsDelay is interval in ms for frame update
 	/// @arg autoScaleDelay is interval on ms for autoscaling the plot
 	/// @arg textInfoUpdateDelay is interval in ms for info
-	void configureUpdateIntervals(
-			int readSensorsInterval
-			, int autoScaleInterval
-			, int textUpdaterInterval
-	);
+	void configureUpdateIntervals(int readSensorsInterval, int autoScaleInterval, int textUpdaterInterval);
 
 protected:
 	void initGui();
@@ -115,4 +111,3 @@ private:
 
 }
 }
-

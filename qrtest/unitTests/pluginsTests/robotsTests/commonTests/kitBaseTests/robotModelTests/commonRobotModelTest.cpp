@@ -43,15 +43,16 @@ TEST_F(CommonRobotModelTest, lifecycleTest)
 	SignalsTester protocolTester(SignalsTester::inOrder);
 
 	protocolTester.expectSignal(&model, &CommonRobotModelDescendantMock::connected, "connected");
-	protocolTester.expectSignal(&model, &CommonRobotModelDescendantMock::allDevicesConfigured, "allDevicesConfigured");
+	protocolTester.expectSignal(&model, &CommonRobotModelDescendantMock::allDevicesConfigured,
+		"allDevicesConfigured");
 	protocolTester.expectSignal(&model, &CommonRobotModelDescendantMock::disconnected, "disconnected");
 
-	QObject::connect(&model, &CommonRobotModel::connected, [&] () {
-		model.configureDevice(PortInfo("1", input)
-				, DeviceInfo::create<kitBase::robotModel::robotParts::TouchSensor>());
+	QObject::connect(&model, &CommonRobotModel::connected, [&]() {
+		model.configureDevice(PortInfo("1", input),
+			DeviceInfo::create<kitBase::robotModel::robotParts::TouchSensor>());
 		model.applyConfiguration();
 	});
-	QObject::connect(&model, &CommonRobotModel::allDevicesConfigured, [&] () { model.disconnectFromRobot(); });
+	QObject::connect(&model, &CommonRobotModel::allDevicesConfigured, [&]() { model.disconnectFromRobot(); });
 
 	model.init();
 
@@ -74,10 +75,10 @@ TEST_F(CommonRobotModelTest, twoDLifecycleTest)
 	SignalsTester protocolTester(SignalsTester::inOrder);
 
 	protocolTester.expectSignal(&model, &CommonRobotModelDescendantMock::connected, "connected");
-	protocolTester.expectSignal(&model, &CommonRobotModelDescendantMock::allDevicesConfigured, "allDevicesConfigured");
+	protocolTester.expectSignal(&model, &CommonRobotModelDescendantMock::allDevicesConfigured,
+		"allDevicesConfigured");
 
-	model.configureDevice(PortInfo("1", input)
-			, DeviceInfo::create<kitBase::robotModel::robotParts::TouchSensor>());
+	model.configureDevice(PortInfo("1", input), DeviceInfo::create<kitBase::robotModel::robotParts::TouchSensor>());
 	model.applyConfiguration();
 
 	model.connectToRobot();
@@ -101,9 +102,10 @@ TEST_F(CommonRobotModelTest, realNoSensorsLifecycleTest)
 	SignalsTester protocolTester(SignalsTester::inOrder);
 
 	protocolTester.expectSignal(&model, &CommonRobotModelDescendantMock::connected, "connected");
-	protocolTester.expectSignal(&model, &CommonRobotModelDescendantMock::allDevicesConfigured, "allDevicesConfigured");
+	protocolTester.expectSignal(&model, &CommonRobotModelDescendantMock::allDevicesConfigured,
+		"allDevicesConfigured");
 
-	QObject::connect(&model, &CommonRobotModel::connected, [&] () { model.applyConfiguration(); });
+	QObject::connect(&model, &CommonRobotModel::connected, [&]() { model.applyConfiguration(); });
 
 	model.connectToRobot();
 
@@ -121,7 +123,8 @@ TEST_F(CommonRobotModelTest, twoDNoSensorsLifecycleTest)
 	SignalsTester protocolTester(SignalsTester::inOrder);
 
 	protocolTester.expectSignal(&model, &CommonRobotModelDescendantMock::connected, "connected");
-	protocolTester.expectSignal(&model, &CommonRobotModelDescendantMock::allDevicesConfigured, "allDevicesConfigured");
+	protocolTester.expectSignal(&model, &CommonRobotModelDescendantMock::allDevicesConfigured,
+		"allDevicesConfigured");
 
 	model.applyConfiguration();
 
@@ -137,16 +140,14 @@ CommonRobotModelTest::CommonRobotModelDescendantMock::CommonRobotModelDescendant
 	: CommonRobotModel("test", "testRobot")
 	, mImmediateConnection(immediateConnection)
 {
-	addAllowedConnection(PortInfo("1", input)
-			, { DeviceInfo::create<kitBase::robotModel::robotParts::TouchSensor>()
-					, DeviceInfo::create<kitBase::robotModel::robotParts::RangeSensor>()});
+	addAllowedConnection(PortInfo("1", input),
+		{DeviceInfo::create<kitBase::robotModel::robotParts::TouchSensor>(),
+			DeviceInfo::create<kitBase::robotModel::robotParts::RangeSensor>()});
 
 	if (!immediateConnection) {
 		mConnectionTimer.setInterval(100);
 		mConnectionTimer.setSingleShot(true);
-		QObject::connect(&mConnectionTimer, &QTimer::timeout, [&] () {
-			Q_EMIT connected(true, "");
-		});
+		QObject::connect(&mConnectionTimer, &QTimer::timeout, [&]() { Q_EMIT connected(true, ""); });
 	}
 	EXPECT_CALL(*this, needsConnection()).Times(AtLeast(0));
 }
@@ -160,8 +161,8 @@ void CommonRobotModelTest::CommonRobotModelDescendantMock::connectToRobot()
 	}
 }
 
-robotParts::Device *CommonRobotModelTest::CommonRobotModelDescendantMock::createDevice(PortInfo const &port
-		, DeviceInfo const &deviceInfo)
+robotParts::Device *CommonRobotModelTest::CommonRobotModelDescendantMock::createDevice(PortInfo const &port,
+	DeviceInfo const &deviceInfo)
 {
 	Q_UNUSED(deviceInfo)
 

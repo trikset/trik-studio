@@ -14,7 +14,9 @@
 
 #include "stylus.h"
 
-Stylus::Stylus(qreal x1, qreal y1, Item* parent) : Item(parent), mStylusImpl()
+Stylus::Stylus(qreal x1, qreal y1, Item *parent)
+	: Item(parent)
+	, mStylusImpl()
 {
 	mNeedScalingRect = false;
 	setPen(QPen(Qt::black));
@@ -53,12 +55,12 @@ QRectF Stylus::boundingRect() const
 	return mStylusImpl.boundingRect(mAbstractListLine);
 }
 
-void Stylus::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
+void Stylus::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 	mStylusImpl.drawItem(mAbstractListLine, painter, option, widget);
 }
 
-void Stylus::drawExtractionForItem(QPainter* painter)
+void Stylus::drawExtractionForItem(QPainter *painter)
 {
 	mStylusImpl.drawExtractionForItem(mAbstractListLine, painter);
 
@@ -67,12 +69,12 @@ void Stylus::drawExtractionForItem(QPainter* painter)
 	drawFieldForResizeItem(painter);*/
 }
 
-void Stylus::drawFieldForResizeItem(QPainter* painter)
+void Stylus::drawFieldForResizeItem(QPainter *painter)
 {
 	mStylusImpl.drawFieldForResizeItem(painter);
 }
 
-void Stylus::drawScalingRects(QPainter* painter)
+void Stylus::drawScalingRects(QPainter *painter)
 {
 	mStylusImpl.drawScalingRects(painter);
 }
@@ -112,8 +114,10 @@ QPair<QDomElement, Item::DomElementTypes> Stylus::generateItem(QDomDocument &doc
 	QDomElement stylus = document.createElement("stylus");
 	for (AbstractItem *aItem : mAbstractListLine) {
 		Line *line = dynamic_cast<Line *>(aItem);
-		QDomElement item = (line->generateItem(document
-				, topLeftPicture - QPoint(static_cast<int>(scenePos().x()), static_cast<int>(scenePos().y())))).first;
+		QDomElement item = (line->generateItem(document, topLeftPicture
+									 - QPoint(static_cast<int>(scenePos().x()),
+										 static_cast<int>(scenePos().y()))))
+		                           .first;
 		stylus.appendChild(item);
 	}
 	return QPair<QDomElement, Item::DomElementTypes>(stylus, mDomElementType);

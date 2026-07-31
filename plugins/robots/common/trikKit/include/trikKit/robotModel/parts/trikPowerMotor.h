@@ -27,8 +27,7 @@ class TrikPowerMotor : public kitBase::robotModel::robotParts::Motor
 	Q_CLASSINFO("friendlyName", tr("Power Motor"))
 
 public:
-	TrikPowerMotor(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port);
+	TrikPowerMotor(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port);
 };
 
 }

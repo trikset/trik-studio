@@ -22,7 +22,8 @@ using namespace models::details;
 using namespace modelsImplementation;
 
 ModelsAssistApi::ModelsAssistApi(AbstractModel &model, const EditorManagerInterface &editorManagerInterface)
-	: mModel(model), mEditorManagerInterface(editorManagerInterface)
+	: mModel(model)
+	, mEditorManagerInterface(editorManagerInterface)
 {
 }
 
@@ -31,8 +32,8 @@ const EditorManagerInterface &ModelsAssistApi::editorManagerInterface() const
 	return mEditorManagerInterface;
 }
 
-Id ModelsAssistApi::createElement(const Id &parent, const Id &id, const Id &logicalId
-		, bool isFromLogicalModel, const QString &name, QPointF position)
+Id ModelsAssistApi::createElement(const Id &parent, const Id &id, const Id &logicalId, bool isFromLogicalModel,
+	const QString &name, QPointF position)
 {
 	Q_ASSERT(parent.idSize() == 4);
 	Id newId = id;
@@ -44,8 +45,8 @@ Id ModelsAssistApi::createElement(const Id &parent, const Id &id, const Id &logi
 
 	const bool isEdge = mEditorManagerInterface.isNodeOrEdge(newId.type()) == -1;
 
-	ElementInfo info(newId, realLogicalId, isFromLogicalModel ? parent : Id(), isFromLogicalModel ? Id() : parent
-			, {{"name", name}}, {{"position", position}}, Id(), isEdge);
+	ElementInfo info(newId, realLogicalId, isFromLogicalModel ? parent : Id(), isFromLogicalModel ? Id() : parent,
+		{{"name", name}}, {{"position", position}}, Id(), isEdge);
 
 	mModel.addElementToModel(info);
 	return newId;
@@ -84,7 +85,7 @@ Id ModelsAssistApi::idByIndex(const QModelIndex &index) const
 
 bool ModelsAssistApi::hasRootDiagrams() const
 {
-	 return mModel.rowCount(QModelIndex()) != 0;
+	return mModel.rowCount(QModelIndex()) != 0;
 }
 
 int ModelsAssistApi::childrenOfRootDiagram() const

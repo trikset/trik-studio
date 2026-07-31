@@ -27,8 +27,7 @@ public:
 	/// Constructor.
 	/// @param elementType - type of table element.
 	/// @param size - size of a table.
-	Table(QSharedPointer<core::types::TypeExpression> const &elementType
-			, int /* size */)
+	Table(QSharedPointer<core::types::TypeExpression> const &elementType, int /* size */)
 		: mElementType(elementType)
 	{
 	}

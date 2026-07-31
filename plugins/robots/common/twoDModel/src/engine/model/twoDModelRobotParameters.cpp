@@ -18,23 +18,25 @@
 
 using namespace twoDModel::model;
 
-TwoDRobotModelParameters::TwoDRobotModelParameters(
-		const twoDModel::robotModel::TwoDRobotModel &twoDRobotModel, QObject *parent):
-	QObject(parent),
-	mRobotModel(twoDRobotModel),
-	mWidth(mRobotModel.size().width()),
-	mHeight(mRobotModel.size().height()),
-	mMass(mRobotModel.mass()),
-	mFriction(mRobotModel.friction()),
-	mRestitution(mRobotModel.restitution()),
-	mLinearDamping(mRobotModel.linearDamping()),
-	mAngularDamping(mRobotModel.angularDamping()),
-	mWheelRestitution(mRobotModel.wheelRestitution()),
-	mWheelFriction(mRobotModel.wheelFriction()),
-	mWheelMass(mRobotModel.wheelMass())
-{}
+TwoDRobotModelParameters::TwoDRobotModelParameters(const twoDModel::robotModel::TwoDRobotModel &twoDRobotModel,
+	QObject *parent)
+	: QObject(parent)
+	, mRobotModel(twoDRobotModel)
+	, mWidth(mRobotModel.size().width())
+	, mHeight(mRobotModel.size().height())
+	, mMass(mRobotModel.mass())
+	, mFriction(mRobotModel.friction())
+	, mRestitution(mRobotModel.restitution())
+	, mLinearDamping(mRobotModel.linearDamping())
+	, mAngularDamping(mRobotModel.angularDamping())
+	, mWheelRestitution(mRobotModel.wheelRestitution())
+	, mWheelFriction(mRobotModel.wheelFriction())
+	, mWheelMass(mRobotModel.wheelMass())
+{
+}
 
-void TwoDRobotModelParameters::reinit() {
+void TwoDRobotModelParameters::reinit()
+{
 	mWidth = mRobotModel.size().width();
 	mHeight = mRobotModel.size().height();
 	mMass = mRobotModel.mass();
@@ -48,30 +50,31 @@ void TwoDRobotModelParameters::reinit() {
 }
 
 namespace {
-static bool valueChanged(const qreal defaultValue, const qreal actualValue) {
+static bool valueChanged(const qreal defaultValue, const qreal actualValue)
+{
 	constexpr auto precision = 1e-5;
 	return std::abs(defaultValue - actualValue) > precision;
 }
 }
 
-bool TwoDRobotModelParameters::propertyChanged(const char *propertyName) const {
+bool TwoDRobotModelParameters::propertyChanged(const char *propertyName) const
+{
 	const auto &defaultPropertyValue = mRobotModel.property(propertyName);
 	const auto &propertyValue = property(propertyName);
-	if (propertyValue.canConvert<qreal>()
-				&& defaultPropertyValue.canConvert<qreal>()) {
+	if (propertyValue.canConvert<qreal>() && defaultPropertyValue.canConvert<qreal>()) {
 		return valueChanged(defaultPropertyValue.toDouble(), propertyValue.toDouble());
 	}
-	if (propertyValue.canConvert<QSizeF>()
-				&& defaultPropertyValue.canConvert<QSizeF>()) {
+	if (propertyValue.canConvert<QSizeF>() && defaultPropertyValue.canConvert<QSizeF>()) {
 		const auto &defaultSize = defaultPropertyValue.toSizeF();
 		const auto &size = propertyValue.toSizeF();
-		return valueChanged(defaultSize.width(), size.width()) ||
-				valueChanged(defaultSize.height(), size.height());
+		return valueChanged(defaultSize.width(), size.width())
+		       || valueChanged(defaultSize.height(), size.height());
 	}
 	qFatal("Unknown property or unexpected type for TwoDRobotModelParameters property");
 }
 
-QPolygonF TwoDRobotModelParameters::collidingPolygon() const {
+QPolygonF TwoDRobotModelParameters::collidingPolygon() const
+{
 	const auto &collPolygon = mRobotModel.collidingPolygon();
 	QPolygonF scaledPolygon;
 
@@ -80,57 +83,69 @@ QPolygonF TwoDRobotModelParameters::collidingPolygon() const {
 
 	scaledPolygon.reserve(collPolygon.size());
 	for (auto &&point : collPolygon) {
-	    scaledPolygon << QPointF{point.x() * widthScale, point.y() * heightScale};
+		scaledPolygon << QPointF {point.x() * widthScale, point.y() * heightScale};
 	}
 	return scaledPolygon;
 }
 
-void TwoDRobotModelParameters::setMass(const qreal mass) {
+void TwoDRobotModelParameters::setMass(const qreal mass)
+{
 	mMass = mass;
 }
 
-void TwoDRobotModelParameters::setWheelMass(const qreal mass) {
+void TwoDRobotModelParameters::setWheelMass(const qreal mass)
+{
 	mWheelMass = mass;
 }
 
-qreal TwoDRobotModelParameters::wheelMass() const {
+qreal TwoDRobotModelParameters::wheelMass() const
+{
 	return mWheelMass;
 }
 
-void TwoDRobotModelParameters::setWheelRestitution(const qreal restitution) {
+void TwoDRobotModelParameters::setWheelRestitution(const qreal restitution)
+{
 	mWheelRestitution = restitution;
 }
 
-qreal TwoDRobotModelParameters::wheelRestitution() const {
+qreal TwoDRobotModelParameters::wheelRestitution() const
+{
 	return mWheelRestitution;
 }
 
-void TwoDRobotModelParameters::setWheelFriction(const qreal friction) {
+void TwoDRobotModelParameters::setWheelFriction(const qreal friction)
+{
 	mWheelFriction = friction;
 }
 
-qreal TwoDRobotModelParameters::wheelFriction() const {
+qreal TwoDRobotModelParameters::wheelFriction() const
+{
 	return mWheelFriction;
 }
 
-void TwoDRobotModelParameters::setSize(QSizeF size) {
+void TwoDRobotModelParameters::setSize(QSizeF size)
+{
 	mWidth = size.width();
 	mHeight = size.height();
 }
 
-void TwoDRobotModelParameters::setFriction(const qreal friction) {
+void TwoDRobotModelParameters::setFriction(const qreal friction)
+{
 	mFriction = friction;
 }
 
-void TwoDRobotModelParameters::setRestitution(const qreal restitution) {
+void TwoDRobotModelParameters::setRestitution(const qreal restitution)
+{
 	mRestitution = restitution;
 }
 
-void TwoDRobotModelParameters::setLinearDamping(const qreal linearDamping) {
+void TwoDRobotModelParameters::setLinearDamping(const qreal linearDamping)
+{
 	mLinearDamping = linearDamping;
 }
 
-void TwoDRobotModelParameters::setAngularDamping(const qreal angularDamping) {
+void TwoDRobotModelParameters::setAngularDamping(const qreal angularDamping)
+{
 	mAngularDamping = angularDamping;
 }
 
@@ -161,12 +176,12 @@ qreal TwoDRobotModelParameters::linearDamping() const
 
 QSizeF TwoDRobotModelParameters::size() const
 {
-	return QSizeF{mWidth, mHeight};
+	return QSizeF {mWidth, mHeight};
 }
 
 qreal TwoDRobotModelParameters::wheelDiameter() const
 {
-	return robotWheelDiameterInPx / robotWidth  * mWidth;
+	return robotWheelDiameterInPx / robotWidth * mWidth;
 }
 
 QPointF TwoDRobotModelParameters::robotCenter() const
@@ -188,7 +203,7 @@ QList<QPointF> TwoDRobotModelParameters::wheelsPosition() const
 	QList<QPointF> list;
 	list.reserve(defaultWheelPosition.size());
 	for (auto &&point : defaultWheelPosition) {
-	    list << QPointF{point.x() * widthScale, point.y() * heightScale};
+		list << QPointF {point.x() * widthScale, point.y() * heightScale};
 	}
 	return list;
 }
@@ -203,7 +218,8 @@ QPointF TwoDRobotModelParameters::rotationCenter() const
 	return (wheelsPos[0] + wheelsPos[1]) / 2;
 }
 
-qreal TwoDRobotModelParameters::robotTrack() const {
+qreal TwoDRobotModelParameters::robotTrack() const
+{
 	const auto &wheelsPos = wheelsPosition();
 	if (wheelsPos.size() < 2) {
 		return mWidth;

@@ -27,9 +27,8 @@ I2CCommunicator::I2CCommunicator(utils::robotCommunication::RobotCommunicator &r
 {
 }
 
-void I2CCommunicator::sendI2C(QObject *addressee
-		, const QByteArray &buffer, const int responseSize
-		, const kitBase::robotModel::PortInfo &port)
+void I2CCommunicator::sendI2C(QObject *addressee, const QByteArray &buffer, const int responseSize,
+	const kitBase::robotModel::PortInfo &port)
 {
 	QByteArray command(buffer.length() + 7, 0);
 	command[0] = buffer.length() + 5;

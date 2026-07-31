@@ -21,8 +21,7 @@ namespace robotsTests {
 namespace kitBaseTests {
 
 class DefaultRobotModelTest : public testing::Test
-{
-};
+{};
 
 }
 }

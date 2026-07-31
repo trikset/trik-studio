@@ -122,11 +122,11 @@ TEST_F(GraphicalPartModelTest, viewTest)
 	delete mGraphicalPartModel;
 	mGraphicalPartModel = new GraphicalPartModel(*mRepoApi, mModelIndexesInterfaceMock);
 
-	QObject::connect(mGraphicalPartModel, SIGNAL(dataChanged(QModelIndex, QModelIndex))
-			, &viewMock, SLOT(dataChanged(QModelIndex, QModelIndex)));
+	QObject::connect(mGraphicalPartModel, SIGNAL(dataChanged(QModelIndex, QModelIndex)), &viewMock,
+		SLOT(dataChanged(QModelIndex, QModelIndex)));
 
-	QObject::connect(mGraphicalPartModel, SIGNAL(rowsAboutToBeRemoved(QModelIndex, int, int))
-			, &viewMock, SLOT(rowsAboutToBeRemoved(QModelIndex, int, int)));
+	QObject::connect(mGraphicalPartModel, SIGNAL(rowsAboutToBeRemoved(QModelIndex, int, int)), &viewMock,
+		SLOT(rowsAboutToBeRemoved(QModelIndex, int, int)));
 
 	viewMock.setModel(mGraphicalPartModel);
 

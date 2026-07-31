@@ -29,8 +29,8 @@ qReal::Id CreatePatternCommand::rootId() const
 	return mRootId;
 }
 
-QList<qReal::ElementInfo> CreatePatternCommand::parse(models::LogicalModelAssistApi &logicalApi
-		, qReal::models::GraphicalModelAssistApi &graphicalApi, const qReal::ElementInfo &info)
+QList<qReal::ElementInfo> CreatePatternCommand::parse(models::LogicalModelAssistApi &logicalApi,
+	qReal::models::GraphicalModelAssistApi &graphicalApi, const qReal::ElementInfo &info)
 {
 	mPattern = graphicalApi.editorManagerInterface().parsePattern(info.id());
 	QList<qReal::ElementInfo> result;
@@ -50,18 +50,19 @@ QList<qReal::ElementInfo> CreatePatternCommand::parse(models::LogicalModelAssist
 				continue;
 			}
 
-			const Id element(info.id().editor(), info.id().diagram(), node.type, QUuid::createUuid().toString());
+			const Id element(info.id().editor(), info.id().diagram(), node.type,
+				QUuid::createUuid().toString());
 			mCreatedNodes[node.id] = element;
 			if (node.id == mPattern.rootNode()) {
 				mRootId = element;
 			}
 
 			const QPointF globalPosition = info.position();
-			const QPointF nodePos(globalPosition.x() - size.x() / 2 + node.position.x()
-					, globalPosition.y() + node.position.y());
-			const ElementInfo nodeInfo(element, Id(), info.logicalParent(), mCreatedNodes[node.parent]
-					, {{"name", logicalApi.editorManagerInterface().friendlyName(element.type())}}
-					, {{"position", nodePos}}, Id(), false);
+			const QPointF nodePos(globalPosition.x() - size.x() / 2 + node.position.x(),
+				globalPosition.y() + node.position.y());
+			const ElementInfo nodeInfo(element, Id(), info.logicalParent(), mCreatedNodes[node.parent],
+				{{"name", logicalApi.editorManagerInterface().friendlyName(element.type())}},
+				{{"position", nodePos}}, Id(), false);
 
 			result << nodeInfo;
 			consideredNodes << node.id;
@@ -76,8 +77,8 @@ QList<qReal::ElementInfo> CreatePatternCommand::parse(models::LogicalModelAssist
 
 	for (const GroupEdge &edge : mPattern.edges()) {
 		const Id element(info.id().editor(), info.id().diagram(), edge.type, QUuid::createUuid().toString());
-		const ElementInfo edgeInfo(element, Id(), info.logicalParent(), info.graphicalParent()
-				, {{"name", logicalApi.editorManagerInterface().friendlyName(element.type())}}, {}, Id(), true);
+		const ElementInfo edgeInfo(element, Id(), info.logicalParent(), info.graphicalParent(),
+			{{"name", logicalApi.editorManagerInterface().friendlyName(element.type())}}, {}, Id(), true);
 
 		result << edgeInfo;
 		mCreatedEdges << element;

@@ -24,23 +24,23 @@ class Curve : public Path
 	Q_OBJECT
 public:
 	Curve(QPointF start, QPointF end, QPointF c1);
-	void  setCXandCY(qreal x, qreal y);
+	void setCXandCY(qreal x, qreal y);
 	QRectF searchMaxMinCoord() const;
 	QRectF boundingRect() const override;
 	QPainterPath shape() const override;
-	void drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr) override;
-	void drawExtractionForItem(QPainter* painter) override;
-	void drawScalingRects(QPainter* painter) override;
-	void drawFieldForResizeItem(QPainter* painter) override;
+	void drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
+	void drawExtractionForItem(QPainter *painter) override;
+	void drawScalingRects(QPainter *painter) override;
+	void drawFieldForResizeItem(QPainter *painter) override;
 
 	void changeDragState(qreal x, qreal y) override;
 	void calcResizeItem(QGraphicsSceneMouseEvent *event) override;
 
-	QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document
-			, const QPoint &topLeftPicture) override;
+	QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document,
+		const QPoint &topLeftPicture) override;
 
 private:
 	QPointF mC1;
 	QPointF mC2;
-	QPainterPath* mCurvePath;
+	QPainterPath *mCurvePath;
 };

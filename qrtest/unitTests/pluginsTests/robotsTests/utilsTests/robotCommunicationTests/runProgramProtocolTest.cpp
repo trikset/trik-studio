@@ -30,32 +30,26 @@ using namespace ::testing;
 
 void RunProgramProtocolTest::SetUp()
 {
-	mCommunicator.reset(new TcpRobotCommunicatorMock{});
+	mCommunicator.reset(new TcpRobotCommunicatorMock {});
 
-	ON_CALL(*mCommunicator, requestCasingVersion()).WillByDefault(
-		Invoke([this]() {
-			delay([this](){ Q_EMIT mCommunicator->casingVersionReceived("model-2015"); });
-		})
-	);
+	ON_CALL(*mCommunicator, requestCasingVersion()).WillByDefault(Invoke([this]() {
+		delay([this]() { Q_EMIT mCommunicator->casingVersionReceived("model-2015"); });
+	}));
 
-	ON_CALL(*mCommunicator, uploadProgram(_)).WillByDefault(
-		Invoke([this](const QString &name) {
-			Q_UNUSED(name)
-			delay([this]() { Q_EMIT mCommunicator->uploadProgramDone(); }, 50);
-		})
-	);
+	ON_CALL(*mCommunicator, uploadProgram(_)).WillByDefault(Invoke([this](const QString &name) {
+		Q_UNUSED(name)
+		delay([this]() { Q_EMIT mCommunicator->uploadProgramDone(); }, 50);
+	}));
 
-	ON_CALL(*mCommunicator, runProgram(_)).WillByDefault(
-		Invoke([this](const QString &name) {
-			Q_UNUSED(name)
-			delay([this]() { Q_EMIT mCommunicator->startedRunning(); }, 50);
-		})
-	);
+	ON_CALL(*mCommunicator, runProgram(_)).WillByDefault(Invoke([this](const QString &name) {
+		Q_UNUSED(name)
+		delay([this]() { Q_EMIT mCommunicator->startedRunning(); }, 50);
+	}));
 }
 
 TEST_F(RunProgramProtocolTest, mainExecutionTest)
 {
-	SignalsTester signalsTester{};
+	SignalsTester signalsTester {};
 
 	const QString configVersion = "model-2015";
 
@@ -76,7 +70,7 @@ TEST_F(RunProgramProtocolTest, mainExecutionTest)
 
 TEST_F(RunProgramProtocolTest, incorrectCasingVersion)
 {
-	SignalsTester signalsTester{};
+	SignalsTester signalsTester {};
 
 	const QString configVersion = "model-2014";
 

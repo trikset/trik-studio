@@ -22,9 +22,8 @@
 using namespace qReal;
 using namespace qReal::gui::editor;
 
-LineHandler::LineHandler(EdgeElement *edge
-		, const LogicalModelAssistInterface &logicalModel
-		, const GraphicalModelAssistInterface &graphicalModel)
+LineHandler::LineHandler(EdgeElement *edge, const LogicalModelAssistInterface &logicalModel,
+	const GraphicalModelAssistInterface &graphicalModel)
 	: mEdge(edge)
 	, mSavedLine(mEdge->line())
 	, mDragType(EdgeElement::noPort)
@@ -68,7 +67,7 @@ void LineHandler::moveEdge(QPointF pos)
 	}
 }
 
-void LineHandler::handleEdgeMove(QPointF )
+void LineHandler::handleEdgeMove(QPointF)
 {
 }
 
@@ -174,14 +173,14 @@ void LineHandler::connectAndArrange(bool reconnectSrc, bool reconnectDst)
 
 void LineHandler::reconnect(bool reconnectSrc, bool reconnectDst)
 {
-	const NodeElement * const src = mEdge->src();
-	const NodeElement * const dst = mEdge->dst();
+	const NodeElement *const src = mEdge->src();
+	const NodeElement *const dst = mEdge->dst();
 
 	if (src && reconnectSrc) {
 		const int targetLinePoint = firstOutsidePoint(true);
 		const qreal oldFrom = mEdge->fromPort();
-		const qreal newFrom = src->portId(mEdge->mapToItem(src, mEdge->line()[targetLinePoint])
-				, mEdge->fromPortTypes());
+		const qreal newFrom =
+			src->portId(mEdge->mapToItem(src, mEdge->line()[targetLinePoint]), mEdge->fromPortTypes());
 		const QStringList localPortTypes = mLogicalModel.editorManagerInterface().portTypes(src->id().type());
 		if (localPortTypes.at(qFloor(oldFrom)) == localPortTypes.at(qFloor(newFrom))) {
 			mEdge->setFromPort(newFrom);
@@ -194,7 +193,8 @@ void LineHandler::reconnect(bool reconnectSrc, bool reconnectDst)
 	if (dst && reconnectDst) {
 		const int targetLinePoint = firstOutsidePoint(false);
 		const qreal oldTo = mEdge->toPort();
-		const qreal newTo = dst->portId(mEdge->mapToItem(dst, mEdge->line()[targetLinePoint]), mEdge->toPortTypes());
+		const qreal newTo =
+			dst->portId(mEdge->mapToItem(dst, mEdge->line()[targetLinePoint]), mEdge->toPortTypes());
 		const QStringList localPortTypes = mLogicalModel.editorManagerInterface().portTypes(dst->id().type());
 		if (localPortTypes.at(qFloor(oldTo)) == localPortTypes.at(qFloor(newTo))) {
 			mEdge->setToPort(newTo);
@@ -207,14 +207,14 @@ void LineHandler::reconnect(bool reconnectSrc, bool reconnectDst)
 
 int LineHandler::firstOutsidePoint(bool startFromSrc) const
 {
-	const NodeElement * const node = startFromSrc ? mEdge->src() : mEdge->dst();
+	const NodeElement *const node = startFromSrc ? mEdge->src() : mEdge->dst();
 	if (!node) {
 		return 0;
 	}
 
 	int point = startFromSrc ? 0 : mEdge->line().count() - 1;
 	while (point >= 0 && point < mEdge->line().count()
-			&& node->contentsRect().contains(mEdge->mapToItem(node, mEdge->line().at(point)))) {
+		&& node->contentsRect().contains(mEdge->mapToItem(node, mEdge->line().at(point)))) {
 		startFromSrc ? point++ : point--;
 	}
 
@@ -240,12 +240,12 @@ EdgeArrangeCriteria LineHandler::arrangeCriteria(const NodeElement *node, const 
 	return {turningLeft ? -1 : 1, 0.0, arrangeLine.dx()};
 }
 
-
 QPointF LineHandler::portArrangePoint(const NodeElement *node) const
 {
 	if (!mEdge->isLoop()) {
-		return (node == mEdge->src()) ? mEdge->mapToItem(mEdge->src(), mEdge->line()[1])
-				: mEdge->mapToItem(mEdge->dst(), mEdge->line()[mEdge->line().count() - 2]);
+		return (node == mEdge->src())
+		               ? mEdge->mapToItem(mEdge->src(), mEdge->line()[1])
+		               : mEdge->mapToItem(mEdge->dst(), mEdge->line()[mEdge->line().count() - 2]);
 	} else {
 		mEdge->createLoopEdge();
 		return mEdge->mapToItem(mEdge->src(), mEdge->line().last());
@@ -256,8 +256,9 @@ int LineHandler::definePoint(QPointF pos) const
 {
 	const QPolygonF line = mEdge->line();
 	for (int i = 0; i < line.size(); ++i)
-		if (QRectF(line[i] - QPointF(EdgeElement::stripeWidth / 2.0, EdgeElement::stripeWidth / 2.0)
-				, QSizeF(EdgeElement::stripeWidth, EdgeElement::stripeWidth)).contains(pos))
+		if (QRectF(line[i] - QPointF(EdgeElement::stripeWidth / 2.0, EdgeElement::stripeWidth / 2.0),
+			    QSizeF(EdgeElement::stripeWidth, EdgeElement::stripeWidth))
+				.contains(pos))
 			return i;
 
 	return -1;
@@ -301,11 +302,10 @@ void LineHandler::deleteLoop(QPolygonF &line, int startPos)
 		for (int j = i + 2; j < line.size() - 1; ++j) {
 			QPointF cut;
 			if (QLineF(line[i], line[i + 1]).intersect(QLineF(line[j], line[j + 1]), &cut)
-					== QLineF::BoundedIntersection)
-			{
-				if ((i != 0) || !((j == line.size() - 2)
-						&& (QLineF(line.first(), line.last()).length() < (squareSize * 2))))
-				{
+				== QLineF::BoundedIntersection) {
+				if ((i != 0)
+					|| !((j == line.size() - 2)
+						&& (QLineF(line.first(), line.last()).length() < (squareSize * 2)))) {
 					QPainterPath path;
 					QPainterPathStroker ps;
 					ps.setWidth(squareSize);
@@ -338,14 +338,13 @@ void LineHandler::alignToGrid()
 
 bool LineHandler::checkPort(QPointF pos, bool isStart) const
 {
-	const NodeElement * const node = mEdge->getNodeAt(pos, isStart);
+	const NodeElement *const node = mEdge->getNodeAt(pos, isStart);
 	if (!node) {
 		return true;
 	}
 
-	const qreal port = node->portId(mEdge->mapToItem(node, pos), isStart
-			? mEdge->fromPortTypes()
-			: mEdge->toPortTypes());
+	const qreal port =
+		node->portId(mEdge->mapToItem(node, pos), isStart ? mEdge->fromPortTypes() : mEdge->toPortTypes());
 
 	if (port < 0) {
 		return true;
@@ -358,7 +357,8 @@ bool LineHandler::checkPort(QPointF pos, bool isStart) const
 
 bool LineHandler::nodeChanged(bool isStart) const
 {
-	const NodeElement * const node = mEdge->getNodeAt(isStart ? mEdge->line().first() : mEdge->line().last(), isStart);
+	const NodeElement *const node =
+		mEdge->getNodeAt(isStart ? mEdge->line().first() : mEdge->line().last(), isStart);
 	return isStart ? (node != mEdge->src()) : (node != mEdge->dst());
 }
 

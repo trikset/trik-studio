@@ -39,13 +39,8 @@ public:
 	/// @param commands - commands to be executed on a robot when connection is established.
 	/// @param startedMessage - message that will be shown in ErrorReporter when execution of commands is started.
 	/// @param robotIpGetter - function that returns current robot ip address.
-	UploaderTool(const QString &actionName
-			, const QString &icon
-			, const QString &kit
-			, const QStringList &commands
-			, const QString &startedMessage
-			, const std::function<QString()> &robotIpGetter
-			);
+	UploaderTool(const QString &actionName, const QString &icon, const QString &kit, const QStringList &commands,
+		const QString &startedMessage, const std::function<QString()> &robotIpGetter);
 
 	~UploaderTool() override;
 
@@ -69,8 +64,8 @@ private:
 	bool checkUnixToolsExist();
 	bool checkUnixToolExist(const QString &name, const QStringList &args);
 
-	qReal::gui::MainWindowInterpretersInterface *mMainWindowInterface;  // Does not have ownership
-	QAction *mAction;  // Doesn't have ownership; may be disposed by GUI.
+	qReal::gui::MainWindowInterpretersInterface *mMainWindowInterface; // Does not have ownership
+	QAction *mAction; // Doesn't have ownership; may be disposed by GUI.
 	QStringList mCommands;
 	QString mStartedMessage;
 	std::function<QString()> mRobotIpGetter;

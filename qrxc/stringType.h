@@ -22,7 +22,7 @@ class StringType : public NonGraphicType
 {
 public:
 	bool init(const QDomElement &element, const QString &context) override;
-	Type* clone() const override;
+	Type *clone() const override;
 
 private:
 	QString mRegularExpression;

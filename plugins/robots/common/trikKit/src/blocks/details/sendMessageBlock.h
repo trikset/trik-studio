@@ -21,7 +21,7 @@ namespace trik {
 namespace blocks {
 namespace details {
 
-class SendMessageBlock: public kitBase::blocksBase::common::DeviceBlock<robotModel::parts::TrikNetworkCommunicator>
+class SendMessageBlock : public kitBase::blocksBase::common::DeviceBlock<robotModel::parts::TrikNetworkCommunicator>
 {
 	Q_OBJECT
 public:

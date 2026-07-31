@@ -37,17 +37,17 @@ public:
 	void setUndoEnabled(bool enabled);
 
 	/// Adds \a command into a list of commands to be executed before this command.
-	void addPreAction(AbstractCommand * const command);
+	void addPreAction(AbstractCommand *const command);
 
 	/// Adds \a command into a specified place of the list of commands to be executed before this command.
-	void insertPreAction(AbstractCommand * const command, int index);
+	void insertPreAction(AbstractCommand *const command, int index);
 
 	/// Adds \a command into a list of commands to be executed after this command.
-	void addPostAction(AbstractCommand * const command);
+	void addPostAction(AbstractCommand *const command);
 
 	/// Adds \a command into a specified place of the list of commands
 	/// to be executed after this command.
-	void insertPostAction(AbstractCommand * const command, int index);
+	void insertPostAction(AbstractCommand *const command, int index);
 
 	virtual bool equals(const AbstractCommand &other) const;
 
@@ -85,16 +85,16 @@ private:
 
 	/// Tells if command tree already contains specified command.
 	/// The command itself is not considered
-	bool hierarchyContains(AbstractCommand * const command) const;
+	bool hierarchyContains(AbstractCommand *const command) const;
 
 	/// The command itself is not considered
-	bool contains(QList<AbstractCommand *> const &list, const AbstractCommand * command) const;
+	bool contains(QList<AbstractCommand *> const &list, const AbstractCommand *command) const;
 
 	void removeDuplicatesOn(QList<AbstractCommand *> &list);
 
-	bool mExecuted { false };
-	bool mRedoEnabled { true };
-	bool mUndoEnabled { true };
+	bool mExecuted {false};
+	bool mRedoEnabled {true};
+	bool mUndoEnabled {true};
 	QList<AbstractCommand *> mPreActions; // has ownership
 	QList<AbstractCommand *> mPostActions; // has ownership
 	QString mModuleBinded;

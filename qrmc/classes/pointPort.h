@@ -27,7 +27,7 @@ class PointPort : public Port
 {
 public:
 	bool init(const QDomElement &element, int width, int height) override;
-	Port* clone() const override;
+	Port *clone() const override;
 
 	QString generateSdf(const MetaCompiler &compiler) const override;
 	QString generateInit(const MetaCompiler &compiler) const override;

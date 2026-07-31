@@ -27,30 +27,29 @@ class MethodsTester
 {
 public:
 
-	virtual ~MethodsTester() {}
+	virtual ~MethodsTester()
+	{
+	}
 	struct ResultOfGenerating {
 		ResultOfGenerating(const QString &name, const QString &first, const QString &second);
 		QString methodName;
 		QString firstResult;
 		QString secondResult;
-
 	};
 
 	QList<ResultOfGenerating> generateTimeResult();
 
 protected:
 
-	virtual AbstractStringGenerator * initGeneratorWithFirstInterface(
-			const AbstractStringGenerator &generator) const = 0;
+	virtual AbstractStringGenerator *initGeneratorWithFirstInterface(
+		const AbstractStringGenerator &generator) const = 0;
 
-	virtual AbstractStringGenerator * initGeneratorWithSecondInterface(
-			const AbstractStringGenerator &generator) const = 0;
+	virtual AbstractStringGenerator *initGeneratorWithSecondInterface(
+		const AbstractStringGenerator &generator) const = 0;
 
 	/// tests given method if it exists in list of methods to be tested
-	ResultOfGenerating testMethodIfExistsInList(
-			const AbstractStringGenerator &stringGenerator
-			, const QString &method
-			);
+	ResultOfGenerating testMethodIfExistsInList(const AbstractStringGenerator &stringGenerator,
+		const QString &method);
 
 	/// fills list of methods to test with methods from given .txt-file
 	void fillMethodsToTestList(const QString &fileName);
@@ -65,7 +64,6 @@ private:
 	/// list of methods to be tested, is filled from files
 	QStringList mMethodsToTest;
 	QList<ResultOfGenerating> mTimeResult;
-
 };
 
 }

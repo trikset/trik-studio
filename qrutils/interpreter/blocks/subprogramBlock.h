@@ -20,7 +20,6 @@ namespace qReal {
 namespace interpretation {
 namespace blocks {
 
-
 /// Interpreter`s implementation for subprogram block.
 /// Starts explosed diagram interpretation using stepInto(Id) signal.
 class QRUTILS_EXPORT SubprogramBlock : public Block
@@ -28,8 +27,7 @@ class QRUTILS_EXPORT SubprogramBlock : public Block
 	Q_OBJECT
 
 public:
-	struct DynamicParameter
-	{
+	struct DynamicParameter {
 		QString name;
 		QString type;
 		QString code;

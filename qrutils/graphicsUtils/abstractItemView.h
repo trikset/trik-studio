@@ -50,9 +50,9 @@ protected:
 private:
 	void scaleTo(qreal newScale);
 
-	qreal mMinAbsScale { 0.2 };
-	qreal mMaxAbsScale { 10.0 };
-	qreal mCurrentAbsScale { 1.0 };
+	qreal mMinAbsScale {0.2};
+	qreal mMaxAbsScale {10.0};
+	qreal mCurrentAbsScale {1.0};
 };
 
 }

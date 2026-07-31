@@ -24,10 +24,8 @@ class DrawRectBlockGenerator : public DrawBlockGenerator
 {
 	Q_OBJECT
 public:
-	DrawRectBlockGenerator(const qrRepo::RepoApi &repo
-			, generatorBase::GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent = nullptr);
+	DrawRectBlockGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+		const qReal::Id &id, QObject *parent = nullptr);
 
 protected:
 	void drawBmp(QPainter *painter) override;

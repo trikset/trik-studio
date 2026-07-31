@@ -32,12 +32,13 @@ class ConcatenationParser : public ParserInterface<TokenType>
 public:
 	/// Constructor. Takes parsers to concatenate.
 	ConcatenationParser(const ParserRef<TokenType> &parser1, const ParserRef<TokenType> &parser2)
-		: mParser1(parser1), mParser2(parser2)
+		: mParser1(parser1)
+		, mParser2(parser2)
 	{
 	}
 
-	QSharedPointer<ast::Node> parse(TokenStream<TokenType> &tokenStream
-			, ParserContext<TokenType> &parserContext) const override
+	QSharedPointer<ast::Node> parse(TokenStream<TokenType> &tokenStream,
+		ParserContext<TokenType> &parserContext) const override
 	{
 		if (tokenStream.isEnd()) {
 			parserContext.reportError(QObject::tr("Unexpected end of input"));
@@ -52,7 +53,8 @@ public:
 				return wrap(new TemporaryErrorNode());
 			}
 
-			if (parser1Result->is<TemporaryDiscardableNode>() && parser2Result->is<TemporaryDiscardableNode>()) {
+			if (parser1Result->is<TemporaryDiscardableNode>()
+				&& parser2Result->is<TemporaryDiscardableNode>()) {
 				const auto result = wrap(new TemporaryDiscardableNode());
 				result->connect(parser1Result);
 				result->connect(parser2Result);

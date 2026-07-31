@@ -32,11 +32,11 @@
 
 class QLineEdit;
 
-namespace  qReal {
+namespace qReal {
 namespace gui {
 
 /// Class for representing tree with elements of the editors.
-class PaletteTree: public QWidget
+class PaletteTree : public QWidget
 {
 	Q_OBJECT
 
@@ -58,7 +58,7 @@ public:
 	  @param id Editor id.
 	*/
 	void deleteEditor(const Id &id);
-	QComboBox* comboBox() const;
+	QComboBox *comboBox() const;
 	QList<QString> editorsNames() const;
 	Id currentEditor() const;
 
@@ -99,8 +99,7 @@ public:
 	void setEnabledForAllElements(const Id &diagram, bool enabled);
 
 	/// Sets user palettes headers and descriptions.
-	void customizeExplosionTitles(const QString &userGroupTitle
-			, const QString &userGroupDescription);
+	void customizeExplosionTitles(const QString &userGroupTitle, const QString &userGroupDescription);
 
 Q_SIGNALS:
 	void paletteParametersChanged();
@@ -151,7 +150,7 @@ private:
 	QHash<Id, int> mCategories;
 
 	/// Pointer to current tree.
-	PaletteTreeWidgets *mTree  {};
+	PaletteTreeWidgets *mTree {};
 
 	/// List with all editor's trees.
 	QList<PaletteTreeWidgets *> mEditorsTrees;
@@ -169,13 +168,13 @@ private:
 	QVBoxLayout *mLayout {};
 
 	/// Current editor number.
-	int mCurrentEditor { 0 };
+	int mCurrentEditor {0};
 
 	/// Representation flag
-	bool mIconsView  {};
+	bool mIconsView {};
 
 	/// Count of items in a row in icon's representation
-	int mItemsCountInARow { -1 };
+	int mItemsCountInARow {-1};
 
 	/// Spacer layout item used when palette is empty to correctly position remaining palette tree widgets. Removed
 	/// from layout when editor tree is initialized.

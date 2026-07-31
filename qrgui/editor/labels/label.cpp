@@ -23,11 +23,11 @@
 using namespace qReal;
 using namespace qReal::gui::editor;
 
-Label::Label(models::GraphicalModelAssistApi &graphicalAssistApi
-		, models::LogicalModelAssistApi &logicalAssistApi
-		// NOLINTNEXTLINE(modernize-pass-by-value)
-		, const Id &elementId
-		, const QSharedPointer<LabelProperties> &properties)
+Label::Label(models::GraphicalModelAssistApi &graphicalAssistApi,
+	models::LogicalModelAssistApi &logicalAssistApi
+	// NOLINTNEXTLINE(modernize-pass-by-value)
+	,
+	const Id &elementId, const QSharedPointer<LabelProperties> &properties)
 	: mIsStretched(false)
 	, mWasMoved(false)
 	, mShouldMove(false)
@@ -65,8 +65,8 @@ void Label::init()
 			propertyName = mProperties->nameForRoleProperty();
 		}
 
-		const QList<QPair<QString, QString>> values = mGraphicalModelAssistApi
-				.editorManagerInterface().enumValues(mId, propertyName);
+		const QList<QPair<QString, QString>> values =
+			mGraphicalModelAssistApi.editorManagerInterface().enumValues(mId, propertyName);
 		for (const QPair<QString, QString> &pair : values) {
 			mEnumValues[pair.first] = pair.second;
 		}
@@ -111,10 +111,10 @@ void Label::setText(const QString &text)
 
 void Label::setTextFromRepo(const QString &text)
 {
-	const QString friendlyText = mEnumValues.contains(text) ? mEnumValues[text] :
-			mEnumValues.isEmpty() || textInteractionFlags() & Qt::TextEditorInteraction
-					? text
-					: enumText(text);
+	const QString friendlyText = mEnumValues.contains(text) ? mEnumValues[text]
+	                             : mEnumValues.isEmpty() || textInteractionFlags() & Qt::TextEditorInteraction
+	                                     ? text
+	                                     : enumText(text);
 	QString plainText = toPlainText();
 	if (friendlyText != plainText) {
 		QGraphicsTextItem::setPlainText(friendlyText);
@@ -187,57 +187,50 @@ QString Label::location() const
 void Label::updateData(bool withUndoRedo)
 {
 	const QString value = toPlainText();
-	auto * const parent = dynamic_cast<Element *>(parentItem());
+	auto *const parent = dynamic_cast<Element *>(parentItem());
 	if (!mProperties->nameForRoleProperty().isEmpty()) {
 		if (mEnumValues.isEmpty()) {
-			parent->setLogicalProperty(mProperties->nameForRoleProperty()
-					, mTextBeforeTextInteraction
-					, value
-					, withUndoRedo
-			);
+			parent->setLogicalProperty(mProperties->nameForRoleProperty(), mTextBeforeTextInteraction,
+				value, withUndoRedo);
 		} else {
 			const auto &values = mEnumValues.values();
-			const QString repoValue = values.contains(value)
-					? mEnumValues.key(value)
-					: (withUndoRedo ? enumText(value) : value);
-			parent->setLogicalProperty(mProperties->nameForRoleProperty()
-					, mTextBeforeTextInteraction
-					, repoValue
-					, withUndoRedo
-			);
+			const QString repoValue = values.contains(value) ? mEnumValues.key(value)
+			                                                 : (withUndoRedo ? enumText(value) : value);
+			parent->setLogicalProperty(mProperties->nameForRoleProperty(), mTextBeforeTextInteraction,
+				repoValue, withUndoRedo);
 		}
 	} else if (mProperties->binding() == "name") {
 		if (value != parent->name()) {
 			parent->setName(value, withUndoRedo);
 		}
 	} else if (mEnumValues.isEmpty()) {
-		const QString properties = mLogicalModelAssistApi.mutableLogicalRepoApi().property(mGraphicalModelAssistApi.
-				logicalId(mId), "dynamicProperties").toString();
+		const QString properties =
+			mLogicalModelAssistApi.mutableLogicalRepoApi()
+				.property(mGraphicalModelAssistApi.logicalId(mId), "dynamicProperties")
+				.toString();
 		if (!properties.isEmpty()) {
 			QDomDocument dynamicProperties;
 			dynamicProperties.setContent(properties);
 
-			for (QDomElement element
-					= dynamicProperties.firstChildElement("properties").firstChildElement("property")
-					; !element.isNull()
-					; element = element.nextSiblingElement("property"))
-			{
+			for (QDomElement element =
+					dynamicProperties.firstChildElement("properties").firstChildElement("property");
+				!element.isNull(); element = element.nextSiblingElement("property")) {
 				if (element.attribute("name") == mProperties->binding()) {
 					element.setAttribute("dynamicPropertyValue", value);
 					break;
 				}
 			}
 
-			mLogicalModelAssistApi.mutableLogicalRepoApi().setProperty(mGraphicalModelAssistApi.logicalId(mId),
-					"dynamicProperties", dynamicProperties.toString(4));
+			mLogicalModelAssistApi.mutableLogicalRepoApi().setProperty(
+				mGraphicalModelAssistApi.logicalId(mId), "dynamicProperties",
+				dynamicProperties.toString(4));
 		}
 
 		parent->setLogicalProperty(mProperties->binding(), mTextBeforeTextInteraction, value, withUndoRedo);
 	} else {
 		const auto &values = mEnumValues.values();
-		const QString repoValue = values.contains(value)
-				? mEnumValues.key(value)
-				: (withUndoRedo ? enumText(value) : value);
+		const QString repoValue =
+			values.contains(value) ? mEnumValues.key(value) : (withUndoRedo ? enumText(value) : value);
 		parent->setLogicalProperty(mProperties->binding(), mTextBeforeTextInteraction, repoValue, withUndoRedo);
 		disconnect(document(), &QTextDocument::contentsChanged, this, &Label::saveToRepo);
 		if (repoValue == mTextBeforeTextInteraction) {
@@ -266,12 +259,12 @@ void Label::mousePressEvent(QGraphicsSceneMouseEvent *event)
 	if (dynamic_cast<EdgeElement *>(parentItem())) {
 		// Passing event to edge because users usially want to edit its property when clicking on it.
 		// NOLINTNEXTLINE(bugprone-parent-virtual-call)
-		QGraphicsItem::mousePressEvent(event);  //clazy:exclude=skipped-base-method
+		QGraphicsItem::mousePressEvent(event); //clazy:exclude=skipped-base-method
 		return;
 	}
 
-	mIsStretched = (event->pos().x() >= boundingRect().right() - 10
-			&& event->pos().y() >= boundingRect().bottom() - 10);
+	mIsStretched =
+		(event->pos().x() >= boundingRect().right() - 10 && event->pos().y() >= boundingRect().bottom() - 10);
 
 	QGraphicsTextItem::mousePressEvent(event);
 	parentItem()->setSelected(true);
@@ -380,7 +373,6 @@ void Label::focusOutEvent(QFocusEvent *event)
 	if (mTextBeforeTextInteraction != toPlainText()) {
 		updateData(true);
 	}
-
 }
 
 void Label::keyPressEvent(QKeyEvent *event)
@@ -436,16 +428,16 @@ void Label::startTextInteraction()
 
 void Label::updateDynamicData()
 {
-	const QString properties = mLogicalModelAssistApi.mutableLogicalRepoApi().property(
-			mGraphicalModelAssistApi.logicalId(mId), "dynamicProperties").toString();
+	const QString properties = mLogicalModelAssistApi.mutableLogicalRepoApi()
+	                                   .property(mGraphicalModelAssistApi.logicalId(mId), "dynamicProperties")
+	                                   .toString();
 	if (!properties.isEmpty()) {
 		QDomDocument dynamicProperties;
 		dynamicProperties.setContent(properties);
 
-		for (QDomElement element = dynamicProperties.firstChildElement("properties").firstChildElement("property")
-				; !element.isNull()
-				; element = element.nextSiblingElement("property"))
-		{
+		for (QDomElement element =
+				dynamicProperties.firstChildElement("properties").firstChildElement("property");
+			!element.isNull(); element = element.nextSiblingElement("property")) {
 			if (element.attribute("textBinded") == mProperties->binding()) {
 				setText(element.attribute("value"));
 				break;
@@ -456,8 +448,8 @@ void Label::updateDynamicData()
 
 void Label::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-	if (toPlainText().isEmpty() && !parentItem()->isSelected()
-			&& !isSelected() && dynamic_cast<EdgeElement *>(parentItem())) {
+	if (toPlainText().isEmpty() && !parentItem()->isSelected() && !isSelected()
+		&& dynamic_cast<EdgeElement *>(parentItem())) {
 		/// @todo: Why label decides it? Why not edge element itself?
 		return;
 	}
@@ -535,13 +527,14 @@ void Label::clearMoveFlag()
 QRectF Label::labelMovingRect() const
 {
 	const int distance = SettingsManager::value("LabelsDistance").toInt();
-	return mapFromItem(parentItem(), parentItem()->boundingRect()).boundingRect()
-			.adjusted(-distance, -distance, distance, distance);
+	return mapFromItem(parentItem(), parentItem()->boundingRect())
+	        .boundingRect()
+	        .adjusted(-distance, -distance, distance, distance);
 }
 
 QString Label::enumText(const QString &enumValue) const
 {
 	return mGraphicalModelAssistApi.editorManagerInterface().isEnumEditable(mId, mProperties->binding())
-			? enumValue
-			: mTextBeforeTextInteraction;
+	               ? enumValue
+	               : mTextBeforeTextInteraction;
 }

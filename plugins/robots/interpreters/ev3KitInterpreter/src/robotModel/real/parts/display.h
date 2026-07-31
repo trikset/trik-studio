@@ -27,9 +27,8 @@ class Display : public robotModel::parts::Ev3Display
 	Q_OBJECT
 
 public:
-	Display(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port
-			, utils::robotCommunication::RobotCommunicator &robotCommunicator);
+	Display(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+		utils::robotCommunication::RobotCommunicator &robotCommunicator);
 
 	void drawPixel(int x, int y) override;
 	void drawLine(int x1, int y1, int x2, int y2) override;

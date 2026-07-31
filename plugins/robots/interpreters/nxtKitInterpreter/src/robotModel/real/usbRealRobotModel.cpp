@@ -26,7 +26,7 @@ UsbRealRobotModel::UsbRealRobotModel(const QString &kitId, const QString &robotI
 
 QString UsbRealRobotModel::name() const
 {
-	return "NxtUsbRealRobotModel";  // Right after NXT OSEK mode
+	return "NxtUsbRealRobotModel"; // Right after NXT OSEK mode
 }
 
 QString UsbRealRobotModel::friendlyName() const

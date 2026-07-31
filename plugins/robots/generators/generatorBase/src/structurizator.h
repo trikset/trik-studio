@@ -57,8 +57,8 @@ public:
 	explicit Structurizator(QObject *parent = nullptr);
 
 	/// main function that performs structurization
-	IntermediateStructurizatorNode *performStructurization(const QSet<qReal::Id> &verticesIds, int startVertex
-			, const QMap<int, QSet<int>> &followers, const QMap<qReal::Id, int> &vertexNumber, int verticesNumber);
+	IntermediateStructurizatorNode *performStructurization(const QSet<qReal::Id> &verticesIds, int startVertex,
+		const QMap<int, QSet<int>> &followers, const QMap<qReal::Id, int> &vertexNumber, int verticesNumber);
 
 private:
 	typedef int Time;

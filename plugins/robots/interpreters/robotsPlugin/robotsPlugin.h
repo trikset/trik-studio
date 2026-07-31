@@ -35,17 +35,17 @@ public:
 
 	void init(const qReal::PluginConfigurator &configurator) override;
 	void release() override;
-	qReal::Customizer *customizationInterface() override;  // Does not transfer ownership.
-	QPair<QString, qReal::gui::PreferencesPage *> preferencesPage() override;  // Transfers ownership.
-	QList<qReal::ActionInfo> actions() override;  // Does not transfer ownership of QAction objects.
-	QList<qReal::HotKeyActionInfo> hotKeyActions() override;  // Does not transfer ownership of QAction objects.
+	qReal::Customizer *customizationInterface() override; // Does not transfer ownership.
+	QPair<QString, qReal::gui::PreferencesPage *> preferencesPage() override; // Transfers ownership.
+	QList<qReal::ActionInfo> actions() override; // Does not transfer ownership of QAction objects.
+	QList<qReal::HotKeyActionInfo> hotKeyActions() override; // Does not transfer ownership of QAction objects.
 	QList<qReal::ProjectConverter> projectConverters() override;
 	QStringList defaultSettingsFiles() override;
 	QObject *guiScriptFacade() override;
 
 private:
 	/// Main window interface object, used to call GUI functionality.
-	qReal::gui::MainWindowInterpretersInterface *mMainWindowInterpretersInterface;  // Does not have ownership
+	qReal::gui::MainWindowInterpretersInterface *mMainWindowInterpretersInterface; // Does not have ownership
 
 	QScopedPointer<interpreterCore::RobotsPluginFacade> mRobotsPluginFacade;
 };

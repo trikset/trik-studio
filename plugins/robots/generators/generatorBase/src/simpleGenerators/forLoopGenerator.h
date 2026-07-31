@@ -24,11 +24,8 @@ class ForLoopGenerator : public BindingGenerator
 {
 	Q_OBJECT
 public:
-	ForLoopGenerator(int index
-			, const qrRepo::RepoApi &repo
-			, GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent = nullptr);
+	ForLoopGenerator(int index, const qrRepo::RepoApi &repo, GeneratorCustomizer &customizer, const qReal::Id &id,
+		QObject *parent = nullptr);
 };
 
 }

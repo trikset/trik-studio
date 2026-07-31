@@ -18,14 +18,14 @@
 #include <QtWidgets/QListWidgetItem>
 
 namespace Ui {
-	class refactoringForm;
+class refactoringForm;
 }
 
 namespace qReal {
 
 /// Window to work with available refactorings. Allows you to choose refactoring,
 /// find all its occurrences and apply it
-class RefactoringWindow: public QDialog
+class RefactoringWindow : public QDialog
 {
 	Q_OBJECT
 
@@ -54,4 +54,3 @@ private:
 };
 
 }
-

@@ -32,7 +32,7 @@ ErrorReporter::ErrorReporter()
 {
 }
 
-ErrorReporter::ErrorReporter(ErrorListWidget* const errorListWidget, QDockWidget* const errorList)
+ErrorReporter::ErrorReporter(ErrorListWidget *const errorListWidget, QDockWidget *const errorList)
 	: mErrorListWidget(errorListWidget)
 	, mErrorList(errorList)
 	, mIsVisible(true)
@@ -57,7 +57,7 @@ void ErrorReporter::updateVisibility(bool isVisible)
 
 void ErrorReporter::reportOperation(const QFuture<void> &operation, const QString &description)
 {
-	auto * const progressBar = new ProgressBar;
+	auto *const progressBar = new ProgressBar;
 	progressBar->reportOperation(operation, description);
 	progressBar->setToolTip(description);
 
@@ -112,7 +112,7 @@ void ErrorReporter::addCritical(const QString &message, const Id &position)
 	Q_EMIT criticalAdded(message, position);
 }
 
-bool ErrorReporter::showErrors(ErrorListWidget* const errorListWidget, QDockWidget* const errorList) const
+bool ErrorReporter::showErrors(ErrorListWidget *const errorListWidget, QDockWidget *const errorList) const
 {
 	errorListWidget->clear();
 
@@ -167,20 +167,21 @@ void ErrorReporter::sendBubblingMessage(const QString &message, int duration, QW
 	bubble->move(0, 0);
 }
 
-void ErrorReporter::showError(const Error &error, ErrorListWidget * const errorListWidget) const
+void ErrorReporter::showError(const Error &error, ErrorListWidget *const errorListWidget) const
 {
 	if (!errorListWidget) {
 		return;
 	}
 
-	if (mErrorList && !mErrorList->isVisible() &&  mIsVisible) {
+	if (mErrorList && !mErrorList->isVisible() && mIsVisible) {
 		mErrorList->setVisible(true);
 	}
 
 	auto *item = new QListWidgetItem(errorListWidget);
 	item->setData(ErrorListWidget::positionRole, error.position().toString());
-	QString message = QString(" <font color='gray'>%1</font> <u>%2</u> %3").arg(
-			error.timestamp(), severityMessage(error), error.message()).trimmed();
+	QString message = QString(" <font color='gray'>%1</font> <u>%2</u> %3")
+	                          .arg(error.timestamp(), severityMessage(error), error.message())
+	                          .trimmed();
 	switch (error.severity()) {
 	case Error::information:
 		item->setIcon(QIcon(":/mainWindow/images/information.png"));

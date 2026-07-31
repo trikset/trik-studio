@@ -42,8 +42,8 @@ RobotsPluginFacade::RobotsPluginFacade()
 	, mGraphicsWatcherManager(nullptr)
 	, mPaletteUpdateManager(nullptr)
 {
-	connect(&mRobotModelManager, &RobotModelManager::robotModelChanged
-			, &mActionsManager, &ActionsManager::onRobotModelChanged);
+	connect(&mRobotModelManager, &RobotModelManager::robotModelChanged, &mActionsManager,
+		&ActionsManager::onRobotModelChanged);
 }
 
 RobotsPluginFacade::~RobotsPluginFacade()
@@ -61,18 +61,15 @@ void RobotsPluginFacade::init(const qReal::PluginConfigurator &configurer)
 {
 	mActionsManager.init(&configurer.mainWindowInterpretersInterface());
 
-	mRobotSettingsPage = new ui::RobotsSettingsPage(mKitPluginManager, mRobotModelManager
-			, configurer.logicalModelApi());
+	mRobotSettingsPage =
+		new ui::RobotsSettingsPage(mKitPluginManager, mRobotModelManager, configurer.logicalModelApi());
 
-	connect(&configurer.systemEvents(), &qReal::SystemEvents::activeTabChanged
-			, mRobotSettingsPage, &ui::RobotsSettingsPage::onProjectOpened);
+	connect(&configurer.systemEvents(), &qReal::SystemEvents::activeTabChanged, mRobotSettingsPage,
+		&ui::RobotsSettingsPage::onProjectOpened);
 
-	mDevicesConfigurationManager.reset(new DevicesConfigurationManager(
-			configurer.graphicalModelApi()
-			, configurer.logicalModelApi()
-			, configurer.mainWindowInterpretersInterface()
-			, configurer.projectManager()
-			));
+	mDevicesConfigurationManager.reset(
+		new DevicesConfigurationManager(configurer.graphicalModelApi(), configurer.logicalModelApi(),
+			configurer.mainWindowInterpretersInterface(), configurer.projectManager()));
 
 	if (!selectKit()) {
 		/// @todo Correctly handle unselected kit.
@@ -81,35 +78,23 @@ void RobotsPluginFacade::init(const qReal::PluginConfigurator &configurer)
 
 	mMainWindow = &configurer.mainWindowInterpretersInterface();
 
-	mParser.reset(new textLanguage::RobotsBlockParser(mRobotModelManager
-			, [this]() { return mProxyInterpreter.timeElapsed(); }));
+	mParser.reset(new textLanguage::RobotsBlockParser(mRobotModelManager,
+		[this]() { return mProxyInterpreter.timeElapsed(); }));
 
-	auto coreFactory = QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface>(new coreBlocks::CoreBlocksFactory());
-	coreFactory->configure(configurer.graphicalModelApi()
-			, configurer.logicalModelApi()
-			, mRobotModelManager
-			, *configurer.mainWindowInterpretersInterface().errorReporter()
-			, *mParser
-			);
+	auto coreFactory =
+		QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface>(new coreBlocks::CoreBlocksFactory());
+	coreFactory->configure(configurer.graphicalModelApi(), configurer.logicalModelApi(), mRobotModelManager,
+		*configurer.mainWindowInterpretersInterface().errorReporter(), *mParser);
 
 	mBlocksFactoryManager.addFactory(coreFactory);
 
-	mUiManager.reset(new UiManager(mActionsManager.debugModeAction()
-			, mActionsManager.editModeAction()
-			, configurer.mainWindowDockInterface()
-			, configurer.systemEvents()
-			, mEventsForKitPlugin
-			, mRobotModelManager));
+	mUiManager.reset(new UiManager(mActionsManager.debugModeAction(), mActionsManager.editModeAction(),
+		configurer.mainWindowDockInterface(), configurer.systemEvents(), mEventsForKitPlugin,
+		mRobotModelManager));
 
-	mInterpreter.reset(new interpreter::BlockInterpreter(
-			configurer.graphicalModelApi()
-			, configurer.logicalModelApi()
-			, configurer.mainWindowInterpretersInterface()
-			, configurer.projectManager()
-			, mBlocksFactoryManager
-			, mRobotModelManager
-			, *mParser
-		));
+	mInterpreter.reset(new interpreter::BlockInterpreter(configurer.graphicalModelApi(),
+		configurer.logicalModelApi(), configurer.mainWindowInterpretersInterface(), configurer.projectManager(),
+		mBlocksFactoryManager, mRobotModelManager, *mParser));
 	if (auto provider = dynamic_cast<kitBase::DevicesConfigurationProvider *>(mInterpreter.data())) {
 		mDevicesConfigurationManager->connectDevicesConfigurationProvider(provider);
 	}
@@ -117,20 +102,20 @@ void RobotsPluginFacade::init(const qReal::PluginConfigurator &configurer)
 	mSensorVariablesUpdater.reset(
 		new interpreterCore::interpreter::details::SensorVariablesUpdater(mRobotModelManager, *mParser));
 
-	connect(&mRobotModelManager, &RobotModelManager::allDevicesConfigured,
-			mSensorVariablesUpdater.data(), &interpreter::details::SensorVariablesUpdater::run);
+	connect(&mRobotModelManager, &RobotModelManager::allDevicesConfigured, mSensorVariablesUpdater.data(),
+		&interpreter::details::SensorVariablesUpdater::run);
 
-	connect(&configurer.systemEvents(), &qReal::SystemEvents::closedMainWindow
-			, &mProxyInterpreter, &kitBase::InterpreterInterface::userStopRobot);
-	connect(&mProxyInterpreter, &kitBase::InterpreterInterface::connected
-			, &mActionsManager.connectToRobotAction(), &QAction::setChecked);
-	connect(&mRobotModelManager, &RobotModelManager::robotModelChanged
-			, &mProxyInterpreter, &kitBase::InterpreterInterface::userStopRobot);
+	connect(&configurer.systemEvents(), &qReal::SystemEvents::closedMainWindow, &mProxyInterpreter,
+		&kitBase::InterpreterInterface::userStopRobot);
+	connect(&mProxyInterpreter, &kitBase::InterpreterInterface::connected, &mActionsManager.connectToRobotAction(),
+		&QAction::setChecked);
+	connect(&mRobotModelManager, &RobotModelManager::robotModelChanged, &mProxyInterpreter,
+		&kitBase::InterpreterInterface::userStopRobot);
 	auto connectDisconnection = [this](kitBase::robotModel::RobotModelInterface &model) {
-		connect(&model, &kitBase::robotModel::RobotModelInterface::disconnected
-				, &mProxyInterpreter, &kitBase::InterpreterInterface::userStopRobot);
-		connect(&model, &kitBase::robotModel::RobotModelInterface::disconnected
-				, &mActionsManager, [=](){ mActionsManager.connectToRobotAction().setChecked(false); });
+		connect(&model, &kitBase::robotModel::RobotModelInterface::disconnected, &mProxyInterpreter,
+			&kitBase::InterpreterInterface::userStopRobot);
+		connect(&model, &kitBase::robotModel::RobotModelInterface::disconnected, &mActionsManager,
+			[=]() { mActionsManager.connectToRobotAction().setChecked(false); });
 	};
 	connectDisconnection(mRobotModelManager.model());
 	connect(&mRobotModelManager, &RobotModelManager::robotModelChanged, &mProxyInterpreter, connectDisconnection);
@@ -139,27 +124,27 @@ void RobotsPluginFacade::init(const qReal::PluginConfigurator &configurer)
 
 	initSensorWidgets();
 
-	mPaletteUpdateManager = new PaletteUpdateManager(configurer.mainWindowInterpretersInterface()
-			, mBlocksFactoryManager, this);
-	connect(&mRobotModelManager, &RobotModelManager::robotModelChanged
-			, mPaletteUpdateManager, &PaletteUpdateManager::updatePalette);
+	mPaletteUpdateManager =
+		new PaletteUpdateManager(configurer.mainWindowInterpretersInterface(), mBlocksFactoryManager, this);
+	connect(&mRobotModelManager, &RobotModelManager::robotModelChanged, mPaletteUpdateManager,
+		&PaletteUpdateManager::updatePalette);
 
 	// It will subscribe to all signals itself and free memory too.
-	new KitAutoSwitcher(configurer.projectManager(), configurer.logicalModelApi()
-			, mBlocksFactoryManager, mKitPluginManager, mRobotModelManager, this);
+	new KitAutoSwitcher(configurer.projectManager(), configurer.logicalModelApi(), mBlocksFactoryManager,
+		mKitPluginManager, mRobotModelManager, this);
 
-	mSaveAsTaskManager.reset(new ExerciseExportManager(configurer.logicalModelApi()
-			, configurer.repoControlInterface(), configurer.projectManager()));
+	mSaveAsTaskManager.reset(new ExerciseExportManager(configurer.logicalModelApi(),
+		configurer.repoControlInterface(), configurer.projectManager()));
 
 	connectInterpreterToActions();
 
 	connectEventsForKitPlugin();
 
-	connect(&mActionsManager.robotSettingsAction(), &QAction::triggered, this
-			, [=] () { configurer.mainWindowInterpretersInterface().openSettingsDialog(tr("Robots")); });
+	connect(&mActionsManager.robotSettingsAction(), &QAction::triggered, this,
+		[=]() { configurer.mainWindowInterpretersInterface().openSettingsDialog(tr("Robots")); });
 
-	connect(&configurer.systemEvents(), &qReal::SystemEvents::activeTabChanged
-			, &mActionsManager, &ActionsManager::onActiveTabChanged);
+	connect(&configurer.systemEvents(), &qReal::SystemEvents::activeTabChanged, &mActionsManager,
+		&ActionsManager::onActiveTabChanged);
 
 	// Just to capture them, not configurer.
 	qReal::ProjectManagementInterface &projectManager = configurer.projectManager();
@@ -167,7 +152,8 @@ void RobotsPluginFacade::init(const qReal::PluginConfigurator &configurer)
 	connect(&mActionsManager.homeAction(), &QAction::triggered, this, [&projectManager, &graphicalModel, this]() {
 		if (projectManager.somethingOpened()) {
 			for (const qReal::Id &diagram : graphicalModel.children(qReal::Id::rootId())) {
-				if (diagram.type() == qReal::Id("RobotsMetamodel", "RobotsDiagram", "RobotsDiagramNode")) {
+				if (diagram.type()
+					== qReal::Id("RobotsMetamodel", "RobotsDiagram", "RobotsDiagramNode")) {
 					mMainWindow->activateItemOrDiagram(diagram);
 					return;
 				}
@@ -179,38 +165,34 @@ void RobotsPluginFacade::init(const qReal::PluginConfigurator &configurer)
 
 	const qrRepo::LogicalRepoApi &repoApi = configurer.logicalModelApi().logicalRepoApi();
 
-	connect(&configurer.systemEvents(), &qReal::SystemEvents::activeTabChanged, this
-			, [this, &repoApi] (const qReal::TabInfo &info) {
-				Q_UNUSED(info);
+	connect(&configurer.systemEvents(), &qReal::SystemEvents::activeTabChanged, this,
+		[this, &repoApi](const qReal::TabInfo &info) {
+		Q_UNUSED(info);
 
-				mDockDevicesConfigurer->setEnabled(
-						!repoApi.metaInformation("twoDModelSensorsReadOnly").toBool());
+		mDockDevicesConfigurer->setEnabled(!repoApi.metaInformation("twoDModelSensorsReadOnly").toBool());
 
-				const bool hasReadOnlyFlags = repoApi.metaInformation("twoDModelWorldReadOnly").toBool()
-						| repoApi.metaInformation("twoDModelSensorsReadOnly").toBool()
-						| repoApi.metaInformation("twoDModelRobotPositionReadOnly").toBool()
-						| repoApi.metaInformation("twoDModelRobotConfigurationReadOnly").toBool()
-						| repoApi.metaInformation("twoDModelSimulationSettingsReadOnly").toBool()
-						;
+		const bool hasReadOnlyFlags = repoApi.metaInformation("twoDModelWorldReadOnly").toBool()
+		                              | repoApi.metaInformation("twoDModelSensorsReadOnly").toBool()
+		                              | repoApi.metaInformation("twoDModelRobotPositionReadOnly").toBool()
+		                              | repoApi.metaInformation("twoDModelRobotConfigurationReadOnly").toBool()
+		                              | repoApi.metaInformation("twoDModelSimulationSettingsReadOnly").toBool();
 
-				mActionsManager.exportExerciseAction().setEnabled(!hasReadOnlyFlags);
-			});
+		mActionsManager.exportExerciseAction().setEnabled(!hasReadOnlyFlags);
+	});
 
-	connect(&mActionsManager.exportExerciseAction(), &QAction::triggered, this, [this] () {
+	connect(&mActionsManager.exportExerciseAction(), &QAction::triggered, this, [this]() {
 		if (!mSaveAsTaskManager->save()) {
-			mMainWindow->errorReporter()
-					->addError(tr("Cannot export exercise to the given location (try to change location)"));
+			mMainWindow->errorReporter()->addError(
+				tr("Cannot export exercise to the given location (try to change location)"));
 		}
 	});
 
 	mLogicalModelApi = &configurer.logicalModelApi();
 	mTextManager = &configurer.textManager();
 	mProjectManager = &configurer.projectManager();
-	connect(mProjectManager
-			, &qReal::ProjectManagementInterface::afterOpen
-			, this
-			, [=](const QString &path){
-		mLogicalModelApi->mutableLogicalRepoApi().setMetaInformation("trikStudioVersion", mCustomizer.productVersion());
+	connect(mProjectManager, &qReal::ProjectManagementInterface::afterOpen, this, [=](const QString &path) {
+		mLogicalModelApi->mutableLogicalRepoApi().setMetaInformation("trikStudioVersion",
+			mCustomizer.productVersion());
 
 		auto logicalRepo = &mLogicalModelApi->logicalRepoApi();
 		const QString code = logicalRepo->metaInformation("activeCode").toString();
@@ -231,10 +213,10 @@ void RobotsPluginFacade::init(const qReal::PluginConfigurator &configurer)
 			const qReal::Id activeDiagram = mMainWindow->activeDiagram();
 			// QString() need to use method with binding
 			// TODO: need refactoring showInTextEditor(?)
-			mTextManager->showInTextEditor(codePath, QString()
-					, qReal::text::Languages::pickByExtension(codePath.suffix()));
+			mTextManager->showInTextEditor(codePath, QString(),
+				qReal::text::Languages::pickByExtension(codePath.suffix()));
 			if (!activeDiagram.isNull()
-					&& mRobotModelManager.model().friendlyName().contains("2d", Qt::CaseInsensitive)) {
+				&& mRobotModelManager.model().friendlyName().contains("2d", Qt::CaseInsensitive)) {
 				mMainWindow->activateItemOrDiagram(activeDiagram);
 			}
 		}
@@ -276,9 +258,9 @@ QObject *RobotsPluginFacade::guiScriptFacade() const
 
 QStringList RobotsPluginFacade::defaultSettingsFiles() const
 {
-	QStringList result = { ":/interpreterCoreDefaultSettings.ini" };
+	QStringList result = {":/interpreterCoreDefaultSettings.ini"};
 	for (const QString &kitId : mKitPluginManager.kitIds()) {
-		for (kitBase::KitPluginInterface * const kit : mKitPluginManager.kitsById(kitId)) {
+		for (kitBase::KitPluginInterface *const kit : mKitPluginManager.kitsById(kitId)) {
 			const QString defaultSettings = kit->defaultSettingsFile();
 			if (!defaultSettings.isEmpty()) {
 				result << defaultSettings;
@@ -314,13 +296,12 @@ bool RobotsPluginFacade::interpretCode(const QString &inputs, const QString &fil
 
 		if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
 			mMainWindow->errorReporter()->addError(
-						tr("The specified script file could not be opened for reading ") + filepath);
+				tr("The specified script file could not be opened for reading ") + filepath);
 			return false;
 		}
 		code = file.readAll();
 		extension = fileInfo.suffix().toLower();
-	}
-	else {
+	} else {
 		auto logicalRepo = &mLogicalModelApi->logicalRepoApi();
 		code = logicalRepo->metaInformation("activeCode").toString();
 		extension = logicalRepo->metaInformation("activeCodeLanguageExtension").toString();
@@ -343,26 +324,14 @@ void RobotsPluginFacade::saveCode(const QString &code, const QString &languageEx
 
 void RobotsPluginFacade::connectInterpreterToActions()
 {
-	QObject::connect(
-			&mActionsManager.runAction()
-			, &QAction::triggered
-			, &mProxyInterpreter
-			, &kitBase::InterpreterInterface::interpret
-			);
+	QObject::connect(&mActionsManager.runAction(), &QAction::triggered, &mProxyInterpreter,
+		&kitBase::InterpreterInterface::interpret);
 
-	QObject::connect(
-			&mActionsManager.stopRobotAction()
-			, &QAction::triggered
-			, &mProxyInterpreter
-			, &kitBase::InterpreterInterface::userStopRobot
-			);
+	QObject::connect(&mActionsManager.stopRobotAction(), &QAction::triggered, &mProxyInterpreter,
+		&kitBase::InterpreterInterface::userStopRobot);
 
-	QObject::connect(
-			&mActionsManager.connectToRobotAction()
-			, &QAction::triggered
-			, &mProxyInterpreter
-			, &kitBase::InterpreterInterface::connectToRobot
-			);
+	QObject::connect(&mActionsManager.connectToRobotAction(), &QAction::triggered, &mProxyInterpreter,
+		&kitBase::InterpreterInterface::connectToRobot);
 }
 
 bool RobotsPluginFacade::selectKit()
@@ -388,8 +357,8 @@ void RobotsPluginFacade::initSensorWidgets()
 {
 	mDockDevicesConfigurer.reset(new kitBase::DevicesConfigurationWidget(nullptr, true));
 	mDockDevicesConfigurer->loadRobotModels(mKitPluginManager.allRobotModels());
-	connect(&mRobotModelManager, &RobotModelManager::robotModelChanged
-			, mDockDevicesConfigurer.data(), &kitBase::DevicesConfigurationWidget::selectRobotModel);
+	connect(&mRobotModelManager, &RobotModelManager::robotModelChanged, mDockDevicesConfigurer.data(),
+		&kitBase::DevicesConfigurationWidget::selectRobotModel);
 
 	mWatchListWindow = new utils::WatchListWindow(*mParser);
 
@@ -402,18 +371,15 @@ void RobotsPluginFacade::initSensorWidgets()
 	connect(&mRobotModelManager, &RobotModelManager::robotModelChanged, this, hideVariables);
 
 	mGraphicsWatcherManager.reset(new GraphicsWatcherManager(*mParser, mRobotModelManager, this));
-	connect(&mProxyInterpreter, &kitBase::InterpreterInterface::started
-			, &*mGraphicsWatcherManager, &GraphicsWatcherManager::forceStart);
-	connect(&mProxyInterpreter, &kitBase::InterpreterInterface::stopped
-			, &*mGraphicsWatcherManager, &GraphicsWatcherManager::forceStop);
+	connect(&mProxyInterpreter, &kitBase::InterpreterInterface::started, &*mGraphicsWatcherManager,
+		&GraphicsWatcherManager::forceStart);
+	connect(&mProxyInterpreter, &kitBase::InterpreterInterface::stopped, &*mGraphicsWatcherManager,
+		&GraphicsWatcherManager::forceStop);
 	connect(&mProxyInterpreter, &kitBase::InterpreterInterface::started, &*mGraphicsWatcherManager, [=]() {
 		mActionsManager.runAction().setVisible(false);
 		mActionsManager.stopRobotAction().setVisible(mRobotModelManager.model().interpretedModel());
 	});
-	connect(&mProxyInterpreter
-			, &kitBase::InterpreterInterface::stopped
-			, &*mGraphicsWatcherManager
-			, [=] () {
+	connect(&mProxyInterpreter, &kitBase::InterpreterInterface::stopped, &*mGraphicsWatcherManager, [=]() {
 		if (!dynamic_cast<qReal::text::QScintillaTextEdit *>(mMainWindow->currentTab())) {
 			// since userStop fires on any tab/model switch even when the code tab is opened
 			// and nothing is running, but this whole visibility mumbo-jumbo has become a mess
@@ -424,11 +390,11 @@ void RobotsPluginFacade::initSensorWidgets()
 
 	mUiManager->placeDevicesConfig(mDockDevicesConfigurer.data());
 	mUiManager->placeWatchPlugins(mWatchListWindow, mGraphicsWatcherManager->widget());
-	mActionsManager.appendHotKey("View.ToggleRobotConsole", tr("Toggle robot console panel")
-			, *mUiManager->robotConsole().toggleViewAction());
-	for (kitBase::robotModel::RobotModelInterface * const model : mKitPluginManager.allRobotModels()) {
-		for (kitBase::KitPluginInterface * const kit : mKitPluginManager.kitsById(model->kitId())) {
-			for (auto && widget : kit->listOfQuickPreferencesFor(*model)) {
+	mActionsManager.appendHotKey("View.ToggleRobotConsole", tr("Toggle robot console panel"),
+		*mUiManager->robotConsole().toggleViewAction());
+	for (kitBase::robotModel::RobotModelInterface *const model : mKitPluginManager.allRobotModels()) {
+		for (kitBase::KitPluginInterface *const kit : mKitPluginManager.kitsById(model->kitId())) {
+			for (auto &&widget : kit->listOfQuickPreferencesFor(*model)) {
 				mUiManager->addWidgetToToolbar(*model, widget);
 			}
 		}
@@ -444,38 +410,37 @@ void RobotsPluginFacade::initKitPlugins(const qReal::PluginConfigurator &configu
 {
 	/// @todo: Check that this code works when different kit is selected
 	for (const QString &kitId : mKitPluginManager.kitIds()) {
-		for (kitBase::KitPluginInterface * const kit : mKitPluginManager.kitsById(kitId)) {
-			kit->init(kitBase::KitPluginConfigurator(configurer
-					, mRobotModelManager, *mParser, mEventsForKitPlugin, mProxyInterpreter));
+		for (kitBase::KitPluginInterface *const kit : mKitPluginManager.kitsById(kitId)) {
+			kit->init(kitBase::KitPluginConfigurator(configurer, mRobotModelManager, *mParser,
+				mEventsForKitPlugin, mProxyInterpreter));
 
 			for (const kitBase::robotModel::RobotModelInterface *model : kit->robotModels()) {
 				initFactoriesFor(kitId, model, configurer);
-				connect(&mEventsForKitPlugin, &kitBase::EventsForKitPluginInterface::interpretationStarted
-						, model, &kitBase::robotModel::RobotModelInterface::onInterpretationStarted);
+				connect(&mEventsForKitPlugin,
+					&kitBase::EventsForKitPluginInterface::interpretationStarted, model,
+					&kitBase::robotModel::RobotModelInterface::onInterpretationStarted);
 			}
 
-			mDevicesConfigurationManager->connectDevicesConfigurationProvider(kit->devicesConfigurationProvider());
+			mDevicesConfigurationManager->connectDevicesConfigurationProvider(
+				kit->devicesConfigurationProvider());
 		}
 	}
 }
 
-void RobotsPluginFacade::initFactoriesFor(const QString &kitId
-		, const kitBase::robotModel::RobotModelInterface *model
-		, const qReal::PluginConfigurator &configurer)
+void RobotsPluginFacade::initFactoriesFor(const QString &kitId, const kitBase::robotModel::RobotModelInterface *model,
+	const qReal::PluginConfigurator &configurer)
 {
 	// Pulling each robot model to each kit plugin with same ids. We need it for supporting
 	// plugin-based blocks set extension for concrete roobt model.
 	for (auto &&kit : mKitPluginManager.kitsById(kitId)) {
-		const auto &factory = QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface>(kit->blocksFactoryFor(model));
+		const auto &factory =
+			QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface>(kit->blocksFactoryFor(model));
 		if (factory) {
 			/// @todo Non-obvious dependency on mParser, which may or may not be constructed here.
 			///       More functional style will be helpful here.
-			factory->configure(configurer.graphicalModelApi()
-					, configurer.logicalModelApi()
-					, mRobotModelManager
-					, *configurer.mainWindowInterpretersInterface().errorReporter()
-					, *mParser
-					);
+			factory->configure(configurer.graphicalModelApi(), configurer.logicalModelApi(),
+				mRobotModelManager, *configurer.mainWindowInterpretersInterface().errorReporter(),
+				*mParser);
 
 			mBlocksFactoryManager.addFactory(factory, model);
 		}
@@ -484,63 +449,38 @@ void RobotsPluginFacade::initFactoriesFor(const QString &kitId
 
 void RobotsPluginFacade::connectEventsForKitPlugin()
 {
-	QObject::connect(
-			&mProxyInterpreter
-			, &kitBase::InterpreterInterface::started
-			, &mEventsForKitPlugin
-			, &kitBase::EventsForKitPluginInterface::interpretationStarted
-			);
+	QObject::connect(&mProxyInterpreter, &kitBase::InterpreterInterface::started, &mEventsForKitPlugin,
+		&kitBase::EventsForKitPluginInterface::interpretationStarted);
 
-	QObject::connect(
-			&mProxyInterpreter
-			, &kitBase::InterpreterInterface::stopped
-			, &mEventsForKitPlugin
-			, &kitBase::EventsForKitPluginInterface::interpretationStopped
-			);
+	QObject::connect(&mProxyInterpreter, &kitBase::InterpreterInterface::stopped, &mEventsForKitPlugin,
+		&kitBase::EventsForKitPluginInterface::interpretationStopped);
 
-	QObject::connect(
-			&mProxyInterpreter
-			, &kitBase::InterpreterInterface::errored
-			, &mEventsForKitPlugin
-			, &kitBase::EventsForKitPluginInterface::interpretationErrored
-			);
+	QObject::connect(&mProxyInterpreter, &kitBase::InterpreterInterface::errored, &mEventsForKitPlugin,
+		&kitBase::EventsForKitPluginInterface::interpretationErrored);
 
-	QObject::connect(
-				&mEventsForKitPlugin
-				, &kitBase::EventsForKitPluginInterface::interpretationStarted
-				, [this](){ /// @todo
+	QObject::connect(&mEventsForKitPlugin, &kitBase::EventsForKitPluginInterface::interpretationStarted,
+		[this]() { /// @todo
 		const bool isBlockInt = mProxyInterpreter.isRunning();
 		mActionsManager.runAction().setEnabled(isBlockInt);
 		mActionsManager.stopRobotAction().setEnabled(isBlockInt);
 		mActionsManager.setEnableRobotActions(isBlockInt);
-	}
-	);
+	});
 
-	QObject::connect(
-				&mEventsForKitPlugin
-				, &kitBase::EventsForKitPluginInterface::codeInterpretationStarted
-				, this
-				, &RobotsPluginFacade::saveCode
-				);
+	QObject::connect(&mEventsForKitPlugin, &kitBase::EventsForKitPluginInterface::codeInterpretationStarted, this,
+		&RobotsPluginFacade::saveCode);
 
-	QObject::connect(
-				&mEventsForKitPlugin
-				, &kitBase::EventsForKitPluginInterface::interpretationStopped
-				, [this](qReal::interpretation::StopReason reason){ /// @todo
+	QObject::connect(&mEventsForKitPlugin, &kitBase::EventsForKitPluginInterface::interpretationStopped,
+		[this](qReal::interpretation::StopReason reason) { /// @todo
 		Q_UNUSED(reason);
 		mActionsManager.runAction().setEnabled(true);
 		mActionsManager.stopRobotAction().setEnabled(true);
 		mActionsManager.setEnableRobotActions(true);
-	}
-	);
+	});
 
-	QObject::connect(
-			&mRobotModelManager
-			, &RobotModelManager::robotModelChanged
-			, [this](kitBase::robotModel::RobotModelInterface &model) {
-				Q_EMIT mEventsForKitPlugin.robotModelChanged(model.name());
-			}
-	);
+	QObject::connect(&mRobotModelManager, &RobotModelManager::robotModelChanged,
+		[this](kitBase::robotModel::RobotModelInterface &model) {
+		Q_EMIT mEventsForKitPlugin.robotModelChanged(model.name());
+	});
 }
 
 void RobotsPluginFacade::sync()

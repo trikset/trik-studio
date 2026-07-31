@@ -35,8 +35,8 @@ RulesPlugin::~RulesPlugin()
 
 void RulesPlugin::init(PluginConfigurator const &configurator)
 {
-	mChecker = new RulesChecker(configurator.graphicalModelApi().graphicalRepoApi()
-			, configurator.mainWindowInterpretersInterface());
+	mChecker = new RulesChecker(configurator.graphicalModelApi().graphicalRepoApi(),
+		configurator.mainWindowInterpretersInterface());
 
 	QObject::connect(mRunAllDiagram, SIGNAL(triggered()), mChecker, SLOT(checkAllDiagrams()));
 	QObject::connect(mRunCurrentDiagram, SIGNAL(triggered()), mChecker, SLOT(checkCurrentDiagram()));
@@ -63,10 +63,9 @@ void RulesPlugin::initAction()
 	mExportToXml = new QAction(QObject::tr("Generate XML"), nullptr);
 	ActionInfo exportXmlInfo(mExportToXml, "generators", "tools");
 	mActionInfos << exportXmlInfo;
-
 }
 
-qReal::Customizer * RulesPlugin::customizationInterface()
+qReal::Customizer *RulesPlugin::customizationInterface()
 {
 	return &mCustomizer;
 }

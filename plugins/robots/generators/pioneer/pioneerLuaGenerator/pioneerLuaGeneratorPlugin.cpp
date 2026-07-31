@@ -37,41 +37,25 @@ PioneerLuaGeneratorPlugin::PioneerLuaGeneratorPlugin()
 	: mGenerateCodeAction(new QAction(this))
 	, mUploadProgramAction(new QAction(this))
 	, mBlocksFactory(new blocks::PioneerBlocksFactory)
-	, mGeneratorForRealCopterRobotModel(
-			new PioneerGeneratorRobotModel(
-					kitId()
-					, "Pioneer"
-					, modelNames::realCopter
-					, tr("Pioneer model (real copter)")
-					, 9
-			))
+	, mGeneratorForRealCopterRobotModel(new PioneerGeneratorRobotModel(kitId(), "Pioneer", modelNames::realCopter,
+		  tr("Pioneer model (real copter)"), 9))
 	, mUploader()
 {
 	mAdditionalPreferences = new PioneerAdditionalPreferences;
 
 	mGenerateCodeAction->setText(tr("Generate to Pioneer Lua"));
 	mGenerateCodeAction->setIcon(QIcon(":/pioneer/lua/images/generateLuaCode.svg"));
-	connect(
-			mGenerateCodeAction
-			, &QAction::triggered
-			, this
-			, [this](){ PioneerLuaGeneratorPlugin::generateCode(true); }
-			, Qt::UniqueConnection
-	);
+	connect(mGenerateCodeAction, &QAction::triggered, this,
+		[this]() { PioneerLuaGeneratorPlugin::generateCode(true); }, Qt::UniqueConnection);
 
 	mUploader.setProgram("pioneer-uploader.exe");
-	connect(&mUploader, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished)
-			, this, &PioneerLuaGeneratorPlugin::uploadFinished);
+	connect(&mUploader, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this,
+		&PioneerLuaGeneratorPlugin::uploadFinished);
 
 	mUploadProgramAction->setText(tr("Upload generated program to Pioneer"));
 	mUploadProgramAction->setIcon(QIcon(":/pioneer/lua/images/upload.svg"));
-	connect(
-			mUploadProgramAction
-			, &QAction::triggered
-			, this
-			, &PioneerLuaGeneratorPlugin::uploadProgram
-			, Qt::UniqueConnection
-	);
+	connect(mUploadProgramAction, &QAction::triggered, this, &PioneerLuaGeneratorPlugin::uploadProgram,
+		Qt::UniqueConnection);
 }
 
 PioneerLuaGeneratorPlugin::~PioneerLuaGeneratorPlugin()
@@ -92,7 +76,7 @@ QList<ActionInfo> PioneerLuaGeneratorPlugin::customActions()
 {
 	const ActionInfo generateCodeActionInfo(mGenerateCodeAction, "generators", "tools");
 	const ActionInfo uploadProgramActionInfo(mUploadProgramAction, "generators", "tools");
-	return { generateCodeActionInfo, uploadProgramActionInfo, /*runProgramActionInfo, stopProgramActionInfo*/ };
+	return {generateCodeActionInfo, uploadProgramActionInfo, /*runProgramActionInfo, stopProgramActionInfo*/};
 }
 
 QList<HotKeyActionInfo> PioneerLuaGeneratorPlugin::hotKeyActions()
@@ -100,17 +84,13 @@ QList<HotKeyActionInfo> PioneerLuaGeneratorPlugin::hotKeyActions()
 	mGenerateCodeAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_G));
 	mUploadProgramAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_U));
 
-	HotKeyActionInfo generateActionInfo(
-			"Generator.GeneratePioneerLua"
-			, tr("Generate Lua script for Pioneer Quadcopter")
-			, mGenerateCodeAction);
+	HotKeyActionInfo generateActionInfo("Generator.GeneratePioneerLua",
+		tr("Generate Lua script for Pioneer Quadcopter"), mGenerateCodeAction);
 
-	HotKeyActionInfo uploadProgramInfo(
-			"Generator.UploadPioneerLua"
-			, tr("Upload Pioneer program")
-			, mUploadProgramAction);
+	HotKeyActionInfo uploadProgramInfo("Generator.UploadPioneerLua", tr("Upload Pioneer program"),
+		mUploadProgramAction);
 
-	return { generateActionInfo, uploadProgramInfo/*, runProgramInfo, stopProgramInfo */};
+	return {generateActionInfo, uploadProgramInfo /*, runProgramInfo, stopProgramInfo */};
 }
 
 QIcon PioneerLuaGeneratorPlugin::iconForFastSelector(const kitBase::robotModel::RobotModelInterface &robotModel) const
@@ -131,11 +111,11 @@ QString PioneerLuaGeneratorPlugin::kitId() const
 
 QList<kitBase::robotModel::RobotModelInterface *> PioneerLuaGeneratorPlugin::robotModels()
 {
-	return { mGeneratorForRealCopterRobotModel.data() };
+	return {mGeneratorForRealCopterRobotModel.data()};
 }
 
 QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> PioneerLuaGeneratorPlugin::blocksFactoryFor(
-		const kitBase::robotModel::RobotModelInterface *model)
+	const kitBase::robotModel::RobotModelInterface *model)
 {
 	Q_UNUSED(model)
 	return mBlocksFactory;
@@ -144,17 +124,17 @@ QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> PioneerLuaGeneratorP
 QList<kitBase::AdditionalPreferences *> PioneerLuaGeneratorPlugin::settingsWidgets()
 {
 	mOwnsAdditionalPreferences = false;
-	return { mAdditionalPreferences };
+	return {mAdditionalPreferences};
 }
 
-QList<QWidget *>PioneerLuaGeneratorPlugin::listOfQuickPreferencesFor(
-		const kitBase::robotModel::RobotModelInterface &model)
+QList<QWidget *> PioneerLuaGeneratorPlugin::listOfQuickPreferencesFor(
+	const kitBase::robotModel::RobotModelInterface &model)
 {
 	Q_UNUSED(model)
 	return {ipSelector(), portSelector(), modeSelector()};
 }
 
-QWidget * PioneerLuaGeneratorPlugin::modeSelector()
+QWidget *PioneerLuaGeneratorPlugin::modeSelector()
 {
 	auto selector = new QComboBox;
 	selector->addItems({"usb", "wifi"});
@@ -170,14 +150,13 @@ QWidget * PioneerLuaGeneratorPlugin::modeSelector()
 
 	updateMode();
 	qReal::SettingsListener::listen(settings, updateMode, this);
-	connect(selector, &QComboBox::currentTextChanged, this, [selector, settings]() {
-		qReal::SettingsManager::setValue(settings, selector->currentText());
-	});
+	connect(selector, &QComboBox::currentTextChanged, this,
+		[selector, settings]() { qReal::SettingsManager::setValue(settings, selector->currentText()); });
 
 	return selector;
 }
 
-QWidget * PioneerLuaGeneratorPlugin::ipSelector()
+QWidget *PioneerLuaGeneratorPlugin::ipSelector()
 {
 	auto selector = new QComboBox;
 	connectSelector(selector, settings::pioneerBaseStationIP);
@@ -186,7 +165,7 @@ QWidget * PioneerLuaGeneratorPlugin::ipSelector()
 	return selector;
 }
 
-QWidget * PioneerLuaGeneratorPlugin::portSelector()
+QWidget *PioneerLuaGeneratorPlugin::portSelector()
 {
 	auto selector = new QComboBox;
 	connectSelector(selector, settings::pioneerBaseStationPort);
@@ -195,7 +174,7 @@ QWidget * PioneerLuaGeneratorPlugin::portSelector()
 	return selector;
 }
 
-void PioneerLuaGeneratorPlugin::connectSelector(QComboBox * selector, QString settings)
+void PioneerLuaGeneratorPlugin::connectSelector(QComboBox *selector, QString settings)
 {
 	selector->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
 	selector->setEditable(true);
@@ -206,7 +185,7 @@ void PioneerLuaGeneratorPlugin::connectSelector(QComboBox * selector, QString se
 
 		// Handle duplicates
 		auto found = false;
-		for(int i = 0; i < selector->count(); ++i) {
+		for (int i = 0; i < selector->count(); ++i) {
 			if (selector->itemText(i) == value) {
 				found = true;
 				break;
@@ -255,7 +234,7 @@ QString PioneerLuaGeneratorPlugin::defaultFilePath(const QString &projectName) c
 
 text::LanguageInfo PioneerLuaGeneratorPlugin::language() const
 {
-	return qReal::text::Languages::lua(QStringList{ "function", "end", "math" });
+	return qReal::text::Languages::lua(QStringList {"function", "end", "math"});
 }
 
 QString PioneerLuaGeneratorPlugin::generatorName() const
@@ -265,14 +244,9 @@ QString PioneerLuaGeneratorPlugin::generatorName() const
 
 generatorBase::MasterGeneratorBase *PioneerLuaGeneratorPlugin::masterGenerator()
 {
-	return new PioneerLuaMasterGenerator(*mRepo
-			, *mMainWindowInterface->errorReporter()
-			, *mParserErrorReporter
-			, *mRobotModelManager
-			, *mTextLanguage
-			, mMainWindowInterface->activeDiagram()
-			, generatorName()
-			, *mMetamodel);
+	return new PioneerLuaMasterGenerator(*mRepo, *mMainWindowInterface->errorReporter(), *mParserErrorReporter,
+		*mRobotModelManager, *mTextLanguage, mMainWindowInterface->activeDiagram(), generatorName(),
+		*mMetamodel);
 }
 
 void PioneerLuaGeneratorPlugin::regenerateExtraFiles(const QFileInfo &newFileInfo)
@@ -283,43 +257,45 @@ void PioneerLuaGeneratorPlugin::regenerateExtraFiles(const QFileInfo &newFileInf
 void PioneerLuaGeneratorPlugin::uploadProgram()
 {
 	const QFileInfo program = generateCodeForProcessing();
-	if (!program.exists()) return;
+	if (!program.exists())
+		return;
 	if (!PlatformInfo::osType().startsWith("windows")) {
 		mMainWindowInterface->errorReporter()->addError(tr("Sorry, but uploading works only on Windows"));
 		return;
 	}
 	if (!QFile::exists(mUploader.program())) {
 		auto link = "<a href=\"https://docs.geoscan.aero/ru/master/programming/trik/trik_main.html\">"
-				+ tr("site") + "</a>";
+		            + tr("site") + "</a>";
 		mMainWindowInterface->errorReporter()->addInformation(tr("Please download uploader from ") + link);
 		return;
 	}
 	setActionsEnabled(false);
-	mUploader.setArguments({ program.path()
-			, qReal::SettingsManager::value(settings::pioneerBaseStationIP).toString()
-			, qReal::SettingsManager::value(settings::pioneerBaseStationPort).toString()
-			, qReal::SettingsManager::value(settings::pioneerBaseStationMode).toString() });
+	mUploader.setArguments(
+		{program.path(), qReal::SettingsManager::value(settings::pioneerBaseStationIP).toString(),
+			qReal::SettingsManager::value(settings::pioneerBaseStationPort).toString(),
+			qReal::SettingsManager::value(settings::pioneerBaseStationMode).toString()});
 	mUploader.start();
 }
 
 void PioneerLuaGeneratorPlugin::uploadFinished()
 {
-	const auto & reporter = mMainWindowInterface->errorReporter();
+	const auto &reporter = mMainWindowInterface->errorReporter();
 	const QString output = mUploader.readAllStandardOutput();
 	const QString error = mUploader.readAllStandardError();
 	const int exitCode = mUploader.exitCode();
 	if (!output.isEmpty()) {
-		for (const auto & line : output.split(QRegExp("[\r\n]"),QString::SkipEmptyParts)) {
+		for (const auto &line : output.split(QRegExp("[\r\n]"), QString::SkipEmptyParts)) {
 			reporter->addInformation(line);
 			qDebug() << "Info: " << line;
 		}
 	}
 	if (!error.isEmpty()) {
-		for (const auto & line : error.split(QRegExp("[\r\n]"),QString::SkipEmptyParts)) {
+		for (const auto &line : error.split(QRegExp("[\r\n]"), QString::SkipEmptyParts)) {
 			reporter->addError(line);
 		}
 	}
-	if (exitCode != 0) reporter->addCritical(tr("Exit code ") + QString::number(exitCode));
+	if (exitCode != 0)
+		reporter->addCritical(tr("Exit code ") + QString::number(exitCode));
 	setActionsEnabled(true);
 }
 

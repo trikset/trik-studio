@@ -26,8 +26,8 @@ class LineItem : public ColorFieldItem
 	Q_OBJECT
 
 public:
-	LineItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-		 const QPointF begin, const QPointF end, int cornerRadius = 0);
+	LineItem(graphicsUtils::AbstractCoordinateSystem *metricSystem, const QPointF begin, const QPointF end,
+		int cornerRadius = 0);
 
 	AbstractItem *clone() const override;
 
@@ -39,8 +39,8 @@ public:
 
 	QRectF boundingRect() const override;
 	QRectF calcNecessaryBoundingRect() const override;
-	void drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget) override;
-	void drawExtractionForItem(QPainter* painter) override;
+	void drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
+	void drawExtractionForItem(QPainter *painter) override;
 
 	void resizeItem(QGraphicsSceneMouseEvent *event) override;
 	QPainterPath resizeArea() const override;

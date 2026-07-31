@@ -36,9 +36,9 @@ class TrikPascalABCGeneratorPluginBase : public TrikGeneratorPluginBase
 	Q_OBJECT
 
 public:
-	TrikPascalABCGeneratorPluginBase(kitBase::robotModel::RobotModelInterface * const robotModel
-									 , const QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> &blocksFactory
-									 , const QStringList &pathsToTemplates);
+	TrikPascalABCGeneratorPluginBase(kitBase::robotModel::RobotModelInterface *const robotModel,
+		const QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> &blocksFactory,
+		const QStringList &pathsToTemplates);
 
 	~TrikPascalABCGeneratorPluginBase() override;
 
@@ -82,7 +82,7 @@ private:
 	/// Doesn't have ownership; may be disposed by GUI.
 	QAction *mStopRobotAction = nullptr;
 
-	TrikPascalABCAdditionalPreferences *mAdditionalPreferences = nullptr;  //Transfers ownership
+	TrikPascalABCAdditionalPreferences *mAdditionalPreferences = nullptr; //Transfers ownership
 	bool mOwnsAdditionalPreferences = true;
 
 	/// Paths on which generator searches for templates. Templates can override each other, those who are later in

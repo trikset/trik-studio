@@ -24,23 +24,18 @@
 using namespace pioneer::lua;
 using namespace generatorBase::simple;
 
-PioneerReadRangeSensor::PioneerReadRangeSensor(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, const qReal::Id &id
-		, QObject *parent)
-	: BindingGenerator(repo, customizer, id, "quadcopterCommands/readTofSensor.t"
-		, { Binding::createConverting(
-				"@@VARIABLE@@"
-				, "Variable"
-				, customizer.factory()->stringPropertyConverter(id, "Variable"))
-		}
-		, parent)
+PioneerReadRangeSensor::PioneerReadRangeSensor(const qrRepo::RepoApi &repo,
+	generatorBase::GeneratorCustomizer &customizer, const qReal::Id &id, QObject *parent)
+	: BindingGenerator(repo, customizer, id, "quadcopterCommands/readTofSensor.t",
+		  {Binding::createConverting("@@VARIABLE@@", "Variable",
+			  customizer.factory()->stringPropertyConverter(id, "Variable"))},
+		  parent)
 {
 	auto factory = dynamic_cast<PioneerLuaGeneratorFactory *>(mCustomizer.factory());
 	if (factory) {
 		factory->tofPart().registerUsage();
 		customizer.factory()->functionBlockConverter(id, "")->convert(
-				QString("%1 = 0").arg(repo.stringProperty(id, "Variable")));
+			QString("%1 = 0").arg(repo.stringProperty(id, "Variable")));
 	} else {
 		throw qReal::Exception("Pioneer PioneerLedGenerator will work only with PioneerLuaGeneratorFactory");
 	}

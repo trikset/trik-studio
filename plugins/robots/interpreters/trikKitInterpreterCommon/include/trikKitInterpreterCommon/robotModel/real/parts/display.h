@@ -29,9 +29,8 @@ class ROBOTS_TRIK_KIT_INTERPRETER_COMMON_EXPORT Display : public robotModel::par
 	Q_OBJECT
 
 public:
-	Display(const kitBase::robotModel::DeviceInfo &info
-		, const kitBase::robotModel::PortInfo &port
-		, utils::robotCommunication::TcpRobotCommunicator &tcpRobotCommunicator);
+	Display(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+		utils::robotCommunication::TcpRobotCommunicator &tcpRobotCommunicator);
 
 	void drawSmile(bool sad) override;
 	/// @todo: color enum here?
@@ -43,9 +42,9 @@ public:
 	void setPainterWidth(int penWidth) override;
 	void drawPixel(int x, int y) override;
 	void drawLine(int x1, int y1, int x2, int y2) override;
-	void drawRect(int x, int y, int width, int height, bool filled)  override;
+	void drawRect(int x, int y, int width, int height, bool filled) override;
 	void drawEllipse(int x, int y, int width, int height, bool filled) override;
-	void drawArc(int x, int y, int width, int height, int startAngle, int spanAngle)  override;
+	void drawArc(int x, int y, int width, int height, int startAngle, int spanAngle) override;
 	void redraw() override;
 
 private:

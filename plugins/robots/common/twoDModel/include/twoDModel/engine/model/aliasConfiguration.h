@@ -59,9 +59,10 @@ public:
 	/// needSerialize: At the moment, information about custom sensors and wheels remains in their
 	/// blocks in WorldModel.xml, but this class is still responsible for storing aliases.
 	void addAliases(const kitBase::robotModel::PortInfo &portInfo, bool needSerialize = false);
+
 private:
 	struct AliasInfo {
-		QStringList mNames{};
+		QStringList mNames {};
 		bool mNeedSerliaze {};
 	};
 

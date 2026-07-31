@@ -25,14 +25,8 @@
 
 using namespace trik;
 
-UploaderTool::UploaderTool(
-		const QString &actionName
-		, const QString &icon
-		, const QString &kit
-		, const QStringList &commands
-		, const QString &startedMessage
-		, const std::function<QString()> &robotIpGetter
-		)
+UploaderTool::UploaderTool(const QString &actionName, const QString &icon, const QString &kit,
+	const QStringList &commands, const QString &startedMessage, const std::function<QString()> &robotIpGetter)
 	: mMainWindowInterface(nullptr)
 	, mAction(new QAction(QIcon(icon), actionName, this))
 	, mCommands(commands)
@@ -41,15 +35,14 @@ UploaderTool::UploaderTool(
 {
 	connect(mAction, &QAction::triggered, this, &UploaderTool::upload);
 	mAction->setVisible(qReal::SettingsManager::value("SelectedRobotKit").toString() == kit);
-	qReal::SettingsListener::listen("SelectedRobotKit", [this, kit](const QString &selectedKit) {
-		mAction->setVisible(selectedKit == kit);
-	}, this);
+	qReal::SettingsListener::listen("SelectedRobotKit",
+		[this, kit](const QString &selectedKit) { mAction->setVisible(selectedKit == kit); }, this);
 
 	connect(&mProcess, &QProcess::started, this, &UploaderTool::onUploadStarted);
-	connect(&mProcess, static_cast<void(QProcess::*)(QProcess::ProcessError)>(&QProcess::error)
-			, this, &UploaderTool::onUploadError);
-	connect(&mProcess, static_cast<void(QProcess::*)(int)>(&QProcess::finished)
-			, this, &UploaderTool::onUploadFinished);
+	connect(&mProcess, static_cast<void (QProcess::*)(QProcess::ProcessError)>(&QProcess::error), this,
+		&UploaderTool::onUploadError);
+	connect(&mProcess, static_cast<void (QProcess::*)(int)>(&QProcess::finished), this,
+		&UploaderTool::onUploadFinished);
 	connect(&mProcess, &QProcess::readyReadStandardOutput, this, &UploaderTool::onUploadStdOut);
 	connect(&mProcess, &QProcess::readyReadStandardError, this, &UploaderTool::onUploadStdErr);
 }
@@ -99,13 +92,12 @@ void UploaderTool::upload()
 	const QString uploaderPath = "bash";
 	QStringList actions;
 	for (QString command /* Not by const reference cause it will be modified next line */ : mCommands) {
-		actions << command
-				.replace("%IP%", mRobotIpGetter())
-				.replace("%PATH%", mPath)
-				.replace("%SSH_TIMEOUT%", qReal::SettingsManager::value("sshTimeout").toString());
+		actions << command.replace("%IP%", mRobotIpGetter())
+				   .replace("%PATH%", mPath)
+				   .replace("%SSH_TIMEOUT%", qReal::SettingsManager::value("sshTimeout").toString());
 	}
 
-	const QStringList args = { "-x", "-c", actions.join("; ") };
+	const QStringList args = {"-x", "-c", actions.join("; ")};
 #endif
 
 	QLOG_INFO() << "Uploading is about to start. Path:" << uploaderPath << "Args: " << args;
@@ -128,10 +120,12 @@ void UploaderTool::onUploadError(QProcess::ProcessError reason)
 
 	if (reason == QProcess::FailedToStart) {
 		QLOG_ERROR() << "Uploading process failed to start! Details:" << mProcess.errorString();
-		mMainWindowInterface->errorReporter()->addError(tr("WinSCP process failed to launch, check path in settings."));
+		mMainWindowInterface->errorReporter()->addError(
+			tr("WinSCP process failed to launch, check path in settings."));
 	} else {
 		QLOG_ERROR() << "Uploading process failed! Details:" << mProcess.errorString();
-		mMainWindowInterface->errorReporter()->addError(tr("Uploading failed, check connection and try again."));
+		mMainWindowInterface->errorReporter()->addError(
+			tr("Uploading failed, check connection and try again."));
 	}
 }
 
@@ -146,7 +140,8 @@ void UploaderTool::onUploadFinished(int exitCode)
 		mMainWindowInterface->errorReporter()->addInformation(tr("Uploaded successfully!"));
 	} else {
 		QLOG_ERROR() << "Uploading process failed with exit code" << exitCode;
-		mMainWindowInterface->errorReporter()->addError(tr("Uploading failed, check connection and try again."));
+		mMainWindowInterface->errorReporter()->addError(
+			tr("Uploading failed, check connection and try again."));
 	}
 }
 
@@ -162,22 +157,23 @@ void UploaderTool::onUploadStdErr()
 
 bool UploaderTool::checkUnixToolsExist()
 {
-	return checkUnixToolExist("ssh", { "-V" }) && checkUnixToolExist("scp", {});
+	return checkUnixToolExist("ssh", {"-V"}) && checkUnixToolExist("scp", {});
 }
 
 bool UploaderTool::checkUnixToolExist(const QString &name, const QStringList &args)
 {
 	QLOG_DEBUG() << "Starting" << qPrintable(name) << args;
 	QProcess tool;
-	connect(&tool, &QProcess::readyReadStandardOutput, this
-			, [&tool]() { QLOG_DEBUG() << tool.readAllStandardOutput(); });
-	connect(&tool, &QProcess::readyReadStandardError, this
-			, [&tool]() { QLOG_DEBUG() << tool.readAllStandardError(); });
+	connect(&tool, &QProcess::readyReadStandardOutput, this,
+		[&tool]() { QLOG_DEBUG() << tool.readAllStandardOutput(); });
+	connect(&tool, &QProcess::readyReadStandardError, this,
+		[&tool]() { QLOG_DEBUG() << tool.readAllStandardError(); });
 
 	tool.start(name, args);
 	if (!tool.waitForFinished()) {
 		QLOG_ERROR() << qPrintable(name) << "failed to start; error: " << tool.errorString();
-		mMainWindowInterface->errorReporter()->addError(tr("%1 is not installed. Please install %1 first.").arg(name));
+		mMainWindowInterface->errorReporter()->addError(
+			tr("%1 is not installed. Please install %1 first.").arg(name));
 		return false;
 	}
 

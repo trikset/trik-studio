@@ -19,7 +19,7 @@
 
 class TrikColorSensorAdapter : public trikControl::ColorSensorInterface
 {
-Q_OBJECT
+	Q_OBJECT
 
 public:
 	TrikColorSensorAdapter(trik::robotModel::parts::TrikColorSensor *sensor);

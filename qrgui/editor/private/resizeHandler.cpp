@@ -55,8 +55,8 @@ void ResizeHandler::resize(QRectF newContents, QPointF newPos, bool needResizePa
 qreal ResizeHandler::maxChildWidth() const
 {
 	qreal maxChildWidthValue = 0;
-	for (const QGraphicsItem * const childItem : mTargetNode.childItems()) {
-		const auto * const curItem = dynamic_cast<const NodeElement * const>(childItem);
+	for (const QGraphicsItem *const childItem : mTargetNode.childItems()) {
+		const auto *const curItem = dynamic_cast<const NodeElement *const>(childItem);
 		if (!curItem) {
 			continue;
 		}
@@ -84,24 +84,23 @@ void ResizeHandler::sortChildrenIfNeeded() const
 	const qreal maxChildWidthValue = maxChildWidth();
 
 	QList<NodeElement *> children = sortedChildrenList();
-	for (QGraphicsItem * const childItem : children) {
-		QGraphicsRectItem * const placeholder = mTargetNode.placeholder();
+	for (QGraphicsItem *const childItem : children) {
+		QGraphicsRectItem *const placeholder = mTargetNode.placeholder();
 
-		if(placeholder != nullptr && childItem == placeholder) {
-			const QRectF rect(forestallingLeft, curChildY, maxChildWidthValue, placeholder->rect().height());
+		if (placeholder != nullptr && childItem == placeholder) {
+			const QRectF rect(forestallingLeft, curChildY, maxChildWidthValue,
+				placeholder->rect().height());
 			placeholder->setRect(rect);
 			curChildY += placeholder->rect().height();
 		}
 
-		auto * const curItem = dynamic_cast<NodeElement* const>(childItem);
+		auto *const curItem = dynamic_cast<NodeElement *const>(childItem);
 		if (!curItem) {
 			continue;
 		}
 
 		const qreal necessaryWidth =
-				mElementType.maximizesChildren()
-				? maxChildWidthValue
-				: curItem->contentsRect().width();
+			mElementType.maximizesChildren() ? maxChildWidthValue : curItem->contentsRect().width();
 		const QRectF rect(forestallingLeft, curChildY, necessaryWidth, curItem->contentsRect().height());
 
 		curItem->setGeometry(rect);
@@ -119,7 +118,7 @@ void ResizeHandler::gripeIfMinimizesToChildrenContainer(QRectF &contents) const
 
 void ResizeHandler::resizeParent() const
 {
-	auto * const parItem = dynamic_cast<NodeElement* const>(mTargetNode.parentItem());
+	auto *const parItem = dynamic_cast<NodeElement *const>(mTargetNode.parentItem());
 	if (parItem) {
 		const ResizeHandler handler(*parItem);
 		handler.resize(parItem->contentsRect(), parItem->pos());
@@ -156,8 +155,8 @@ QPointF ResizeHandler::childDeflection() const
 	int forestallingTop = sizeOfForestalling[1];
 	int forestallingLeft = sizeOfForestalling[0];
 
-	for (const QGraphicsItem * const childItem : mTargetNode.childItems()) {
-		const auto * const curItem = dynamic_cast<const NodeElement * const>(childItem);
+	for (const QGraphicsItem *const childItem : mTargetNode.childItems()) {
+		const auto *const curItem = dynamic_cast<const NodeElement *const>(childItem);
 		if (!curItem) {
 			continue;
 		}
@@ -171,8 +170,8 @@ QPointF ResizeHandler::childDeflection() const
 
 void ResizeHandler::printChildPos() const
 {
-	for (const QGraphicsItem * const childItem : mTargetNode.childItems()) {
-		const auto * const curItem = dynamic_cast<const NodeElement * const>(childItem);
+	for (const QGraphicsItem *const childItem : mTargetNode.childItems()) {
+		const auto *const curItem = dynamic_cast<const NodeElement *const>(childItem);
 		if (!curItem) {
 			continue;
 		}
@@ -185,16 +184,15 @@ void ResizeHandler::moveChildren(QPointF shift) const
 	qreal forestallingTop = sizeOfForestalling[1];
 	qreal forestallingLeft = sizeOfForestalling[0];
 
-	for (QGraphicsItem * const childItem : mTargetNode.childItems()) {
-		auto * const curItem = dynamic_cast<NodeElement * const>(childItem);
+	for (QGraphicsItem *const childItem : mTargetNode.childItems()) {
+		auto *const curItem = dynamic_cast<NodeElement *const>(childItem);
 		if (!curItem) {
 			continue;
 		}
 
 		curItem->moveBy(shift.x(), shift.y());
 
-		QPointF pos(qMax(curItem->pos().x(), forestallingLeft)
-				, qMax(curItem->pos().y(), forestallingTop));
+		QPointF pos(qMax(curItem->pos().x(), forestallingLeft), qMax(curItem->pos().y(), forestallingTop));
 		// returns object to the parent area
 		curItem->setPos(pos);
 	}
@@ -204,7 +202,7 @@ void ResizeHandler::expandByChildren(QRectF &contents) const
 {
 	QVector<int> const sizeOfForestalling = mElementType.sizeOfForestalling();
 
-	for (const QGraphicsItem * const childItem : mTargetNode.childItems()) {
+	for (const QGraphicsItem *const childItem : mTargetNode.childItems()) {
 		QRectF curChildItemBoundingRect = childBoundingRect(childItem, contents);
 
 		if (curChildItemBoundingRect.width() == 0 || curChildItemBoundingRect.height() == 0) {
@@ -215,18 +213,14 @@ void ResizeHandler::expandByChildren(QRectF &contents) const
 		// bad behaviour when dropping one element to another
 		curChildItemBoundingRect.translate(childItem->scenePos() - mTargetNode.scenePos());
 
-		contents.setLeft(qMin(curChildItemBoundingRect.left() - sizeOfForestalling[0]
-						, contents.left()));
-		contents.setRight(qMax(curChildItemBoundingRect.right() + sizeOfForestalling[2]
-						, contents.right()));
-		contents.setTop(qMin(curChildItemBoundingRect.top() - sizeOfForestalling[1]
-						, contents.top()));
-		contents.setBottom(qMax(curChildItemBoundingRect.bottom() + sizeOfForestalling[3]
-						, contents.bottom()));
+		contents.setLeft(qMin(curChildItemBoundingRect.left() - sizeOfForestalling[0], contents.left()));
+		contents.setRight(qMax(curChildItemBoundingRect.right() + sizeOfForestalling[2], contents.right()));
+		contents.setTop(qMin(curChildItemBoundingRect.top() - sizeOfForestalling[1], contents.top()));
+		contents.setBottom(qMax(curChildItemBoundingRect.bottom() + sizeOfForestalling[3], contents.bottom()));
 	}
 }
 
-QRectF ResizeHandler::childBoundingRect(const QGraphicsItem * const childItem, const QRectF &contents) const
+QRectF ResizeHandler::childBoundingRect(const QGraphicsItem *const childItem, const QRectF &contents) const
 {
 	QRectF boundingRect;
 
@@ -240,7 +234,7 @@ QRectF ResizeHandler::childBoundingRect(const QGraphicsItem * const childItem, c
 		return boundingRect;
 	}
 
-	const auto * const curItem = dynamic_cast<const NodeElement * const>(childItem);
+	const auto *const curItem = dynamic_cast<const NodeElement *const>(childItem);
 	if (curItem) {
 		boundingRect = curItem->contentsRect();
 	}

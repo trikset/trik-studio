@@ -21,16 +21,16 @@
 using namespace qReal;
 
 PreferencesMiscellaneousPage::PreferencesMiscellaneousPage(QWidget *parent)
-		: PreferencesPage(parent)
-		, mUi(new Ui::PreferencesMiscellaneousPage)
+	: PreferencesPage(parent)
+	, mUi(new Ui::PreferencesMiscellaneousPage)
 {
 	mUi->setupUi(this);
 	setObjectName("preferencesMiscellaneousPage");
 	setWindowIcon(QIcon(":/preferencesDialog/images/miscellaneous.png"));
 
 	connect(mUi->imagesPathBrowseButton, SIGNAL(clicked()), this, SLOT(browseImagesPath()));
-	connect(mUi->toolbarSizeSlider, &QSlider::valueChanged
-			, [=](int value ) { SettingsManager::setValue("toolbarSize", value); });
+	connect(mUi->toolbarSizeSlider, &QSlider::valueChanged,
+		[=](int value) { SettingsManager::setValue("toolbarSize", value); });
 
 	restoreSettings();
 }
@@ -53,8 +53,9 @@ void PreferencesMiscellaneousPage::changeEvent(QEvent *e)
 
 void PreferencesMiscellaneousPage::browseImagesPath()
 {
-	const QString path = utils::QRealFileDialog::getExistingDirectory("OpenImagesOnMiscellaneousPage"
-			, this, tr("Open Directory")).replace("\\", "/");
+	const QString path = utils::QRealFileDialog::getExistingDirectory("OpenImagesOnMiscellaneousPage", this,
+		tr("Open Directory"))
+	                             .replace("\\", "/");
 	if (!path.isEmpty()) {
 		mUi->imagesPathEdit->setText(path);
 	}

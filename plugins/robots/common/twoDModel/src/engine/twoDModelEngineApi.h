@@ -35,18 +35,17 @@ public:
 	TwoDModelEngineApi(model::Model &model, view::TwoDModelWidget &view);
 	~TwoDModelEngineApi() override;
 
-	void setNewMotor(int speed, uint degrees
-			, const kitBase::robotModel::PortInfo &port, bool breakMode) override;
+	void setNewMotor(int speed, uint degrees, const kitBase::robotModel::PortInfo &port, bool breakMode) override;
 
 	int readEncoder(const kitBase::robotModel::PortInfo &port) const override;
 	void resetEncoder(const kitBase::robotModel::PortInfo &port) override;
 
 	/// @todo: move this logic into sensors adding here some more low-level logic instead.
 	int readTouchSensor(const kitBase::robotModel::PortInfo &port) const override;
-	int readRangeSensor(const kitBase::robotModel::PortInfo &port
-			, int maxDistance, qreal scanningAngle) const override;
-	QVector<int> readLidarSensor(const kitBase::robotModel::PortInfo &port
-			, int maxDistance, qreal scanningAngle) const override;
+	int readRangeSensor(const kitBase::robotModel::PortInfo &port, int maxDistance,
+		qreal scanningAngle) const override;
+	QVector<int> readLidarSensor(const kitBase::robotModel::PortInfo &port, int maxDistance,
+		qreal scanningAngle) const override;
 	QVector<int> readAccelerometerSensor() const override;
 	QVector<int> readGyroscopeSensor() const override;
 	QVector<int> calibrateGyroscopeSensor() override;
@@ -66,6 +65,7 @@ public:
 	engine::TwoDModelGuiFacade &guiFacade() const override;
 
 	kitBase::robotModel::PortInfo videoPort() const override;
+
 private:
 	QPair<QPointF, qreal> countPositionAndDirection(const kitBase::robotModel::PortInfo &port) const;
 

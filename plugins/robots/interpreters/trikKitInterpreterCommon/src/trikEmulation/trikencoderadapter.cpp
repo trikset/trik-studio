@@ -18,9 +18,10 @@
 
 #include <QtCore/QEventLoop>
 
-trik::TrikEncoderAdapter::TrikEncoderAdapter(const kitBase::robotModel::PortInfo &port
-											 , twoDModel::engine::TwoDModelEngineInterface *engine)
-	: mPort(port), mEngine(engine)
+trik::TrikEncoderAdapter::TrikEncoderAdapter(const kitBase::robotModel::PortInfo &port,
+	twoDModel::engine::TwoDModelEngineInterface *engine)
+	: mPort(port)
+	, mEngine(engine)
 {
 }
 

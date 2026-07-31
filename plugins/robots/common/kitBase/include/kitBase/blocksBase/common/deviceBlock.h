@@ -38,9 +38,10 @@ public:
 	{
 		const robotModel::DeviceInfo &deviceInfo = robotModel::DeviceInfo::create<Device>();
 		const QString portProperty = eval<QString>("Port");
-		const QString port = !portProperty.isEmpty() ? portProperty :
-				deviceInfo.name()[0].toUpper() + deviceInfo.name().mid(1) + "Port";
-		Device * const device = robotModel::RobotModelUtils::findDevice<Device>(mRobotModel, port);
+		const QString port = !portProperty.isEmpty()
+		                             ? portProperty
+		                             : deviceInfo.name()[0].toUpper() + deviceInfo.name().mid(1) + "Port";
+		Device *const device = robotModel::RobotModelUtils::findDevice<Device>(mRobotModel, port);
 		if (device) {
 			doJob(*device);
 		} else {

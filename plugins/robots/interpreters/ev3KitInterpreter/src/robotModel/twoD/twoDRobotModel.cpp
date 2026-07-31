@@ -47,8 +47,8 @@ using namespace kitBase::robotModel;
 TwoDRobotModel::TwoDRobotModel(RobotModelInterface const &realModel)
 	: twoDModel::robotModel::TwoDRobotModel(realModel)
 	, mDisplayWidget(new Ev3DisplayWidget())
-	, mCollidingPolygon({QPointF(1, 20), QPointF(8, 10), QPointF(47, 10), QPointF(49, 20)
-			,QPointF(49, 30), QPointF(47, 40), QPointF(8, 40), QPointF(1, 30)})
+	, mCollidingPolygon({QPointF(1, 20), QPointF(8, 10), QPointF(47, 10), QPointF(49, 20), QPointF(49, 30),
+		  QPointF(47, 40), QPointF(8, 40), QPointF(1, 30)})
 {
 }
 
@@ -115,14 +115,12 @@ QString TwoDRobotModel::sensorImagePath(const DeviceInfo &deviceType) const
 	}
 }
 
-
 QRect TwoDRobotModel::sensorImageRect(const kitBase::robotModel::DeviceInfo &deviceType) const
 {
 	if (deviceType.isA<robotParts::TouchSensor>()) {
 		return {-12, -5, 25, 10};
-	} else if (deviceType.isA<robotParts::ColorSensor>()
-			|| deviceType.isA<robotParts::ColorSensorRaw>()
-			|| deviceType.isA<robotParts::LightSensor>()) {
+	} else if (deviceType.isA<robotParts::ColorSensor>() || deviceType.isA<robotParts::ColorSensorRaw>()
+		   || deviceType.isA<robotParts::LightSensor>()) {
 		return {-6, -6, 12, 12};
 	}
 	if (deviceType.isA<robotParts::RangeSensor>()) {
@@ -140,12 +138,12 @@ QPolygonF TwoDRobotModel::collidingPolygon() const
 
 qreal TwoDRobotModel::mass() const
 {
-	return 0.5;  /// @todo measure it
+	return 0.5; /// @todo measure it
 }
 
 qreal TwoDRobotModel::friction() const
 {
-	return 0.3;  /// @todo measure it
+	return 0.3; /// @todo measure it
 }
 
 qreal TwoDRobotModel::onePercentAngularVelocity() const
@@ -155,5 +153,5 @@ qreal TwoDRobotModel::onePercentAngularVelocity() const
 
 QList<QPointF> TwoDRobotModel::wheelsPosition() const
 {
-	return { QPointF(35, 5), QPointF(35, 45) };
+	return {QPointF(35, 5), QPointF(35, 45)};
 }

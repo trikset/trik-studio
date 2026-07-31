@@ -19,29 +19,17 @@
 using namespace pioneer::lua;
 using namespace generatorBase::simple;
 
-PioneerGPIOInit::PioneerGPIOInit(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, const qReal::Id &id
-		, QObject *parent)
-	: BindingGenerator(repo, customizer, id, "initialization/GPIO.t"
-		, {
-			Binding::createConverting(
-					"@@PIN_NAME@@"
-					, "PinName"
-					, customizer.factory()->stringPropertyConverter(id, "PinName"))
-			, Binding::createConverting(
-					"@@PORT@@"
-					, "Port"
-					, customizer.factory()->stringPropertyConverter(id, "Port"))
-			, Binding::createConverting(
-					"@@PIN@@"
-					, "Pin"
-					, customizer.factory()->stringPropertyConverter(id, "Pin"))
-			, Binding::createConverting(
-					"@@MODE@@"
-					, "Mode"
-					, customizer.factory()->stringPropertyConverter(id, "Mode"))
-			}
-		, parent)
+PioneerGPIOInit::PioneerGPIOInit(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+	const qReal::Id &id, QObject *parent)
+	: BindingGenerator(repo, customizer, id, "initialization/GPIO.t",
+		  {Binding::createConverting("@@PIN_NAME@@", "PinName",
+			   customizer.factory()->stringPropertyConverter(id, "PinName")),
+			  Binding::createConverting("@@PORT@@", "Port",
+				  customizer.factory()->stringPropertyConverter(id, "Port")),
+			  Binding::createConverting("@@PIN@@", "Pin",
+				  customizer.factory()->stringPropertyConverter(id, "Pin")),
+			  Binding::createConverting("@@MODE@@", "Mode",
+				  customizer.factory()->stringPropertyConverter(id, "Mode"))},
+		  parent)
 {
 }

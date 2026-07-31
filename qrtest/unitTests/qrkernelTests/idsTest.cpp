@@ -22,50 +22,55 @@
 
 using namespace qReal;
 
-TEST(IdsTest, createElementIdTest) {
+TEST(IdsTest, createElementIdTest)
+{
 	Id id = Id::createElementId("diagram", "editor", "element");
 	EXPECT_TRUE(id.id() != "");
 }
 
-TEST(IdsTest, rootIdTest) {
+TEST(IdsTest, rootIdTest)
+{
 	Id id = Id::rootId();
 	EXPECT_EQ(id, Id("ROOT_ID", "ROOT_ID", "ROOT_ID", "ROOT_ID"));
 }
 
-TEST(IdsTest, gettersTest) {
+TEST(IdsTest, gettersTest)
+{
 	Id id = Id::loadFromString("qrm:/editor/diagram/element/id");
 
 	EXPECT_EQ(id.editor(), "editor");
 	EXPECT_EQ(id.diagram(), "diagram");
 	EXPECT_EQ(id.element(), "element");
 	EXPECT_EQ(id.id(), "id");
-	EXPECT_EQ(id.type() ,Id("editor", "diagram", "element"));
+	EXPECT_EQ(id.type(), Id("editor", "diagram", "element"));
 }
 
-TEST(IdsTest, idSizeTest) {
+TEST(IdsTest, idSizeTest)
+{
 	Id id = Id::loadFromString("qrm:/editor/diagram/element/id");
-	EXPECT_EQ(id.idSize(), (uint) 4);
+	EXPECT_EQ(id.idSize(), (uint)4);
 
 	id = Id::loadFromString("qrm:/editor/diagram/element");
-	EXPECT_EQ(id.idSize(), (uint) 3);
+	EXPECT_EQ(id.idSize(), (uint)3);
 
 	id = Id::loadFromString("qrm:/editor/diagram");
-	EXPECT_EQ(id.idSize(), (uint) 2);
+	EXPECT_EQ(id.idSize(), (uint)2);
 
 	id = Id::loadFromString("qrm:/editor");
-	EXPECT_EQ(id.idSize(), (uint) 1);
+	EXPECT_EQ(id.idSize(), (uint)1);
 
 	id = Id::loadFromString("qrm:/");
-	EXPECT_EQ(id.idSize(), (uint) 0);
+	EXPECT_EQ(id.idSize(), (uint)0);
 }
 
-TEST(IdsTest, sameTypeIdTest) {
+TEST(IdsTest, sameTypeIdTest)
+{
 	Id const id = Id::loadFromString("qrm:/editor/diagram/element/id");
 	EXPECT_EQ(id.sameTypeId().type(), id.type());
 }
 
-
-TEST(IdsTest, toUrlToStringToVariantTest) {
+TEST(IdsTest, toUrlToStringToVariantTest)
+{
 	QString const idString = "qrm:/editor/diagram/element/id";
 	Id const id = Id::loadFromString(idString);
 
@@ -76,7 +81,8 @@ TEST(IdsTest, toUrlToStringToVariantTest) {
 	EXPECT_EQ(toVariant.value<Id>(), id);
 }
 
-TEST(IdsTest, idInputOutputStreamTest) {
+TEST(IdsTest, idInputOutputStreamTest)
+{
 	QString const idString = "qrm:/editor/diagram/element/id";
 	Id const out = Id::loadFromString(idString);
 
@@ -103,22 +109,22 @@ TEST(IdsTest, idInputOutputStreamTest) {
 // Do not run death tests with ASan in debug build to prevent incorrect reports with stack overflow
 #if !defined(__SANITIZE_ADDRESS__)
 
-TEST(IdsTest, checkGTestDeathTestSupport) {
+TEST(IdsTest, checkGTestDeathTestSupport)
+{
 	GTEST_FLAG_SET(death_test_style, "threadsafe");
-	auto tryQAssert = [](){ Q_ASSERT(0 && "Q_ASSERT can be catched by GTest's EXPECT_DEATH"); };
+	auto tryQAssert = []() { Q_ASSERT(0 && "Q_ASSERT can be catched by GTest's EXPECT_DEATH"); };
 	EXPECT_DEATH_IF_SUPPORTED(tryQAssert(), ".*Q_ASSERT.*EXPECT_DEATH.*");
 }
 
-TEST(IdsTest, loadFromStringTest) {
+TEST(IdsTest, loadFromStringTest)
+{
 	GTEST_FLAG_SET(death_test_style, "threadsafe");
-	EXPECT_DEATH_IF_SUPPORTED(Id::loadFromString("qrm:/editor/diagram/element/id/test")
-			, ".*path\\.count\\(\\) > 0 && path\\.count\\(\\) <= 5.*");
+	EXPECT_DEATH_IF_SUPPORTED(Id::loadFromString("qrm:/editor/diagram/element/id/test"),
+		".*path\\.count\\(\\) > 0 && path\\.count\\(\\) <= 5.*");
 
-	EXPECT_DEATH_IF_SUPPORTED(Id::loadFromString("qm:/editor/diagram/element/id")
-			, ".*path\\[0\\] == \"qrm:\".*");
+	EXPECT_DEATH_IF_SUPPORTED(Id::loadFromString("qm:/editor/diagram/element/id"), ".*path\\[0\\] == \"qrm:\".*");
 
-	EXPECT_DEATH_IF_SUPPORTED(Id::loadFromString("qrm:/editor//diagram")
-			, ".*string == result\\.toString\\(\\).*");
+	EXPECT_DEATH_IF_SUPPORTED(Id::loadFromString("qrm:/editor//diagram"), ".*string == result\\.toString\\(\\).*");
 
 	Id id = Id::loadFromString("qrm:/editor/diagram/element/id");
 	EXPECT_EQ(id, Id("editor", "diagram", "element", "id"));
@@ -136,25 +142,23 @@ TEST(IdsTest, loadFromStringTest) {
 	EXPECT_EQ(id, Id("", "", "", ""));
 }
 
-TEST(IdsTest, checkIntegrityTest) {
+TEST(IdsTest, checkIntegrityTest)
+{
 	GTEST_FLAG_SET(death_test_style, "threadsafe");
-	EXPECT_DEATH_IF_SUPPORTED(Id id("editor", "diagram", "", "id")
-			, ".*checkIntegrity\\(\\).*");
+	EXPECT_DEATH_IF_SUPPORTED(Id id("editor", "diagram", "", "id"), ".*checkIntegrity\\(\\).*");
 
-	EXPECT_DEATH_IF_SUPPORTED(Id id("editor", "", "element", "id")
-			, ".*checkIntegrity\\(\\).*");
+	EXPECT_DEATH_IF_SUPPORTED(Id id("editor", "", "element", "id"), ".*checkIntegrity\\(\\).*");
 
-	EXPECT_DEATH_IF_SUPPORTED(Id id("", "diagram", "element", "id")
-			, ".*checkIntegrity\\(\\).*");
+	EXPECT_DEATH_IF_SUPPORTED(Id id("", "diagram", "element", "id"), ".*checkIntegrity\\(\\).*");
 
-	EXPECT_DEATH_IF_SUPPORTED(Id id("editor", "", "", "id")
-			, ".*checkIntegrity\\(\\).*");
+	EXPECT_DEATH_IF_SUPPORTED(Id id("editor", "", "", "id"), ".*checkIntegrity\\(\\).*");
 }
 
-TEST(IdsTest, additonalConstructorTest) {
+TEST(IdsTest, additonalConstructorTest)
+{
 	GTEST_FLAG_SET(death_test_style, "threadsafe");
-	EXPECT_DEATH_IF_SUPPORTED(Id id(Id::loadFromString("qrm:/editor/diagram/element/id"), "test")
-			, ".*Can not add a part to Id, it will be too long.*");
+	EXPECT_DEATH_IF_SUPPORTED(Id id(Id::loadFromString("qrm:/editor/diagram/element/id"), "test"),
+		".*Can not add a part to Id, it will be too long.*");
 
 	Id id1(Id::loadFromString("qrm:/editor/diagram/element"), "id");
 	EXPECT_EQ(id1.id(), "id");

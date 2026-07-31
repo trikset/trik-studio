@@ -23,15 +23,9 @@ using namespace qReal;
 using namespace qReal::commands;
 using namespace qReal::gui::editor::commands;
 
-InsertIntoEdgeCommand::InsertIntoEdgeCommand(EditorViewScene &scene
-		, const models::Models &models
-		, const Id &firstElem
-		, const Id &lastElem
-		, const Id &parent
-		, QPointF scenePos
-		, QPointF shift
-		, bool isFromLogicalModel
-		, CreateElementsCommand *createCommand)
+InsertIntoEdgeCommand::InsertIntoEdgeCommand(EditorViewScene &scene, const models::Models &models, const Id &firstElem,
+	const Id &lastElem, const Id &parent, QPointF scenePos, QPointF shift, bool isFromLogicalModel,
+	CreateElementsCommand *createCommand)
 	: AbstractCommand()
 	, mScene(scene)
 	, mModels(models)
@@ -73,13 +67,12 @@ bool InsertIntoEdgeCommand::execute()
 	NodeElement *firstNode = mScene.getNodeById(mFirstId);
 	NodeElement *lastNode = mScene.getNodeById(mLastId);
 
-	auto insertPos = mFirstId == mLastId && firstNode ?
-			firstNode->mapToScene(firstNode->contentsRect().center()) : mPos;
+	auto insertPos =
+		mFirstId == mLastId && firstNode ? firstNode->mapToScene(firstNode->contentsRect().center()) : mPos;
 
 	EdgeElement *edge;
 	edge = mRemoveOldEdge ? mScene.getEdgeById(mOldEdge) : mScene.edgeForInsertion(insertPos);
-	if (!edge && mPos != insertPos)
-	{
+	if (!edge && mPos != insertPos) {
 		insertPos = mPos;
 		edge = mScene.edgeForInsertion(insertPos);
 	}
@@ -153,16 +146,16 @@ bool InsertIntoEdgeCommand::restoreState()
 	return true;
 }
 
-void InsertIntoEdgeCommand::initCommand(CreateElementsCommand *&command, const Id &type
-		, const QMap<QString, QVariant> &additionalProperties)
+void InsertIntoEdgeCommand::initCommand(CreateElementsCommand *&command, const Id &type,
+	const QMap<QString, QVariant> &additionalProperties)
 {
 	if (!command) {
 		const QString name = mLogicalAssistApi.editorManagerInterface().friendlyName(type);
 		const Id newId = type.sameTypeId();
 		QMap<QString, QVariant> logicalProperties = additionalProperties;
 		logicalProperties["name"] = name;
-		const ElementInfo element(newId, mIsLogical ? newId : Id(), mScene.rootItemId(), mParentId
-				, logicalProperties, {{"position", mPos}}, Id(), false);
+		const ElementInfo element(newId, mIsLogical ? newId : Id(), mScene.rootItemId(), mParentId,
+			logicalProperties, {{"position", mPos}}, Id(), false);
 		command = new CreateElementsCommand(mModels, {element});
 	}
 }
@@ -181,7 +174,7 @@ void InsertIntoEdgeCommand::makeLink(CreateElementsCommand *command, NodeElement
 		line.append(dst->mapToScene(dst->contentsRect().center()));
 	}
 
-	EdgeElement * const edge = mScene.getEdgeById(newLink);
+	EdgeElement *const edge = mScene.getEdgeById(newLink);
 	line.translate(-edge->pos());
 	if (!line.isEmpty()) {
 		edge->setLine(line);

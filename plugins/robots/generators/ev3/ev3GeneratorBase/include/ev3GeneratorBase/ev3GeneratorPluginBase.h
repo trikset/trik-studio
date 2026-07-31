@@ -38,14 +38,10 @@ class ROBOTS_EV3_GENERATOR_BASE_EXPORT Ev3GeneratorPluginBase : public generator
 	Q_OBJECT
 
 public:
-	enum class RunPolicy {
-		Ask
-		, AlwaysRun
-		, NeverRun
-	};
+	enum class RunPolicy { Ask, AlwaysRun, NeverRun };
 
-	Ev3GeneratorPluginBase(const QString &usbRobotName, const QString &usbRobotFriendlyName, int usbPriority
-			, const QString &bluetoothRobotName, const QString &bluetoothRobotFriendlyName, int bluetoothPriority);
+	Ev3GeneratorPluginBase(const QString &usbRobotName, const QString &usbRobotFriendlyName, int usbPriority,
+		const QString &bluetoothRobotName, const QString &bluetoothRobotFriendlyName, int bluetoothPriority);
 
 	~Ev3GeneratorPluginBase() override;
 
@@ -54,7 +50,7 @@ public:
 	QList<kitBase::robotModel::RobotModelInterface *> robotModels() override;
 
 	QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> blocksFactoryFor(
-			const kitBase::robotModel::RobotModelInterface *model) override;
+		const kitBase::robotModel::RobotModelInterface *model) override;
 
 	QList<kitBase::AdditionalPreferences *> settingsWidgets() override;
 
@@ -69,4 +65,3 @@ private:
 };
 
 }
-

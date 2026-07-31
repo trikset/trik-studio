@@ -35,12 +35,8 @@ class MainClass
 {
 public:
 	/// Gets name of .qrs file with metamodel and path to qrmc, launches all processes for testing.
-	MainClass(
-			const QString &metamodelFileName
-			, const QString &pathToQrmc
-			, const QString &applicationPath
-			, const QString &configurationFileName
-		);
+	MainClass(const QString &metamodelFileName, const QString &pathToQrmc, const QString &applicationPath,
+		const QString &configurationFileName);
 
 	/// Returns result of comparison - 0, if all results are correct, and 1 otherwise.
 	int testResult() const;
@@ -64,17 +60,17 @@ private:
 
 	void launchEditorGenerator(const QString &fileName, const QString &qrxcGeneratedBinariesDir);
 
-	void createHtml(QList<MethodsTester::ResultOfGenerating> qrxcAndQrmcResult
-			, QList<MethodsTester::ResultOfGenerating> qrxcAndInterpreterResult
-			, QList<MethodsTester::ResultOfGenerating> timeResult
-			, QList<MethodsTester::ResultOfGenerating> timeResultInterpter);
+	void createHtml(QList<MethodsTester::ResultOfGenerating> qrxcAndQrmcResult,
+		QList<MethodsTester::ResultOfGenerating> qrxcAndInterpreterResult,
+		QList<MethodsTester::ResultOfGenerating> timeResult,
+		QList<MethodsTester::ResultOfGenerating> timeResultInterpter);
 
 	/// puts names of generated plugins into mQrxcGeneratedPluginList (for further creation of EditorManager)
-//	void appendPluginNames();
+	//	void appendPluginNames();
 
 	/// Loads plugin and returns pointer to its interface.
 	/// Transfers ownership to a caller.
-	qReal::Metamodel* loadPlugin(const QFileInfo &file);
+	qReal::Metamodel *loadPlugin(const QFileInfo &file);
 
 	PluginLoader mPluginLoader;
 

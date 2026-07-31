@@ -43,7 +43,7 @@ public:
 	/// Filling the same name properties table widget.
 	/// @param propertiesWithTheSameNameList IdList of elements with the same name.
 	/// @param propertyName name of property.
-	void fillSameNamePropertiesTW(const IdList &propertiesWithTheSameNameList, QString  const &propertyName);
+	void fillSameNamePropertiesTW(const IdList &propertiesWithTheSameNameList, QString const &propertyName);
 
 Q_SIGNALS:
 	void createNewChosen();

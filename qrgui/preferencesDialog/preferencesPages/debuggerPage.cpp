@@ -20,8 +20,8 @@
 using namespace qReal;
 
 PreferencesDebuggerPage::PreferencesDebuggerPage(QWidget *parent)
-		: PreferencesPage(parent)
-		, mUi(new Ui::PreferencesDebuggerPage)
+	: PreferencesPage(parent)
+	, mUi(new Ui::PreferencesDebuggerPage)
 
 {
 	mUi->setupUi(this);

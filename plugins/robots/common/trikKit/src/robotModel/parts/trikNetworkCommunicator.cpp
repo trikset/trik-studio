@@ -19,4 +19,5 @@ using namespace kitBase::robotModel;
 
 TrikNetworkCommunicator::TrikNetworkCommunicator(const DeviceInfo &info, const PortInfo &port)
 	: kitBase::robotModel::robotParts::Communicator(info, port)
-{}
+{
+}

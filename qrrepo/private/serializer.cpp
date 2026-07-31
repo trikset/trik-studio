@@ -36,13 +36,13 @@ using namespace details;
 using namespace utils;
 using namespace qReal;
 
-const char * const unsavedDir = "%1/unsaved/%2";
+const char *const unsavedDir = "%1/unsaved/%2";
 
 Serializer::Serializer(const QString &workingFile) // NOLINT(modernize-pass-by-value)
 	// Syncroniously running instances of QReal can clear temp dirs of each other.
 	// So generating new UUID as temp dir name.
-	: mWorkingDir(QString(unsavedDir).arg(PlatformInfo::invariantSettingsPath("pathToTempFolder")
-			, QUuid::createUuid().toString()))
+	: mWorkingDir(QString(unsavedDir)
+			  .arg(PlatformInfo::invariantSettingsPath("pathToTempFolder"), QUuid::createUuid().toString()))
 	, mWorkingFile(workingFile)
 {
 	clearWorkingDir();
@@ -79,12 +79,11 @@ void Serializer::setWorkingFile(const QString &workingFile)
 
 bool Serializer::saveToDisk(QList<Object *> const &objects, QHash<QString, QVariant> const &metaInfo) const
 {
-	Q_ASSERT_X(!mWorkingFile.isEmpty()
-		, "Serializer::saveToDisk(...)"
-		, "may be Repository of RepoApi (see Models constructor also) has been initialised with empty filename?");
+	Q_ASSERT_X(!mWorkingFile.isEmpty(), "Serializer::saveToDisk(...)",
+		"may be Repository of RepoApi (see Models constructor also) has been initialised with empty filename?");
 
 	clearWorkingDir();
-	for (const Object * const object : objects) {
+	for (const Object *const object : objects) {
 		const QString filePath = createDirectory(object->id(), object->isLogicalObject());
 
 		QDomDocument doc;
@@ -100,14 +99,13 @@ bool Serializer::saveToDisk(QList<Object *> const &objects, QHash<QString, QVari
 	templatesDir.mkpath(templatesDirName);
 	const auto &metaInfoKeys = metaInfo.keys();
 
-	for (auto &&key: metaInfoKeys) {
+	for (auto &&key : metaInfoKeys) {
 		if (key.startsWith("templates.")) {
 			const auto &templateName = key.mid(10);
 			const QString filePath = templatesDirName + "/" + templateName + ".xml";
 			qDebug() << "filePath" << filePath;
 			OutFile out(filePath);
-			out() << xmlUtils::ensureXmlFieldsOrder(
-					 ValuesSerializer::serializeQVariant(metaInfo[key]));
+			out() << xmlUtils::ensureXmlFieldsOrder(ValuesSerializer::serializeQVariant(metaInfo[key]));
 		}
 	}
 
@@ -119,7 +117,7 @@ bool Serializer::saveToDisk(QList<Object *> const &objects, QHash<QString, QVari
 	const QDir compressDir(mWorkingDir);
 	const QDir dir = fileInfo.absolutePath();
 
-	QFile previousSave(dir.absolutePath() + "/" + fileName +".qrs");
+	QFile previousSave(dir.absolutePath() + "/" + fileName + ".qrs");
 	if (previousSave.exists()) {
 		previousSave.remove();
 	}
@@ -141,7 +139,7 @@ bool Serializer::saveToDisk(QList<Object *> const &objects, QHash<QString, QVari
 	return true;
 }
 
-void Serializer::loadFromDisk(QHash<qReal::Id, Object*> &objectsHash, QHash<QString, QVariant> &metaInfo)
+void Serializer::loadFromDisk(QHash<qReal::Id, Object *> &objectsHash, QHash<QString, QVariant> &metaInfo)
 {
 	clearWorkingDir();
 	if (QFileInfo::exists(mWorkingFile)) {
@@ -152,7 +150,7 @@ void Serializer::loadFromDisk(QHash<qReal::Id, Object*> &objectsHash, QHash<QStr
 	loadMetaInfo(metaInfo);
 }
 
-void Serializer::loadFromDisk(const QString &currentPath, QHash<qReal::Id, Object*> &objectsHash)
+void Serializer::loadFromDisk(const QString &currentPath, QHash<qReal::Id, Object *> &objectsHash)
 {
 	QDir dir(currentPath + "/tree");
 	if (dir.cd("logical")) {
@@ -163,7 +161,7 @@ void Serializer::loadFromDisk(const QString &currentPath, QHash<qReal::Id, Objec
 	}
 }
 
-void Serializer::loadModel(const QDir &dir, QHash<qReal::Id, Object*> &objectsHash) // NOLINT(misc-no-recursion)
+void Serializer::loadModel(const QDir &dir, QHash<qReal::Id, Object *> &objectsHash) // NOLINT(misc-no-recursion)
 {
 	for (auto &&fileInfo : dir.entryInfoList(QDir::AllEntries | QDir::NoDotAndDotDot)) {
 		const QString path = fileInfo.filePath();
@@ -175,10 +173,10 @@ void Serializer::loadModel(const QDir &dir, QHash<qReal::Id, Object*> &objectsHa
 
 			// To ensure backwards compatibility. Replace this by separate tag names when save updating mechanism
 			// will be implemented.
-			Object * const object = element.hasAttribute("logicalId") && element.attribute("logicalId") != "qrm:/"
+			Object *const object =
+				element.hasAttribute("logicalId") && element.attribute("logicalId") != "qrm:/"
 					? dynamic_cast<Object *>(new GraphicalObject(element))
-					: dynamic_cast<Object *>(new LogicalObject(element))
-					;
+					: dynamic_cast<Object *>(new LogicalObject(element));
 
 			auto &old = objectsHash[object->id()];
 			delete old;
@@ -193,7 +191,7 @@ void Serializer::saveMetaInfo(QHash<QString, QVariant> const &metaInfo) const
 	QDomElement root = document.createElement("metaInformation");
 	document.appendChild(root);
 	const auto &metaInfoKeys = metaInfo.keys();
-	for (auto &&key: metaInfoKeys) {
+	for (auto &&key : metaInfoKeys) {
 		if (mFileNames.contains(key)) {
 			const QString filePath = mWorkingDir + "/" + key + ".xml";
 			OutFile out(filePath);
@@ -226,15 +224,13 @@ void Serializer::loadMetaInfo(QHash<QString, QVariant> &metaInfo) const
 	}
 
 	const QDomDocument document = xmlUtils::loadDocument(filePath);
-	for (QDomElement child = document.documentElement().firstChildElement("info")
-			; !child.isNull()
-			; child = child.nextSiblingElement("info"))
-	{
-		metaInfo[child.attribute("key")] = ValuesSerializer::deserializeQVariant(
-				child.attribute("type"), child.attribute("value"));
+	for (QDomElement child = document.documentElement().firstChildElement("info"); !child.isNull();
+		child = child.nextSiblingElement("info")) {
+		metaInfo[child.attribute("key")] =
+			ValuesSerializer::deserializeQVariant(child.attribute("type"), child.attribute("value"));
 	}
 
-	for (const auto & file : mFileNames) {
+	for (const auto &file : mFileNames) {
 		const QString path = mWorkingDir + "/" + file + ".xml";
 		if (!QFile::exists(path)) {
 			continue;

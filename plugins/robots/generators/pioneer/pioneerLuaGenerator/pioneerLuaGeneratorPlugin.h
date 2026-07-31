@@ -56,7 +56,7 @@ public:
 
 	QIcon iconForFastSelector(const kitBase::robotModel::RobotModelInterface &robotModel) const override;
 
-	QList<QWidget *>listOfQuickPreferencesFor(const kitBase::robotModel::RobotModelInterface &model) override;
+	QList<QWidget *> listOfQuickPreferencesFor(const kitBase::robotModel::RobotModelInterface &model) override;
 
 	int priority() const override;
 
@@ -65,8 +65,7 @@ public:
 	QList<kitBase::robotModel::RobotModelInterface *> robotModels() override;
 
 	QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> blocksFactoryFor(
-			const kitBase::robotModel::RobotModelInterface *model
-			) override;
+		const kitBase::robotModel::RobotModelInterface *model) override;
 
 	QList<kitBase::AdditionalPreferences *> settingsWidgets() override;
 
@@ -97,16 +96,16 @@ private:
 	/// Set "enabled" state of "upload" and "run" actions to a given value.
 	void setActionsEnabled(bool isEnabled);
 
-	void connectSelector(QComboBox * selector, QString settings);
+	void connectSelector(QComboBox *selector, QString settings);
 	QWidget *ipSelector();
 	QWidget *portSelector();
 	QWidget *modeSelector();
 
 	/// Action that launches code generator.
-	QAction *mGenerateCodeAction;  // Doesn't have ownership; may be disposed by GUI.
+	QAction *mGenerateCodeAction; // Doesn't have ownership; may be disposed by GUI.
 
 	/// Action that uploads generated program onto quadcopter.
-	QAction *mUploadProgramAction;  // Doesn't have ownership; may be disposed by GUI.
+	QAction *mUploadProgramAction; // Doesn't have ownership; may be disposed by GUI.
 
 	/// Factory for blocks on a diagram that can be processed by this generator.
 	QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> mBlocksFactory;

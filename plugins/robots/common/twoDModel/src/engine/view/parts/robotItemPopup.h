@@ -63,11 +63,11 @@ private:
 	QWidget *initSpinBox();
 	QWidget *initSetStartButton();
 
-	QAbstractButton *mFollowButton {};  // Takes ownership
-	QAbstractButton *mReturnButton {};  // Takes ownership
-	PopupMetricWidget *mSpinBox {};  // Takes ownership
-	QAbstractButton *mSetStartButton {};  // Takes ownership
-	RobotItem *mCurrentItem {};  // Does not take ownership
+	QAbstractButton *mFollowButton {}; // Takes ownership
+	QAbstractButton *mReturnButton {}; // Takes ownership
+	PopupMetricWidget *mSpinBox {}; // Takes ownership
+	QAbstractButton *mSetStartButton {}; // Takes ownership
+	RobotItem *mCurrentItem {}; // Does not take ownership
 };
 
 }

@@ -28,8 +28,7 @@ class StatCircular
 {
 public:
 	/// Circular port.
-	struct CircularPort
-	{
+	struct CircularPort {
 		/// X coordinate of circle center.
 		qreal x;
 

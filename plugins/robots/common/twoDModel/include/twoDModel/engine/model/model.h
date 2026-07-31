@@ -56,13 +56,12 @@ class TWO_D_MODEL_EXPORT Model : public QObject
 
 public:
 	/// Dependency injection for the physics engine
-	explicit Model(physics::PhysicsEngineFactory *engineFactory,
-	               QObject *parent = nullptr);
+	explicit Model(physics::PhysicsEngineFactory *engineFactory, QObject *parent = nullptr);
 	~Model() override;
 
-	void init(qReal::ErrorReporterInterface &errorReporter
-			, kitBase::InterpreterControlInterface &interpreterControl
-			, qReal::LogicalModelAssistInterface &logicalModel);
+	void init(qReal::ErrorReporterInterface &errorReporter,
+		kitBase::InterpreterControlInterface &interpreterControl,
+		qReal::LogicalModelAssistInterface &logicalModel);
 
 	/// Returns a reference to a world map.
 	WorldModel &worldModel();
@@ -139,12 +138,12 @@ private:
 	Timeline mTimeline;
 	QScopedPointer<constraints::ConstraintsChecker> mChecker;
 	QScopedPointer<templates::TemplatesParserApi> mTemplatesParserApi;
-	RobotModel * mRobotModel {}; //Has ownership
-	qReal::ErrorReporterInterface *mErrorReporter;  // Doesn`t take ownership.
-	qReal::LogicalModelAssistInterface *mLogicalModel;  // Doesn`t take ownership.
+	RobotModel *mRobotModel {}; //Has ownership
+	qReal::ErrorReporterInterface *mErrorReporter; // Doesn`t take ownership.
+	qReal::LogicalModelAssistInterface *mLogicalModel; // Doesn`t take ownership.
 	QScopedPointer<physics::PhysicsEngineFactory> mEngineFactory;
-	physics::PhysicsEngineBase *mRealisticPhysicsEngine {};  // Takes ownership.
-	physics::PhysicsEngineBase *mSimplePhysicsEngine {};  // Takes ownership.
+	physics::PhysicsEngineBase *mRealisticPhysicsEngine {}; // Takes ownership.
+	physics::PhysicsEngineBase *mSimplePhysicsEngine {}; // Takes ownership.
 	quint64 mStartTimestamp {0};
 };
 

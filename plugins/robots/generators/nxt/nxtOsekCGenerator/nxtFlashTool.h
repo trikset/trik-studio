@@ -31,14 +31,10 @@ class NxtFlashTool : public QObject
 	Q_OBJECT
 
 public:
-	enum RunPolicy {
-		Ask = 0
-		, AlwaysRun
-		, NeverRun
-	};
+	enum RunPolicy { Ask = 0, AlwaysRun, NeverRun };
 
-	NxtFlashTool(qReal::ErrorReporterInterface &errorReporter
-			, utils::robotCommunication::RobotCommunicationThreadInterface &communicator);
+	NxtFlashTool(qReal::ErrorReporterInterface &errorReporter,
+		utils::robotCommunication::RobotCommunicationThreadInterface &communicator);
 
 public Q_SLOTS:
 	/// Searches for the firmware image in nxt-tools/nexttool directory and flashes it into NXT brick.
@@ -69,14 +65,7 @@ Q_SIGNALS:
 	void uploadingComplete(bool success);
 
 private:
-	enum CompileState {
-		idle,
-		clean,
-		compile,
-		compilationError,
-		link,
-		done
-	};
+	enum CompileState { idle, clean, compile, compilationError, link, done };
 
 	QString path(const QString &file = QString()) const;
 	QString nxtProgramName(const QFileInfo &srcFile) const;

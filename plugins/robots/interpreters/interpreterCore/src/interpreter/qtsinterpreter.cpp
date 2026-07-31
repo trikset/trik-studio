@@ -28,15 +28,12 @@ using namespace kitBase::robotModel;
 
 const Id startingElementType = Id("RobotsMetamodel", "RobotsDiagram", "InitialNode");
 
-QtsInterpreter::QtsInterpreter(const GraphicalModelAssistInterface &graphicalModelApi
-		, LogicalModelAssistInterface &logicalModelApi
-		, qReal::gui::MainWindowInterpretersInterface &interpretersInterface
-		, const qReal::ProjectManagementInterface &projectManager
-		, BlocksFactoryManagerInterface &blocksFactoryManager
-		, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
-		, qrtext::LanguageToolboxInterface &languageToolbox
-		, QAction &connectToRobotAction
-		)
+QtsInterpreter::QtsInterpreter(const GraphicalModelAssistInterface &graphicalModelApi,
+	LogicalModelAssistInterface &logicalModelApi,
+	qReal::gui::MainWindowInterpretersInterface &interpretersInterface,
+	const qReal::ProjectManagementInterface &projectManager, BlocksFactoryManagerInterface &blocksFactoryManager,
+	const kitBase::robotModel::RobotModelManagerInterface &robotModelManager,
+	qrtext::LanguageToolboxInterface &languageToolbox, QAction &connectToRobotAction)
 	: mGraphicalModelApi(graphicalModelApi)
 	, mLogicalModelApi(logicalModelApi)
 	, mInterpretersInterface(interpretersInterface)
@@ -54,20 +51,11 @@ QtsInterpreter::QtsInterpreter(const GraphicalModelAssistInterface &graphicalMod
 	// Other components may want to subscribe to allDevicesConfigured() signal because
 	// it seems to be the only way to perform robot devices additional initialization.
 	// We must let them work out before interpretation starts, so creating queued connection.
-	connect(
-			&mRobotModelManager
-			, &kitBase::robotModel::RobotModelManagerInterface::allDevicesConfigured
-			, this
-			, &QtsInterpreter::devicesConfiguredSlot
-			, Qt::QueuedConnection
-			);
+	connect(&mRobotModelManager, &kitBase::robotModel::RobotModelManagerInterface::allDevicesConfigured, this,
+		&QtsInterpreter::devicesConfiguredSlot, Qt::QueuedConnection);
 
-	connect(
-			&mRobotModelManager
-			, &kitBase::robotModel::RobotModelManagerInterface::connected
-			, this
-			, &QtsInterpreter::connectedSlot
-			);
+	connect(&mRobotModelManager, &kitBase::robotModel::RobotModelManagerInterface::connected, this,
+		&QtsInterpreter::connectedSlot);
 
 	connect(&projectManager, &qReal::ProjectManagementInterface::beforeOpen, this, &QtsInterpreter::userStopRobot);
 
@@ -97,7 +85,8 @@ void QtsInterpreter::interpret()
 	mBlocksTable->clear();
 	mState = waitingForDevicesConfiguredToLaunch;
 
-	if (!mAutoconfigurer.configure(mGraphicalModelApi.children(Id::rootId()), mRobotModelManager.model().robotId())) {
+	if (!mAutoconfigurer.configure(mGraphicalModelApi.children(Id::rootId()),
+		    mRobotModelManager.model().robotId())) {
 		mState = idle;
 		return;
 	}
@@ -127,8 +116,8 @@ void QtsInterpreter::stopRobot(qReal::interpretation::StopReason reason)
 int QtsInterpreter::timeElapsed() const
 {
 	return mState == interpreting
-			? mRobotModelManager.model().timeline().timestamp() - mInterpretationStartedTimestamp
-			: 0;
+	               ? mRobotModelManager.model().timeline().timestamp() - mInterpretationStartedTimestamp
+	               : 0;
 }
 
 void QtsInterpreter::connectedSlot(bool success, const QString &errorString)
@@ -184,7 +173,7 @@ void QtsInterpreter::connectToRobot()
 	}
 
 	mActionConnectToRobot.setChecked(
-			mRobotModelManager.model().connectionState() == RobotModelInterface::connectedState);
+		mRobotModelManager.model().connectionState() == RobotModelInterface::connectedState);
 }
 
 void QtsInterpreter::reportError(const QString &message)

@@ -32,11 +32,10 @@ class RefactoringApplier : public QObject
 	Q_OBJECT
 
 public:
-	RefactoringApplier(LogicalModelAssistInterface &logicalModelApi
-			, GraphicalModelAssistInterface &graphicalModelApi
-			, gui::MainWindowInterpretersInterface &interpretersInterface
-			, qrRepo::RepoApi *refactoringRepoApi
-			, QHash<Id, Id> *match);
+	RefactoringApplier(LogicalModelAssistInterface &logicalModelApi,
+		GraphicalModelAssistInterface &graphicalModelApi,
+		gui::MainWindowInterpretersInterface &interpretersInterface, qrRepo::RepoApi *refactoringRepoApi,
+		QHash<Id, Id> *match);
 	~RefactoringApplier();
 
 	void applyRefactoringRule();
@@ -84,8 +83,8 @@ private:
 	LogicalModelAssistInterface &mLogicalModelApi;
 	GraphicalModelAssistInterface &mGraphicalModelApi;
 
-	QList<QPair<Id, Id> > *mRule;
-	QList<QPair<Id, Id> > *mApply;
+	QList<QPair<Id, Id>> *mRule;
+	QList<QPair<Id, Id>> *mApply;
 
 	qrRepo::RepoApi *mRefactoringRepoApi;
 	QHash<Id, Id> *mMatch;

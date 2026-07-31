@@ -21,19 +21,17 @@
 
 using namespace twoDModel::items;
 
-EllipseRegion::EllipseRegion(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-			     QGraphicsItem *parent)
+EllipseRegion::EllipseRegion(graphicsUtils::AbstractCoordinateSystem *metricSystem, QGraphicsItem *parent)
 	: RegionItem(metricSystem, parent)
 {
-	connect(this, &AbstractItem::mouseInteractionStarted, this, [this]() {mEstimatedPos = pos(); });
+	connect(this, &AbstractItem::mouseInteractionStarted, this, [this]() { mEstimatedPos = pos(); });
 }
 
 EllipseRegion::EllipseRegion(QSharedPointer<graphicsUtils::AbstractItem> item,
-		graphicsUtils::AbstractCoordinateSystem *metricSystem,
-		QGraphicsItem *parent):
-	RegionItem(item, metricSystem, parent)
+	graphicsUtils::AbstractCoordinateSystem *metricSystem, QGraphicsItem *parent)
+	: RegionItem(item, metricSystem, parent)
 {
-	connect(this, &AbstractItem::mouseInteractionStarted, this, [this]() {mEstimatedPos = pos(); });
+	connect(this, &AbstractItem::mouseInteractionStarted, this, [this]() { mEstimatedPos = pos(); });
 }
 
 QString EllipseRegion::regionType() const
@@ -80,7 +78,7 @@ QPainterPath EllipseRegion::shape() const
 	// parent shapes with QPainterPathStroker, as the region cannot be a path at the moment.
 	result.addEllipse(graphicsUtils::RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), pen().width() / 2));
 	if (isSelected()) {
-		 result.addPath(resizeArea());
+		result.addPath(resizeArea());
 	}
 	return result;
 }

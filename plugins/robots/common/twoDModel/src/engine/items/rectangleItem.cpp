@@ -20,8 +20,7 @@
 using namespace twoDModel::items;
 using namespace graphicsUtils;
 
-RectangleItem::RectangleItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-				QPointF begin, QPointF end)
+RectangleItem::RectangleItem(graphicsUtils::AbstractCoordinateSystem *metricSystem, QPointF begin, QPointF end)
 	: ColorFieldItem(metricSystem)
 {
 	setX1(begin.x());
@@ -29,19 +28,19 @@ RectangleItem::RectangleItem(graphicsUtils::AbstractCoordinateSystem *metricSyst
 	setX2(end.x());
 	setY2(end.y());
 	setPrivateData();
-	connect(this, &AbstractItem::mouseInteractionStarted, this, [this]() {mEstimatedPos = pos(); });
+	connect(this, &AbstractItem::mouseInteractionStarted, this, [this]() { mEstimatedPos = pos(); });
 }
 
 AbstractItem *RectangleItem::clone() const
 {
-	auto * const cloned = new RectangleItem(coordinateSystem(), {x1(), y1()}, {x2(), y2()});
+	auto *const cloned = new RectangleItem(coordinateSystem(), {x1(), y1()}, {x2(), y2()});
 	AbstractItem::copyTo(cloned);
 	return cloned;
 }
 
 QAction *RectangleItem::rectangleTool()
 {
-	auto * const result = new QAction(loadTextColorIcon(":/icons/2d_rectangle.svg"), tr("Rectangle (R)"), nullptr);
+	auto *const result = new QAction(loadTextColorIcon(":/icons/2d_rectangle.svg"), tr("Rectangle (R)"), nullptr);
 	result->setShortcuts({QKeySequence(Qt::Key_R), QKeySequence(Qt::Key_7)});
 	result->setCheckable(true);
 	return result;
@@ -70,7 +69,7 @@ QRectF RectangleItem::boundingRect() const
 	return RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), (pen().width() + drift) / 2);
 }
 
-void RectangleItem::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
+void RectangleItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 	Q_UNUSED(option)
 	Q_UNUSED(widget)
@@ -82,9 +81,9 @@ void RectangleItem::drawExtractionForItem(QPainter *painter)
 	AbstractItem::drawExtractionForItem(painter);
 	painter->setPen(getStrokePen());
 	painter->setBrush(Qt::transparent);
-	painter->drawRect(RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), pen().width()/2));
+	painter->drawRect(RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), pen().width() / 2));
 	if (!filled()) {
-		painter->drawRect(RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), -pen().width()/2));
+		painter->drawRect(RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), -pen().width() / 2));
 	}
 }
 
@@ -97,10 +96,8 @@ QDomElement RectangleItem::serialize(QDomElement &parent) const
 	const auto beginY = coordSystem->toUnit(y1() + scenePos().y());
 	const auto endX = coordSystem->toUnit(x2() + scenePos().x());
 	const auto endY = coordSystem->toUnit(y2() + scenePos().y());
-	rectangleNode.setAttribute("begin", QString::number(beginX)
-	                 + ":" + QString::number(beginY));
-	rectangleNode.setAttribute("end", QString::number(endX)
-	                 + ":" + QString::number(endY));
+	rectangleNode.setAttribute("begin", QString::number(beginX) + ":" + QString::number(beginY));
+	rectangleNode.setAttribute("end", QString::number(endX) + ":" + QString::number(endY));
 	return rectangleNode;
 }
 
@@ -136,7 +133,7 @@ void RectangleItem::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 QPainterPath RectangleItem::shapeWihoutResizeArea() const
 {
 	QPainterPath result;
-	result.addRect(RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), pen().width()/2));
+	result.addRect(RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), pen().width() / 2));
 	return result;
 }
 
@@ -158,7 +155,7 @@ QPainterPath RectangleItem::shape() const
 		result.addRect(RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), 0));
 		result = ps.createStroke(result);
 	} else {
-		result.addRect(RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), pen().width()/2));
+		result.addRect(RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), pen().width() / 2));
 	}
 
 	if (isSelected()) {

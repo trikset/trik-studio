@@ -26,8 +26,7 @@ const QSizeF defaultSize = QSizeF(200, 200);
 
 using namespace twoDModel::items;
 
-RegionItem::RegionItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-			QGraphicsItem *parent)
+RegionItem::RegionItem(graphicsUtils::AbstractCoordinateSystem *metricSystem, QGraphicsItem *parent)
 	: TwoDSceneItem(parent)
 	, mVisible(false)
 	, mTextItem(new QGraphicsTextItem(this))
@@ -44,7 +43,7 @@ RegionItem::RegionItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 	setBrushColor(mColor.name());
 	setBrushStyle("Diag");
 
-	auto updateTextPosition = [this](){ setTextPosition(); };
+	auto updateTextPosition = [this]() { setTextPosition(); };
 	connect(this, &AbstractItem::positionChanged, this, updateTextPosition);
 	connect(this, &AbstractItem::x1Changed, this, updateTextPosition);
 	connect(this, &AbstractItem::x2Changed, this, updateTextPosition);
@@ -52,9 +51,8 @@ RegionItem::RegionItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 	connect(this, &AbstractItem::y2Changed, this, updateTextPosition);
 }
 
-RegionItem::RegionItem(QSharedPointer<graphicsUtils::AbstractItem>& abstractItem,
-		graphicsUtils::AbstractCoordinateSystem *metricSystem,
-		QGraphicsItem *parent)
+RegionItem::RegionItem(QSharedPointer<graphicsUtils::AbstractItem> &abstractItem,
+	graphicsUtils::AbstractCoordinateSystem *metricSystem, QGraphicsItem *parent)
 	: RegionItem(metricSystem, parent)
 {
 	// When creating a region from an existing AbstractItem, we need to copy the position on the scene
@@ -109,8 +107,8 @@ QString RegionItem::text() const
 
 void RegionItem::setText(const QString &text)
 {
-	mTextItem->setHtml(QString("<div style='background-color:#FFFFFF;color:%2;'>%1</div>")
-			.arg(text, mColor.name()));
+	mTextItem->setHtml(
+		QString("<div style='background-color:#FFFFFF;color:%2;'>%1</div>").arg(text, mColor.name()));
 	mTextItem->setVisible(!text.isEmpty());
 }
 
@@ -123,8 +121,7 @@ void RegionItem::setTextPosition()
 {
 	const auto x = qMin(x1(), x2());
 	const auto y = qMin(y1(), y2());
-	QPointF parentScenePosition {x + mTextPosition.x(),
-				    y + mTextPosition.y()};
+	QPointF parentScenePosition {x + mTextPosition.x(), y + mTextPosition.y()};
 	mTextItem->setPos(parentScenePosition);
 }
 
@@ -138,7 +135,7 @@ void RegionItem::setColor(const QColor &color)
 	mColor = color;
 	setPenColor(mColor.name());
 	setBrushColor(mColor.name());
-	setText(text());  // To update text color
+	setText(text()); // To update text color
 	update();
 }
 
@@ -165,27 +162,21 @@ QDomElement RegionItem::serialize(QDomElement &element) const
 
 	if (!text().isEmpty()) {
 		regionNode.setAttribute("text", text());
-		regionNode.setAttribute("textX",
-				     QString::number(mMetricSystem->toUnit(textPosition().x())));
-		regionNode.setAttribute("textY",
-				     QString::number(mMetricSystem->toUnit(textPosition().y())));
+		regionNode.setAttribute("textX", QString::number(mMetricSystem->toUnit(textPosition().x())));
+		regionNode.setAttribute("textY", QString::number(mMetricSystem->toUnit(textPosition().y())));
 	}
 
 	if (mDumpPositionInfo) {
 		const auto x = qMin(x1(), x2()) + scenePos().x();
 		const auto y = qMin(y1(), y2()) + scenePos().y();
-		regionNode.setAttribute("x",
-				     QString::number(mMetricSystem->toUnit(x)));
-		regionNode.setAttribute("y",
-				     QString::number(mMetricSystem->toUnit(y)));
+		regionNode.setAttribute("x", QString::number(mMetricSystem->toUnit(x)));
+		regionNode.setAttribute("y", QString::number(mMetricSystem->toUnit(y)));
 
 		const auto width = qAbs(x2() - x1());
 		const auto height = qAbs(y2() - y1());
 
-		regionNode.setAttribute("height",
-				     QString::number(mMetricSystem->toUnit(height)));
-		regionNode.setAttribute("width",
-				     QString::number(mMetricSystem->toUnit(width)));
+		regionNode.setAttribute("height", QString::number(mMetricSystem->toUnit(height)));
+		regionNode.setAttribute("width", QString::number(mMetricSystem->toUnit(width)));
 	}
 
 	regionNode.setAttribute("visible", visible() ? "true" : "false");

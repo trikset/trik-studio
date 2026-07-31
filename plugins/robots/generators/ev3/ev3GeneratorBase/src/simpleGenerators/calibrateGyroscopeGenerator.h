@@ -20,14 +20,12 @@ namespace ev3 {
 namespace simple {
 
 /// Generator for 'Calibrate Gyroscope' block
-class CalibrateGyroscopeGenerator: public generatorBase::simple::BindingGenerator
+class CalibrateGyroscopeGenerator : public generatorBase::simple::BindingGenerator
 {
 	Q_OBJECT
 public:
-	CalibrateGyroscopeGenerator(const qrRepo::RepoApi &repo
-			, generatorBase::GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent = nullptr);
+	CalibrateGyroscopeGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+		const qReal::Id &id, QObject *parent = nullptr);
 };
 
 }

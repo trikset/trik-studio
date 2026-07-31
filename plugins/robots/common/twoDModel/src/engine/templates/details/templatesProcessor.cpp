@@ -21,43 +21,42 @@
 using namespace twoDModel::templates::details;
 
 TemplatesProcessor::TemplatesProcessor(details::TemplatesManager *manager) noexcept
-	: mManager(manager){}
+	: mManager(manager)
+{
+}
 
-QDomElement TemplatesProcessor::processTemplate(const QDomElement &elements, ExpansionContext& context)
+QDomElement TemplatesProcessor::processTemplate(const QDomElement &elements, ExpansionContext &context)
 {
 	auto &&templateName = elements.tagName() == "use" ? elements.attribute("template") : elements.tagName();
 
 	if (templateName.isEmpty()) {
-		error(QObject::tr(R"(The &lt;use&gt; tag must contain a "template" attribute)")
-				, elements.lineNumber(), context, SubstitutionErrorCode::UseTagContainsTemplateAttr);
+		error(QObject::tr(R"(The &lt;use&gt; tag must contain a "template" attribute)"), elements.lineNumber(),
+			context, SubstitutionErrorCode::UseTagContainsTemplateAttr);
 		return {};
 	}
 
 	if (context.mMacrosInProgress.contains(templateName)) {
-		error(QObject::tr(
-			"Recursive template expansion detected: %1 -> %2")
-			.arg(context.mOrder.join(" -> "), templateName), elements.lineNumber(),
-			context, SubstitutionErrorCode::RecursiveTemplateExpansion);
+		error(QObject::tr("Recursive template expansion detected: %1 -> %2")
+				.arg(context.mOrder.join(" -> "), templateName),
+			elements.lineNumber(), context, SubstitutionErrorCode::RecursiveTemplateExpansion);
 		return {};
 	}
 
 	auto *foundTemplate = mManager->findTemplate(templateName);
 
 	if (!foundTemplate) {
-		error(QObject::tr(
-			"The &lt;use&gt; tag contains a template=%1"
-			" attribute that is not the name of a declared template")
-			.arg(templateName), elements.lineNumber(), context,
-			SubstitutionErrorCode::UseUndeclaredTemplate);
+		error(QObject::tr("The &lt;use&gt; tag contains a template=%1"
+				  " attribute that is not the name of a declared template")
+				.arg(templateName),
+			elements.lineNumber(), context, SubstitutionErrorCode::UseUndeclaredTemplate);
 		return {};
 	}
 
 	auto &xmlTemplate = *foundTemplate;
 	auto substitutionResult = xmlTemplate.substitute(elements);
 	const auto &errors = xmlTemplate.substitutionErrors();
-	for (auto &&substitutionError: errors) {
-		error(substitutionError.error, substitutionError.line,
-					context, substitutionError.errorCode);
+	for (auto &&substitutionError : errors) {
+		error(substitutionError.error, substitutionError.line, context, substitutionError.errorCode);
 	}
 	if (!errors.isEmpty()) {
 		return {};
@@ -67,12 +66,12 @@ QDomElement TemplatesProcessor::processTemplate(const QDomElement &elements, Exp
 	QDomDocument result;
 	QString errorMessage;
 	int errorLine;
-	const auto &message =
-		QObject::tr("After substituting the parameters for"
-			    " the template %1, it did not become a valid xml node").arg(templateName);
+	const auto &message = QObject::tr("After substituting the parameters for"
+					  " the template %1, it did not become a valid xml node")
+	                              .arg(templateName);
 	if (!result.setContent(wrappedXml, &errorMessage, &errorLine)) {
 		error(QString("%1 %2").arg(message, errorMessage), errorLine, context,
-				SubstitutionErrorCode::QtXmlParserError);
+			SubstitutionErrorCode::QtXmlParserError);
 		return {};
 	}
 
@@ -82,40 +81,41 @@ QDomElement TemplatesProcessor::processTemplate(const QDomElement &elements, Exp
 	return result.documentElement();
 }
 
-bool TemplatesProcessor::substitute(const QDomElement& constraintsXml) {
+bool TemplatesProcessor::substitute(const QDomElement &constraintsXml)
+{
 	std::stack<ExpansionItem> elementStack;
 	const auto &rootContext = ExpansionContext();
-	auto&& child = constraintsXml.firstChildElement();
+	auto &&child = constraintsXml.firstChildElement();
 
 	while (!child.isNull()) {
-		elementStack.push(ExpansionItem{child, rootContext.fork()});
+		elementStack.push(ExpansionItem {child, rootContext.fork()});
 		child = child.nextSiblingElement();
 	}
 
 	while (!elementStack.empty()) {
 		auto currentItem = std::move(elementStack.top());
-		auto&& current = currentItem.mElement;
-		auto&& context = currentItem.mContext;
+		auto &&current = currentItem.mElement;
+		auto &&context = currentItem.mContext;
 
 		elementStack.pop();
 
 		// If the current node is not equal to use, we just want to process its children later.
 		const auto isTemplate = current.tagName() == "use" || mManager->isPotentialTemplate(current.tagName());
 		if (!isTemplate) {
-			auto&& child = current.firstChildElement();
+			auto &&child = current.firstChildElement();
 			while (!child.isNull()) {
-				elementStack.push(ExpansionItem{child, context.fork()});
+				elementStack.push(ExpansionItem {child, context.fork()});
 				child = child.nextSiblingElement();
 			}
 			continue;
 		}
 
 		// If it is a <use> node, we want to replace it with a template definition.
-		auto&& currentContext = context.fork();
-		auto&& replacement = processTemplate(current, currentContext);
-		auto&& parent = current.parentNode().toElement();
+		auto &&currentContext = context.fork();
+		auto &&replacement = processTemplate(current, currentContext);
+		auto &&parent = current.parentNode().toElement();
 
-		auto&& nextSibling = current.nextSibling();
+		auto &&nextSibling = current.nextSibling();
 
 		// If the substitution is unsuccessful, we do not process the subtree,
 		// the user will see an error message.
@@ -140,7 +140,7 @@ bool TemplatesProcessor::substitute(const QDomElement& constraintsXml) {
 				parent.insertBefore(cloned, nextSibling);
 			}
 
-			newlyInserted.push_back(ExpansionItem{cloned, currentContext});
+			newlyInserted.push_back(ExpansionItem {cloned, currentContext});
 			replChild = next;
 		}
 
@@ -150,7 +150,6 @@ bool TemplatesProcessor::substitute(const QDomElement& constraintsXml) {
 	}
 	return true;
 }
-
 
 void TemplatesProcessor::clear()
 {
@@ -162,10 +161,8 @@ QStringList TemplatesProcessor::errors() const
 	return mErrors;
 }
 
-void TemplatesProcessor::error(const QString& message,
-				      int line,
-				      const ExpansionContext &context,
-				      SubstitutionErrorCode code)
+void TemplatesProcessor::error(const QString &message, int line, const ExpansionContext &context,
+	SubstitutionErrorCode code)
 {
 	Q_UNUSED(code)
 	QStringList messages = {message, QObject::tr("line %1").arg(line)};
@@ -174,15 +171,13 @@ void TemplatesProcessor::error(const QString& message,
 		messages.append(QObject::tr("relative the beginning of the &lt;constraints&gt; tag"));
 	} else {
 		auto currentTemplateName = context.mOrder.last();
-		messages.append(QObject::tr("relative to the beginning of the %1 template body")
-				.arg(currentTemplateName));
+		messages.append(
+			QObject::tr("relative to the beginning of the %1 template body").arg(currentTemplateName));
 	}
 	const auto &finalMessage = messages.join(" ");
 	mErrors << finalMessage;
 	if (inTemplate) {
-		const auto &substitutionChain = QObject::tr("Substitution chain: %1.")
-				.arg(context.mOrder.join(" -> "));
+		const auto &substitutionChain = QObject::tr("Substitution chain: %1.").arg(context.mOrder.join(" -> "));
 		mErrors << substitutionChain;
 	}
 }
-

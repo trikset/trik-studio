@@ -71,8 +71,8 @@ public:
 private:
 	QSize preferedSvgSize() const;
 
-	bool mExternal { true };
-	bool mIsSvg { false };
+	bool mExternal {true};
+	bool mIsSvg {false};
 	QString mPath;
 	QString mImageId;
 	QScopedPointer<QImage> mImage;

@@ -24,10 +24,8 @@ class SendMessageThreadsGenerator : public BindingGenerator
 {
 	Q_OBJECT
 public:
-	SendMessageThreadsGenerator(const qrRepo::RepoApi &repo
-			, GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent = nullptr);
+	SendMessageThreadsGenerator(const qrRepo::RepoApi &repo, GeneratorCustomizer &customizer, const qReal::Id &id,
+		QObject *parent = nullptr);
 };
 
 }

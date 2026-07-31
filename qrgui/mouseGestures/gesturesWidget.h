@@ -23,7 +23,7 @@
 #include <qrkernel/ids.h>
 
 namespace Ui {
-	class GesturesWidget;
+class GesturesWidget;
 }
 
 namespace qReal {
@@ -39,14 +39,14 @@ public:
 
 	void draw(const QString &paths);
 	Id currentElement() const;
-	void setElements(QList<QPair<QString, Id> > const &elements);
+	void setElements(QList<QPair<QString, Id>> const &elements);
 
 Q_SIGNALS:
 	void currentElementChanged();
 
 private:
 	Ui::GesturesWidget *mUi;
-	int mCurrentPointNumber { -1 };
+	int mCurrentPointNumber {-1};
 	static int coord(int previous, int next, int part);
 };
 

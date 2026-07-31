@@ -14,7 +14,6 @@
 
 #include <trikKitInterpreterCommon/trikEmulation/trikaccelerometeradapter.h>
 
-
 TrikAccelerometerAdapter::TrikAccelerometerAdapter(kitBase::robotModel::robotParts::AccelerometerSensor *acc)
 	: mAccelerometer(acc)
 {

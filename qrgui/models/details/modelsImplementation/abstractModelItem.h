@@ -27,7 +27,7 @@ class AbstractModelItem
 public:
 	virtual ~AbstractModelItem();
 
-	typedef QList<AbstractModelItem*> PointerList;
+	typedef QList<AbstractModelItem *> PointerList;
 
 	AbstractModelItem(const Id &id, AbstractModelItem *parent);
 	Id id() const;

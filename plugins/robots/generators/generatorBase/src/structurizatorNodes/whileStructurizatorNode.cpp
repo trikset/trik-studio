@@ -16,10 +16,8 @@
 
 using namespace generatorBase;
 
-WhileStructurizatorNode::WhileStructurizatorNode(IntermediateStructurizatorNode *headNode
-		, IntermediateStructurizatorNode *bodyNode
-		, IntermediateStructurizatorNode *exitNode
-		, QObject *parent)
+WhileStructurizatorNode::WhileStructurizatorNode(IntermediateStructurizatorNode *headNode,
+	IntermediateStructurizatorNode *bodyNode, IntermediateStructurizatorNode *exitNode, QObject *parent)
 	: IntermediateStructurizatorNode(parent)
 	, mHeadNode(headNode)
 	, mBodyNode(bodyNode)

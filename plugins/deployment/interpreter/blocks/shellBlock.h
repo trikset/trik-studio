@@ -46,7 +46,7 @@ private:
 	/// Non-constant couse arguments can be evaluated by lua interpreter.
 	virtual QStringList arguments();
 
-	ShellWidget *mShellWidget;  // Does not take ownership
+	ShellWidget *mShellWidget; // Does not take ownership
 };
 
 }

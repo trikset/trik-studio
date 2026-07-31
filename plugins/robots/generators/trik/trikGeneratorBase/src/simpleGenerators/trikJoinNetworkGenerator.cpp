@@ -19,19 +19,14 @@
 using namespace trik::simple;
 using namespace generatorBase::simple;
 
-
-TrikJoinNetworkGenerator::TrikJoinNetworkGenerator(const qrRepo::RepoApi &repo
-						   , generatorBase::GeneratorCustomizer &customizer
-						   , const qReal::Id &id
-						   , QObject *parent)
-	: BindingGenerator(repo, customizer, id
-			  , "messages/joinNetwork.t"
-			  , { Binding::createStaticConverting("@@IP@@"
-								,  utils::StringUtils::wrap(
-								      utils::StringUtils::dequote(repo.stringProperty(id, "Address")))
-								, customizer.factory()->stringPropertyConverter(id, "Address"))
-					, Binding::createDirect("@@PORT@@", "IPPort")
-					, Binding::createDirect("@@HULL_NUMBER@@", "HullNumber") }
-			  , parent)
+TrikJoinNetworkGenerator::TrikJoinNetworkGenerator(const qrRepo::RepoApi &repo,
+	generatorBase::GeneratorCustomizer &customizer, const qReal::Id &id, QObject *parent)
+	: BindingGenerator(repo, customizer, id, "messages/joinNetwork.t",
+		  {Binding::createStaticConverting("@@IP@@",
+			   utils::StringUtils::wrap(utils::StringUtils::dequote(repo.stringProperty(id, "Address"))),
+			   customizer.factory()->stringPropertyConverter(id, "Address")),
+			  Binding::createDirect("@@PORT@@", "IPPort"),
+			  Binding::createDirect("@@HULL_NUMBER@@", "HullNumber")},
+		  parent)
 {
 }

@@ -33,9 +33,9 @@ class VisualInterpreterUnit : public BaseGraphTransformationUnit
 	Q_OBJECT
 
 public:
-	VisualInterpreterUnit(LogicalModelAssistInterface &logicalModelApi
-			, GraphicalModelAssistInterface &graphicalModelApi
-			, gui::MainWindowInterpretersInterface &interpretersInterface);
+	VisualInterpreterUnit(LogicalModelAssistInterface &logicalModelApi,
+		GraphicalModelAssistInterface &graphicalModelApi,
+		gui::MainWindowInterpretersInterface &interpretersInterface);
 	~VisualInterpreterUnit();
 
 	/// Load semantics model from current open diagram
@@ -52,11 +52,11 @@ public:
 	bool findMatch();
 
 	/// Get rule parser for watch list
-	utils::ExpressionsParser* ruleParser();
+	utils::ExpressionsParser *ruleParser();
 
 private slots:
-	void processTextCodeInterpreterStdOutput(QHash<QPair<QString, QString>, QString> const &output
-			, TextCodeInterpreter::CodeLanguage const language);
+	void processTextCodeInterpreterStdOutput(QHash<QPair<QString, QString>, QString> const &output,
+		TextCodeInterpreter::CodeLanguage const language);
 	void processTextCodeInterpreterErrOutput(QString const &output);
 
 protected:
@@ -77,7 +77,7 @@ protected:
 
 	/// Checks current diagram for being semantics model
 	bool isSemanticsEditor() const;
-	
+
 	bool checkRuleMatching();
 
 	/// Checks rule application conditions on the found matches
@@ -136,7 +136,7 @@ protected:
 	QPointF position();
 
 	/// Fill rules information with this
-	void putIdIntoMap(QHash<QString ,IdList*> *map, QString const &ruleName, Id const &id);
+	void putIdIntoMap(QHash<QString, IdList *> *map, QString const &ruleName, Id const &id);
 
 	/// Obtain an element id with the corresponding control flow mark
 	Id nodeIdWithControlMark(Id const &controlMarkId) const;
@@ -180,12 +180,12 @@ protected:
 	QPair<QString, QString> mInitializationCode;
 
 	/// All maps below has the format: key - rule name, value - list of ids
-	QHash<QString, IdList*> mDeletedElements;
-	QHash<QString, QHash<Id, Id>* > mReplacedElements;
-	QHash<QString, IdList*> mCreatedElements;
-	QHash<QString, IdList*> mNodesWithNewControlMark;
-	QHash<QString, IdList*> mNodesWithDeletedControlMark;
-	QHash<QString, IdList*> mNodesWithControlMark;
+	QHash<QString, IdList *> mDeletedElements;
+	QHash<QString, QHash<Id, Id> *> mReplacedElements;
+	QHash<QString, IdList *> mCreatedElements;
+	QHash<QString, IdList *> mNodesWithNewControlMark;
+	QHash<QString, IdList *> mNodesWithDeletedControlMark;
+	QHash<QString, IdList *> mNodesWithControlMark;
 	QHash<Id, Id> mReplacedElementsPairs;
 	QHash<Id, Id> mCreatedElementsPairs;
 

@@ -42,12 +42,10 @@ public:
 	/// @param blocksTable - an entity that will produce logic of the block by its id.
 	/// @param parser - parser that is used to analyze and evaluate textual expressions inside properties of blocks.
 	/// @param initialNodeType - the type of the element to start on diagram when stepping into it.
-	Interpreter(const qReal::GraphicalModelAssistInterface &graphicalModelApi
-			, qReal::LogicalModelAssistInterface &logicalModelApi
-			, qReal::gui::MainWindowInterpretersInterface &interpretersInterface
-			, BlocksTableInterface &blocksTable
-			, qrtext::LanguageToolboxInterface &languageToolbox
-			, const Id &initialNodeType);
+	Interpreter(const qReal::GraphicalModelAssistInterface &graphicalModelApi,
+		qReal::LogicalModelAssistInterface &logicalModelApi,
+		qReal::gui::MainWindowInterpretersInterface &interpretersInterface, BlocksTableInterface &blocksTable,
+		qrtext::LanguageToolboxInterface &languageToolbox, const Id &initialNodeType);
 
 	~Interpreter() override;
 
@@ -69,12 +67,9 @@ private Q_SLOTS:
 	void sendMessage(const QString &threadId, const QString &message);
 
 private:
-	enum InterpreterState {
-		interpreting
-		, idle
-	};
+	enum InterpreterState { interpreting, idle };
 
-	void addThread(Thread * const thread, const QString &threadId);
+	void addThread(Thread *const thread, const QString &threadId);
 
 	void reportError(const QString &message);
 
@@ -83,8 +78,8 @@ private:
 	qReal::gui::MainWindowInterpretersInterface &mInterpretersInterface;
 
 	InterpreterState mState;
-	QHash<QString, Thread *> mThreads;  // Has ownership
-	BlocksTableInterface &mBlocksTable;  // Has ownership
+	QHash<QString, Thread *> mThreads; // Has ownership
+	BlocksTableInterface &mBlocksTable; // Has ownership
 
 	/// Reference to a parser to be able to clear parser state when starting interpretation.
 	qrtext::LanguageToolboxInterface &mLanguageToolbox;

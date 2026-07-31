@@ -69,9 +69,8 @@ void Connection::send(const QByteArray &data)
 		mKeepAliveTimer->start();
 	}
 
-	const QByteArray message = mProtocol == Protocol::messageLength
-			? QByteArray::number(data.size()) + ':' + data
-			: data + '\n';
+	const QByteArray message =
+		mProtocol == Protocol::messageLength ? QByteArray::number(data.size()) + ':' + data : data + '\n';
 
 	mSocket->write(message);
 }
@@ -114,8 +113,7 @@ void Connection::onReadyRead()
 void Connection::processBuffer()
 {
 	switch (mProtocol) {
-	case Protocol::messageLength:
-	{
+	case Protocol::messageLength: {
 		while (!mBuffer.isEmpty()) {
 			if (mExpectedBytes == 0) {
 				// Determining the length of a message.
@@ -148,8 +146,7 @@ void Connection::processBuffer()
 		}
 		break;
 	}
-	case Protocol::endOfLineSeparator:
-	{
+	case Protocol::endOfLineSeparator: {
 		if (mBuffer.contains('\n')) {
 			const auto messages = mBuffer.split('\n');
 			for (int i = 0; i < messages.size() - 1; ++i) {
@@ -167,7 +164,8 @@ void Connection::handleIncomingData(const QByteArray &data)
 {
 	if (data == "keepalive") {
 		return;
-	} if (data == "version") {
+	}
+	if (data == "version") {
 		mVersionRequestReceived = true;
 		send(QString("version: " + trikRuntimeVersion).toUtf8());
 	} else {
@@ -210,8 +208,7 @@ void Connection::connectSlots()
 	connect(mSocket, &QTcpSocket::readyRead, this, &Connection::onReadyRead);
 	connect(mSocket, &QTcpSocket::connected, this, &Connection::onConnect);
 	connect(mSocket, &QTcpSocket::disconnected, this, &Connection::onDisconnect);
-	connect(mSocket, QOverload<QAbstractSocket::SocketError>::of(&QTcpSocket::error)
-			, this, &Connection::onError);
+	connect(mSocket, QOverload<QAbstractSocket::SocketError>::of(&QTcpSocket::error), this, &Connection::onError);
 }
 
 void Connection::doDisconnect()

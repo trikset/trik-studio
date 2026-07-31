@@ -20,14 +20,13 @@
 using namespace ev3::simple;
 using namespace generatorBase::simple;
 
-EnginesStopGenerator::EnginesStopGenerator(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, const qReal::Id &id
-		, QObject *parent)
-	: BindingGenerator(repo, customizer, id, "engines/stop.t", QList<Binding *>()
-			<< Binding::createConverting("@@PORT@@", "Ports"
-					, static_cast<Ev3GeneratorFactory *>(customizer.factory())->outputPortNameConverter())
-			<< Binding::createConverting("@@BREAK_MODE@@", "Mode", customizer.factory()->breakModeConverter())
-			, parent)
+EnginesStopGenerator::EnginesStopGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+	const qReal::Id &id, QObject *parent)
+	: BindingGenerator(repo, customizer, id, "engines/stop.t",
+		  QList<Binding *>() << Binding::createConverting("@@PORT@@", "Ports",
+			  static_cast<Ev3GeneratorFactory *>(customizer.factory())->outputPortNameConverter())
+				     << Binding::createConverting("@@BREAK_MODE@@", "Mode",
+						customizer.factory()->breakModeConverter()),
+		  parent)
 {
 }

@@ -32,13 +32,14 @@ public:
 	}
 
 	/// Returns value of a string (without quotes).
-	const QString &string() const {
+	const QString &string() const
+	{
 		return mString;
 	}
 
 private:
-	void accept(core::AstVisitorInterface &visitor, const QSharedPointer<Node> &pointer
-			, const QSharedPointer<Node> &parent) override
+	void accept(core::AstVisitorInterface &visitor, const QSharedPointer<Node> &pointer,
+		const QSharedPointer<Node> &parent) override
 	{
 		static_cast<LuaAstVisitorInterface *>(&visitor)->visit(qSharedPointerCast<String>(pointer), parent);
 	}

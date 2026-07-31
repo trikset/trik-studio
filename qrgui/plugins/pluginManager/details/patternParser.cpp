@@ -34,7 +34,7 @@ bool PatternParser::parseGroup(const EditorManager *editorManager, const Pattern
 	const QString xml = pattern.xml().replace("\\\"", "\"").replace("\\n", "\n");
 
 	QDomDocument doc;
-	if (xml.isEmpty()){
+	if (xml.isEmpty()) {
 		qWarning() << "ERROR: pattern parser: no xml-file to parse";
 		return false;
 	}
@@ -46,7 +46,8 @@ bool PatternParser::parseGroup(const EditorManager *editorManager, const Pattern
 	QString errorMessage;
 	int errorLine, errorColumn;
 	if (!doc.setContent(xml, &errorMessage, &errorLine, &errorColumn)) {
-		qWarning() << QString("%1:%2: %3").arg(QString::number(errorLine), QString::number(errorColumn), errorMessage);
+		qWarning() << QString("%1:%2: %3")
+				      .arg(QString::number(errorLine), QString::number(errorColumn), errorMessage);
 		return false;
 	}
 
@@ -66,19 +67,16 @@ const Pattern &PatternParser::pattern() const
 
 bool PatternParser::parseGroup(const QDomElement &group)
 {
-	Pattern pattern(mEditor, mDiagram, group.attribute("name")
-			, group.attribute("inNode"), group.attribute("outNode")
-			, group.attribute("rootNode"));
+	Pattern pattern(mEditor, mDiagram, group.attribute("name"), group.attribute("inNode"),
+		group.attribute("outNode"), group.attribute("rootNode"));
 
-	for (QDomElement node = group.firstChildElement("groupNode"); !node.isNull()
-			; node = node.nextSiblingElement("groupNode"))
-	{
+	for (QDomElement node = group.firstChildElement("groupNode"); !node.isNull();
+		node = node.nextSiblingElement("groupNode")) {
 		parseNode(node, pattern);
 	}
 
-	for (QDomElement edge = group.firstChildElement("groupEdge"); !edge.isNull()
-			; edge = edge.nextSiblingElement("groupEdge"))
-	{
+	for (QDomElement edge = group.firstChildElement("groupEdge"); !edge.isNull();
+		edge = edge.nextSiblingElement("groupEdge")) {
 		parseEdge(edge, pattern);
 	}
 

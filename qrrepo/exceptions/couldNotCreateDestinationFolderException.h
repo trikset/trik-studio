@@ -26,7 +26,8 @@ class QRREPO_EXPORT CouldNotCreateDestinationFolderException : public QrRepoExce
 public:
 	explicit CouldNotCreateDestinationFolderException(const QString &folderName)
 		: QrRepoException("Could not create destination folder: " + folderName)
-	{}
+	{
+	}
 };
 
 }

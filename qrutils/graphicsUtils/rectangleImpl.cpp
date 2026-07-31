@@ -50,11 +50,11 @@ void RectangleImpl::drawEllipseItem(QPainter *painter, qreal x1, qreal y1, qreal
 	painter->drawEllipse(calcRect(x1, y1, x2, y2));
 }
 
-void RectangleImpl::drawImageItemWithMirrored(QPainter *painter, qreal x1, qreal y1, qreal x2, qreal y2
-		, const QImage &myImage)
+void RectangleImpl::drawImageItemWithMirrored(QPainter *painter, qreal x1, qreal y1, qreal x2, qreal y2,
+	const QImage &myImage)
 {
 	QImage image(myImage);
-	if(x2 > x1) {
+	if (x2 > x1) {
 		if (y2 < y1)
 			image = myImage.mirrored(false, true);
 	} else {

@@ -32,11 +32,12 @@ QList<QPoint> PathCorrector::getMousePath(QList<QPoint> const &path)
 		QPoint previousPoint = path[i - 1];
 		int length = currentPoint.x() - previousPoint.x();
 		int width = currentPoint.y() - previousPoint.y();
-		int number = static_cast<int>((sqrt(pow(static_cast<qreal>(length), 2)
-											+ pow(static_cast<qreal>(width), 2))) / mouseSpeed + 1);
+		int number = static_cast<int>(
+			(sqrt(pow(static_cast<qreal>(length), 2) + pow(static_cast<qreal>(width), 2))) / mouseSpeed
+			+ 1);
 		for (int j = 1; j <= number; j++) {
-			QPoint point(int(previousPoint.x() + length * j / number)
-					, int(previousPoint.y() + width * j / number));
+			QPoint point(int(previousPoint.x() + length * j / number),
+				int(previousPoint.y() + width * j / number));
 			mousePath.append(point);
 		}
 	}
@@ -53,8 +54,8 @@ QList<QPoint> PathCorrector::correctPath(QList<QPoint> const &path)
 		QPoint currentPoint = path[i];
 		qreal speed = (currentPoint - previousPoint).manhattanLength();
 		qreal b = sense * (1 - 1 / exp(speedKoef * speed));
-		previousPoint.setX((int) (b * currentPoint.x() + (1 - b) * previousPoint.x()));
-		previousPoint.setY((int) (b * currentPoint.y() + (1 - b) * previousPoint.y()));
+		previousPoint.setX((int)(b * currentPoint.x() + (1 - b) * previousPoint.x()));
+		previousPoint.setY((int)(b * currentPoint.y() + (1 - b) * previousPoint.y()));
 		newPath.push_back(previousPoint);
 	}
 	return newPath;

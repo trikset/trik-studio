@@ -18,9 +18,11 @@
 
 using namespace qrtext::core;
 
-SemanticAnalyzer::SemanticAnalyzer(QSharedPointer<GeneralizationsTableInterface> const &generalizationsTable
-	, QList<Error> &errors)
-	: mAny(new types::Any()), mErrors(errors), mGeneralizationsTable(generalizationsTable)
+SemanticAnalyzer::SemanticAnalyzer(QSharedPointer<GeneralizationsTableInterface> const &generalizationsTable,
+	QList<Error> &errors)
+	: mAny(new types::Any())
+	, mErrors(errors)
+	, mGeneralizationsTable(generalizationsTable)
 {
 }
 
@@ -68,8 +70,9 @@ void SemanticAnalyzer::finalizeResolve(const QSharedPointer<ast::Node> &node)
 				if (typeVariable->finalType() == mAny) {
 					// Do nothing, error shall already be reported as unknown identifier.
 				} else {
-					const QString error = QObject::tr("Can not deduce type, expression can be of following types: %1")
-							.arg(typeVariable->toString());
+					const QString error = QObject::tr(
+						"Can not deduce type, expression can be of following types: %1")
+					                              .arg(typeVariable->toString());
 					reportError(expression, error);
 				}
 			}
@@ -98,7 +101,7 @@ QStringList SemanticAnalyzer::identifiers() const
 	return mIdentifierDeclarations.keys();
 }
 
-QMap<QString, QSharedPointer<types::TypeExpression> > SemanticAnalyzer::variableTypes() const
+QMap<QString, QSharedPointer<types::TypeExpression>> SemanticAnalyzer::variableTypes() const
 {
 	QMap<QString, QSharedPointer<qrtext::core::types::TypeExpression>> result;
 	for (auto it = mIdentifierDeclarations.begin(), end = mIdentifierDeclarations.end(); it != end; ++it) {
@@ -136,8 +139,8 @@ void SemanticAnalyzer::forget(const QSharedPointer<ast::Node> &root)
 	}
 }
 
-void SemanticAnalyzer::assign(const QSharedPointer<ast::Node> &expression
-		, const QSharedPointer<types::TypeExpression> &type)
+void SemanticAnalyzer::assign(const QSharedPointer<ast::Node> &expression,
+	const QSharedPointer<types::TypeExpression> &type)
 {
 	const auto castExpression = as<ast::Expression>(expression);
 
@@ -147,10 +150,11 @@ void SemanticAnalyzer::assign(const QSharedPointer<ast::Node> &expression
 			// new variable. Else it doesn't play well with coercion --- variable gets created, then coerced,
 			// then program is rechecked to verify coercion results, new variable is created during recheck,
 			// gets coerced and so on, infinitely.
-			mTypes[castExpression]->constrain(QList<QSharedPointer<types::TypeExpression>>{type}
-					, *mGeneralizationsTable);
+			mTypes[castExpression]->constrain(QList<QSharedPointer<types::TypeExpression>> {type},
+				*mGeneralizationsTable);
 		} else {
-			mTypes.insert(castExpression, QSharedPointer<types::TypeVariable>(new types::TypeVariable(type)));
+			mTypes.insert(castExpression,
+				QSharedPointer<types::TypeVariable>(new types::TypeVariable(type)));
 		}
 	} else {
 		mTypes.insert(castExpression, type.dynamicCast<types::TypeVariable>());
@@ -162,8 +166,8 @@ void SemanticAnalyzer::unify(QSharedPointer<ast::Node> const &lhs, QSharedPointe
 	mTypes.insert(as<ast::Expression>(lhs), mTypes.value(as<ast::Expression>(rhs)));
 }
 
-void SemanticAnalyzer::constrain(QSharedPointer<ast::Node> const &operation
-		, QSharedPointer<ast::Node> const &node, QList<QSharedPointer<types::TypeExpression>> const &types)
+void SemanticAnalyzer::constrain(QSharedPointer<ast::Node> const &operation, QSharedPointer<ast::Node> const &node,
+	QList<QSharedPointer<types::TypeExpression>> const &types)
 {
 	auto nodeType = mTypes.value(as<ast::Expression>(node));
 	if (!nodeType) {
@@ -222,8 +226,8 @@ void SemanticAnalyzer::requestRecheck()
 	mRecheckNeeded = true;
 }
 
-bool SemanticAnalyzer::isGeneralization(const QSharedPointer<types::TypeExpression> &specific
-		, const QSharedPointer<types::TypeExpression> &general) const
+bool SemanticAnalyzer::isGeneralization(const QSharedPointer<types::TypeExpression> &specific,
+	const QSharedPointer<types::TypeExpression> &general) const
 {
 	return generalizationsTable().isGeneralization(specific, general);
 }

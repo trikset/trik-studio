@@ -37,7 +37,9 @@
 namespace trik {
 
 class ROBOTS_TRIK_KIT_INTERPRETER_COMMON_EXPORT TrikKitInterpreterPluginBase
-		: public QObject, public kitBase::KitPluginInterface, /*for now*/ public kitBase::DevicesConfigurationProvider
+	: public QObject,
+	  public kitBase::KitPluginInterface,
+	  /*for now*/ public kitBase::DevicesConfigurationProvider
 {
 	Q_OBJECT
 	Q_INTERFACES(kitBase::KitPluginInterface)
@@ -54,7 +56,7 @@ public:
 	kitBase::robotModel::RobotModelInterface *defaultRobotModel() override;
 
 	QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> blocksFactoryFor(
-			const kitBase::robotModel::RobotModelInterface *model) override;
+		const kitBase::robotModel::RobotModelInterface *model) override;
 	QList<kitBase::AdditionalPreferences *> settingsWidgets() override;
 
 	QWidget *quickPreferencesFor(const kitBase::robotModel::RobotModelInterface &model) override;
@@ -63,7 +65,7 @@ public:
 
 	QIcon iconForFastSelector(const kitBase::robotModel::RobotModelInterface &robotModel) const override;
 
-	kitBase::DevicesConfigurationProvider * devicesConfigurationProvider() override;
+	kitBase::DevicesConfigurationProvider *devicesConfigurationProvider() override;
 
 	QList<qReal::ActionInfo> customActions() override;
 
@@ -77,7 +79,7 @@ Q_SIGNALS:
 	void codeInterpretationStarted(const QString &code, const QString &languageExtension);
 
 private Q_SLOTS:
-	QWidget *produceIpAddressConfigurer();  // Transfers ownership
+	QWidget *produceIpAddressConfigurer(); // Transfers ownership
 
 	void testStart(); // QtS
 	void testStop(qReal::interpretation::StopReason reason);
@@ -85,10 +87,9 @@ private Q_SLOTS:
 
 protected:
 	/// Takes ownership over all supplied pointers.
-	void initKitInterpreterPluginBase(robotModel::TrikRobotModelBase * const realRobotModel
-			, robotModel::twoD::TrikTwoDRobotModel * const twoDRobotModel
-			, const QSharedPointer<blocks::TrikBlocksFactoryBase> &blocksFactory
-			);
+	void initKitInterpreterPluginBase(robotModel::TrikRobotModelBase *const realRobotModel,
+		robotModel::twoD::TrikTwoDRobotModel *const twoDRobotModel,
+		const QSharedPointer<blocks::TrikBlocksFactoryBase> &blocksFactory);
 
 	qReal::gui::MainWindowInterpretersInterface *mMainWindow {};
 
@@ -119,7 +120,7 @@ private:
 	TrikAdditionalPreferences *mAdditionalPreferences = nullptr;
 	bool mOwnsAdditionalPreferences = true;
 
-	kitBase::InterpreterControlInterface *mInterpreterControl {};  // Does not have ownership.
+	kitBase::InterpreterControlInterface *mInterpreterControl {}; // Does not have ownership.
 	qReal::ProjectManagementInterface *mProjectManager {}; // Does not have ownership.
 	qReal::LogicalModelAssistInterface *mLogicalModel {}; // Doesn`t have ownership
 	QString mCurrentlySelectedModelName;

@@ -25,7 +25,8 @@ class TemporaryPair : public ast::Node
 public:
 	/// Constructor. Takes left and right subtrees.
 	TemporaryPair(QSharedPointer<ast::Node> const &left, QSharedPointer<ast::Node> const &right)
-		: mLeft(left), mRight(right)
+		: mLeft(left)
+		, mRight(right)
 	{
 	}
 

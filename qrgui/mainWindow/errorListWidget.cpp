@@ -41,7 +41,7 @@ ErrorListWidget::ErrorListWidget(QWidget *parent)
 	initContextMenu();
 }
 
-void ErrorListWidget::highlightElement(QListWidgetItem* const item)
+void ErrorListWidget::highlightElement(QListWidgetItem *const item)
 {
 	const qReal::Id id = qReal::Id::loadFromString(item->data(positionRole).toString());
 	if (item->isSelected()) {
@@ -49,7 +49,7 @@ void ErrorListWidget::highlightElement(QListWidgetItem* const item)
 	}
 }
 
-void ErrorListWidget::init(qReal::MainWindow* mainWindow)
+void ErrorListWidget::init(qReal::MainWindow *mainWindow)
 {
 	mMainWindow = mainWindow;
 }

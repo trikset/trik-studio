@@ -19,7 +19,7 @@ namespace twoDModel {
 
 namespace items {
 
-class ColorFieldItem: public view::TwoDSceneItem
+class ColorFieldItem : public view::TwoDSceneItem
 {
 	Q_OBJECT
 
@@ -29,9 +29,7 @@ class ColorFieldItem: public view::TwoDSceneItem
 	Q_DISABLE_COPY(ColorFieldItem)
 
 public:
-	explicit ColorFieldItem(
-	                graphicsUtils::AbstractCoordinateSystem *metricSystem,
-	                QGraphicsItem *parent = nullptr);
+	explicit ColorFieldItem(graphicsUtils::AbstractCoordinateSystem *metricSystem, QGraphicsItem *parent = nullptr);
 	~ColorFieldItem() override;
 
 	/// Returns a color of this item.
@@ -50,7 +48,8 @@ public:
 	/// Creates a copy of this graphical item. Transfers ownership to the caller.
 	virtual AbstractItem *clone() const = 0;
 
-	void setBindedToRegion(bool bindedtoRegion) {
+	void setBindedToRegion(bool bindedtoRegion)
+	{
 		mBindedToRegion = bindedtoRegion;
 	};
 
@@ -64,6 +63,7 @@ Q_SIGNALS:
 	void convertToRegionWithContextMenu(const twoDModel::items::ColorFieldItem &);
 	/// A signal emitted when the region is bound to this element through the context menu.
 	void bindToRegionWithContextMenu(const twoDModel::items::ColorFieldItem &);
+
 private:
 	bool mBindedToRegion {};
 };

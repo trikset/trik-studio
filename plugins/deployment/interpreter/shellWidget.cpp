@@ -27,7 +27,7 @@ ShellWidget::ShellWidget(QWidget *parent)
 	setTextColor(Qt::white);
 	setReadOnly(true);
 
-	QPushButton * const button = new QPushButton(tr("Clear"), this);
+	QPushButton *const button = new QPushButton(tr("Clear"), this);
 	button->move(0, 0);
 	button->setFixedHeight(15);
 	connect(button, &QPushButton::clicked, this, &QTextEdit::clear);

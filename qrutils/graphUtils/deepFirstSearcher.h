@@ -26,17 +26,17 @@ class QRUTILS_EXPORT DeepFirstSearcher
 {
 public:
 	/// A storage for more comfortable processing visited nodes
-	struct QRUTILS_EXPORT LinkInfo
-	{
+	struct QRUTILS_EXPORT LinkInfo {
 	public:
 		qReal::Id linkId;
 		qReal::Id target;
 		bool connected;
 		bool targetVisited;
 
-		bool operator==(const LinkInfo &other) {
-			return linkId == other.linkId && target == other.target
-					&& connected == other.connected && targetVisited == other.targetVisited;
+		bool operator==(const LinkInfo &other)
+		{
+			return linkId == other.linkId && target == other.target && connected == other.connected
+			       && targetVisited == other.targetVisited;
 		}
 	};
 

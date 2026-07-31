@@ -23,8 +23,7 @@ void handler(QtMsgType type, const QMessageLogContext &context, const QString &m
 	auto const &msgUtf8 = message.toUtf8();
 	auto msg = msgUtf8.constData();
 	fprintf(stderr, "%s:%d\t", context.file, context.line);
-	switch (type)
-	{
+	switch (type) {
 	case QtDebugMsg:
 		fprintf(stderr, "Debug: %s\n", msg);
 		break;
@@ -42,7 +41,6 @@ void handler(QtMsgType type, const QMessageLogContext &context, const QString &m
 		abort();
 	}
 }
-
 
 int main(int argc, char *argv[])
 {

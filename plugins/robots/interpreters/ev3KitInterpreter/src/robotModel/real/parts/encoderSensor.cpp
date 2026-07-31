@@ -21,8 +21,8 @@ const unsigned encoderSensorResponseSize = 9;
 using namespace ev3::robotModel::real::parts;
 using namespace kitBase::robotModel;
 
-EncoderSensor::EncoderSensor(const DeviceInfo &info, const PortInfo &port
-		, utils::robotCommunication::RobotCommunicator &robotCommunicator)
+EncoderSensor::EncoderSensor(const DeviceInfo &info, const PortInfo &port,
+	utils::robotCommunication::RobotCommunicator &robotCommunicator)
 	: kitBase::robotModel::robotParts::EncoderSensor(info, port)
 	, mImplementation(robotCommunicator, port)
 	, mRobotCommunicator(robotCommunicator)
@@ -44,11 +44,12 @@ void EncoderSensor::read()
 
 void EncoderSensor::nullify()
 {
-	QByteArray command = communication::Ev3DirectCommand::formCommand(12, 0, 0, 0
-			, enums::commandType::CommandTypeEnum::DIRECT_COMMAND_REPLY);
+	QByteArray command = communication::Ev3DirectCommand::formCommand(12, 0, 0, 0,
+		enums::commandType::CommandTypeEnum::DIRECT_COMMAND_REPLY);
 	int index = 7;
 	communication::Ev3DirectCommand::addOpcode(enums::opcode::OpcodeEnum::OUTPUT_CLR_COUNT, command, index);
-	communication::Ev3DirectCommand::addByteParameter(enums::daisyChainLayer::DaisyChainLayerEnum::EV3, command, index);
+	communication::Ev3DirectCommand::addByteParameter(enums::daisyChainLayer::DaisyChainLayerEnum::EV3, command,
+		index);
 	communication::Ev3DirectCommand::addByteParameter(lowLevelPort(), command, index);
 
 	mRobotCommunicator.send(this, command, 3);

@@ -29,9 +29,10 @@ public:
 	/// Constructor.
 	/// @param returnType - type expression denoting return type of a function.
 	/// @param formalParameters - a list of formal parameter types.
-	Function(QSharedPointer<core::types::TypeExpression> const &returnType
-			, QList<QSharedPointer<core::types::TypeExpression>> const &formalParameters)
-		: mReturnType(returnType), mFormalParameters(formalParameters)
+	Function(QSharedPointer<core::types::TypeExpression> const &returnType,
+		QList<QSharedPointer<core::types::TypeExpression>> const &formalParameters)
+		: mReturnType(returnType)
+		, mFormalParameters(formalParameters)
 	{
 	}
 
@@ -54,9 +55,8 @@ public:
 			parameterTypes << type->toString();
 		}
 
-		return QString("%1(%2)").arg(mReturnType->toString(), parameterTypes.join(", ")) +  QObject::tr("");
+		return QString("%1(%2)").arg(mReturnType->toString(), parameterTypes.join(", ")) + QObject::tr("");
 	}
-
 
 private:
 	QSharedPointer<core::types::TypeExpression> mReturnType;

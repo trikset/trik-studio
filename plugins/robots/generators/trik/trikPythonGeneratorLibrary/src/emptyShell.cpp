@@ -16,8 +16,7 @@
 
 using namespace trik::python;
 
-EmptyShell::EmptyShell(const kitBase::robotModel::DeviceInfo &info
-		, const kitBase::robotModel::PortInfo &port)
+EmptyShell::EmptyShell(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port)
 	: TrikShell(info, port)
 {
 }
@@ -63,4 +62,3 @@ void EmptyShell::initVideoStreaming(int qual, bool grayscaled)
 	Q_UNUSED(qual)
 	Q_UNUSED(grayscaled)
 }
-

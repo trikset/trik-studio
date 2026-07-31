@@ -40,27 +40,21 @@ class ROBOTS_GENERATOR_EXPORT LuaProcessor : public QObject, public TemplatePara
 	Q_OBJECT
 
 public:
-	LuaProcessor(qReal::ErrorReporterInterface &errorReporter
-			, qrtext::LanguageToolboxInterface &textLanguage
-			, const utils::ParserErrorReporter &parserErrorReporter
-			, QObject *parent = nullptr);
+	LuaProcessor(qReal::ErrorReporterInterface &errorReporter, qrtext::LanguageToolboxInterface &textLanguage,
+		const utils::ParserErrorReporter &parserErrorReporter, QObject *parent = nullptr);
 
 	/// Converts the given Lua code into the target language and substitues all
 	/// reserved variables and functions code.
 	/// Takes ownership on @arg reservedVariablesConverter.
-	virtual QString translate(const QString &luaCode
-			, const qReal::Id &id
-			, const QString &propertyName
-			, const simple::Binding::ConverterInterface *reservedVariablesConverter);
+	virtual QString translate(const QString &luaCode, const qReal::Id &id, const QString &propertyName,
+		const simple::Binding::ConverterInterface *reservedVariablesConverter);
 
 	/// Converts the given Lua code into the target language, substitues all
 	/// reserved variables and functions code and casts the result to the given types.
 	/// Takes ownership on @arg reservedVariablesConverter.
-	virtual QString castTo(const QSharedPointer<qrtext::core::types::TypeExpression> &type
-			, const QString &luaCode
-			, const qReal::Id &id
-			, const QString &propertyName
-			, const simple::Binding::ConverterInterface *reservedVariablesConverter);
+	virtual QString castTo(const QSharedPointer<qrtext::core::types::TypeExpression> &type, const QString &luaCode,
+		const qReal::Id &id, const QString &propertyName,
+		const simple::Binding::ConverterInterface *reservedVariablesConverter);
 
 	/// Returns facade object for manipulating text language.
 	qrtext::LanguageToolboxInterface &toolbox() const;
@@ -73,9 +67,8 @@ protected:
 	qReal::ErrorReporterInterface &mErrorReporter;
 	qrtext::LanguageToolboxInterface &mTextLanguage;
 
-	QSharedPointer<qrtext::core::ast::Node> parse(const QString &data
-			, const qReal::Id &id
-			, const QString &propertyName) const;
+	QSharedPointer<qrtext::core::ast::Node> parse(const QString &data, const qReal::Id &id,
+		const QString &propertyName) const;
 
 private:
 	PrecedenceConverter mPrecedenceConverter;

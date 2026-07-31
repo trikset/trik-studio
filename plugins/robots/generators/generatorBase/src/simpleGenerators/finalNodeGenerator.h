@@ -24,11 +24,8 @@ class FinalNodeGenerator : public BindingGenerator
 {
 	Q_OBJECT
 public:
-	FinalNodeGenerator(const qrRepo::RepoApi &repo
-			, GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, bool inMainDiagram
-			, QObject *parent = nullptr);
+	FinalNodeGenerator(const qrRepo::RepoApi &repo, GeneratorCustomizer &customizer, const qReal::Id &id,
+		bool inMainDiagram, QObject *parent = nullptr);
 };
 
 }

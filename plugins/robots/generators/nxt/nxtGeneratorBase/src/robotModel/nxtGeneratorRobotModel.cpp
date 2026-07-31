@@ -16,11 +16,8 @@
 
 using namespace nxt::robotModel;
 
-NxtGeneratorRobotModel::NxtGeneratorRobotModel(const QString &kitId
-		, const QString &robotId
-		, const QString &name
-		, const QString &friendlyName
-		, int priority)
+NxtGeneratorRobotModel::NxtGeneratorRobotModel(const QString &kitId, const QString &robotId, const QString &name,
+	const QString &friendlyName, int priority)
 	: NxtRobotModelBase(kitId, robotId)
 	, mName(name)
 	, mFriendlyName(friendlyName)

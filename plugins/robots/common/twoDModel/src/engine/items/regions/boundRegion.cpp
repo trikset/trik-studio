@@ -26,9 +26,8 @@ using namespace twoDModel::items;
 
 const int defaultStroke = 0;
 
-BoundRegion::BoundRegion(graphicsUtils::AbstractCoordinateSystem *metricSystem
-			, QSharedPointer<graphicsUtils::AbstractItem> abstractItem
-			, QString boundId, QGraphicsItem *parent)
+BoundRegion::BoundRegion(graphicsUtils::AbstractCoordinateSystem *metricSystem,
+	QSharedPointer<graphicsUtils::AbstractItem> abstractItem, QString boundId, QGraphicsItem *parent)
 	: RegionItem(abstractItem, metricSystem, parent)
 	, mBoundItem(abstractItem)
 	, mBoundId(std::move(boundId))
@@ -37,14 +36,13 @@ BoundRegion::BoundRegion(graphicsUtils::AbstractCoordinateSystem *metricSystem
 	RegionItem::setDumpPositionInfo(false);
 	// Unlike a regular region, we don't just copy the element once;
 	// any change to the associated AbstractItem should also change the region.
-	connect(&*abstractItem, &AbstractItem::positionChanged, this, [this](QPointF p) {this->setPos(p);} );
+	connect(&*abstractItem, &AbstractItem::positionChanged, this, [this](QPointF p) { this->setPos(p); });
 	connect(&*abstractItem, &AbstractItem::x1Changed, this, &AbstractItem::setX1);
 	connect(&*abstractItem, &AbstractItem::y1Changed, this, &AbstractItem::setY1);
 	connect(&*abstractItem, &AbstractItem::x2Changed, this, &AbstractItem::setX2);
 	connect(&*abstractItem, &AbstractItem::y2Changed, this, &AbstractItem::setY2);
-	connect(&*abstractItem, &AbstractItem::penChanged, this, [this](const QPen &pen){
-		setPenColor(pen.color().name());
-	});
+	connect(&*abstractItem, &AbstractItem::penChanged, this,
+		[this](const QPen &pen) { setPenColor(pen.color().name()); });
 
 	if (auto colorFieldItem = qSharedPointerCast<items::ColorFieldItem>(abstractItem)) {
 		colorFieldItem->setBindedToRegion(true);
@@ -103,7 +101,7 @@ void BoundRegion::switchToMode(EditorMode mode)
 QRectF BoundRegion::boundingRect() const
 {
 	QSharedPointer<graphicsUtils::AbstractItem> strong = mBoundItem.toStrongRef();
-	return strong ? strong->boundingRect().adjusted(-mStroke, -mStroke, mStroke, mStroke) : QRectF{};
+	return strong ? strong->boundingRect().adjusted(-mStroke, -mStroke, mStroke, mStroke) : QRectF {};
 }
 
 void BoundRegion::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -127,8 +125,7 @@ QPainterPath BoundRegion::shape() const
 	// the resize area of the associated object.
 	if (auto *ellipseItem = dynamic_cast<items::EllipseItem *>(strong.data())) {
 		result = ellipseItem->shapeWihoutResizeArea();
-	}
-	else if (auto *rectangleItem = dynamic_cast<items::RectangleItem *>(strong.data())) {
+	} else if (auto *rectangleItem = dynamic_cast<items::RectangleItem *>(strong.data())) {
 		result = rectangleItem->shapeWihoutResizeArea();
 	} else {
 		QLOG_ERROR() << "This type of object that inherits AbstractItem is "

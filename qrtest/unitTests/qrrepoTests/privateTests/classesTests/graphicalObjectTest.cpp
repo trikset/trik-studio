@@ -63,8 +63,8 @@ TEST(GraphicalObjectTest, graphicalPartsSerializeTest)
 	ASSERT_TRUE(serializedGraphicalObject.firstChildElement("properties").childNodes().isEmpty());
 	ASSERT_FALSE(serializedGraphicalObject.firstChildElement("graphicalParts").childNodes().isEmpty());
 
-	QDomElement graphicalPart
-			= serializedGraphicalObject.firstChildElement("graphicalParts").firstChildElement("graphicalPart");
+	QDomElement graphicalPart =
+		serializedGraphicalObject.firstChildElement("graphicalParts").firstChildElement("graphicalPart");
 
 	ASSERT_EQ("0", graphicalPart.attribute("index").toStdString());
 	ASSERT_EQ("QPointF", graphicalPart.firstChildElement().tagName().toStdString());

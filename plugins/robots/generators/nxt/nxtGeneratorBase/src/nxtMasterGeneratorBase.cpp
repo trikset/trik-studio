@@ -19,13 +19,10 @@
 
 using namespace nxt;
 
-NxtMasterGeneratorBase::NxtMasterGeneratorBase(const qrRepo::RepoApi &repo
-		, qReal::ErrorReporterInterface &errorReporter
-		, const utils::ParserErrorReporter &parserErrorReporter
-		, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
-		, qrtext::LanguageToolboxInterface &textLanguage
-		, const qReal::Id &diagramId
-		, const QString &generatorName)
+NxtMasterGeneratorBase::NxtMasterGeneratorBase(const qrRepo::RepoApi &repo,
+	qReal::ErrorReporterInterface &errorReporter, const utils::ParserErrorReporter &parserErrorReporter,
+	const kitBase::robotModel::RobotModelManagerInterface &robotModelManager,
+	qrtext::LanguageToolboxInterface &textLanguage, const qReal::Id &diagramId, const QString &generatorName)
 	: MasterGeneratorBase(repo, errorReporter, robotModelManager, textLanguage, parserErrorReporter, diagramId)
 	, mGeneratorName(generatorName)
 {
@@ -33,8 +30,8 @@ NxtMasterGeneratorBase::NxtMasterGeneratorBase(const qrRepo::RepoApi &repo
 
 generatorBase::GeneratorCustomizer *NxtMasterGeneratorBase::createCustomizer()
 {
-	return new NxtGeneratorCustomizer(mRepo, mErrorReporter, mRobotModelManager, *createLuaProcessor()
-			, mGeneratorName, supportsSwitchUnstableToBreaks());
+	return new NxtGeneratorCustomizer(mRepo, mErrorReporter, mRobotModelManager, *createLuaProcessor(),
+		mGeneratorName, supportsSwitchUnstableToBreaks());
 }
 
 void NxtMasterGeneratorBase::beforeGeneration()

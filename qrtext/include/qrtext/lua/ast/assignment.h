@@ -28,9 +28,9 @@ public:
 	/// Constructor.
 	/// @param variable - left-hand side expression: variable or array slice.
 	/// @param value - right-hand side expression.
-	Assignment(QSharedPointer<Expression> const &variable
-			, QSharedPointer<Expression> const &value)
-		: mVariable(variable), mValue(value)
+	Assignment(QSharedPointer<Expression> const &variable, QSharedPointer<Expression> const &value)
+		: mVariable(variable)
+		, mValue(value)
 	{
 		connect(mVariable);
 		connect(mValue);
@@ -54,8 +54,8 @@ public:
 	}
 
 private:
-	void accept(core::AstVisitorInterface &visitor, const QSharedPointer<Node> &pointer
-			, const QSharedPointer<Node> &parent) override
+	void accept(core::AstVisitorInterface &visitor, const QSharedPointer<Node> &pointer,
+		const QSharedPointer<Node> &parent) override
 	{
 		static_cast<LuaAstVisitorInterface *>(&visitor)->visit(qSharedPointerCast<Assignment>(pointer), parent);
 	}

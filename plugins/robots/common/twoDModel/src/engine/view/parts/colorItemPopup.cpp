@@ -53,8 +53,8 @@ bool ColorItemPopup::suits(QGraphicsItem *item)
 	const auto *ellipseRegion = dynamic_cast<items::EllipseRegion *>(item);
 
 	return dynamic_cast<items::ColorFieldItem *>(item) != nullptr
-		|| (rectRegion != nullptr && rectRegion->editorMode() == EditorMode::regionEditorMode)
-		|| (ellipseRegion != nullptr && ellipseRegion->editorMode() == EditorMode::regionEditorMode);
+	       || (rectRegion != nullptr && rectRegion->editorMode() == EditorMode::regionEditorMode)
+	       || (ellipseRegion != nullptr && ellipseRegion->editorMode() == EditorMode::regionEditorMode);
 }
 
 bool ColorItemPopup::attachTo(const QList<QGraphicsItem *> &items)
@@ -88,8 +88,8 @@ bool ColorItemPopup::attachTo(const QList<QGraphicsItem *> &items)
 
 void ColorItemPopup::initWidget()
 {
-	auto * const layout = new QVBoxLayout(this);
-	auto * const firstRow = new QHBoxLayout;
+	auto *const layout = new QVBoxLayout(this);
+	auto *const firstRow = new QHBoxLayout;
 	firstRow->addWidget(initColorPicker());
 	firstRow->addWidget(initBrushPicker());
 	layout->addLayout(firstRow);
@@ -100,9 +100,9 @@ void ColorItemPopup::initWidget()
 
 QWidget *ColorItemPopup::initColorPicker()
 {
-	auto * const editor = new qReal::ui::ColorListEditor(this, true);
+	auto *const editor = new qReal::ui::ColorListEditor(this, true);
 	editor->setToolTip(tr("Color"));
-	const QStringList colorList = { "Black", "Blue", "LimeGreen", "Yellow", "White", "Red", "#964b00"};
+	const QStringList colorList = {"Black", "Blue", "LimeGreen", "Yellow", "White", "Red", "#964b00"};
 	editor->setColorList(colorList);
 	editor->setFocusPolicy(Qt::NoFocus);
 	connect(editor, &qReal::ui::ColorListEditor::colorChanged, this, [=](const QColor &color) {
@@ -119,7 +119,7 @@ QWidget *ColorItemPopup::initColorPicker()
 
 QWidget *ColorItemPopup::initBrushPicker()
 {
-	auto * const editor = new QCheckBox(this);
+	auto *const editor = new QCheckBox(this);
 	editor->setFocusPolicy(Qt::NoFocus);
 	mBrushPicker = editor;
 	connect(mColorPicker, &qReal::ui::ColorListEditor::colorChanged, this, &ColorItemPopup::setBrushPickerColor);
@@ -139,7 +139,7 @@ QWidget *ColorItemPopup::initBrushPicker()
 
 QWidget *ColorItemPopup::initSpinBox()
 {
-	auto * const spinBox = new PopupMetricWidget(this);
+	auto *const spinBox = new PopupMetricWidget(this);
 	spinBox->setToolTip(tr("Thickness"));
 	QPalette spinBoxPalette;
 	spinBoxPalette.setColor(QPalette::Window, Qt::transparent);
@@ -164,11 +164,11 @@ void ColorItemPopup::onSizeUnitChanged(const QSharedPointer<twoDModel::model::Si
 void ColorItemPopup::setBrushPickerColor(const QColor &color)
 {
 	mBrushPicker->setStyleSheet(QString(
-			"QCheckBox { spacing: 0 }"
-			"QCheckBox::indicator { width: 12px; height: 12px; }"
-			"QCheckBox::indicator::checked { background: %1; border: 1px solid %1; border-radius: 6px; }"
-			"QCheckBox::indicator::unchecked { background: white; border: 1px solid %1; border-radius: 6px; }"
-	).arg(color.name()));
+		"QCheckBox { spacing: 0 }"
+		"QCheckBox::indicator { width: 12px; height: 12px; }"
+		"QCheckBox::indicator::checked { background: %1; border: 1px solid %1; border-radius: 6px; }"
+		"QCheckBox::indicator::unchecked { background: white; border: 1px solid %1; border-radius: 6px; }")
+			.arg(color.name()));
 }
 
 QPen ColorItemPopup::pen() const

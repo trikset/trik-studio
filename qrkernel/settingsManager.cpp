@@ -21,7 +21,7 @@
 
 using namespace qReal;
 
-SettingsManager* SettingsManager::mInstance = nullptr;
+SettingsManager *SettingsManager::mInstance = nullptr;
 
 SettingsManager::SettingsManager()
 	: mSettings(QSettings::IniFormat, QSettings::UserScope, "CyberTech Labs", "TRIK Studio")
@@ -47,7 +47,7 @@ QVariant SettingsManager::value(const QString &key, const QVariant &defaultValue
 	return instance()->get(key, defaultValue);
 }
 
-SettingsManager* SettingsManager::instance()
+SettingsManager *SettingsManager::instance()
 {
 	if (mInstance == nullptr) {
 		mInstance = new SettingsManager();

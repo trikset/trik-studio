@@ -34,25 +34,9 @@ class QRUTILS_EXPORT AbstractItem : public QGraphicsObject
 	Q_OBJECT
 
 public:
-	enum DragState {
-		None
-		, TopLeft
-		, TopRight
-		, BottomLeft
-		, BottomRight
-		, Ctrl
-	};
+	enum DragState { None, TopLeft, TopRight, BottomLeft, BottomRight, Ctrl };
 
-	enum ZValue {
-		Background
-		, Region
-		, Picture
-		, Shape
-		, Marker
-		, Wall
-		, Moveable
-		, Robot
-	};
+	enum ZValue { Background, Region, Picture, Shape, Marker, Wall, Moveable, Robot };
 
 	explicit AbstractItem(QGraphicsItem *parent = nullptr);
 
@@ -73,8 +57,8 @@ public:
 	static QStringList getPenStyleList();
 	static QStringList getBrushStyleList();
 
-	static QIcon loadThemedIcon(const QString& path, const QColor& color);
-	static QIcon loadTextColorIcon(const QString& path);
+	static QIcon loadThemedIcon(const QString &path, const QColor &color);
+	static QIcon loadTextColorIcon(const QString &path);
 
 	QPen pen() const;
 	QBrush brush() const;
@@ -89,8 +73,8 @@ public:
 	virtual void setBrushColor(const QString &text);
 	virtual void setBrush(const QString &brushStyle, const QString &brushColor);
 	virtual void setPen(const QString &penStyle, qreal width, const QString &penColor);
-	virtual void setPenBrush(const QString &penStyle, qreal width, const QString &penColor, const QString &brushStyle
-			, const QString &brushColor);
+	virtual void setPenBrush(const QString &penStyle, qreal width, const QString &penColor,
+		const QString &brushStyle, const QString &brushColor);
 
 	/// Returns a x-coordinate of the first item`s end (it may be one corner of the rectangle or the begin of the line).
 	qreal x1() const;
@@ -119,15 +103,15 @@ public:
 
 	virtual void calcResizeItem(QGraphicsSceneMouseEvent *event);
 	virtual void resizeItem(QGraphicsSceneMouseEvent *event);
-	virtual void resizeItemCommon(QGraphicsSceneMouseEvent *event, QPointF &estimatedPosition,
-									bool showGrid, qreal gridSize);
+	virtual void resizeItemCommon(QGraphicsSceneMouseEvent *event, QPointF &estimatedPosition, bool showGrid,
+		qreal gridSize);
 	void reverseOldResizingItem(QPointF begin, QPointF end);
 
 	virtual void restorePos();
 	virtual void savePos();
 
 	//for save to xml
-	virtual void setXandY(QDomElement& dom, const QRectF &rect);
+	virtual void setXandY(QDomElement &dom, const QRectF &rect);
 	QDomElement setPenBrushToDoc(QDomDocument &document, const QString &domName) const;
 	QDomElement setPenBrushToElement(QDomElement &target, const QString &domName) const;
 	virtual QRectF sceneBoundingRectCoord(const QPoint topLeftPicture);
@@ -194,7 +178,7 @@ protected:
 	void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
 
 	virtual void updateCursor(QGraphicsSceneHoverEvent *event);
-	void copyTo(AbstractItem * const other) const;
+	void copyTo(AbstractItem *const other) const;
 	qreal alignedCoordinate(qreal coord, const qreal gridSize) const;
 	void setXYWithDragState(const QPointF pos);
 

@@ -25,12 +25,10 @@ class TrikNetworkCommunicator : public kitBase::robotModel::robotParts::Communic
 	Q_OBJECT
 
 public:
-	TrikNetworkCommunicator(const kitBase::robotModel::DeviceInfo &info
-				, const kitBase::robotModel::PortInfo &port);
-
+	TrikNetworkCommunicator(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port);
 
 	/// Send a message to a robot
-	virtual void send(const QString& message, int hullNumber) = 0;
+	virtual void send(const QString &message, int hullNumber) = 0;
 
 	/// Receive message from robot
 	virtual QString receive(bool wait) = 0;

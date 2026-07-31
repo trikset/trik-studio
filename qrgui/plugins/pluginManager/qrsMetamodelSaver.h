@@ -58,10 +58,10 @@ private:
 	QString linkShapeToString(LinkShape linkShape);
 
 	void saveMetamodel(qrRepo::RepoApi &repo, const Metamodel &metamodel);
-	void saveDiagram(qrRepo::RepoApi &repo, const Metamodel &metamodel
-			, const QString &diagramName, const Id &metamodelDiagramId, Id &resultingId);
-	void saveObjectsOnDiagram(qrRepo::RepoApi &repo, const Metamodel &metamodel
-			, const QString &diagramName, const Id &diagram, QMap<const ElementType *, Id> &elements);
+	void saveDiagram(qrRepo::RepoApi &repo, const Metamodel &metamodel, const QString &diagramName,
+		const Id &metamodelDiagramId, Id &resultingId);
+	void saveObjectsOnDiagram(qrRepo::RepoApi &repo, const Metamodel &metamodel, const QString &diagramName,
+		const Id &diagram, QMap<const ElementType *, Id> &elements);
 	Id saveNode(qrRepo::RepoApi &repo, const NodeElementType &node, const Id &diagram);
 	Id saveEdge(qrRepo::RepoApi &repo, const EdgeElementType &edge, const Id &diagram);
 	Id saveGroup(qrRepo::RepoApi &repo, const PatternType &pattern, const Id &diagram);
@@ -73,10 +73,11 @@ private:
 	void saveContainerProperties(qrRepo::RepoApi &repo, const NodeElementType &node, const Id &id);
 	void saveAssociations(qrRepo::RepoApi &repo, const EdgeElementType &edge, const Id &id);
 	void savePorts(qrRepo::RepoApi &repo, const EdgeElementType &edge, const Id &id, const QString &direction);
-	void saveEnumValues(qrRepo::RepoApi &repo, const Metamodel &metamodel, const QString &enumName, const Id &enumId);
+	void saveEnumValues(qrRepo::RepoApi &repo, const Metamodel &metamodel, const QString &enumName,
+		const Id &enumId);
 	void saveGroupNodes(qrRepo::RepoApi &repo, const QDomElement &parent, const Id &id);
-	void saveLinksInMetamodel(qrRepo::RepoApi &repo, const Metamodel &metamodel, const QString &diagramName
-			, const Id &diagram, const QMap<const ElementType *, Id> &elements);
+	void saveLinksInMetamodel(qrRepo::RepoApi &repo, const Metamodel &metamodel, const QString &diagramName,
+		const Id &diagram, const QMap<const ElementType *, Id> &elements);
 };
 
 }

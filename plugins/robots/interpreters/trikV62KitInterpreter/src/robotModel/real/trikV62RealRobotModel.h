@@ -46,9 +46,8 @@ public:
 	void setErrorReporter(qReal::ErrorReporterInterface &errorReporter) override;
 
 protected:
-	kitBase::robotModel::robotParts::Device *createDevice(
-			const kitBase::robotModel::PortInfo &port
-			, const kitBase::robotModel::DeviceInfo &deviceInfo) override;
+	kitBase::robotModel::robotParts::Device *createDevice(const kitBase::robotModel::PortInfo &port,
+		const kitBase::robotModel::DeviceInfo &deviceInfo) override;
 
 private:
 	QScopedPointer<utils::robotCommunication::TcpRobotCommunicator> mRobotCommunicator;

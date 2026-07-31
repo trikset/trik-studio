@@ -53,7 +53,7 @@ TwoDRobotModel::TwoDRobotModel(const RobotModelInterface &realModel)
 		}
 	}
 
-	addAllowedConnection(PortInfo("MarkerPort", output), { markerInfo() });
+	addAllowedConnection(PortInfo("MarkerPort", output), {markerInfo()});
 }
 
 TwoDRobotModel::TwoDRobotModel(const QString &robotId)
@@ -104,7 +104,7 @@ QList<DeviceInfo> TwoDRobotModel::convertibleBases() const
 
 int TwoDRobotModel::priority() const
 {
-	return 10;  // The highest priority in all kits.
+	return 10; // The highest priority in all kits.
 }
 
 twoDModel::engine::TwoDModelEngineInterface *TwoDRobotModel::engine()
@@ -171,9 +171,9 @@ QPointF TwoDRobotModel::rotationCenter() const
 	return (wheelsPos[0] + wheelsPos[1]) / 2;
 }
 
-QPair<qreal, int> TwoDRobotModel::rangeSensorAngleAndDistance (const kitBase::robotModel::DeviceInfo &deviceType) const
+QPair<qreal, int> TwoDRobotModel::rangeSensorAngleAndDistance(const kitBase::robotModel::DeviceInfo &deviceType) const
 {
-	return deviceType.isA<robotParts::RangeSensor>() ? QPair<qreal,int>(20, 255) : QPair<qreal, int>(0, 0);
+	return deviceType.isA<robotParts::RangeSensor>() ? QPair<qreal, int>(20, 255) : QPair<qreal, int>(0, 0);
 }
 
 robotParts::Device *TwoDRobotModel::createDevice(const PortInfo &port, const DeviceInfo &deviceInfo)
@@ -196,8 +196,7 @@ robotParts::Device *TwoDRobotModel::createDevice(const PortInfo &port, const Dev
 	}
 
 	if (deviceInfo.isA<robotParts::RangeSensor>()) {
-		return new parts::RangeSensor(deviceInfo, port
-				, *mEngine, rangeSensorAngleAndDistance(deviceInfo));
+		return new parts::RangeSensor(deviceInfo, port, *mEngine, rangeSensorAngleAndDistance(deviceInfo));
 	}
 
 	if (deviceInfo.isA<robotParts::LightSensor>()) {

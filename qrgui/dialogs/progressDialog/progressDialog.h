@@ -31,7 +31,7 @@ public:
 	void reportOperation(const QFuture<void> &operation, const QString &description = QString()) override;
 
 private:
-	ProgressBar *mProgressBar;  // Has ownership
+	ProgressBar *mProgressBar; // Has ownership
 };
 
 }

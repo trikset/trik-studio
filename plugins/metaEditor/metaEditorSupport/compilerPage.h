@@ -17,7 +17,7 @@
 #include <qrgui/preferencesDialog/preferencesPage.h>
 
 namespace Ui {
-	class PreferencesCompilerPage;
+class PreferencesCompilerPage;
 }
 
 namespace metaEditor {
@@ -45,11 +45,11 @@ private slots:
 
 private:
 	/// Helper function to init form fields after preset selection
-	void initCompilersSettings(QString const &pathToQmake,
-			QString const &pathToMake, QString const &pluginExtension, QString const &prefix);
+	void initCompilersSettings(QString const &pathToQmake, QString const &pathToMake,
+		QString const &pluginExtension, QString const &prefix);
 
 	/// Ui object
-	Ui::PreferencesCompilerPage *mUi;  // Has ownership
+	Ui::PreferencesCompilerPage *mUi; // Has ownership
 };
 
 }

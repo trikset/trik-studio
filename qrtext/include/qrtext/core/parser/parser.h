@@ -37,15 +37,16 @@ public:
 	/// Constructor. Takes grammar of a language to parse in form of a ParserInterface and a list of errors where to put
 	/// parser errors.
 	explicit Parser(QSharedPointer<ParserInterface<TokenType>> const &grammar, QList<Error> &errors)
-		: mErrors(errors), mGrammar(grammar)
+		: mErrors(errors)
+		, mGrammar(grammar)
 	{
 	}
 
 	/// Parses given stream of tokens and returns AST with results or nullptr if parsing is impossible.
 	/// @param tokens - a stream of tokens to parse.
 	/// @param tokenUserFriendlyNames - map with displayed names of tokens.
-	QSharedPointer<ast::Node> parse(QList<Token<TokenType>> const &tokens
-			, QHash<TokenType, QString> const &tokenUserFriendlyNames)
+	QSharedPointer<ast::Node> parse(QList<Token<TokenType>> const &tokens,
+		QHash<TokenType, QString> const &tokenUserFriendlyNames)
 	{
 		mTokenStream.reset(new TokenStream<TokenType>(tokens, tokenUserFriendlyNames, mErrors));
 		mContext.reset(new ParserContext<TokenType>(mErrors, *mTokenStream));

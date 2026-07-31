@@ -18,7 +18,7 @@
 #include <QtCore/QDir>
 
 #if defined(Q_OS_WIN)
-#include <windows.h>
+#	include <windows.h>
 #endif
 
 using namespace utils;
@@ -59,11 +59,9 @@ bool FileSystemUtils::setCreationDateToNow(const QString &path)
 {
 #if defined(Q_OS_WIN)
 	// Getting file handle
-	const LPCTSTR fileName = sizeof(TCHAR) == 1
-			? (LPCTSTR)path.toLocal8Bit().constData()
-			: (LPCTSTR)path.utf16();
-	const HANDLE handle = CreateFile(fileName, FILE_WRITE_ATTRIBUTES
-			, FILE_SHARE_READ | FILE_SHARE_WRITE, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
+	const LPCTSTR fileName = sizeof(TCHAR) == 1 ? (LPCTSTR)path.toLocal8Bit().constData() : (LPCTSTR)path.utf16();
+	const HANDLE handle = CreateFile(fileName, FILE_WRITE_ATTRIBUTES, FILE_SHARE_READ | FILE_SHARE_WRITE, 0,
+		OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
 	if (handle == INVALID_HANDLE_VALUE) {
 		qWarning() << "FileSystemUtils::setCreationDateToNow: Could not open" << path << "for writing";
 		return false;
@@ -74,7 +72,8 @@ bool FileSystemUtils::setCreationDateToNow(const QString &path)
 
 	GetSystemTime(&systemTime);
 	SystemTimeToFileTime(&systemTime, &fileTime);
-	bool result = SetFileTime(handle, &fileTime, static_cast<LPFILETIME>(nullptr), static_cast<LPFILETIME>(nullptr));
+	bool result =
+		SetFileTime(handle, &fileTime, static_cast<LPFILETIME>(nullptr), static_cast<LPFILETIME>(nullptr));
 	result &= CloseHandle(handle);
 	return result;
 #else

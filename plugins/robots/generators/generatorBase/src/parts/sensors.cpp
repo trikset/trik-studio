@@ -32,8 +32,7 @@
 using namespace generatorBase::parts;
 using namespace qReal;
 
-Sensors::Sensors(const QStringList &pathsToTemplates
-		, const simple::Binding::ConverterInterface *inputPortConverter)
+Sensors::Sensors(const QStringList &pathsToTemplates, const simple::Binding::ConverterInterface *inputPortConverter)
 	: InitTerminateCodeGenerator(pathsToTemplates)
 	, mInputPortConverter(inputPortConverter)
 {
@@ -44,17 +43,15 @@ Sensors::~Sensors()
 	delete mInputPortConverter;
 }
 
-QString Sensors::code(const QString &directory
-		, const kitBase::robotModel::PortInfo &port
-		, const kitBase::robotModel::DeviceInfo &device)
+QString Sensors::code(const QString &directory, const kitBase::robotModel::PortInfo &port,
+	const kitBase::robotModel::DeviceInfo &device)
 {
 	const QString portString = mInputPortConverter->convert(port.name());
 	const QString templatePath = QString("%1/%2.t").arg(directory, device.name());
 	return readTemplateIfExists(templatePath).replace("@@PORT@@", portString);
 }
 
-void Sensors::reinitDevices(const QMap<kitBase::robotModel::PortInfo
-		, kitBase::robotModel::DeviceInfo> &devices)
+void Sensors::reinitDevices(const QMap<kitBase::robotModel::PortInfo, kitBase::robotModel::DeviceInfo> &devices)
 {
 	mInitCode.clear();
 	mTerminateCode.clear();
@@ -65,8 +62,7 @@ void Sensors::reinitDevices(const QMap<kitBase::robotModel::PortInfo
 	}
 }
 
-void Sensors::reinitPort(const kitBase::robotModel::PortInfo &port
-		, const kitBase::robotModel::DeviceInfo &device)
+void Sensors::reinitPort(const kitBase::robotModel::PortInfo &port, const kitBase::robotModel::DeviceInfo &device)
 {
 	mInitCode << code("initialization", port, device);
 	mTerminateCode << code("termination", port, device);

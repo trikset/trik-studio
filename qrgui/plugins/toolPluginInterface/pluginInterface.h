@@ -43,7 +43,7 @@ public:
 
 	/// Shall be overriden to return customizer that allows to change window title,
 	/// show/hide certain GUI elements and so on.
-	virtual Customizer* customizationInterface()
+	virtual Customizer *customizationInterface()
 	{
 		return nullptr;
 	}

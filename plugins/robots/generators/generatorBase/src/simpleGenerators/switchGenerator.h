@@ -24,13 +24,8 @@ class SwitchGenerator : public BindingGenerator
 {
 	Q_OBJECT
 public:
-	SwitchGenerator(const qrRepo::RepoApi &repo
-			, GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, const QString &part
-			, const QStringList &values
-			, bool generateIfs
-			, QObject *parent = nullptr);
+	SwitchGenerator(const qrRepo::RepoApi &repo, GeneratorCustomizer &customizer, const qReal::Id &id,
+		const QString &part, const QStringList &values, bool generateIfs, QObject *parent = nullptr);
 };
 
 }

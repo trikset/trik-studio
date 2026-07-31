@@ -20,8 +20,8 @@ using namespace qReal;
 
 SettingsListener::SettingsListener()
 {
-	connect(SettingsManager::instance(), &SettingsManager::settingsChanged
-			, this, &SettingsListener::onSettingsChanged);
+	connect(SettingsManager::instance(), &SettingsManager::settingsChanged, this,
+		&SettingsListener::onSettingsChanged);
 }
 
 SettingsListener::~SettingsListener()
@@ -38,14 +38,14 @@ SettingsListener &SettingsListener::instance()
 void SettingsListener::onSettingsChanged(const QString &name, const QVariant &oldValue, const QVariant &newValue)
 {
 	Q_UNUSED(oldValue)
-	for (AbstractListener * const listener : mListeners.values(name)) {
+	for (AbstractListener *const listener : mListeners.values(name)) {
 		listener->fireEvent(newValue);
 	}
 }
 
 void SettingsListener::disconnectSource(QObject *object)
 {
-	for (AbstractListener * const listener : instance().mListeners.values()) {
+	for (AbstractListener *const listener : instance().mListeners.values()) {
 		if (listener->object() == object) {
 			for (const QString &key : instance().mListeners.keys(listener)) {
 				instance().mListeners.remove(key, listener);
@@ -58,7 +58,7 @@ void SettingsListener::disconnectSource(QObject *object)
 
 void SettingsListener::disconnectSource(const QString &key, QObject *object)
 {
-	for (AbstractListener * const listener : instance().mListeners.values()) {
+	for (AbstractListener *const listener : instance().mListeners.values()) {
 		if (listener->object() == object) {
 			instance().mListeners.remove(key, listener);
 		}

@@ -44,8 +44,8 @@ public:
 	bool isModified(const QString &path) const override;
 	bool isModifiedEver(const QString &path) const override;
 
-	void showInTextEditor(const QFileInfo &fileInfo, const QString &genName
-			, const text::LanguageInfo &language) override;
+	void showInTextEditor(const QFileInfo &fileInfo, const QString &genName,
+		const text::LanguageInfo &language) override;
 
 	void showInTextEditor(const QFileInfo &fileInfo, const text::LanguageInfo &language) override;
 

@@ -26,69 +26,68 @@ void MetamodelGeneratorSupportTest::SetUp()
 {
 	mGenerator = new MetamodelGeneratorSupport(nullptr, nullptr);
 
-	QString const elementsXml =
-	"<diagram>"
-	"<graphicTypes>"
-	"<node displayedName=\"Semantics Rule\" name=\"SemanticsRule\">"
-		"<graphics>"
-			"<labels>"
-				"<label x=\"0\" y=\"0\" textBinded=\"ruleName\"/>"
-				"<label x=\"0\" y=\"10\" textBinded=\"procedure\"/>"
-			"</labels>"
-		"</graphics>"
-		"<logic>"
-			"<properties>"
-				"<property type=\"string\" name=\"ruleName\" />"
-				"<property type=\"string\" name=\"procedure\" />"
-			"</properties>"
-			"<container>"
-			"</container>"
-		"</logic>"
-	"</node>"
-	"<node displayedName=\"Wildcard\" name=\"Wildcard\">"
-		"<graphics>"
-			"<ports>"
-				"<pointPort x=\"10\" y=\"10\"/>"
-			"</ports>"
-		"</graphics>"
-		"<logic>"
-		"</logic>"
-	"</node>"
-	"<node displayedName=\"Control Flow Mark\" name=\"ControlFlowMark\">"
-		"<graphics>"
-			"<ports>"
-				"<pointPort x=\"0\" y=\"0\"/>"
-			"</ports>"
-			"<labels>"
-				"<label x=\"10\" y=\"0\" textBinded=\"semanticsStatus\"/>"
-			"</labels>"
-		"</graphics>"
-		"<logic>"
-			"<properties>"
-				"<property type=\"SemanticsStatus\" name=\"semanticsStatus\"/>"
-			"</properties>"
-		"</logic>"
-	"</node>"
-	"<edge displayedName=\"Replacement\" name=\"Replacement\">"
-		"<graphics>"
-			"<lineType type=\"dashLine\"/>"
-		"</graphics>"
-		"<logic>"
-			"<associations endType=\"open_arrow\" beginType=\"no_arrow\">"
-			"</associations>"
-		"</logic>"
-	"</edge>"
-	"<edge displayedName=\"Control Flow Location\" name=\"ControlFlowLocation\">"
-		"<graphics>"
-			"<lineType type=\"dotLine\"/>"
-		"</graphics>"
-		"<logic>"
-			"<associations endType=\"open_arrow\" beginType=\"no_arrow\">"
-			"</associations>"
-		"</logic>"
-	"</edge>"
-	"</graphicTypes>"
-	"</diagram>";
+	QString const elementsXml = "<diagram>"
+				    "<graphicTypes>"
+				    "<node displayedName=\"Semantics Rule\" name=\"SemanticsRule\">"
+				    "<graphics>"
+				    "<labels>"
+				    "<label x=\"0\" y=\"0\" textBinded=\"ruleName\"/>"
+				    "<label x=\"0\" y=\"10\" textBinded=\"procedure\"/>"
+				    "</labels>"
+				    "</graphics>"
+				    "<logic>"
+				    "<properties>"
+				    "<property type=\"string\" name=\"ruleName\" />"
+				    "<property type=\"string\" name=\"procedure\" />"
+				    "</properties>"
+				    "<container>"
+				    "</container>"
+				    "</logic>"
+				    "</node>"
+				    "<node displayedName=\"Wildcard\" name=\"Wildcard\">"
+				    "<graphics>"
+				    "<ports>"
+				    "<pointPort x=\"10\" y=\"10\"/>"
+				    "</ports>"
+				    "</graphics>"
+				    "<logic>"
+				    "</logic>"
+				    "</node>"
+				    "<node displayedName=\"Control Flow Mark\" name=\"ControlFlowMark\">"
+				    "<graphics>"
+				    "<ports>"
+				    "<pointPort x=\"0\" y=\"0\"/>"
+				    "</ports>"
+				    "<labels>"
+				    "<label x=\"10\" y=\"0\" textBinded=\"semanticsStatus\"/>"
+				    "</labels>"
+				    "</graphics>"
+				    "<logic>"
+				    "<properties>"
+				    "<property type=\"SemanticsStatus\" name=\"semanticsStatus\"/>"
+				    "</properties>"
+				    "</logic>"
+				    "</node>"
+				    "<edge displayedName=\"Replacement\" name=\"Replacement\">"
+				    "<graphics>"
+				    "<lineType type=\"dashLine\"/>"
+				    "</graphics>"
+				    "<logic>"
+				    "<associations endType=\"open_arrow\" beginType=\"no_arrow\">"
+				    "</associations>"
+				    "</logic>"
+				    "</edge>"
+				    "<edge displayedName=\"Control Flow Location\" name=\"ControlFlowLocation\">"
+				    "<graphics>"
+				    "<lineType type=\"dotLine\"/>"
+				    "</graphics>"
+				    "<logic>"
+				    "<associations endType=\"open_arrow\" beginType=\"no_arrow\">"
+				    "</associations>"
+				    "</logic>"
+				    "</edge>"
+				    "</graphicTypes>"
+				    "</diagram>";
 
 	mDocument = mGenerator->loadElementsFromString(elementsXml);
 }
@@ -143,7 +142,7 @@ TEST_F(MetamodelGeneratorSupportTest, appendTypesToElementTest)
 TEST_F(MetamodelGeneratorSupportTest, insertElementInDiagramSublevelTest)
 {
 	QDomElement const elem = mDocument.createElement("TestElement");
-	mGenerator->insertElementInDiagramSublevel(mDocument ,"nonGraphicTypes", elem);
+	mGenerator->insertElementInDiagramSublevel(mDocument, "nonGraphicTypes", elem);
 
 	ASSERT_EQ(mGenerator->diagramElement(mDocument).childNodes().size(), 2);
 	ASSERT_EQ(mDocument.elementsByTagName("TestElement").size(), 1);
@@ -151,10 +150,11 @@ TEST_F(MetamodelGeneratorSupportTest, insertElementInDiagramSublevelTest)
 
 TEST_F(MetamodelGeneratorSupportTest, insertElementsInDiagramSublevelTest)
 {
-	QDomDocument doc = mGenerator->loadElementsFromString("<diagram><testElem1/><testElem2/><testElem3/><></diagram>");
+	QDomDocument doc =
+		mGenerator->loadElementsFromString("<diagram><testElem1/><testElem2/><testElem3/><></diagram>");
 
-	mGenerator->insertElementsInDiagramSublevel(mDocument ,"nonGraphicTypes"
-			, mGenerator->diagramElement(doc).childNodes());
+	mGenerator->insertElementsInDiagramSublevel(mDocument, "nonGraphicTypes",
+		mGenerator->diagramElement(doc).childNodes());
 
 	ASSERT_EQ(mGenerator->diagramElement(mDocument).childNodes().size(), 2);
 	ASSERT_EQ(mDocument.elementsByTagName("nonGraphicTypes").size(), 1);
@@ -167,7 +167,8 @@ TEST_F(MetamodelGeneratorSupportTest, insertElementsInDiagramSublevelTest)
 
 TEST_F(MetamodelGeneratorSupportTest, appendElementsTest)
 {
-	QDomDocument doc = mGenerator->loadElementsFromString("<diagram><testElem1/><testElem2/><testElem3/><></diagram>");
+	QDomDocument doc =
+		mGenerator->loadElementsFromString("<diagram><testElem1/><testElem2/><testElem3/><></diagram>");
 
 	mGenerator->appendElements(mGenerator->diagramElement(mDocument), mGenerator->diagramElement(doc).childNodes());
 

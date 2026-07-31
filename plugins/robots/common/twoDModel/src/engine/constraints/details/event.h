@@ -35,11 +35,8 @@ public:
 	/// @param trigger Functor object that makes something that must be done on the event fire.
 	/// @param dropsOnFire If true (default case) the event will be automaticly dropped when fired.
 	///    Otherwise the event can fire multiple times without manual resetting.
-	Event(const QString &id
-		, const Condition &condition
-		, const Trigger &trigger
-		, bool dropsOnFire = true
-		, bool isSettedInitially = false);
+	Event(const QString &id, const Condition &condition, const Trigger &trigger, bool dropsOnFire = true,
+		bool isSettedInitially = false);
 
 	/// Returns the unique identifier of this event that can be used for manual setting up or dropping this event.
 	QString id() const;

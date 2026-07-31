@@ -34,7 +34,7 @@ void NxtEnginesForwardBlock::run()
 
 	const bool breakMode = stringProperty("Mode") != "float";
 
-	for (NxtMotor * const motor : parsePorts<NxtMotor>()) {
+	for (NxtMotor *const motor : parsePorts<NxtMotor>()) {
 		motor->on(power, breakMode);
 	}
 

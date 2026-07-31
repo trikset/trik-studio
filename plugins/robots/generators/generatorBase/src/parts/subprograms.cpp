@@ -22,13 +22,10 @@
 using namespace generatorBase::parts;
 using namespace qReal;
 
-Subprograms::Subprograms(const qrRepo::RepoApi &repo
-		, ErrorReporterInterface &errorReporter
-		, const QStringList &pathsToTemplates
-		, qrtext::LanguageToolboxInterface &luaToolbox
-		, const simple::Binding::ConverterInterface *nameNormalizer
-		, const simple::Binding::ConverterInterface *typeConverter
-		)
+Subprograms::Subprograms(const qrRepo::RepoApi &repo, ErrorReporterInterface &errorReporter,
+	const QStringList &pathsToTemplates, qrtext::LanguageToolboxInterface &luaToolbox,
+	const simple::Binding::ConverterInterface *nameNormalizer,
+	const simple::Binding::ConverterInterface *typeConverter)
 	: TemplateParametrizedEntity(pathsToTemplates)
 	, mRepo(repo)
 	, mErrorReporter(errorReporter)
@@ -68,8 +65,8 @@ void Subprograms::usageFound(const Id &logicalId)
 	}
 }
 
-Subprograms::GenerationResult Subprograms::generate(ControlFlowGeneratorBase *mainGenerator
-		, const QString &indentString)
+Subprograms::GenerationResult Subprograms::generate(ControlFlowGeneratorBase *mainGenerator,
+	const QString &indentString)
 {
 	QMap<Id, QString> declarations;
 	QMap<Id, QString> implementations;
@@ -95,11 +92,9 @@ Subprograms::GenerationResult Subprograms::generate(ControlFlowGeneratorBase *ma
 			QDomDocument currentDynamicLabels;
 			currentDynamicLabels.setContent(currentDynamicLabelsString);
 
-			for (QDomElement element
-					= currentDynamicLabels.firstChildElement("labels").firstChildElement("label")
-					; !element.isNull()
-					; element = element.nextSiblingElement("label"))
-			{
+			for (QDomElement element =
+					currentDynamicLabels.firstChildElement("labels").firstChildElement("label");
+				!element.isNull(); element = element.nextSiblingElement("label")) {
 				const auto type = element.attribute("type");
 				auto result = element.attribute("value");
 				bool okDouble = false;
@@ -112,7 +107,8 @@ Subprograms::GenerationResult Subprograms::generate(ControlFlowGeneratorBase *ma
 				if (type == "float" && okInt) {
 					result = QString::number(intValue, 'f', 1);
 				}
-				mLuaToolbox.setVariableValue(mNameNormalizer->convert(element.attribute("text")), result);
+				mLuaToolbox.setVariableValue(mNameNormalizer->convert(element.attribute("text")),
+					result);
 			}
 		}
 
@@ -136,8 +132,7 @@ Subprograms::GenerationResult Subprograms::generate(ControlFlowGeneratorBase *ma
 	return GenerationResult::success;
 }
 
-void Subprograms::obtainCode(QMap<Id, QString> const &declarations
-		, QMap<Id, QString> const &implementations)
+void Subprograms::obtainCode(QMap<Id, QString> const &declarations, QMap<Id, QString> const &implementations)
 {
 	if (!declarations.isEmpty()) {
 		mForwardDeclarationsCode << readTemplate("subprograms/declarationsSectionHeader.t");
@@ -179,14 +174,11 @@ QString Subprograms::readSubprogramSignature(const Id &id, const QString &pathTo
 		QDomDocument currentDynamicLabels;
 		currentDynamicLabels.setContent(currentDynamicLabelsString);
 
-		for (QDomElement element
-				= currentDynamicLabels.firstChildElement("labels").firstChildElement("label")
-				; !element.isNull()
-				; element = element.nextSiblingElement("label"))
-		{
+		for (QDomElement element = currentDynamicLabels.firstChildElement("labels").firstChildElement("label");
+			!element.isNull(); element = element.nextSiblingElement("label")) {
 			const QString type = element.attribute("type");
-			QString argument = readTemplateIfExists(QString("subprograms/%1SubprogramArgument.t").arg(type)
-					, argumentFormat);
+			QString argument = readTemplateIfExists(QString("subprograms/%1SubprogramArgument.t").arg(type),
+				argumentFormat);
 			argument.replace("@@TYPE@@", mTypeConverter->convert(type));
 			argument.replace("@@NAME@@", mNameNormalizer->convert(element.attribute("text")));
 			argumentsList << argument;
@@ -194,10 +186,10 @@ QString Subprograms::readSubprogramSignature(const Id &id, const QString &pathTo
 	}
 
 	const QString fallBackResult = "FileNotExist";
-	QString argumentsSeparator = readTemplateIfExists("subprograms/declarationArgumentsSeparator.t", fallBackResult);
-	argumentsSeparator = argumentsSeparator == fallBackResult
-			? readTemplate("luaPrinting/argumentsSeparator.t")
-			: argumentsSeparator;
+	QString argumentsSeparator =
+		readTemplateIfExists("subprograms/declarationArgumentsSeparator.t", fallBackResult);
+	argumentsSeparator = argumentsSeparator == fallBackResult ? readTemplate("luaPrinting/argumentsSeparator.t")
+	                                                          : argumentsSeparator;
 	QString arguments = argumentsList.join(argumentsSeparator);
 	return signatureWithName.replace("@@ARGUMENTS@@", arguments);
 }
@@ -217,8 +209,8 @@ Id Subprograms::graphicalId(const Id &logicalId) const
 bool Subprograms::checkIdentifier(const QString &identifier, const QString &rawName)
 {
 	if (identifier.isEmpty()) {
-		mErrorReporter.addError(QObject::tr(
-				"Please enter valid c-style name for subprogram \"") + rawName + "\"");
+		mErrorReporter.addError(
+			QObject::tr("Please enter valid c-style name for subprogram \"") + rawName + "\"");
 		return false;
 	}
 

@@ -25,9 +25,7 @@
 using namespace twoDModel::constraints::details;
 using namespace kitBase;
 
-ConditionsFactory::ConditionsFactory(Events &events
-		, const Objects &objects
-		, StatusReporter &status)
+ConditionsFactory::ConditionsFactory(Events &events, const Objects &objects, StatusReporter &status)
 	: mEvents(events)
 	, mObjects(objects)
 	, mStatus(status)
@@ -106,61 +104,61 @@ Condition ConditionsFactory::inside(const QString &objectId, const QString &regi
 			return false;
 		}
 
-		QObject * const object = mObjects[objectId];
-		auto* const region = dynamic_cast<items::RegionItem *>(mObjects[regionId]);
+		QObject *const object = mObjects[objectId];
+		auto *const region = dynamic_cast<items::RegionItem *>(mObjects[regionId]);
 
 		if (!region) {
 			reportError(QObject::tr("%1 is not a region").arg(regionId));
 			return false;
 		}
 
-		if (auto * const graphicsObject = dynamic_cast<QGraphicsObject *>(object)) {
+		if (auto *const graphicsObject = dynamic_cast<QGraphicsObject *>(object)) {
 			if (objectPoint == "all") {
-				return region->mapToScene(region->shapeWihoutResizeArea()).contains(
-						graphicsObject->mapToScene(graphicsObject->shape()));
+				return region->mapToScene(region->shapeWihoutResizeArea())
+				        .contains(graphicsObject->mapToScene(graphicsObject->shape()));
 			} else if (objectPoint == "any") {
-				return region->mapToScene(region->shapeWihoutResizeArea()).intersects(
-						graphicsObject->mapToScene(graphicsObject->shape()));
+				return region->mapToScene(region->shapeWihoutResizeArea())
+				        .intersects(graphicsObject->mapToScene(graphicsObject->shape()));
 			}
 			return region->containsItem(graphicsObject);
 		}
 
-		if (auto * const robotModel = dynamic_cast<model::RobotModel *>(object)) {
+		if (auto *const robotModel = dynamic_cast<model::RobotModel *>(object)) {
 			if (objectPoint == "all") {
 				return region->mapToScene(region->shapeWihoutResizeArea())
-						.contains(robotModel->robotBoundingPath(false));
+				        .contains(robotModel->robotBoundingPath(false));
 			} else if (objectPoint == "any") {
 				return region->mapToScene(region->shapeWihoutResizeArea())
-						.intersects(robotModel->robotBoundingPath(false));
+				        .intersects(robotModel->robotBoundingPath(false));
 			}
 			return region->containsPoint(robotModel->robotCenter());
 		}
 
-		if (auto * const device
-				= dynamic_cast<kitBase::robotModel::robotParts::Device *>(object))
-		{
+		if (auto *const device = dynamic_cast<kitBase::robotModel::robotParts::Device *>(object)) {
 			const QStringList parts = objectId.split('.');
 			if (objectId.isEmpty()) {
 				return false;
 			}
 
-			const QString& robotId = parts[0];
+			const QString &robotId = parts[0];
 			if (!mObjects.contains(robotId)) {
 				return false;
 			}
 
-			if (auto * const robotModel = dynamic_cast<model::RobotModel *>(mObjects[robotId])) {
+			if (auto *const robotModel = dynamic_cast<model::RobotModel *>(mObjects[robotId])) {
 				auto deviceShape = robotModel->robotsTransform().map(
-						robotModel->sensorBoundingPath(device->port()));
+					robotModel->sensorBoundingPath(device->port()));
 				if (objectPoint == "all") {
-					return region->mapToScene(region->shapeWihoutResizeArea()).contains(
-							deviceShape.isEmpty() ? robotModel->robotBoundingPath(false) : deviceShape);
+					return region->mapToScene(region->shapeWihoutResizeArea())
+					        .contains(deviceShape.isEmpty() ? robotModel->robotBoundingPath(false)
+										: deviceShape);
 				} else if (objectPoint == "any") {
-					return region->mapToScene(region->shapeWihoutResizeArea()).intersects(
-							deviceShape.isEmpty() ? robotModel->robotBoundingPath(false) : deviceShape);
+					return region->mapToScene(region->shapeWihoutResizeArea())
+					        .intersects(deviceShape.isEmpty() ? robotModel->robotBoundingPath(false)
+										  : deviceShape);
 				}
-				return region->containsPoint(
-						robotModel->robotsTransform().map(robotModel->configuration().position(device->port())));
+				return region->containsPoint(robotModel->robotsTransform().map(
+					robotModel->configuration().position(device->port())));
 			}
 
 			return false;
@@ -201,12 +199,12 @@ Condition ConditionsFactory::timerCondition(int timeout, bool forceDrop, const V
 	// We can do this in the event itself, by why? There will be no need in it except here, so storing it in heap...
 	QSharedPointer<qint64> lastSetUpTimestamp(new qint64(-1));
 
-	QObject::connect(&event, &Event::settedUp, [lastSetUpTimestamp, timestamp]() {
-		*lastSetUpTimestamp = timestamp().toLongLong();
-	});
+	QObject::connect(&event, &Event::settedUp,
+		[lastSetUpTimestamp, timestamp]() { *lastSetUpTimestamp = timestamp().toLongLong(); });
 
 	return [timeout, forceDrop, timestamp, &event, lastSetUpTimestamp]() {
-		const bool timeElapsed = *lastSetUpTimestamp >= 0 && timestamp().toLongLong() - *lastSetUpTimestamp >= timeout;
+		const bool timeElapsed =
+			*lastSetUpTimestamp >= 0 && timestamp().toLongLong() - *lastSetUpTimestamp >= timeout;
 		if (timeElapsed && forceDrop) {
 			// Someone may think that dropping here will not let the event fire even if all conditions are satisfied.
 			// But we get into this lambda after checking this event`s aliveness, so it will fire (but after drop).

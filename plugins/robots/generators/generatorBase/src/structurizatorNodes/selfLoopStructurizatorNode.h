@@ -30,6 +30,7 @@ public:
 	bool analyzeBreak() override;
 	Type type() const override;
 	qReal::Id firstId() const override;
+
 private:
 	IntermediateStructurizatorNode *mBodyNode;
 };

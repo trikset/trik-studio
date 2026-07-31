@@ -20,14 +20,12 @@ namespace trik {
 namespace simple {
 
 /// Generator for 'Write To File' block.
-class FileWriteGenerator  : public generatorBase::simple::BindingGenerator
+class FileWriteGenerator : public generatorBase::simple::BindingGenerator
 {
 	Q_OBJECT
 public:
-	FileWriteGenerator(const qrRepo::RepoApi &repo
-			, generatorBase::GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent);
+	FileWriteGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+		const qReal::Id &id, QObject *parent);
 };
 
 }
