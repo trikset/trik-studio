@@ -88,10 +88,26 @@ void Shell::print(const QString &text)
 	mRobotCommunicator.runDirectCommand(directCommand);
 }
 
-void Shell::initVideoStreaming(int qual, bool grayscale)
+void Shell::initVideoStreaming(int qual, bool grayscale, bool detached, const QString &port)
 {
-	const QString shellToExecute = QString("\"/etc/init.d/mjpg-encoder-ov7670 start --jpeg-qual %1 "
-		"--white-black %2 && /etc/init.d/mjpg-streamer-ov7670"
-		" start\"").arg(qual, grayscale);
-	runCommand(shellToExecute);
+	const auto &pathToCommand = ":/trikQts/templates/videosensors/initVideoStreaming.t";
+	const auto &directCommand = utils::InFile::readAll(pathToCommand)
+			.replace("@@DETACHED@@", QString(detached))
+			.replace("@@QUALITY@@", QString(qual))
+			.replace("@@GRAYSCALED@@", QString(grayscale))
+			.replace("@@PORT@@", "\"" + port + "\"")
+			+ ";script.run()";
+
+	mRobotCommunicator.runDirectCommand(directCommand);
+}
+
+
+void Shell::stopVideoStreaming(const QString &port)
+{
+	const auto &pathToCommand = ":/trikQts/templates/videosensors/stopVideoStreaming.t";
+	const auto &directCommand = utils::InFile::readAll(pathToCommand)
+			.replace("@@PORT@@", "\"" + port + "\"")
+			+ ";script.run()";
+
+	mRobotCommunicator.runDirectCommand(directCommand);
 }

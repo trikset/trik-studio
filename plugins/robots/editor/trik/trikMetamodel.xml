@@ -348,6 +348,12 @@
 						<property displayedName="Quality" type="JpgEncoderQuality" name="Quality">
 							<default>30</default>
 						</property>
+						<property displayedName="Port" type="string" name="Port">
+							<default>video0</default>
+						</property>
+						<property displayedName="Detached" type="bool" name="Detached">
+							<default>false</default>
+						</property>
 					</properties>
 					<generalizations>
 						<parent parentName="AbstractNode"/>
@@ -365,6 +371,9 @@
 			</graphics>
 			<logic>
 				<properties>
+				<property displayedName="Port" type="string" name="Port">
+					<default>video0</default>
+				</property>
 				</properties>
 				<generalizations>
 					<parent parentName="AbstractNode"/>

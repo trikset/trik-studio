@@ -51,7 +51,8 @@ public:
 	void removeFile(const QString &filePath) override;
 	void readFile(const QString &filePath) override;
 	void print(const QString &text) override;
-	void initVideoStreaming(int qual, bool grayscaled) override;
+	void initVideoStreaming(int qual, bool grayscaled, bool detached, const QString &port) override;
+	void stopVideoStreaming(const QString &port) override;
 
 	/// Sets the error reporter for writing bubbling messages in say().
 	void setErrorReporter(qReal::ErrorReporterInterface &errorReporter);

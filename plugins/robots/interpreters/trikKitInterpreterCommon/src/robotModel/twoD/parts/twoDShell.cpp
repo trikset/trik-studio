@@ -78,11 +78,18 @@ void Shell::print(const QString &text)
 	Q_EMIT textPrinted(text);
 }
 
-void Shell::initVideoStreaming(int qual, bool grayscaled)
+void Shell::initVideoStreaming(int qual, bool grayscaled, bool detached, const QString &port)
 {
 	Q_UNUSED(qual)
 	Q_UNUSED(grayscaled)
+	Q_UNUSED(detached)
+	Q_UNUSED(port)
 	// Video streaming has no sense here (for now at least).
+}
+
+void Shell::stopVideoStreaming(const QString &port)
+{
+	Q_UNUSED(port)
 }
 
 void Shell::setErrorReporter(qReal::ErrorReporterInterface &errorReporter)
