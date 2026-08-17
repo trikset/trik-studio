@@ -1,4 +1,4 @@
-/* Copyright 2018 CyberTech Labs Ltd.
+/* Copyright 2026 CyberTech Labs Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,20 +12,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. */
 
-#include "stopVideoStreamingGenerator.h"
+#pragma once
 
-#include <generatorBase/generatorCustomizer.h>
+#include <kitBase/blocksBase/common/deviceBlock.h>
+#include <trikKit/robotModel/parts/trikShell.h>
 
-using namespace trik::simple;
-using namespace generatorBase::simple;
+namespace trik {
+namespace blocks {
+namespace details {
 
-StopVideoStreamingGenerator::StopVideoStreamingGenerator(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, const qReal::Id &id
-		, QObject *parent)
-	: BindingGenerator(repo, customizer, id
-			, "videosensors/stopVideoStreaming.t"
-			, {Binding::createDirect("@@PORT@@", "Port")}
-			, parent)
+/// Interpreter implementation for "Disable Video Streaming" block.
+class StopVideoStreamingBlock : public kitBase::blocksBase::common::DeviceBlock<trik::robotModel::parts::TrikShell>
 {
+	Q_OBJECT
+public:
+	StopVideoStreamingBlock(kitBase::robotModel::RobotModelInterface &robotModel);
+
+protected:
+	void doJob(robotModel::parts::TrikShell &shell) override;
+};
+
+}
+}
 }
