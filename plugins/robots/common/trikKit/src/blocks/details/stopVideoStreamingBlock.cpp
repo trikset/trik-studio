@@ -24,6 +24,6 @@ StopVideoStreamingBlock::StopVideoStreamingBlock(kitBase::robotModel::RobotModel
 void StopVideoStreamingBlock::doJob(trik::robotModel::parts::TrikShell &shell)
 {
 	const auto &port = stringProperty("Port");
-	shell.initVideoStreaming(qual, grayscaled, detached, port);
+	shell.stopVideoStreaming(port);
 	Q_EMIT done(mNextBlockId);
 }

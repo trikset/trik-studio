@@ -34,6 +34,16 @@
 				<value name="off" displayedName="off"/>
 				<value name="orange" displayedName="orange"/>
 			</enum>
+			<enum name="StopCameraMode">
+				<value name="StopNone" displayedName="Switch Algorithm"/>
+				<value name="StopStream" displayedName="Stop stream"/>
+				<value name="StopAll" displayedName="Deactivate camera"/>
+			</enum>
+			<enum name="VideoPort">
+				<value name="video1" displayedName="video1"/>
+				<value name="video2" displayedName="video2"/>
+				<value name="usb-camera" displayedName="usb-camera"/>
+			</enum>
 			<enum name="BackgroundColor">
 				<value name="white" displayedName="white"/>
 				<value name="black" displayedName="black"/>
@@ -348,11 +358,11 @@
 						<property displayedName="Quality" type="JpgEncoderQuality" name="Quality">
 							<default>30</default>
 						</property>
-						<property displayedName="Port" type="string" name="Port">
-							<default>video0</default>
+						<property displayedName="Video Port" type="VideoPort" name="VideoPort">
+							<default>video1</default>
 						</property>
 						<property displayedName="Detached" type="bool" name="Detached">
-							<default>false</default>
+							<default>true</default>
 						</property>
 					</properties>
 					<generalizations>
@@ -371,8 +381,8 @@
 			</graphics>
 			<logic>
 				<properties>
-				<property displayedName="Port" type="string" name="Port">
-					<default>video0</default>
+				<property displayedName="Video Port" type="VideoPort" name="VideoPort">
+					<default>video1</default>
 				</property>
 				</properties>
 				<generalizations>
@@ -399,6 +409,9 @@
 						<property displayedName="Draw stream" type="Bool" name="DrawStream">
 							<default>true</default>
 						</property>
+						<property displayedName="Video Port" type="VideoPort" name="VideoPort">
+							<default>video1</default>
+						</property>
 					</properties>
 					<generalizations>
 						<parent parentName="AbstractNode"/>
@@ -421,6 +434,12 @@
 						<property displayedName="Mode" type="VideoSensor" name="Mode">
 							<default>line</default>
 						</property>
+						<property displayedName="StopCameraMode" type="StopCameraMode" name="StopCameraMode">
+							<default>StopAll</default>
+						</property>
+						<property displayedName="Video Port" type="VideoPort" name="VideoPort">
+							<default>video1</default>
+						</property>
 					</properties>
 					<generalizations>
 						<parent parentName="AbstractNode"/>
@@ -442,6 +461,9 @@
 					<properties>
 						<property displayedName="Mode" type="DetectableVideoSensor" name="Mode">
 							<default>line</default>
+						</property>
+						<property displayedName="Video Port" type="VideoPort" name="PoVideoPortrt">
+							<default>video1</default>
 						</property>
 					</properties>
 					<generalizations>

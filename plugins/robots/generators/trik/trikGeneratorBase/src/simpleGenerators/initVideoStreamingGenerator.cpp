@@ -13,7 +13,7 @@
  * limitations under the License. */
 
 #include "initVideoStreamingGenerator.h"
-
+#include <qrutils/stringUtils.h>
 #include <generatorBase/generatorCustomizer.h>
 
 using namespace trik::simple;
@@ -28,7 +28,9 @@ InitVideoStreamingGenerator::InitVideoStreamingGenerator(const qrRepo::RepoApi &
 			, { Binding::createDirect("@@QUALITY@@", "Quality")
 			, Binding::createDirect("@@GRAYSCALED@@", "Grayscaled")
 			, Binding::createDirect("@@DETACHED@@", "Detached")
-			, Binding::createDirect("@@PORT@@", "Port")}
+			, Binding::createStaticConverting("@@PORT@@",
+				utils::StringUtils::wrap(utils::StringUtils::dequote(repo.property(id, "VideoPort").toString())),
+				customizer.factory()->stringPropertyConverter(id, "Port"))}
 			, parent)
 {
 }

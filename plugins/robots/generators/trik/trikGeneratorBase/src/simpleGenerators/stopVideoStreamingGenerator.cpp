@@ -13,7 +13,7 @@
  * limitations under the License. */
 
 #include "stopVideoStreamingGenerator.h"
-
+#include <qrutils/stringUtils.h>
 #include <generatorBase/generatorCustomizer.h>
 
 using namespace trik::simple;
@@ -25,7 +25,9 @@ StopVideoStreamingGenerator::StopVideoStreamingGenerator(const qrRepo::RepoApi &
 		, QObject *parent)
 	: BindingGenerator(repo, customizer, id
 			, "videosensors/stopVideoStreaming.t"
-			, {Binding::createDirect("@@PORT@@", "Port")}
+			, {Binding::createStaticConverting("@@PORT@@",
+				utils::StringUtils::wrap(utils::StringUtils::dequote(repo.property(id, "VideoPort").toString())),
+				customizer.factory()->stringPropertyConverter(id, "VideoPort"))}
 			, parent)
 {
 }
