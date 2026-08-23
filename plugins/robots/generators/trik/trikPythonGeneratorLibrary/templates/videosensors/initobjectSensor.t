@@ -1,2 +1,2 @@
-brick.configure("video2", "objectSensor")
-brick.objectSensor("video2").init(@@DRAW@@)
+brick.configure(@@PORT@@, "objectSensor")
+brick.objectSensor(@@PORT@@).init(@@DRAW@@)

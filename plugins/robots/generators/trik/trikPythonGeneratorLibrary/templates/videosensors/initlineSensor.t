@@ -1,2 +1,2 @@
-brick.configure("video2", "lineSensor")
-brick.lineSensor("video2").init(@@DRAW@@)
+brick.configure(@@PORT@@, "lineSensor")
+brick.lineSensor(@@PORT@@).init(@@DRAW@@)
