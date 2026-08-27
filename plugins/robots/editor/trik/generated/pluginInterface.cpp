@@ -395,6 +395,10 @@ void TrikMetamodelPlugin::initEnums()
 		{qMakePair(QString("in"), tr("In")), qMakePair(QString("inout"), tr("Inout")),
 			qMakePair(QString("out"), tr("Out")), qMakePair(QString("return"), tr("Return"))});
 	mMetamodel->setEnumEditable("ParameterDirectionKind", false);
+	mMetamodel->addEnum("StopCameraMode", {qMakePair(QString("StopAll"), tr("Deactivate camera")),
+						      qMakePair(QString("StopNone"), tr("Switch Algorithm")),
+						      qMakePair(QString("StopStream"), tr("Stop stream"))});
+	mMetamodel->setEnumEditable("StopCameraMode", false);
 	mMetamodel->addEnum("TrikButtons",
 		{qMakePair(QString("Down"), tr("Down")), qMakePair(QString("Enter"), tr("Enter")),
 			qMakePair(QString("Esc"), tr("Esc")), qMakePair(QString("Left"), tr("Left")),
@@ -420,6 +424,10 @@ void TrikMetamodelPlugin::initEnums()
 		{qMakePair(QString("B1"), tr("B1")), qMakePair(QString("B2"), tr("B2")),
 			qMakePair(QString("B3"), tr("B3")), qMakePair(QString("B4"), tr("B4"))});
 	mMetamodel->setEnumEditable("TrikV6EncoderPort", false);
+	mMetamodel->addEnum("VideoPort",
+		{qMakePair(QString("usb-camera"), tr("usb-camera")), qMakePair(QString("video1"), tr("video1")),
+			qMakePair(QString("video2"), tr("video2"))});
+	mMetamodel->setEnumEditable("VideoPort", false);
 	mMetamodel->addEnum("VideoSensor",
 		{qMakePair(QString("color"), tr("Color sensor")), qMakePair(QString("line"), tr("Line sensor")),
 			qMakePair(QString("object"), tr("Object sensor"))});
