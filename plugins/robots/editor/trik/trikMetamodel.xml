@@ -362,7 +362,7 @@
 							<default>video1</default>
 						</property>
 						<property displayedName="Detached" type="bool" name="Detached">
-							<default>true</default>
+							<default>false</default>
 						</property>
 					</properties>
 					<generalizations>
@@ -462,7 +462,7 @@
 						<property displayedName="Mode" type="DetectableVideoSensor" name="Mode">
 							<default>line</default>
 						</property>
-						<property displayedName="Video Port" type="VideoPort" name="PoVideoPortrt">
+						<property displayedName="Video Port" type="VideoPort" name="VideoPort">
 							<default>video1</default>
 						</property>
 					</properties>
