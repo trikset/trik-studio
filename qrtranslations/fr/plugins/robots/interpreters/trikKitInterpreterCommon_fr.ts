@@ -175,6 +175,10 @@
         <source>Cannot get a photo from folders/project (possibly because of wrong path/empty project)</source>
         <translation>Impossible d&apos;obtenir une photo depuis les dossiers/projet (probablement en raison d&apos;un chemin incorrect ou d&apos;un projet vide)</translation>
     </message>
+    <message>
+        <source>LineSensor on port %1 not supportred in 2D</source>
+        <translation>Le capteur de ligne sur le port %1 n&apos;est pas pris en charge en 2D</translation>
+    </message>
 </context>
 <context>
     <name>trik::TrikKitInterpreterPlugin</name>

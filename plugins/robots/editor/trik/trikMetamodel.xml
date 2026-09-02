@@ -434,7 +434,7 @@
 						<property displayedName="Mode" type="VideoSensor" name="Mode">
 							<default>line</default>
 						</property>
-						<property displayedName="StopCameraMode" type="StopCameraMode" name="StopCameraMode">
+						<property displayedName="Stop Camera Mode" type="StopCameraMode" name="StopCameraMode">
 							<default>StopAll</default>
 						</property>
 						<property displayedName="Video Port" type="VideoPort" name="VideoPort">
