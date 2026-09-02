@@ -45,6 +45,7 @@
 #include "details/detectLineBlock.h"
 #include "details/lineDetectorToVariable.h"
 #include "details/initVideoStreamingBlock.h"
+#include "details/stopVideoStreamingBlock.h"
 #include "details/waitForMotionBlock.h"
 #include "details/speakerBlock.h"
 #include "details/ledBlock.h"
@@ -98,7 +99,10 @@ qReal::interpretation::Block *TrikBlocksFactoryBase::produceBlock(const qReal::I
 		return new LineDetectorToVariableBlock();
 	} else if (elementMetatypeIs(element, "TrikInitVideoStreaming")) {
 		return new InitVideoStreamingBlock(mRobotModelManager->model());
-	} else if (elementMetatypeIs(element, "TrikSendMessage")) {
+	} else if (elementMetatypeIs(element, "TrikStopVideoStreaming")) {
+		return new StopVideoStreamingBlock(mRobotModelManager->model());
+	}
+	else if (elementMetatypeIs(element, "TrikSendMessage")) {
 		return new SendMessageBlock(mRobotModelManager->model());
 	} else if (elementMetatypeIs(element, "TrikWaitForMessage")) {
 		return new WaitForMessageBlock(mRobotModelManager->model());
@@ -218,7 +222,6 @@ qReal::IdList TrikBlocksFactoryBase::blocksToDisable() const
 	// because there is no implementation for it
 	if (!mRobotModelManager->model().name().contains("Gen")) {
 		result << id("TrikStopCamera");
-		result << id("TrikStopVideoStreaming");
 	}
 
 	if (mRobotModelManager->model().name().contains("TwoD")) {

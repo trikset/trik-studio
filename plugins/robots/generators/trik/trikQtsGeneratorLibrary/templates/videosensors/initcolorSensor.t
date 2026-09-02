@@ -1,2 +1,2 @@
-brick.configure("video2", "colorSensor");
-brick.colorSensor("video2").init(@@DRAW@@);
+brick.configure(@@PORT@@, "colorSensor");
+brick.colorSensor(@@PORT@@).init(@@DRAW@@);

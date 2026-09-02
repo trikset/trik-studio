@@ -13,7 +13,7 @@
  * limitations under the License. */
 
 #include "initCameraGenerator.h"
-
+#include <qrutils/stringUtils.h>
 #include <generatorBase/generatorCustomizer.h>
 
 using namespace trik::simple;
@@ -24,7 +24,10 @@ InitCameraGenerator::InitCameraGenerator(const qrRepo::RepoApi &repo, generatorB
 	: BindingGenerator(repo, customizer, id,
 		  "videosensors/init" + repo.property(id, "Mode").toString() + "Sensor.t",
 		  {Binding::createConverting("@@DRAW@@", "DrawStream",
-			  customizer.factory()->boolPropertyConverter(id, "DrawStream", false))},
+			  customizer.factory()->boolPropertyConverter(id, "DrawStream", false)),
+			  Binding::createStaticConverting("@@PORT@@",
+				utils::StringUtils::wrap(utils::StringUtils::dequote(repo.property(id, "VideoPort").toString())),
+				customizer.factory()->stringPropertyConverter(id, "VideoPort"))},
 		  parent)
 {
 }

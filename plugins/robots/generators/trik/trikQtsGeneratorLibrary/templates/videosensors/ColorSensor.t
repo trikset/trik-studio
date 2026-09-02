@@ -1,1 +1,1 @@
-brick.colorSensor("video2").read(2, 2)
+brick.colorSensor(@@PORT@@).read(2, 2)

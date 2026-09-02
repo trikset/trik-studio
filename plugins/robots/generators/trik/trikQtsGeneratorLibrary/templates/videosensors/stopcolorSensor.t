@@ -1,1 +1,1 @@
-brick.colorSensor("video2").stop();
+brick.colorSensor(@@PORT@@).stop(@@STOP_CAMERA_MODE@@);

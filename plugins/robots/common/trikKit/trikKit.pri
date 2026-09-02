@@ -80,6 +80,7 @@ HEADERS += \
 	$$PWD/src/blocks/details/detectLineBlock.h \
 	$$PWD/src/blocks/details/lineDetectorToVariable.h \
 	$$PWD/src/blocks/details/initVideoStreamingBlock.h \
+	$$PWD/src/blocks/details/stopVideoStreamingBlock.h \
 	$$PWD/src/blocks/details/writeToFileBlock.h \
 	$$PWD/src/blocks/details/removeFileBlock.h \
 	$$PWD/src/blocks/details/trikWaitForGyroscopeBlock.h \
@@ -142,6 +143,7 @@ SOURCES += \
 	$$PWD/src/blocks/details/detectLineBlock.cpp \
 	$$PWD/src/blocks/details/lineDetectorToVariable.cpp \
 	$$PWD/src/blocks/details/initVideoStreamingBlock.cpp \
+	$$PWD/src/blocks/details/stopVideoStreamingBlock.cpp \
 	$$PWD/src/blocks/details/writeToFileBlock.cpp \
 	$$PWD/src/blocks/details/removeFileBlock.cpp \
 	$$PWD/src/blocks/details/trikWaitForGyroscopeBlock.cpp \

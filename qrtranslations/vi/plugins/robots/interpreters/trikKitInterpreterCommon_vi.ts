@@ -168,6 +168,10 @@
         <source>Cannot get a photo from folders/project (possibly because of wrong path/empty project)</source>
         <translation>Không thể lấy ảnh từ thư mục/dự án (có thể do đường dẫn sai/dự án trống)</translation>
     </message>
+    <message>
+        <source>LineSensor on port %1 not supportred in 2D</source>
+        <translation>Cảm biến dòng trên cổng %1 không được hỗ trợ trong mô hình 2D</translation>
+    </message>
 </context>
 <context>
     <name>trik::TrikKitInterpreterPluginBase</name>

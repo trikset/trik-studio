@@ -35,6 +35,8 @@ public:
 	QStringList pathsToTemplates() const override;
 	void initDeviceVariables() override;
 
+	generatorBase::simple::Binding::ConverterInterface *portNameConverter() const override;
+
 private:
 	const QStringList mPathsToTemplates;
 };

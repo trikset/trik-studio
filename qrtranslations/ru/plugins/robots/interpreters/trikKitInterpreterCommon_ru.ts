@@ -247,6 +247,10 @@
         <source>No cofigured random device</source>
         <translation type="vanished">Генератор случайных чисел не сконфигурирован</translation>
     </message>
+    <message>
+        <source>LineSensor on port %1 not supportred in 2D</source>
+        <translation>Датчик линии на порту %1 не поддерживается в 2D-модели</translation>
+    </message>
 </context>
 <context>
     <name>trik::TrikKitInterpreterPluginBase</name>

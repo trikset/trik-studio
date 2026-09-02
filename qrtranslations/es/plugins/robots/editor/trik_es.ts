@@ -847,6 +847,18 @@
         <source>Drawing</source>
         <translation>Dibujo</translation>
     </message>
+    <message>
+        <source>Video Port</source>
+        <translation>Puerto de vídeo</translation>
+    </message>
+    <message>
+        <source>Detached</source>
+        <translation>No detener</translation>
+    </message>
+    <message>
+        <source>Stop Camera Mode</source>
+        <translation>Modo de apagado de la cámara</translation>
+    </message>
 </context>
 <context>
     <name>QObject::QObject</name>
@@ -1172,6 +1184,30 @@
     <message>
         <source>Public</source>
         <translation>Público</translation>
+    </message>
+    <message>
+        <source>Deactivate camera</source>
+        <translation>Desactivar la cámara</translation>
+    </message>
+    <message>
+        <source>Switch Algorithm</source>
+        <translation>Cambiar de algoritmo</translation>
+    </message>
+    <message>
+        <source>Stop stream</source>
+        <translation>Detener la transmisión</translation>
+    </message>
+    <message>
+        <source>usb-camera</source>
+        <translation>usb-camera</translation>
+    </message>
+    <message>
+        <source>video1</source>
+        <translation>video1</translation>
+    </message>
+    <message>
+        <source>video2</source>
+        <translation>video2</translation>
     </message>
 </context>
 </TS>
