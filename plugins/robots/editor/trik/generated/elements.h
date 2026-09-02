@@ -216,7 +216,7 @@ public:
 	{
 		addProperty("Mode", "DetectableVideoSensor", QString::fromUtf8("line"), QObject::tr("Mode"),
 			QObject::tr(""), false);
-		addProperty("VideoPort", "VideoPort", QString::fromUtf8("video1"), QObject::tr("Video Port"),
+		addProperty("VideoPort", "VideoPort", QString::fromUtf8("video2"), QObject::tr("Video Port"),
 			QObject::tr(""), false);
 	}
 };
@@ -276,6 +276,8 @@ public:
 	void initProperties()
 	{
 		addProperty("Variable", "string", QObject::tr("err"), QObject::tr("Variable"), QObject::tr(""), false);
+		addProperty("VideoPort", "VideoPort", QString::fromUtf8("video2"), QObject::tr("Video Port"),
+			QObject::tr(""), false);
 	}
 };
 
@@ -788,7 +790,7 @@ public:
 			QObject::tr(""), false);
 		addProperty("Mode", "VideoSensor", QString::fromUtf8("line"), QObject::tr("Mode"), QObject::tr(""),
 			false);
-		addProperty("VideoPort", "VideoPort", QString::fromUtf8("video1"), QObject::tr("Video Port"),
+		addProperty("VideoPort", "VideoPort", QString::fromUtf8("video2"), QObject::tr("Video Port"),
 			QObject::tr(""), false);
 	}
 };
@@ -845,7 +847,7 @@ public:
 			QObject::tr(""), false);
 		addProperty("Quality", "JpgEncoderQuality", QString::fromUtf8("30"), QObject::tr("Quality"),
 			QObject::tr(""), false);
-		addProperty("VideoPort", "VideoPort", QString::fromUtf8("video1"), QObject::tr("Video Port"),
+		addProperty("VideoPort", "VideoPort", QString::fromUtf8("video2"), QObject::tr("Video Port"),
 			QObject::tr(""), false);
 	}
 };
@@ -1707,7 +1709,7 @@ public:
 			false);
 		addProperty("StopCameraMode", "StopCameraMode", QString::fromUtf8("StopAll"),
 			QObject::tr("StopCameraMode"), QObject::tr(""), false);
-		addProperty("VideoPort", "VideoPort", QString::fromUtf8("video1"), QObject::tr("Video Port"),
+		addProperty("VideoPort", "VideoPort", QString::fromUtf8("video2"), QObject::tr("Video Port"),
 			QObject::tr(""), false);
 	}
 };
@@ -1757,7 +1759,7 @@ public:
 
 	void initProperties()
 	{
-		addProperty("VideoPort", "VideoPort", QString::fromUtf8("video1"), QObject::tr("Video Port"),
+		addProperty("VideoPort", "VideoPort", QString::fromUtf8("video2"), QObject::tr("Video Port"),
 			QObject::tr(""), false);
 	}
 };

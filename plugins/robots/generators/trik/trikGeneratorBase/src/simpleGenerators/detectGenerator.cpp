@@ -13,14 +13,17 @@
  * limitations under the License. */
 
 #include "detectGenerator.h"
-
+#include <qrutils/stringUtils.h>
 #include <generatorBase/generatorCustomizer.h>
 
 using namespace trik::simple;
+using namespace generatorBase::simple;
 
 DetectGenerator::DetectGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
 	const qReal::Id &id, QObject *parent)
 	: BindingGenerator(repo, customizer, id, "videosensors/detect" + repo.property(id, "Mode").toString() + ".t",
-		  {}, parent)
+		  {Binding::createStaticConverting("@@PORT@@",
+			utils::StringUtils::wrap(utils::StringUtils::dequote(repo.property(id, "VideoPort").toString())),
+			customizer.factory()->stringPropertyConverter(id, "VideoPort"))}, parent)
 {
 }
