@@ -871,6 +871,18 @@
         <source>Drawing</source>
         <translation>Рисование</translation>
     </message>
+    <message>
+        <source>Video Port</source>
+        <translation>Видеопорт</translation>
+    </message>
+    <message>
+        <source>Detached</source>
+        <translation>Не останавливать</translation>
+    </message>
+    <message>
+        <source>Stop Camera Mode</source>
+        <translation>Режим остановки камеры</translation>
+    </message>
 </context>
 <context>
     <name>QObject::QObject</name>
@@ -1208,6 +1220,30 @@
     <message>
         <source>true</source>
         <translation>истина</translation>
+    </message>
+    <message>
+        <source>Deactivate camera</source>
+        <translation>Отключить камеру</translation>
+    </message>
+    <message>
+        <source>Switch Algorithm</source>
+        <translation>Переключить алгоритм</translation>
+    </message>
+    <message>
+        <source>Stop stream</source>
+        <translation>Остановить трансляцию</translation>
+    </message>
+    <message>
+        <source>usb-camera</source>
+        <translation>usb-camera</translation>
+    </message>
+    <message>
+        <source>video1</source>
+        <translation>video1</translation>
+    </message>
+    <message>
+        <source>video2</source>
+        <translation>video2</translation>
     </message>
 </context>
 </TS>
