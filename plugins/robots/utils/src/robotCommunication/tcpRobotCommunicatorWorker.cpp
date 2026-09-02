@@ -29,7 +29,7 @@ static const uint telemetryPort = 9000;
 TcpRobotCommunicatorWorker::TcpRobotCommunicatorWorker(const QString &robotIpRegistryKey)
 	: mRobotIpRegistryKey(robotIpRegistryKey)
 {
-	qRegisterMetaType<MessageKind>("MessageKind");
+	qRegisterMetaType<MessageKind>("utils::robotCommunication::MessageKind");
 }
 
 TcpRobotCommunicatorWorker::~TcpRobotCommunicatorWorker() = default;
