@@ -23,6 +23,7 @@ TrikV62GeneratorRobotModel::TrikV62GeneratorRobotModel(const QString &kitId, con
 	, mFriendlyName(friendlyName)
 	, mPriority(priority)
 {
+	registerVideoDetectorAliases();
 }
 
 void TrikV62GeneratorRobotModel::setErrorReporter(qReal::ErrorReporterInterface &errorReporter)

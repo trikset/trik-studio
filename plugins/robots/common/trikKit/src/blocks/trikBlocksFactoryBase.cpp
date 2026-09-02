@@ -45,6 +45,7 @@
 #include "details/detectLineBlock.h"
 #include "details/lineDetectorToVariable.h"
 #include "details/initVideoStreamingBlock.h"
+#include "details/stopVideoStreamingBlock.h"
 #include "details/waitForMotionBlock.h"
 #include "details/speakerBlock.h"
 #include "details/ledBlock.h"
@@ -99,7 +100,7 @@ qReal::interpretation::Block *TrikBlocksFactoryBase::produceBlock(const qReal::I
 	} else if (elementMetatypeIs(element, "TrikInitVideoStreaming")) {
 		return new InitVideoStreamingBlock(mRobotModelManager->model());
 	} else if (elementMetatypeIs(element, "TrikStopVideoStreaming")) {
-		return new InitVideoStreamingBlock(mRobotModelManager->model());
+		return new StopVideoStreamingBlock(mRobotModelManager->model());
 	}
 	else if (elementMetatypeIs(element, "TrikSendMessage")) {
 		return new SendMessageBlock(mRobotModelManager->model());

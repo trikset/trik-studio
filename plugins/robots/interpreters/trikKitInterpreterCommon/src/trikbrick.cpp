@@ -298,6 +298,11 @@ trikControl::LineSensorInterface *TrikBrick::lineSensor(const QString &port)
 		return lineSensor("LineSensorPort"); // seems to be the case for 2d model
 	}
 
+	if (port == "usb-camera" || port == "video1") {
+		Q_EMIT error(tr("LineSensor on port %1 not supportred in 2D").arg(port));
+		return nullptr;
+	}
+
 	if (!mLineSensors.contains(port)) {
 		auto sens = RobotModelUtils::findDevice<TrikLineSensor>(*mTwoDRobotModel, port);
 		if (sens == nullptr) {
@@ -316,6 +321,11 @@ trikControl::ColorSensorInterface *TrikBrick::colorSensor(const QString &port)
 	using namespace kitBase::robotModel;
 	if (port == "video0" || port == "video2") {
 		return colorSensor("ColorSensorPort"); // seems to be the case for 2d model
+	}
+
+	if (port == "usb-camera" || port == "video1") {
+		Q_EMIT error(tr("LineSensor on port %1 not supportred in 2D").arg(port));
+		return nullptr;
 	}
 
 	if (!mColorSensors.contains(port)) {

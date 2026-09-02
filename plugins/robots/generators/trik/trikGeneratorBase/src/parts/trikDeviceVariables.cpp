@@ -23,9 +23,24 @@ QString TrikDeviceVariables::variableTemplatePath(const kitBase::robotModel::Dev
 {
 	if (device.name() == "trikLineSensor" || device.name() == "trikObjectSensor"
 		|| device.name() == "trikColorSensor") {
-		QString templateName = port.name();
-		templateName.remove("Port");
-		return "videosensors/" + templateName + ".t";
+		// Video detectors are described by reserved variables like "lineSensor", "colorSensor",
+		// "objectSensorX", "objectSensorY", "objectSensorSize" with an optional camera number suffix
+		// ("lineSensor1" etc). Template is chosen by the detector kind, not by the port name, so that
+		// aliases for different cameras reuse the same read templates.
+		auto reservedVariable = port.reservedVariable();
+		while (!reservedVariable.isEmpty() && reservedVariable.back().isDigit()) {
+			reservedVariable.chop(1);
+		}
+
+		const auto &templateName = reservedVariable == "colorSensor" ? "ColorSensor"
+			: reservedVariable == "objectSensorX" ? "ObjectSensorX"
+			: reservedVariable == "objectSensorY" ? "ObjectSensorY"
+			: reservedVariable == "objectSensorSize" ? "ObjectSensorSize"
+			: reservedVariable == "lineSensor" ? "LineSensor"
+			: QString();
+		if (!templateName.isEmpty()) {
+			return "videosensors/" + templateName + ".t";
+		}
 	} else if (device.name() == "gyroscope" || device.name() == "accelerometer") {
 		return QString("%1/%2.t").arg(device.name(), port.reservedVariable());
 	} else if (device.name().startsWith("gamepad")) {
