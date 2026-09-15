@@ -46,6 +46,7 @@ HEADERS += \
 	$$PWD/src/parts/trikDeviceVariables.h \
 	$$PWD/src/converters/backgroundColorConverter.h \
 	$$PWD/src/converters/ledColorConverter.h \
+	$$PWD/src/converters/videoPortNameConverter.h \
 	$$PWD/src/simpleGenerators/detectGenerator.h \
 	$$PWD/src/simpleGenerators/initCameraGenerator.h \
 	$$PWD/src/simpleGenerators/ledGenerator.h \
@@ -95,6 +96,7 @@ SOURCES += \
 	$$PWD/src/parts/trikDeviceVariables.cpp \
 	$$PWD/src/converters/backgroundColorConverter.cpp \
 	$$PWD/src/converters/ledColorConverter.cpp \
+	$$PWD/src/converters/videoPortNameConverter.cpp \
 	$$PWD/src/simpleGenerators/detectGenerator.cpp \
 	$$PWD/src/simpleGenerators/initCameraGenerator.cpp \
 	$$PWD/src/simpleGenerators/ledGenerator.cpp \

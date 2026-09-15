@@ -1,4 +1,4 @@
-/* Copyright 2015 CyberTech Labs Ltd.
+/* Copyright 2026 CyberTech Labs Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,21 +12,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. */
 
-#include "initVideoStreamingBlock.h"
+#include "stopVideoStreamingBlock.h"
 
 using namespace trik::blocks::details;
 
-InitVideoStreamingBlock::InitVideoStreamingBlock(kitBase::robotModel::RobotModelInterface &robotModel)
+StopVideoStreamingBlock::StopVideoStreamingBlock(kitBase::robotModel::RobotModelInterface &robotModel)
 	: kitBase::blocksBase::common::DeviceBlock<trik::robotModel::parts::TrikShell>(robotModel)
 {
 }
 
-void InitVideoStreamingBlock::doJob(trik::robotModel::parts::TrikShell &shell)
+void StopVideoStreamingBlock::doJob(trik::robotModel::parts::TrikShell &shell)
 {
-	const int qual = intProperty("Quality");
-	const bool grayscaled = boolProperty("Grayscaled");
-	const bool detached = boolProperty("Detached");
 	const auto &port = stringProperty("Port");
-	shell.initVideoStreaming(qual, grayscaled, detached, port);
+	shell.stopVideoStreaming(port);
 	Q_EMIT done(mNextBlockId);
 }

@@ -298,6 +298,11 @@ trikControl::LineSensorInterface *TrikBrick::lineSensor(const QString &port)
 		return lineSensor("LineSensorPort"); // seems to be the case for 2d model
 	}
 
+	if (port == "usb-camera" || port == "video1") {
+		Q_EMIT error(tr("LineSensor on port %1 not supportred in 2D").arg(port));
+		return nullptr;
+	}
+
 	if (!mLineSensors.contains(port)) {
 		auto sens = RobotModelUtils::findDevice<TrikLineSensor>(*mTwoDRobotModel, port);
 		if (sens == nullptr) {
@@ -316,6 +321,11 @@ trikControl::ColorSensorInterface *TrikBrick::colorSensor(const QString &port)
 	using namespace kitBase::robotModel;
 	if (port == "video0" || port == "video2") {
 		return colorSensor("ColorSensorPort"); // seems to be the case for 2d model
+	}
+
+	if (port == "usb-camera" || port == "video1") {
+		Q_EMIT error(tr("LineSensor on port %1 not supportred in 2D").arg(port));
+		return nullptr;
 	}
 
 	if (!mColorSensors.contains(port)) {
@@ -383,18 +393,18 @@ QVector<uint8_t> TrikBrick::getStillImage()
 		trikControl::QtCameraImplementation camera(webCameraName);
 		camera.setTempDir(qReal::PlatformInfo::invariantSettingsPath("pathToTempFolder"));
 
-		log(tr("Get photo with camera started"));
+		Q_EMIT log(tr("Get photo with camera started"));
 		QVector<uint8_t> photo = camera.getPhoto();
-		log(tr("Get photo with camera finished"));
+		Q_EMIT log(tr("Get photo with camera finished"));
 		if (photo.isEmpty()) {
-			error(tr("Cannot get a photo from camera (possibly because of wrong camera name)"));
+			Q_EMIT error(tr("Cannot get a photo from camera (possibly because of wrong camera name)"));
 		}
 
 		return photo;
 	} else {
 		QVector<uint8_t> photo = mImitationCamera->getPhoto();
 		if (photo.isEmpty()) {
-			error(tr("Cannot get a photo from folders/project (possibly because of wrong path/empty "
+			Q_EMIT error(tr("Cannot get a photo from folders/project (possibly because of wrong path/empty "
 			         "project)"));
 		}
 

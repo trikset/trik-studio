@@ -1,1 +1,1 @@
-brick.objectSensor("video2").stop();
+brick.objectSensor(@@PORT@@).stop(@@STOP_CAMERA_MODE@@);

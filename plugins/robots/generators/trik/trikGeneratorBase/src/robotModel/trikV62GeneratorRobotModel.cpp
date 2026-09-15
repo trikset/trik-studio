@@ -17,12 +17,14 @@
 using namespace trik::robotModel;
 
 TrikV62GeneratorRobotModel::TrikV62GeneratorRobotModel(const QString &kitId, const QString &robotId,
+	// NOLINTNEXTLINE(modernize-pass-by-value)
 	const QString &name, const QString &friendlyName, int priority)
 	: TrikRobotModelV62(kitId, robotId)
 	, mName(name)
 	, mFriendlyName(friendlyName)
 	, mPriority(priority)
 {
+	registerVideoDetectorAliases();
 }
 
 void TrikV62GeneratorRobotModel::setErrorReporter(qReal::ErrorReporterInterface &errorReporter)

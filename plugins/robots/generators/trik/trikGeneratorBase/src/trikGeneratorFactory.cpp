@@ -56,6 +56,7 @@
 #include "simpleGenerators/readLidarGenerator.h"
 #include "parts/trikDeviceVariables.h"
 #include "simpleGenerators/trikJoinNetworkGenerator.h"
+#include "converters/videoPortNameConverter.h"
 
 using namespace trik;
 using namespace trik::simple;
@@ -64,6 +65,7 @@ using namespace generatorBase::simple;
 
 TrikGeneratorFactory::TrikGeneratorFactory(const qrRepo::RepoApi &repo, qReal::ErrorReporterInterface &errorReporter,
 	const kitBase::robotModel::RobotModelManagerInterface &robotModelManager, lua::LuaProcessor &luaProcessor,
+	// NOLINTNEXTLINE(modernize-pass-by-value)
 	const QStringList &pathsToTemplates)
 	: GeneratorFactoryBase(repo, errorReporter, robotModelManager, luaProcessor)
 	, mPathsToTemplates(pathsToTemplates)
@@ -164,4 +166,10 @@ AbstractSimpleGenerator *TrikGeneratorFactory::simpleGenerator(const qReal::Id &
 QStringList TrikGeneratorFactory::pathsToTemplates() const
 {
 	return mPathsToTemplates; //{":/" + mGeneratorName + "/templates"};
+}
+
+generatorBase::simple::Binding::ConverterInterface *TrikGeneratorFactory::portNameConverter() const
+{
+	return new converters::VideoPortNameConverter(mRobotModelManager.model().availablePorts()
+		, GeneratorFactoryBase::portNameConverter());
 }

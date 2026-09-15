@@ -14,6 +14,8 @@
 
 #include "trikKit/robotModel/trikRobotModelBase.h"
 
+#include <QtCore/QStringList>
+
 #include <kitBase/robotModel/robotParts/display.h>
 #include <kitBase/robotModel/robotParts/speaker.h>
 #include <kitBase/robotModel/robotParts/button.h>
@@ -297,10 +299,34 @@ QHash<QString, int> TrikRobotModelBase::buttonCodes() const
 
 PortInfo TrikRobotModelBase::video2Port() const
 {
-	return PortInfo("Video2Port", tr("Video 2"), input);
+	return {"Video2Port", tr("Video 2"), input};
+}
+
+void TrikRobotModelBase::registerVideoDetectorAliases()
+{
+	const QStringList cameraNumbers = {"1", "2", "3"};
+	for (const QString &number : cameraNumbers) {
+		addAllowedConnection(
+			PortInfo("LineSensorVideo" + number + "Port", input, {}, "lineSensor" + number
+				, PortInfo::ReservedVariableType::vector),
+			{lineSensorInfo()});
+		addAllowedConnection(
+			PortInfo("ColorSensorVideo" + number + "Port", input, {}, "colorSensor" + number
+				, PortInfo::ReservedVariableType::vector),
+			{colorSensorInfo()});
+		addAllowedConnection(
+			PortInfo("ObjectSensorXVideo" + number + "Port", input, {}, "objectSensorX" + number),
+			{objectSensorInfo()});
+		addAllowedConnection(
+			PortInfo("ObjectSensorYVideo" + number + "Port", input, {}, "objectSensorY" + number),
+			{objectSensorInfo()});
+		addAllowedConnection(
+			PortInfo("ObjectSensorSizeVideo" + number + "Port", input, {}, "objectSensorSize" + number),
+			{objectSensorInfo()});
+	}
 }
 
 PortInfo TrikRobotModelBase::lidarPort() const
 {
-	return PortInfo("LidarPort", tr("Lidar"), input, {}, "lidar", PortInfo::ReservedVariableType::vector);
+	return {"LidarPort", tr("Lidar"), input, {}, "lidar", PortInfo::ReservedVariableType::vector};
 }
