@@ -299,7 +299,7 @@ QHash<QString, int> TrikRobotModelBase::buttonCodes() const
 
 PortInfo TrikRobotModelBase::video2Port() const
 {
-	return PortInfo("Video2Port", tr("Video 2"), input);
+	return {"Video2Port", tr("Video 2"), input};
 }
 
 void TrikRobotModelBase::registerVideoDetectorAliases()
@@ -328,5 +328,5 @@ void TrikRobotModelBase::registerVideoDetectorAliases()
 
 PortInfo TrikRobotModelBase::lidarPort() const
 {
-	return PortInfo("LidarPort", tr("Lidar"), input, {}, "lidar", PortInfo::ReservedVariableType::vector);
+	return {"LidarPort", tr("Lidar"), input, {}, "lidar", PortInfo::ReservedVariableType::vector};
 }

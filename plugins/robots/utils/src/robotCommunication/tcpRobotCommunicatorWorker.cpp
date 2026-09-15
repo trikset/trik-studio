@@ -26,6 +26,7 @@ using namespace utils::robotCommunication;
 static const uint controlPort = 8888;
 static const uint telemetryPort = 9000;
 
+// NOLINTNEXTLINE(modernize-pass-by-value)
 TcpRobotCommunicatorWorker::TcpRobotCommunicatorWorker(const QString &robotIpRegistryKey)
 	: mRobotIpRegistryKey(robotIpRegistryKey)
 {

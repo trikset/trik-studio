@@ -26,7 +26,7 @@ class StopVideoStreamingBlock : public kitBase::blocksBase::common::DeviceBlock<
 {
 	Q_OBJECT
 public:
-	StopVideoStreamingBlock(kitBase::robotModel::RobotModelInterface &robotModel);
+	explicit StopVideoStreamingBlock(kitBase::robotModel::RobotModelInterface &robotModel);
 
 protected:
 	void doJob(robotModel::parts::TrikShell &shell) override;

@@ -65,6 +65,7 @@ using namespace generatorBase::simple;
 
 TrikGeneratorFactory::TrikGeneratorFactory(const qrRepo::RepoApi &repo, qReal::ErrorReporterInterface &errorReporter,
 	const kitBase::robotModel::RobotModelManagerInterface &robotModelManager, lua::LuaProcessor &luaProcessor,
+	// NOLINTNEXTLINE(modernize-pass-by-value)
 	const QStringList &pathsToTemplates)
 	: GeneratorFactoryBase(repo, errorReporter, robotModelManager, luaProcessor)
 	, mPathsToTemplates(pathsToTemplates)
