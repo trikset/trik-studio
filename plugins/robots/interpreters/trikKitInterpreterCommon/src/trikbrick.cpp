@@ -393,18 +393,18 @@ QVector<uint8_t> TrikBrick::getStillImage()
 		trikControl::QtCameraImplementation camera(webCameraName);
 		camera.setTempDir(qReal::PlatformInfo::invariantSettingsPath("pathToTempFolder"));
 
-		log(tr("Get photo with camera started"));
+		Q_EMIT log(tr("Get photo with camera started"));
 		QVector<uint8_t> photo = camera.getPhoto();
-		log(tr("Get photo with camera finished"));
+		Q_EMIT log(tr("Get photo with camera finished"));
 		if (photo.isEmpty()) {
-			error(tr("Cannot get a photo from camera (possibly because of wrong camera name)"));
+			Q_EMIT error(tr("Cannot get a photo from camera (possibly because of wrong camera name)"));
 		}
 
 		return photo;
 	} else {
 		QVector<uint8_t> photo = mImitationCamera->getPhoto();
 		if (photo.isEmpty()) {
-			error(tr("Cannot get a photo from folders/project (possibly because of wrong path/empty "
+			Q_EMIT error(tr("Cannot get a photo from folders/project (possibly because of wrong path/empty "
 			         "project)"));
 		}
 
