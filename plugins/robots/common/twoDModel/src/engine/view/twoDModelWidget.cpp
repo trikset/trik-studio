@@ -129,6 +129,8 @@ TwoDModelWidget::TwoDModelWidget(Model &model, QWidget *parent)
 	connect(&mModel.timeline(), &Timeline::started, this, &TwoDModelWidget::setRunStopButtonsVisibility);
 	connect(&mModel.timeline(), &Timeline::stopped, this, &TwoDModelWidget::saveWorldModelToRepo);
 	connect(&mModel.timeline(), &Timeline::stopped, this, &TwoDModelWidget::setRunStopButtonsVisibility);
+	connect(&mModel.timeline(), &Timeline::paused, this, &TwoDModelWidget::setRunStopButtonsVisibility);
+	connect(&mModel.timeline(), &Timeline::resumed, this, &TwoDModelWidget::setRunStopButtonsVisibility);
 	connect(&mModel.timeline(), &Timeline::speedFactorChanged, this, [=](int value) {
 		const QPoint downCoords = mUi->speedDownButton->mapTo(this, mUi->speedDownButton->rect().bottomRight());
 		const QPoint upCoords = mUi->speedUpButton->mapTo(this, mUi->speedUpButton->rect().bottomLeft());
@@ -938,8 +940,12 @@ void TwoDModelWidget::setDetailsVisibility(bool visible)
 
 void TwoDModelWidget::setRunStopButtonsVisibility()
 {
-	mUi->runButton->setVisible(!mModel.timeline().isStarted());
-	mUi->stopButton->setVisible(mModel.timeline().isStarted());
+	const auto &timeline = mModel.timeline();
+	mUi->runButton->setVisible(!timeline.isStarted());
+	mUi->stopButton->setVisible(timeline.isStarted());
+	mUi->pauseButton->setVisible(timeline.isStarted());
+	mUi->pauseButton->setIcon(QIcon(timeline.isPaused() ? ":/icons/2d_run.png" : ":/icons/2d_pause.png"));
+	mUi->pauseButton->setToolTip(timeline.isPaused() ? tr("Resume simulation") : tr("Pause simulation"));
 }
 
 QGraphicsView::DragMode TwoDModelWidget::cursorTypeToDragType(CursorType type) const
@@ -1076,6 +1082,10 @@ void TwoDModelWidget::initRunStopButtons()
 {
 	connect(mUi->runButton, &QPushButton::clicked, this, &TwoDModelWidget::runButtonPressed);
 	connect(mUi->stopButton, &QPushButton::clicked, this, &TwoDModelWidget::stopButtonPressed);
+	connect(mUi->pauseButton, &QPushButton::clicked, this, [this]() {
+		auto &timeline = mModel.timeline();
+		timeline.setPaused(!timeline.isPaused());
+	});
 }
 
 template<class T>
