@@ -19,18 +19,18 @@
 using namespace trik::simple;
 using namespace generatorBase::simple;
 
-InitVideoStreamingGenerator::InitVideoStreamingGenerator(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, const qReal::Id &id
-		, QObject *parent)
-	: BindingGenerator(repo, customizer, id
-			, "videosensors/initVideoStreaming.t"
-			, { Binding::createDirect("@@QUALITY@@", "Quality")
-			, Binding::createConverting("@@GRAYSCALED@@", "Grayscaled", customizer.factory()->boolPropertyConverter(id, "Grayscaled", false))
-			, Binding::createConverting("@@DETACHED@@", "Detached", customizer.factory()->boolPropertyConverter(id, "Detached", false))
-			, Binding::createStaticConverting("@@PORT@@",
-				utils::StringUtils::wrap(utils::StringUtils::dequote(repo.property(id, "VideoPort").toString())),
-				customizer.factory()->stringPropertyConverter(id, "Port"))}
-			, parent)
+InitVideoStreamingGenerator::InitVideoStreamingGenerator(const qrRepo::RepoApi &repo,
+	generatorBase::GeneratorCustomizer &customizer, const qReal::Id &id, QObject *parent)
+	: BindingGenerator(repo, customizer, id, "videosensors/initVideoStreaming.t",
+		  {Binding::createDirect("@@QUALITY@@", "Quality"),
+			  Binding::createConverting("@@GRAYSCALED@@", "Grayscaled",
+				  customizer.factory()->boolPropertyConverter(id, "Grayscaled", false)),
+			  Binding::createConverting("@@DETACHED@@", "Detached",
+				  customizer.factory()->boolPropertyConverter(id, "Detached", false)),
+			  Binding::createStaticConverting("@@PORT@@",
+				  utils::StringUtils::wrap(
+					  utils::StringUtils::dequote(repo.property(id, "VideoPort").toString())),
+				  customizer.factory()->stringPropertyConverter(id, "Port"))},
+		  parent)
 {
 }
