@@ -19,18 +19,6 @@
 using namespace trik::simple;
 using namespace generatorBase::simple;
 
-namespace  {
-	QString convertModeToEnum(const QString &mode) {
-		if (mode == "StopNone") {
-			return "0";
-		}
-		if (mode == "StopStream") {
-			return "1";
-		}
-		return "2";
-	}
-}
-
 StopCameraGenerator::StopCameraGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
 	const qReal::Id &id, QObject *parent)
 	: BindingGenerator(repo, customizer, id,
@@ -39,10 +27,7 @@ StopCameraGenerator::StopCameraGenerator(const qrRepo::RepoApi &repo, generatorB
 				utils::StringUtils::wrap(utils::StringUtils::dequote(repo.property(id, "VideoPort").toString())),
 				customizer.factory()->stringPropertyConverter(id, "VideoPort"))
 			   ,
-			   Binding::createStaticConverting("@@STOP_CAMERA_MODE@@",
-				 convertModeToEnum(repo.stringProperty(id, "StopCameraMode")),
-				 customizer.factory()->stringPropertyConverter(id, "StopCameraMode"))
-			   ,
+			   Binding::createDirect("@@STOP_CAMERA_MODE@@", "StopCameraMode")
 			   }, parent)
 {
 }
