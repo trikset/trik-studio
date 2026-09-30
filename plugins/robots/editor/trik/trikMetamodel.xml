@@ -35,9 +35,9 @@
 				<value name="orange" displayedName="orange"/>
 			</enum>
 			<enum name="StopCameraMode">
-				<value name="StopNone" displayedName="Switch Algorithm"/>
-				<value name="StopStream" displayedName="Stop stream"/>
-				<value name="StopAll" displayedName="Deactivate camera"/>
+				<value name="0" displayedName="Switch Algorithm"/>
+				<value name="1" displayedName="Stop stream"/>
+				<value name="2" displayedName="Deactivate camera"/>
 			</enum>
 			<enum name="VideoPort">
 				<value name="video1" displayedName="video1"/>
@@ -435,7 +435,7 @@
 							<default>line</default>
 						</property>
 						<property displayedName="Stop Camera Mode" type="StopCameraMode" name="StopCameraMode">
-							<default>StopAll</default>
+							<default>2</default>
 						</property>
 						<property displayedName="Video Port" type="VideoPort" name="VideoPort">
 							<default>video2</default>

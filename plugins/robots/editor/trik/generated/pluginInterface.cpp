@@ -395,9 +395,9 @@ void TrikMetamodelPlugin::initEnums()
 		{qMakePair(QString("in"), tr("In")), qMakePair(QString("inout"), tr("Inout")),
 			qMakePair(QString("out"), tr("Out")), qMakePair(QString("return"), tr("Return"))});
 	mMetamodel->setEnumEditable("ParameterDirectionKind", false);
-	mMetamodel->addEnum("StopCameraMode", {qMakePair(QString("StopAll"), tr("Deactivate camera")),
-						      qMakePair(QString("StopNone"), tr("Switch Algorithm")),
-						      qMakePair(QString("StopStream"), tr("Stop stream"))});
+	mMetamodel->addEnum("StopCameraMode",
+		{qMakePair(QString("0"), tr("Switch Algorithm")), qMakePair(QString("1"), tr("Stop stream")),
+			qMakePair(QString("2"), tr("Deactivate camera"))});
 	mMetamodel->setEnumEditable("StopCameraMode", false);
 	mMetamodel->addEnum("TrikButtons",
 		{qMakePair(QString("Down"), tr("Down")), qMakePair(QString("Enter"), tr("Enter")),

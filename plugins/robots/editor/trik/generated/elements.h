@@ -1707,8 +1707,8 @@ public:
 	{
 		addProperty("Mode", "VideoSensor", QString::fromUtf8("line"), QObject::tr("Mode"), QObject::tr(""),
 			false);
-		addProperty("StopCameraMode", "StopCameraMode", QString::fromUtf8("StopAll"),
-			QObject::tr("Stop Camera Mode"), QObject::tr(""), false);
+		addProperty("StopCameraMode", "StopCameraMode", QString::fromUtf8("2"), QObject::tr("Stop Camera Mode"),
+			QObject::tr(""), false);
 		addProperty("VideoPort", "VideoPort", QString::fromUtf8("video2"), QObject::tr("Video Port"),
 			QObject::tr(""), false);
 	}
