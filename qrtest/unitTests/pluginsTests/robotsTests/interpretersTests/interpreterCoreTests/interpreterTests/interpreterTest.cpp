@@ -15,6 +15,8 @@
 #include "interpreterTest.h"
 
 #include <QtCore/QCoreApplication>
+#include <QtCore/QElapsedTimer>
+#include <QtCore/QTimer>
 
 #include <qrtext/lua/luaToolbox.h>
 #include "interpreterCore/interpreter/blockInterpreter.h"
@@ -144,4 +146,34 @@ TEST_F(InterpreterTest, stopRobot)
 	}
 
 	mInterpreter->stopRobot(qReal::interpretation::StopReason::finished);
+}
+
+TEST_F(InterpreterTest, pauseAndResume)
+{
+	EXPECT_CALL(mModel, stopRobot()).Times(2);
+
+	// Pausing right after start, before the first block of the program is executed.
+	QObject::connect(mInterpreter.data(), &kitBase::InterpreterInterface::started, [this]() {
+		mInterpreter->pauseInterpretation();
+	});
+
+	mInterpreter->interpret();
+
+	// Program consists of instantaneous blocks only, so without pause it would be finished here.
+	QElapsedTimer timer;
+	timer.start();
+	while (timer.elapsed() < 200) {
+		QCoreApplication::processEvents();
+	}
+
+	ASSERT_FALSE(mInterpreterStopped);
+	ASSERT_TRUE(mInterpreter->isRunning());
+
+	mInterpreter->resumeInterpretation();
+	if (!mInterpreterStopped) {
+		QTimer::singleShot(5000, &mEventLoop, &QEventLoop::quit);
+		mEventLoop.exec();
+	}
+
+	ASSERT_TRUE(mInterpreterStopped);
 }
