@@ -116,6 +116,14 @@ void TwoDModelEngineFacade::init(const kitBase::EventsForKitPluginInterface &eve
 
 		connect(this, &TwoDModelEngineFacade::stopButtonPressed, &interpreterControl,
 			[&interpreterControl]() { Q_EMIT interpreterControl.stopAllInterpretation(); });
+
+		// Timers in the program are driven by the timeline, but instantaneous blocks are not,
+		// so the interpreter itself must be suspended while simulation is paused.
+		connect(&mModel->timeline(), &model::Timeline::paused, &interpreterControl,
+			&kitBase::InterpreterControlInterface::pauseInterpretation, Qt::UniqueConnection);
+
+		connect(&mModel->timeline(), &model::Timeline::resumed, &interpreterControl,
+			&kitBase::InterpreterControlInterface::resumeInterpretation, Qt::UniqueConnection);
 	};
 
 	auto disconnectTwoDModel = [this, &eventsForKitPlugin, &interpreterControl]() {
@@ -130,6 +138,12 @@ void TwoDModelEngineFacade::init(const kitBase::EventsForKitPluginInterface &eve
 
 		disconnect(this, &twoDModel::TwoDModelControlInterface::stopButtonPressed, &interpreterControl,
 			&kitBase::InterpreterControlInterface::userStopRobot);
+
+		disconnect(&mModel->timeline(), &model::Timeline::paused, &interpreterControl,
+			&kitBase::InterpreterControlInterface::pauseInterpretation);
+
+		disconnect(&mModel->timeline(), &model::Timeline::resumed, &interpreterControl,
+			&kitBase::InterpreterControlInterface::resumeInterpretation);
 	};
 
 	connect(&projectManager, &qReal::ProjectManagementInterface::afterOpen, this, reloadWorld);

@@ -79,6 +79,16 @@ public:
 	/// Returns string id of a thread.
 	QString id() const;
 
+	/// Suspends interpretation: the block that is going to be executed next will not be started
+	/// until resume() is called. Blocks that are already running are not affected.
+	void pause();
+
+	/// Continues interpretation suspended by pause() call.
+	void resume();
+
+	/// Returns true if interpretation of this thread is suspended by pause() call.
+	bool isPaused() const;
+
 Q_SIGNALS:
 	/// Emitted when interpretation process was terminated (correctly or due to errors).
 	void stopped(qReal::interpretation::StopReason reason);
@@ -112,6 +122,9 @@ private:
 	void turnOff(BlockInterface *const block);
 	void connectBlock(BlockInterface *const block);
 
+	/// Interprets given block or postpones its interpretation until resume() if the thread is paused.
+	void interpretBlock(BlockInterface *const block);
+
 	const qReal::GraphicalModelAssistInterface *mGraphicalModelApi; // Doesn't have ownership
 	const qReal::LogicalModelAssistInterface *mLogicalModelApi {};
 	qReal::gui::MainWindowInterpretersInterface &mInterpretersInterface;
@@ -125,6 +138,8 @@ private:
 	QSignalMapper *mProcessEventsMapper; // Has ownership
 	QString mId;
 	QQueue<QString> mMessages;
+	bool mIsPaused {false};
+	BlockInterface *mPostponedBlock {}; // Doesn't have ownership
 };
 
 }
