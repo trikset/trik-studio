@@ -45,15 +45,9 @@ if /I "%FromInstaller%"=="false" (
     > "!regFile!" echo Windows Registry Editor Version 5.00
     >>"!regFile!" echo.
     >>"!regFile!" echo [-!fileExts!\UserChoice]
-
-<<<<<<< HEAD
-C:\Windows\regedit.exe /s "%regFile%"
-del "%regFile%" >nul 2>&1
-=======
     C:\Windows\regedit.exe /s "!regFile!"
     del "!regFile!" >nul 2>&1
 )
->>>>>>> 599b4b5e9 (Do not call regedit during installation from the installer.)
 
 rem === Register the .qrs extension ===
 reg add "%classes%\%extension%" /ve /d "%progId%" /f >nul
