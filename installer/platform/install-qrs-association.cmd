@@ -1,12 +1,20 @@
 @echo off
 setlocal EnableDelayedExpansion
 
-set "TargetDir=%~dp0"
+rem === Parse arguments ===
+rem From installer: %1 = TargetDir, %2 = AllUsers ("true"/"false"), %3 = FromInstaller ("true")
+rem From double-click: no arguments, fall back to script directory, AllUsers=false, FromInstaller=false
+
+set "TargetDir=%~1"
+if "%TargetDir%"=="" set "TargetDir=%~dp0"
 if "%TargetDir:~-1%"=="\" set "TargetDir=%TargetDir:~0,-1%"
 
 set "AllUsers=false"
-if /I "%~1"=="-AllUsers" set "AllUsers=%~2"
-if /I "%~1"=="true" set "AllUsers=true"
+if /I "%~2"=="true" set "AllUsers=true"
+if /I "%~2"=="false" set "AllUsers=false"
+
+set "FromInstaller=false"
+if /I "%~3"=="true" set "FromInstaller=true"
 
 if "%TargetDir%"=="" (
     echo TargetDir is empty 1>&2
@@ -29,15 +37,23 @@ if /I "%AllUsers%"=="true" (
     set "classes=HKCU\Software\Classes"
 )
 
-set "regFile=%TEMP%\remove_userchoice_%RANDOM%.reg"
-set "fileExts=HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.qrs"
+rem When run from the installer, skip regedit to avoid UAC prompt.
+if /I "%FromInstaller%"=="false" (
+    set "regFile=%TEMP%\remove_userchoice_%RANDOM%.reg"
+    set "fileExts=HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.qrs"
 
-> "%regFile%" echo Windows Registry Editor Version 5.00
->>"%regFile%" echo.
->>"%regFile%" echo [-%fileExts%\UserChoice]
+    > "!regFile!" echo Windows Registry Editor Version 5.00
+    >>"!regFile!" echo.
+    >>"!regFile!" echo [-!fileExts!\UserChoice]
 
+<<<<<<< HEAD
 C:\Windows\regedit.exe /s "%regFile%"
 del "%regFile%" >nul 2>&1
+=======
+    C:\Windows\regedit.exe /s "!regFile!"
+    del "!regFile!" >nul 2>&1
+)
+>>>>>>> 599b4b5e9 (Do not call regedit during installation from the installer.)
 
 rem === Register the .qrs extension ===
 reg add "%classes%\%extension%" /ve /d "%progId%" /f >nul

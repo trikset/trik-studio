@@ -15,7 +15,8 @@ Component.prototype.createOperations = function()
             "/c",
             "@TargetDir@\\install-qrs-association.cmd",
             "@TargetDir@",
-            allUsers.toString()
+            allUsers.toString(),
+            "true"
         );
     }
 }
