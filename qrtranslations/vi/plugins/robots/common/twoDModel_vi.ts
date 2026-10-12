@@ -394,6 +394,10 @@
         <source>px</source>
         <translation>px</translation>
     </message>
+    <message>
+        <source>Pause simulation</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>twoDModel::constraints::ConstraintsChecker</name>
@@ -881,6 +885,14 @@
     <message>
         <source>%1 (port %2)</source>
         <translation>%1 (cổng %2)</translation>
+    </message>
+    <message>
+        <source>Resume simulation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pause simulation</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -58,6 +58,20 @@ void ProxyInterpreter::stopRobot(qReal::interpretation::StopReason reason)
 	}
 }
 
+void ProxyInterpreter::pauseInterpretation()
+{
+	if (mProxiedInterpreter) {
+		mProxiedInterpreter->pauseInterpretation();
+	}
+}
+
+void ProxyInterpreter::resumeInterpretation()
+{
+	if (mProxiedInterpreter) {
+		mProxiedInterpreter->resumeInterpretation();
+	}
+}
+
 int ProxyInterpreter::timeElapsed() const
 {
 	return mProxiedInterpreter ? mProxiedInterpreter->timeElapsed() : 0;

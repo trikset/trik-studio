@@ -38,12 +38,17 @@ Timeline::Timeline(QObject *parent)
 	connect(&mTimer, &QTimer::timeout, this, &Timeline::onTimer);
 	mTimer.setTimerType(Qt::TimerType::PreciseTimer);
 	mTimer.setInterval(defaultRealTimeInterval);
+
+	connect(&mFrameTimer, &QTimer::timeout, this, &Timeline::gotoNextFrame);
+	mFrameTimer.setTimerType(Qt::TimerType::PreciseTimer);
+	mFrameTimer.setSingleShot(true);
 }
 
 void Timeline::start()
 {
 	if (!mIsStarted) {
 		mIsStarted = true;
+		mIsPaused = false;
 		Q_EMIT started();
 		gotoNextFrame();
 	}
@@ -53,6 +58,7 @@ void Timeline::stop(qReal::interpretation::StopReason reason)
 {
 	if (mIsStarted) {
 		mIsStarted = false;
+		mIsPaused = false;
 		QCoreApplication::processEvents();
 		Q_EMIT beforeStop(reason);
 		mTimer.stop();
@@ -60,16 +66,47 @@ void Timeline::stop(qReal::interpretation::StopReason reason)
 	}
 }
 
+void Timeline::pause()
+{
+	if (mIsStarted && !mIsPaused) {
+		mIsPaused = true;
+		mTimer.stop();
+		mFrameTimer.stop();
+		mCyclesCount = 0;
+		// Let the scene reflect the ticks that were modeled since the last frame
+		Q_EMIT nextFrame();
+		Q_EMIT paused();
+	}
+}
+
+void Timeline::resume()
+{
+	if (mIsStarted && mIsPaused) {
+		mIsPaused = false;
+		Q_EMIT resumed();
+		gotoNextFrame();
+	}
+}
+
+void Timeline::setPaused(bool paused)
+{
+	if (paused) {
+		pause();
+	} else {
+		resume();
+	}
+}
+
 void Timeline::onTimer()
 {
-	if (!mIsStarted) {
+	if (!mIsStarted || mIsPaused) {
 		mTimer.stop();
 		return;
 	}
 
 	for (int i = 0; i < ticksPerCycle; ++i) {
 		QCoreApplication::processEvents();
-		if (mIsStarted) {
+		if (mIsStarted && !mIsPaused) {
 			mTimestamp += timeInterval;
 			Q_EMIT tick();
 			++mCyclesCount;
@@ -80,7 +117,7 @@ void Timeline::onTimer()
 					static_cast<int>(QDateTime::currentMSecsSinceEpoch() - mFrameStartTimestamp);
 				const int pauseBeforeFrameEnd = mFrameLength - msFromFrameStart;
 				if (pauseBeforeFrameEnd > 0) {
-					QTimer::singleShot(pauseBeforeFrameEnd - 1, this, &Timeline::gotoNextFrame);
+					mFrameTimer.start(pauseBeforeFrameEnd - 1);
 				} else {
 					gotoNextFrame();
 				}
@@ -93,6 +130,10 @@ void Timeline::onTimer()
 
 void Timeline::gotoNextFrame()
 {
+	if (mIsPaused) {
+		return;
+	}
+
 	Q_EMIT nextFrame();
 	mFrameStartTimestamp = QDateTime::currentMSecsSinceEpoch();
 	if (!mTimer.isActive()) {
@@ -113,6 +154,11 @@ int Timeline::speedFactor() const
 bool Timeline::isStarted() const
 {
 	return mIsStarted;
+}
+
+bool Timeline::isPaused() const
+{
+	return mIsPaused;
 }
 
 quint64 Timeline::timestamp() const

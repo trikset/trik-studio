@@ -88,6 +88,7 @@ void BlockInterpreter::interpret()
 	mRobotModelManager.model().stopRobot();
 	mBlocksTable->clear();
 	mState = waitingForDevicesConfiguredToLaunch;
+	mIsPaused = false;
 
 	if (!mAutoconfigurer.configure(mGraphicalModelApi.children(Id::rootId()),
 		    mRobotModelManager.model().robotId())) {
@@ -113,9 +114,34 @@ void BlockInterpreter::stopRobot(qReal::interpretation::StopReason reason)
 {
 	mRobotModelManager.model().stopRobot();
 	mState = idle;
+	mIsPaused = false;
 	mThreads.clear();
 	mBlocksTable->setFailure();
 	Q_EMIT stopped(reason);
+}
+
+void BlockInterpreter::pauseInterpretation()
+{
+	if (mState == idle || mIsPaused) {
+		return;
+	}
+
+	mIsPaused = true;
+	for (const auto &thread : mThreads) {
+		thread->pause();
+	}
+}
+
+void BlockInterpreter::resumeInterpretation()
+{
+	if (!mIsPaused) {
+		return;
+	}
+
+	mIsPaused = false;
+	for (const auto &thread : mThreads) {
+		thread->resume();
+	}
 }
 
 int BlockInterpreter::timeElapsed() const
@@ -201,6 +227,11 @@ void BlockInterpreter::addThread(const QSharedPointer<qReal::interpretation::Thr
 	}
 
 	mThreads[threadId] = thread;
+	if (mIsPaused) {
+		// Threads forked while the program is paused must not start until it is resumed.
+		thread->pause();
+	}
+
 	connect(&*thread, &interpretation::Thread::stopped, this, &BlockInterpreter::threadStopped);
 
 	connect(&*thread, &qReal::interpretation::Thread::newThread, this, &BlockInterpreter::newThread);
