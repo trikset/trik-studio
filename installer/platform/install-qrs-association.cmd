@@ -36,7 +36,7 @@ set "fileExts=HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explor
 >>"%regFile%" echo.
 >>"%regFile%" echo [-%fileExts%\UserChoice]
 
-regedit /s "%regFile%"
+C:\Windows\regedit.exe /s "%regFile%"
 del "%regFile%" >nul 2>&1
 
 rem === Register the .qrs extension ===
