@@ -11,13 +11,9 @@ Component.prototype.createOperations = function()
 
         component.addOperation(
             "Execute",
-            "powershell.exe",
-            "-NoProfile",
-            "-NonInteractive",
-            "-ExecutionPolicy",
-            "Bypass",
-            "-File",
-            "@TargetDir@\\install-qrs-association.ps1",
+            "cmd.exe",
+            "/c",
+            "@TargetDir@\\install-qrs-association.cmd",
             "@TargetDir@",
             allUsers.toString()
         );
