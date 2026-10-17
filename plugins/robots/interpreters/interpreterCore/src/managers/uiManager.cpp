@@ -66,7 +66,10 @@ UiManager::UiManager(QAction &debugModeAction, QAction &editModeAction, qReal::g
 	connect(&kitPluginEvents, &kitBase::EventsForKitPluginInterface::interpretationStarted, mRobotConsole,
 		&qReal::ui::ConsoleDock::clear);
 	connect(&kitPluginEvents, &kitBase::EventsForKitPluginInterface::robotModelChanged, this,
-		[=]() { QTimer::singleShot(0, this, &UiManager::reloadDocksSavingToolbarsAndErrors); });
+		[=]() {
+			saveDocks();
+			QTimer::singleShot(0, this, &UiManager::reloadDocksSavingToolbarsAndErrors);
+		});
 	connect(&robotModelManager, &kitBase::robotModel::RobotModelManagerInterface::robotModelChanged, this,
 		&UiManager::onRobotModelChanged);
 	connect(&debugModeAction, &QAction::triggered, this, &UiManager::switchToDebuggerMode);
