@@ -77,10 +77,7 @@ protected:
 	virtual kitBase::robotModel::PortInfo lidarPort() const;
 	virtual kitBase::robotModel::DeviceInfo networkInfo() const;
 
-	/// Registers ports for video detectors (line/color/object sensors) on each video camera
-	/// (video1, video2, usb-camera). Reserved variables get a camera number suffix ("lineSensor1",
-	/// "colorSensor3", "objectSensorX2" etc). Called only by generator robot models, so interpreted
-	/// (2D and real-time) models keep the single legacy port set untouched.
+	/// Registers per-camera aliases for video detector reserved variables.
 	void registerVideoDetectorAliases();
 };
 
