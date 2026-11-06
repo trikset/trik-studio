@@ -14,12 +14,19 @@ case "$(uname)" in
     export HOMEBREW_NO_AUTO_UPDATE=1
     TRIK_PYTHON3_VERSION_PATCH=${TRIK_PYTHON3_VERSION_PATCH:-0}
     brew tap "hudochenkov/sshpass"
-    TRIK_BREW_PACKAGES="ccache coreutils pkg-config gnu-sed sshpass p7zip"
+    TRIK_BREW_PACKAGES="ccache coreutils pkg-config gnu-sed sshpass p7zip rsync"
     for pkg in $TRIK_BREW_PACKAGES ; do
       p="${pkg##*/}"
       p="${p%.*}"
       brew install --quiet "$pkg" || brew upgrade "$pkg" || brew link --force "$pkg" || echo "Failed to install/upgrade $pkg"
     done    
+    RSYNC_PREFIX="$(brew --prefix rsync)"
+    echo "$RSYNC_PREFIX/bin" >> "$GITHUB_PATH"
+    export PATH="$RSYNC_PREFIX/bin:$PATH"
+    if rsync --version 2>&1 | grep -qi '^openrsync'; then
+      echo "ERROR: GNU rsync is required, but openrsync is used instead" >&2
+      exit 1
+    fi
     qt_archives+=("qtmacextras")
     
     PYTHON_VERSION="3.${TRIK_PYTHON3_VERSION_MINOR}.$TRIK_PYTHON3_VERSION_PATCH"
