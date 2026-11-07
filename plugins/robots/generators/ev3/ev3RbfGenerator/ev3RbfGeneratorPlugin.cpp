@@ -219,15 +219,23 @@ bool Ev3RbfGeneratorPlugin::compile(const QFileInfo &lmsFile)
 #else
 	lmsasm.setArguments({"-output", rbfFile.fileName(), lmsFile.fileName()});
 #endif
-	connect(&lmsasm, &QProcess::readyRead, &loop, [&lmsasm]() { QLOG_INFO() << lmsasm.readAll(); });
+	QString lmsasmError;
+	connect(&lmsasm, &QProcess::readyReadStandardError, &loop, [&lmsasm, &lmsasmError]() {
+		lmsasmError += QString::fromLocal8Bit(lmsasm.readAllStandardError());
+	});
+	connect(&lmsasm, &QProcess::readyReadStandardOutput, &loop, [&lmsasm]() {
+		QLOG_INFO() << QString::fromLocal8Bit(lmsasm.readAllStandardOutput());
+	});
 	connect(&lmsasm, &QProcess::errorOccurred, &loop, [&lmsasm, &loop](QProcess::ProcessError e) {
 		QLOG_ERROR() << "Failed to start process (status" << e << "):" << lmsasm.program()
 			     << lmsasm.arguments();
 		loop.quit();
 	});
+	auto finishedNormally = false;
 	connect(&lmsasm, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), &loop,
-		[&loop, &lmsasm](int e, QProcess::ExitStatus s) {
-		if (e || s != QProcess::ExitStatus::NormalExit) {
+		[&loop, &lmsasm, &finishedNormally](int e, QProcess::ExitStatus s) {
+		finishedNormally = (e == 0 && s == QProcess::ExitStatus::NormalExit);
+		if (!finishedNormally) {
 			QLOG_ERROR() << "Failed to execute process (errCode:" << e << ", exitStatus:" << s
 				     << "):" << lmsasm.program() << lmsasm.arguments();
 		}
@@ -236,6 +244,20 @@ bool Ev3RbfGeneratorPlugin::compile(const QFileInfo &lmsFile)
 
 	lmsasm.start();
 	loop.exec();
+
+	lmsasmError += QString::fromLocal8Bit(lmsasm.readAllStandardError());
+	lmsasmError = lmsasmError.trimmed();
+
+	if (!finishedNormally || !lmsasmError.isEmpty()) {
+		if (lmsasmError.isEmpty()) {
+			QLOG_ERROR() << "lmsasm failed without an error message";
+		} else {
+			QLOG_ERROR() << "lmsasm error:" << lmsasmError;
+			mMainWindowInterface->errorReporter()->addError(lmsasmError);
+		}
+		return false;
+	}
+
 	return true;
 }
 
