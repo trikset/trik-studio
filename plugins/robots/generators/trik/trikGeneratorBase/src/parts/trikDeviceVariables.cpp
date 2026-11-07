@@ -68,7 +68,7 @@ QString TrikDeviceVariables::variableTemplatePath(const kitBase::robotModel::Dev
 {
 	if (device.name() == "trikLineSensor" || device.name() == "trikObjectSensor"
 		|| device.name() == "trikColorSensor") {
-		const auto templatePath = videoSensorTemplatePath(port.reservedVariable());
+		auto templatePath = videoSensorTemplatePath(port.reservedVariable());
 		if (!templatePath.isEmpty()) {
 			return templatePath;
 		}
