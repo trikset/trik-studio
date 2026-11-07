@@ -2,7 +2,7 @@
 set -euxo pipefail
 BUILD_INSTALLER=${BUILD_INSTALLER:-true}
 TRIK_QT_VERSION=${TRIK_QT_VERSION:-5.15}
-XCODE_VERSION=${XCODE_VERSION:-15.3}
+XCODE_VERSION=${XCODE_VERSION:-16.4}
 SCRIPT_DIR="$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
 
 source "$SCRIPT_DIR/utilities.sh"
@@ -14,12 +14,19 @@ case "$(uname)" in
     export HOMEBREW_NO_AUTO_UPDATE=1
     TRIK_PYTHON3_VERSION_PATCH=${TRIK_PYTHON3_VERSION_PATCH:-0}
     brew tap "hudochenkov/sshpass"
-    TRIK_BREW_PACKAGES="ccache coreutils pkg-config gnu-sed sshpass p7zip"
+    TRIK_BREW_PACKAGES="ccache coreutils pkg-config gnu-sed sshpass p7zip rsync"
     for pkg in $TRIK_BREW_PACKAGES ; do
       p="${pkg##*/}"
       p="${p%.*}"
       brew install --quiet "$pkg" || brew upgrade "$pkg" || brew link --force "$pkg" || echo "Failed to install/upgrade $pkg"
     done    
+    RSYNC_PREFIX="$(brew --prefix rsync)"
+    echo "$RSYNC_PREFIX/bin" >> "$GITHUB_PATH"
+    export PATH="$RSYNC_PREFIX/bin:$PATH"
+    if rsync --version 2>&1 | grep -qi '^openrsync'; then
+      echo "ERROR: GNU rsync is required, but openrsync is used instead" >&2
+      exit 1
+    fi
     qt_archives+=("qtmacextras")
     
     PYTHON_VERSION="3.${TRIK_PYTHON3_VERSION_MINOR}.$TRIK_PYTHON3_VERSION_PATCH"
@@ -28,8 +35,23 @@ case "$(uname)" in
     curl -o "/tmp/${PYTHON_INSTALLER_NAME}" "${PYTHON_DOWNLOAD_URL}"
     sudo installer -pkg "/tmp/${PYTHON_INSTALLER_NAME}" -target /
 
-    MACPORTS_PKG="MacPorts-2.11.6-14-Sonoma.pkg"
-    MACPORTS_URL="https://github.com/macports/macports-base/releases/download/v2.11.6/${MACPORTS_PKG}"
+    MACPORTS_VERSION=${MACPORTS_VERSION:-2.12.7}
+    MACOS_VERSION=$(sw_vers -productVersion)
+    case "${MACOS_VERSION%%.*}" in
+      11) MACPORTS_CODENAME=BigSur ;;
+      12) MACPORTS_CODENAME=Monterey ;;
+      13) MACPORTS_CODENAME=Ventura ;;
+      14) MACPORTS_CODENAME=Sonoma ;;
+      15) MACPORTS_CODENAME=Sequoia ;;
+      26) MACPORTS_CODENAME=Tahoe ;;
+      27) MACPORTS_CODENAME=GoldenGate ;;
+      *)
+        echo "No MacPorts package mapping for macOS ${MACOS_VERSION}" >&2
+        exit 1
+        ;;
+    esac
+    MACPORTS_PKG="MacPorts-${MACPORTS_VERSION}-${MACOS_VERSION%%.*}-${MACPORTS_CODENAME}.pkg"
+    MACPORTS_URL="https://github.com/macports/macports-base/releases/download/v${MACPORTS_VERSION}/${MACPORTS_PKG}"
     curl -L --fail --output "${MACPORTS_PKG}" "${MACPORTS_URL}"
     sudo installer -pkg "${MACPORTS_PKG}" -target /
     export PATH="/opt/local/bin:$PATH"

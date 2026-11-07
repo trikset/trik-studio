@@ -47,7 +47,7 @@ on:
       xcode_version:
         required: false
         type: string
-        default: 15.3
+        default: 16.4
       config:
         required: false
         type: string
