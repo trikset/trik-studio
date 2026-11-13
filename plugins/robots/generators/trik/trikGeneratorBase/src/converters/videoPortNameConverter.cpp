@@ -23,24 +23,33 @@ namespace {
 QString cameraSourceFor(const kitBase::robotModel::PortInfo &port)
 {
 	// Reserved variable of a video detector port looks like "lineSensor", "colorSensor",
-	// "objectSensorX", "objectSensorY", "objectSensorSize" with an optional camera number suffix
-	// ("lineSensor1" etc). Legacy names without a suffix are bound to the default camera (video2).
+	// "objectSensorX", "objectSensorY", "objectSensorSize". Per-camera aliases put the camera
+	// number right after the sensor name ("lineSensor1", "colorSensor3", "objectSensor1" etc).
+	// Legacy object sensor names without a number are bound to the default camera (video2).
 	const auto &reservedVariable = port.reservedVariable();
-	if (!reservedVariable.startsWith("lineSensor") && !reservedVariable.startsWith("colorSensor")
-		&& !reservedVariable.startsWith("objectSensorX")
-		&& !reservedVariable.startsWith("objectSensorY")
-		&& !reservedVariable.startsWith("objectSensorSize")) {
+	QString number;
+	if (reservedVariable.startsWith("lineSensor")) {
+		number = reservedVariable.mid(QString("lineSensor").size());
+	} else if (reservedVariable.startsWith("colorSensor")) {
+		number = reservedVariable.mid(QString("colorSensor").size());
+	} else if (reservedVariable.startsWith("objectSensor")) {
+		const auto parameter = reservedVariable.mid(QString("objectSensor").size());
+		if (parameter != "X" && parameter != "Y" && parameter != "Size") {
+			number = parameter;
+		}
+	} else {
 		return {};
 	}
 
-	QString suffix;
-	for (int i = reservedVariable.size() - 1; i >= 0 && reservedVariable.at(i).isDigit(); --i) {
-		suffix.prepend(reservedVariable.at(i));
+	for (auto &&symbol : number) {
+		if (!symbol.isDigit()) {
+			return {};
+		}
 	}
 
-	const auto &camera = suffix == "1" ? "video1"
-		: suffix == "2" ? "video2"
-		: suffix == "3" ? "usb-camera"
+	const auto &camera = number == "1" ? "video1"
+		: number == "2" ? "video2"
+		: number == "3" ? "usb-camera"
 		: "video2";
 	return utils::StringUtils::wrap(camera);
 }

@@ -78,6 +78,7 @@
         <file>templates/accelerometer/accelerometer.t</file>
         <file>templates/videosensors/LineSensor.t</file>
         <file>templates/videosensors/ColorSensor.t</file>
+        <file>templates/videosensors/ObjectSensor.t</file>
         <file>templates/videosensors/ObjectSensorX.t</file>
         <file>templates/videosensors/ObjectSensorY.t</file>
         <file>templates/videosensors/ObjectSensorSize.t</file>

@@ -315,13 +315,8 @@ void TrikRobotModelBase::registerVideoDetectorAliases()
 				, PortInfo::ReservedVariableType::vector),
 			{colorSensorInfo()});
 		addAllowedConnection(
-			PortInfo("ObjectSensorXVideo" + number + "Port", input, {}, "objectSensorX" + number),
-			{objectSensorInfo()});
-		addAllowedConnection(
-			PortInfo("ObjectSensorYVideo" + number + "Port", input, {}, "objectSensorY" + number),
-			{objectSensorInfo()});
-		addAllowedConnection(
-			PortInfo("ObjectSensorSizeVideo" + number + "Port", input, {}, "objectSensorSize" + number),
+			PortInfo("ObjectSensorVideo" + number + "Port", input, {}, "objectSensor" + number
+				, PortInfo::ReservedVariableType::vector),
 			{objectSensorInfo()});
 	}
 }

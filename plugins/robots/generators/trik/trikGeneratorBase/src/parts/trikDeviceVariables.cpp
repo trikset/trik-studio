@@ -18,28 +18,59 @@
 
 using namespace trik::parts;
 
+namespace {
+
+QString videoSensorTemplatePath(const QString &reservedVariable)
+{
+	// Video detectors are described by reserved variables like "lineSensor", "colorSensor",
+	// "objectSensorX", "objectSensorY", "objectSensorSize". Per-camera aliases put the camera
+	// number right after the sensor name ("lineSensor1", "colorSensor3", "objectSensor1" etc).
+	// Object sensor also has a vector form "objectSensorN" returning [x, y, size].
+	QString detectorKind;
+	if (reservedVariable.startsWith("lineSensor")) {
+		detectorKind = "lineSensor";
+	} else if (reservedVariable.startsWith("colorSensor")) {
+		detectorKind = "colorSensor";
+	} else if (reservedVariable.startsWith("objectSensor")) {
+		const auto parameter = reservedVariable.mid(QString("objectSensor").size());
+		if (parameter == "X" || parameter == "Y" || parameter == "Size") {
+			detectorKind = "objectSensor" + parameter;
+		} else {
+			auto isCameraNumber = !parameter.isEmpty();
+			for (auto &&symbol : parameter) {
+				if (!symbol.isDigit()) {
+					isCameraNumber = false;
+					break;
+				}
+			}
+
+			if (isCameraNumber) {
+				detectorKind = "objectSensor";
+			}
+		}
+	}
+
+	const auto &templateName = detectorKind == "colorSensor" ? "ColorSensor"
+		: detectorKind == "objectSensor" ? "ObjectSensor"
+		: detectorKind == "objectSensorX" ? "ObjectSensorX"
+		: detectorKind == "objectSensorY" ? "ObjectSensorY"
+		: detectorKind == "objectSensorSize" ? "ObjectSensorSize"
+		: detectorKind == "lineSensor" ? "LineSensor"
+		: QString();
+
+	return templateName.isEmpty() ? QString() : "videosensors/" + templateName + ".t";
+}
+
+}
+
 QString TrikDeviceVariables::variableTemplatePath(const kitBase::robotModel::DeviceInfo &device,
 	const kitBase::robotModel::PortInfo &port) const
 {
 	if (device.name() == "trikLineSensor" || device.name() == "trikObjectSensor"
 		|| device.name() == "trikColorSensor") {
-		// Video detectors are described by reserved variables like "lineSensor", "colorSensor",
-		// "objectSensorX", "objectSensorY", "objectSensorSize" with an optional camera number suffix
-		// ("lineSensor1" etc). Template is chosen by the detector kind, not by the port name, so that
-		// aliases for different cameras reuse the same read templates.
-		auto reservedVariable = port.reservedVariable();
-		while (!reservedVariable.isEmpty() && reservedVariable.back().isDigit()) {
-			reservedVariable.chop(1);
-		}
-
-		const auto &templateName = reservedVariable == "colorSensor" ? "ColorSensor"
-			: reservedVariable == "objectSensorX" ? "ObjectSensorX"
-			: reservedVariable == "objectSensorY" ? "ObjectSensorY"
-			: reservedVariable == "objectSensorSize" ? "ObjectSensorSize"
-			: reservedVariable == "lineSensor" ? "LineSensor"
-			: QString();
-		if (!templateName.isEmpty()) {
-			return "videosensors/" + templateName + ".t";
+		auto templatePath = videoSensorTemplatePath(port.reservedVariable());
+		if (!templatePath.isEmpty()) {
+			return templatePath;
 		}
 	} else if (device.name() == "gyroscope" || device.name() == "accelerometer") {
 		return QString("%1/%2.t").arg(device.name(), port.reservedVariable());
