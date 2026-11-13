@@ -207,7 +207,7 @@ void Thread::turnOn(BlockInterface *const block)
 		mProcessEventsMapper->setMapping(mProcessEventsTimer, mCurrentBlock);
 		mProcessEventsTimer->start();
 	} else {
-		mCurrentBlock->interpret(this);
+		interpretBlock(mCurrentBlock);
 	}
 }
 
@@ -215,8 +215,46 @@ void Thread::interpretAfterEventsProcessing(QObject *blockObject)
 {
 	auto *const block = dynamic_cast<BlockInterface *>(blockObject);
 	if (block) {
-		block->interpret(this);
+		interpretBlock(block);
 	}
+}
+
+void Thread::interpretBlock(BlockInterface *const block)
+{
+	if (mIsPaused) {
+		mPostponedBlock = block;
+		return;
+	}
+
+	block->interpret(this);
+}
+
+void Thread::pause()
+{
+	mIsPaused = true;
+}
+
+void Thread::resume()
+{
+	if (!mIsPaused) {
+		return;
+	}
+
+	mIsPaused = false;
+	if (mPostponedBlock) {
+		// Starting postponed block through the event loop, so resume() caller will not be blocked
+		// by the whole chain of instantaneous blocks.
+		BlockInterface *const block = mPostponedBlock;
+		mPostponedBlock = nullptr;
+		mProcessEventsMapper->removeMappings(mProcessEventsTimer);
+		mProcessEventsMapper->setMapping(mProcessEventsTimer, block);
+		mProcessEventsTimer->start();
+	}
+}
+
+bool Thread::isPaused() const
+{
+	return mIsPaused;
 }
 
 void Thread::turnOff(BlockInterface *const block)

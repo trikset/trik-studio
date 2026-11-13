@@ -39,6 +39,8 @@ public Q_SLOTS:
 	void connectToRobot() override;
 	void interpret() override;
 	void stopRobot(qReal::interpretation::StopReason reason = qReal::interpretation::StopReason::userStop) override;
+	void pauseInterpretation() override;
+	void resumeInterpretation() override;
 
 private:
 	kitBase::InterpreterInterface *mProxiedInterpreter; // Does not have ownership.

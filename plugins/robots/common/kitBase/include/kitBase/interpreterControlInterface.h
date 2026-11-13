@@ -65,6 +65,13 @@ public Q_SLOTS:
 	{
 		stopRobot(qReal::interpretation::StopReason::userStop);
 	}
+
+	/// Suspends interpretation process (for example, when 2D model simulation is paused).
+	/// Does nothing by default.
+	virtual void pauseInterpretation() {}
+
+	/// Continues interpretation process suspended by pauseInterpretation(). Does nothing by default.
+	virtual void resumeInterpretation() {}
 };
 
 }

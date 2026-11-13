@@ -42,8 +42,11 @@ public:
 
 	int speedFactor() const;
 
-	/// Returns true if timeline is ticking at the moment.
+	/// Returns true if timeline is started, i.e. the modeling is in progress (even if it is paused now).
 	bool isStarted() const;
+
+	/// Returns true if timeline is started but its ticking is suspended by pause() call.
+	bool isPaused() const;
 
 	quint64 timestamp() const override;
 
@@ -56,6 +59,16 @@ public:
 public Q_SLOTS:
 	void start();
 	void stop(qReal::interpretation::StopReason reason);
+
+	/// Suspends ticking of the started timeline. Model time does not flow until resume() is called.
+	/// Does nothing if timeline is not started or already paused.
+	void pause();
+
+	/// Continues ticking of the paused timeline. Does nothing if timeline is not paused.
+	void resume();
+
+	/// Pauses timeline if @arg paused is true, resumes it otherwise.
+	void setPaused(bool paused);
 
 	// Speed factor is also cycles per frame count
 	void setSpeedFactor(int factor);
@@ -75,6 +88,12 @@ Q_SIGNALS:
 	/// Emitted just after timeline has stopped its ticking.
 	void stopped(qReal::interpretation::StopReason reason);
 
+	/// Emitted when started timeline was paused.
+	void paused();
+
+	/// Emitted when paused timeline continued its ticking.
+	void resumed();
+
 	/// Emitted when timeline speed factor value changes.
 	void speedFactorChanged(int value);
 
@@ -88,10 +107,12 @@ private:
 	static const int ticksPerCycle = 3;
 
 	QTimer mTimer;
+	QTimer mFrameTimer;
 	int mSpeedFactor;
 	int mCyclesCount;
 	qint64 mFrameStartTimestamp {};
 	bool mIsStarted;
+	bool mIsPaused {false};
 	quint64 mTimestamp;
 	int mFrameLength = defaultFrameLength;
 };

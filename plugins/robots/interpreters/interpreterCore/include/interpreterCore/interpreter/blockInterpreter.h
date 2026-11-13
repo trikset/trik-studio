@@ -68,6 +68,8 @@ public Q_SLOTS:
 	void connectToRobot() override;
 	void interpret() override;
 	void stopRobot(qReal::interpretation::StopReason reason = qReal::interpretation::StopReason::userStop) override;
+	void pauseInterpretation() override;
+	void resumeInterpretation() override;
 	int timeElapsed() const override;
 	qReal::IdList supportedDiagrams() const override;
 
@@ -92,6 +94,7 @@ private:
 	qReal::gui::MainWindowInterpretersInterface &mInterpretersInterface;
 
 	InterpreterState mState;
+	bool mIsPaused {false};
 	quint64 mInterpretationStartedTimestamp {};
 	QHash<QString, QSharedPointer<qReal::interpretation::Thread>> mThreads;
 	const kitBase::robotModel::RobotModelManagerInterface &mRobotModelManager;
