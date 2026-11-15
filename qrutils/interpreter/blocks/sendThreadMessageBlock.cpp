@@ -28,9 +28,9 @@ void SendThreadMessageBlock::run()
 
 	const auto message = eval<QString>("Message");
 	if (propertyIsString("Message")) {
-		sendMessage(thread, "\"" + qrtext::lua::LuaStringEscapeUtils::escape(message) + "\"");
+		Q_EMIT sendMessage(thread, "\"" + qrtext::lua::LuaStringEscapeUtils::escape(message) + "\"");
 	} else {
-		sendMessage(thread, message);
+		Q_EMIT sendMessage(thread, message);
 	}
 
 	Q_EMIT done(mNextBlockId);
