@@ -128,6 +128,13 @@ bool ProjectManager::openProject(const QString &fileName)
 		return false;
 	}
 
+	if (!fileName.isEmpty() && mModels.repoControlApi().isSubprogramsSave(fileName)) {
+		showMessage(tr("Can`t open project file"),
+			tr("The selected file is a subprograms export, not a regular project save. "
+				"Use 'Subprograms -> Import from file' to import it."));
+		return false;
+	}
+
 	Q_EMIT beforeOpen(fileName);
 	// There is no way to verify sufficiency plugins without initializing repository
 	// that is stored in the save file. Initializing is impossible without closing current project.

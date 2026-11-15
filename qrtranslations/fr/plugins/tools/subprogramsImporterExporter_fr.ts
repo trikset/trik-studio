@@ -101,5 +101,9 @@
         <source>There are different subprograms with the same name in your project. Please make them unique.</source>
         <translation>Il existe des sous-programmes différents portant le même nom dans votre projet. Veuillez les rendre uniques.</translation>
     </message>
+    <message>
+        <source>The selected file is not a subprograms export file. Regular project saves cannot be imported as subprograms.</source>
+        <translation>Le fichier sélectionné n&apos;est pas un fichier d&apos;export de sous-programmes. Les sauvegardes de projet ordinaires ne peuvent pas être importées comme sous-programmes.</translation>
+    </message>
 </context>
 </TS>

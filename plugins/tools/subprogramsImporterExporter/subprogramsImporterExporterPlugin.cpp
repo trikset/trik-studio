@@ -142,6 +142,13 @@ void SubprogramsImporterExporterPlugin::importToProject() const
 		return;
 	}
 
+	if (!mRepo->isSubprogramsSave(fileName)) {
+		mMainWindowInterpretersInterface->errorReporter()->addError(
+			tr("The selected file is not a subprograms export file. Regular project saves cannot be imported"
+				" as subprograms."));
+		return;
+	}
+
 	const auto &openedDiagrams = mMainWindowInterpretersInterface->openedDiagrams();
 	QHash<QString, QVariant> oldMeta;
 	for (const auto &metaKey : mLogicalModel->logicalRepoApi().metaInformationKeys()) {

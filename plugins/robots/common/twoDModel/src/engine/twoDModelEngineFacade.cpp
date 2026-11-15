@@ -90,6 +90,8 @@ void TwoDModelEngineFacade::init(const kitBase::EventsForKitPluginInterface &eve
 			worldModel.firstChild().appendChild(blobs.firstChild().firstChild());
 		}
 
+		// reloadWorld() is called with already prepared meta: we adapt the world to it instead of
+		// overwriting it. Therefore no meta writes are allowed during reload.
 		mView->loadTemplatesXmls();
 		mView->loadModelXmls(worldModel);
 		mView->resetDrawAction();
