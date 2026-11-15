@@ -22,10 +22,13 @@ HEADERS += \
 	$$PWD/brandManagerDeclSpec.h \
 	$$PWD/brandManager.h \
 	$$PWD/fonts.h \
+	$$PWD/fontSettingsManager.h \
 	$$PWD/styles.h \
 
 SOURCES += \
 	$$PWD/brandManager.cpp \
+	$$PWD/fonts.cpp \
+	$$PWD/fontSettingsManager.cpp \
 	$$PWD/styles.cpp \
 
 RESOURCES += \
