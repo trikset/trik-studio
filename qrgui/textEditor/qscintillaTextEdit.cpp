@@ -164,9 +164,7 @@ void QScintillaTextEdit::init()
 void QScintillaTextEdit::setDefaultSettings()
 {
 	// Default font
-	int id = QFontDatabase::addApplicationFont(BrandManager::fonts()->monospaceFont());
-	QString family = QFontDatabase::applicationFontFamilies(id).at(0);
-	mFont = QFont(family, 9, 50);
+	mFont = BrandManager::fonts()->codeEditorFont();
 	QFontMetrics metrics(mFont);
 	mAverageCharWidth = metrics.averageCharWidth();
 	setFont(mFont);
