@@ -20,7 +20,9 @@ include(../../global.pri)
 
 QT += widgets
 
-links(qrkernel qrutils)
+links(qrkernel qrutils qrgui-brand-manager)
+
+includes(qrgui)
 
 DEFINES += QRGUI_PREFERENCES_DIALOG_LIBRARY
 
@@ -31,6 +33,7 @@ HEADERS += \
 	$$PWD/preferencesPages/behaviourPage.h \
 	$$PWD/preferencesPages/debuggerPage.h \
 	$$PWD/preferencesPages/editorPage.h \
+	$$PWD/preferencesPages/fontSettingsWidget.h \
 	$$PWD/preferencesPages/miscellaneousPage.h \
 	$$PWD/preferencesPages/featuresPage.h \
 
@@ -40,6 +43,7 @@ SOURCES += \
 	$$PWD/preferencesPages/behaviourPage.cpp \
 	$$PWD/preferencesPages/debuggerPage.cpp \
 	$$PWD/preferencesPages/editorPage.cpp \
+	$$PWD/preferencesPages/fontSettingsWidget.cpp \
 	$$PWD/preferencesPages/miscellaneousPage.cpp \
 	$$PWD/preferencesPages/featuresPage.cpp \
 

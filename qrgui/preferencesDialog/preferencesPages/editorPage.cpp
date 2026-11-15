@@ -15,6 +15,8 @@
 #include "editorPage.h"
 #include "ui_editorPage.h"
 
+#include "fontSettingsWidget.h"
+
 #include <qrkernel/settingsManager.h>
 #include <qrgui/plugins/metaMetaModel/include/metaMetaModel/linkShape.h>
 
@@ -25,7 +27,6 @@ PreferencesEditorPage::PreferencesEditorPage(QWidget *parent)
 	, mUi(new Ui::PreferencesEditorPage)
 	, mWidthGrid(SettingsManager::value("GridWidth").toInt())
 	, mIndexGrid(SettingsManager::value("IndexGrid").toInt())
-	, mFontButtonWasPressed(false)
 {
 	mUi->setupUi(this);
 	setObjectName("preferencesEditorPage");
@@ -34,9 +35,10 @@ PreferencesEditorPage::PreferencesEditorPage(QWidget *parent)
 	connect(mUi->gridWidthSlider, SIGNAL(valueChanged(int)), this, SLOT(widthGridSliderMoved(int)));
 	connect(mUi->indexGridSlider, SIGNAL(valueChanged(int)), this, SLOT(indexGridSliderMoved(int)));
 	connect(mUi->dragAreaSizeSlider, SIGNAL(valueChanged(int)), this, SLOT(dragAreaSliderMoved(int)));
-	connect(mUi->fontCheckBox, SIGNAL(toggled(bool)), this, SLOT(manualFontCheckBoxChecked(bool)));
-	connect(mUi->fontSelectionButton, SIGNAL(clicked()), this, SLOT(fontSelectionButtonClicked()));
 	connect(mUi->paletteComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(paletteComboBoxClicked(int)));
+
+	mFontSettingsWidget = new FontSettingsWidget(this);
+	mUi->fontsLayout->addWidget(mFontSettingsWidget);
 
 	mUi->gridWidthSlider->setValue(mWidthGrid);
 	mUi->indexGridSlider->setValue(mIndexGrid);
@@ -54,27 +56,8 @@ PreferencesEditorPage::~PreferencesEditorPage()
 	delete mUi;
 }
 
-void PreferencesEditorPage::manualFontCheckBoxChecked(bool state)
-{
-	mUi->fontSelectionButton->setVisible(state);
-}
-
-void PreferencesEditorPage::fontSelectionButtonClicked()
-{
-	mFontButtonWasPressed = true;
-
-	QFontDialog fontDialog(this);
-	fontDialog.setModal(true);
-	QFont font;
-	font.fromString(mFont);
-	fontDialog.setCurrentFont(font);
-	fontDialog.exec();
-	mFont = fontDialog.currentFont().toString();
-}
-
 void PreferencesEditorPage::changeEvent(QEvent *e)
 {
-
 	switch (e->type()) {
 	case QEvent::LanguageChange:
 		mUi->retranslateUi(this);
@@ -109,10 +92,11 @@ void PreferencesEditorPage::save()
 	SettingsManager::setValue("ShowAlignment", mUi->showAlignmentCheckBox->isChecked());
 	SettingsManager::setValue("ActivateGrid", mUi->activateGridCheckBox->isChecked());
 	SettingsManager::setValue("ActivateAlignment", mUi->activateAlignmentCheckBox->isChecked());
-	SettingsManager::setValue("CustomFont", mUi->fontCheckBox->isChecked());
 	SettingsManager::setValue("PaletteRepresentation", mUi->paletteComboBox->currentIndex());
 	SettingsManager::setValue("PaletteIconsInARowCount", mUi->paletteSpinBox->value());
-	SettingsManager::setValue("manualFontCheckBoxChecked", mUi->fontCheckBox->isChecked());
+
+	const auto fontsChanged = mFontSettingsWidget->hasChanges();
+	mFontSettingsWidget->save();
 
 	mWidthGrid = mUi->gridWidthSlider->value();
 	mIndexGrid = mUi->indexGridSlider->value();
@@ -121,13 +105,8 @@ void PreferencesEditorPage::save()
 	SettingsManager::setValue("IndexGrid", mIndexGrid);
 	SettingsManager::setValue("DragArea", mDragArea);
 
-	if (mWasChecked != mUi->fontCheckBox->isChecked() || mOldFont != mFont) {
-		if (mFontButtonWasPressed) {
-			SettingsManager::setValue("CurrentFont", mFont);
-		}
-
+	if (fontsChanged) {
 		setRestartFlag();
-		mFontButtonWasPressed = false;
 	}
 }
 
@@ -144,15 +123,11 @@ void PreferencesEditorPage::restoreSettings()
 	const LinkShape type = static_cast<LinkShape>(SettingsManager::value("LineType").toInt());
 	mUi->lineMode->setCurrentIndex(static_cast<int>(type));
 
-	mUi->fontCheckBox->setChecked(SettingsManager::value("CustomFont").toBool());
-	mUi->fontSelectionButton->setVisible(mUi->fontCheckBox->isChecked());
-	mWasChecked = mUi->fontCheckBox->isChecked();
+	mFontSettingsWidget->reload();
 
 	mUi->paletteComboBox->setCurrentIndex(SettingsManager::value("PaletteRepresentation").toInt());
 	paletteComboBoxClicked(mUi->paletteComboBox->currentIndex());
 	mUi->paletteSpinBox->setValue(SettingsManager::value("PaletteIconsInARowCount").toInt());
-	mFont = SettingsManager::value("CurrentFont").toString();
-	mOldFont = mFont;
 }
 
 void PreferencesEditorPage::paletteComboBoxClicked(int index)

@@ -14,9 +14,9 @@
 
 #pragma once
 
-#include <QtWidgets/QFontDialog>
-
 #include "qrgui/preferencesDialog/preferencesPage.h"
+
+class FontSettingsWidget;
 
 namespace Ui {
 class PreferencesEditorPage;
@@ -42,18 +42,12 @@ private Q_SLOTS:
 	void widthGridSliderMoved(int value);
 	void indexGridSliderMoved(int value);
 	void dragAreaSliderMoved(int value);
-	void manualFontCheckBoxChecked(bool);
-	void fontSelectionButtonClicked();
 	void paletteComboBoxClicked(int index);
 
 private:
 	Ui::PreferencesEditorPage *mUi;
+	FontSettingsWidget *mFontSettingsWidget {};
 	int mWidthGrid;
 	int mIndexGrid;
 	int mDragArea;
-	QString mFont;
-
-	bool mFontButtonWasPressed {};
-	bool mWasChecked {};
-	QString mOldFont;
 };
