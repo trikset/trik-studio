@@ -110,9 +110,17 @@ TwoDModelWidget::TwoDModelWidget(Model &model, QWidget *parent)
 	connect(&*mScene, &TwoDModelScene::robotPressed, mUi->palette, &Palette::unselect);
 	connect(&*mScene, &TwoDModelScene::robotListChanged, this, &TwoDModelWidget::onRobotListChange);
 
-	connect(&mModel.worldModel(), &WorldModel::itemRemoved, this, [this]() { saveWorldModelToRepo(); });
+	connect(&mModel.worldModel(), &WorldModel::itemRemoved, this, [this]() {
+		if (!mLoadingModel) {
+			saveWorldModelToRepo();
+		}
+	});
 
-	connect(&mModel.worldModel(), &WorldModel::blobsChanged, this, [this]() { saveBlobsToRepo(); });
+	connect(&mModel.worldModel(), &WorldModel::blobsChanged, this, [this]() {
+		if (!mLoadingModel) {
+			saveBlobsToRepo();
+		}
+	});
 
 	connect(&mModel.settings(), &Settings::physicsChanged, this, [this]() { updateUIPhysicsSettings(); });
 
@@ -791,8 +799,11 @@ void TwoDModelWidget::loadModelXmls(const QDomDocument &model, bool withUndo)
 		mController->moduleOpened(editorId());
 	}
 
+	// Do not write intermediate world states to meta while the model is being reloaded.
+	mLoadingModel = true;
 	mScene->clearScene(true, Reason::loading);
 	mModel.deserialize(model);
+	mLoadingModel = false;
 	updateWheelComboBoxes();
 	mUi->trainingModeButton->setVisible(mModel.hasConstraints());
 }

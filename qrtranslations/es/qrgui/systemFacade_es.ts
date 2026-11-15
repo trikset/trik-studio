@@ -115,5 +115,9 @@
         <source>File %1 not found. Try again</source>
         <translation>Archivo %1 no encontrado. Inténtelo de nuevo</translation>
     </message>
+    <message>
+        <source>The selected file is a subprograms export, not a regular project save. Use &apos;Subprograms -&gt; Import from file&apos; to import it.</source>
+        <translation>El archivo seleccionado es una exportación de subprogramas, no una copia de seguridad normal del proyecto. Para importarlo, use «Subprogramas -&gt; Importar desde archivo...».</translation>
+    </message>
 </context>
 </TS>

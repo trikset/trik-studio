@@ -115,5 +115,9 @@
         <source>File %1 not found. Try again</source>
         <translation>Không tìm thấy tệp %1. Hãy thử lại</translation>
     </message>
+    <message>
+        <source>The selected file is a subprograms export, not a regular project save. Use &apos;Subprograms -&gt; Import from file&apos; to import it.</source>
+        <translation>Tệp đã chọn là bản xuất chương trình con, không phải bản lưu dự án thông thường. Để nhập tệp này, hãy dùng «Chương trình con -&gt; Nhập từ tệp...».</translation>
+    </message>
 </context>
 </TS>

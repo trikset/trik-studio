@@ -101,5 +101,9 @@
         <source>There are different subprograms with the same name in your project. Please make them unique.</source>
         <translation>Có các chương trình con khác nhau cùng tên trong dự án của bạn. Vui lòng đặt tên sao cho chúng là duy nhất.</translation>
     </message>
+    <message>
+        <source>The selected file is not a subprograms export file. Regular project saves cannot be imported as subprograms.</source>
+        <translation>Tệp đã chọn không phải là tệp xuất chương trình con. Không thể nhập các bản lưu dự án thông thường dưới dạng chương trình con.</translation>
+    </message>
 </context>
 </TS>

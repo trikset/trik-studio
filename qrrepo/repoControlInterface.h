@@ -41,6 +41,10 @@ public:
 	virtual qReal::IdList elementsByPropertyContent(const QString &propertyContent, bool sensitivity,
 		bool regExp) const = 0;
 
+	/// Returns true if the given save file is a subprograms export (it has no ROOT object).
+	/// @param fileName - save file to check
+	virtual bool isSubprogramsSave(const QString &fileName) const = 0;
+
 	/// virtual, for import *.qrs file into current project
 	/// @param importedFile - file to be imported
 	virtual void importFromDisk(const QString &importedFile) = 0;

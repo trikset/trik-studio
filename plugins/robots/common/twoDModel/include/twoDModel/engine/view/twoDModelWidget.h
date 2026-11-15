@@ -268,6 +268,8 @@ private:
 	bool mDetailsAreVisible {};
 	bool mFirstShow {true};
 
+	/// Prevents writing intermediate world states to meta while the world is being reloaded.
+	bool mLoadingModel {false};
 	bool mRobotPositionReadOnly {};
 
 	bool mBackgroundMode {false};

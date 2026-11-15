@@ -119,5 +119,9 @@
         <source>File %1 not found. Try again</source>
         <translation>Файл %1 не найден. Укажите существующий файл</translation>
     </message>
+    <message>
+        <source>The selected file is a subprograms export, not a regular project save. Use &apos;Subprograms -&gt; Import from file&apos; to import it.</source>
+        <translation>Выбранный файл является экспортом подпрограмм, а не обычным сохранением проекта. Для импорта используйте «Подпрограммы -&gt; Импортировать из файла...».</translation>
+    </message>
 </context>
 </TS>

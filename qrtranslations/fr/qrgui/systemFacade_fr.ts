@@ -118,5 +118,9 @@
         <source>File %1 not found. Try again</source>
         <translation>Fichier %1 introuvable. Réessayez de nouveau</translation>
     </message>
+    <message>
+        <source>The selected file is a subprograms export, not a regular project save. Use &apos;Subprograms -&gt; Import from file&apos; to import it.</source>
+        <translation>Le fichier sélectionné est un export de sous-programmes, et non une sauvegarde de projet ordinaire. Pour l&apos;importer, utilisez « Sous-programmes -&gt; Importer depuis un fichier... ».</translation>
+    </message>
 </context>
 </TS>

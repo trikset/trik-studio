@@ -15,6 +15,8 @@
 #include "repoApi.h"
 #include "private/repository.h"
 
+#include <QtCore/QFile>
+
 using namespace qrRepo;
 using namespace qrRepo::details;
 using namespace qReal;
@@ -428,6 +430,19 @@ bool RepoApi::saveTo(const QString &workingFile)
 bool RepoApi::saveDiagramsById(QHash<QString, IdList> const &diagramIds)
 {
 	return mRepository->saveDiagramsById(diagramIds);
+}
+
+bool RepoApi::isSubprogramsSave(const QString &fileName) const
+{
+	try {
+		Serializer serializer(fileName);
+		serializer.decompressFile(fileName);
+		const QString rootPath = serializer.workingDirectory()
+				+ "/tree/logical/ROOT_ID/ROOT_ID/ROOT_ID/ROOT_ID";
+		return !QFile::exists(rootPath);
+	} catch (...) {
+		return false;
+	}
 }
 
 void RepoApi::importFromDisk(const QString &importedFile)

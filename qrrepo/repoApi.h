@@ -127,6 +127,8 @@ public:
 
 	bool exterminate() override;
 
+	bool isSubprogramsSave(const QString &fileName) const override;
+
 	/// RepoApi's wrapper for Repository.importFromDisk
 	/// @param importedFile - file to be imported
 	void importFromDisk(const QString &importedFile) override;
