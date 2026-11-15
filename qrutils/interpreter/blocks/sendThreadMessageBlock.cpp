@@ -14,6 +14,8 @@
 
 #include "sendThreadMessageBlock.h"
 
+#include <qrtext/lua/luaStringEscapeUtils.h>
+
 using namespace qReal::interpretation::blocks;
 
 void SendThreadMessageBlock::run()
@@ -24,6 +26,12 @@ void SendThreadMessageBlock::run()
 		return;
 	}
 
-	sendMessage(thread, eval<QString>("Message"));
+	const auto message = eval<QString>("Message");
+	if (propertyIsString("Message")) {
+		sendMessage(thread, "\"" + qrtext::lua::LuaStringEscapeUtils::escape(message) + "\"");
+	} else {
+		sendMessage(thread, message);
+	}
+
 	Q_EMIT done(mNextBlockId);
 }
