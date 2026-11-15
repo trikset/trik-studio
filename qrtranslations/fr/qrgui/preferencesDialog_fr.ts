@@ -2,6 +2,45 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="fr_FR">
 <context>
+    <name>FontSettingsWidget</name>
+    <message>
+        <source>Fonts</source>
+        <translation>Polices</translation>
+    </message>
+    <message>
+        <source>%1:</source>
+        <translation>%1 :</translation>
+    </message>
+    <message>
+        <source>Choose Font...</source>
+        <translation>Choisir la police...</translation>
+    </message>
+    <message>
+        <source>Reset to Default</source>
+        <translation>Réinitialiser par défaut</translation>
+    </message>
+    <message>
+        <source>%1 pt</source>
+        <translation>%1 pt</translation>
+    </message>
+    <message>
+        <source>%1 px</source>
+        <translation>%1 px</translation>
+    </message>
+    <message>
+        <source>Diagram labels</source>
+        <translation>Étiquettes du diagramme</translation>
+    </message>
+    <message>
+        <source>Code editor</source>
+        <translation>Éditeur de code</translation>
+    </message>
+    <message>
+        <source>Start screen</source>
+        <translation>Écran de démarrage</translation>
+    </message>
+</context>
+<context>
     <name>PreferencesBehaviourPage</name>
     <message>
         <source>User Interface</source>
@@ -110,15 +149,15 @@
     <name>PreferencesEditorPage</name>
     <message>
         <source>Font</source>
-        <translation>Police</translation>
+        <translation type="vanished">Police</translation>
     </message>
     <message>
         <source>Use some of system fonts</source>
-        <translation>Utiliser les polices système</translation>
+        <translation type="vanished">Utiliser les polices système</translation>
     </message>
     <message>
         <source>Choose Font</source>
-        <translation>Choisir la police</translation>
+        <translation type="vanished">Choisir la police</translation>
     </message>
     <message>
         <source>Grid</source>
