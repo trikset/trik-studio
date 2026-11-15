@@ -16,6 +16,7 @@
 
 #include <QsLog.h>
 #include <qrtext/languageToolboxInterface.h>
+#include <qrtext/lua/types/string.h>
 #include <qrgui/plugins/pluginManager/editorManagerInterface.h>
 
 using namespace qReal;
@@ -179,6 +180,17 @@ QColor Block::propertyToColor(const QString &property) const
 {
 	// Qt does not support dark-yellow string color (see QColor::colorNames())
 	return property == "darkYellow" ? QColor(Qt::darkYellow) : QColor(property);
+}
+
+bool Block::propertyIsString(const QString &propertyName)
+{
+	const auto ast = mParser->ast(mGraphicalId, propertyName);
+	if (!ast) {
+		return false;
+	}
+
+	const auto type = mParser->type(ast);
+	return type && type->is<qrtext::lua::types::String>();
 }
 
 void Block::error(const QString &message)

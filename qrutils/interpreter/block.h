@@ -116,6 +116,9 @@ protected:
 	/// Returns a property of current block with given name as color.
 	QColor propertyToColor(const QString &property) const;
 
+	/// Returns true if the given property is a string-valued expression.
+	bool propertyIsString(const QString &propertyName);
+
 	/// Reports error and emits "failure" signal.
 	void error(const QString &message);
 
