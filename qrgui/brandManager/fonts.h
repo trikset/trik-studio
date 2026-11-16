@@ -14,9 +14,11 @@
 
 #pragma once
 
+#include <QtCore/QPair>
 #include <QtCore/QString>
 #include <QtCore/QStringList>
 #include <QtCore/QVariant>
+#include <QtCore/QVector>
 #include <QtGui/QFont>
 
 #include "qrgui/brandManager/brandManagerDeclSpec.h"
@@ -144,10 +146,11 @@ private:
 	/// Returns the configuration of the given role.
 	static RoleConfig roleConfig(FontRole role);
 
-	/// Returns paths to all font files bundled into the application resources.
-	/// The order does not matter: a family is matched by its name, and styles
-	/// of the same family are matched by the QFont properties (weight, style).
-	virtual QStringList bundledFonts() const;
+	/// Returns all font files bundled into the application resources as
+	/// (path, family) pairs. The order does not matter: a family is matched by
+	/// its name, and styles of the same family are matched by the QFont
+	/// properties (weight, style).
+	virtual QVector<QPair<QString, QString>> bundledFonts() const;
 
 	/// Returns the family explicitly selected by the user, if any.
 	/// Falls back to the legacy `CurrentFont` for SceneLabels.

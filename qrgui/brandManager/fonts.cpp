@@ -26,8 +26,16 @@ using namespace qReal;
 
 Fonts::Fonts()
 {
-	for (const auto &fontPath : bundledFonts()) {
-		registerFontFile(fontPath);
+	const auto systemFamilies = QFontDatabase().families();
+
+	for (const auto &font : bundledFonts()) {
+		if (systemFamilies.contains(font.second, Qt::CaseInsensitive)) {
+			QLOG_DEBUG() << "System font family takes precedence over bundled one:" << font.second << "("
+				     << font.first << ")";
+			continue;
+		}
+
+		registerFontFile(font.first);
 	}
 }
 
@@ -159,15 +167,15 @@ QStringList Fonts::fontSettingsKeys(FontRole role)
 	return keys;
 }
 
-QStringList Fonts::bundledFonts() const
+QVector<QPair<QString, QString>> Fonts::bundledFonts() const
 {
 	return {
-		":/fonts/Pfennig.ttf",
-		":/fonts/DejaVuSansMono.ttf",
-		":/fonts/CascadiaMono-Regular.ttf",
-		":/fonts/CascadiaMono-Bold.ttf",
-		":/fonts/CascadiaMono-Italic.ttf",
-		":/fonts/CascadiaMono-BoldItalic.ttf",
+		{":/fonts/Pfennig.ttf", "Pfennig"},
+		{":/fonts/DejaVuSansMono.ttf", "DejaVu Sans Mono"},
+		{":/fonts/CascadiaMono-Regular.ttf", "Cascadia Mono"},
+		{":/fonts/CascadiaMono-Bold.ttf", "Cascadia Mono"},
+		{":/fonts/CascadiaMono-Italic.ttf", "Cascadia Mono"},
+		{":/fonts/CascadiaMono-BoldItalic.ttf", "Cascadia Mono"},
 	};
 }
 
