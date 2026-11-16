@@ -57,6 +57,8 @@ private:
 	QWidget *createPluginButton(const Id &editor, const Id &diagram, QWidget *const bindedImage);
 
 	void centralizeButton(QPushButton *const styledButton);
+	void resizeEvent(QResizeEvent *event) override;
+	void updateLayoutForCurrentSize();
 
 	void paintEvent(QPaintEvent *event) override;
 
@@ -64,7 +66,11 @@ private:
 	ProjectManager *mProjectManager; // Doesn't have ownership.
 	int mProjectListSize {-1};
 
+	QWidget *mHeaderWidget {}; // Has ownership.
+	QWidget *mContentsWidget {}; // Has ownership.
 	QBoxLayout *mProjectsManagementLayout {}; // Has ownership.
+	QBoxLayout *mContentsLayout {}; // Has ownership.
+	QWidget *mProjectsManagementWidget {}; // Has ownership.
 	QWidget *mRecentProjectsWidget {}; // Has ownership.
 	QPushButton *mNewProjectButton {}; // Has ownership.
 	QPushButton *mOpenProjectButton {}; // Has ownership.

@@ -52,26 +52,29 @@ QWidget *StartWidget::createMainWidget()
 	auto *const result = new QWidget(this);
 	result->setStyleSheet(BrandManager::styles()->startTabBackgroundStyle());
 
-	QWidget *const header = createHeader();
+	mHeaderWidget = createHeader();
 	mRecentProjectsWidget = createRecentProjectsWidget();
-	QWidget *const projectsManagement = createProjectsManagementWidget();
+	mProjectsManagementWidget = createProjectsManagementWidget();
+	mContentsWidget = new QWidget(this);
+	mContentsLayout = new QHBoxLayout;
+	mContentsLayout->setSpacing(20);
+	mContentsWidget->setLayout(mContentsLayout);
 
 	auto *mainLayout = new QVBoxLayout;
 	mainLayout->setSpacing(20);
-	auto *contentsLayout = new QHBoxLayout;
-
-	mainLayout->addWidget(header);
-	mainLayout->addLayout(contentsLayout);
+	mainLayout->addWidget(mHeaderWidget);
+	mainLayout->addWidget(mContentsWidget);
 	mainLayout->setStretch(1, 10);
 	if (mRecentProjectsWidget) {
-		contentsLayout->addWidget(mRecentProjectsWidget);
+		mContentsLayout->addWidget(mRecentProjectsWidget);
 	}
 
-	contentsLayout->addWidget(projectsManagement);
-	contentsLayout->addWidget(new QWidget());
-	contentsLayout->setStretch(0, 2);
-	contentsLayout->setStretch(1, 2);
-	contentsLayout->setStretch(2, 3);
+	mContentsLayout->addWidget(mProjectsManagementWidget);
+	mContentsLayout->addWidget(new QWidget());
+	mContentsLayout->setStretch(0, 2);
+	mContentsLayout->setStretch(1, 2);
+	mContentsLayout->setStretch(2, 3);
+	updateLayoutForCurrentSize();
 
 	result->setLayout(mainLayout);
 	return result;
@@ -80,11 +83,15 @@ QWidget *StartWidget::createMainWidget()
 QWidget *StartWidget::createHeader()
 {
 	auto *const appName = new QLabel(BrandManager::applicationName());
+	appName->setObjectName("startTabAppName");
 	appName->setStyleSheet(BrandManager::styles()->startTabLabelLevel1Style());
+	appName->setWordWrap(true);
 
 	auto *const appLogo = new QLabel;
+	appLogo->setObjectName("startTabAppLogo");
 	appLogo->setFixedSize(300, 150);
 	appLogo->setScaledContents(false);
+	appLogo->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
 	appLogo->setPixmap(QPixmap::fromImage(BrandManager::applicationLogo())
 			.scaled(appLogo->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
 
@@ -95,7 +102,7 @@ QWidget *StartWidget::createHeader()
 	auto *const headerLayout = new QHBoxLayout;
 	headerLayout->addLayout(logoLayout);
 	headerLayout->addStretch();
-	headerLayout->addWidget(appLogo);
+	headerLayout->addWidget(appLogo, 0, Qt::AlignRight);
 
 	auto *const header = new QWidget;
 	header->setObjectName("header");
@@ -156,6 +163,61 @@ QWidget *StartWidget::createProjectsManagementWidget()
 	auto *const result = new QWidget();
 	result->setLayout(mProjectsManagementLayout);
 	return result;
+}
+
+void StartWidget::resizeEvent(QResizeEvent *event)
+{
+	QWidget::resizeEvent(event);
+	updateLayoutForCurrentSize();
+}
+
+void StartWidget::updateLayoutForCurrentSize()
+{
+	if (!mHeaderWidget || !mContentsWidget) {
+		return;
+	}
+
+	const bool compactLayout = width() < 700;
+	const bool compactContentsLayout = width() < 900;
+
+	QLabel *const appName = mHeaderWidget->findChild<QLabel *>("startTabAppName");
+	QLabel *const appLogo = mHeaderWidget->findChild<QLabel *>("startTabAppLogo");
+	if (!appName || !appLogo) {
+		return;
+	}
+
+	auto *const headerLayout = compactLayout ? new QVBoxLayout : new QHBoxLayout;
+	headerLayout->setSpacing(20);
+	headerLayout->setContentsMargins(0, 0, 0, 0);
+	if (compactLayout) {
+		headerLayout->addWidget(appName, 0, Qt::AlignLeft);
+		headerLayout->addWidget(appLogo, 0, Qt::AlignHCenter);
+		headerLayout->addStretch();
+	} else {
+		auto *const logoLayout = new QVBoxLayout;
+		logoLayout->addWidget(appName);
+		logoLayout->addStretch();
+		headerLayout->addLayout(logoLayout);
+		headerLayout->addStretch();
+		headerLayout->addWidget(appLogo, 0, Qt::AlignRight);
+	}
+	mHeaderWidget->setLayout(headerLayout);
+
+	auto *const contentsLayout = compactContentsLayout ? new QVBoxLayout : new QHBoxLayout;
+	contentsLayout->setSpacing(20);
+	contentsLayout->setContentsMargins(0, 0, 0, 0);
+	if (mRecentProjectsWidget) {
+		contentsLayout->addWidget(mRecentProjectsWidget);
+	}
+	if (mProjectsManagementWidget) {
+		contentsLayout->addWidget(mProjectsManagementWidget);
+	}
+	contentsLayout->addWidget(new QWidget());
+	mContentsWidget->setLayout(contentsLayout);
+	mContentsLayout = contentsLayout;
+	mContentsLayout->setStretch(0, 2);
+	mContentsLayout->setStretch(1, 2);
+	mContentsLayout->setStretch(2, 3);
 }
 
 void StartWidget::openRecentProject(const QString &fileName)
