@@ -1,6 +1,6 @@
 QLabel {
     background-color: transparent;
-    font-family: "Segoe UI";
+    font-family: "@@Font@@";
     color: @@Text@@;
     font: 20px;
     text-align: left;

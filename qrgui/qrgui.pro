@@ -80,6 +80,9 @@ hotKeyManager.depends = \
 brandManager.depends = \
 	pluginManager \
 
+preferencesDialog.depends = \
+	brandManager \
+
 pluginManager.depends = \
 	metaMetaModel \
 	toolPluginInterface \

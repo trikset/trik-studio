@@ -15,6 +15,7 @@
 #pragma once
 
 #include <QtWidgets/QApplication>
+#include <QtGui/QFontInfo>
 #include <QPalette>
 
 #include <qrutils/inFile.h>
@@ -95,7 +96,7 @@ protected:
 		auto systemPalette(QApplication::palette());
 		return style.replace("@@Window@@", systemPalette.color(QPalette::Window).name())
 		        .replace("@@Base@@", systemPalette.color(QPalette::Base).name())
-		        .replace("@@Font@@", mFonts.commandButtonsFont())
+		        .replace("@@Font@@", QFontInfo(mFonts.uiFont()).family())
 		        .replace("@@Light@@", systemPalette.color(QPalette::Light).name())
 		        .replace("@@Highlight@@", systemPalette.color(QPalette::Highlight).name())
 		        .replace("@@Text@@", systemPalette.color(QPalette::Text).name());

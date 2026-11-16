@@ -2,5 +2,9 @@
     <qresource prefix="/fonts">
         <file>Pfennig.ttf</file>
         <file>DejaVuSansMono.ttf</file>
+        <file>CascadiaMono-Regular.ttf</file>
+        <file>CascadiaMono-Bold.ttf</file>
+        <file>CascadiaMono-Italic.ttf</file>
+        <file>CascadiaMono-BoldItalic.ttf</file>
     </qresource>
 </RCC>

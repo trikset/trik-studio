@@ -2,6 +2,45 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="vi_VN">
 <context>
+    <name>FontSettingsWidget</name>
+    <message>
+        <source>Fonts</source>
+        <translation>Phông chữ</translation>
+    </message>
+    <message>
+        <source>%1:</source>
+        <translation>%1:</translation>
+    </message>
+    <message>
+        <source>Choose Font...</source>
+        <translation>Chọn phông chữ...</translation>
+    </message>
+    <message>
+        <source>Reset to Default</source>
+        <translation>Đặt lại mặc định</translation>
+    </message>
+    <message>
+        <source>%1 pt</source>
+        <translation>%1 pt</translation>
+    </message>
+    <message>
+        <source>%1 px</source>
+        <translation>%1 px</translation>
+    </message>
+    <message>
+        <source>Diagram labels</source>
+        <translation>Nhãn trên sơ đồ</translation>
+    </message>
+    <message>
+        <source>Code editor</source>
+        <translation>Trình soạn thảo mã</translation>
+    </message>
+    <message>
+        <source>Start screen</source>
+        <translation>Màn hình bắt đầu</translation>
+    </message>
+</context>
+<context>
     <name>PreferencesBehaviourPage</name>
     <message>
         <source>User Interface</source>
@@ -110,15 +149,15 @@
     <name>PreferencesEditorPage</name>
     <message>
         <source>Font</source>
-        <translation>Phông chữ</translation>
+        <translation type="vanished">Phông chữ</translation>
     </message>
     <message>
         <source>Use some of system fonts</source>
-        <translation>Sử dụng phông chữ hệ thống</translation>
+        <translation type="vanished">Sử dụng phông chữ hệ thống</translation>
     </message>
     <message>
         <source>Choose Font</source>
-        <translation>Chọn phông chữ</translation>
+        <translation type="vanished">Chọn phông chữ</translation>
     </message>
     <message>
         <source>Grid</source>

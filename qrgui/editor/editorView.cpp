@@ -14,14 +14,14 @@
 
 #include "editorView.h"
 
-#include <QtCore/QDir>
 #include <QtCore/QTimeLine>
-#include <QtGui/QFontDatabase>
 
 #include <qrkernel/settingsListener.h>
 #include <qrutils/mathUtils/math.h>
 #include <qrgui/models/models.h>
 #include <qrutils/widgets/searchLinePanel.h>
+
+#include "brandManager/brandManager.h"
 
 using namespace qReal;
 using namespace qReal::gui::editor;
@@ -63,7 +63,9 @@ EditorView::EditorView(const models::Models &models, Controller &controller,
 	connect(&mTouchManager, SIGNAL(gestureStarted()), &mScene, SLOT(deleteGesture()));
 	SettingsListener::listen("IndexGrid", &mScene, &EditorViewScene::redraw);
 	SettingsListener::listen("GridWidth", &mScene, &EditorViewScene::redraw);
-	SettingsListener::listen("CurrentFont", this, &EditorView::setSceneFont);
+	for (const auto &key : Fonts::fontSettingsKeys(FontRole::SceneLabels)) {
+		SettingsListener::listen(key, this, &EditorView::setSceneFont);
+	}
 
 	addAction(&mScene.deleteAction());
 }
@@ -356,17 +358,6 @@ void EditorView::find()
 
 void EditorView::setSceneFont()
 {
-	if (SettingsManager::value("CustomFont").toBool()) {
-		QFont font;
-		font.fromString(SettingsManager::value("CurrentFont").toString());
-		scene()->setFont(font);
-		scene()->update();
-	} else {
-		/// @todo: use brand manager here
-		scene()->setFont(QFont(QFontDatabase::applicationFontFamilies(
-					       QFontDatabase::addApplicationFont(QDir::currentPath() + "/times.ttf"))
-					       .at(0),
-			9));
-		scene()->update();
-	}
+	scene()->setFont(BrandManager::fonts()->sceneLabelsFont());
+	scene()->update();
 }

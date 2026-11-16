@@ -2,6 +2,45 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="ru_RU">
 <context>
+    <name>FontSettingsWidget</name>
+    <message>
+        <source>Fonts</source>
+        <translation>Шрифты</translation>
+    </message>
+    <message>
+        <source>%1:</source>
+        <translation>%1:</translation>
+    </message>
+    <message>
+        <source>Choose Font...</source>
+        <translation>Выбрать шрифт...</translation>
+    </message>
+    <message>
+        <source>Reset to Default</source>
+        <translation>Сбросить по умолчанию</translation>
+    </message>
+    <message>
+        <source>%1 pt</source>
+        <translation>%1 пт</translation>
+    </message>
+    <message>
+        <source>%1 px</source>
+        <translation>%1 пикс</translation>
+    </message>
+    <message>
+        <source>Diagram labels</source>
+        <translation>Надписи на диаграмме</translation>
+    </message>
+    <message>
+        <source>Code editor</source>
+        <translation>Редактор кода</translation>
+    </message>
+    <message>
+        <source>Start screen</source>
+        <translation>Стартовый экран</translation>
+    </message>
+</context>
+<context>
     <name>PreferencesBehaviourPage</name>
     <message>
         <source>User Interface</source>
@@ -118,15 +157,15 @@
     <name>PreferencesEditorPage</name>
     <message>
         <source>Font</source>
-        <translation>Шрифт</translation>
+        <translation type="vanished">Шрифт</translation>
     </message>
     <message>
         <source>Use some of system fonts</source>
-        <translation>Использовать системный шрифт</translation>
+        <translation type="vanished">Использовать системный шрифт</translation>
     </message>
     <message>
         <source>Choose Font</source>
-        <translation>Выбрать шрифт</translation>
+        <translation type="vanished">Выбрать шрифт</translation>
     </message>
     <message>
         <source>Grid</source>
