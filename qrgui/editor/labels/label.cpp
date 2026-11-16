@@ -419,10 +419,6 @@ void Label::startTextInteraction()
 	setTextInteractionFlags(isReadOnly() ? Qt::TextBrowserInteraction : Qt::TextEditorInteraction);
 	setFocus(Qt::OtherFocusReason);
 
-	// Set full text selection
-	QTextCursor cursor = QTextCursor(document());
-	cursor.select(QTextCursor::Document);
-	setTextCursor(cursor);
 	setCursor(Qt::IBeamCursor);
 }
 
