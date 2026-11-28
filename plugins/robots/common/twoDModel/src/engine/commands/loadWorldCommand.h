@@ -15,6 +15,7 @@
 #pragma once
 
 #include <qrgui/controller/commands/abstractCommand.h>
+#include <QtCore/QString>
 #include <QtXml/QDomElement>
 #include "twoDModel/engine/view/twoDModelWidget.h"
 
@@ -27,17 +28,19 @@ class LoadWorldCommand : public qReal::commands::AbstractCommand
 	Q_OBJECT
 public:
 	/// Creates instance of command using XML \a data.
-	LoadWorldCommand(view::TwoDModelWidget &twoDwidget, const QDomDocument &data);
+	LoadWorldCommand(view::TwoDModelWidget &twoDwidget, const QDomDocument &data, const QString &worldName);
 
 private:
 	bool execute() override;
 	bool restoreState() override;
 
-	void loadWorld(const QDomDocument &world);
+	void loadWorld(const QDomDocument &world, const QString &worldName);
 
 	view::TwoDModelWidget &mWidget;
 	const QDomDocument mNewWorld;
 	const QDomDocument mOldWorld;
+	const QString mNewWorldName;
+	const QString mOldWorldName;
 };
 
 }
