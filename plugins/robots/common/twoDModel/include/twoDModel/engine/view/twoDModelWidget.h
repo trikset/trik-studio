@@ -15,6 +15,7 @@
 #pragma once
 
 #include <QtCore/QSignalMapper>
+#include <QtCore/QString>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QGraphicsView>
 
@@ -84,6 +85,8 @@ public:
 	void setSensorVisible(const kitBase::robotModel::PortInfo &port, bool isVisible);
 
 	void loadModelXmls(const QDomDocument &model, bool withUndo = false);
+	QString currentWorldName() const;
+	void setCurrentWorldName(const QString &name);
 
 	void loadTemplatesXmls();
 
@@ -249,6 +252,7 @@ private:
 	ImageItemPopup *mImageItemPopup {}; // Takes ownership
 	RobotItemPopup *mRobotItemPopup {}; // Takes ownership
 	SpeedPopup *mSpeedPopup {}; // Takes owneship
+	QString mCurrentWorldName;
 
 	RobotItem *mSelectedRobotItem {};
 	kitBase::DevicesConfigurationWidget *mCurrentConfigurer {};

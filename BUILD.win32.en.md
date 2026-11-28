@@ -61,3 +61,13 @@ After a successful build without errors, go to directory with the compiled appli
    ```
 
 *Now you have successfully built TRIK Studio under 32-bit Windows, ready to use. Good luck with your work!*
+
+## Portable Windows integration
+
+To add `.qrs` Open/Edit actions and Start Menu shortcuts for TRIK Studio and the 2D-model Player, run
+`trik-studio-portable-integration.cmd install` from the portable application directory. This registers the
+actions for the current Windows user only. To remove them, run:
+
+```
+trik-studio-portable-integration.cmd uninstall
+```

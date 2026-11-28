@@ -23,6 +23,13 @@ include(trikKit.pri)
 copyToDestdir(externalToolsConfig, now)
 copyToDestdir(externalScripts/run_maze_generator.sh, now)
 
+win32 {
+	copyToDestdir(../../../../installer/platform/trik-studio-portable-integration.cmd, now)
+	copyToDestdir(../../../../installer/platform/trik-studio-portable-integration.ps1, now)
+}
+
 OTHER_FILES += \
     externalToolsConfig/* \
     externalScripts/run_maze_generator.sh \
+    ../../../../installer/platform/trik-studio-portable-integration.cmd \
+    ../../../../installer/platform/trik-studio-portable-integration.ps1 \

@@ -737,7 +737,7 @@ void MainWindow::initDarkPalette()
 
 	if (useDarkTheme) {
 		QApplication::setPalette(BrandManager::styles()->loadPalette(
-			QCoreApplication::applicationDirPath() + "/palettes/darkWindowsPalette.ini"));
+			BrandManager::styles()->darkPalettePath()));
 	}
 	// Light is the default one, just return
 }

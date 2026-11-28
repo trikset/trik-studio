@@ -16,6 +16,7 @@
 #include "ui_twoDModelWidget.h"
 
 #include <QtCore/qmath.h>
+#include <QtCore/QFileInfo>
 
 #include <qrkernel/settingsManager.h>
 #include <qrkernel/exception/exception.h>
@@ -579,7 +580,8 @@ void TwoDModelWidget::loadWorldModel()
 		return;
 	}
 
-	auto command = new commands::LoadWorldCommand(*this, loadXmlWithConversion(loadFileName));
+	auto command = new commands::LoadWorldCommand(
+		*this, loadXmlWithConversion(loadFileName), QFileInfo(loadFileName).completeBaseName());
 	if (mController) {
 		mController->execute(command);
 	}
@@ -614,7 +616,8 @@ void TwoDModelWidget::loadWorldModelWithoutRobot()
 		newWorld.replaceChild(oldWorld.firstChildElement("robots"), newWorld.firstChildElement("robots"));
 	}
 
-	auto command = new commands::LoadWorldCommand(*this, save);
+	auto command = new commands::LoadWorldCommand(
+		*this, save, QFileInfo(loadFileName).completeBaseName());
 	if (mController) {
 		mController->execute(command);
 	}
@@ -795,6 +798,18 @@ void TwoDModelWidget::loadModelXmls(const QDomDocument &model, bool withUndo)
 	mModel.deserialize(model);
 	updateWheelComboBoxes();
 	mUi->trainingModeButton->setVisible(mModel.hasConstraints());
+}
+
+QString TwoDModelWidget::currentWorldName() const
+{
+	return mCurrentWorldName;
+}
+
+void TwoDModelWidget::setCurrentWorldName(const QString &name)
+{
+	mCurrentWorldName = name;
+	mUi->worldNameLabel->setText(name.isEmpty() ? QString() : tr("World: %1").arg(name));
+	mUi->worldNameLabel->setVisible(!name.isEmpty());
 }
 
 void TwoDModelWidget::loadTemplatesXmls()

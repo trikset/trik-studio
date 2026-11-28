@@ -17,28 +17,32 @@
 
 using namespace twoDModel::commands;
 
-LoadWorldCommand::LoadWorldCommand(view::TwoDModelWidget &twoDwidget, const QDomDocument &data)
+LoadWorldCommand::LoadWorldCommand(
+	view::TwoDModelWidget &twoDwidget, const QDomDocument &data, const QString &worldName)
 	: mWidget(twoDwidget)
 	, mNewWorld(data)
 	, mOldWorld(mWidget.generateWorldModelWithBlobsXml())
+	, mNewWorldName(worldName)
+	, mOldWorldName(mWidget.currentWorldName())
 {
 }
 
 bool LoadWorldCommand::execute()
 {
-	loadWorld(mNewWorld.cloneNode().toDocument());
+	loadWorld(mNewWorld.cloneNode().toDocument(), mNewWorldName);
 	return true;
 }
 
 bool LoadWorldCommand::restoreState()
 {
-	loadWorld(mOldWorld.cloneNode().toDocument());
+	loadWorld(mOldWorld.cloneNode().toDocument(), mOldWorldName);
 	return true;
 }
 
-void LoadWorldCommand::loadWorld(const QDomDocument &world)
+void LoadWorldCommand::loadWorld(const QDomDocument &world, const QString &worldName)
 {
 	mWidget.loadModelXmls(world, true);
+	mWidget.setCurrentWorldName(worldName);
 	Q_EMIT mWidget.model().modelChanged(mWidget.generateWorldModelXml());
 	Q_EMIT mWidget.model().blobsChanged(mWidget.generateBlobsXml());
 }

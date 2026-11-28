@@ -92,6 +92,7 @@ void TwoDModelEngineFacade::init(const kitBase::EventsForKitPluginInterface &eve
 
 		mView->loadTemplatesXmls();
 		mView->loadModelXmls(worldModel);
+		mView->setCurrentWorldName({});
 		mView->resetDrawAction();
 
 		loadReadOnlyFlags(logicalModel);

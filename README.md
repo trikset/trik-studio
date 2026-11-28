@@ -12,6 +12,7 @@ An opensource cross-platform educational programming environment for future robo
 ## Build
 ### How to build locally
 * [Windows x32 from console](https://github.com/kleo-53/trik-studio/blob/master/BUILD.win32.en.md)
+* [Linux (Ubuntu 22.04)](BUILD.linux.en.md)
 
 
 
