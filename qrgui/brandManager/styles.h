@@ -154,6 +154,11 @@ protected:
 		return processUrl(":/styles/splashscreen/splashscreen.css");
 	}
 
+	virtual QString darkPalettePath() const
+	{
+		return processUrl(":/styles/palettes/darkWindowsPalette.ini");
+	}
+
 	/// Returns either given url without modifications or transforms it into absolute disk location
 	/// for more convenient styles debugging (modifications do not need rebuilds then)
 	QString processUrl(const QString &resourceUrl) const
